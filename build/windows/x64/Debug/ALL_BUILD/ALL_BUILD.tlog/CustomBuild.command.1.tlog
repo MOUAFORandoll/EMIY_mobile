@@ -1,0 +1,10 @@
+^C:\ONNEXT\FAHKAP\FAHKAPMOBILE\WINDOWS\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/fahkapmobile/windows -BC:/OnNext/Fahkap/fahkapmobile/build/windows --check-stamp-file C:/OnNext/Fahkap/fahkapmobile/build/windows/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

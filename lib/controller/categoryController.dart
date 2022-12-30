@@ -1,0 +1,31 @@
+import 'package:fahkapmobile/model/data/CategoryModel.dart';
+import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
+import 'package:fahkapmobile/model/data/ProduitModel.dart';
+import 'package:fahkapmobile/repository/categoryRepo.dart';
+import 'package:fahkapmobile/utils/Services/requestServices.dart';
+import 'package:get/get.dart';
+
+class CategoryController extends GetxController {
+  final service = new ApiService();
+  final CategoryRepo categoryRepo;
+  CategoryController({required this.categoryRepo});
+
+  List<CategoryModel> _categoryList = [];
+  List<CategoryModel> get categoryList => _categoryList;
+  int _isLoaded = 0;
+  int get isLoaded => _isLoaded;
+  // CategoryController({required this.service});
+  getCategory() async {
+    try {
+      Response response = await categoryRepo.getListCategory();
+      _categoryList.addAll((response.body['data'] as List)
+          .map((e) => CategoryModel.fromJson(e))
+          .toList());
+      // print(_categoryList);
+      _isLoaded = 1;
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+}

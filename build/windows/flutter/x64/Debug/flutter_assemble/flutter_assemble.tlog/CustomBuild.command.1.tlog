@@ -1,0 +1,28 @@
+^C:\ONNEXT\FAHKAP\FAHKAPMOBILE\BUILD\WINDOWS\CMAKEFILES\DFB374622450F75E19C61317C0E437F9\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\flutter PROJECT_DIR=C:\OnNext\Fahkap\fahkapmobile FLUTTER_ROOT=C:\flutter FLUTTER_EPHEMERAL_DIR=C:\OnNext\Fahkap\fahkapmobile\windows\flutter\ephemeral PROJECT_DIR=C:\OnNext\Fahkap\fahkapmobile FLUTTER_TARGET=C:\OnNext\Fahkap\fahkapmobile\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false EXTRA_FRONT_END_OPTIONS=--no-sound-null-safety TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\OnNext\Fahkap\fahkapmobile\.dart_tool\package_config.json C:/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\ONNEXT\FAHKAP\FAHKAPMOBILE\BUILD\WINDOWS\CMAKEFILES\580A33E157EAFEDDB652B45B0542D45C\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\ONNEXT\FAHKAP\FAHKAPMOBILE\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/fahkapmobile/windows -BC:/OnNext/Fahkap/fahkapmobile/build/windows --check-stamp-file C:/OnNext/Fahkap/fahkapmobile/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

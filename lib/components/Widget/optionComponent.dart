@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:fahkapmobile/styles/colorApp.dart';
+
+class OptionComponent extends StatelessWidget {
+  OptionComponent({this.title, this.selected = false, this.onTap});
+  var title, onTap;
+
+  bool selected = false;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.only(
+              top: Get.height * .04,
+              bottom: Get.height * .04,
+              left: Get.width * .01,
+              right: Get.width * .01),
+          decoration: BoxDecoration(
+            color: this.selected ? ColorsApp.grey : null,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text(this.title), Icon(Icons.arrow_forward_ios_sharp)],
+          ),
+        ));
+  }
+}
