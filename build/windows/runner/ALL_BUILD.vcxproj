@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{91CE4A56-057E-3E20-AEED-60F2DD44558C}</ProjectGuid>
+    <ProjectGuid>{460C85E9-E6EF-3F76-B84F-AC7429CE342E}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -85,11 +85,11 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\OnNext\Fahkap\fahkapmobile\windows\runner\CMakeLists.txt">
+    <CustomBuild Include="C:\OnNext\Fahkap\FahKapMobile\windows\runner\CMakeLists.txt">
       <StdOutEncoding>UTF-8</StdOutEncoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/OnNext/Fahkap/fahkapmobile/windows/runner/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/OnNext/Fahkap/FahKapMobile/windows/runner/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/fahkapmobile/windows -BC:/OnNext/Fahkap/fahkapmobile/build/windows --check-stamp-file C:/OnNext/Fahkap/fahkapmobile/build/windows/runner/CMakeFiles/generate.stamp
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/FahKapMobile/windows -BC:/OnNext/Fahkap/FahKapMobile/build/windows --check-stamp-file C:/OnNext/Fahkap/FahKapMobile/build/windows/runner/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -98,11 +98,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\OnNext\Fahkap\fahkapmobile\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\OnNext\Fahkap\FahKapMobile\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule C:/OnNext/Fahkap/fahkapmobile/windows/runner/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule C:/OnNext/Fahkap/FahKapMobile/windows/runner/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/fahkapmobile/windows -BC:/OnNext/Fahkap/fahkapmobile/build/windows --check-stamp-file C:/OnNext/Fahkap/fahkapmobile/build/windows/runner/CMakeFiles/generate.stamp
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/FahKapMobile/windows -BC:/OnNext/Fahkap/FahKapMobile/build/windows --check-stamp-file C:/OnNext/Fahkap/FahKapMobile/build/windows/runner/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -111,11 +111,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">C:\OnNext\Fahkap\fahkapmobile\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">C:\OnNext\Fahkap\FahKapMobile\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/OnNext/Fahkap/fahkapmobile/windows/runner/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/OnNext/Fahkap/FahKapMobile/windows/runner/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/fahkapmobile/windows -BC:/OnNext/Fahkap/fahkapmobile/build/windows --check-stamp-file C:/OnNext/Fahkap/fahkapmobile/build/windows/runner/CMakeFiles/generate.stamp
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/OnNext/Fahkap/FahKapMobile/windows -BC:/OnNext/Fahkap/FahKapMobile/build/windows --check-stamp-file C:/OnNext/Fahkap/FahKapMobile/build/windows/runner/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -124,21 +124,21 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\OnNext\Fahkap\fahkapmobile\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\OnNext\Fahkap\FahKapMobile\build\windows\runner\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\OnNext\Fahkap\fahkapmobile\build\windows\ZERO_CHECK.vcxproj">
-      <Project>{8B7DBF6A-6ABA-37F4-92EB-81FB1B5189FA}</Project>
+    <ProjectReference Include="C:\OnNext\Fahkap\FahKapMobile\build\windows\ZERO_CHECK.vcxproj">
+      <Project>{D9A82209-9ABC-3ED1-95D4-CC64118B9205}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\OnNext\Fahkap\fahkapmobile\build\windows\runner\fahkapmobile.vcxproj">
-      <Project>{D74F9D2A-0E30-306E-AD47-E1F02FF2BA2B}</Project>
+    <ProjectReference Include="C:\OnNext\Fahkap\FahKapMobile\build\windows\runner\fahkapmobile.vcxproj">
+      <Project>{252B59DE-0E31-3395-9591-CD5999FACAF9}</Project>
       <Name>fahkapmobile</Name>
     </ProjectReference>
   </ItemGroup>

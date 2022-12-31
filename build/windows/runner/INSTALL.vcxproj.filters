@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\OnNext\Fahkap\fahkapmobile\build\windows\CMakeFiles\12b4287e13c7b067b1ef7223ceb49ae2\INSTALL_force.rule">
+    <CustomBuild Include="C:\OnNext\Fahkap\FahKapMobile\build\windows\CMakeFiles\699818e1db5416dc1e42230222136a69\INSTALL_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{2F20D7F9-1456-3EBF-9CC6-B1CE201847FA}</UniqueIdentifier>
+      <UniqueIdentifier>{E1754F25-FEF7-39DB-9D83-F171C5F21E60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

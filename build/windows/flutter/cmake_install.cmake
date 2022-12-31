@@ -1,4 +1,4 @@
-# Install script for directory: C:/OnNext/Fahkap/fahkapmobile/windows/flutter
+# Install script for directory: C:/OnNext/Fahkap/FahKapMobile/windows/flutter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
