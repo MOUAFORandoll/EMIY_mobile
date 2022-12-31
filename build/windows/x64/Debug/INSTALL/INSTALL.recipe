@@ -2,19 +2,19 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\OnNext\Fahkap\fahkapmobile\build\windows\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>C:\OnNext\Fahkap\FahKapMobile\build\windows\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\OnNext\Fahkap\fahkapmobile\build\windows\flutter\x64\Debug\flutter_assemble</FullPath>
+      <FullPath>C:\OnNext\Fahkap\FahKapMobile\build\windows\flutter\x64\Debug\flutter_assemble</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\OnNext\Fahkap\fahkapmobile\build\windows\runner\Debug\fahkapmobile.exe</FullPath>
+      <FullPath>C:\OnNext\Fahkap\FahKapMobile\build\windows\runner\Debug\fahkapmobile.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\OnNext\Fahkap\fahkapmobile\build\windows\x64\Debug\ALL_BUILD</FullPath>
+      <FullPath>C:\OnNext\Fahkap\FahKapMobile\build\windows\x64\Debug\ALL_BUILD</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\OnNext\Fahkap\fahkapmobile\build\windows\x64\Debug\INSTALL</FullPath>
+      <FullPath>C:\OnNext\Fahkap\FahKapMobile\build\windows\x64\Debug\INSTALL</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
