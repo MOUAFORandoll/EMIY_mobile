@@ -1,7 +1,7 @@
 fahkapmobile
 2.12
-file:///C:/OnNext/Fahkap/fahkapmobile/
-file:///C:/OnNext/Fahkap/fahkapmobile/lib/
+file:///C:/OnNext/Fahkap/FahKapMobile/
+file:///C:/OnNext/Fahkap/FahKapMobile/lib/
 antdesign_icons
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/antdesign_icons-0.0.3/
@@ -194,10 +194,6 @@ image_cropper
 2.12
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_cropper-1.5.1/
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_cropper-1.5.1/lib/
-image_gallery_saver
-2.12
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.7.1/
-file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.7.1/lib/
 image_picker
 2.0
 file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.6.5+3/

@@ -308,12 +308,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "image_gallery_saver",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.7.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "image_picker",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.6.5+3",
       "packageUri": "lib/",
@@ -716,7 +710,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-12-25T21:02:05.056691Z",
+  "generated": "2023-01-01T09:35:12.683903Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

@@ -37,7 +37,7 @@ dependencies:
   jwt_decode:
   flutter_spinkit: any
   cached_network_image: ^2.4.0
-  image_gallery_saver: any
+  # image_gallery_saver: any
   image_picker: any
   image_cropper: any
   provider: ^5.0.0
