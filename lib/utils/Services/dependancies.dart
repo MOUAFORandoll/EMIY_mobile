@@ -5,6 +5,7 @@ import 'package:fahkapmobile/controller/categoryController.dart';
 import 'package:fahkapmobile/controller/managerController.dart';
 import 'package:fahkapmobile/controller/productController.dart';
 import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
+import 'package:fahkapmobile/repository/LivreurRepo.dart';
 import 'package:fahkapmobile/repository/categoryRepo.dart';
 import 'package:fahkapmobile/repository/popularProductRepo.dart';
 import 'package:fahkapmobile/utils/Services/ApiClient.dart';
@@ -16,7 +17,7 @@ class MyBinding extends Bindings {
     // httpClient.timeout = const Duration(seconds: 60);
 
     Get.lazyPut(() => ApiClient());
-
+ 
     Get.lazyPut(() => CategoryRepo(apiClient: Get.find()));
     Get.lazyPut(() => ProductRepo(apiClient: Get.find()));
     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()));
@@ -26,6 +27,8 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => BuyShopController());
     Get.lazyPut(() => ManagerController());
     Get.lazyPut(() => BoutiqueController(boutiqueRepo: Get.find()));
+    Get.lazyPut(() => LivreurRepo(apiClient: Get.find()));
+
   }
 
   onInit() {

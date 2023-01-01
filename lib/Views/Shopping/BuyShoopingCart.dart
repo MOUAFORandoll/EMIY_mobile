@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fahkapmobile/components/Form/formComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
+import 'package:fahkapmobile/components/Widget/LivreurComponent.dart';
 import 'package:fahkapmobile/components/Widget/productBuyComponent.dart';
 import 'package:fahkapmobile/controller/BuyShopController.dart';
 import 'package:fahkapmobile/controller/cartController.dart';
@@ -113,6 +114,7 @@ class BuyShoopingCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<BuyShopController>().onInit();
+    Get.find<BuyShopController>().getListLivreur();
 
     return GetBuilder<BuyShopController>(builder: (_Bcontroller) {
       return Scaffold(
@@ -194,26 +196,26 @@ class BuyShoopingCart extends StatelessWidget {
                         //     : StepState.editing),
                         Step(
                             title: const Text('Choix du livreur'),
-                            content: GetBuilder<CartController>(
-                                builder: (_controller) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                // crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SingleChildScrollView(
-                                      child: ListView.builder(
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount:
-                                              _controller.getItems.length,
-                                          itemBuilder: (_ctx, index) =>
-                                              ProductBuyComponent(
-                                                  cartModel: _controller
-                                                      .getItems[index])))
-                                ],
-                              );
-                            })),
+                            content: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _Bcontroller.isLoaded == 1
+                                    ? SingleChildScrollView(
+                                        child: ListView.builder(
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount:
+                                                _Bcontroller.livreurList.length,
+                                            itemBuilder: (_ctx, index) =>
+                                                LivreurComponent(
+                                                    livreur: _Bcontroller
+                                                        .livreurList[index])))
+                                    : CircularProgressIndicator(
+                                        color: ColorsApp.bleuLight)
+                              ],
+                            )),
                         Step(
                           title: const Text('Informations personnels'),
                           content: Container(
