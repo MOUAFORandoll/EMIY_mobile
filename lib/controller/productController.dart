@@ -118,6 +118,8 @@ class ProductController extends GetxController {
     _produitcategoryList = [];
     _isLoadedPC = 0;
     try {
+    _produitcategoryList = [];
+
       Response response = await productRepo.getListProductForCategory(id);
       print('*------response');
       print(response.body);

@@ -74,12 +74,25 @@ class BoutiqueView extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             CardBoutiqueComponent(
                 title: 'Produits', link: AppLinks.PRODUCT_FOR_BOUTIQUE),
-            CardBoutiqueComponent(title: 'Commandes', link: ''),
+            CardBoutiqueComponent(
+              title: 'Commandes',
+              link: AppLinks.COMMANDE_FOR_BOUTIQUE,
+            ),
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            CardBoutiqueComponent(title: 'Historiques', link: ''),
-            CardBoutiqueComponent(title: 'Gerer votre Boutique ', link: ''),
-          ])
+            CardBoutiqueComponent(
+                title: 'Historiques', link: AppLinks.HISTORIQUE_FOR_BOUTIQUE),
+            CardBoutiqueComponent(
+                title: 'Gerer votre Boutique ',
+                link: AppLinks.MANAGE_FOR_BOUTIQUE),
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            CardBoutiqueComponent(
+                title: 'Transaction Compte',
+                link: AppLinks.HISTORIQUE_FOR_BOUTIQUE),
+            CardBoutiqueComponent(
+                title: 'Retrait Compte ', link: AppLinks.MANAGE_FOR_BOUTIQUE),
+          ]),
         ]))
       ]);
     });

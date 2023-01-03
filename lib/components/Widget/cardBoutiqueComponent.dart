@@ -27,7 +27,10 @@ class CardBoutiqueComponent extends StatelessWidget {
           margin: EdgeInsets.all(Get.size.width * .02),
           decoration: BoxDecoration(
               color: Colors.blue, borderRadius: BorderRadius.circular(8)),
-          child: Text(title)),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+          )),
     );
   }
 }

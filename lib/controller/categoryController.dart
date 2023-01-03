@@ -6,7 +6,6 @@ import 'package:fahkapmobile/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
-  final service = new ApiService();
   final CategoryRepo categoryRepo;
   CategoryController({required this.categoryRepo});
 
@@ -17,6 +16,7 @@ class CategoryController extends GetxController {
   // CategoryController({required this.service});
   getCategory() async {
     try {
+      _isLoaded = 0;
       Response response = await categoryRepo.getListCategory();
       _categoryList.addAll((response.body['data'] as List)
           .map((e) => CategoryModel.fromJson(e))

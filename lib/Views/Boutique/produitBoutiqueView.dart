@@ -19,6 +19,7 @@ import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProduitBoutiqueView extends StatelessWidget {
   ProduitBoutiqueView({Key? key}) : super(key: key);
@@ -26,12 +27,12 @@ class ProduitBoutiqueView extends StatelessWidget {
 
   TextEditingController name = TextEditingController();
   TextEditingController titre = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController pass = TextEditingController();
-  TextEditingController repass = TextEditingController();
-  TextEditingController email = TextEditingController();
+  TextEditingController quantite = TextEditingController();
+  TextEditingController prix = TextEditingController();
+  TextEditingController description = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Get.find<BoutiqueController>().getListProduitForBoutique();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
       return Scaffold(
           appBar: AppBar(
@@ -83,18 +84,87 @@ class ProduitBoutiqueView extends StatelessWidget {
                         },
                       )
                     ])),
-
             !_controller.addProduct
-                ? SingleChildScrollView(
-                    child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: _controller.Boutique.produits.length,
-                    itemBuilder: (_ctx, index) {
-                      return ProductBoutiqueComponent(
-                          produit: _controller.Boutique.produits[index]);
-                    },
-                  ))
+                ? _controller.isLoadedPB == 0
+                    ? Shimmer.fromColors(
+                        baseColor: Colors.blueGrey,
+                        highlightColor: Colors.greenAccent,
+                        child: Container(
+                            // margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                            child: SingleChildScrollView(
+                                child: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 10,
+                                    itemBuilder: (_ctx, index) => Row(
+                                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  height: kMdHeight / 9,
+                                                  // width: kMdWidth,
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: kMarginX,
+                                                      vertical: kMarginY),
+                                                  width: Get.width / 3,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(8),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    8)),
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            "assets/images/error.gif"),
+                                                        fit: BoxFit.cover,
+                                                        colorFilter:
+                                                            ColorFilter.mode(
+                                                                Colors.red,
+                                                                BlendMode
+                                                                    .colorBurn)),
+                                                  )),
+                                              Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: kMarginX,
+                                                      vertical: kMarginY),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        // width: kSmWidth * .6,
+
+                                                        child: Text('Nom : ',
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: TextStyle(
+                                                                color: ColorsApp
+                                                                    .greenLight,
+                                                                fontSize: 12)),
+                                                      ),
+                                                    ],
+                                                  ))
+                                            ])))))
+                    : _controller.produitBoutiqueList.length == 0
+                        ? Center(child: Text('Aucun Produit'))
+                        : SingleChildScrollView(
+                            child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _controller.produitBoutiqueList.length,
+                            itemBuilder: (_ctx, index) {
+                              return ProductBoutiqueComponent(
+                                  produit:
+                                      _controller.produitBoutiqueList[index]);
+                            },
+                          ))
                 : Container(
                     margin: EdgeInsets.symmetric(horizontal: 5),
                     child: SingleChildScrollView(
@@ -110,7 +180,7 @@ class ProduitBoutiqueView extends StatelessWidget {
                         FormComponent2(
                             icon: Icons.account_circle,
                             type: 0,
-                            controller: titre,
+                            controller: quantite,
                             enabled: true,
                             titre: 'Quantite',
                             kType: TextInputType.number,
@@ -118,15 +188,64 @@ class ProduitBoutiqueView extends StatelessWidget {
                         FormComponent2(
                             icon: Icons.account_circle,
                             type: 0,
-                            controller: titre,
+                            controller: prix,
                             kType: TextInputType.number,
                             enabled: true,
                             titre: 'Prix',
                             hint: "1500"),
-                        CommentForm(
-                          titre: 'Description',
-                          // height: kMdHeight / 2,
-                          width: kMdWidth * 4,
+                        Container(
+                          alignment: Alignment.topLeft,
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          child: Text('Description'),
+                        ),
+                        TextFormField(
+                          onChanged: (String value) {
+                            // if (onChange != null) onChange!(value);
+                          },
+                          controller: description,
+                          validator: (value) {
+                            return value!.isEmpty
+                                ? "veillez remplir se champs"
+                                : null;
+                          },
+                          // keyboardType: type,
+                          // obscureText: obscureText!,
+                          maxLengthEnforced: false,
+                          maxLength: 10,
+                          maxLines: 10,
+                          decoration: new InputDecoration(
+                            fillColor: ColorsApp.skyBlue,
+                            counter: Offstage(),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: ColorsApp.grey,
+                                )),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Colors.black.withOpacity(.4),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.only(
+                              left: 12,
+                              bottom: 10,
+                              top: 10,
+                              right: 12,
+                            ),
+                            hintText: 'Entrer une description',
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'orkney',
+                            ),
+                            // suffixIcon: InkWell(
+                            //   onTap: () => onTap,
+                            //   child: Icon(
+                            //     icon,
+                            //     color: Colors.grey,
+                            //   ),
+                            // ),
+                          ),
                         ),
                         _controller.listImgProduits.length != 0
                             ? smallText(
@@ -166,12 +285,16 @@ class ProduitBoutiqueView extends StatelessWidget {
                                   // ),
                                   CustomBtn(
                                     color: ColorsApp.greenLight,
-                                    title: _controller.addProduct
-                                        ? 'Retour'
-                                        : 'Ajouter Produit',
-                                    onTap: () {
-                                      _controller
-                                          .chageState(!_controller.addProduct);
+                                    title: 'Ajouter Produit',
+                                    onTap: () async {
+                                      var data = {
+                                        'titre': titre.text,
+                                        'quantite': quantite.text,
+                                        'prix': prix.text,
+                                        'description': description.text
+                                      };
+                                      await _controller.addProduit(data);
+                                      // _controller.chageState(!_controller.addProduct);
                                     },
                                   )
                                 ])),

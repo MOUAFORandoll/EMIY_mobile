@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:fahkapmobile/Views/Boutique/BoutiqueView.dart';
+import 'package:fahkapmobile/components/Button/customBtn.dart';
+import 'package:fahkapmobile/components/Form/formComponent2.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';
 import 'package:fahkapmobile/controller/boutiqueController.dart';
 import 'package:fahkapmobile/controller/managerController.dart';
@@ -19,6 +21,7 @@ import 'package:fahkapmobile/components/Widget/infoComponent.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:fahkapmobile/utils/api/apiUrl.dart';
 import 'package:fahkapmobile/utils/provider/refresh_token.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class ManageView extends StatefulWidget {
@@ -52,461 +55,237 @@ class _ManageViewState extends State<ManageView> {
   TextEditingController _passwordController = TextEditingController();
 
   TextEditingController _newpasswordController = TextEditingController();
+
+  TextEditingController name = TextEditingController();
+  TextEditingController prenom = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController description = TextEditingController();
+  // TextEditingController adresse = TextEditingController();
+  TextEditingController email = TextEditingController();
   bool udateAdd = false;
   bool udatePass = false;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    return GetBuilder<ManagerController>(
-        builder:
-            (_manager) =>
-                CustomScrollView(controller: _scrollController, slivers: [
-                  // Add the app bar to the CustomScrollView.
-                  SliverAppBar(
-                    backgroundColor: Colors.white,
-                    elevation: 0,
-                    // Provide a standard title.
-                    // title: Text('title'),
-                    // Allows the user to reveal the app bar if they begin scrolling
-                    // back up the list of items.
-                    floating: true,
-                    // Display a placeholder widget to visualize the shrinking size.
-                    flexibleSpace: InkWell(
-                      child: SingleChildScrollView(
-                        child: Column(children: [
-                          Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    child: BigText(
-                                        text: "Profile image",
-                                        bolder: _manager.state),
-                                    onTap: () => _manager.chageState(true),
-                                  ),
-                                  GetBuilder<BoutiqueController>(
-                                      builder: (_controller) => _controller
-                                                  .isLoaded ==
-                                              1
-                                          ? _controller.isExist
-                                              ? InkWell(
-                                                  child: BigText(
-                                                      text: "Boutique",
-                                                      bolder: !_manager.state),
-                                                  onTap: () => _manager
-                                                      .chageState(false),
-                                                )
-                                              : Container()
-                                          : _controller.isLoaded == 2
-                                              ? Container()
-                                              : Container(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                  color: ColorsApp.bleuLight,
-                                                ))),
-                                ],
-                              ),
-                              margin: EdgeInsets.only(
-                                top: Get.height * .030,
-                                // left: kMarginX,
-                                // right: kMarginX,
-                              )),
-                        ]),
-                      ),
-                      /*   onTap: () => filterDest() */
+    return GetBuilder<ManagerController>(builder: (_manager) {
+      // ignore: unnecessary_null_comparison
+      if (_manager.User != null) {
+        name.text = _manager.User.nom;
+        prenom.text = _manager.User.prenom.toString();
+        phone.text = _manager.User.phone.toString();
+        email.text = _manager.User.email;
+      }
+      return CustomScrollView(controller: _scrollController, slivers: [
+        // Add the app bar to the CustomScrollView.
+        SliverAppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          // Provide a standard title.
+          // title: Text('title'),
+          // Allows the user to reveal the app bar if they begin scrolling
+          // back up the list of items.
+          floating: true,
+          // Display a placeholder widget to visualize the shrinking size.
+          flexibleSpace: InkWell(
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          child:
+                              BigText(text: "Profile", bolder: _manager.state),
+                          onTap: () => _manager.chageState(true),
+                        ),
+                        GetBuilder<BoutiqueController>(
+                            builder: (_controller) => _controller.isLoaded == 1
+                                ? _controller.isExist
+                                    ? InkWell(
+                                        child: BigText(
+                                            text: "Boutique",
+                                            bolder: !_manager.state),
+                                        onTap: () => _manager.chageState(false),
+                                      )
+                                    : Container()
+                                : _controller.isLoaded == 2
+                                    ? Container()
+                                    : Container(
+                                        child: CircularProgressIndicator(
+                                        color: ColorsApp.bleuLight,
+                                      ))),
+                      ],
                     ),
-                    // Make the initial height of the SliverAppBar larger than normal.
-                    expandedHeight: 60,
-                  ),
-                  SliverList(
-                      // Use a delegate to build items as they're scrolled on screen.
-                      delegate: SliverChildBuilderDelegate(
-                    // The builder function returns a ListTile with a title that
-                    // displays the index of the current item.
-                    (context, index) => _manager.state
-                        ? Container(
-                            padding:
-                                EdgeInsets.only(left: 20, right: 20, top: 20),
-                            child: Column(children: <Widget>[
+                    margin: EdgeInsets.only(
+                      top: Get.height * .030,
+                      // left: kMarginX,
+                      // right: kMarginX,
+                    )),
+              ]),
+            ),
+            /*   onTap: () => filterDest() */
+          ),
+          // Make the initial height of the SliverAppBar larger than normal.
+          expandedHeight: 60,
+        ),
+        SliverList(
+            // Use a delegate to build items as they're scrolled on screen.
+            delegate: SliverChildBuilderDelegate(
+          // The builder function returns a ListTile with a title that
+          // displays the index of the current item.
+          (context, index) => _manager.state
+              ? _manager.isLoaded == 0
+                  ? Shimmer.fromColors(
+                      baseColor: Colors.blueGrey,
+                      highlightColor: Colors.greenAccent,
+                      child: Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 20),
+                          child: Column(children: <Widget>[
+                            InfoComponent(title: Text("First name"), value: ''),
+                            InfoComponent(title: Text("Last name"), value: ''),
+                            InfoComponent(
+                                title: Text("Phone number"), value: ''),
+                            InfoComponent(title: Text("Email"), value: ''),
+                            InfoComponent(
+                              title: Row(children: [
+                                Text("Password"),
+                                // Container(
+                                //     child: Icon(FontAwesomeIcons.pen,
+                                //         size: 12, color: Color(0xFFCFD6D6)),
+                                //     margin: EdgeInsets.only(left: 10))
+                              ]),
+                              value: "*****",
+                            ),
+                            CustomBtn(
+                              color: ColorsApp.greenLight,
+                              title: 'Mettre a jour',
+                              onTap: () async {},
+                            )
+                          ])))
+                  : Container(
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                      child: _manager.userP
+                          ? Column(children: <Widget>[
                               InfoComponent(
-                                  title: Text("First name"), value: "Nom"),
+                                  title: Text("First name"),
+                                  value: _manager.User.nom),
                               InfoComponent(
-                                  title: Text("Last name"), value: "Prenom"),
+                                  title: Text("Last name"),
+                                  value: _manager.User.prenom),
                               InfoComponent(
-                                  title: Text("Phone number"), value: "Aucun"),
+                                  title: Text("Phone number"),
+                                  value: _manager.User.phone),
                               InfoComponent(
-                                  title: Row(children: [
-                                    Text("Adress"),
+                                  title: Text("Email"),
+                                  value: _manager.User.email),
+                              // InfoComponent(
+                              //   title: Row(children: [
+                              //     Text("Adress"),
+                              //     Container(
+                              //         child: Icon(FontAwesomeIcons.pen,
+                              //             size: 12, color: Color(0xFFCFD6D6)),
+                              //         margin: EdgeInsets.only(left: 10))
+                              //   ]),
+                              //   value: "addresse",
+                              // ),
+                              InfoComponent(
+                                title: Row(children: [
+                                  Text("Password"),
+                                  // Container(
+                                  //     child: Icon(FontAwesomeIcons.pen,
+                                  //         size: 12, color: Color(0xFFCFD6D6)),
+                                  //     margin: EdgeInsets.only(left: 10))
+                                ]),
+                                value: "*****",
+                              ),
+                              CustomBtn(
+                                color: ColorsApp.greenLight,
+                                title: 'Mettre a jour',
+                                onTap: () async {
+                                  Get.bottomSheet(
                                     Container(
-                                        child: Icon(FontAwesomeIcons.pen,
-                                            size: 12, color: Color(0xFFCFD6D6)),
-                                        margin: EdgeInsets.only(left: 10))
-                                  ]),
-                                  value: "addresse",
-                                  onTap: () {
-                                    print("eeeeeeeeee");
-                                    return showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            StatefulBuilder(
-                                              builder: (BuildContext context,
-                                                      StateSetter setState) =>
-                                                  Dialog(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0)), //this right here
-                                                child: Container(
-                                                  height: 180,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10.0,
-                                                          right: 10.0,
-                                                          top: 8),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Container(
-                                                        child: Text(
-                                                          'Votre adresse',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        margin: EdgeInsets.only(
-                                                            top: 10.0,
-                                                            bottom: 10.0,
-                                                            left: 8),
-                                                      ),
-                                                      SizedBox(
-                                                          child: TextFormField(
-                                                        onChanged: (value) {},
-                                                        controller:
-                                                            _addressController,
-                                                        validator: (value) {
-                                                          if (value == "") {
-                                                            return "veillez remplir se champs";
-                                                          } else {
-                                                            return null;
-                                                          }
-                                                        },
-                                                        keyboardType:
-                                                            TextInputType.text,
-                                                        obscureText: false,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText: "ville",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                          hintStyle: TextStyle(
-                                                            color: Colors.grey,
-                                                          ),
-                                                        ),
-                                                      )),
-                                                      Container(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 10),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              TextButton(
-                                                                child:
-                                                                    const Text(
-                                                                  'CANCEl',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .red),
-                                                                ),
-                                                                onPressed: () {
-                                                                  _addressController
-                                                                      .clear();
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-                                                                },
-                                                              ),
-                                                              Button(
-                                                                  title:
-                                                                      'Update',
-                                                                  enabled: true,
-                                                                  state:
-                                                                      udateAdd,
-                                                                  onTap:
-                                                                      () async {
-                                                                    if (_addressController
-                                                                        .text
-                                                                        .isNotEmpty) {
-                                                                      setState(
-                                                                          () {
-                                                                        udateAdd =
-                                                                            true;
-                                                                      });
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: kSmWidth * .07,
+                                          vertical: kSmHeight * .09),
+                                      // height: 800,
+                                      color: ColorsApp.grey,
+                                      child: SingleChildScrollView(
+                                          child: Column(
+                                        // mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          FormComponent2(
+                                              icon: Icons.account_circle,
+                                              type: 0,
+                                              controller: name,
+                                              enabled: true,
+                                              titre: 'Nom',
+                                              hint: ""),
+                                          FormComponent2(
+                                              icon: Icons.account_circle,
+                                              type: 0,
+                                              controller: prenom,
+                                              enabled: true,
+                                              titre: 'Prenom',
+                                              hint: ""),
+                                          FormComponent2(
+                                              icon: Icons.account_circle,
+                                              type: 0,
+                                              controller: phone,
+                                              kType: TextInputType.number,
+                                              enabled: true,
+                                              titre: 'phone',
+                                              hint: " "),
+                                          // FormComponent2(
+                                          //     icon: Icons.account_circle,
+                                          //     type: 0,
+                                          //     controller: adresse,
+                                          //     // kType: TextInputType.number,
+                                          //     enabled: true,
+                                          //     titre: 'adresse',
+                                          //     hint: " "),
+                                          FormComponent2(
+                                              icon: Icons.account_circle,
+                                              type: 0,
+                                              controller: email,
+                                              // kType: TextInputType.number,
+                                              enabled: true,
+                                              titre: 'email',
+                                              hint: " "),
+                                          CustomBtn(
+                                              color: ColorsApp.greenLight,
+                                              title: 'Mettre a jour',
+                                              onTap: () async {
+                                                var data = {
+                                                  'keySecret': new GetStorage()
+                                                      .read('keySecret'),
+                                                  'nom': name.text,
+                                                  'prenom': prenom.text,
+                                                  'phone': phone.text,
+                                                  'email': email.text,
+                                                };
+                                                print(data);
+                                                await _manager.updateUser(data);
+                                              })
+                                        ],
+                                      )),
+                                    ),
+                                  );
+                                },
+                              )
+                            ])
+                          : Center(
+                              child: CustomBtn(
+                                  color: ColorsApp.greenLight,
+                                  title: 'Creer compte',
+                                  onTap: () async {}),
+                            ))
+              : BoutiqueView(),
 
-                                                                      try {
-                                                                        var payload =
-                                                                            Jwt.parseJwt(widget.accessToken);
-                                                                        String
-                                                                            userid =
-                                                                            payload["id"].toString();
-                                                                        var body =
-                                                                            {
-                                                                          "adress":
-                                                                              _addressController.text
-                                                                        };
-                                                                        print(
-                                                                            '${ApiUrl.baseUrl}/api/membres/$userid        ${body}');
-                                                                        var dio =
-                                                                            await CustomDio().getApiClient();
-                                                                        final response = await dio.patch(
-                                                                            '${ApiUrl.baseUrl}/api/membres/$userid',
-                                                                            data: json.encode(
-                                                                                body),
-                                                                            options:
-                                                                                Options(headers: {
-                                                                              "Content-Type": "application/merge-patch+json"
-                                                                            }));
-                                                                      } catch (e) {}
-                                                                    } else {
-                                                                      return 0;
-                                                                    }
-                                                                  },
-                                                                  height: 40,
-                                                                  width: 100,
-                                                                  textColor:
-                                                                      Colors
-                                                                          .white,
-                                                                  borderColor:
-                                                                      ColorsApp
-                                                                          .skyBlue,
-                                                                  loaderColor:
-                                                                      Colors
-                                                                          .white),
-                                                            ],
-                                                          ))
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ));
-                                  }),
-                              InfoComponent(
-                                  title: Row(children: [
-                                    Text("Password"),
-                                    Container(
-                                        child: Icon(FontAwesomeIcons.pen,
-                                            size: 12, color: Color(0xFFCFD6D6)),
-                                        margin: EdgeInsets.only(left: 10))
-                                  ]),
-                                  value: "*****",
-                                  onTap: () {
-                                    print("eeeeeeeeee");
-                                    return showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            StatefulBuilder(
-                                                builder: (BuildContext context,
-                                                        StateSetter setState) =>
-                                                    Dialog(
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10.0)), //this right here
-                                                        child: Container(
-                                                          height: 300,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 10.0,
-                                                                    right: 10.0,
-                                                                    top: 8),
-                                                            child:
-                                                                SingleChildScrollView(
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Container(
-                                                                    child: Text(
-                                                                      'Ancien mot de passe',
-                                                                      style: TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                    margin: EdgeInsets.only(
-                                                                        top:
-                                                                            10.0,
-                                                                        bottom:
-                                                                            10.0,
-                                                                        left:
-                                                                            8),
-                                                                  ),
-                                                                  SizedBox(
-                                                                      child:
-                                                                          TextFormField(
-                                                                    onChanged:
-                                                                        (value) {},
-                                                                    controller:
-                                                                        _passwordController,
-                                                                    validator:
-                                                                        (value) {
-                                                                      if (value ==
-                                                                          "") {
-                                                                        return "veillez remplir se champs";
-                                                                      } else {
-                                                                        return null;
-                                                                      }
-                                                                    },
-                                                                    keyboardType:
-                                                                        TextInputType
-                                                                            .text,
-                                                                    obscureText:
-                                                                        false,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      hintText:
-                                                                          "*****",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10),
-                                                                        borderSide:
-                                                                            BorderSide(
-                                                                          color:
-                                                                              Colors.grey,
-                                                                        ),
-                                                                      ),
-                                                                      hintStyle:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .grey,
-                                                                      ),
-                                                                    ),
-                                                                  )),
-                                                                  Container(
-                                                                    child: Text(
-                                                                      'Nouveau mot de passe',
-                                                                      style: TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                    margin: EdgeInsets.only(
-                                                                        top:
-                                                                            10.0,
-                                                                        bottom:
-                                                                            10.0,
-                                                                        left:
-                                                                            8),
-                                                                  ),
-                                                                  SizedBox(
-                                                                      child:
-                                                                          TextFormField(
-                                                                    onChanged:
-                                                                        (value) {},
-                                                                    controller:
-                                                                        _newpasswordController,
-                                                                    validator:
-                                                                        (value) {
-                                                                      if (value ==
-                                                                          "") {
-                                                                        return "veillez remplir se champs";
-                                                                      } else {
-                                                                        return null;
-                                                                      }
-                                                                    },
-                                                                    keyboardType:
-                                                                        TextInputType
-                                                                            .text,
-                                                                    obscureText:
-                                                                        false,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      hintText:
-                                                                          "*****",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10),
-                                                                        borderSide:
-                                                                            BorderSide(
-                                                                          color:
-                                                                              Colors.grey,
-                                                                        ),
-                                                                      ),
-                                                                      hintStyle:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .grey,
-                                                                      ),
-                                                                    ),
-                                                                  )),
-                                                                  Container(
-                                                                      padding: EdgeInsets.only(
-                                                                          top:
-                                                                              10),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.end,
-                                                                        children: [
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text(
-                                                                              'CANCEl',
-                                                                              style: TextStyle(color: Colors.red),
-                                                                            ),
-                                                                            onPressed:
-                                                                                () {
-                                                                              _newpasswordController.clear();
-
-                                                                              _passwordController.clear();
-
-                                                                              Navigator.of(context).pop();
-                                                                            },
-                                                                          ),
-                                                                          Button(
-                                                                              title: 'Update',
-                                                                              enabled: true,
-                                                                              state: udatePass,
-                                                                              onTap: () async {},
-                                                                              height: 40,
-                                                                              width: 100,
-                                                                              textColor: Colors.white,
-                                                                              borderColor: ColorsApp.skyBlue,
-                                                                              loaderColor: Colors.white),
-                                                                        ],
-                                                                      ))
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ))));
-                                  })
-                            ]))
-                        : BoutiqueView(),
-
-                    childCount: 1,
-                  ))
-                ]));
+          childCount: 1,
+        ))
+      ]);
+    });
   }
   // Builds 1000 ListTiles
 

@@ -1,3 +1,6 @@
+import 'package:fahkapmobile/Views/Boutique/CommadesBoutiqueView.dart';
+import 'package:fahkapmobile/Views/Boutique/HistroriqueView.dart';
+import 'package:fahkapmobile/Views/Boutique/manageBoutiqueView.dart';
 import 'package:fahkapmobile/Views/Boutique/produitBoutiqueView.dart';
 import 'package:fahkapmobile/Views/Category/ProductCategoryView.dart';
 import 'package:fahkapmobile/Views/ComplementView/OnboardingScreen.dart';
@@ -41,10 +44,21 @@ class AppRoutes {
         name: AppLinks.PRODUCT_FOR_CATEGORY, page: () => ProductCategoryView()),
     GetPage(
         name: AppLinks.PRODUCT_FOR_BOUTIQUE, page: () => ProduitBoutiqueView()),
+    GetPage(
+        name: AppLinks.COMMANDE_FOR_BOUTIQUE,
+        page: () => CommandesBoutiqueView()),
+    GetPage(
+        name: AppLinks.HISTORIQUE_FOR_BOUTIQUE,
+        page: () => HistoriqueCommandeView()),
+    GetPage(
+        name: AppLinks.MANAGE_FOR_BOUTIQUE, page: () => ManageBoutiqueView()),
   ];
 }
 
 class AppLinks {
+  static const String MANAGE_FOR_BOUTIQUE = "/mfb";
+  static const String HISTORIQUE_FOR_BOUTIQUE = "/hfb";
+  static const String COMMANDE_FOR_BOUTIQUE = "/cfb";
   static const String PRODUCT_FOR_BOUTIQUE = "/pfb";
   static const String BUYSHOP = "/buyShop";
   static const String TEST = "/TEST";

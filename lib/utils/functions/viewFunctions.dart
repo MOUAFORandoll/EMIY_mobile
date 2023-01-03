@@ -17,7 +17,7 @@ class ViewFunctions {
       margin: EdgeInsets.all(10),
       colorText: Colors.white,
       duration: Duration(seconds: 5),
-      isDismissible: true,
+      // isDismissible: true,
       dismissDirection: DismissDirection.horizontal,
       forwardAnimationCurve: Curves.easeOutBack,
     );

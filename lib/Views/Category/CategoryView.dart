@@ -23,9 +23,8 @@ class CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _scrollController,
-      slivers: [
+    return GetBuilder<CategoryController>(builder: (categorys) {
+      return CustomScrollView(controller: _scrollController, slivers: [
         // Add the app bar to the CustomScrollView.
         SliverAppBar(
           backgroundColor: Colors.white,
@@ -67,9 +66,14 @@ class CategoryView extends StatelessWidget {
         //   // The builder function returns a ListTile with a title that
         //   // displays the index of the current item.
         //   (context, index) =>
-        
-        GetBuilder<CategoryController>(builder: (categorys) {
-          return categorys.isLoaded == 0
+
+        SliverList(
+
+            // Use a delegate to build items as they're scrolled on screen.
+            delegate: SliverChildBuilderDelegate(
+          // The builder function returns a ListTile with a title that
+          // displays the index of the current item.
+          (context, index) => categorys.isLoaded == 0
               ? Shimmer.fromColors(
                   baseColor: Colors.blueGrey,
                   highlightColor: Colors.greenAccent,
@@ -78,27 +82,46 @@ class CategoryView extends StatelessWidget {
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 10,
-                          itemBuilder: (_ctx, index) => CategoryComponent2(
-                                category: categorys.categoryList[index],
-                              ))))
-              : SliverList(
+                          itemBuilder: (_ctx, index) => Container(
+                              height: kSmHeight * 2,
+                              width: kSmWidth,
+                              padding: EdgeInsets.all(kMarginX),
+                              margin: EdgeInsets.symmetric(
+                                  vertical: kMarginY, horizontal: kMarginX),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Column(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        alignment: Alignment.center,
+                                        // margin: EdgeInsets.only(
+                                        //     top: Get.height * .005, left: Get.width * .008),
+                                        child: Icon(
+                                          Icons.no_backpack,
+                                          color: Colors.white,
+                                        )),
+                                    Container(
+                                      width: kSmWidth * .6,
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(
+                                      //     top: Get.height * .005, left: Get.width * .008),
+                                      child: Text('',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15)),
+                                    ),
+                                  ])))))
+              : CategoryComponent2(
+                  category: categorys.categoryList[index],
+                ),
 
-                      // Use a delegate to build items as they're scrolled on screen.
-                      delegate: SliverChildBuilderDelegate(
-                      // The builder function returns a ListTile with a title that
-                      // displays the index of the current item.
-                      (context, index) => CategoryComponent2(
-                        category: categorys.categoryList[index],
-                      ),
-
-                      childCount: categorys.categoryList.length,
-                    ))
-                 ;
-        }),
-        // childCount: 1,
-        // )),
-      ],
-      // Builds 1000 ListTiles
-    );
+          childCount: categorys.categoryList.length,
+        ))
+      ]);
+    });
   }
 }

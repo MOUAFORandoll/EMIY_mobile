@@ -66,6 +66,16 @@ class CartController extends GetxController {
     return false;
   }
 
+  getListPinCart() {
+    var listF = [];
+   _items.forEach((k, v) {
+      listF.add([v.id, v.quantity]);
+    });
+    print(listF);
+    return listF;
+  }
+
+
   void removeItem(id) {
     _items.remove(id);
     update();

@@ -1,3 +1,14 @@
+// To parse this JSON data, do
+//
+//     final userModel = userModelFromJson(jsonString);
+
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+
+String userModelToJson(UserModel data) => json.encode(data.toJson());
+
 class UserModel {
   UserModel({
     required this.id,
@@ -6,72 +17,34 @@ class UserModel {
     required this.email,
     required this.phone,
     required this.status,
-    required this.password,
-    required this.typeUser,
-    required this.agences,
-    required this.voyages,
-    required this.pointDeVentes,
-    required this.dateCreate,
-    required this.transactions,
+    required this.dateCreated,
   });
-  late final int id;
-  late final String nom;
-  late final String prenom;
-  late final String email;
-  late final String phone;
-  late final bool status;
-  late final String password;
-  late final String typeUser;
-  late final List<String> agences;
-  late final List<String> voyages;
-  late final List<String> pointDeVentes;
-  late final String dateCreate;
-  late final List<Transactions> transactions;
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nom = json['nom'];
-    prenom = json['prenom'];
-    email = json['email'];
-    phone = json['phone'];
-    status = json['status'];
-    password = json['password'];
-    typeUser = json['typeUser'];
-    agences = List.castFrom<dynamic, String>(json['agences']);
-    voyages = List.castFrom<dynamic, String>(json['voyages']);
-    pointDeVentes = List.castFrom<dynamic, String>(json['pointDeVentes']);
-    dateCreate = json['dateCreate'];
-    transactions = List.from(json['transactions'])
-        .map((e) => Transactions.fromJson(e))
-        .toList();
-  }
+  int id;
+  String nom;
+  String prenom;
+  String email;
+  String phone;
+  bool status;
+  String dateCreated;
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['nom'] = nom;
-    _data['prenom'] = prenom;
-    _data['email'] = email;
-    _data['phone'] = phone;
-    _data['status'] = status;
-    _data['password'] = password;
-    _data['typeUser'] = typeUser;
-    _data['agences'] = agences;
-    _data['voyages'] = voyages;
-    _data['pointDeVentes'] = pointDeVentes;
-    _data['dateCreate'] = dateCreate;
-    _data['transactions'] = transactions.map((e) => e.toJson()).toList();
-    return _data;
-  }
-}
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        id: json["id"],
+        nom: json["nom"],
+        prenom: json["prenom"],
+        email: json["email"],
+        phone: json["phone"],
+        status: json["status"],
+        dateCreated: json["dateCreated"],
+      );
 
-class Transactions {
-  Transactions();
-
-  Transactions.fromJson(Map json);
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "nom": nom,
+        "prenom": prenom,
+        "email": email,
+        "phone": phone,
+        "status": status,
+        "dateCreated": dateCreated,
+      };
 }

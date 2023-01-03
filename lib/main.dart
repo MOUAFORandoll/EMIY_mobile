@@ -12,7 +12,6 @@ import 'package:get_storage/get_storage.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  new GetStorage();
   MyBinding().dependencies();
   // await MyBinding().onInit();
 
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
     } else {
       box.write('isDark', false);
     }
-  MyBinding().onInit();
+    MyBinding().onInit();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: MyBinding(),

@@ -137,20 +137,80 @@ class BuyShoopingCart extends StatelessWidget {
                       type: StepperType.vertical,
                       currentStep: _Bcontroller.state,
                       onStepCancel: () {
-                        _Bcontroller.stateChange(false); // if (_index > 0) {
-                        //   setState(() {
-                        //     _index--;
-                        //   });
-                        // } else {
-                        //   Get.back();
-                        // }
+                        _Bcontroller.stateChange(false);
+                      },
+                      onStepTapped: (int index) {
+                        // print('index------------------' + widget.currentStep);
                       },
                       onStepContinue: () async {
+                        // if (_Bcontroller.state == 0) {
+
+                        // }
+
+                        // if (_Bcontroller.isCurrent(0)) {
                         _Bcontroller.stateChange(true);
+                        // }
+                        // if (_Bcontroller.isCurrent(1) &&
+                        //     _Bcontroller.current == 0) {
+                        //   if (_Bcontroller.isLivreur == 0) {
+                        //     functions.snackBar('Achat',
+                        //         'Selectionner un livreur', ColorsApp.red);
+                        //   } else {
+                        //     _Bcontroller.stateChange(true);
+                        //   }
+                        // }
+                        // if (_Bcontroller.isCurrent(2)) {
+                        //   if ((nom.text.isEmpty ||
+                        //           prenom.text.isEmpty ||
+                        //           phone.text.isEmpty) &&
+                        //       _Bcontroller.current != 2) {
+                        //     functions.snackBar(
+                        //         'Achat',
+                        //         'Veuillez remplir tous les champs',
+                        //         ColorsApp.red);
+                        //     return;
+                        //   } else {
+                        //     _Bcontroller.stateChange(true);
+                        //   }
+                        // }
+                        _Bcontroller.stateChange(true);
+                        print(_Bcontroller.isCurrent(3));
+                        // if (_Bcontroller.isCurrent(3)) {
+                        // if (nom.text.isEmpty ||
+                        //     prenom.text.isEmpty ||
+                        //     phone.text.isEmpty ||
+                        //     _Bcontroller.isLivreur == 0) {
+                        //   if (_Bcontroller.isLivreur == 0) {
+                        //     functions.snackBar('Achat',
+                        //         'Selectionner un livreur', ColorsApp.red);
+                        //   } else {
+                        //     functions.snackBar(
+                        //         'Achat',
+                        //         'Veuillez remplir tous les champs',
+                        //         ColorsApp.red);
+                        //   }
+                        // }
+                        var listProd = _controller.getListPinCart();
+
+                        if (nom.text.isNotEmpty &&
+                            prenom.text.isNotEmpty &&
+                            phone.text.isNotEmpty &&
+                            _Bcontroller.isLivreur != 0) {
+                          var data = {
+                            'nom': nom.text,
+                            'prenom': prenom.text,
+                            'phone': phone.text,
+                            'idModePaiement': 1,
+                            'idLivreur': _Bcontroller.isLivreur,
+                            'listProduits': listProd,
+                          };
+                          print(data);
+                          await _Bcontroller.buyCart(data);
+                        } else {}
                       },
-                      onStepTapped: (int index) {},
                       steps: [
                         Step(
+                            isActive: _Bcontroller.isCurrent(0),
                             title: const Text('Informations commande'),
                             content: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -196,6 +256,7 @@ class BuyShoopingCart extends StatelessWidget {
                         //     : StepState.editing),
                         Step(
                             title: const Text('Choix du livreur'),
+                            isActive: _Bcontroller.isCurrent(1),
                             content: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               // crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,6 +279,7 @@ class BuyShoopingCart extends StatelessWidget {
                             )),
                         Step(
                           title: const Text('Informations personnels'),
+                          isActive: _Bcontroller.isCurrent(2),
                           content: Container(
                               margin: EdgeInsets.only(
                                 top: Get.size.height * .025,
@@ -292,6 +354,7 @@ class BuyShoopingCart extends StatelessWidget {
                         ),
                         Step(
                             title: const Text('Payement'),
+                            isActive: _Bcontroller.isCurrent(3),
                             content: Column(
                               children: [
                                 // CinetPayCheckout(
@@ -303,7 +366,6 @@ class BuyShoopingCart extends StatelessWidget {
                                 // )
                               ],
                             ),
-                            isActive: true,
                             state: StepState.complete),
                       ],
                     )

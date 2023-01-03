@@ -51,18 +51,17 @@ class ProductView extends StatelessWidget {
                 return Stack(
                   children: [
                     Container(
-                        child:
-                            Get.find<ProductController>().totalItems >= 1
-                                ? IconButtonF(
-                                    color: ColorsApp.black,
-                                    icon: Icons.shopping_cart_outlined,
-                                    onTap: () {
-                                      Get.toNamed(
-                                        AppLinks.CART,
-                                      );
-                                    },
-                                  )
-                                : Container()),
+                        child: Get.find<ProductController>().totalItems >= 1
+                            ? IconButtonF(
+                                color: ColorsApp.black,
+                                icon: Icons.shopping_cart_outlined,
+                                onTap: () {
+                                  // Get.toNamed(
+                                  //   AppLinks.CART,
+                                  // );
+                                },
+                              )
+                            : Container()),
                     Get.find<ProductController>().totalItems >= 1
                         ? Positioned(
                             top: 0,
@@ -136,8 +135,7 @@ class ProductView extends StatelessWidget {
               )),
         ),
       ]),
-      bottomNavigationBar:
-          GetBuilder<ProductController>(builder: (prod) {
+      bottomNavigationBar: GetBuilder<ProductController>(builder: (prod) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -150,6 +148,7 @@ class ProductView extends StatelessWidget {
                   IconButtonF(
                     backgroundColor: ColorsApp.greenLight,
                     icon: Icons.remove,
+                    inconSize: 15.0,
                     onTap: () {
                       prod.setQuantity(false); // Get.back();
                     },
@@ -161,6 +160,7 @@ class ProductView extends StatelessWidget {
                   IconButtonF(
                     backgroundColor: ColorsApp.greenLight,
                     icon: Icons.add,
+                    inconSize: 15.0,
                     onTap: () {
                       prod.setQuantity(true); // Get.back();
                     },
@@ -170,8 +170,8 @@ class ProductView extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(color: ColorsApp.grey),
-              padding: EdgeInsets.only(
-                  left: kMdWidth / 6, right: kMdWidth / 6, top: 6, bottom: 6),
+              // padding: EdgeInsets.only(
+              //     left: kMdWidth / 6, right: kMdWidth / 6, top: 6, bottom: 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
