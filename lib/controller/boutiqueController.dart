@@ -62,33 +62,46 @@ class BoutiqueController extends GetxController {
   getBoutique() async {
     try {
       Response response = await boutiqueRepo.getBoutiqueForUser();
-      _Boutique = BoutiqueModel.fromJson(response.body['data']);
-      _isExist = response.body['exist'];
-      // print(_Boutique);
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _Boutique = BoutiqueModel.fromJson(response.body['data']);
+          _isExist = response.body['exist'];
+          // print(_Boutique);
+        }
+      }
       _isLoaded = 1;
 
       update();
     } catch (e) {
+      _isExist = false;
+      _isLoaded = 1;
+
+      update();
       print(e);
     }
   }
 
   List<CommandeBoutiqueModel> _commandeBoutiqueList = [];
+  List<CommandeBoutiqueModel> _commandeBoutiqueListSave = [];
   List<CommandeBoutiqueModel> get commandeBoutiqueList => _commandeBoutiqueList;
   int _isLoadedPC = 0;
   int get isLoadedPC => _isLoadedPC;
   getListCommandeForBoutique() async {
     // _commandeBoutiqueList = [];
+    _searchCom = false;
     _isLoadedPC = 0;
     try {
       Response response =
           await boutiqueRepo.getListCommandeForBoutique(Boutique.codeBoutique);
-      _commandeBoutiqueList = [];
-
-      _commandeBoutiqueList.addAll((response.body['data'] as List)
-          .map((e) => CommandeBoutiqueModel.fromJson(e))
-          .toList());
-
+      _commandeBoutiqueList.clear();
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _commandeBoutiqueList.addAll((response.body['data'] as List)
+              .map((e) => CommandeBoutiqueModel.fromJson(e))
+              .toList());
+          _commandeBoutiqueListSave = _commandeBoutiqueList;
+        }
+      }
       _isLoadedPC = 1;
       update();
     } catch (e) {
@@ -96,6 +109,7 @@ class BoutiqueController extends GetxController {
     }
   }
 
+  List<CommandeBoutiqueModel> _HcommandeBoutiqueListSave = [];
   List<CommandeBoutiqueModel> _HcommandeBoutiqueList = [];
   List<CommandeBoutiqueModel> get HcommandeBoutiqueList =>
       _HcommandeBoutiqueList;
@@ -104,14 +118,19 @@ class BoutiqueController extends GetxController {
   getListHCommandeForBoutique() async {
     // _HcommandeBoutiqueList = [];
     _isLoadedPH = 0;
+    _HsearchCom = false;
     try {
       Response response =
           await boutiqueRepo.getListHCommandeForBoutique(Boutique.codeBoutique);
-      _HcommandeBoutiqueList = [];
-
-      _HcommandeBoutiqueList.addAll((response.body['data'] as List)
-          .map((e) => CommandeBoutiqueModel.fromJson(e))
-          .toList());
+      _HcommandeBoutiqueList.clear();
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _HcommandeBoutiqueList.addAll((response.body['data'] as List)
+              .map((e) => CommandeBoutiqueModel.fromJson(e))
+              .toList());
+        }
+      }
+      _HcommandeBoutiqueListSave = _HcommandeBoutiqueList;
       print('i-----');
       print(response.body['data']);
       _isLoadedPH = 1;
@@ -122,21 +141,27 @@ class BoutiqueController extends GetxController {
   }
 
   List<ProduitBoutiqueModel> _produitBoutiqueList = [];
+  List<ProduitBoutiqueModel> _produitBoutiqueListSave = [];
   List<ProduitBoutiqueModel> get produitBoutiqueList => _produitBoutiqueList;
   int _isLoadedPB = 0;
   int get isLoadedPB => _isLoadedPB;
   getListProduitForBoutique() async {
     // _produitBoutiqueList = [];
     _isLoadedPB = 0;
+    _searchProB = false;
+
     try {
       Response response =
           await boutiqueRepo.getListProduitForBoutique(Boutique.codeBoutique);
-      _produitBoutiqueList = [];
-
-      _produitBoutiqueList.addAll((response.body['data'] as List)
-          .map((e) => ProduitBoutiqueModel.fromJson(e))
-          .toList());
-
+      _produitBoutiqueList.clear();
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _produitBoutiqueList.addAll((response.body['data'] as List)
+              .map((e) => ProduitBoutiqueModel.fromJson(e))
+              .toList());
+        }
+      }
+      _produitBoutiqueListSave = _produitBoutiqueList;
       _isLoadedPB = 1;
       update();
     } catch (e) {
@@ -287,5 +312,97 @@ class BoutiqueController extends GetxController {
       update();
       print(e);
     }
+  }
+
+  bool _searchCom = false;
+  bool get searchCom => _searchCom;
+
+  searchButtom() {
+    _searchCom = !_searchCom;
+    // searchCommande('');
+    if (!_searchCom) {
+      _commandeBoutiqueList = _commandeBoutiqueListSave;
+    }
+    update();
+  }
+
+  searchCommande(text) {
+    print(text);
+    _commandeBoutiqueList = [];
+    List<CommandeBoutiqueModel> cont = [];
+    _commandeBoutiqueListSave.forEach((item) {
+      if (item.numCommande.toUpperCase().contains(text.toUpperCase()) ||
+          item.titre.toUpperCase().contains(text.toUpperCase())) {
+        cont.add(item);
+      }
+    });
+    print(cont.length);
+    if (cont.length != 0) {
+      _commandeBoutiqueList = cont;
+    } else {
+      _commandeBoutiqueList = _commandeBoutiqueListSave;
+    }
+
+    update();
+  }
+
+  bool _HsearchCom = false;
+  bool get HsearchCom => _HsearchCom;
+
+  HsearchButtom() {
+    _HsearchCom = !_HsearchCom;
+    HsearchCommande('');
+    update();
+  }
+
+  HsearchCommande(text) {
+    print(text);
+    _HcommandeBoutiqueList = [];
+    List<CommandeBoutiqueModel> cont = [];
+    _HcommandeBoutiqueListSave.forEach((item) {
+      if (item.numCommande.toUpperCase().contains(text.toUpperCase()) ||
+          item.titre.toUpperCase().contains(text.toUpperCase())) {
+        cont.add(item);
+      }
+    });
+    print(cont.length);
+    if (cont.length != 0) {
+      _HcommandeBoutiqueList = cont;
+    } else {
+      _HcommandeBoutiqueList = _HcommandeBoutiqueListSave;
+    }
+
+    update();
+  }
+
+  bool _searchProB = false;
+  bool get searchProB => _searchProB;
+
+  searchProBButtom() {
+    _searchProB = !_searchProB;
+    if (!_searchProB) {
+      _produitBoutiqueList = _produitBoutiqueListSave;
+    }
+    update();
+  }
+
+  searchProduitB(text) {
+    print(text);
+    _produitBoutiqueList.clear();
+    List<ProduitBoutiqueModel> cont = [];
+    _produitBoutiqueListSave.forEach((item) {
+      if (item.titre.toUpperCase().contains(text.toUpperCase()) ||
+          item.codeProduit.toUpperCase().contains(text.toUpperCase())) {
+        cont.add(item);
+      }
+    });
+    print(cont.length);
+    if (cont.length != 0) {
+      _produitBoutiqueList = cont;
+    } else {
+      _produitBoutiqueList = _produitBoutiqueListSave;
+    }
+
+    update();
   }
 }

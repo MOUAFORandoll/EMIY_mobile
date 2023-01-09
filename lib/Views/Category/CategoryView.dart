@@ -78,48 +78,43 @@ class CategoryView extends StatelessWidget {
                   baseColor: Colors.blueGrey,
                   highlightColor: Colors.greenAccent,
                   child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 10,
-                          itemBuilder: (_ctx, index) => Container(
-                              height: kSmHeight * 2,
-                              width: kSmWidth,
-                              padding: EdgeInsets.all(kMarginX),
-                              margin: EdgeInsets.symmetric(
-                                  vertical: kMarginY, horizontal: kMarginX),
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Column(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        alignment: Alignment.center,
-                                        // margin: EdgeInsets.only(
-                                        //     top: Get.height * .005, left: Get.width * .008),
-                                        child: Icon(
-                                          Icons.no_backpack,
-                                          color: Colors.white,
-                                        )),
-                                    Container(
-                                      width: kSmWidth * .6,
-                                      alignment: Alignment.center,
-                                      // margin: EdgeInsets.only(
-                                      //     top: Get.height * .005, left: Get.width * .008),
-                                      child: Text('',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)),
-                                    ),
-                                  ])))))
+                      height: kSmHeight * 2,
+                      width: kSmWidth,
+                      padding: EdgeInsets.all(kMarginX),
+                      margin: EdgeInsets.symmetric(
+                          vertical: kMarginY, horizontal: kMarginX),
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                alignment: Alignment.center,
+                                // margin: EdgeInsets.only(
+                                //     top: Get.height * .005, left: Get.width * .008),
+                                child: Icon(
+                                  Icons.no_backpack,
+                                  color: Colors.white,
+                                )),
+                            Container(
+                              width: kSmWidth * .6,
+                              alignment: Alignment.center,
+                              // margin: EdgeInsets.only(
+                              //     top: Get.height * .005, left: Get.width * .008),
+                              child: Text('',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15)),
+                            ),
+                          ])))
               : CategoryComponent2(
                   category: categorys.categoryList[index],
                 ),
 
-          childCount: categorys.categoryList.length,
+          childCount:
+              categorys.isLoaded == 0 ? 1 : categorys.categoryList.length,
         ))
       ]);
     });

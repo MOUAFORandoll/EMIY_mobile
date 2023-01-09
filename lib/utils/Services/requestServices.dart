@@ -39,7 +39,6 @@ class ApiService extends GetConnect {
     // });
   }
 
-  
 /**
  *  Start Section Billet 
  */
@@ -80,7 +79,7 @@ class ApiService extends GetConnect {
     //   if (response.statusCode == 200) {
     //     return {
     //       'code': 200,
-    //       'data': BoutiqueModel.fromJson(response.body['data']),
+    //       'data': BoutiqueModel.fromJson(response.body['data'].length != 0),
     //       'exist': response.body['exist']
     //     };
     //   } else {
@@ -121,7 +120,7 @@ class ApiService extends GetConnect {
     //   });
     //   if (response.statusCode == 200) {
     //     print('---------------------');
-    //     print(response.body['data']);
+    //     print(response.body['data'].length != 0);
     //     return {
     //       'code': 200,
     //       'data': (response.body['data'] as List)
@@ -146,7 +145,7 @@ class ApiService extends GetConnect {
     //   // print(response.body);
     //   if (response.statusCode == 200) {
     //     print('---------------------');
-    //     print(response.body['data']);
+    //     print(response.body['data'].length != 0);
     //     return {
     //       'code': 200,
     //       'data': (response.body['data'] as List)

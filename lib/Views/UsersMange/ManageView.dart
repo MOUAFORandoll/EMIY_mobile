@@ -6,9 +6,13 @@ import 'package:fahkapmobile/Views/Boutique/BoutiqueView.dart';
 import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Form/formComponent2.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';
+import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/controller/boutiqueController.dart';
 import 'package:fahkapmobile/controller/managerController.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
+import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:fahkapmobile/utils/Services/storageService2.dart';
+import 'package:fahkapmobile/utils/database/DataBase.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
@@ -68,6 +72,7 @@ class _ManageViewState extends State<ManageView> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return GetBuilder<ManagerController>(builder: (_manager) {
+      print(_manager.User);
       // ignore: unnecessary_null_comparison
       if (_manager.User != null) {
         name.text = _manager.User.nom;
@@ -87,9 +92,10 @@ class _ManageViewState extends State<ManageView> {
           floating: true,
           // Display a placeholder widget to visualize the shrinking size.
           flexibleSpace: InkWell(
-            child: SingleChildScrollView(
-              child: Column(children: [
+            child: GetBuilder<BoutiqueController>(
+              builder: (_controller) => Column(children: [
                 Container(
+                    alignment: Alignment.topLeft,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -98,22 +104,21 @@ class _ManageViewState extends State<ManageView> {
                               BigText(text: "Profile", bolder: _manager.state),
                           onTap: () => _manager.chageState(true),
                         ),
-                        GetBuilder<BoutiqueController>(
-                            builder: (_controller) => _controller.isLoaded == 1
-                                ? _controller.isExist
-                                    ? InkWell(
-                                        child: BigText(
-                                            text: "Boutique",
-                                            bolder: !_manager.state),
-                                        onTap: () => _manager.chageState(false),
-                                      )
-                                    : Container()
-                                : _controller.isLoaded == 2
-                                    ? Container()
-                                    : Container(
-                                        child: CircularProgressIndicator(
-                                        color: ColorsApp.bleuLight,
-                                      ))),
+                        _controller.isLoaded == 1
+                            ? _controller.isExist
+                                ? InkWell(
+                                    child: BigText(
+                                        text: "Boutique",
+                                        bolder: !_manager.state),
+                                    onTap: () => _manager.chageState(false),
+                                  )
+                                : Container()
+                            : _controller.isLoaded == 2
+                                ? Container()
+                                : Container(
+                                    child: SpinKitCircle(
+                                    color: ColorsApp.bleuLight,
+                                  )),
                       ],
                     ),
                     margin: EdgeInsets.only(
@@ -121,12 +126,41 @@ class _ManageViewState extends State<ManageView> {
                       // left: kMarginX,
                       // right: kMarginX,
                     )),
+                _controller.isExist
+                    ? Container(width: 0, height: 0)
+                    : InkWell(
+                        child: Container(
+                            padding: EdgeInsets.only(
+                                left: 20, right: 20, top: 2, bottom: 2),
+                            margin: EdgeInsets.only(bottom: 5, top: 8),
+                            decoration: BoxDecoration(color: ColorsApp.grey),
+                            height: 40,
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  smallText(
+                                      al: true,
+                                      width: kSmWidth,
+                                      text: 'Historique de vos achats',
+                                      size: 16),
+                                  Container(
+                                      margin: EdgeInsets.only(
+                                          top: Get.height * .005,
+                                          left: Get.width * .008),
+                                      child: Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        // color: Colors.white,
+                                      )),
+                                ])),
+                        onTap: () => Get.toNamed(AppLinks.COMMANDE_FOR_USER),
+                      ),
               ]),
             ),
             /*   onTap: () => filterDest() */
           ),
           // Make the initial height of the SliverAppBar larger than normal.
-          expandedHeight: 60,
+          expandedHeight: 95,
         ),
         SliverList(
             // Use a delegate to build items as they're scrolled on screen.
@@ -164,8 +198,8 @@ class _ManageViewState extends State<ManageView> {
                             )
                           ])))
                   : Container(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-                      child: _manager.userP
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                      child: !_manager.userP && _manager.User != null
                           ? Column(children: <Widget>[
                               InfoComponent(
                                   title: Text("First name"),
@@ -272,13 +306,36 @@ class _ManageViewState extends State<ManageView> {
                                     ),
                                   );
                                 },
-                              )
+                              ),
+                              Center(
+                                  child: CustomBtn(
+                                      color: ColorsApp.red,
+                                      title: 'Deconneter',
+                                      onTap: () {
+                                        Get.find<StorageService>()
+                                            .deleteStorage();
+                                        Get.find<DB>().deleteAll();
+                                        Get.toNamed(AppLinks.LOGIN);
+                                      })),
                             ])
-                          : Center(
-                              child: CustomBtn(
-                                  color: ColorsApp.greenLight,
-                                  title: 'Creer compte',
-                                  onTap: () async {}),
+                          : Column(
+                              children: [
+                                Center(
+                                    child: CustomBtn(
+                                        color: ColorsApp.greenLight,
+                                        title: 'Se Connecter',
+                                        onTap: () {
+                                          Get.toNamed(AppLinks.LOGIN);
+                                        })),
+                                Center(
+                                  child: CustomBtn(
+                                      color: ColorsApp.greenLight,
+                                      title: 'Creer compte',
+                                      onTap: () {
+                                        Get.toNamed(AppLinks.REGISTER);
+                                      }),
+                                )
+                              ],
                             ))
               : BoutiqueView(),
 

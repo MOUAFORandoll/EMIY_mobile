@@ -11,6 +11,7 @@ import 'package:fahkapmobile/components/Widget/productBoutiqueComponent.dart';
 import 'package:fahkapmobile/components/Widget/productComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/components/Text/titleText.dart';
+import 'package:fahkapmobile/components/Form/text_field.dart';
 import 'package:fahkapmobile/controller/boutiqueController.dart';
 import 'package:fahkapmobile/controller/categoryController.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
@@ -23,9 +24,33 @@ import 'package:shimmer/shimmer.dart';
 class CommandesBoutiqueView extends StatelessWidget {
   CommandesBoutiqueView({Key? key}) : super(key: key);
   ScrollController _scrollController = new ScrollController();
+//  TextField(
+//                       onChanged: (value) => _controller.searchCommande(value),
 
+//                       // keyboardType: _typekeyBord,
+//                       // cursorRadius: const Radius.circular(20),
+//                       // cursorHeight: kToolbarHeight / 2,
+
+//                       cursorColor: const Color(0xff28255A),
+//                       controller: controllerField,
+//                       // obscureText: type == KFieldType.password,
+//                       textAlign: TextAlign.left,
+//                       decoration: InputDecoration(
+//                         hintText: '1234',
+//                         border: OutlineInputBorder(
+//                             borderRadius: BorderRadius.circular(20)),
+//                         contentPadding: EdgeInsets.symmetric(horizontal: 10),
+//                         hintStyle: TextStyle(
+//                             color: Colors.grey,
+//                             fontSize: 25,
+//                             fontWeight: FontWeight.w700),
+//                       ),
+//                     ),
+//                   )
   @override
   Widget build(BuildContext context) {
+    TextEditingController controllerField = TextEditingController();
+
     Get.find<BoutiqueController>().getListCommandeForBoutique();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
       return Scaffold(
@@ -33,14 +58,31 @@ class CommandesBoutiqueView extends StatelessWidget {
             leading: InkWell(
                 child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
                 onTap: () => Get.back()),
-            title: Text(
-              'Liste de vos commandes',
-              style: TextStyle(color: Colors.black),
-            ),
+            title: _controller.searchCom
+                ? KTextField(
+                    controllerField: controllerField,
+                    onChange: _controller.searchCommande)
+                : Text(
+                    'Liste de vos commandes',
+                    style: TextStyle(color: Colors.black),
+                  ),
             actions: [
               InkWell(
-                child: Icon(Icons.search, color: Colors.red),
-              )
+                  child: Container(
+                      margin: EdgeInsets.only(right: 10),
+                      child: !_controller.searchCom
+                          ? Icon(
+                              Icons.search,
+                              color: Colors.red,
+                            )
+                          : Icon(
+                              Icons.close,
+                              color: Colors.red,
+                            )),
+                  onTap: () {
+                    controllerField.text = '';
+                    _controller.searchButtom();
+                  })
             ],
             foregroundColor: Colors.red,
             backgroundColor: Colors.transparent,
@@ -178,18 +220,19 @@ class CommandesBoutiqueView extends StatelessWidget {
                                 ]));
                       },
                     )))
-                :  _controller.commandeBoutiqueList.length == 0
+                : _controller.commandeBoutiqueList.length == 0
                     ? Center(child: Text('Aucune commande'))
                     : SingleChildScrollView(
-                    child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: _controller.commandeBoutiqueList.length,
-                    itemBuilder: (_ctx, index) {
-                      return CommandeBoutiqueComponent(
-                          commande: _controller.commandeBoutiqueList[index]);
-                    },
-                  ))
+                        child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _controller.commandeBoutiqueList.length,
+                        itemBuilder: (_ctx, index) {
+                          return CommandeBoutiqueComponent(
+                              commande:
+                                  _controller.commandeBoutiqueList[index]);
+                        },
+                      ))
           ])));
     });
   }

@@ -1,7 +1,10 @@
 import 'package:fahkapmobile/components/Button/button.dart';
 import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Form/formComponent.dart';
+import 'package:fahkapmobile/controller/managerController.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:fahkapmobile/utils/Services/dependancies.dart';
+import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fahkapmobile/utils/Services/routing.dart';
@@ -23,29 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen>
   TextEditingController repass = TextEditingController();
   TextEditingController email = TextEditingController();
 
-  bool error = false;
-  bool is_disable = false;
-  late int telephone;
-  late String password;
-  // AuthProvider api = AuthProvider();
-  // GetStorage box = GetStorage();
-
   bool validator = false;
-  bool validator2 = false;
-
-  bool enabled = false;
-  bool enableD = true;
-  bool loading = false;
-  /* 
-  bool enableName = true;
-  bool enableMail = true;
-  bool enablePasword = true;
-  bool enableNumber = true; */
-  var phoneSa = '';
-  var nom = '';
-  var mailSa = '';
-
-  var passSa = '';
   @override
   void initState() {
     super.initState();
@@ -53,6 +34,8 @@ class _RegisterScreenState extends State<RegisterScreen>
 
     // api.onInit();
   }
+
+  var fn = new ViewFunctions();
 
   final int _numPages = 2;
   final pageController = PageController(initialPage: 0);
@@ -83,9 +66,6 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
   }
 
-  bool enabledData = false;
-  String payCode = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +75,8 @@ class _RegisterScreenState extends State<RegisterScreen>
           backgroundColor: Colors.transparent,
         ),
         // backgroundColor: Color.fromRGBO(243, 243, 243, 1),
-        body: TabBarView(
+        body: SafeArea(
+            child: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           controller: _tabController,
           children: [
@@ -171,12 +152,12 @@ class _RegisterScreenState extends State<RegisterScreen>
                                         controller: surname,
                                         enabled: true,
                                         hint: "surname"),
-                                    FormComponent(
-                                        icon: Icons.account_circle,
-                                        type: 0,
-                                        controller: phone,
-                                        enabled: true,
-                                        hint: "Ville"),
+                                    // FormComponent(
+                                    //     icon: Icons.account_circle,
+                                    //     type: 0,
+                                    //     controller: phone,
+                                    //     enabled: true,
+                                    //     hint: "Ville"),
                                     FormComponent(
                                         icon: Icons.account_circle,
                                         type: 0,
@@ -244,7 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 ),
                               ),
                             ),
-                            Text(
+                            /*  Text(
                               "Confirm your register!",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -260,6 +241,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                           */
                             Container(
                                 margin: EdgeInsets.only(
                                     top: Get.size.height * .025,
@@ -272,12 +254,12 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 // ),
                                 child: Column(
                                   children: [
-                                    FormComponent(
-                                        icon: Icons.account_circle,
-                                        type: 0,
-                                        controller: phone,
-                                        enabled: true,
-                                        hint: "Code"),
+                                    // FormComponent(
+                                    //     icon: Icons.account_circle,
+                                    //     type: 0,
+                                    //     controller: phone,
+                                    //     enabled: true,
+                                    //     hint: "Code"),
                                     FormComponent(
                                         icon: Icons.lock,
                                         type: 1,
@@ -292,22 +274,44 @@ class _RegisterScreenState extends State<RegisterScreen>
                                         hint: "repeat-password")
                                   ],
                                 )),
-                            Button(
-                                borderRadius: 15.0,
-                                width: Get.size.height * .8,
-                                margin: EdgeInsets.only(
-                                    top: Get.size.height * .025, bottom: 0),
-                                height: Get.size.height * .08,
-                                loaderColor: Colors.white,
-                                title: "Validate",
-                                textColor: Colors.white,
-                                itemColor: Colors.blue,
-                                borderColor: Colors.transparent,
-                                state: validator,
-                                enabled: true,
-                                onTap: () async {
-                                  Get.toNamed(AppLinks.FIRST);
-                                }),
+                            GetBuilder<ManagerController>(
+                                builder: (_manager) => Button(
+                                    borderRadius: 15.0,
+                                    width: Get.size.height * .8,
+                                    margin: EdgeInsets.only(
+                                        top: Get.size.height * .025, bottom: 0),
+                                    height: Get.size.height * .08,
+                                    loaderColor: Colors.white,
+                                    title: "Validate",
+                                    textColor: Colors.white,
+                                    itemColor: Colors.blue,
+                                    borderColor: Colors.transparent,
+                                    state: validator,
+                                    enabled: true,
+                                    onTap: () async {
+                                      if (pass.text != repass.text) {
+                                        fn.snackBar(
+                                            'Mot de passse',
+                                            'Mot de passe differents',
+                                            ColorsApp.red);
+                                      } else {
+                                        // Get.toNamed(AppLinks.FIRST);
+                                        await _manager.signUp({
+                                          'phone': phone.text,
+                                          'password': pass.text,
+                                          "nom": name.text,
+                                          "prenom": surname.text,
+                                          "email": email.text,
+                                          "status": true,
+                                        });
+                                        if (_manager.isSignUp) {
+                                          Get.offNamedUntil(
+                                              AppLinks.FIRST, (route) => false);
+
+                                          MyBinding().onGetAll();
+                                        }
+                                      }
+                                    })),
                             Button(
                                 borderRadius: 15.0,
                                 width: Get.size.height * .8,
@@ -329,6 +333,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                       ),
                     ))),
           ],
-        ));
+        )));
   }
 }

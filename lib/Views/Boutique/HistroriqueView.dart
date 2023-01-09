@@ -2,6 +2,7 @@ import 'package:fahkapmobile/components/Button/btnCatList.dart';
 import 'package:fahkapmobile/components/Button/btnCatListPV.dart';
 import 'package:fahkapmobile/components/Button/button.dart';
 import 'package:fahkapmobile/components/Form/formComponent2.dart';
+import 'package:fahkapmobile/components/Form/text_field.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';
 import 'package:fahkapmobile/components/Text/bigtitleText.dart';
 import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
@@ -26,6 +27,8 @@ class HistoriqueCommandeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controllerField = TextEditingController();
+
     Get.find<BoutiqueController>().getListHCommandeForBoutique();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
       return Scaffold(
@@ -33,14 +36,31 @@ class HistoriqueCommandeView extends StatelessWidget {
             leading: InkWell(
                 child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
                 onTap: () => Get.back()),
-            title: Text(
-              'Historiques de vos ventes',
-              style: TextStyle(color: Colors.black),
-            ),
+            title: _controller.HsearchCom
+                ? KTextField(
+                    controllerField: controllerField,
+                    onChange: _controller.HsearchCommande)
+                : Text(
+                    'Historiques de vos ventes',
+                    style: TextStyle(color: Colors.black),
+                  ),
             actions: [
               InkWell(
-                child: Icon(Icons.search, color: Colors.red),
-              )
+                  child: Container(
+                      margin: EdgeInsets.only(right: 10),
+                      child: !_controller.HsearchCom
+                          ? Icon(
+                              Icons.search,
+                              color: Colors.red,
+                            )
+                          : Icon(
+                              Icons.close,
+                              color: Colors.red,
+                            )),
+                  onTap: () {
+                    controllerField.text = '';
+                    _controller.HsearchButtom();
+                  })
             ],
             foregroundColor: Colors.red,
             backgroundColor: Colors.transparent,
@@ -178,18 +198,19 @@ class HistoriqueCommandeView extends StatelessWidget {
                                 ]));
                       },
                     )))
-                :  _controller.HcommandeBoutiqueList.length == 0
+                : _controller.HcommandeBoutiqueList.length == 0
                     ? Center(child: Text('Aucune commande'))
                     : SingleChildScrollView(
-                    child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: _controller.HcommandeBoutiqueList.length,
-                    itemBuilder: (_ctx, index) {
-                      return CommandeBoutiqueComponent(
-                          commande: _controller.HcommandeBoutiqueList[index]);
-                    },
-                  ))
+                        child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _controller.HcommandeBoutiqueList.length,
+                        itemBuilder: (_ctx, index) {
+                          return CommandeBoutiqueComponent(
+                              commande:
+                                  _controller.HcommandeBoutiqueList[index]);
+                        },
+                      ))
           ])));
     });
   }

@@ -9,14 +9,22 @@ class smallText extends StatelessWidget {
   Color color;
   bool bolder;
   double size;
+  bool al;
+  double width;
   // String content;
   // bool marginBool;
-  smallText({this.text = '', this.color = Colors.black, this.bolder = false, this.size = 12});
+  smallText(
+      {this.text = '',
+      this.color = Colors.black,
+      this.bolder = false,
+      this.al = false,
+      this.size = 12,
+      this.width = 0.0});
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: kSmWidth * .8,
-        alignment: Alignment.center,
+        width: width == 0 ? kSmWidth * .8 : width,
+        alignment: al ? null : Alignment.center,
         child: Text(
           text,
           overflow: TextOverflow.ellipsis,

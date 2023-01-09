@@ -40,7 +40,7 @@ class TextForm extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.black.withOpacity(.4),
+              color: ColorsApp.skyBlue,
           ),
         ),
         contentPadding: EdgeInsets.only(

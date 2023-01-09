@@ -67,9 +67,9 @@ class _ManageBoutiqueViewState extends State<ManageBoutiqueView> {
               style: TextStyle(color: Colors.black),
             ),
             actions: [
-              InkWell(
-                child: Icon(Icons.search, color: Colors.red),
-              )
+              // InkWell(
+              //   child: Icon(Icons.search, color: Colors.red),
+              // )
             ],
             foregroundColor: Colors.red,
             backgroundColor: Colors.transparent,
@@ -123,7 +123,7 @@ class _ManageBoutiqueViewState extends State<ManageBoutiqueView> {
                             child: Text("Description")),
                         Container(
                             height: kMdHeight * .3,
-                            // alignment: Alignment.topLeft,
+                            alignment: Alignment.topLeft,
                             child: Text(
                               _controller.Boutique.description,
                               // overflow: TextOverflow.ellipsis,
@@ -186,15 +186,8 @@ class _ManageBoutiqueViewState extends State<ManageBoutiqueView> {
                                       child: Text('Description'),
                                     ),
                                     TextFormField(
-                                      onChanged: (String value) {
-                                        // if (onChange != null) onChange!(value);
-                                      },
                                       controller: description,
-                                      validator: (value) {
-                                        return value!.isEmpty
-                                            ? "veillez remplir se champs"
-                                            : null;
-                                      },
+
                                       // keyboardType: type,
                                       // obscureText: obscureText!,
                                       maxLengthEnforced: false,
@@ -202,18 +195,18 @@ class _ManageBoutiqueViewState extends State<ManageBoutiqueView> {
                                       maxLines: 10,
                                       decoration: new InputDecoration(
                                         fillColor: ColorsApp.skyBlue,
-                                        counter: Offstage(),
+                                        // counter: Offstage(),
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
                                             borderSide: BorderSide(
-                                              color: ColorsApp.grey,
+                                              color: ColorsApp.skyBlue,
                                             )),
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           borderSide: BorderSide(
-                                            color: Colors.black.withOpacity(.4),
+                                            color: ColorsApp.skyBlue,
                                           ),
                                         ),
                                         contentPadding: EdgeInsets.only(

@@ -60,14 +60,15 @@ class CommentForm extends StatelessWidget {
                   fillColor: ColorsApp.skyBlue,
                   counter: Offstage(),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(
+                    borderRadius: BorderRadius.circular(10.0),
+                    /*   borderSide: BorderSide(
                         color: ColorsApp.grey,
-                      )),
+                      ) */
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Colors.black.withOpacity(.4),
+                      color: ColorsApp.skyBlue,
                     ),
                   ),
                   contentPadding: EdgeInsets.only(

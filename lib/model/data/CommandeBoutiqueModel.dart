@@ -14,6 +14,7 @@ String commandeBoutiqueModelToJson(CommandeBoutiqueModel data) =>
 class CommandeBoutiqueModel {
   CommandeBoutiqueModel({
     required this.codeProduit,
+    required this.numCommande,
     required this.codeCommande,
     required this.titre,
     required this.prix,
@@ -23,6 +24,7 @@ class CommandeBoutiqueModel {
     required this.photo,
   });
 
+  String numCommande;
   String codeProduit;
   String codeCommande;
   String titre;
@@ -35,6 +37,7 @@ class CommandeBoutiqueModel {
   factory CommandeBoutiqueModel.fromJson(Map<String, dynamic> json) =>
       CommandeBoutiqueModel(
         codeProduit: json["codeProduit"],
+        numCommande: json["numCommande"],
         codeCommande: json["codeCommande"],
         titre: json["titre"],
         prix: json["prix"],
@@ -45,6 +48,7 @@ class CommandeBoutiqueModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "numCommande": numCommande,
         "codeProduit": codeProduit,
         "codeCommande": codeCommande,
         "titre": titre,

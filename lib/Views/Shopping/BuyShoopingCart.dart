@@ -173,8 +173,20 @@ class BuyShoopingCart extends StatelessWidget {
                         //     _Bcontroller.stateChange(true);
                         //   }
                         // }
-                        _Bcontroller.stateChange(true);
-                        print(_Bcontroller.isCurrent(3));
+                        // if (_Bcontroller.isCurrent(0)) {
+                        //   _Bcontroller.stateChangeX(1);
+                        // }
+                        // ;
+                        // if (_Bcontroller.isCurrent(1)) {
+                        //   _Bcontroller.stateChangeX(2);
+                        // }
+                        // ;
+                        // if (_Bcontroller.isCurrent(2)) {
+                        //   _Bcontroller.stateChangeX(3);
+                        // }
+                        // ;
+
+                        // print(_Bcontroller.isCurrent(3));
                         // if (_Bcontroller.isCurrent(3)) {
                         // if (nom.text.isEmpty ||
                         //     prenom.text.isEmpty ||
@@ -190,8 +202,9 @@ class BuyShoopingCart extends StatelessWidget {
                         //         ColorsApp.red);
                         //   }
                         // }
-                        var listProd = _controller.getListPinCart();
+                        // var listProd = await _controller.getListPinCart();
 
+                        // print(listProd);
                         if (nom.text.isNotEmpty &&
                             prenom.text.isNotEmpty &&
                             phone.text.isNotEmpty &&
@@ -202,7 +215,7 @@ class BuyShoopingCart extends StatelessWidget {
                             'phone': phone.text,
                             'idModePaiement': 1,
                             'idLivreur': _Bcontroller.isLivreur,
-                            'listProduits': listProd,
+                            'listProduits': _controller.getListPinCart(),
                           };
                           print(data);
                           await _Bcontroller.buyCart(data);
@@ -366,7 +379,7 @@ class BuyShoopingCart extends StatelessWidget {
                                 // )
                               ],
                             ),
-                            state: StepState.complete),
+                            state: StepState.disabled),
                       ],
                     )
                   : Container()

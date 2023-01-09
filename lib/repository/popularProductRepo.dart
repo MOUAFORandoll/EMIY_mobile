@@ -13,9 +13,7 @@ class ProductRepo extends GetxService {
     // try {
     Response response =
         await apiClient.getCollections(ApiRoutes.POPULAR_PRODUCT);
-    print('*********************');
-    // print(a);
-    print('*------------------');
+     
     return response;
   }
 

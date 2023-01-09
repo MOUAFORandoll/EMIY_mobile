@@ -13,6 +13,7 @@ import 'package:fahkapmobile/utils/api/apiUrl.dart';
 import 'package:get/get.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 // ignore: must_be_immutable
 class CommandeBoutiqueComponent extends StatelessWidget {
@@ -96,6 +97,16 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                               Container(
                                 // width: kSmWidth * .6,
 
+                                child: Text(
+                                    'Numero Commande : ' + commande.numCommande,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: ColorsApp.greenLight,
+                                        fontSize: 12)),
+                              ),
+                              Container(
+                                // width: kSmWidth * .6,
+
                                 child: Text('Nom : ' + commande.titre,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -129,7 +140,13 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                                         fontWeight: FontWeight.bold)),
                               ),
                               Container(
-                                child: Text('Date : ' + commande.date,
+                                  child: Text('Date : ' + commande.date,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold))),
+                              Container(
+                                child: Text('Status : ' + commande.status,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.red,
@@ -151,165 +168,26 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                           )),
                     ]) /* ) */),
             onTap: () {
-              // Get.bottomSheet(
-              //   Container(
-              //     padding: EdgeInsets.symmetric(horizontal: kSmWidth * .07),
-              //     // height: 800,
-              //     color: ColorsApp.grey,
-              //     child: SingleChildScrollView(
-              //         child: Column(
-              //       // mainAxisSize: MainAxisSize.min,
-              //       children: [
-              //         FormComponent2(
-              //             icon: Icons.account_circle,
-              //             type: 0,
-              //             controller: titre,
-              //             enabled: true,
-              //             titre: 'Nom du commande',
-              //             hint: "Iphone 11"),
-              //         FormComponent2(
-              //             icon: Icons.account_circle,
-              //             type: 0,
-              //             controller: quantite,
-              //             enabled: true,
-              //             titre: 'Quantite',
-              //             kType: TextInputType.number,
-              //             hint: "10"),
-              //         FormComponent2(
-              //             icon: Icons.account_circle,
-              //             type: 0,
-              //             controller: prix,
-              //             kType: TextInputType.number,
-              //             enabled: true,
-              //             titre: 'Prix',
-              //             hint: "1500"),
-              //         // CommentForm(
-              //         //   titre: 'Description',
-              //         //   controller: description,
-              //         //   width: kMdWidth * 4,
-              //         // ),
-              //         Container(
-              //           alignment: Alignment.topLeft,
-              //           margin: EdgeInsets.symmetric(vertical: 5),
-              //           child: Text('Description'),
-              //         ),
-              //         TextFormField(
-              //           onChanged: (String value) {
-              //             // if (onChange != null) onChange!(value);
-              //           },
-              //           controller: description,
-              //           validator: (value) {
-              //             return value!.isEmpty
-              //                 ? "veillez remplir se champs"
-              //                 : null;
-              //           },
-              //           // keyboardType: type,
-              //           // obscureText: obscureText!,
-              //           maxLengthEnforced: false,
-              //           maxLength: 10,
-              //           maxLines: 10,
-              //           decoration: new InputDecoration(
-              //             fillColor: ColorsApp.skyBlue,
-              //             counter: Offstage(),
-              //             focusedBorder: OutlineInputBorder(
-              //                 borderRadius: BorderRadius.circular(10.0),
-              //                 borderSide: BorderSide(
-              //                   color: ColorsApp.grey,
-              //                 )),
-              //             border: OutlineInputBorder(
-              //               borderRadius: BorderRadius.circular(10),
-              //               borderSide: BorderSide(
-              //                 color: Colors.black.withOpacity(.4),
-              //               ),
-              //             ),
-              //             contentPadding: EdgeInsets.only(
-              //               left: 12,
-              //               bottom: 10,
-              //               top: 10,
-              //               right: 12,
-              //             ),
-              //             hintText: 'Entrer une description',
-              //             hintStyle: TextStyle(
-              //               color: Colors.grey,
-              //               fontFamily: 'orkney',
-              //             ),
-              //             // suffixIcon: InkWell(
-              //             //   onTap: () => onTap,
-              //             //   child: Icon(
-              //             //     icon,
-              //             //     color: Colors.grey,
-              //             //   ),
-              //             // ),
-              //           ),
-              //         ),
-
-              //         // _controller.listImgcommandes.length != 0
-              //         //     ? smallText(
-              //         //         text: 'Listes images',
-              //         //       )
-              //         //     : Container(),
-              //         // _controller.listImgcommandes.length != 0
-              //         //     ? Container(
-              //         //         height: kSmHeight,
-              //         //         margin:
-              //         //             EdgeInsets.symmetric(vertical: kMarginY * .1),
-              //         //         child: ListView.builder(
-              //         //           itemCount: _controller.listImgcommandes.length,
-              //         //           scrollDirection: Axis.horizontal,
-              //         //           itemBuilder: (_ctx, index) => ImageComp(
-              //         //               file: _controller.listImgcommandes[index],
-              //         //               index: index),
-              //         //         ),
-              //         //       )
-              //         //     : Container(),
-              //         // Container(
-              //         //     decoration: BoxDecoration(color: ColorsApp.grey),
-              //         //     child: CustomBtn(
-              //         //       color: ColorsApp.greenLight,
-              //         //       title: 'Selectionner image',
-              //         //       onTap: () {
-              //         //         _controller.getImage();
-              //         //       },
-              //         //     )),
-              //         // Container(
-              //         //     decoration: BoxDecoration(color: ColorsApp.grey),
-              //         //     child: Row(
-              //         //         mainAxisAlignment: MainAxisAlignment.end,
-              //         //         children: [
-              //         //           // smallText(
-              //         //           //   text: _controller.Boutique.titre,
-              //         //           // ),
-              //         //           CustomBtn(
-              //         //             color: ColorsApp.greenLight,
-              //         //             title: _controller.addProduct
-              //         //                 ? 'Retour'
-              //         //                 : 'Ajouter commande',
-              //         //             onTap: () {
-              //         //               _controller
-              //         //                   .chageState(!_controller.addProduct);
-              //         //             },
-              //         //           )
-              //         //         ])),
-              //         CustomBtn(
-              //           color: ColorsApp.greenLight,
-              //           title: 'Update',
-              //           onTap: () async {
-              //             var data = {
-              //               'idcommande': commande.id,
-              //               'titre': titre.text,
-              //               'quantite': quantite.text,
-              //               'prixUnitaire': prix.text,
-              //               'description': description.text
-              //             };
-              //             print(data);
-              //             await _controller.updatecommande(data);
-              //             // _controller.chageState(!_controller.addProduct);
-              //           },
-              //         )
-              //       ],
-              //     )),
-              //   ),
-              //    );
+              if (commande.status == 'En cours') {
+                Get.bottomSheet(Container(
+                    padding: EdgeInsets.symmetric(horizontal: kSmWidth * .07),
+                    height: 800,
+                    color: ColorsApp.grey,
+                    child: SingleChildScrollView(
+                        child: Column(
+                            // mainAxisSize: MainAxisSize.min,
+                            children: [
+                          QrImage(
+                            data: commande.codeCommande +
+                                '@' +
+                                _controller.Boutique.codeBoutique,
+                            version: QrVersions.auto,
+                            size: 200.0,
+                          ),
+                        ]))));
+              } else {
+                print('deja recup');
+              }
             },
           ),
           // Positioned(

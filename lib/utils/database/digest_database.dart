@@ -1237,7 +1237,7 @@ void dispose()   {
                               margin: EdgeInsets.symmetric(
                                   horizontal: 18, vertical: 10),
                               child: Divider(
-                                color: Colors.black.withOpacity(.4),
+                                  color: ColorsApp.skyBlue,
                               ),
                             ),
                             Row(

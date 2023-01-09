@@ -6,6 +6,7 @@ import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Form/commentForm.dart';
 import 'package:fahkapmobile/components/Form/formComponent.dart';
 import 'package:fahkapmobile/components/Form/formComponent2.dart';
+import 'package:fahkapmobile/components/Form/text_field.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';
 import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
@@ -32,6 +33,8 @@ class ProduitBoutiqueView extends StatelessWidget {
   TextEditingController description = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    TextEditingController controllerField = TextEditingController();
+
     Get.find<BoutiqueController>().getListProduitForBoutique();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
       return Scaffold(
@@ -39,14 +42,31 @@ class ProduitBoutiqueView extends StatelessWidget {
             leading: InkWell(
                 child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
                 onTap: () => Get.back()),
-            title: Text(
-              'Liste de vos produits',
-              style: TextStyle(color: Colors.black),
-            ),
+            title: _controller.searchProB
+                ? KTextField(
+                    controllerField: controllerField,
+                    onChange: _controller.searchProduitB)
+                : Text(
+                    'Liste de vos produits',
+                    style: TextStyle(color: Colors.black),
+                  ),
             actions: [
               InkWell(
-                child: Icon(Icons.search, color: Colors.red),
-              )
+                  child: Container(
+                      margin: EdgeInsets.only(right: 10),
+                      child: !_controller.searchProB
+                          ? Icon(
+                              Icons.search,
+                              color: Colors.red,
+                            )
+                          : Icon(
+                              Icons.close,
+                              color: Colors.red,
+                            )),
+                  onTap: () {
+                    controllerField.text = '';
+                    _controller.searchProBButtom();
+                  })
             ],
             foregroundColor: Colors.red,
             backgroundColor: Colors.transparent,
@@ -224,7 +244,7 @@ class ProduitBoutiqueView extends StatelessWidget {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
-                                color: Colors.black.withOpacity(.4),
+                                color: ColorsApp.skyBlue,
                               ),
                             ),
                             contentPadding: EdgeInsets.only(

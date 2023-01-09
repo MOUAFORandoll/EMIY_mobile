@@ -1,3 +1,4 @@
+import 'package:fahkapmobile/controller/CommandeController.dart';
 import 'package:fahkapmobile/model/data/CartModel.dart';
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/model/data/LivreurModel.dart';
@@ -17,6 +18,7 @@ class BuyShopController extends GetxController {
 
   final service = new ApiService();
   LivreurRepo livreurRepo = Get.find();
+  CommandeController commande = Get.find();
   int _state = 0;
   int get state => _state;
   // ignore: must_call_super
@@ -27,6 +29,14 @@ class BuyShopController extends GetxController {
 
   // int _current = 0;
   // int get current => _current;
+
+  stateChangeX(i) {
+    // _current = _state;
+    _state = i;
+
+    update();
+    print('_state..........${_state}');
+  }
 
   stateChange(bool i) {
     // _current = _state;
@@ -66,16 +76,19 @@ class BuyShopController extends GetxController {
     _isLoaded = 0;
     setLivreur(0);
     try {
-      _livreurList = [];
-
+      
       _livreurList.clear();
       update();
       Response response = await livreurRepo.getLivreur();
-      print('livreur------------------');
-      print(response.body['data']);
-      _livreurList.addAll((response.body['data'] as List)
-          .map((e) => LivreurModel.fromJson(e))
-          .toList());
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          print('livreur------------------');
+          print(response.body['data'].length != 0);
+          _livreurList.addAll((response.body['data'] as List)
+              .map((e) => LivreurModel.fromJson(e))
+              .toList());
+        }
+      }
       // print(_categoryList);
       _isLoaded = 1;
       update();
@@ -103,8 +116,10 @@ class BuyShopController extends GetxController {
     try {
       Response response = await buySoppingCartRepo.buyCart(data);
       print(response.body);
+      commande.saveCommande(response.body['id'], response.body['codeCommande'],
+          response.body['codeClient'], response.body['date']);
       Get.back();
-   
+
       fn.snackBar('Achat', response.body['message'], ColorsApp.bleuLight);
       _isOk = response.body['status'];
       // Get.back(closeOverlays: true);

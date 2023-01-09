@@ -11,6 +11,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/controller/cartController.dart';
 import 'package:fahkapmobile/controller/categoryController.dart';
+import 'package:fahkapmobile/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
 
@@ -34,12 +35,13 @@ class _FirstScreenState extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       // extendBody for floating bar get better perfomance
       // extendBody: true,
       backgroundColor: Colors.white,
 
-      body: _buildContent(_currentIndex),
+      body: SafeArea(child: _buildContent(_currentIndex)),
 
       bottomNavigationBar: _buildBorderRadiusDesign(),
     );

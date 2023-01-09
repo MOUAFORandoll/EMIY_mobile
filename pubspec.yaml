@@ -47,21 +47,20 @@ dependencies:
   intl: null
   page_view_indicator: any
   path_provider: any
-  permission_handler: any
-  shared_preferences: any
+  permission_handler: any 
   splashscreen: ^1.3.5
   sqflite: ^2.0.0+3
   theme_provider: any
-  file_picker:
+  # file_picker:
   open_file:
   badges: ^2.0.2
   screenshot: ^1.2.3
   syncfusion_flutter_pdf: ^18.4.47-beta
   pdf: any
-  countdown_flutter:
+  # countdown_flutter:
   filesystem_picker: ^1.0.3
   autocomplete_textfield:
-  google_sign_in:
+  # google_sign_in:
   shimmer: ^2.0.0
   carousel_slider: ^3.0.0
   sliding_up_panel: ^2.0.0+1

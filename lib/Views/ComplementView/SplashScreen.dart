@@ -1,3 +1,5 @@
+import 'package:fahkapmobile/utils/Services/dependancies.dart';
+import 'package:fahkapmobile/utils/Services/storageService.dart';
 import 'package:get/get.dart';
 import 'package:fahkapmobile/utils/DataBase/DataBase.dart';
 import 'package:fahkapmobile/utils/Services/routing.dart';
@@ -20,7 +22,7 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage>
     with WidgetsBindingObserver, SingleTickerProviderStateMixin {
-  // GetStorage box = GetStorage();
+  GetStorage box = GetStorage();
   // int isOpen = 0;
   // var rep = 0;
   // int count = 0;
@@ -28,7 +30,10 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   start() {
     Future.delayed(Duration(seconds: 3), () async {
       print('10');
-      Get.offAndToNamed(AppLinks.FIRST);
+
+      Get.offNamedUntil(AppLinks.FIRST, (route) => false);
+
+      MyBinding().onGetAll();
     });
   }
 

@@ -3,6 +3,8 @@ import 'package:fahkapmobile/Views/Boutique/HistroriqueView.dart';
 import 'package:fahkapmobile/Views/Boutique/manageBoutiqueView.dart';
 import 'package:fahkapmobile/Views/Boutique/produitBoutiqueView.dart';
 import 'package:fahkapmobile/Views/Category/ProductCategoryView.dart';
+import 'package:fahkapmobile/Views/Commandes/CommandeView.dart';
+import 'package:fahkapmobile/Views/Commandes/ProduitForCommande.dart';
 import 'package:fahkapmobile/Views/ComplementView/OnboardingScreen.dart';
 import 'package:fahkapmobile/Views/FirstScreen.dart';
 import 'package:fahkapmobile/Views/ComplementView/SplashScreen.dart';
@@ -41,12 +43,22 @@ class AppRoutes {
           return ProductView(index: int.parse(index!));
         }),
     GetPage(
+        name: AppLinks.PRODUCT_FOR_COMMANDE,
+        // ignore: top_level_function_literal_block
+        page: () {
+          var id = Get.parameters['id'];
+          var code = Get.parameters['code'];
+          return ProduitForCommande(id: int.parse(id!), code: code!);
+        }),
+    GetPage(
         name: AppLinks.PRODUCT_FOR_CATEGORY, page: () => ProductCategoryView()),
     GetPage(
         name: AppLinks.PRODUCT_FOR_BOUTIQUE, page: () => ProduitBoutiqueView()),
     GetPage(
         name: AppLinks.COMMANDE_FOR_BOUTIQUE,
         page: () => CommandesBoutiqueView()),
+
+    GetPage(name: AppLinks.COMMANDE_FOR_USER, page: () => CommandeView()),
     GetPage(
         name: AppLinks.HISTORIQUE_FOR_BOUTIQUE,
         page: () => HistoriqueCommandeView()),
@@ -56,9 +68,11 @@ class AppRoutes {
 }
 
 class AppLinks {
+  static const String PRODUCT_FOR_COMMANDE = "/pfc";
   static const String MANAGE_FOR_BOUTIQUE = "/mfb";
   static const String HISTORIQUE_FOR_BOUTIQUE = "/hfb";
   static const String COMMANDE_FOR_BOUTIQUE = "/cfb";
+  static const String COMMANDE_FOR_USER = "/cfu";
   static const String PRODUCT_FOR_BOUTIQUE = "/pfb";
   static const String BUYSHOP = "/buyShop";
   static const String TEST = "/TEST";

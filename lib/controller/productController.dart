@@ -84,25 +84,30 @@ class ProductController extends GetxController {
   }
 
   List<ProduitModel> _produitList = [];
+  List<ProduitModel> _produitListSave = [];
   List<ProduitModel> get produitList => _produitList;
   int _isLoadedP = 0;
   int get isLoadedP => _isLoadedP;
   Future<void> getPopularProduit() async {
     print('response**********');
 
-    _produitList = [];
     _isLoadedP = 0;
     try {
       Response response = await productRepo.getListProductPopular();
-      print('*------response');
+
       print(response.body);
 
-      _produitList = [];
-
-      _produitList.addAll((response.body['data'] as List)
-          .map((e) => ProduitModel.fromJson(e))
-          .toList());
-
+      _produitList.clear();
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _produitList.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+          _produitListSave.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+        }
+      }
       _isLoadedP = 1;
       update();
     } catch (e) {
@@ -115,23 +120,58 @@ class ProductController extends GetxController {
   int _isLoadedPC = 0;
   int get isLoadedPC => _isLoadedPC;
   getCategoryProduit(id) async {
-    _produitcategoryList = [];
+    _produitcategoryList.clear();
     _isLoadedPC = 0;
     try {
-    _produitcategoryList = [];
-
       Response response = await productRepo.getListProductForCategory(id);
       print('*------response');
       print(response.body);
-
-      _produitcategoryList.addAll((response.body['data'] as List)
-          .map((e) => ProduitModel.fromJson(e))
-          .toList());
-
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _produitcategoryList.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+        }
+      }
       _isLoadedPC = 1;
       update();
     } catch (e) {
       print(e);
     }
+  }
+
+  bool _searchPro = false;
+  bool get searchPro => _searchPro;
+
+  searchProButtom() {
+    _searchPro = !_searchPro;
+    if (!_searchPro) {
+      _produitList = _produitListSave;
+    }
+    // searchProduit('');
+    update();
+  }
+
+  searchProduit(text) {
+    _produitList = [];
+    List<ProduitModel> cont = [];
+    print(_produitListSave);
+
+    _produitListSave.forEach((item) {
+      print(item.titre.toUpperCase());
+      print(text.toUpperCase());
+      if (item.titre.toUpperCase().contains(text.toUpperCase()) ||
+          item.codeProduit.toUpperCase().contains(text.toUpperCase())) {
+        cont.add(item);
+      }
+    });
+    print(cont.length);
+    if (cont.length != 0) {
+      _produitList = cont;
+    } else {
+      _produitList = _produitListSave;
+    }
+
+    update();
   }
 }
