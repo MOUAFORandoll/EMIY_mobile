@@ -3,11 +3,13 @@ import 'package:fahkapmobile/controller/CommandeController.dart';
 import 'package:fahkapmobile/controller/boutiqueController.dart';
 import 'package:fahkapmobile/controller/cartController.dart';
 import 'package:fahkapmobile/controller/categoryController.dart';
+import 'package:fahkapmobile/controller/listBoutiqueController.dart';
 import 'package:fahkapmobile/controller/managerController.dart';
 import 'package:fahkapmobile/controller/productController.dart';
 import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
 import 'package:fahkapmobile/repository/BuyShoopingCartRepo.dart';
 import 'package:fahkapmobile/repository/CommandeRepo.dart';
+import 'package:fahkapmobile/repository/ListBoutiqueRepo.dart';
 import 'package:fahkapmobile/repository/LivreurRepo.dart';
 import 'package:fahkapmobile/repository/ManageRepo.dart';
 import 'package:fahkapmobile/repository/categoryRepo.dart';
@@ -38,6 +40,7 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => CategoryRepo(apiClient: Get.find()));
     Get.lazyPut(() => ProductRepo(apiClient: Get.find()));
     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()));
+    Get.lazyPut(() => ListBoutiqueRepo(apiClient: Get.find()));
     Get.lazyPut(() => BuyShoopingCartRepo(apiClient: Get.find()));
 
     Get.lazyPut(() => ProductController(productRepo: Get.find()));
@@ -45,6 +48,7 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => CartController());
     Get.lazyPut(() => BuyShopController(buySoppingCartRepo: Get.find()));
     Get.lazyPut(() => BoutiqueController(boutiqueRepo: Get.find()));
+    Get.lazyPut(() => ListBoutiqueController(listBoutiqueRepo: Get.find()));
   }
 
   onInit() async {
@@ -61,7 +65,7 @@ class MyBinding extends Bindings {
     Get.find<CartController>();
 
     Get.find<BuyShopController>();
-    Get.find<BoutiqueController>().getBoutique();
+    Get.find<BoutiqueController>().getBoutique(); 
     Get.find<CommandeController>().getListCommandes();
   }
 
@@ -90,6 +94,8 @@ class MyBinding extends Bindings {
 
     Get.lazyPut(() => BuyShopController(buySoppingCartRepo: Get.find()));
     Get.lazyPut(() => BoutiqueController(boutiqueRepo: Get.find()));
+    Get.lazyPut(() => ListBoutiqueRepo(apiClient: Get.find()));
+
     var database = Get.find<DB>();
     database.init();
     Get.find<ManagerController>();
@@ -105,6 +111,8 @@ class MyBinding extends Bindings {
 
     Get.find<BuyShopController>();
     Get.find<BoutiqueController>().getBoutique();
+    Get.lazyPut(() => ListBoutiqueController(listBoutiqueRepo: Get.find()));
+
     // Get.find<CommandeController>().insertAll();
   }
 }

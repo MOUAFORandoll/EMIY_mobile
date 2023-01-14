@@ -4,7 +4,7 @@ import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Form/commentForm.dart';
 import 'package:fahkapmobile/components/Form/formComponent2.dart';
 import 'package:fahkapmobile/controller/boutiqueController.dart';
-import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
+import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
 import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/ProduitModel.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';

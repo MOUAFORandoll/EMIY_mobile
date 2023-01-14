@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
+import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
 import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/ProduitBoutiqueModel.dart';
 import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
@@ -19,8 +19,8 @@ class BoutiqueController extends GetxController {
   BoutiqueController({required this.boutiqueRepo});
 
   var fn = new ViewFunctions();
-  BoutiqueModel? _Boutique;
-  BoutiqueModel get Boutique => _Boutique!;
+  BoutiqueUserModel? _Boutique;
+  BoutiqueUserModel get Boutique => _Boutique!;
   int _isLoaded = 0;
   int get isLoaded => _isLoaded;
   bool _isExist = false;
@@ -64,7 +64,7 @@ class BoutiqueController extends GetxController {
       Response response = await boutiqueRepo.getBoutiqueForUser();
       if (response.body['data'] != null) {
         if (response.body['data'].length != 0) {
-          _Boutique = BoutiqueModel.fromJson(response.body['data']);
+          _Boutique = BoutiqueUserModel.fromJson(response.body['data']);
           _isExist = response.body['exist'];
           // print(_Boutique);
         }

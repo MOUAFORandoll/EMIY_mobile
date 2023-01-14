@@ -25,11 +25,11 @@ class MyApp extends StatelessWidget {
     MyBinding().onInit();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialBinding: MyBinding(),
+      initialBinding: MyBinding(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: AppLinks.TEST,
+      initialRoute: AppLinks.SPLASHSCREEN,
       getPages: AppRoutes.pages,
     );
   }

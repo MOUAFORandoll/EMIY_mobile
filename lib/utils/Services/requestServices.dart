@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
+import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
 import 'package:fahkapmobile/model/data/ProduitModel.dart';

@@ -17,6 +17,7 @@ import 'package:fahkapmobile/styles/colorApp.dart';
 
 import 'package:get/get.dart';
 
+import 'Boutiques/ListBoutiqueView.dart';
 import 'Category/CategoryView.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -35,7 +36,6 @@ class _FirstScreenState extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       // extendBody for floating bar get better perfomance
       // extendBody: true,
@@ -54,11 +54,13 @@ class _FirstScreenState extends State<FirstScreen> {
       // case 1:
       //   return SearchView();
       case 1:
-        return CategoryView();
+        return ListBoutiqueView();
       case 2:
-        return ShoppingView();
+        return CategoryView();
 
       case 3:
+        return ShoppingView();
+      case 4:
         return ManageView();
 
       // case 4:
@@ -94,6 +96,11 @@ class _FirstScreenState extends State<FirstScreen> {
           //   badgeCount: _badgeCounts[3],
           //   showBadge: _badgeShows[3],
           // ),
+          CustomNavigationBarItem(
+            icon: Icon(Icons.dashboard_customize_outlined),
+            // badgeCount: _badgeCounts[2],
+            // showBadge: _badgeShows[2],
+          ),
           CustomNavigationBarItem(
             icon: Icon(Icons.dashboard_customize_outlined),
             // badgeCount: _badgeCounts[2],

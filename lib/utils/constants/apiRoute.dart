@@ -4,6 +4,7 @@ class ApiRoutes {
   static const PRODUCT_FOR_CATEGORY = "/category/read/produit";
   static const BOUTIQUE_FOR_UPDATE = "/boutique/update";
   static const BOUTIQUE_FOR_USER = "/boutique/read/user";
+  static const BOUTIQUE_READ_ALL = "/boutique/read/all";
   static const BOUTIQUE_READ_COMMANDE = "/commande/boutique/read";
   static const USER_READ_COMMANDE_PRODUIT = "/commande/produit/read/user";
   static const BOUTIQUE_READ_HCOMMANDE = "/commande/boutique/readH";

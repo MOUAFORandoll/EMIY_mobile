@@ -1,9 +1,13 @@
- import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
+import 'package:fahkapmobile/components/Text/bigtitleText.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 class Test extends StatefulWidget {
@@ -14,124 +18,88 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  final _baseUrl = 'https://jsonplaceholder.typicode.com/posts';
-
-  int _page = 0;
-
-  final int _limit = 20;
-
-  bool _isFirstLoadRunning = false;
-  bool _hasNextPage = true;
-
-  bool _isLoadMoreRunning = false;
-
-  List _posts = [];
-
-  void _loadMore() async {
-    if (_hasNextPage == true &&
-        _isFirstLoadRunning == false &&
-        _isLoadMoreRunning == false &&
-        _controller.position.extentAfter < 300) {
-      setState(() {
-        _isLoadMoreRunning = true; // Display a progress indicator at the bottom
-      });
-
-      _page += 1; // Increase _page by 1
-
-      try {
-        final res =
-            await new Dio().get("$_baseUrl?_page=$_page&_limit=$_limit");
-
-        final List fetchedPosts = res.data;
-        if (fetchedPosts.isNotEmpty) {
-          setState(() {
-            _posts.addAll(fetchedPosts);
-          });
-        } else {
-          setState(() {
-            _hasNextPage = false;
-          });
-        }
-      } catch (err) {}
-
-      setState(() {
-        _isLoadMoreRunning = false;
-      });
-    }
-  }
-
-  void _firstLoad() async {
-    setState(() {
-      _isFirstLoadRunning = true;
-    });
-
-    try {
-      final res = await new Dio().get("$_baseUrl?_page=$_page&_limit=$_limit");
-
-      setState(() {
-        _posts = res.data;
-      });
-    } catch (err) {}
-
-    setState(() {
-      _isFirstLoadRunning = false;
-    });
-  }
-
-  late ScrollController _controller;
   @override
   void initState() {
     super.initState();
-    _firstLoad();
-    _controller = ScrollController()..addListener(_loadMore);
   }
 
-  @override
+  ScrollController _scrollController = new ScrollController();
+
+  getH() {
+    print(1 + Random().nextInt(6 - 2));
+    return double.parse((1 + Random().nextInt(6 - 2)).toString());
+  }
+
+  List<double> list = [18.0, 10, 9, 5, 18.5, 7.5, 3.9];
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Your news',
-            style: TextStyle(color: Colors.white),
+    return new Scaffold(
+      body: new Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: StaggeredGridView.countBuilder(
+          crossAxisCount: 4,
+          itemCount: 50,
+          itemBuilder: (BuildContext context, int index) =>
+              // CachedNetworkImage(
+              //   // fit: BoxFit.cover,
+              //   imageUrl: 'https://via.placeholder.com/150',
+              //   imageBuilder: (context, imageProvider) {
+              //     return Container(
+              //       decoration: BoxDecoration(
+              //         color: ColorsApp.greySecond,
+              //         borderRadius: BorderRadius.circular(8),
+              //         image: DecorationImage(
+              //             image: imageProvider,
+              //             fit: BoxFit.cover,
+              //             colorFilter: ColorFilter.mode(
+              //                 Colors.red, BlendMode.colorBurn)),
+              //       ),
+              //     );
+              //   },
+              //   placeholder: (context, url) {
+              //     return Container(
+              //       child: Center(
+              //           child: CircularProgressIndicator(
+              //         color: ColorsApp.skyBlue,
+              //       )),
+              //     );
+              //   },
+              //   errorWidget: (context, url, error) {
+              //     return Container(
+              //         height: kMdHeight * .15,
+              //         width: Get.width * .5,
+              //         decoration: BoxDecoration(
+              //             color: ColorsApp.greySecond,
+              //             borderRadius: BorderRadius.circular(8),
+              //             image: DecorationImage(
+              //               image: AssetImage('assets/logo.png'),
+              //             )));
+              //   },
+              // ),
+              Container(
+            child: Container(
+                child: Container(
+                    alignment: Alignment.bottomCenter,
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('Nom*'),
+                        Text('1500F'),
+                      ],
+                    )),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: AssetImage('assets/logo.png'),
+                    ))),
           ),
+          staggeredTileBuilder: (int index) =>
+              new StaggeredTile.count(2, index.isEven ? 3 : 2),
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 6.0,
         ),
-        body: _isFirstLoadRunning
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: _posts.length,
-                      controller: _controller,
-                      itemBuilder: (_, index) => Card(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 10),
-                        child: ListTile(
-                          title: Text(_posts[index]['title']),
-                          subtitle: Text(_posts[index]['body']),
-                        ),
-                      ),
-                    ),
-                  ),
-                  if (_isLoadMoreRunning == true)
-                    const Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 40),
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
-                  if (_hasNextPage == false)
-                    Container(
-                      padding: const EdgeInsets.only(top: 30, bottom: 40),
-                      color: Colors.amber,
-                      child: const Center(
-                        child: Text('You have fetched all of the content'),
-                      ),
-                    ),
-                ],
-              ));
+      ),
+    );
   }
 }
- 

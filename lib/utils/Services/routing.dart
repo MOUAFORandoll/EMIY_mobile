@@ -1,7 +1,8 @@
-import 'package:fahkapmobile/Views/Boutique/CommadesBoutiqueView.dart';
-import 'package:fahkapmobile/Views/Boutique/HistroriqueView.dart';
-import 'package:fahkapmobile/Views/Boutique/manageBoutiqueView.dart';
-import 'package:fahkapmobile/Views/Boutique/produitBoutiqueView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/CommadesBoutiqueView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/HistroriqueView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/manageBoutiqueView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/produitBoutiqueView.dart';
+import 'package:fahkapmobile/Views/Boutiques/BoutiqueView.dart';
 import 'package:fahkapmobile/Views/Category/ProductCategoryView.dart';
 import 'package:fahkapmobile/Views/Commandes/CommandeView.dart';
 import 'package:fahkapmobile/Views/Commandes/ProduitForCommande.dart';
@@ -50,6 +51,12 @@ class AppRoutes {
           var code = Get.parameters['code'];
           return ProduitForCommande(id: int.parse(id!), code: code!);
         }),
+          GetPage(
+        name: AppLinks.BOUTIQUE,
+        // ignore: top_level_function_literal_block
+        page: () {
+          return BoutiqueView();
+        }),
     GetPage(
         name: AppLinks.PRODUCT_FOR_CATEGORY, page: () => ProductCategoryView()),
     GetPage(
@@ -69,6 +76,7 @@ class AppRoutes {
 
 class AppLinks {
   static const String PRODUCT_FOR_COMMANDE = "/pfc";
+  static const String  BOUTIQUE = "/boutique";
   static const String MANAGE_FOR_BOUTIQUE = "/mfb";
   static const String HISTORIQUE_FOR_BOUTIQUE = "/hfb";
   static const String COMMANDE_FOR_BOUTIQUE = "/cfb";

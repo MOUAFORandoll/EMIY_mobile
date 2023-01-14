@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:fahkapmobile/Views/Boutique/BoutiqueView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/BoutiqueView.dart';
 import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Form/formComponent2.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';

@@ -17,6 +17,7 @@ import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -31,7 +32,7 @@ class HomeView extends StatelessWidget {
     // Get.find<ProductController>().getPopularProduit();
     //  Get.find<CategoryController>().getCategory();
     return GetBuilder<ProductController>(builder: (prods) {
-      return   CustomScrollView(controller: _scrollController, slivers: [
+      return CustomScrollView(controller: _scrollController, slivers: [
         // Add the app bar to the CustomScrollView.
         SliverAppBar(
           backgroundColor: Colors.white,
@@ -534,27 +535,48 @@ class HomeView extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(
-                                          height: kMdHeight,
+                                          height: kMdHeight * 1.2,
                                           child: Stack(
                                             children: [
-                                              GridView.builder(
-                                                  physics:
-                                                      NeverScrollableScrollPhysics(),
-                                                  gridDelegate:
-                                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: 2,
-                                                          crossAxisSpacing:
-                                                              10.0,
-                                                          mainAxisSpacing:
-                                                              50.0),
-                                                  itemCount:
-                                                      prods.produitList.length,
-                                                  itemBuilder: (_ctx, index) =>
-                                                      ProductComponentAll(
-                                                          produit:
-                                                              prods.produitList[
-                                                                  index],
-                                                          index: index)),
+                                              StaggeredGridView.countBuilder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                crossAxisCount: 4,
+                                                itemCount:
+                                                    prods.produitList.length,
+                                                itemBuilder: (_ctx, index) =>
+                                                    ProductComponentAll(
+                                                        produit: prods
+                                                            .produitList[index],
+                                                        index: index),
+                                                staggeredTileBuilder:
+                                                    (int index) =>
+                                                        new StaggeredTile.count(
+                                                            2,
+                                                            index.isEven
+                                                                ? 3
+                                                                : 2),
+                                                mainAxisSpacing: 2.0,
+                                                crossAxisSpacing: 4.0,
+                                              ),
+                                              //   GridView.builder(
+                                              //       physics:
+                                              //           NeverScrollableScrollPhysics(),
+                                              //       gridDelegate:
+                                              //           const SliverGridDelegateWithFixedCrossAxisCount(
+                                              //               crossAxisCount: 2,
+                                              //               crossAxisSpacing:
+                                              //                   10.0,
+                                              //               mainAxisSpacing:
+                                              //                   50.0),
+                                              //       itemCount:
+                                              //           prods.produitList.length,
+                                              //       itemBuilder: (_ctx, index) =>
+                                              //           ProductComponentAll(
+                                              //               produit:
+                                              //                   prods.produitList[
+                                              //                       index],
+                                              //               index: index)),
                                             ],
                                           )),
                                     ],

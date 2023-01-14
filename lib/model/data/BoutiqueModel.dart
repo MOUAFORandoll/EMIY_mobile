@@ -26,7 +26,7 @@ class BoutiqueModel {
   String titre;
   bool status;
   String dateCreated;
-  List<Produit> produits;
+  List<ProduitModel> produits;
 
   factory BoutiqueModel.fromJson(Map<String, dynamic> json) => BoutiqueModel(
         codeBoutique: json["codeBoutique"],
@@ -35,8 +35,8 @@ class BoutiqueModel {
         titre: json["titre"],
         status: json["status"],
         dateCreated: json["dateCreated"],
-        produits: List<Produit>.from(
-            json["produits"].map((x) => Produit.fromJson(x))),
+        produits: List<ProduitModel>.from(
+            json["produits"].map((x) => ProduitModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,50 +50,60 @@ class BoutiqueModel {
       };
 }
 
-class Produit {
-  Produit({
+ProduitModel produitModelFromJson(String str) =>
+    ProduitModel.fromJson(json.decode(str));
+
+String produitModelToJson(ProduitModel data) => json.encode(data.toJson());
+
+class ProduitModel {
+  ProduitModel({
     required this.id,
     required this.codeProduit,
+    required this.boutique,
+    required this.description,
     required this.titre,
     required this.quantite,
     required this.prix,
     required this.status,
-    required this.date,
-    required this.description,
     required this.images,
   });
 
-  int id;
-  String codeProduit;
-  String titre;
-  int quantite;
-  int prix;
-  bool status;
-  String date;
-  String description;
-  List<Image> images;
-  factory Produit.fromJson(Map<String, dynamic> json) => Produit(
-        id: json["id"],
-        codeProduit: json["codeProduit"],
-        titre: json["titre"],
-        date: json["date "] == null ? null : json["date "],
-        quantite: json["quantite"],
-        prix: json["prix"],
-        status: json["status"],
-        description: json["description"],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+  final String codeProduit;
+  final String boutique;
+  final String description;
+  final String titre;
+  final int quantite;
+  final int id;
+  final int prix;
+  final bool status;
+  final List<Image> images;
+
+  factory ProduitModel.fromJson(Map<String, dynamic> json) => ProduitModel(
+        id: json["id"] == null ? null : json["id"],
+        codeProduit: json["codeProduit"] == null ? null : json["codeProduit"],
+        boutique: json["boutique"] == null ? null : json["boutique"],
+        description: json["description"] == null ? null : json["description"],
+        titre: json["titre"] == null ? null : json["titre"],
+        quantite: json["quantite"] == null ? null : json["quantite"],
+        prix: json["prix"] == null ? null : json["prix"],
+        status: json["status"] == null ? null : json["status"],
+        images: json["images"] == null
+            ? []
+            : List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "codeProduit": codeProduit,
-        "titre": titre,
-        "date ": date == null ? null : date,
-        "quantite": quantite,
-        "prix": prix,
-        "status": status,
-        "description": description,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "id": id == null ? null : id,
+        "codeProduit": codeProduit == null ? null : codeProduit,
+        "boutique": boutique == null ? null : boutique,
+        "description": description == null ? null : description,
+        "titre": titre == null ? null : titre,
+        "quantite": quantite == null ? null : quantite,
+        "prix": prix == null ? null : prix,
+        "status": status == null ? null : status,
+        "images": images == null
+            ? null
+            : List<dynamic>.from(images.map((x) => x.toJson())),
       };
 }
 
