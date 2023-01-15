@@ -39,11 +39,13 @@ class _FirstScreenState extends State<FirstScreen> {
     controller = ScrollController();
     controller.addListener(() {
       setState(() {
+        print(_isVisible);
         _isVisible =
             controller.position.userScrollDirection == ScrollDirection.forward;
       });
     });
   }
+
   List<int> _badgeCounts = List<int>.generate(5, (index) => index);
 
   List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
@@ -55,11 +57,13 @@ class _FirstScreenState extends State<FirstScreen> {
       // extendBody: true,
       backgroundColor: Colors.white,
 
-      body: SafeArea(child: _buildContent(_currentIndex)),
+      body: SafeArea(
+          child: ListView.builder(
+              controller: controller,
+              itemBuilder: (_ctx, i) => _buildContent(_currentIndex))),
 
-      bottomNavigationBar:  Offstage(
-        offstage: !_isVisible,
-        child:_buildBorderRadiusDesign()),
+      bottomNavigationBar:
+          Offstage(offstage: !_isVisible, child: _buildBorderRadiusDesign()),
     );
   }
 
