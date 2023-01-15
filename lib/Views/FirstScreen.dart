@@ -57,10 +57,7 @@ class _FirstScreenState extends State<FirstScreen> {
       // extendBody: true,
       backgroundColor: Colors.white,
 
-      body: SafeArea(
-          child: ListView.builder(
-              controller: controller,
-              itemBuilder: (_ctx, i) => _buildContent(_currentIndex))),
+      body: SafeArea(child: _buildContent(_currentIndex)),
 
       bottomNavigationBar:
           Offstage(offstage: !_isVisible, child: _buildBorderRadiusDesign()),
