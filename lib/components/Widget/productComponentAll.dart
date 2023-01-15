@@ -50,7 +50,7 @@ class ProductComponentAll extends StatelessWidget {
                     image: imageProvider,
                     fit: BoxFit.cover,
                     colorFilter:
-                        ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                        ColorFilter.mode(Colors.transparent, BlendMode.colorBurn)),
               ),
             );
           },

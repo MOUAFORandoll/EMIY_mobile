@@ -1,13 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fahkapmobile">
   <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission_WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission_READ_EXTERNAL_STORAGE"/>
   <application
         android:label="fahkapmobile"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"  android:usesCleartextTraffic="true" android:requestLegacyExternalStorage="true">
     <activity
+            
+            android:screenOrientation="portrait"             
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/LaunchTheme"
+            android:launchMode="singleTop" 
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">

@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     //   box.write('isDark', false);
     // }
     MyBinding().onInit();
+    MyBinding().requestPermission();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: MyBinding(),

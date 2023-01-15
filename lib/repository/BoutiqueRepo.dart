@@ -40,9 +40,32 @@ class BoutiqueRepo extends GetxService with StorageService {
     return a;
   }
 
+  Future getListCategory() async {
+    Response a = await apiClient.getCollections(
+        ApiRoutes.CATEGORY);
+    ;
+
+    return a;
+  }
+
+  Future newProduit(data) async {
+    Response a =
+        await apiClient.getCollectionsP(ApiRoutes.NEW_PRODUCT, data);
+    ;
+
+    return a;
+  }
+  
   Future updateProduitFB(data) async {
     Response a =
         await apiClient.getCollectionsP(ApiRoutes.UPDATE_PRODUCT, data);
+    ;
+
+    return a;
+  }
+  Future updateImageBoutique(data) async {
+    Response a =
+        await apiClient.getCollectionsP(ApiRoutes.BOUTIQUE_IMAGE_UPDATE, data);
     ;
 
     return a;

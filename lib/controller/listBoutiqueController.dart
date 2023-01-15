@@ -4,6 +4,7 @@ import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
 import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/ProduitBoutiqueModel.dart';
+import 'package:fahkapmobile/model/data/ProduitModel.dart';
 import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
 import 'package:fahkapmobile/repository/ListBoutiqueRepo.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
@@ -21,8 +22,8 @@ class ListBoutiqueController extends GetxController {
   ListBoutiqueController({required this.listBoutiqueRepo});
 
   var fn = new ViewFunctions();
-  List<BoutiqueModel>? _ListBoutique;
-  List<BoutiqueModel> get ListBoutique => _ListBoutique!;
+  List<BoutiqueModel> _ListBoutique = [];
+  List<BoutiqueModel> get ListBoutique => _ListBoutique;
   int _isLoaded = 0;
   int get isLoaded => _isLoaded;
   bool _isExist = false;
@@ -38,57 +39,48 @@ class ListBoutiqueController extends GetxController {
     update();
   }
 
-  File imageFile = new File('');
 
-  Future getImage() async {
-    try {
-      print("wwwwwwwww");
-
-      var image = await ImagePicker.pickImage(
-          source: ImageSource.gallery,
-          imageQuality: 10,
-          maxHeight: 500,
-          maxWidth: 500);
-
-      File? croppedFile = await ImageCropper().cropImage(
-        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
-        sourcePath: image.path,
-      );
-      _listImgProduits.add(croppedFile!);
-    } catch (e) {
-      // _showToastPictureError(context);
-    }
-  }
-
+  bool gA = false;
   // BoutiqueController({required this.service});
   getListBoutiques() async {
-    try {
-      Response response = await listBoutiqueRepo.getListBoutiques();
-      if (response.body['data'] != null) {
-        if (response.body['data'].length != 0) {
-          _ListBoutique!.addAll((response.body['data'] as List)
-              .map((e) => BoutiqueModel.fromJson(e))
-              .toList());
+    if (gA == false) {
+      gA = true;
+      try {
+        _ListBoutique = [];
+        _ListBoutique.clear();
+        _isLoaded = 0;
+        update();
+        Response response = await listBoutiqueRepo.getListBoutiques();
+        // print('------------------------/*****************************');
+        // print(response.body);
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            _ListBoutique.addAll((response.body['data'] as List)
+                .map((e) => BoutiqueModel.fromJson(e))
+                .toList());
 
-          _isExist = response.body['exist'];
-          // print(_ListBoutique);
+            _isExist = response.body['exist'];
+            // print(_ListBoutique);
+          }
         }
+        gA = false;
+        _isLoaded = 1;
+
+        update();
+      } catch (e) {
+        _isExist = false;
+        _isLoaded = 1;
+        gA = false;
+
+        update();
+        print(e);
       }
-      _isLoaded = 1;
-
-      update();
-    } catch (e) {
-      _isExist = false;
-      _isLoaded = 1;
-
-      update();
-      print(e);
     }
   }
 
-  List<ProduitBoutiqueModel> _produitBoutiqueList = [];
-  List<ProduitBoutiqueModel> _produitBoutiqueListSave = [];
-  List<ProduitBoutiqueModel> get produitBoutiqueList => _produitBoutiqueList;
+  List<ProduitModel> _produitBoutiqueList = [];
+  List<ProduitModel> _produitBoutiqueListSave = [];
+  List<ProduitModel> get produitBoutiqueList => _produitBoutiqueList;
   int _isLoadedPB = 0;
   int get isLoadedPB => _isLoadedPB;
   getDataForBoutique(codeBoutique) async {
@@ -99,10 +91,12 @@ class ListBoutiqueController extends GetxController {
       Response response =
           await listBoutiqueRepo.getListProduitForBoutique(codeBoutique);
       _produitBoutiqueList.clear();
+      print('-----------------');
+      print(response.body);
       if (response.body['data'] != null) {
         if (response.body['data'].length != 0) {
           _produitBoutiqueList.addAll((response.body['data'] as List)
-              .map((e) => ProduitBoutiqueModel.fromJson(e))
+              .map((e) => ProduitModel.fromJson(e))
               .toList());
         }
       }

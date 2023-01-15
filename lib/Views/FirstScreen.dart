@@ -14,6 +14,7 @@ import 'package:fahkapmobile/controller/categoryController.dart';
 import 'package:fahkapmobile/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:get/get.dart';
 
@@ -29,7 +30,20 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
   int _currentIndex = 0;
+  bool _isVisible = true;
+  late ScrollController controller;
 
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController();
+    controller.addListener(() {
+      setState(() {
+        _isVisible =
+            controller.position.userScrollDirection == ScrollDirection.forward;
+      });
+    });
+  }
   List<int> _badgeCounts = List<int>.generate(5, (index) => index);
 
   List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
@@ -43,7 +57,9 @@ class _FirstScreenState extends State<FirstScreen> {
 
       body: SafeArea(child: _buildContent(_currentIndex)),
 
-      bottomNavigationBar: _buildBorderRadiusDesign(),
+      bottomNavigationBar:  Offstage(
+        offstage: !_isVisible,
+        child:_buildBorderRadiusDesign()),
     );
   }
 

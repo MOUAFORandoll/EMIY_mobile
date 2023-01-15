@@ -27,8 +27,18 @@ class CommandeView extends StatelessWidget {
     return GetBuilder<CommandeController>(builder: (_commande) {
       return Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: InkWell(
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: ColorsApp.black,
+              ),
+              onTap: () {
+                Get.back();
+              },
+            ),
             title: BigtitleText(text: 'Commandes', bolder: true),
-            centerTitle: true,
           ),
           body: CustomScrollView(controller: _scrollController, slivers: [
             SliverList(
@@ -95,17 +105,19 @@ class CommandeView extends StatelessWidget {
                                           ))
                                     ],
                                   )))))
-                  : Container(
-                      height: kMdHeight,
-                      margin: EdgeInsets.symmetric(vertical: kMarginY * .2),
-                      child: ListView.builder(
-                        // scrollDirection: Axis.horizontal,
-                        itemCount: _commande.commandeList.length,
-                        itemBuilder: (_ctx, index) => CommandeComponent(
-                          commande: _commande.commandeList[index],
+                  : _commande.commandeList.length == 0
+                      ? Center(child: Text('Aucune Commande'))
+                      : Container(
+                          height: kMdHeight,
+                          margin: EdgeInsets.symmetric(vertical: kMarginY * .2),
+                          child: ListView.builder(
+                            // scrollDirection: Axis.horizontal,
+                            itemCount: _commande.commandeList.length,
+                            itemBuilder: (_ctx, index) => CommandeComponent(
+                              commande: _commande.commandeList[index],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
 
               childCount: 1, //_commande.commandeList.length,
             ))

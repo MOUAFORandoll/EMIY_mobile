@@ -29,139 +29,133 @@ class ProductCategoryView extends StatelessWidget {
 
     Get.find<ProductController>().getCategoryProduit(Get.parameters['id']);
     return Scaffold(
-      body: CustomScrollView(controller: _scrollController, slivers: [
-        // Add the app bar to the CustomScrollView.
-        SliverAppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: ColorsApp.bleuLight,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButtonF(
-                  icon: Icons.close,
-                  color: ColorsApp.black,
-                  onTap: () {
-                    Get.back();
-                  },
-                ),
-                BigtitleText(
-                    text: Get.parameters['libelle'].toString(), bolder: true),
-              ],
-            )),
-
-        SliverList(
-          // Use a delegate to build items as they're scrolled on screen.
-          delegate: SliverChildBuilderDelegate(
-            // The builder function returns a ListTile with a title that
-            // displays the index of the current item.
-            (context, index) => GetBuilder<ProductController>(
-                builder: (_category) => _category.isLoadedPC == 0
-                    ? Shimmer.fromColors(
-                        baseColor: Colors.blueGrey,
-                        highlightColor: Colors.greenAccent,
-                        child: SizedBox(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: InkWell(
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: ColorsApp.black,
+          ),
+          onTap: () {
+            Get.back();
+          },
+        ),
+        title: BigtitleText(
+            text: Get.parameters['libelle'].toString(), bolder: true),
+      ),
+      body:
+      RefreshIndicator(
+          color: ColorsApp.skyBlue,
+          onRefresh: () async {
+            
+            await    Get.find<ProductController>()
+                .getCategoryProduit(Get.parameters['id']);
+   
+          },
+          child:  GetBuilder<ProductController>(
+          builder: (_category) => _category.isLoadedPC == 0
+              ? Shimmer.fromColors(
+                  baseColor: Colors.blueGrey,
+                  highlightColor: Colors.greenAccent,
+                  child: SizedBox(
+                    height: kMdHeight,
+                    child: Stack(
+                      children: [
+                        GridView.builder(
+                          padding: const EdgeInsets.all(20),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 10.0,
+                                  mainAxisSpacing: 10.0),
+                          itemCount: 10,
+                          itemBuilder: (_ctx, index) => Container(
+                            height: kMdHeight * 2,
+                            width: kMdWidth * 1.1,
+                            margin: EdgeInsets.only(right: kMarginX),
+                            decoration: BoxDecoration(
+                                color: ColorsApp.greySecond,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      height: kMdHeight * .115,
+                                      width: Get.width * .5,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        image: AssetImage('assets/logo.png'),
+                                      ))),
+                                  Container(
+                                    width: kSmWidth * .6,
+                                    margin: EdgeInsets.only(
+                                        top: Get.height * .005,
+                                        left: Get.width * .008),
+                                    child: Text('produit.titre',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: ColorsApp.black,
+                                            fontSize: 12)),
+                                  ),
+                                  // Container(
+                                  //   width: kSmWidth * .6,
+                                  //   margin: EdgeInsets.only(
+                                  //       top: Get.height * .005,
+                                  //       left: Get.width * .008),
+                                  //   child: Text('XAF ' + '1000',
+                                  //       overflow: TextOverflow.ellipsis,
+                                  //       style: TextStyle(
+                                  //           color: Colors.red,
+                                  //           fontSize: 12,
+                                  //           fontWeight: FontWeight.bold)),
+                                  // ),
+                                ]),
+                          ),
+                        )
+                      ],
+                    ),
+                  ))
+              : _category.isLoadedPC == 1
+                  ? (_category.produitcategoryList.length != 0)
+                      ? SizedBox(
                           height: kMdHeight,
                           child: Stack(
                             children: [
-                              GridView.builder(
-                                padding: const EdgeInsets.all(20),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        crossAxisSpacing: 20.0,
-                                        mainAxisSpacing: 50.0),
-                                itemCount: 10,
-                                itemBuilder: (_ctx, index) => Container(
-                                  height: kMdHeight * 2,
-                                  width: kMdWidth * 1.1,
-                                  margin: EdgeInsets.only(right: kMarginX),
-                                  decoration: BoxDecoration(
-                                      color: ColorsApp.greySecond,
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                            height: kMdHeight * .115,
-                                            width: Get.width * .5,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                              image:
-                                                  AssetImage('assets/logo.png'),
-                                            ))),
-                                        Container(
-                                          width: kSmWidth * .6,
-                                          margin: EdgeInsets.only(
-                                              top: Get.height * .005,
-                                              left: Get.width * .008),
-                                          child: Text('produit.titre',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: ColorsApp.black,
-                                                  fontSize: 12)),
-                                        ),
-                                        // Container(
-                                        //   width: kSmWidth * .6,
-                                        //   margin: EdgeInsets.only(
-                                        //       top: Get.height * .005,
-                                        //       left: Get.width * .008),
-                                        //   child: Text('XAF ' + '1000',
-                                        //       overflow: TextOverflow.ellipsis,
-                                        //       style: TextStyle(
-                                        //           color: Colors.red,
-                                        //           fontSize: 12,
-                                        //           fontWeight: FontWeight.bold)),
-                                        // ),
-                                      ]),
-                                ),
-                              )
+                              SingleChildScrollView(
+                                  child: GridView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.all(20),
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 10.0,
+                                              mainAxisSpacing: 10.0),
+                                      itemCount:
+                                          _category.produitcategoryList.length,
+                                      itemBuilder: (_ctx, index) =>
+                                          ProductForCatComponent(
+                                              produit: _category
+                                                  .produitcategoryList[index],
+                                              index: index)))
                             ],
                           ),
-                        ))
-                    : _category.isLoadedPC == 1
-                        ? (_category.produitcategoryList.length != 0)
-                            ? SizedBox(
-                                height: kMdHeight,
-                                child: Stack(
-                                  children: [
-                                    GridView.builder(
-                                        padding: const EdgeInsets.all(20),
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 20.0,
-                                                mainAxisSpacing: 70.0),
-                                        itemCount: _category
-                                            .produitcategoryList.length,
-                                        itemBuilder: (_ctx, index) =>
-                                            ProductForCatComponent(
-                                                produit: _category
-                                                    .produitcategoryList[index],
-                                                index: index))
-                                  ],
-                                ),
-                              )
-                            : Container(
-                                height: kMdHeight * .6,
-                                alignment: Alignment.center,
-                                child: Center(
-                                  child: Text('Aucun Produit'),
-                                ))
-                        : Container(
-                            height: kMdHeight * .6,
-                            alignment: Alignment.center,
-                            child: Center(
-                              child: Text('Error'),
-                            ))),
-
-            // Builds 1000 ListTiles
-            childCount: 1,
-          ),
-        )
-      ]),
-    );
+                        )
+                      : Container(
+                          height: kMdHeight * .6,
+                          alignment: Alignment.center,
+                          child: Center(
+                            child: Text('Aucun Produit'),
+                          ))
+                  : Container(
+                      height: kMdHeight * .6,
+                      alignment: Alignment.center,
+                      child: Center(
+                        child: Text('Error'),
+                      ))),
+     ) );
   }
 }

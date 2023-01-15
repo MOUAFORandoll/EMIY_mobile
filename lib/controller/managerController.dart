@@ -39,6 +39,7 @@ class ManagerController extends GetxController {
   UserModel get User => _User;
   int _isLoaded = 0;
   int get isLoaded => _isLoaded;
+  //
   // CategoryController({required this.service});
   getUser() async {
     // print('user-------------------------${new GetStorage().read('keySecret')}');
@@ -57,6 +58,28 @@ class ManagerController extends GetxController {
       _isLoaded = 1;
       update();
       print(e);
+    }
+  }
+
+  // CategoryController({required this.service});
+  newLocalisation() async {
+    // print('user-------------------------${new GetStorage().read('keySecret')}');
+    try {
+      Response response = await manageRepo.newConnexion();
+
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          print('user-------------------------${response.body['data']}');
+          if (response.statusCode == 203) {
+            await newLocalisation();
+          }
+        }
+      }
+      getKeyU();
+      _isLoaded = 1;
+    } catch (e) {
+      _isLoaded = 1;
+      update();
     }
   }
 

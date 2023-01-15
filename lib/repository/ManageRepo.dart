@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart' hide Response;
 import 'package:fahkapmobile/model/data/ProduitModel.dart';
 import 'package:fahkapmobile/utils/Services/ApiClient.dart';
 import 'package:fahkapmobile/utils/Services/storageService.dart';
@@ -13,12 +14,26 @@ class ManageRepo extends GetxService with StorageService {
 
   Future getUser() async {
     // print('key******************** ${this.getKey()}');
-
+    // await this.userRefresh();
     Response a = await apiClient
         .getCollectionsP(ApiRoutes.USER, {'keySecret': this.getKey()});
     ;
 
     return a;
+  }
+
+  Future userRefresh() async {
+    if (this.getKeyKen() != null) {
+      print('this.getKeyKen()');
+      print(this.getKeyKen());
+
+      Response a = await apiClient.getCollectionsP(ApiRoutes.Refresh,
+          {'refreshToken': this.getKeyKen()['refreshToken']});
+      ;
+      print('toke***n  ');
+      print(a.body);
+      this.saveKeyKen(a.body);
+    } else {}
   }
 
   Future updateUser(data) async {
@@ -28,10 +43,43 @@ class ManageRepo extends GetxService with StorageService {
     return a;
   }
 
+  Future newConnexion() async {
+    print('newlocatio-------------------------${this.getKey()}');
+
+    if (this.getKey() != null && this.getKey().length != 0) {
+      try {
+        print('newlocatio-');
+
+        var loca = await new Dio().get('https://ipapi.co/json/');
+
+        print(loca.data);
+        var data = {
+          'ip': loca.data['ip'],
+          'ville': loca.data['city'],
+          'latitude': loca.data['latitude'],
+          'keySecret': this.getKey(),
+          'longitude': loca.data['longitude']
+        };
+        await this.saveLonLat(loca.data);
+        print(data);
+        Response a =
+            await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
+
+        print('ssnewlocatio-------------------------');
+        print(a.body);
+
+        return a;
+      } catch (e) {
+        return new Response(body: {'data': []}, statusCode: 203);
+      }
+    } else {
+      return new Response(body: {'data': []}, statusCode: 200);
+    }
+  }
+
   Future Login(data) async {
     Response a = await apiClient.getCollectionsP(ApiRoutes.LOGIN, data);
     var logdata = {'phone': data['phone'], 'password': data['password']};
-    await this.saveKeyKen(a.body);
 
     return a;
   }

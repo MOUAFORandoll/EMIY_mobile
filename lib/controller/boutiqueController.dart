@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
+import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/ProduitBoutiqueModel.dart';
 import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:fahkapmobile/utils/Services/requestServices.dart';
+import 'package:fahkapmobile/utils/Services/storageService2.dart';
 import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,11 +31,19 @@ class BoutiqueController extends GetxController {
   bool get addProduct => _addProduct;
   List<File> _listImgProduits = [];
 
+  var s = Get.find<StorageService>();
   List<File> get listImgProduits => _listImgProduits;
 
   chageState(bool i) {
     _addProduct = i;
     update();
+  }
+
+  onInitData() {
+    _listImgProduits = [];
+    _listImgProduits.clear();
+    _addProduct = false;
+    // update();
   }
 
   File imageFile = new File('');
@@ -48,11 +58,115 @@ class BoutiqueController extends GetxController {
           maxHeight: 500,
           maxWidth: 500);
 
-      File? croppedFile = await ImageCropper().cropImage(
-        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
-        sourcePath: image.path,
-      );
-      _listImgProduits.add(croppedFile!);
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      // );
+      _listImgProduits.add(image);
+      print(_listImgProduits.length);
+      update();
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
+  var _categorySelect;
+  CategoryModel get categorySelect => _categorySelect;
+  secelctCate(cat) {
+    _categorySelect = cat;
+    update();
+  }
+
+  List<CategoryModel> _categoryList = [];
+  List<CategoryModel> get categoryList => _categoryList;
+  int _isLoadedC = 0;
+  int get isLoadedC => _isLoadedC;
+  // CategoryController({required this.service});
+  getCategory() async {
+    try {
+      _categoryList.clear();
+      _isLoadedC = 0;
+      Response response = await boutiqueRepo.getListCategory();
+
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _categoryList.addAll((response.body['data'] as List)
+              .map((e) => CategoryModel.fromJson(e))
+              .toList());
+        }
+      }
+      // print(_categoryList);
+      _isLoadedC = 1;
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future updateImageBoutique() async {
+    try {
+      var image = await ImagePicker.pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 10,
+          maxHeight: 500,
+          maxWidth: 500);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      // );
+      if (image != null) {
+        Get.defaultDialog(
+            title: 'En cours',
+            barrierDismissible: false,
+            content: SizedBox(
+                // height: Get.size.height * .02,
+                // width: Get.size.width * .02,
+                child: Center(
+                    child: CircularProgressIndicator(
+              color: Colors.blueAccent,
+            ))));
+
+        try {
+          FormData formData = new FormData({
+            "file": await MultipartFile(
+              image.path,
+              filename: "Image.jpg",
+            ),
+            'codeBoutique': Boutique.codeBoutique,
+            'keySecret': s.getKey()
+          });
+
+          print(formData.files);
+
+          Response response = await boutiqueRepo.updateImageBoutique(formData);
+          print(response.body);
+          if (response.statusCode == 200) {
+            await getBoutique();
+          }
+
+          Get.back();
+          fn.snackBar(
+              'Mise a jour', response.body['message'], ColorsApp.bleuLight);
+          _isUpdating = false;
+          // Get.back(closeOverlays: true);
+          update();
+        } catch (e) {
+          Get.back();
+          fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+          // Get.back();
+          _isUpdating = false;
+          update();
+          print(e);
+        }
+      }
     } catch (e) {
       // _showToastPictureError(context);
     }
@@ -220,7 +334,7 @@ class BoutiqueController extends GetxController {
           color: Colors.blueAccent,
         ))));
     try {
-      Response response = await boutiqueRepo.updateProduitFB(data);
+      Response response = await boutiqueRepo.newProduit(data);
       print(response.body);
       if (response.statusCode == 200) {
         await getBoutique();

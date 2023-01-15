@@ -1,7 +1,7 @@
-import 'package:fahkapmobile/Views/BoutiqueUser/CommadesBoutiqueView.dart';
-import 'package:fahkapmobile/Views/BoutiqueUser/HistroriqueView.dart';
-import 'package:fahkapmobile/Views/BoutiqueUser/manageBoutiqueView.dart';
-import 'package:fahkapmobile/Views/BoutiqueUser/produitBoutiqueView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/HistroriqueCBUView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/manageBoutiqueUserView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/produitBoutiqueUserView.dart';
 import 'package:fahkapmobile/Views/Boutiques/BoutiqueView.dart';
 import 'package:fahkapmobile/Views/Category/ProductCategoryView.dart';
 import 'package:fahkapmobile/Views/Commandes/CommandeView.dart';
@@ -60,17 +60,17 @@ class AppRoutes {
     GetPage(
         name: AppLinks.PRODUCT_FOR_CATEGORY, page: () => ProductCategoryView()),
     GetPage(
-        name: AppLinks.PRODUCT_FOR_BOUTIQUE, page: () => ProduitBoutiqueView()),
+        name: AppLinks.PRODUCT_FOR_BOUTIQUE, page: () => ProduitBoutiqueUserView()),
     GetPage(
         name: AppLinks.COMMANDE_FOR_BOUTIQUE,
-        page: () => CommandesBoutiqueView()),
+        page: () => CommandesBoutiqueUserView()),
 
     GetPage(name: AppLinks.COMMANDE_FOR_USER, page: () => CommandeView()),
     GetPage(
         name: AppLinks.HISTORIQUE_FOR_BOUTIQUE,
-        page: () => HistoriqueCommandeView()),
+        page: () => HistroriqueCBUView()),
     GetPage(
-        name: AppLinks.MANAGE_FOR_BOUTIQUE, page: () => ManageBoutiqueView()),
+        name: AppLinks.MANAGE_FOR_BOUTIQUE, page: () => ManageBoutiqueUserView()),
   ];
 }
 

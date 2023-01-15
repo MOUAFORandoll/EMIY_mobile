@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:fahkapmobile/model/data/UserModel.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
-mixin StorageService   {
+mixin StorageService {
   GetStorage _box = new GetStorage();
 
   Future<StorageService> init() async {
@@ -32,21 +32,31 @@ mixin StorageService   {
 
   Future<void> saveKeyKen(key) async {
     await _box.write('keyKen', key);
-
+    print(key);
     await this.saveKey(Jwt.parseJwt(key['token'])['keySecret']);
   }
 
   getKeyKen() {
-    return jsonDecode(this.find('keyKen'));
+    return this.find('keyKen');
   }
 
   Future<void> saveKey(String key) async {
     await _box.write('keySecret', key);
   }
 
-  String getKey() {
-   
+  Future<void> saveLonLat(key) async {
+    await this.save('long', key['longitude']);
+    await this.save('lat', key['latitude']);
+  }
 
+    getLonLat() async {
+    return {
+      'long': this.find('long'),
+      'lat': this.find('lat')
+    };
+  }
+
+  String getKey() {
     return this.find('keySecret').toString();
   }
 }

@@ -17,48 +17,21 @@ class ImageComp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(right: 5),
-        child: CachedNetworkImage(
-          height: kMdHeight / 9,
-          width: Get.width / 3,
-          fit: BoxFit.cover,
-          imageUrl: file.uri.toFilePath(),
-          imageBuilder: (context, imageProvider) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    bottomLeft: Radius.circular(8)),
-                image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                    colorFilter:
-                        ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
-              ),
-            );
-          },
-          placeholder: (context, url) {
-            return Container(
-              child: Center(
-                  child: CircularProgressIndicator(
-                color: ColorsApp.skyBlue,
-              )),
-            );
-          },
-          errorWidget: (context, url, error) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    bottomLeft: Radius.circular(8)),
-                image: DecorationImage(
-                    image: AssetImage("assets/images/error.gif"),
-                    fit: BoxFit.cover,
-                    colorFilter:
-                        ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
-              ),
-            );
-          },
-        ));
+      margin: EdgeInsets.only(right: 5),
+      height: kMdHeight / 5,
+      width: Get.width / 3,
+      child: Image.file(
+        file,
+        fit: BoxFit.cover,
+      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.only(
+      //       topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+      //   image: DecorationImage(
+      //       image: AssetImage(file.path),
+      //       fit: BoxFit.cover,
+      //       colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+      // ),
+    );
   }
 }

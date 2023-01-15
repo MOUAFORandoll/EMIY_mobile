@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:fahkapmobile/Views/BoutiqueUser/BoutiqueView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Form/formComponent2.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';
@@ -93,7 +93,8 @@ class _ManageViewState extends State<ManageView> {
           // Display a placeholder widget to visualize the shrinking size.
           flexibleSpace: InkWell(
             child: GetBuilder<BoutiqueController>(
-              builder: (_controller) => Column(children: [
+              builder: (_controller) => SingleChildScrollView(
+                  child: Column(children: [
                 Container(
                     alignment: Alignment.topLeft,
                     child: Row(
@@ -126,36 +127,36 @@ class _ManageViewState extends State<ManageView> {
                       // left: kMarginX,
                       // right: kMarginX,
                     )),
-                _controller.isExist
+                /*  _controller.isExist
                     ? Container(width: 0, height: 0)
-                    : InkWell(
-                        child: Container(
-                            padding: EdgeInsets.only(
-                                left: 20, right: 20, top: 2, bottom: 2),
-                            margin: EdgeInsets.only(bottom: 5, top: 8),
-                            decoration: BoxDecoration(color: ColorsApp.grey),
-                            height: 40,
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  smallText(
-                                      al: true,
-                                      width: kSmWidth,
-                                      text: 'Historique de vos achats',
-                                      size: 16),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          top: Get.height * .005,
-                                          left: Get.width * .008),
-                                      child: Icon(
-                                        Icons.arrow_forward_ios_outlined,
-                                        // color: Colors.white,
-                                      )),
-                                ])),
-                        onTap: () => Get.toNamed(AppLinks.COMMANDE_FOR_USER),
-                      ),
-              ]),
+                    :  */
+                InkWell(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          left: 20, right: 20, top: 2, bottom: 2),
+                      margin: EdgeInsets.only(bottom: 5, top: 8),
+                      decoration: BoxDecoration(color: ColorsApp.grey),
+                      height: 40,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            smallText(
+                                al: true,
+                                width: kSmWidth,
+                                text: 'Historique de vos achats',
+                                size: 16),
+                            Container(
+                                margin: EdgeInsets.only(
+                                    top: Get.height * .005,
+                                    left: Get.width * .008),
+                                child: Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  // color: Colors.white,
+                                )),
+                          ])),
+                  onTap: () => Get.toNamed(AppLinks.COMMANDE_FOR_USER),
+                ),
+              ])),
             ),
             /*   onTap: () => filterDest() */
           ),
@@ -197,147 +198,160 @@ class _ManageViewState extends State<ManageView> {
                               onTap: () async {},
                             )
                           ])))
-                  : Container(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-                      child: !_manager.userP && _manager.User != null
-                          ? Column(children: <Widget>[
-                              InfoComponent(
-                                  title: Text("First name"),
-                                  value: _manager.User.nom),
-                              InfoComponent(
-                                  title: Text("Last name"),
-                                  value: _manager.User.prenom),
-                              InfoComponent(
-                                  title: Text("Phone number"),
-                                  value: _manager.User.phone),
-                              InfoComponent(
-                                  title: Text("Email"),
-                                  value: _manager.User.email),
-                              // InfoComponent(
-                              //   title: Row(children: [
-                              //     Text("Adress"),
-                              //     Container(
-                              //         child: Icon(FontAwesomeIcons.pen,
-                              //             size: 12, color: Color(0xFFCFD6D6)),
-                              //         margin: EdgeInsets.only(left: 10))
-                              //   ]),
-                              //   value: "addresse",
-                              // ),
-                              InfoComponent(
-                                title: Row(children: [
-                                  Text("Password"),
-                                  // Container(
-                                  //     child: Icon(FontAwesomeIcons.pen,
-                                  //         size: 12, color: Color(0xFFCFD6D6)),
-                                  //     margin: EdgeInsets.only(left: 10))
-                                ]),
-                                value: "*****",
-                              ),
-                              CustomBtn(
-                                color: ColorsApp.greenLight,
-                                title: 'Mettre a jour',
-                                onTap: () async {
-                                  Get.bottomSheet(
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: kSmWidth * .07,
-                                          vertical: kSmHeight * .09),
-                                      // height: 800,
-                                      color: ColorsApp.grey,
-                                      child: SingleChildScrollView(
-                                          child: Column(
-                                        // mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          FormComponent2(
-                                              icon: Icons.account_circle,
-                                              type: 0,
-                                              controller: name,
-                                              enabled: true,
-                                              titre: 'Nom',
-                                              hint: ""),
-                                          FormComponent2(
-                                              icon: Icons.account_circle,
-                                              type: 0,
-                                              controller: prenom,
-                                              enabled: true,
-                                              titre: 'Prenom',
-                                              hint: ""),
-                                          FormComponent2(
-                                              icon: Icons.account_circle,
-                                              type: 0,
-                                              controller: phone,
-                                              kType: TextInputType.number,
-                                              enabled: true,
-                                              titre: 'phone',
-                                              hint: " "),
-                                          // FormComponent2(
-                                          //     icon: Icons.account_circle,
-                                          //     type: 0,
-                                          //     controller: adresse,
-                                          //     // kType: TextInputType.number,
-                                          //     enabled: true,
-                                          //     titre: 'adresse',
-                                          //     hint: " "),
-                                          FormComponent2(
-                                              icon: Icons.account_circle,
-                                              type: 0,
-                                              controller: email,
-                                              // kType: TextInputType.number,
-                                              enabled: true,
-                                              titre: 'email',
-                                              hint: " "),
-                                          CustomBtn(
-                                              color: ColorsApp.greenLight,
-                                              title: 'Mettre a jour',
-                                              onTap: () async {
-                                                var data = {
-                                                  'keySecret': new GetStorage()
-                                                      .read('keySecret'),
-                                                  'nom': name.text,
-                                                  'prenom': prenom.text,
-                                                  'phone': phone.text,
-                                                  'email': email.text,
-                                                };
-                                                print(data);
-                                                await _manager.updateUser(data);
-                                              })
-                                        ],
-                                      )),
-                                    ),
-                                  );
-                                },
-                              ),
-                              Center(
-                                  child: CustomBtn(
-                                      color: ColorsApp.red,
-                                      title: 'Deconneter',
-                                      onTap: () {
-                                        Get.find<StorageService>()
-                                            .deleteStorage();
-                                        Get.find<DB>().deleteAll();
-                                        Get.toNamed(AppLinks.LOGIN);
-                                      })),
-                            ])
-                          : Column(
-                              children: [
-                                Center(
-                                    child: CustomBtn(
-                                        color: ColorsApp.greenLight,
-                                        title: 'Se Connecter',
-                                        onTap: () {
-                                          Get.toNamed(AppLinks.LOGIN);
-                                        })),
-                                Center(
-                                  child: CustomBtn(
-                                      color: ColorsApp.greenLight,
-                                      title: 'Creer compte',
-                                      onTap: () {
-                                        Get.toNamed(AppLinks.REGISTER);
-                                      }),
-                                )
-                              ],
-                            ))
-              : BoutiqueView(),
+                  : RefreshIndicator(
+                      color: ColorsApp.skyBlue,
+                      onRefresh: () async {
+                        await Get.find<ManagerController>().getKeyU();
+
+                        await Get.find<ManagerController>().getUser();
+
+                        await Get.find<ManagerController>().getKeyU();
+                        ;
+                      },
+                      child: Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 10),
+                          child: !_manager.userP && _manager.User != null
+                              ? Column(children: <Widget>[
+                                  InfoComponent(
+                                      title: Text("First name"),
+                                      value: _manager.User.nom),
+                                  InfoComponent(
+                                      title: Text("Last name"),
+                                      value: _manager.User.prenom),
+                                  InfoComponent(
+                                      title: Text("Phone number"),
+                                      value: _manager.User.phone),
+                                  InfoComponent(
+                                      title: Text("Email"),
+                                      value: _manager.User.email),
+                                  // InfoComponent(
+                                  //   title: Row(children: [
+                                  //     Text("Adress"),
+                                  //     Container(
+                                  //         child: Icon(FontAwesomeIcons.pen,
+                                  //             size: 12, color: Color(0xFFCFD6D6)),
+                                  //         margin: EdgeInsets.only(left: 10))
+                                  //   ]),
+                                  //   value: "addresse",
+                                  // ),
+                                  InfoComponent(
+                                    title: Row(children: [
+                                      Text("Password"),
+                                      // Container(
+                                      //     child: Icon(FontAwesomeIcons.pen,
+                                      //         size: 12, color: Color(0xFFCFD6D6)),
+                                      //     margin: EdgeInsets.only(left: 10))
+                                    ]),
+                                    value: "*****",
+                                  ),
+                                  CustomBtn(
+                                    color: ColorsApp.greenLight,
+                                    title: 'Mettre a jour',
+                                    onTap: () async {
+                                      Get.bottomSheet(
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: kSmWidth * .07,
+                                              vertical: kSmHeight * .09),
+                                          // height: 800,
+                                          color: ColorsApp.grey,
+                                          child: SingleChildScrollView(
+                                              child: Column(
+                                            // mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              FormComponent2(
+                                                  icon: Icons.account_circle,
+                                                  type: 0,
+                                                  controller: name,
+                                                  enabled: true,
+                                                  titre: 'Nom',
+                                                  hint: ""),
+                                              FormComponent2(
+                                                  icon: Icons.account_circle,
+                                                  type: 0,
+                                                  controller: prenom,
+                                                  enabled: true,
+                                                  titre: 'Prenom',
+                                                  hint: ""),
+                                              FormComponent2(
+                                                  icon: Icons.account_circle,
+                                                  type: 0,
+                                                  controller: phone,
+                                                  kType: TextInputType.number,
+                                                  enabled: true,
+                                                  titre: 'phone',
+                                                  hint: " "),
+                                              // FormComponent2(
+                                              //     icon: Icons.account_circle,
+                                              //     type: 0,
+                                              //     controller: adresse,
+                                              //     // kType: TextInputType.number,
+                                              //     enabled: true,
+                                              //     titre: 'adresse',
+                                              //     hint: " "),
+                                              FormComponent2(
+                                                  icon: Icons.account_circle,
+                                                  type: 0,
+                                                  controller: email,
+                                                  // kType: TextInputType.number,
+                                                  enabled: true,
+                                                  titre: 'email',
+                                                  hint: " "),
+                                              CustomBtn(
+                                                  color: ColorsApp.greenLight,
+                                                  title: 'Mettre a jour',
+                                                  onTap: () async {
+                                                    var data = {
+                                                      'keySecret':
+                                                          new GetStorage().read(
+                                                              'keySecret'),
+                                                      'nom': name.text,
+                                                      'prenom': prenom.text,
+                                                      'phone': phone.text,
+                                                      'email': email.text,
+                                                    };
+                                                    print(data);
+                                                    await _manager
+                                                        .updateUser(data);
+                                                  })
+                                            ],
+                                          )),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  Center(
+                                      child: CustomBtn(
+                                          color: ColorsApp.red,
+                                          title: 'Deconneter',
+                                          onTap: () {
+                                            Get.find<StorageService>()
+                                                .deleteStorage();
+                                            Get.find<DB>().deleteAll();
+                                            Get.toNamed(AppLinks.LOGIN);
+                                          })),
+                                ])
+                              : Column(
+                                  children: [
+                                    Center(
+                                        child: CustomBtn(
+                                            color: ColorsApp.greenLight,
+                                            title: 'Se Connecter',
+                                            onTap: () {
+                                              Get.toNamed(AppLinks.LOGIN);
+                                            })),
+                                    Center(
+                                      child: CustomBtn(
+                                          color: ColorsApp.greenLight,
+                                          title: 'Creer compte',
+                                          onTap: () {
+                                            Get.toNamed(AppLinks.REGISTER);
+                                          }),
+                                    )
+                                  ],
+                                )))
+              : BoutiqueUserView(),
 
           childCount: 1,
         ))

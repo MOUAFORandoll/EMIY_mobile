@@ -11,6 +11,13 @@ class CartController extends GetxController {
 
   Map<int, CartModel> _items = {};
   Map<int, CartModel> get items => _items;
+  int _current = 0;
+  int get current => _current;
+  setCurrent(index) {
+    _current = index;
+    update();
+    // print('cureent ---${_current}');
+  }
 
   int get totalItems {
     var totalQt = 0;
@@ -68,13 +75,12 @@ class CartController extends GetxController {
 
   getListPinCart() {
     var listF = [];
-   _items.forEach((k, v) {
+    _items.forEach((k, v) {
       listF.add([v.id, v.quantity]);
     });
     print(listF);
     return listF;
   }
-
 
   void removeItem(id) {
     _items.remove(id);

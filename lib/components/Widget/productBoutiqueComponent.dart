@@ -66,7 +66,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                   image: imageProvider,
                                   fit: BoxFit.cover,
                                   colorFilter: ColorFilter.mode(
-                                      Colors.red, BlendMode.colorBurn)),
+                                      Colors.transparent, BlendMode.colorBurn)),
                             ),
                           );
                         },
@@ -284,7 +284,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                       //         ])),
                       CustomBtn(
                         color: ColorsApp.greenLight,
-                        title: 'Update',
+                        title: 'Mettre a jour',
                         onTap: () async {
                           var data = {
                             'idProduit': produit.id,

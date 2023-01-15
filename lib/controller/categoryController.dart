@@ -19,10 +19,12 @@ class CategoryController extends GetxController {
       _categoryList.clear();
       _isLoaded = 0;
       Response response = await categoryRepo.getListCategory();
-      if (response.body['data'] != null && response.body['data'].length != 0) {
-        _categoryList.addAll((response.body['data'] as List)
-            .map((e) => CategoryModel.fromJson(e))
-            .toList());
+      if (response.body['data'] != null) {
+        if (response.body['data'].length != 0) {
+          _categoryList.addAll((response.body['data'] as List)
+              .map((e) => CategoryModel.fromJson(e))
+              .toList());
+        }
       }
       // print(_categoryList);
       _isLoaded = 1;

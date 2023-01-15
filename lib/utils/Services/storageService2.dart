@@ -36,8 +36,12 @@ class StorageService extends GetxController {
     await this.saveKey(Jwt.parseJwt(key['token'])['keySecret']);
   }
 
+    getLonLat() async {
+    return {'long': this.find('long'), 'lat': this.find('lat')};
+  }
+
   getKeyKen() {
-    return jsonDecode(this.find('keyKen'));
+    return this.find('keyKen');
   }
 
   Future<void> saveKey(String key) async {

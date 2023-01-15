@@ -18,6 +18,7 @@ class BoutiqueUserModel {
     required this.titre,
     required this.status,
     required this.dateCreated,
+    required this.images,
     required this.produits,
   });
 
@@ -27,6 +28,7 @@ class BoutiqueUserModel {
   String titre;
   bool status;
   String dateCreated;
+  final List<Image> images;
   List<Produit> produits;
 
   factory BoutiqueUserModel.fromJson(Map<String, dynamic> json) =>
@@ -39,6 +41,9 @@ class BoutiqueUserModel {
         dateCreated: json["dateCreated"],
         produits: List<Produit>.from(
             json["produits"].map((x) => Produit.fromJson(x))),
+        images: json["images"] == null
+            ? []
+            : List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +54,9 @@ class BoutiqueUserModel {
         "status": status,
         "dateCreated": dateCreated,
         "produits": List<dynamic>.from(produits.map((x) => x.toJson())),
+        "images": images == null
+            ? null
+            : List<dynamic>.from(images.map((x) => x.toJson())),
       };
 }
 

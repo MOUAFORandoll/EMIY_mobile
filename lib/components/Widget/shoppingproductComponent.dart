@@ -52,7 +52,7 @@ class ShoppingproductComponent extends StatelessWidget {
                                       image: imageProvider,
                                       fit: BoxFit.cover,
                                       colorFilter: ColorFilter.mode(
-                                          Colors.red, BlendMode.colorBurn))),
+                                          Colors.transparent, BlendMode.colorBurn))),
                             ),
                           );
                         },

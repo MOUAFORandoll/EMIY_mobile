@@ -76,14 +76,14 @@ class BuyShopController extends GetxController {
     _isLoaded = 0;
     setLivreur(0);
     try {
-      
       _livreurList.clear();
       update();
       Response response = await livreurRepo.getLivreur();
       if (response.body['data'] != null) {
         if (response.body['data'].length != 0) {
           print('livreur------------------');
-          print(response.body['data'].length != 0);
+          print(response.body['data']);
+
           _livreurList.addAll((response.body['data'] as List)
               .map((e) => LivreurModel.fromJson(e))
               .toList());

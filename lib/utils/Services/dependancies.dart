@@ -19,6 +19,7 @@ import 'package:fahkapmobile/utils/Services/storageService2.dart';
 import 'package:fahkapmobile/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class MyBinding extends Bindings {
@@ -55,18 +56,20 @@ class MyBinding extends Bindings {
     await GetStorage.init();
     var database = Get.find<DB>();
     database.init();
-    Get.find<ManagerController>();
+    Get.find<ManagerController>().newLocalisation();
     Get.find<ManagerController>().getKeyU();
     Get.find<ManagerController>().getUser();
 
     Get.find<ProductController>().getPopularProduit();
     Get.find<CategoryController>().getCategory();
+    Get.find<BoutiqueController>().getCategory();
 
     Get.find<CartController>();
 
     Get.find<BuyShopController>();
-    Get.find<BoutiqueController>().getBoutique(); 
+    Get.find<BoutiqueController>().getBoutique();
     Get.find<CommandeController>().getListCommandes();
+    Get.find<BoutiqueController>().getCategory();
   }
 
   onGetAll() async {
@@ -98,7 +101,8 @@ class MyBinding extends Bindings {
 
     var database = Get.find<DB>();
     database.init();
-    Get.find<ManagerController>();
+    Get.find<ManagerController>().newLocalisation();
+
     Get.find<ManagerController>().getKeyU();
 
     Get.find<CommandeController>().getListCommandes();
@@ -106,6 +110,7 @@ class MyBinding extends Bindings {
 
     Get.find<ProductController>().getPopularProduit();
     Get.find<CategoryController>().getCategory();
+    Get.find<BoutiqueController>().getCategory();
 
     Get.find<CartController>();
 
@@ -114,5 +119,13 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => ListBoutiqueController(listBoutiqueRepo: Get.find()));
 
     // Get.find<CommandeController>().insertAll();
+  }
+
+  void requestPermission() async {
+    var status = await Permission.storage.status;
+    print("voici le statut ,  $status");
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
   }
 }

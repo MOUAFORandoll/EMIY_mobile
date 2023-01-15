@@ -5,6 +5,7 @@ import 'package:fahkapmobile/components/Button/button.dart';
 import 'package:fahkapmobile/components/Form/formComponent2.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';
 import 'package:fahkapmobile/components/Text/bigtitleText.dart';
+import 'package:fahkapmobile/components/Widget/BoutiqueComponent.dart';
 import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
 import 'package:fahkapmobile/components/Widget/categoryComponent2.dart';
 import 'package:fahkapmobile/components/Widget/productComponent.dart';
@@ -27,25 +28,47 @@ class ListBoutiqueView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.find<ListBoutiqueController>().getListBoutiques();
     return Scaffold(
-      body: CustomScrollView(controller: _scrollController, slivers: [
+        body: RefreshIndicator(
+      color: ColorsApp.skyBlue,
+      onRefresh: () async {
+        await Get.find<ListBoutiqueController>().getListBoutiques();
+      },
+      child: CustomScrollView(controller: _scrollController, slivers: [
         // Add the app bar to the CustomScrollView.
         SliverAppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: ColorsApp.bleuLight,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButtonF(
-                  icon: Icons.close,
-                  color: ColorsApp.black,
-                  onTap: () {
-                    Get.back();
-                  },
-                ),
-                BigtitleText(text: 'list des boutiques', bolder: true),
-              ],
-            )),
-
+          backgroundColor: Colors.white,
+          elevation: 0,
+          // Provide a standard title.
+          // title: Text('title'),
+          // Allows the user to reveal the app bar if they begin scrolling
+          // back up the list of items.
+          floating: true,
+          // Display a placeholder widget to visualize the shrinking size.
+          flexibleSpace: InkWell(
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Container(
+                    margin: EdgeInsets.only(top: Get.height * .030),
+                    padding: EdgeInsets.only(
+                        left: Get.width * .030, right: Get.width * .030),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BigtitleText(text: 'Les Boutiques', bolder: true),
+                          // Container(
+                          //     child: InkWell(
+                          //         child: Icon(Icons.search),
+                          //         onTap: () => Scaffold.of(context).openDrawer())
+                          //     // padding: EdgeInsets.only(right: 10),
+                          //     ),
+                        ])),
+              ]),
+            ),
+            /*   onTap: () => filterDest() */
+          ),
+          // Make the initial height of the SliverAppBar larger than normal.
+          expandedHeight: 60,
+        ),
         SliverList(
           // Use a delegate to build items as they're scrolled on screen.
           delegate: SliverChildBuilderDelegate(
@@ -119,25 +142,21 @@ class ListBoutiqueView extends StatelessWidget {
                           ),
                         ))
                     : (_lbcontroller.ListBoutique.length != 0)
-                        ? SizedBox(
-                            height: kMdHeight,
-                            child: Stack(
-                              children: [
-                                GridView.builder(
-                                    padding: const EdgeInsets.all(20),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 20.0,
-                                            mainAxisSpacing: 70.0),
-                                    itemCount:
-                                        _lbcontroller.ListBoutique.length,
-                                    itemBuilder: (_ctx, index) => Text(
-                                        _lbcontroller
-                                            .ListBoutique[index].titre))
-                              ],
-                            ),
-                          )
+                        ? SingleChildScrollView(
+                            child: GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.all(5),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 10.0,
+                                        mainAxisSpacing: 10.0),
+                                itemCount: _lbcontroller.ListBoutique.length,
+                                itemBuilder: (_ctx, index) => BoutiqueComponent(
+                                      boutique:
+                                          _lbcontroller.ListBoutique[index],
+                                    )))
                         : Container(
                             height: kMdHeight * .6,
                             alignment: Alignment.center,
@@ -150,6 +169,6 @@ class ListBoutiqueView extends StatelessWidget {
           ),
         )
       ]),
-    );
+    ));
   }
 }

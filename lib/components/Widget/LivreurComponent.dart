@@ -39,7 +39,7 @@ class LivreurComponent extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    livreur.localisation.distance,
+                    livreur.distance.toString() + ' km',
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
