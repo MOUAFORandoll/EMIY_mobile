@@ -13,12 +13,17 @@ class ApiClient extends GetConnect implements GetxService {
           'application/json; charset=UTF-8', /* 'Authorization':'***' */
     };
   }
-  void onInit() { 
-
+  void onInit() {
     super.onInit();
   }
 
-  Future<Response> getCollections(url) => get(url);
-  Future<Response> getCollectionsP(url, data) => post(url, data);
- 
+  Future<Response> getCollections(url) async {
+    Response rep = await get(url);
+    return rep;
+  }
+
+  Future<Response> getCollectionsP(url, data) async {
+    Response rep = await post(url, data);
+    return rep;
+  }
 }

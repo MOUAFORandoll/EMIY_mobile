@@ -28,30 +28,41 @@ class ProductComponentAll extends StatelessWidget {
               child: Container(
                   alignment: Alignment.bottomCenter,
                   margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(produit.titre,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              TextStyle(color: ColorsApp.black, fontSize: 12)),
-                      Text('XAF ' + produit.prix.toString(),
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold)),
-                    ],
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: ColorsApp.greySecond,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8)),
+                      ),
+                      // margin: EdgeInsets.symmetric(vertical: 1, horizontal: 1),
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(produit.titre,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: ColorsApp.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12)),
+                          Text('XAF ' + produit.prix.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      )),
+                  decoration: BoxDecoration(
+                    color: ColorsApp.greySecond,
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                            Colors.transparent, BlendMode.colorBurn)),
                   )),
-              decoration: BoxDecoration(
-                color: ColorsApp.greySecond,
-                borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                    colorFilter:
-                        ColorFilter.mode(Colors.transparent, BlendMode.colorBurn)),
-              ),
             );
           },
           placeholder: (context, url) {

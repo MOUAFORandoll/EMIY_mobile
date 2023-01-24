@@ -82,6 +82,11 @@ class CartController extends GetxController {
     return listF;
   }
 
+  deleteAll() {
+    _items.clear();
+    update();
+  }
+
   void removeItem(id) {
     _items.remove(id);
     update();

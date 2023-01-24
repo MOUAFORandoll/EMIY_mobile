@@ -43,7 +43,6 @@ class BuyShopController extends GetxController {
     _state = i ? checkVal(_state + 1) : checkVal(_state - 1);
 
     update();
-    print('_state..........${_state}');
   }
 
   checkVal(val) {
@@ -79,7 +78,7 @@ class BuyShopController extends GetxController {
       _livreurList.clear();
       update();
       Response response = await livreurRepo.getLivreur();
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           print('livreur------------------');
           print(response.body['data']);

@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:fahkapmobile/components/Button/IconButtonF.dart';
 import 'package:fahkapmobile/components/Form/formComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/components/Widget/LivreurComponent.dart';
 import 'package:fahkapmobile/components/Widget/productBuyComponent.dart';
 import 'package:fahkapmobile/controller/BuyShopController.dart';
 import 'package:fahkapmobile/controller/cartController.dart';
+import 'package:fahkapmobile/controller/managerController.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,73 +36,7 @@ class BuyShoopingCart extends StatelessWidget {
   bool ok = false;
   List<TrajetModel> listTrajet = [];
 
-//  newSaveSql() async {
-//     var send = await BuyShoopingCart().insert(newR);
-//     print(send);
-//   }
-//   // ignore: must_call_super
-//   getData() async {
-//     await new ApiService().getListTrajet().then((value) {
-//       setState(() {
-//         // print(value);
-//         listTrajet = value;
-//         dropdownvalueD = listTrajet[0];
-//         ok = true;
-//       });
-//     }).catchError((e) {
-//       ViewFunctions().verifiedConnection();
-//       Timer(Duration(seconds: 3), () {
-//         // print('********************${counter}');
-//         getData();
-//       });
-//       // getData();
-//     });
-//     ;
-//   }
-
   bool _loading = false;
-
-  // // ignore: must_call_super
-  // buyBillet() async {
-  //   var data = {
-  //     "nom": nom.value.text,
-  //     "prenom": prenom.value.text,
-  //     "numero": phone.value.text,
-  //     "idPlace": selectedPlaceId,
-  //     "idModePaiement": 1,
-  //   };
-
-  //   Get.defaultDialog(
-  //       title: 'En cours',
-  //       content: SizedBox(
-  //           // height: Get.size.height * .02,
-  //           // width: Get.size.width * .02,
-  //           child: Center(
-  //               child: CircularProgressIndicator(
-  //         color: Colors.blueAccent,
-  //       ))));
-  //   await new ApiService().buyBillet(data).then((value) {
-  //     setState(() {
-  //       finish = true;
-  //       message = value['message'];
-
-  //       color = value['color'];
-  //     });
-  //     // print(value['message']);
-  //     // functions.snackBar('Reservation', 'cccccccccccc', ColorsApp.skyBlue, 2);
-  //     Get.back();
-  //   }).catchError((e) {
-  //     setState(() {
-  //       finish = true;
-  //       message = 'Echec de Reservation ';
-  //       color = ColorsApp.red;
-  //     });
-  //     // print(value['message']);
-  //     // functions.snackBar('Reservation', 'cccccccccccc', ColorsApp.skyBlue, 2);
-
-  //     // functions.snackBar('Reservation', 'Echec de Reservation ', Colors.red, 3);
-  //     // Get.back(); // getData();
-  //   });
 
   @override
   void initState() {}
@@ -114,197 +50,242 @@ class BuyShoopingCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<BuyShopController>().onInit();
-    Get.find<BuyShopController>().getListLivreur();
-
+    Get.find<ManagerController>().getLocalU();
     return GetBuilder<BuyShopController>(builder: (_Bcontroller) {
-      return Scaffold(
-          appBar: AppBar(
-            leading: InkWell(
-                child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
-                onTap: () => Get.back()),
-            title: Text(
-              'Effectuer votre achat',
-              style: TextStyle(color: Colors.black),
+      return GetBuilder<CartController>(builder: (_controller) {
+        return Scaffold(
+            appBar: AppBar(
+              leading: InkWell(
+                  child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
+                  onTap: () => Get.back()),
+              title: Text(
+                _Bcontroller.state == 0
+                    ? 'Votre lieux de livraison'
+                    : _Bcontroller.state == 1
+                        ? "Choisissez un coursier"
+                        : _Bcontroller.state == 2
+                            ? "Entrer vos informations "
+                            : "Terminer",
+                style: TextStyle(color: Colors.black),
+              ),
+              foregroundColor: Colors.red,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
             ),
-            foregroundColor: Colors.red,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
-          body: GetBuilder<CartController>(builder: (_controller) {
-            return Stack(children: [
-              _controller.getItems.length != 0
-                  ? Stepper(
-                      type: StepperType.vertical,
-                      currentStep: _Bcontroller.state,
-                      onStepCancel: () {
-                        _Bcontroller.stateChange(false);
-                      },
-                      onStepTapped: (int index) {
-                        // print('index------------------' + widget.currentStep);
-                      },
-                      onStepContinue: () async {
-                        // if (_Bcontroller.state == 0) {
-
-                        // }
-
-                        // if (_Bcontroller.isCurrent(0)) {
-                        _Bcontroller.stateChange(true);
-                        // }
-                        // if (_Bcontroller.isCurrent(1) &&
-                        //     _Bcontroller.current == 0) {
-                        //   if (_Bcontroller.isLivreur == 0) {
-                        //     functions.snackBar('Achat',
-                        //         'Selectionner un livreur', ColorsApp.red);
-                        //   } else {
-                        //     _Bcontroller.stateChange(true);
-                        //   }
-                        // }
-                        // if (_Bcontroller.isCurrent(2)) {
-                        //   if ((nom.text.isEmpty ||
-                        //           prenom.text.isEmpty ||
-                        //           phone.text.isEmpty) &&
-                        //       _Bcontroller.current != 2) {
-                        //     functions.snackBar(
-                        //         'Achat',
-                        //         'Veuillez remplir tous les champs',
-                        //         ColorsApp.red);
-                        //     return;
-                        //   } else {
-                        //     _Bcontroller.stateChange(true);
-                        //   }
-                        // }
-                        // if (_Bcontroller.isCurrent(0)) {
-                        //   _Bcontroller.stateChangeX(1);
-                        // }
-                        // ;
-                        // if (_Bcontroller.isCurrent(1)) {
-                        //   _Bcontroller.stateChangeX(2);
-                        // }
-                        // ;
-                        // if (_Bcontroller.isCurrent(2)) {
-                        //   _Bcontroller.stateChangeX(3);
-                        // }
-                        // ;
-
-                        // print(_Bcontroller.isCurrent(3));
-                        // if (_Bcontroller.isCurrent(3)) {
-                        // if (nom.text.isEmpty ||
-                        //     prenom.text.isEmpty ||
-                        //     phone.text.isEmpty ||
-                        //     _Bcontroller.isLivreur == 0) {
-                        //   if (_Bcontroller.isLivreur == 0) {
-                        //     functions.snackBar('Achat',
-                        //         'Selectionner un livreur', ColorsApp.red);
-                        //   } else {
-                        //     functions.snackBar(
-                        //         'Achat',
-                        //         'Veuillez remplir tous les champs',
-                        //         ColorsApp.red);
-                        //   }
-                        // }
-                        // var listProd = await _controller.getListPinCart();
-
-                        // print(listProd);
-                        if (nom.text.isNotEmpty &&
-                            prenom.text.isNotEmpty &&
-                            phone.text.isNotEmpty &&
-                            _Bcontroller.isLivreur != 0) {
-                          var data = {
-                            'nom': nom.text,
-                            'prenom': prenom.text,
-                            'phone': phone.text,
-                            'idModePaiement': 1,
-                            'idLivreur': _Bcontroller.isLivreur,
-                            'listProduits': _controller.getListPinCart(),
-                          };
-                          print(data);
-                          await _Bcontroller.buyCart(data);
-                        } else {}
-                      },
-                      steps: [
-                        Step(
-                            isActive: _Bcontroller.isCurrent(0),
-                            title: const Text('Informations commande'),
-                            content: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
+            bottomNavigationBar: Container(
+              height: kMarginY * 8,
+              padding: EdgeInsets.symmetric(horizontal: kMarginX),
+              decoration: BoxDecoration(
+                color: ColorsApp.greySecond,
+                // borderRadius: BorderRadius.all(
+                //   Radius.circular(12),
+                // ),
+              ),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButtonF(
+                        icon: Icons.skip_previous_rounded,
+                        inconSize: 30.0,
+                        color: ColorsApp.bleuLight,
+                        onTap: () => _Bcontroller.stateChange(false)),
+                    IconButtonF(
+                        icon: Icons.skip_next_rounded,
+                        inconSize: 30.0,
+                        color: ColorsApp.bleuLight,
+                        onTap: () async {
+                          var user = Get.find<ManagerController>();
+                          if (_Bcontroller.state == 0) {
+                            _Bcontroller.stateChange(true);
+                          } else if (_Bcontroller.state == 1) {
+                            if (_Bcontroller.isLivreur == 0) {
+                              functions.snackBar('Achat',
+                                  'Selectionner un livreur', ColorsApp.red);
+                            } else {
+                              _Bcontroller.stateChange(true);
+                            }
+                          } else if (_Bcontroller.state == 2) {
+                            if ((nom.text.isEmpty ||
+                                prenom.text.isEmpty ||
+                                phone.text.isEmpty)) {
+                              functions.snackBar(
+                                  'Achat',
+                                  'Veuillez remplir tous les champs',
+                                  ColorsApp.red);
+                              return;
+                            } else {
+                              _Bcontroller.stateChange(true);
+                            }
+                          } else if (_Bcontroller.state == 3) {
+                            if (nom.text.isNotEmpty &&
+                                prenom.text.isNotEmpty &&
+                                phone.text.isNotEmpty &&
+                                _Bcontroller.isLivreur != 0) {
+                              var data = {
+                                'nom': nom.text,
+                                'prenom': prenom.text,
+                                'phone': phone.text,
+                                'idModePaiement': 1,
+                                'idLivreur': _Bcontroller.isLivreur,
+                                'listProduits': _controller.getListPinCart(),
+                                'ville': user.ville,
+                                'longitude': user.longitude,
+                                'latitude': user.latitude,
+                              };
+                              print(data);
+                              await _Bcontroller.buyCart(data);
+                            } else {
+                              functions.snackBar(
+                                  'Achat',
+                                  'Veuillez verifier vos informations',
+                                  ColorsApp.red);
+                            }
+                            // _Bcontroller.stateChange(true);
+                          }
+                        }),
+                  ]),
+            ),
+            body: Stack(children: [
+              _Bcontroller.state == 0
+                  ? Container(
+                      margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                      child: SingleChildScrollView(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+/*                           Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
+                                Container(child: Text('Nom')),
+                                Container(
+                                  // margin: EdgeInsets.only(left: Get.width * .008),
+                                  child: Text('Prix ',
+                                      style: TextStyle(fontSize: 15)),
+                                ),
+                                Container(
+                                  // margin: EdgeInsets.only(left: Get.width * .008),
+                                  child: Text('Quantity',
+                                      style: TextStyle(fontSize: 15)),
+                                ),
+                                Container(
+                                  // margin: EdgeInsets.only(left: Get.width * .008),
+                                  child: Text('Total (XAF)',
+                                      style: TextStyle(fontSize: 15)),
+                                ),
+                              ]),
+                          SingleChildScrollView(
+                              child: ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: _controller.getItems.length,
+                                  itemBuilder: (_ctx, index) =>
+                                      ProductBuyComponent(
+                                          cartModel:
+                                              _controller.getItems[index])))
+                      */
+                          InkWell(
+                              child: Container(
+                                  margin: EdgeInsets.only(
+                                      top: Get.height * .05,
+                                      left: Get.width * .01,
+                                      right: Get.width * .01,
+                                      bottom: Get.height * .009),
+                                  padding: EdgeInsets.all(Get.height * .02),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: ColorsApp.bleuLight),
+                                  child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(child: Text('Nom')),
-                                      Container(
-                                        // margin: EdgeInsets.only(left: Get.width * .008),
-                                        child: Text('Prix ',
-                                            style: TextStyle(fontSize: 15)),
+                                    children: <Widget>[
+                                      Text(
+                                        'Mon Emplacement actuel',
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      Container(
-                                        // margin: EdgeInsets.only(left: Get.width * .008),
-                                        child: Text('Quantity',
-                                            style: TextStyle(fontSize: 15)),
+                                      Icon(Icons.location_pin)
+                                    ],
+                                  )),
+                              onTap: () {
+                                // _controller.setLivreur(livreur.id);
+                              }),
+                          InkWell(
+                              child: Container(
+                                  margin: EdgeInsets.only(
+                                      top: Get.height * .05,
+                                      left: Get.width * .01,
+                                      right: Get.width * .01,
+                                      bottom: Get.height * .009),
+                                  padding: EdgeInsets.all(Get.height * .02),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: ColorsApp.bleuLight),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        'Selectionne point de livraison',
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      Container(
-                                        // margin: EdgeInsets.only(left: Get.width * .008),
-                                        child: Text('Total (XAF)',
-                                            style: TextStyle(fontSize: 15)),
-                                      ),
-                                    ]),
-                                SingleChildScrollView(
-                                    child: ListView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount: _controller.getItems.length,
-                                        itemBuilder: (_ctx, index) =>
-                                            ProductBuyComponent(
-                                                cartModel: _controller
-                                                    .getItems[index])))
-                              ],
-                            )),
-                        // isActive: (selectedPlace != "0"),
-                        // state: (selectedPlace != "0")
-                        //     ? StepState.complete
-                        //     : StepState.editing),
-                        Step(
-                            title: const Text('Choix du livreur'),
-                            isActive: _Bcontroller.isCurrent(1),
-                            content: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _Bcontroller.isLoaded == 1
-                                    ? SingleChildScrollView(
+                                      Icon(Icons.my_location)
+                                    ],
+                                  )),
+                              onTap: () {
+                                Get.bottomSheet(Container(
+                                    height: kMdHeight * 8,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            topLeft: Radius.circular(20))),
+                                    child: SingleChildScrollView(
                                         child: ListView.builder(
                                             physics:
                                                 NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
-                                            itemCount:
-                                                _Bcontroller.livreurList.length,
+                                            itemCount: 50,
                                             itemBuilder: (_ctx, index) =>
-                                                LivreurComponent(
-                                                    livreur: _Bcontroller
-                                                        .livreurList[index])))
-                                    : CircularProgressIndicator(
-                                        color: ColorsApp.bleuLight)
-                              ],
-                            )),
-                        Step(
-                          title: const Text('Informations personnels'),
-                          isActive: _Bcontroller.isCurrent(2),
-                          content: Container(
-                              margin: EdgeInsets.only(
-                                top: Get.size.height * .025,
-                                bottom: Get.size.height * .025,
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white),
-                              // padding: EdgeInsets.only(
-                              //   top: 25,
-                              // ),
-                              child: Column(
+                                                Text('iii')))));
+                              })
+                        ],
+                      )))
+                  : _Bcontroller.state == 1
+                      ? Container(
+                          margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                          child: SingleChildScrollView(
+                              child: _Bcontroller.isLoaded == 1
+                                  ? Column(
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      // crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SingleChildScrollView(
+                                            child: ListView.builder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: _Bcontroller
+                                                    .livreurList.length,
+                                                itemBuilder: (_ctx, index) =>
+                                                    LivreurComponent(
+                                                        livreur: _Bcontroller
+                                                                .livreurList[
+                                                            index])))
+                                      ],
+                                    )
+                                  : Container(
+                                      alignment: Alignment.center,
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                            color: ColorsApp.bleuLight),
+                                      ))))
+                      : _Bcontroller.state == 2
+                          ? Container(
+                              margin:
+                                  EdgeInsets.symmetric(horizontal: kMarginX),
+                              child: SingleChildScrollView(
+                                  child: Column(
                                 children: [
                                   Container(
                                       margin: EdgeInsets.only(
@@ -347,44 +328,19 @@ class BuyShoopingCart extends StatelessWidget {
                                         ],
                                       )),
                                 ],
-                              )),
-                          // isActive: (nom.value.text.length != 0 &&
-                          //     prenom.value.text.length != 0 &&
-                          //     phone.value.text.length != 0 &&
-                          //     ViewFunctions()
-                          //         .verifPhoneNumber(phone.value.text) &&
-                          //     ViewFunctions().verifText(nom.value.text) &&
-                          //     ViewFunctions().verifText(prenom.value.text)),
-                          // state: (nom.value.text.length != 0 &&
-                          //         prenom.value.text.length != 0 &&
-                          //         phone.value.text.length != 0 &&
-                          //         ViewFunctions()
-                          //             .verifPhoneNumber(phone.value.text) &&
-                          //         ViewFunctions().verifText(nom.value.text) &&
-                          //         ViewFunctions().verifText(prenom.value.text))
-                          //     ? StepState.complete
-                          //     : StepState.editing),
-                        ),
-                        Step(
-                            title: const Text('Payement'),
-                            isActive: _Bcontroller.isCurrent(3),
-                            content: Column(
+                              )))
+                          : SingleChildScrollView(
+                              child: Column(
                               children: [
-                                // CinetPayCheckout(
-                                //   title: 'Payment Checkout',
-                                //   configData: <String, dynamic>{},
-                                //   paymentData: <String, dynamic>{},
-                                //   waitResponse: (data) {},
-                                //   onError: (data) {},
-                                // )
+                                Container(
+                                    alignment: Alignment.center,
+                                    child: Center(
+                                      child: Text('Valider Paiement'),
+                                    ))
                               ],
-                            ),
-                            state: StepState.disabled),
-                      ],
-                    )
-                  : Container()
-            ]);
-          }));
+                            ))
+            ]));
+      });
     });
   }
 }

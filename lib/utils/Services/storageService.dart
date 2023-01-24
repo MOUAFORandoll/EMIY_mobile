@@ -44,15 +44,20 @@ mixin StorageService {
     await _box.write('keySecret', key);
   }
 
-  Future<void> saveLonLat(key) async {
+  saveLonLat(key) async {
+    await this.save('ville', '');
+    await this.save('long', 0);
+    await this.save('lat', 0);
+    await this.save('ville', key['ville']);
     await this.save('long', key['longitude']);
     await this.save('lat', key['latitude']);
   }
 
-    getLonLat() async {
+  getLonLat() async {
     return {
       'long': this.find('long'),
-      'lat': this.find('lat')
+      'lat': this.find('lat'),
+      'ville': this.find('ville')
     };
   }
 

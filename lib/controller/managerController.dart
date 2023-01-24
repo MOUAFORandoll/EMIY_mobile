@@ -26,12 +26,50 @@ class ManagerController extends GetxController {
   }
 
   var s = Get.find<StorageService>();
+
+  var _ville;
+  String get ville => _ville;
+
+  var _longitude;
+  double get longitude => _longitude;
+
+  var _latitude;
+  double get latitude => _latitude;
+
+  getLocalU() async {
+    var data = await s.getLonLat();
+    print(data);
+    _ville = data['ville'];
+    _longitude = data['long'];
+    _latitude = data['lat'];
+    update();
+  }
+
   bool _userP = false;
   bool get userP => _userP;
   getKeyU() {
     _userP = s.getKey().isEmpty;
     _isConnected = !_userP;
-    // print('------------------${_userP}');
+    print('------------------${s.getKey()}');
+    update();
+  }
+
+  bool _stateSign = true;
+  bool get stateSign => _stateSign;
+  steStateSign() {
+    _stateSign = !_stateSign;
+    update();
+  }
+
+  bool _stateCreate = true;
+  bool get stateCreate => _stateCreate;
+  steStateCreate() {
+    _stateCreate = !_stateCreate;
+    update();
+  }
+
+  initStateSign() {
+    _stateSign = true;
     update();
   }
 
@@ -46,12 +84,13 @@ class ManagerController extends GetxController {
     try {
       Response response = await manageRepo.getUser();
       // print('user-------------------------${response.body['data']}');
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           _User = UserModel.fromJson(response.body['data']);
+          getKeyU();
         }
       }
-      getKeyU();
+
       _isLoaded = 1;
       update();
     } catch (e) {
@@ -67,7 +106,7 @@ class ManagerController extends GetxController {
     try {
       Response response = await manageRepo.newConnexion();
 
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           print('user-------------------------${response.body['data']}');
           if (response.statusCode == 203) {
@@ -76,14 +115,33 @@ class ManagerController extends GetxController {
         }
       }
       getKeyU();
-      _isLoaded = 1;
-    } catch (e) {
-      _isLoaded = 1;
-      update();
-    }
+    } catch (e) {}
   }
 
   var fn = new ViewFunctions();
+  deconnectUser() async {
+    Get.defaultDialog(
+        title: 'En cours',
+        barrierDismissible: false,
+        content: SizedBox(
+            // height: Get.size.height * .02,
+            // width: Get.size.width * .02,
+            child: Center(
+                child: CircularProgressIndicator(
+          color: Colors.blueAccent,
+        ))));
+    Get.find<StorageService>().deleteStorage();
+    getKeyU();
+    _User = null;
+    Get.back();
+    fn.snackBar('Mise a jour', 'Deconnecte', ColorsApp.bleuLight);
+    _userP = true;
+    update();
+
+    print('---------userp---------${userP}');
+
+    // Get.find<DB>().deleteAll();
+  }
 
   bool _isUpdating = false;
   bool get isUpdating => _isUpdating;
@@ -105,6 +163,7 @@ class ManagerController extends GetxController {
       print(response.body);
 
       if (response.statusCode == 200) {
+        getKeyU();
         await getUser();
       }
 
@@ -141,8 +200,9 @@ class ManagerController extends GetxController {
 //       print(response.body);
       if (response.statusCode == 200) {
         s.saveKeyKen(response.body);
+        getKeyU();
         await getUser();
-        await MyBinding().onGetAll();
+        // await MyBinding().onGetAll();
       }
 
       Get.back();
@@ -178,8 +238,10 @@ class ManagerController extends GetxController {
 //       print(response.body);
 //  this.saveKeyKen(response.body);
       if (response.statusCode == 200) {
+        s.saveKeyKen(response.body);
+        getKeyU();
         await getUser();
-        await MyBinding().onGetAll();
+        // await MyBinding().onGetAll();
       }
 
       Get.back();

@@ -27,6 +27,9 @@ import 'package:fahkapmobile/utils/api/apiUrl.dart';
 import 'package:fahkapmobile/utils/provider/refresh_token.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'LoginScreen.dart';
+import 'RegisterScreen.dart';
+
 // ignore: must_be_immutable
 class ManageView extends StatefulWidget {
   var accessToken;
@@ -73,6 +76,7 @@ class _ManageViewState extends State<ManageView> {
     double height = MediaQuery.of(context).size.height;
     return GetBuilder<ManagerController>(builder: (_manager) {
       print(_manager.User);
+      // _manager.initStateSign();
       // ignore: unnecessary_null_comparison
       if (_manager.User != null) {
         name.text = _manager.User.nom;
@@ -118,6 +122,7 @@ class _ManageViewState extends State<ManageView> {
                                 ? Container()
                                 : Container(
                                     child: SpinKitCircle(
+                                    size: 20,
                                     color: ColorsApp.bleuLight,
                                   )),
                       ],
@@ -237,7 +242,7 @@ class _ManageViewState extends State<ManageView> {
                                   // ),
                                   InfoComponent(
                                     title: Row(children: [
-                                      Text("Password"),
+                                      Text("Ville"),
                                       // Container(
                                       //     child: Icon(FontAwesomeIcons.pen,
                                       //         size: 12, color: Color(0xFFCFD6D6)),
@@ -325,30 +330,44 @@ class _ManageViewState extends State<ManageView> {
                                       child: CustomBtn(
                                           color: ColorsApp.red,
                                           title: 'Deconneter',
-                                          onTap: () {
-                                            Get.find<StorageService>()
-                                                .deleteStorage();
-                                            Get.find<DB>().deleteAll();
-                                            Get.toNamed(AppLinks.LOGIN);
+                                          onTap: () async {
+                                            await Get.find<ManagerController>()
+                                                .deconnectUser();
+
+                                            // Get.toNamed(AppLinks.LOGIN);
                                           })),
                                 ])
                               : Column(
                                   children: [
-                                    Center(
-                                        child: CustomBtn(
-                                            color: ColorsApp.greenLight,
-                                            title: 'Se Connecter',
-                                            onTap: () {
-                                              Get.toNamed(AppLinks.LOGIN);
-                                            })),
-                                    Center(
-                                      child: CustomBtn(
-                                          color: ColorsApp.greenLight,
-                                          title: 'Creer compte',
-                                          onTap: () {
-                                            Get.toNamed(AppLinks.REGISTER);
-                                          }),
-                                    )
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Center(
+                                              child: CustomBtn(
+                                                  color: _manager.stateSign
+                                                      ? ColorsApp.greenLight
+                                                      : ColorsApp.greySecond,
+                                                  title: 'Se Connecter',
+                                                  onTap: () {
+                                                    _manager.steStateSign();
+                                                  })),
+                                          Center(
+                                            child: CustomBtn(
+                                                color: !_manager.stateSign
+                                                    ? ColorsApp.greenLight
+                                                    : ColorsApp.greySecond,
+                                                title: 'Creer compte',
+                                                onTap: () {
+                                                  _manager.steStateSign();
+                                                  print(_manager.stateSign);
+                                                  // Get.toNamed(AppLinks.REGISTER);
+                                                }),
+                                          )
+                                        ]),
+                                    _manager.stateSign
+                                        ? LoginScreen()
+                                        : RegisterScreen()
                                   ],
                                 )))
               : BoutiqueUserView(),

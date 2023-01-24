@@ -8,7 +8,7 @@ import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/controller/cartController.dart';
 import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/controller/listBoutiqueController.dart';
+import 'package:fahkapmobile/controller/categoryBoutiqueController.dart';
 import 'package:fahkapmobile/controller/productController.dart';
 import 'package:fahkapmobile/model/data/ProduitModel.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
@@ -29,9 +29,7 @@ class ProductView extends StatelessWidget {
 
     Object produ = Get.parameters['type'] == '0'
         ? Get.find<ProductController>().produitList[index]
-        : Get.parameters['type'] == '1'
-            ? Get.find<ProductController>().produitcategoryList[index]
-            : Get.find<ListBoutiqueController>().produitBoutiqueList[index];
+        : Get.find<CategoryBoutiqueController>().produitBoutiqueList[index];
     var product = produ as ProduitModel;
     Get.find<ProductController>()
         .initProduct(Get.find<CartController>(), product);

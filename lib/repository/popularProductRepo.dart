@@ -17,12 +17,4 @@ class ProductRepo extends GetxService {
     return response;
   }
 
-  Future getListProductForCategory(id) async {
-    // try {
-    Response response =
-        await await apiClient.getCollectionsP(ApiRoutes.PRODUCT_FOR_CATEGORY, {
-      'id': id, /* 'keySecret': keySecret */
-    });
-    return response;
-  }
 }

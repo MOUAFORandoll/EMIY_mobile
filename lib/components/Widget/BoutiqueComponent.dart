@@ -1,6 +1,5 @@
 // ignore: must_be_immutable
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fahkapmobile/Views/Category/ProductCategoryView.dart';
+import 'package:cached_network_image/cached_network_image.dart'; 
 import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
@@ -26,10 +25,11 @@ class BoutiqueComponent extends StatelessWidget {
           height: kSmHeight * 3,
           width: kSmWidth * .9,
           alignment: Alignment.center,
-          padding: EdgeInsets.all(kMarginX),
+          padding: EdgeInsets.all(kMarginX / 4),
           margin: EdgeInsets.all(Get.size.width * .02),
           decoration: BoxDecoration(
-              color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+              color: ColorsApp.greySecond,
+              borderRadius: BorderRadius.circular(8)),
           child: Column(
             children: [
               Container(

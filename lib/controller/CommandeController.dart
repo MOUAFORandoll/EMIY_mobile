@@ -20,7 +20,7 @@ class CommandeController extends GetxController with DB {
   getListCommandes() async {
     try {
       print('DB *************response ');
-      _commandeList .clear();
+      _commandeList.clear();
       _isLoaded = false;
       var response = await this.getListCommande();
       print('DB *************response ');
@@ -59,20 +59,21 @@ class CommandeController extends GetxController with DB {
 
     try {
       _isLoadedP = false;
-      _produitList .clear();
+      _produitList.clear();
       findComBuyId(id);
       Response response = await commandeRepo.getListProductForComm(id);
       print('*------response');
       print(response.body);
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           produitList.addAll((response.body['data'] as List)
               .map((e) => Produit.fromJson(e))
               .toList());
         }
+        _isLoadedP = true;
+        update();
       }
-      _isLoadedP = true;
-      update();
+     
     } catch (e) {
       print(e);
     }

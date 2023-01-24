@@ -2,9 +2,10 @@ class ApiRoutes {
   static const POPULAR_PRODUCT = "/produit/read/client";
   static const CATEGORY_PRODUCT = "/category/read";
   static const CATEGORY = "/category/read/all";
-  static const PRODUCT_FOR_CATEGORY = "/category/read/produit";
+  static const BOUTIQUE_FOR_CATEGORY = "/category/read/boutique";
   static const BOUTIQUE_IMAGE_UPDATE = "/boutique/image/new";
   static const BOUTIQUE_FOR_UPDATE = "/boutique/update";
+  static const BOUTIQUE_FOR_UPDATE_LOCALISATION = "/boutique/localisation";
   static const BOUTIQUE_FOR_USER = "/boutique/read/user";
   static const BOUTIQUE_READ_ALL = "/boutique/read/all";
   static const BOUTIQUE_READ_COMMANDE = "/commande/boutique/read";
@@ -18,7 +19,7 @@ class ApiRoutes {
   static const BUY = "/commande/new0";
   static const UPDATE_PRODUCT = "/produit/update";
   static const NEW_PRODUCT = "/produit/new";
-  static const DESABLED_PRODUCT = "/produit/state";   
+  static const DESABLED_PRODUCT = "/produit/state";
   static const LOGIN = "/api/logins";
   static const Refresh = "/api/token/refresh";
   static const SIGNUP = "/api/users";

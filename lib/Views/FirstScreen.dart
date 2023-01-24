@@ -18,8 +18,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:get/get.dart';
 
-import 'Boutiques/ListBoutiqueView.dart';
-import 'Category/CategoryView.dart';
+import 'CategoryBoutique/CategoryView.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -71,13 +70,13 @@ class _FirstScreenState extends State<FirstScreen> {
       // case 1:
       //   return SearchView();
       case 1:
-        return ListBoutiqueView();
-      case 2:
+        //   return ListBoutiqueView();
+        // case 2:
         return CategoryView();
 
-      case 3:
+      case 2:
         return ShoppingView();
-      case 4:
+      case 3:
         return ManageView();
 
       // case 4:
@@ -113,11 +112,11 @@ class _FirstScreenState extends State<FirstScreen> {
           //   badgeCount: _badgeCounts[3],
           //   showBadge: _badgeShows[3],
           // ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.dashboard_customize_outlined),
-            // badgeCount: _badgeCounts[2],
-            // showBadge: _badgeShows[2],
-          ),
+          // CustomNavigationBarItem(
+          //   icon: Icon(Icons.leave_bags_at_home),
+          //   // badgeCount: _badgeCounts[2],
+          //   // showBadge: _badgeShows[2],
+          // ),
           CustomNavigationBarItem(
             icon: Icon(Icons.dashboard_customize_outlined),
             // badgeCount: _badgeCounts[2],

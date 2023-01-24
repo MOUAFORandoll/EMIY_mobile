@@ -10,10 +10,14 @@ class BoutiqueRepo extends GetxService with StorageService {
   BoutiqueRepo({required this.apiClient});
 
   Future getBoutiqueForUser() async {
-    Response a = await apiClient.getCollectionsP(
-        ApiRoutes.BOUTIQUE_FOR_USER, {'keySecret': this.getKey()});
+    if (this.getKey() != null && this.getKey().length != 0) {
+      Response a = await apiClient.getCollectionsP(
+          ApiRoutes.BOUTIQUE_FOR_USER, {'keySecret': this.getKey()});
 
-    return a;
+      return a;
+    } else {
+      return new Response(body: {'data': []}, statusCode: 200);
+    }
   }
 
   Future getListCommandeForBoutique(codeBoutique) async {
@@ -40,22 +44,20 @@ class BoutiqueRepo extends GetxService with StorageService {
     return a;
   }
 
-  Future getListCategory() async {
-    Response a = await apiClient.getCollections(
-        ApiRoutes.CATEGORY);
-    ;
+  // Future getListCategory() async {
+  //   Response a = await apiClient.getCollections(ApiRoutes.CATEGORY);
+  //   ;
 
-    return a;
-  }
+  //   return a;
+  // }
 
   Future newProduit(data) async {
-    Response a =
-        await apiClient.getCollectionsP(ApiRoutes.NEW_PRODUCT, data);
+    Response a = await apiClient.getCollectionsP(ApiRoutes.NEW_PRODUCT, data);
     ;
 
     return a;
   }
-  
+
   Future updateProduitFB(data) async {
     Response a =
         await apiClient.getCollectionsP(ApiRoutes.UPDATE_PRODUCT, data);
@@ -63,6 +65,7 @@ class BoutiqueRepo extends GetxService with StorageService {
 
     return a;
   }
+
   Future updateImageBoutique(data) async {
     Response a =
         await apiClient.getCollectionsP(ApiRoutes.BOUTIQUE_IMAGE_UPDATE, data);
@@ -82,6 +85,14 @@ class BoutiqueRepo extends GetxService with StorageService {
   Future updateBoutique(data) async {
     Response a =
         await apiClient.getCollectionsP(ApiRoutes.BOUTIQUE_FOR_UPDATE, data);
+    ;
+
+    return a;
+  }
+
+  Future updateLocalisationBoutique(data) async {
+    Response a = await apiClient.getCollectionsP(
+        ApiRoutes.BOUTIQUE_FOR_UPDATE_LOCALISATION, data);
     ;
 
     return a;

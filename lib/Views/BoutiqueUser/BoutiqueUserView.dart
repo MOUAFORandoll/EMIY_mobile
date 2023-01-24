@@ -35,6 +35,7 @@ class BoutiqueUserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BoutiqueController>(builder: (_controller) {
+      // Get.find<BoutiqueController>().getCategory();
       return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         // Container(
         //   decoration: BoxDecoration(color: ColorsApp.grey),

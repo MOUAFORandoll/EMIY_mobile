@@ -11,6 +11,7 @@ import 'package:fahkapmobile/components/Widget/productComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/components/Text/titleText.dart';
 import 'package:fahkapmobile/components/Widget/productComponentAll.dart';
+import 'package:fahkapmobile/controller/categoryBoutiqueController.dart';
 import 'package:fahkapmobile/controller/categoryController.dart';
 import 'package:fahkapmobile/controller/productController.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
@@ -36,7 +37,7 @@ class HomeView extends StatelessWidget {
           color: ColorsApp.skyBlue,
           onRefresh: () async {
             print('****debut');
-            await Get.find<CategoryController>().getCategory();
+            await Get.find<CategoryBoutiqueController>().getCategory();
             print('****mid');
 
             await prods.getPopularProduit();
@@ -104,9 +105,10 @@ class HomeView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                     // The builder function returns a ListTile with a title that
                     // displays the index of the current item.
-                    (context, index) =>
-                        GetBuilder<CategoryController>(builder: (categorys) {
-                          return categorys.isLoaded == 0 || prods.isLoadedP == 0
+                    (context, index) => GetBuilder<CategoryBoutiqueController>(
+                            builder: (categorys) {
+                          return categorys.isLoadedCat == 0 ||
+                                  prods.isLoadedP == 0
                               ? Shimmer.fromColors(
                                   baseColor: Colors.blueGrey,
                                   highlightColor: Colors.greenAccent,

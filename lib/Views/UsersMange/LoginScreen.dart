@@ -19,148 +19,131 @@ class LoginScreen extends StatelessWidget {
   bool validator = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // backgroundColor: Color.fromRGBO(243, 243, 243, 1),
-        body: SafeArea(
-      child: SingleChildScrollView(
-          child: Container(
-        alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        // padding: EdgeInsets.all(15),
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                          // padding: EdgeInsets.only(
-                          //   bottom: 25,
-                          // ),
-                          child: Icon(
-                        Icons.star,
-                        color: ColorsApp.skyBlue,
-                        size: 20,
-                      )),
-                      Container(
-                        child: ThemeButtonWidget(),
-                        margin: EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width * .005),
-                      ),
-                    ]),
-                new Hero(
-                  tag: "login screen",
-                  child: new Container(child: Image.asset('assets/login.png')),
-                ),
-                Text(
-                  "Hi there !",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "Your Welcome.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(
-                        top: Get.size.height * .025,
-                        bottom: Get.size.height * .025),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white),
-                    // padding: EdgeInsets.only(
-                    //   top: 25,
-                    // ),
-                    child: Column(
-                      children: [
-                        FormComponent(
-                            icon: Icons.account_circle,
-                            type: 0,
-                            controller: phone,
-                            enabled: true,
-                            hint: "Phone"),
-                        FormComponent(
-                          icon: Icons.lock,
-                          type: 1,
-                          controller: password,
-                          enabled: true,
-                          hint: "Password",
-                        )
-                      ],
-                    )),
-                GetBuilder<ManagerController>(
-                    builder: (_manager) => Button(
-                        borderRadius: 15.0,
-                        width: Get.size.height * .8,
-                        margin: EdgeInsets.only(
-                            top: Get.size.height * .025, bottom: 0),
-                        height: Get.size.height * .08,
-                        loaderColor: Colors.white,
-                        title: "Connexion",
-                        textColor: Colors.white,
-                        itemColor: Colors.blue,
-                        borderColor: Colors.transparent,
-                        state: validator,
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            //   Container(
+            //       // padding: EdgeInsets.only(
+            //       //   bottom: 25,
+            //       // ),
+            //       child: Icon(
+            //     Icons.star,
+            //     color: ColorsApp.skyBlue,
+            //     size: 20,
+            //   )),
+            //   Container(
+            //     child: ThemeButtonWidget(),
+            //     margin: EdgeInsets.only(
+            //         right: MediaQuery.of(context).size.width * .005),
+            //   ),
+            // ]),
+            // new Hero(
+            //   tag: "login screen",
+            //   child: new Container(child: Image.asset('assets/login.png')),
+            // ),
+            Text(
+              "Hi there !",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            // Text(
+            //   "Your Welcome.",
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //     fontSize: 20,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            Container(
+                margin: EdgeInsets.only(
+                    top: Get.size.height * .08, bottom: Get.size.height * .025),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white),
+                // padding: EdgeInsets.only(
+                //   top: 25,
+                // ),
+                child: Column(
+                  children: [
+                    FormComponent(
+                        icon: Icons.account_circle,
+                        type: 0,
+                        controller: phone,
                         enabled: true,
-                        onTap: () async {
-                          // Get.toNamed(AppLinks.FIRST);
-                          await _manager.loginUser({
-                            'phone': phone.text,
-                            'password': password.text,
-                          });
-                          if (_manager.isConnected) {
-                           
-      Get.offNamedUntil(AppLinks.FIRST, (route) => false);
-
-                            MyBinding().onGetAll();
-                          }
-                        })),
-                Button(
+                        hint: "Phone"),
+                    FormComponent(
+                      icon: Icons.lock,
+                      type: 1,
+                      controller: password,
+                      enabled: true,
+                      hint: "Password",
+                    )
+                  ],
+                )),
+            GetBuilder<ManagerController>(
+                builder: (_manager) => Button(
                     borderRadius: 15.0,
                     width: Get.size.height * .8,
                     margin:
-                        EdgeInsets.only(top: Get.size.height * .015, bottom: 0),
+                        EdgeInsets.only(top: Get.size.height * .025, bottom: 0),
                     height: Get.size.height * .08,
                     loaderColor: Colors.white,
-                    title: "Create a new account",
+                    title: "Connexion",
                     textColor: Colors.white,
-                    itemColor: Colors.black,
+                    itemColor: Colors.blue,
                     borderColor: Colors.transparent,
                     state: validator,
                     enabled: true,
                     onTap: () async {
-                      Get.toNamed(AppLinks.REGISTER);
-                    }),
-                Container(
-                  margin:
-                      EdgeInsets.only(top: Get.size.height * .008, bottom: 0),
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    child: Text(
-                      'Forgot Password ?',
-                      textAlign: TextAlign.justify,
-                    ),
-                    onPressed: () => Get.toNamed(AppLinks.FORGOT),
-                  ),
-                )
-              ],
-            ),
-          ),
+                      // Get.toNamed(AppLinks.FIRST);
+                      await _manager.loginUser({
+                        'phone': phone.text,
+                        'password': password.text,
+                      });
+                      if (_manager.isConnected) {
+                        // Get.offNamedUntil(AppLinks.FIRST, (route) => false);
+
+                        MyBinding().onGetDataNew();
+                      }
+                    })),
+            // Button(
+            //     borderRadius: 15.0,
+            //     width: Get.size.height * .8,
+            //     margin: EdgeInsets.only(top: Get.size.height * .015, bottom: 0),
+            //     height: Get.size.height * .08,
+            //     loaderColor: Colors.white,
+            //     title: "Create a new account",
+            //     textColor: Colors.white,
+            //     itemColor: Colors.black,
+            //     borderColor: Colors.transparent,
+            //     state: validator,
+            //     enabled: true,
+            //     onTap: () async {
+            //       Get.toNamed(AppLinks.REGISTER);
+            //     }),
+            // Container(
+            //   margin: EdgeInsets.only(top: Get.size.height * .008, bottom: 0),
+            //   alignment: Alignment.center,
+            //   child: TextButton(
+            //     child: Text(
+            //       'Forgot Password ?',
+            //       textAlign: TextAlign.justify,
+            //     ),
+            //     onPressed: () => Get.toNamed(AppLinks.FORGOT),
+            //   ),
+            // )
+          ],
         ),
-      )),
-    ));
+      ),
+    );
   }
 
   // showAlertDialog(

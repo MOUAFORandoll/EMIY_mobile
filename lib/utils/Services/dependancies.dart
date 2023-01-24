@@ -3,13 +3,13 @@ import 'package:fahkapmobile/controller/CommandeController.dart';
 import 'package:fahkapmobile/controller/boutiqueController.dart';
 import 'package:fahkapmobile/controller/cartController.dart';
 import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/controller/listBoutiqueController.dart';
+import 'package:fahkapmobile/controller/categoryBoutiqueController.dart';
 import 'package:fahkapmobile/controller/managerController.dart';
 import 'package:fahkapmobile/controller/productController.dart';
 import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
 import 'package:fahkapmobile/repository/BuyShoopingCartRepo.dart';
 import 'package:fahkapmobile/repository/CommandeRepo.dart';
-import 'package:fahkapmobile/repository/ListBoutiqueRepo.dart';
+import 'package:fahkapmobile/repository/categoryBoutiqueRepo.dart';
 import 'package:fahkapmobile/repository/LivreurRepo.dart';
 import 'package:fahkapmobile/repository/ManageRepo.dart';
 import 'package:fahkapmobile/repository/categoryRepo.dart';
@@ -38,18 +38,18 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => ManagerController(manageRepo: Get.find()));
 
     Get.lazyPut(() => CommandeController(commandeRepo: Get.find()));
-    Get.lazyPut(() => CategoryRepo(apiClient: Get.find()));
+    Get.lazyPut(() => CategoryBoutiqueRepo(apiClient: Get.find()));
     Get.lazyPut(() => ProductRepo(apiClient: Get.find()));
     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()));
-    Get.lazyPut(() => ListBoutiqueRepo(apiClient: Get.find()));
+    Get.lazyPut(() => CategoryBoutiqueRepo(apiClient: Get.find()));
     Get.lazyPut(() => BuyShoopingCartRepo(apiClient: Get.find()));
 
     Get.lazyPut(() => ProductController(productRepo: Get.find()));
-    Get.lazyPut(() => CategoryController(categoryRepo: Get.find()));
     Get.lazyPut(() => CartController());
     Get.lazyPut(() => BuyShopController(buySoppingCartRepo: Get.find()));
     Get.lazyPut(() => BoutiqueController(boutiqueRepo: Get.find()));
-    Get.lazyPut(() => ListBoutiqueController(listBoutiqueRepo: Get.find()));
+    Get.lazyPut(
+        () => CategoryBoutiqueController(categoryBoutiqueRepo: Get.find()));
   }
 
   onInit() async {
@@ -60,16 +60,15 @@ class MyBinding extends Bindings {
     Get.find<ManagerController>().getKeyU();
     Get.find<ManagerController>().getUser();
 
-    Get.find<ProductController>().getPopularProduit();
-    Get.find<CategoryController>().getCategory();
-    Get.find<BoutiqueController>().getCategory();
+    Get.find<ProductController>().getPopularProduit(); 
 
     Get.find<CartController>();
 
     Get.find<BuyShopController>();
     Get.find<BoutiqueController>().getBoutique();
-    Get.find<CommandeController>().getListCommandes();
-    Get.find<BoutiqueController>().getCategory();
+    Get.find<CommandeController>().getListCommandes();  
+
+    Get.find<BuyShopController>().getListLivreur();
   }
 
   onGetAll() async {
@@ -85,19 +84,17 @@ class MyBinding extends Bindings {
 
     Get.lazyPut(() => ManagerController(manageRepo: Get.find()));
 
-    Get.lazyPut(() => CategoryRepo(apiClient: Get.find()));
     Get.lazyPut(() => ProductRepo(apiClient: Get.find()));
     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()));
     Get.lazyPut(() => BuyShoopingCartRepo(apiClient: Get.find()));
 
     Get.lazyPut(() => ProductController(productRepo: Get.find()));
-    Get.lazyPut(() => CategoryController(categoryRepo: Get.find()));
     Get.lazyPut(() => CartController());
     Get.lazyPut(() => CommandeController(commandeRepo: Get.find()));
 
     Get.lazyPut(() => BuyShopController(buySoppingCartRepo: Get.find()));
     Get.lazyPut(() => BoutiqueController(boutiqueRepo: Get.find()));
-    Get.lazyPut(() => ListBoutiqueRepo(apiClient: Get.find()));
+    Get.lazyPut(() => CategoryBoutiqueRepo(apiClient: Get.find()));
 
     var database = Get.find<DB>();
     database.init();
@@ -109,16 +106,30 @@ class MyBinding extends Bindings {
     Get.find<ManagerController>().getUser();
 
     Get.find<ProductController>().getPopularProduit();
-    Get.find<CategoryController>().getCategory();
-    Get.find<BoutiqueController>().getCategory();
+    // Get.find<BoutiqueController>().getCategory();
+    Get.find<CategoryBoutiqueController>().getCategory();
 
+    Get.find<BuyShopController>().getListLivreur();
     Get.find<CartController>();
 
     Get.find<BuyShopController>();
     Get.find<BoutiqueController>().getBoutique();
-    Get.lazyPut(() => ListBoutiqueController(listBoutiqueRepo: Get.find()));
+    Get.lazyPut(
+        () => CategoryBoutiqueController(categoryBoutiqueRepo: Get.find()));
 
     // Get.find<CommandeController>().insertAll();
+  }
+
+  onGetDataNew() async {
+    var database = Get.find<DB>();
+    database.init();
+    Get.find<ManagerController>().newLocalisation();
+
+    Get.find<ManagerController>().getKeyU();
+
+    Get.find<CommandeController>().getListCommandes();
+    Get.find<BoutiqueController>().getBoutique();
+    Get.find<ManagerController>().getUser();
   }
 
   void requestPermission() async {

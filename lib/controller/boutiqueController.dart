@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
@@ -70,38 +71,39 @@ class BoutiqueController extends GetxController {
     }
   }
 
-  var _categorySelect;
-  CategoryModel get categorySelect => _categorySelect;
-  secelctCate(cat) {
-    _categorySelect = cat;
-    update();
-  }
+  // var _categorySelect;
+  // CategoryModel get categorySelect => _categorySelect;
+  // secelctCate(cat) {
+  //   _categorySelect = cat;
+  //   update();
+  // }
 
-  List<CategoryModel> _categoryList = [];
-  List<CategoryModel> get categoryList => _categoryList;
-  int _isLoadedC = 0;
-  int get isLoadedC => _isLoadedC;
-  // CategoryController({required this.service});
-  getCategory() async {
-    try {
-      _categoryList.clear();
-      _isLoadedC = 0;
-      Response response = await boutiqueRepo.getListCategory();
+  // List<CategoryModel> _categoryList = [];
+  // List<CategoryModel> get categoryList => _categoryList;
+  // int _isLoadedC = 0;
+  // int get isLoadedC => _isLoadedC;
+  // // CategoryController({required this.service});
+  // getCategory() async {
+  //   try {
+  //     _categoryList.clear();
+  //     _isLoadedC = 0;
+  //     Response response = await boutiqueRepo.getListCategory();
 
-      if (response.body['data'] != null) {
-        if (response.body['data'].length != 0) {
-          _categoryList.addAll((response.body['data'] as List)
-              .map((e) => CategoryModel.fromJson(e))
-              .toList());
-        }
-      }
-      // print(_categoryList);
-      _isLoadedC = 1;
-      update();
-    } catch (e) {
-      print(e);
-    }
-  }
+  //     if (response.body != null) {
+  //       if (response.body['data'].length != 0) {
+  //         _categoryList.addAll((response.body['data'] as List)
+  //             .map((e) => CategoryModel.fromJson(e))
+  //             .toList());
+  //       }
+  //       _isLoadedC = 1;
+  //       update();
+  //     }
+  //     // print(_categoryList);
+
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future updateImageBoutique() async {
     try {
@@ -176,7 +178,7 @@ class BoutiqueController extends GetxController {
   getBoutique() async {
     try {
       Response response = await boutiqueRepo.getBoutiqueForUser();
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           _Boutique = BoutiqueUserModel.fromJson(response.body['data']);
           _isExist = response.body['exist'];
@@ -208,16 +210,16 @@ class BoutiqueController extends GetxController {
       Response response =
           await boutiqueRepo.getListCommandeForBoutique(Boutique.codeBoutique);
       _commandeBoutiqueList.clear();
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           _commandeBoutiqueList.addAll((response.body['data'] as List)
               .map((e) => CommandeBoutiqueModel.fromJson(e))
               .toList());
           _commandeBoutiqueListSave = _commandeBoutiqueList;
         }
+        _isLoadedPC = 1;
+        update();
       }
-      _isLoadedPC = 1;
-      update();
     } catch (e) {
       print(e);
     }
@@ -237,12 +239,15 @@ class BoutiqueController extends GetxController {
       Response response =
           await boutiqueRepo.getListHCommandeForBoutique(Boutique.codeBoutique);
       _HcommandeBoutiqueList.clear();
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           _HcommandeBoutiqueList.addAll((response.body['data'] as List)
               .map((e) => CommandeBoutiqueModel.fromJson(e))
               .toList());
         }
+        _isLoaded = 1;
+
+        update();
       }
       _HcommandeBoutiqueListSave = _HcommandeBoutiqueList;
       print('i-----');
@@ -268,16 +273,17 @@ class BoutiqueController extends GetxController {
       Response response =
           await boutiqueRepo.getListProduitForBoutique(Boutique.codeBoutique);
       _produitBoutiqueList.clear();
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           _produitBoutiqueList.addAll((response.body['data'] as List)
               .map((e) => ProduitBoutiqueModel.fromJson(e))
               .toList());
         }
+
+        _isLoadedPB = 1;
+        update();
       }
       _produitBoutiqueListSave = _produitBoutiqueList;
-      _isLoadedPB = 1;
-      update();
     } catch (e) {
       print(e);
     }
@@ -407,6 +413,70 @@ class BoutiqueController extends GetxController {
         ))));
     try {
       Response response = await boutiqueRepo.updateBoutique(data);
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        await getBoutique();
+      }
+
+      Get.back();
+      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      _isUpdatingB = false;
+      // Get.back(closeOverlays: true);
+      update();
+    } catch (e) {
+      Get.back();
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      // Get.back();
+      _isUpdatingB = false;
+      update();
+      print(e);
+    }
+  }
+
+  var _ville;
+  String get ville => _ville;
+
+  var _longitude;
+  double get longitude => _longitude;
+
+  var _latitude;
+  double get latitude => _latitude;
+
+  getLocalU() async {
+    var data = await s.getLonLat();
+    print(data);
+    _ville = data['ville'];
+    _longitude = data['long'];
+    _latitude = data['lat'];
+    update();
+  }
+
+
+  updateLocalisationBoutique() async {
+    await getLocalU();
+    var data = {
+      'codeBoutique': Boutique.codeBoutique,
+      'keySecret': s.getKey(),
+      'ville': ville,
+      'longitude': longitude,
+      'latitude': latitude,
+    };
+    print(data);
+    _isUpdatingB = true;
+    update();
+    Get.defaultDialog(
+        title: 'En cours',
+        barrierDismissible: false,
+        content: SizedBox(
+            // height: Get.size.height * .02,
+            // width: Get.size.width * .02,
+            child: Center(
+                child: CircularProgressIndicator(
+          color: Colors.blueAccent,
+        ))));
+    try {
+      Response response = await boutiqueRepo.updateLocalisationBoutique(data);
       print(response.body);
 
       if (response.statusCode == 200) {

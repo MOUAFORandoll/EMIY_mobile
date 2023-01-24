@@ -28,8 +28,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: MyBinding(),
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          pageTransitionsTheme: PageTransitionsTheme(builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          })),
       initialRoute: AppLinks.SPLASHSCREEN,
       getPages: AppRoutes.pages,
     );

@@ -23,62 +23,66 @@ class ShoppingView extends StatelessWidget {
     var functions = ViewFunctions();
     return GetBuilder<CartController>(builder: (_controller) {
       return Scaffold(
-        body: _controller.getItems.length == 0
-            ? Center(
-                child: BigText(
-                  text: 'Vide',
-                  bolder: true,
-                ),
-              )
-            : CustomScrollView(controller: _scrollController, slivers: [
-                // Add the app bar to the CustomScrollView.
-                SliverAppBar(
-                  backgroundColor: Colors.white,
-                  elevation: 0,
-                  // Provide a standard title.
-                  // title: Text('title'),
-                  // Allows the user to reveal the app bar if they begin scrolling
-                  // back up the list of items.
-                  floating: true,
-                  // Display a placeholder widget to visualize the shrinking size.
-                  flexibleSpace: InkWell(
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                        Container(
-                            margin: EdgeInsets.only(top: Get.height * .030),
-                            padding: EdgeInsets.only(
-                                left: Get.width * .030,
-                                right: Get.width * .030),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BigtitleText(text: 'Panier', bolder: true),
-                                  // Container(
-                                  //     child: InkWell(
-                                  //         child: Icon(Icons.search),
-                                  //         onTap: () => Scaffold.of(context).openDrawer())
-                                  //     // padding: EdgeInsets.only(right: 10),
-                                  //     ),
-                                ])),
-                      ]),
-                    ),
-                    /*   onTap: () => filterDest() */
-                  ),
-                  // Make the initial height of the SliverAppBar larger than normal.
-                  expandedHeight: 60,
+        body: CustomScrollView(controller: _scrollController, slivers: [
+          // Add the app bar to the CustomScrollView.
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            // Provide a standard title.
+            // title: Text('title'),
+            // Allows the user to reveal the app bar if they begin scrolling
+            // back up the list of items.
+            floating: true,
+            // Display a placeholder widget to visualize the shrinking size.
+            flexibleSpace: InkWell(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  Container(
+                      margin: EdgeInsets.only(top: Get.height * .020),
+                      padding: EdgeInsets.only(
+                          left: Get.width * .030, right: Get.width * .030),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BigtitleText(text: 'Panier', bolder: true),
+                            IconButtonF(
+                                icon: Icons.delete_forever,
+                                color: Colors.red,
+                                onTap: () {
+                                  _controller.deleteAll();
+                                })
+                            // Container(
+                            //     child: InkWell(
+                            //         child: Icon(Icons.search),
+                            //         onTap: () => Scaffold.of(context).openDrawer())
+                            //     // padding: EdgeInsets.only(right: 10),
+                            //     ),
+                          ])),
+                ]),
+              ),
+              /*   onTap: () => filterDest() */
+            ),
+            // Make the initial height of the SliverAppBar larger than normal.
+            expandedHeight: 60,
 
-                  // expandedHeight: 300,
-                  // pinned: true,
-                ),
-                SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                  (context, index) => ShoppingproductComponent(
+            // expandedHeight: 300,
+            // pinned: true,
+          ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate(
+            (context, index) => _controller.getItems.length == 0
+                ? Center(
+                    child: BigText(
+                      text: 'Vide',
+                      bolder: true,
+                    ),
+                  )
+                : ShoppingproductComponent(
                     cartM: _controller.getItems[index],
                   ),
-                  childCount: _controller.getItems.length,
-                ))
-              ]),
+            childCount: _controller.getItems.length,
+          ))
+        ]),
         bottomNavigationBar: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

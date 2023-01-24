@@ -98,7 +98,7 @@ class ProductController extends GetxController {
       print(response.body);
 
       _produitList.clear();
-      if (response.body['data'] != null) {
+      if (response.body != null) {
         if (response.body['data'].length != 0) {
           _produitList.addAll((response.body['data'] as List)
               .map((e) => ProduitModel.fromJson(e))
@@ -107,33 +107,9 @@ class ProductController extends GetxController {
               .map((e) => ProduitModel.fromJson(e))
               .toList());
         }
+        _isLoadedP = 1;
+        update();
       }
-      _isLoadedP = 1;
-      update();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  List<ProduitModel> _produitcategoryList = [];
-  List<ProduitModel> get produitcategoryList => _produitcategoryList;
-  int _isLoadedPC = 0;
-  int get isLoadedPC => _isLoadedPC;
-  getCategoryProduit(id) async {
-    _produitcategoryList.clear();
-    _isLoadedPC = 0;
-    try {
-      Response response = await productRepo.getListProductForCategory(id);
-
-      if (response.body['data'] != null) {
-        if (response.body['data'].length != 0) {
-          _produitcategoryList.addAll((response.body['data'] as List)
-              .map((e) => ProduitModel.fromJson(e))
-              .toList());
-        }
-      }
-      _isLoadedPC = 1;
-      update();
     } catch (e) {
       print(e);
     }
@@ -189,7 +165,7 @@ import 'package:fahkapmobile/components/Text/titleText.dart';
 import 'package:fahkapmobile/components/Widget/productForBoutiqueComponent.dart';
 import 'package:fahkapmobile/components/Widget/productForCatComponent.dart';
 import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/controller/listBoutiqueController.dart';
+import 'package:fahkapmobile/controller/CategoryBoutiqueController.dart';
 import 'package:fahkapmobile/controller/productController.dart';
 import 'package:fahkapmobile/model/data/ProduitModel.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
@@ -208,7 +184,7 @@ class BoutiqueView extends StatelessWidget {
   Widget build(BuildContext context) {
     print(Get.parameters);
 
-    Get.find<ListBoutiqueController>()
+    Get.find<CategoryBoutiqueController>()
         .getDataForBoutique(Get.parameters['codeBoutique']);
     return Scaffold(
       appBar: AppBar(
@@ -226,7 +202,7 @@ class BoutiqueView extends StatelessWidget {
         title: BigtitleText(
             text: Get.parameters['nomBoutique'].toString(), bolder: true),
       ),
-      body: GetBuilder<ListBoutiqueController>(
+      body: GetBuilder<CategoryBoutiqueController>(
           builder: (_bscontroler) => _bscontroler.isLoadedPB == 0
               ? Shimmer.fromColors(
                   baseColor: Colors.blueGrey,

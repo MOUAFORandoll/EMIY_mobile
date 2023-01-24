@@ -1,9 +1,9 @@
 import 'package:fahkapmobile/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:fahkapmobile/Views/BoutiqueUser/HistroriqueCBUView.dart';
 import 'package:fahkapmobile/Views/BoutiqueUser/manageBoutiqueUserView.dart';
-import 'package:fahkapmobile/Views/BoutiqueUser/produitBoutiqueUserView.dart';
-import 'package:fahkapmobile/Views/Boutiques/BoutiqueView.dart';
-import 'package:fahkapmobile/Views/Category/ProductCategoryView.dart';
+import 'package:fahkapmobile/Views/BoutiqueUser/produitBoutiqueUserView.dart'; 
+import 'package:fahkapmobile/Views/CategoryBoutique/BoutiqueCategoryView.dart';
+import 'package:fahkapmobile/Views/CategoryBoutique/BoutiqueView.dart'; 
 import 'package:fahkapmobile/Views/Commandes/CommandeView.dart';
 import 'package:fahkapmobile/Views/Commandes/ProduitForCommande.dart';
 import 'package:fahkapmobile/Views/ComplementView/OnboardingScreen.dart';
@@ -58,7 +58,7 @@ class AppRoutes {
           return BoutiqueView();
         }),
     GetPage(
-        name: AppLinks.PRODUCT_FOR_CATEGORY, page: () => ProductCategoryView()),
+        name: AppLinks.BOUTIQUE_FOR_CATEGORY, page: () => BoutiqueCategoryView()),
     GetPage(
         name: AppLinks.PRODUCT_FOR_BOUTIQUE, page: () => ProduitBoutiqueUserView()),
     GetPage(
@@ -94,5 +94,5 @@ class AppLinks {
   static const String SPLASHSCREEN = "/splashscreen";
   static const String ONBOARDING = "/onboarding";
   static const String PRODUCT = "/product";
-  static const String PRODUCT_FOR_CATEGORY = "/productfcategory";
+  static const String BOUTIQUE_FOR_CATEGORY = "/bfc";
 }

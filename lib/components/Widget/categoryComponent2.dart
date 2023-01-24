@@ -1,5 +1,4 @@
-// ignore: must_be_immutable
-import 'package:fahkapmobile/Views/Category/ProductCategoryView.dart';
+// ignore: must_be_immutable 
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:fahkapmobile/utils/Services/routing.dart';
@@ -17,7 +16,7 @@ class CategoryComponent2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(AppLinks.PRODUCT_FOR_CATEGORY +
+        Get.toNamed(AppLinks.BOUTIQUE_FOR_CATEGORY +
             '?id=${category.id}&libelle=${category.libelle}');
       },
       child: Container(

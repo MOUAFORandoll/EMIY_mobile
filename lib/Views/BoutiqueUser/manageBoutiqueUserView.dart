@@ -137,7 +137,8 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                                           image: imageProvider,
                                           fit: BoxFit.cover,
                                           colorFilter: ColorFilter.mode(
-                                              Colors.transparent, BlendMode.colorBurn)),
+                                              Colors.transparent,
+                                              BlendMode.colorBurn)),
                                     ),
                                   );
                                 },
@@ -167,8 +168,9 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                         Container(
                             alignment: Alignment.topLeft,
                             child: Text("Description")),
+
                         Container(
-                            height: kMdHeight * .3,
+                            // height: kMdHeight * .3,
                             alignment: Alignment.topLeft,
                             child: Text(
                               _controller.Boutique.description,
@@ -178,7 +180,9 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.normal),
                             )),
-
+                        Container(
+                            alignment: Alignment.topLeft,
+                            child: Text("Infoemation localisation")),
                         // InfoComponent(
                         //     title: Text("Phone number"),
                         //     value: _controller.User.phone),
@@ -275,7 +279,41 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                                         // ),
                                       ),
                                     ),
-
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      margin: EdgeInsets.symmetric(vertical: 5),
+                                      child: Text('Localisation'),
+                                    ),
+                                    InkWell(
+                                        child: Container(
+                                            margin: EdgeInsets.only(
+                                                top: Get.height * .05,
+                                                left: Get.width * .01,
+                                                right: Get.width * .01,
+                                                bottom: Get.height * .009),
+                                            padding: EdgeInsets.all(
+                                                Get.height * .02),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: ColorsApp.bleuLight),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  'Mon Emplacement actuel',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                Icon(Icons.location_pin)
+                                              ],
+                                            )),
+                                        onTap: () {
+                                          _controller
+                                              .updateLocalisationBoutique();
+                                        }),
                                     // FormComponent2(
                                     //     icon: Icons.account_circle,
                                     //     type: 0,

@@ -43,7 +43,7 @@ class ProduitBoutiqueUserView extends StatelessWidget {
 
     CategoryModel dropdownvalue = new CategoryModel.fromJson(
         {"id": 0, "libelle": '', "description": '', "status": false});
-    Get.find<BoutiqueController>().getCategory();
+
     Get.find<BoutiqueController>().getListProduitForBoutique();
     Get.find<BoutiqueController>().onInitData();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
@@ -104,15 +104,17 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                       smallText(
                         text: !_controller.addProduct ? 'Liste' : 'Nouveau',
                       ),
-                      CustomBtn(
-                        color: ColorsApp.greenLight,
-                        title: _controller.addProduct
-                            ? 'Retour'
-                            : 'Ajouter Produit',
-                        onTap: () {
-                          _controller.chageState(!_controller.addProduct);
-                        },
-                      )
+/*                       _controller.categoryList.length != 0
+                          ? */ CustomBtn(
+                              color: ColorsApp.greenLight,
+                              title: _controller.addProduct
+                                  ? 'Retour'
+                                  : 'Ajouter Produit',
+                              onTap: () {
+                                _controller.chageState(!_controller.addProduct);
+                              },
+                            )/* 
+                          : Container() */
                     ])),
             !_controller.addProduct
                 ? _controller.isLoadedPB == 0
@@ -223,7 +225,7 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                             enabled: true,
                             titre: 'Prix',
                             hint: "1500"),
-                        Container(
+                      /*   Container(
                           alignment: Alignment.topLeft,
                           margin: EdgeInsets.symmetric(vertical: 5),
                           child: Text('Categorie'),
@@ -265,7 +267,7 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                                     // });
                                   },
                                 )),
-                        Container(
+                       */  Container(
                           alignment: Alignment.topLeft,
                           margin: EdgeInsets.symmetric(vertical: 5),
                           child: Text('Description'),
@@ -369,8 +371,8 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                                         'description': description.text,
                                         'prixUnitaire': prix.text,
                                         'quantite': quantite.text,
-                                        'idCategory':
-                                            _controller.categorySelect.id,
+                                        // 'idCategory':
+                                        //     _controller.categorySelect.id,
                                         'codeBoutique':
                                             _controller.Boutique.codeBoutique,
                                         'countImage':
