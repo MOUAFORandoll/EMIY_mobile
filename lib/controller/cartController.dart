@@ -4,6 +4,7 @@ import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
 import 'package:fahkapmobile/model/data/ProduitModel.dart';
 import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:fahkapmobile/utils/Services/requestServices.dart';
+import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
@@ -25,6 +26,46 @@ class CartController extends GetxController {
       totalQt += v.quantity;
     });
     return totalQt;
+  }
+
+  var fn = new ViewFunctions();
+
+  void updateQuantityProduct(int idProduit, bool state) {
+    // if (quantity <= product.quantite) {
+    print('taillen');
+    if (_items.containsKey(idProduit)) {
+      var total = 0;
+      _items.update(idProduit, (value) {
+        total = value.quantity + (state ? 1 : -1);
+        if (total > 0) {
+          return CartModel(
+              id: value.id,
+              name: value.name,
+              index: value.index,
+              type: value.type,
+              prix: double.parse(value.prix.toString()),
+              img: value.img,
+              quantity: total,
+              isExist: true,
+              time: DateTime.now().toString());
+        } else {
+          fn.snackBar('Panier', 'Impossible', ColorsApp.red);
+          return CartModel(
+              id: value.id,
+              name: value.name,
+              index: value.index,
+              type: value.type,
+              prix: double.parse(value.prix.toString()),
+              img: value.img,
+              quantity: value.quantity,
+              isExist: true,
+              time: DateTime.now().toString());
+        }
+      });
+      print(total);
+
+      update();
+    }
   }
 
   double get totalPrix {
@@ -106,48 +147,51 @@ class CartController extends GetxController {
 
   void addItem(ProduitModel product, int quantity, index, type) {
     print(quantity);
+    if (quantity <= product.quantite) {
+      print('taillen');
+      if (_items.containsKey(product.id)) {
+        var total = 0;
+        _items.update(product.id, (value) {
+          total = value.quantity + quantity;
 
-    print('taillen');
-    if (_items.containsKey(product.id)) {
-      var total = 0;
-      _items.update(product.id, (value) {
-        total = value.quantity + quantity;
+          return CartModel(
+              id: value.id,
+              name: value.name,
+              index: value.index,
+              type: value.type,
+              prix: double.parse(value.prix.toString()),
+              img: value.img,
+              quantity: value.quantity + quantity,
+              isExist: true,
+              time: DateTime.now().toString());
+        });
 
-        return CartModel(
-            id: value.id,
-            name: value.name,
-            index: value.index,
-            type: value.type,
-            prix: double.parse(value.prix.toString()),
-            img: value.img,
-            quantity: value.quantity + quantity,
-            isExist: true,
-            time: DateTime.now().toString());
-      });
-
-      if (total <= 0) {
-        _items.remove(product.id);
+        if (total <= 0) {
+          _items.remove(product.id);
+        }
+      } else {
+        if (quantity > 0) {
+          print(index);
+          print(type);
+          _items.putIfAbsent(
+              product.id,
+              () => CartModel(
+                  id: product.id,
+                  name: product.titre,
+                  index: index,
+                  type: type,
+                  prix: double.parse(product.prix.toString()),
+                  img: product.images[0].src,
+                  quantity: quantity,
+                  isExist: true,
+                  time: DateTime.now().toString()));
+          _items.forEach((k, v) {
+            print('vall ' + v.quantity.toString());
+          });
+        }
       }
     } else {
-      if (quantity > 0) {
-        print(index);
-        print(type);
-        _items.putIfAbsent(
-            product.id,
-            () => CartModel(
-                id: product.id,
-                name: product.titre,
-                index: index,
-                type: type,
-                prix: double.parse(product.prix.toString()),
-                img: product.images[0].src,
-                quantity: quantity,
-                isExist: true,
-                time: DateTime.now().toString()));
-        _items.forEach((k, v) {
-          print('vall ' + v.quantity.toString());
-        });
-      }
+      fn.snackBar('Panier', 'Qunatite incorrect', ColorsApp.bleuLight);
     }
   }
 }

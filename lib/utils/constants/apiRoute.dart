@@ -1,5 +1,6 @@
 class ApiRoutes {
-  static const POPULAR_PRODUCT = "/produit/read/client";
+  static const POPULAR_ALL = "/produit/read/client";
+  static const POPULAR_PRODUCT = "/produit/read/popular";
   static const CATEGORY_PRODUCT = "/category/read";
   static const CATEGORY = "/category/read/all";
   static const BOUTIQUE_FOR_CATEGORY = "/category/read/boutique";
@@ -23,4 +24,8 @@ class ApiRoutes {
   static const LOGIN = "/api/logins";
   static const Refresh = "/api/token/refresh";
   static const SIGNUP = "/api/users";
+
+  static const TRANSACTION_READ = "/transaction/read";
+  static const TRANSACTION_RETRAIT = "/transaction/retrait";
+
 }

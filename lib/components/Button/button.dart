@@ -43,11 +43,12 @@ class Button extends StatelessWidget {
               border: borderColor == null
                   ? Border.all(color: Colors.black38)
                   : Border.all(color: borderColor),
-              color: (enabled)
-                  ? (itemColor == null)
-                      ? ColorsApp.skyBlue
-                      : itemColor
-                  : Colors.grey,
+              gradient: GradientApp.blueG,
+              // color: (enabled)
+              //     ? (itemColor == null)
+              //         ? ColorsApp.skyBlue
+              //         : itemColor
+              //     : Colors.grey,
             ),
             child: SpinKitCircle(
               color: Colors.blue,
@@ -65,6 +66,7 @@ class Button extends StatelessWidget {
               border: borderColor == null
                   ? Border.all(color: Colors.black38)
                   : Border.all(color: borderColor),
+              gradient: GradientApp.blueG,
               color: (enabled)
                   ? (itemColor == null)
                       ? ColorsApp.skyBlue

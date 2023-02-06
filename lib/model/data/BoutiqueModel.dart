@@ -16,9 +16,9 @@ class BoutiqueModel {
     required this.description,
     required this.titre,
     required this.status,
+    required this.dateCreated,
     required this.images,
-    required this.dateCreated, 
-
+    required this.localisation,
   });
 
   String codeBoutique;
@@ -26,8 +26,9 @@ class BoutiqueModel {
   String description;
   String titre;
   bool status;
-  final List<ImageU> images;
-  String dateCreated; 
+  String dateCreated;
+  List<Image> images;
+  Localisation localisation;
 
   factory BoutiqueModel.fromJson(Map<String, dynamic> json) => BoutiqueModel(
         codeBoutique: json["codeBoutique"],
@@ -36,10 +37,9 @@ class BoutiqueModel {
         titre: json["titre"],
         status: json["status"],
         dateCreated: json["dateCreated"],
-        images: json["images"] == null
-            ? []
-            : List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
-       );
+        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        localisation: Localisation.fromJson(json["localisation"]),
+      );
 
   Map<String, dynamic> toJson() => {
         "codeBoutique": codeBoutique,
@@ -48,27 +48,51 @@ class BoutiqueModel {
         "titre": titre,
         "status": status,
         "dateCreated": dateCreated,
-       "images": images == null
-            ? null
-            : List<dynamic>.from(images.map((x) => x.toJson())),
-     };
-} 
-class ImageU {
-  ImageU({
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "localisation": localisation.toJson(),
+      };
+}
+
+class Image {
+  Image({
     required this.id,
     required this.src,
   });
 
-  final int id;
-  final String src;
+  int id;
+  String src;
 
-  factory ImageU.fromJson(Map<String, dynamic> json) => ImageU(
-        id: json["id"] == null ? null : json["id"],
-        src: json["src"] == null ? null :  json["src"],
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        id: json["id"],
+        src: json["src"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "src": src == null ? null : src,
+        "id": id,
+        "src": src,
+      };
+}
+
+class Localisation {
+  Localisation({
+    required this.ville,
+    required this.longitude,
+    required this.latitude,
+  });
+
+  String ville;
+  double longitude;
+  double latitude;
+
+  factory Localisation.fromJson(Map<String, dynamic> json) => Localisation(
+        ville: json["ville"],
+        longitude: json["longitude"]?.toDouble(),
+        latitude: json["latitude"]?.toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ville": ville,
+        "longitude": longitude,
+        "latitude": latitude,
       };
 }

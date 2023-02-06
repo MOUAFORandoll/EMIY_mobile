@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.only(left: 10, right: 10),
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
             // ),
             Container(
                 margin: EdgeInsets.only(
-                    top: Get.size.height * .08, bottom: Get.size.height * .025),
+                    top: Get.size.height * .02, bottom: Get.size.height * .025),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.white),
@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     FormComponent(
-                        icon: Icons.account_circle,
+                        icon: Icons.phone,
                         type: 0,
                         controller: phone,
                         enabled: true,

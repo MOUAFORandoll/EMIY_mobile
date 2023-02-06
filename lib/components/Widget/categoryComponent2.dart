@@ -1,4 +1,4 @@
-// ignore: must_be_immutable 
+// ignore: must_be_immutable
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:fahkapmobile/utils/Services/routing.dart';
@@ -26,9 +26,9 @@ class CategoryComponent2 extends StatelessWidget {
           margin:
               EdgeInsets.symmetric(vertical: kMarginY, horizontal: kMarginX),
           decoration: BoxDecoration(
-              color: Colors.blue, borderRadius: BorderRadius.circular(8)),
-          child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              gradient: GradientApp.blueG,
+              borderRadius: BorderRadius.circular(8)),
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Container(

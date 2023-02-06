@@ -10,9 +10,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 // import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:toast/toast.dart';
-import 'package:fahkapmobile/model/data/VoyageModelH.dart';
-import 'package:fahkapmobile/model/data/VoyageModelX.dart';
+import 'package:toast/toast.dart'; 
 import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:fahkapmobile/utils/api/apiUrl.dart';
 

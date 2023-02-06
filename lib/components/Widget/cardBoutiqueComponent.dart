@@ -1,4 +1,4 @@
-// ignore: must_be_immutable  
+// ignore: must_be_immutable
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:fahkapmobile/utils/Services/routing.dart';
@@ -25,7 +25,8 @@ class CardBoutiqueComponent extends StatelessWidget {
           padding: EdgeInsets.all(kMarginX),
           margin: EdgeInsets.all(Get.size.width * .02),
           decoration: BoxDecoration(
-              color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+              gradient: GradientApp.blueG,
+              borderRadius: BorderRadius.circular(8)),
           child: Text(
             title,
             textAlign: TextAlign.center,

@@ -1,5 +1,5 @@
 // ignore: must_be_immutable
-import 'package:cached_network_image/cached_network_image.dart'; 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
 import 'package:fahkapmobile/styles/textStyle.dart';
@@ -19,7 +19,7 @@ class BoutiqueComponent extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(AppLinks.BOUTIQUE +
-            '?codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}');
+            '?codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
       },
       child: Container(
           height: kSmHeight * 3,

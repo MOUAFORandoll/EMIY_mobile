@@ -40,7 +40,8 @@ class CommandeComponent extends StatelessWidget {
               margin: EdgeInsets.symmetric(
                   horizontal: kMarginX, vertical: kMarginY),
               decoration: BoxDecoration(
-                  color: ColorsApp.skyBlue,
+                  // color: ColorsApp.skyBlue,
+                  gradient: GradientApp.blueG,
                   borderRadius: BorderRadius.circular(8)),
               child: /* SingleChildScrollView(
               child: */

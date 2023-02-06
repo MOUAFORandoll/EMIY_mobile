@@ -25,7 +25,8 @@ class CategoryComponent extends StatelessWidget {
           padding: EdgeInsets.all(kMarginX),
           margin: EdgeInsets.only(right: kMarginX),
           decoration: BoxDecoration(
-              color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+              gradient: GradientApp.blueG,
+              borderRadius: BorderRadius.circular(8)),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,

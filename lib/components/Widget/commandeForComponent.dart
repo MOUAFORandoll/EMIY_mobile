@@ -43,7 +43,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                 margin: EdgeInsets.symmetric(
                     horizontal: kMarginX, vertical: kMarginY),
                 decoration: BoxDecoration(
-                    color: ColorsApp.skyBlue,
+                    gradient: GradientApp.blueG,
                     borderRadius: BorderRadius.circular(8)),
                 child: /* SingleChildScrollView(
               child: */
@@ -51,7 +51,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                      Container(
+                      Container( 
                           child: CachedNetworkImage(
                         height: kMdHeight / 6,
                         width: Get.width / 3,

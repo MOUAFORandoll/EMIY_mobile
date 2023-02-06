@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ProductComponentAll extends StatelessWidget {
   ProduitModel produit;
-  var height, index;
+  var height, index, type;
 
   ProductComponentAll(
-      {required this.produit, required this.index, this.height});
+      {required this.produit, required this.index, this.height, this.type = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class ProductComponentAll extends StatelessWidget {
       ),
       onTap: () {
         Get.toNamed(AppLinks.PRODUCT +
-            '?index=${index}&type=0&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
+            '?index=${index}&type=${type}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
       },
     );
   }

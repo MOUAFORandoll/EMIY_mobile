@@ -24,10 +24,16 @@ class ManageRepo extends GetxService with StorageService {
 
         return a;
       } else {
-        return new Response(body: {'data': []}, statusCode: 200);
+        return new Response(body: {
+          'data': [],
+          'compte': [],
+        }, statusCode: 200);
       }
     } else {
-      return new Response(body: {'data': []}, statusCode: 200);
+      return new Response(body: {
+        'data': [],
+        'compte': [],
+      }, statusCode: 200);
     }
   }
 
@@ -60,35 +66,35 @@ class ManageRepo extends GetxService with StorageService {
     // ignore: unnecessary_null_comparison
     if (this.getKey() != null) {
       if (this.getKey().length != 0) {
-       /*   try {
+        /*   try {
      */
-      print('newlocatio-');
+        print('newlocatio-');
 
-      var loca = await new Dio().get('https://ipapi.co/json/');
+        var loca = await new Dio().get('https://ipapi.co/json/');
 
-      print(loca.data);
-      var data = {
-        'ip': loca.data['ip'],
-        'ville': loca.data['city'],
-        'latitude': loca.data['latitude'],
-        'keySecret': this.getKey(),
-        'longitude': loca.data['longitude']
-      };
-      await this.saveLonLat(data);
-      print(data);
-      Response a =
-          await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
+        print(loca.data);
+        var data = {
+          'ip': loca.data['ip'],
+          'ville': loca.data['city'],
+          'latitude': loca.data['latitude'],
+          'keySecret': this.getKey(),
+          'longitude': loca.data['longitude']
+        };
+        await this.saveLonLat(data);
+        print(data);
+        Response a =
+            await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
 
-      print('ssnewlocatio-------------------------');
-      print(a.body);
+        print('ssnewlocatio-------------------------');
+        print(a.body);
 
-      return a;
-      /*   } catch (e) {
+        return a;
+        /*   } catch (e) {
         return new Response(body: {'data': []}, statusCode: 203);
       } */
-    } else {
-      return new Response(body: {'data': []}, statusCode: 200);
-    }
+      } else {
+        return new Response(body: {'data': []}, statusCode: 200);
+      }
     } else {
       return new Response(body: {'data': []}, statusCode: 200);
     }
@@ -96,7 +102,6 @@ class ManageRepo extends GetxService with StorageService {
 
   Future Login(data) async {
     Response a = await apiClient.getCollectionsP(ApiRoutes.LOGIN, data);
-    
 
     return a;
   }

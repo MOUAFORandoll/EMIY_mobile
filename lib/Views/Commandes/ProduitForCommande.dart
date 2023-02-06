@@ -1,3 +1,4 @@
+import 'package:fahkapmobile/components/Text/bigtitleText.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/components/Text/titleText.dart';
 import 'package:fahkapmobile/components/Widget/productComponent0.dart';
@@ -24,7 +25,18 @@ class ProduitForCommande extends StatelessWidget {
     return GetBuilder<CommandeController>(builder: (_commande) {
       return Scaffold(
           appBar: AppBar(
-            title: Text('Code : ${code} '),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: InkWell(
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: ColorsApp.black,
+              ),
+              onTap: () {
+                Get.back();
+              },
+            ),
+            title: BigtitleText(text: 'Comm: ${code} ', bolder: true),
             actions: [
               InkWell(
                 child: Container(

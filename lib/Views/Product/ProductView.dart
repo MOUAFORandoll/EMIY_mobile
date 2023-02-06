@@ -4,6 +4,8 @@ import 'package:fahkapmobile/components/Button/AppIconButton.dart';
 import 'package:fahkapmobile/components/Button/IconButtonF.dart';
 import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Text/bigText.dart';
+import 'package:fahkapmobile/components/Text/bigtitleText.dart';
+import 'package:fahkapmobile/components/Text/bigtitleText0.dart';
 import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/controller/cartController.dart';
@@ -29,7 +31,9 @@ class ProductView extends StatelessWidget {
 
     Object produ = Get.parameters['type'] == '0'
         ? Get.find<ProductController>().produitList[index]
-        : Get.find<CategoryBoutiqueController>().produitBoutiqueList[index];
+        : Get.parameters['type'] == '1'
+            ? Get.find<ProductController>().produitListAll[index]
+            : Get.find<CategoryBoutiqueController>().produitBoutiqueList[index];
     var product = produ as ProduitModel;
     Get.find<ProductController>()
         .initProduct(Get.find<CartController>(), product);
@@ -62,9 +66,9 @@ class ProductView extends StatelessWidget {
                                   color: ColorsApp.black,
                                   icon: Icons.shopping_cart_outlined,
                                   onTap: () {
-                                    // Get.toNamed(
-                                    //   AppLinks.CART,
-                                    // );
+                                    Get.toNamed(
+                                      AppLinks.SHOPNEXT,
+                                    );
                                   },
                                 )
                               : Container()),
@@ -208,10 +212,16 @@ class ProductView extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20))),
-                child:
-                    Center(child: BigText(text: product.titre, bolder: true)),
+                        topRight: Radius.circular(25),
+                        topLeft: Radius.circular(25))),
+                child: Center(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                      // BigText(text: product.titre, bolder: true),
+                      // BigText(
+                      //     text: 'XAF ' + product.prix.toString(), bolder: true)
+                    ])),
                 padding: EdgeInsets.only(top: 5, bottom: 5),
                 width: double.maxFinite,
               ),
@@ -222,10 +232,27 @@ class ProductView extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
                 margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                child: Text(
-                  product.description,
-                  textAlign: TextAlign.justify,
-                )),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BigtitleText(text: product.titre, bolder: true),
+                            BigtitleText0(
+                                text: 'Disponible: ' +
+                                    product.quantite.toString(),
+                                bolder: true),
+                          ]),
+                      BigtitleText(
+                          text: 'XAF ' + product.prix.toString(), bolder: true),
+                      Container(
+                          margin: EdgeInsets.only(top: 10, bottom: 5),
+                          child: Text(
+                            product.description,
+                            textAlign: TextAlign.justify,
+                          ))
+                    ])),
           ),
         ],
       )),
@@ -280,7 +307,8 @@ class ProductView extends StatelessWidget {
                   ),
                   CustomBtn(
                     color: ColorsApp.greenLight,
-                    title: prod.exitP(product) ? "Update" : 'Ajouter au panier',
+                    title:
+                        prod.exitP(product) ? "Augmenter" : 'Ajouter au panier',
                     onTap: () {
                       prod.addItem(product, index, Get.parameters['type']);
                     },

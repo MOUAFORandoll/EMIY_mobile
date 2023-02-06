@@ -1,3 +1,4 @@
+import 'package:fahkapmobile/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -21,52 +22,76 @@ class _FormComponentState extends State<FormComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      validator: (value) {
-        return value == "" ? "veillez remplir se champs" : null;
-      },
-      enabled: widget.enabled,
-      onChanged: (val) {
-        setState(() {
-          value = val;
-        });
+    return Container(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            margin: EdgeInsets.only(
+              bottom: 1,
+              top: 1,
+            ),
+            child: Text(widget.hint.toString(),
+                style: TextStyle(
+                  color: ColorsApp.bleuLight,
+                ))),
+        Container(
+            margin: EdgeInsets.only(
+              bottom: 2,
+              top: 2,
+            ),
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                  color: ColorsApp.greySecond, spreadRadius: 1, blurRadius: 5)
+            ], color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            child: TextFormField(
+              controller: widget.controller,
+              validator: (value) {
+                return value == "" ? "veillez remplir se champs" : null;
+              },
+              enabled: widget.enabled,
+              onChanged: (val) {
+                setState(() {
+                  value = val;
+                });
 
-        print('value');
-        print(value);
-      },
-      keyboardType: TextInputType.text,
-      obscureText: widget.type == 1 ? true : false,
-      decoration: new InputDecoration(
-        prefixIcon: Icon(widget.icon),
-        counterText: "",
-        // focusedBorder: OutlineInputBorder(
-        //     // borderRadius: BorderRadius.circular(15),
-        //     borderSide: BorderSide(
-        //   color: (value.isNotEmpty)
-        //       ? (/* !(RegExp(r'^(0|[1-9]\d*)$')
-        //                                       .hasMatch(value.text) && */
-        //               value.length != 9)
-        //           ? Colors.red
-        //           : Colors.blue
-        //       : Colors.blue,
-        // )),
-        border: OutlineInputBorder(
-          // borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide.none,
-        ),
-        contentPadding: EdgeInsets.only(
-          left: 15,
-          bottom: 11,
-          top: 15,
-          right: 15,
-        ),
+                print('value');
+                print(value);
+              },
+              keyboardType: TextInputType.text,
+              obscureText: widget.type == 1 ? true : false,
+              decoration: new InputDecoration(
+                prefixIcon: Icon(widget.icon),
+                counterText: "",
+                // focusedBorder: OutlineInputBorder(
+                //     // borderRadius: BorderRadius.circular(15),
+                //     borderSide: BorderSide(
+                //   color: (value.isNotEmpty)
+                //       ? (/* !(RegExp(r'^(0|[1-9]\d*)$')
+                //                                       .hasMatch(value.text) && */
+                //               value.length != 9)
+                //           ? Colors.red
+                //           : Colors.blue
+                //       : Colors.blue,
+                // )),
+                border: OutlineInputBorder(
+                  // borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: EdgeInsets.only(
+                  left: 15,
+                  bottom: 11,
+                  top: 15,
+                  right: 15,
+                ),
 
-        hintText: widget.hint,
-        hintStyle: TextStyle(
-          color: Colors.grey,
-        ),
-      ),
-    );
+                // hintText: widget.hint,
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ))
+      ],
+    ));
   }
 }

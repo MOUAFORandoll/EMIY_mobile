@@ -1,3 +1,6 @@
+import 'package:fahkapmobile/controller/managerController.dart';
+import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:fahkapmobile/utils/Services/dependancies.dart';
 import 'package:fahkapmobile/utils/Services/storageService.dart';
 import 'package:get/get.dart';
@@ -15,6 +18,8 @@ import 'package:jwt_decode/jwt_decode.dart';
 import 'package:fahkapmobile/views/UsersMange/LoginScreen.dart';
 import 'package:fahkapmobile/views/ComplementView/wrapper.dart';
 
+import 'dart:async';
+
 class SplashScreenPage extends StatefulWidget {
   @override
   _SplashScreenPageState createState() => _SplashScreenPageState();
@@ -28,10 +33,13 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   // int count = 0;
   // var data;
   start() {
-    Future.delayed(Duration(seconds: 3), () async {
+    Get.find<ManagerController>().startTimer();
+
+    Future.delayed(Duration(seconds: 10), () async {
       print('10');
 
       Get.offNamedUntil(AppLinks.FIRST, (route) => false);
+      Get.find<ManagerController>().chageN(false);
 
       MyBinding().onGetAll();
     });
@@ -53,6 +61,12 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   void initState() {
     start();
   }
+
+  // @override
+  // void dispose() {
+  //   startTimer();
+  //   start();
+  // }
 
   late double height = 0;
   late String texte = "";
@@ -118,11 +132,11 @@ class _SplashScreenPageState extends State<SplashScreenPage>
     return /* (isOpen == 0)
         ? */
         NewSplashScreen(
-            title: "Fah Kap",
-            //  subtitle: "LEGACY FINANCE \n Digital Finance",
-            image: 'assets/logo.png',
-            /*  loaderColor: Colors.yellow, */
-            size: 70.0);
+      title: "Fah Kap",
+      //  subtitle: "LEGACY FINANCE \n Digital Finance",
+      image: 'assets/logo.png',
+      /*  loaderColor: Colors.yellow, */
+    );
     // : (isOpen == 1)
     //     ? Wrapper()
     //     : LoginScreen();
@@ -130,62 +144,71 @@ class _SplashScreenPageState extends State<SplashScreenPage>
 }
 
 class NewSplashScreen extends StatelessWidget {
-  NewSplashScreen(
-      {this.title, this.subtitle, this.image, this.loaderColor, this.size});
-  var title, subtitle, image, loaderColor, size;
+  NewSplashScreen({
+    this.title,
+    this.subtitle,
+    this.image,
+    this.loaderColor,
+  });
+  var title, subtitle, image, loaderColor;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-      alignment: Alignment.center,
-      fit: StackFit.expand,
-      children: <Widget>[
-        new Column(
+    return GetBuilder<ManagerController>(builder: (_controller) {
+      return Scaffold(
+          body: Container(
+        // height: Get.height * .06,
+
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: GradientApp.blueG,
+        ),
+        child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Expanded(
-              flex: 2,
-              child: new Container(
-                  child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new CircleAvatar(
-                    radius: double.parse(this.size.toString()),
-                    backgroundColor: Colors.transparent,
-                    child: Hero(
-                      tag: "splashscreenImage",
-                      child: new Container(child: Image.asset(this.image)),
-                    ),
-                  ),
-                  new Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
-                  ),
-                  Text(this.title,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.bold))
-                ],
-              )),
-            ),
-            Expanded(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SpinKitCircle(
-                    color: Colors.blue,
-                    size: 40,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                  ),
-                  (this.subtitle == null) ? Text('') : Text(this.subtitle)
-                ],
-              ),
-            ),
+            // new Expanded(
+            //   flex: 2,
+            //   child: new Container(
+            //       child: new Column(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: <Widget>[
+            // new CircleAvatar(
+            //   radius: double.parse(this.size.toString()),
+            //   backgroundColor: Colors.transparent,
+            //   child: Hero(
+            //     tag: "splashscreenImage",
+            //     child:
+            //         new Container(child: Image.asset(this.image)),
+            //   ),
+            // ),
+            // new Padding(
+            //   padding: const EdgeInsets.only(top: 15.0),
+            // ),
+            Text('N',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    // fontFamily:  ,
+                    fontSize: 120 + _controller.tailleAdd,
+                    color: Colors.white))
+            //     ],
+            //   )),
+            // ),
+
+            // Container(
+            //   padding: EdgeInsets.only(top: kMdHeight / 5),
+            //   child: SpinKitCircle(
+            //     color: Colors.blue,
+            //     size: 40,
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 20.0),
+            // ),
+            // (this.subtitle == null) ? Text('') : Text(this.subtitle)
           ],
         ),
-      ],
-    ));
+      ));
+    });
   }
 }

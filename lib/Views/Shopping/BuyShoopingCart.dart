@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fahkapmobile/components/Button/IconButtonF.dart';
+import 'package:fahkapmobile/components/Button/customBtn.dart';
 import 'package:fahkapmobile/components/Form/formComponent.dart';
 import 'package:fahkapmobile/components/Text/smallText.dart';
 import 'package:fahkapmobile/components/Widget/LivreurComponent.dart';
@@ -12,8 +13,7 @@ import 'package:fahkapmobile/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_field/phone_number.dart';
-import 'package:fahkapmobile/model/data/TrajetModel.dart';
+import 'package:intl_phone_field/phone_number.dart'; 
 import 'package:fahkapmobile/styles/colorApp.dart';
 
 // import 'package:cinetpay/cinetpay.dart';
@@ -33,9 +33,7 @@ class BuyShoopingCart extends StatelessWidget {
 
   bool select = false;
   bool finish = false;
-  bool ok = false;
-  List<TrajetModel> listTrajet = [];
-
+  bool ok = false; 
   bool _loading = false;
 
   @override
@@ -59,20 +57,21 @@ class BuyShoopingCart extends StatelessWidget {
                   child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
                   onTap: () => Get.back()),
               title: Text(
-                _Bcontroller.state == 0
-                    ? 'Votre lieux de livraison'
-                    : _Bcontroller.state == 1
-                        ? "Choisissez un coursier"
-                        : _Bcontroller.state == 2
-                            ? "Entrer vos informations "
-                            : "Terminer",
+                // _Bcontroller.state == 0
+                //     ? 'Votre lieux de livraison'
+                //     : _Bcontroller.state == 1
+                //         ? "Choisissez un coursier"
+                //         : _Bcontroller.state == 2
+                //             ? "Entrer vos informations "
+                //             : "Terminer"
+                'Finalisation',
                 style: TextStyle(color: Colors.black),
               ),
               foregroundColor: Colors.red,
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            bottomNavigationBar: Container(
+            /*      bottomNavigationBar: Container(
               height: kMarginY * 8,
               padding: EdgeInsets.symmetric(horizontal: kMarginX),
               decoration: BoxDecoration(
@@ -98,13 +97,6 @@ class BuyShoopingCart extends StatelessWidget {
                           if (_Bcontroller.state == 0) {
                             _Bcontroller.stateChange(true);
                           } else if (_Bcontroller.state == 1) {
-                            if (_Bcontroller.isLivreur == 0) {
-                              functions.snackBar('Achat',
-                                  'Selectionner un livreur', ColorsApp.red);
-                            } else {
-                              _Bcontroller.stateChange(true);
-                            }
-                          } else if (_Bcontroller.state == 2) {
                             if ((nom.text.isEmpty ||
                                 prenom.text.isEmpty ||
                                 phone.text.isEmpty)) {
@@ -118,15 +110,17 @@ class BuyShoopingCart extends StatelessWidget {
                             }
                           } else if (_Bcontroller.state == 3) {
                             if (nom.text.isNotEmpty &&
-                                prenom.text.isNotEmpty &&
-                                phone.text.isNotEmpty &&
-                                _Bcontroller.isLivreur != 0) {
+                                    prenom.text.isNotEmpty &&
+                                    phone.text
+                                        .isNotEmpty /* &&
+                                _Bcontroller.isLivreur != 0 */
+                                ) {
                               var data = {
                                 'nom': nom.text,
                                 'prenom': prenom.text,
                                 'phone': phone.text,
                                 'idModePaiement': 1,
-                                'idLivreur': _Bcontroller.isLivreur,
+                                // 'idLivreur': _Bcontroller.isLivreur,
                                 'listProduits': _controller.getListPinCart(),
                                 'ville': user.ville,
                                 'longitude': user.longitude,
@@ -145,201 +139,326 @@ class BuyShoopingCart extends StatelessWidget {
                         }),
                   ]),
             ),
-            body: Stack(children: [
-              _Bcontroller.state == 0
-                  ? Container(
-                      margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                      child: SingleChildScrollView(
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+            */
+            body: Container(
+                margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                child: SingleChildScrollView(
+                    child: Column(mainAxisAlignment: MainAxisAlignment.start,
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-/*                           Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(child: Text('Nom')),
-                                Container(
-                                  // margin: EdgeInsets.only(left: Get.width * .008),
-                                  child: Text('Prix ',
-                                      style: TextStyle(fontSize: 15)),
-                                ),
-                                Container(
-                                  // margin: EdgeInsets.only(left: Get.width * .008),
-                                  child: Text('Quantity',
-                                      style: TextStyle(fontSize: 15)),
-                                ),
-                                Container(
-                                  // margin: EdgeInsets.only(left: Get.width * .008),
-                                  child: Text('Total (XAF)',
-                                      style: TextStyle(fontSize: 15)),
-                                ),
-                              ]),
-                          SingleChildScrollView(
-                              child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: _controller.getItems.length,
-                                  itemBuilder: (_ctx, index) =>
-                                      ProductBuyComponent(
-                                          cartModel:
-                                              _controller.getItems[index])))
-                      */
-                          InkWell(
-                              child: Container(
-                                  margin: EdgeInsets.only(
-                                      top: Get.height * .05,
-                                      left: Get.width * .01,
-                                      right: Get.width * .01,
-                                      bottom: Get.height * .009),
-                                  padding: EdgeInsets.all(Get.height * .02),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: ColorsApp.bleuLight),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Text(
-                                        'Mon Emplacement actuel',
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Icon(Icons.location_pin)
-                                    ],
-                                  )),
-                              onTap: () {
-                                // _controller.setLivreur(livreur.id);
-                              }),
-                          InkWell(
-                              child: Container(
-                                  margin: EdgeInsets.only(
-                                      top: Get.height * .05,
-                                      left: Get.width * .01,
-                                      right: Get.width * .01,
-                                      bottom: Get.height * .009),
-                                  padding: EdgeInsets.all(Get.height * .02),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: ColorsApp.bleuLight),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Text(
-                                        'Selectionne point de livraison',
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Icon(Icons.my_location)
-                                    ],
-                                  )),
-                              onTap: () {
-                                Get.bottomSheet(Container(
-                                    height: kMdHeight * 8,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(20),
-                                            topLeft: Radius.circular(20))),
-                                    child: SingleChildScrollView(
-                                        child: ListView.builder(
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: 50,
-                                            itemBuilder: (_ctx, index) =>
-                                                Text('iii')))));
-                              })
-                        ],
-                      )))
-                  : _Bcontroller.state == 1
-                      ? Container(
-                          margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                          child: SingleChildScrollView(
-                              child: _Bcontroller.isLoaded == 1
-                                  ? Column(
-                                      // mainAxisAlignment: MainAxisAlignment.start,
-                                      // crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        SingleChildScrollView(
-                                            child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: _Bcontroller
-                                                    .livreurList.length,
-                                                itemBuilder: (_ctx, index) =>
-                                                    LivreurComponent(
-                                                        livreur: _Bcontroller
-                                                                .livreurList[
-                                                            index])))
-                                      ],
-                                    )
-                                  : Container(
-                                      alignment: Alignment.center,
-                                      child: Center(
-                                        child: CircularProgressIndicator(
-                                            color: ColorsApp.bleuLight),
-                                      ))))
-                      : _Bcontroller.state == 2
-                          ? Container(
-                              margin:
-                                  EdgeInsets.symmetric(horizontal: kMarginX),
-                              child: SingleChildScrollView(
-                                  child: Column(
-                                children: [
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          top: Get.size.height * .025,
-                                          bottom: Get.size.height * .025),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Colors.white),
-                                      // padding: EdgeInsets.only(
-                                      //   top: 25,
-                                      // ),
-                                      child: Column(
-                                        children: [
-                                          FormComponent(
-                                              icon: Icons.account_circle,
-                                              type: 0,
-                                              controller: nom,
-                                              enabled: true,
-                                              hint: "Nom"),
-                                          FormComponent(
-                                              icon: Icons.account_circle,
-                                              type: 0,
-                                              controller: prenom,
-                                              enabled: true,
-                                              hint: "Prenom"),
-                                          FormComponent(
-                                              icon: Icons.call,
-                                              type: 0,
-                                              controller: phone,
-                                              enabled: true,
-                                              hint: "Phone"),
-                                          // FormComponent(
-                                          //   icon: Icons.lock,
-                                          //   type: 1,
-                                          //   controller: pass,
-                                          //   enabled: true,
-                                          //   hint: "Password",
-                                          // )
-                                        ],
-                                      )),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(child: Text('Nom')),
+                            Container(
+                              // margin: EdgeInsets.only(left: Get.width * .008),
+                              child:
+                                  Text('Prix ', style: TextStyle(fontSize: 15)),
+                            ),
+                            Container(
+                              // margin: EdgeInsets.only(left: Get.width * .008),
+                              child: Text('Quantity',
+                                  style: TextStyle(fontSize: 15)),
+                            ),
+                            Container(
+                              // margin: EdgeInsets.only(left: Get.width * .008),
+                              child: Text('Total (XAF)',
+                                  style: TextStyle(fontSize: 15)),
+                            ),
+                          ]),
+                      SingleChildScrollView(
+                          child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: _controller.getItems.length,
+                              itemBuilder: (_ctx, index) => ProductBuyComponent(
+                                  cartModel: _controller.getItems[index]))),
+                      InkWell(
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  top: Get.height * .05,
+                                  left: Get.width * .01,
+                                  right: Get.width * .01,
+                                  bottom: Get.height * .009),
+                              padding: EdgeInsets.all(Get.height * .02),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: ColorsApp.bleuLight),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Mon Emplacement actuel',
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Icon(Icons.location_pin)
                                 ],
-                              )))
-                          : SingleChildScrollView(
-                              child: Column(
-                              children: [
-                                Container(
-                                    alignment: Alignment.center,
-                                    child: Center(
-                                      child: Text('Valider Paiement'),
-                                    ))
-                              ],
-                            ))
-            ]));
+                              )),
+                          onTap: () {
+                            // _controller.setLivreur(livreur.id);
+                          }),
+                      InkWell(
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  top: Get.height * .05,
+                                  left: Get.width * .01,
+                                  right: Get.width * .01,
+                                  bottom: Get.height * .009),
+                              padding: EdgeInsets.all(Get.height * .02),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: ColorsApp.bleuLight),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Selectionne point de livraison',
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Icon(Icons.my_location)
+                                ],
+                              )),
+                          onTap: () {
+                            Get.bottomSheet(Container(
+                                height: kMdHeight * 8,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20),
+                                        topLeft: Radius.circular(20))),
+                                child: SingleChildScrollView(
+                                    child: ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: 50,
+                                        itemBuilder: (_ctx, index) =>
+                                            Text('iii')))));
+                          }),
+                      Container(
+                          margin: EdgeInsets.only(
+                              top: Get.size.height * .025,
+                              bottom: Get.size.height * .025),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white),
+                          // padding: EdgeInsets.only(
+                          //   top: 25,
+                          // ),
+                          child: Column(
+                            children: [
+                              FormComponent(
+                                  icon: Icons.account_circle,
+                                  type: 0,
+                                  controller: nom,
+                                  enabled: true,
+                                  hint: "Nom"),
+                              FormComponent(
+                                  icon: Icons.account_circle,
+                                  type: 0,
+                                  controller: prenom,
+                                  enabled: true,
+                                  hint: "Prenom"),
+                              FormComponent(
+                                  icon: Icons.call,
+                                  type: 0,
+                                  controller: phone,
+                                  enabled: true,
+                                  hint: "Phone"),
+                              // FormComponent(
+                              //   icon: Icons.lock,
+                              //   type: 1,
+                              //   controller: pass,
+                              //   enabled: true,
+                              //   hint: "Password",
+                              // )
+                            ],
+                          )),
+                      CustomBtn(
+                        color: ColorsApp.greenLight,
+                        title: 'Terminer',
+                        onTap: () {
+                          // prod.addItem(product, index, Get.parameters['type']);
+                        },
+                      )
+                      // SingleChildScrollView(
+                      //     child: Column(
+                      //   children: [
+                      //     Container(
+                      //         alignment: Alignment.center,
+                      //         child: Center(
+                      //           child: Text('Valider Paiement'),
+                      //         ))
+                      //   ],
+                      // ))
+                    ])
+//               _Bcontroller.state == 0
+//                   ? Container(
+//                       margin: EdgeInsets.symmetric(horizontal: kMarginX),
+//                       child: SingleChildScrollView(
+//                           child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.start,
+//                         // crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+// /*                           Row(
+//                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 Container(child: Text('Nom')),
+//                                 Container(
+//                                   // margin: EdgeInsets.only(left: Get.width * .008),
+//                                   child: Text('Prix ',
+//                                       style: TextStyle(fontSize: 15)),
+//                                 ),
+//                                 Container(
+//                                   // margin: EdgeInsets.only(left: Get.width * .008),
+//                                   child: Text('Quantity',
+//                                       style: TextStyle(fontSize: 15)),
+//                                 ),
+//                                 Container(
+//                                   // margin: EdgeInsets.only(left: Get.width * .008),
+//                                   child: Text('Total (XAF)',
+//                                       style: TextStyle(fontSize: 15)),
+//                                 ),
+//                               ]),
+//                           SingleChildScrollView(
+//                               child: ListView.builder(
+//                                   physics: NeverScrollableScrollPhysics(),
+//                                   shrinkWrap: true,
+//                                   itemCount: _controller.getItems.length,
+//                                   itemBuilder: (_ctx, index) =>
+//                                       ProductBuyComponent(
+//                                           cartModel:
+//                                               _controller.getItems[index])))
+//                       */
+//                           InkWell(
+//                               child: Container(
+//                                   margin: EdgeInsets.only(
+//                                       top: Get.height * .05,
+//                                       left: Get.width * .01,
+//                                       right: Get.width * .01,
+//                                       bottom: Get.height * .009),
+//                                   padding: EdgeInsets.all(Get.height * .02),
+//                                   decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.circular(5),
+//                                       color: ColorsApp.bleuLight),
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                         MainAxisAlignment.spaceBetween,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         'Mon Emplacement actuel',
+//                                         overflow: TextOverflow.ellipsis,
+//                                       ),
+//                                       Icon(Icons.location_pin)
+//                                     ],
+//                                   )),
+//                               onTap: () {
+//                                 // _controller.setLivreur(livreur.id);
+//                               }),
+//                           InkWell(
+//                               child: Container(
+//                                   margin: EdgeInsets.only(
+//                                       top: Get.height * .05,
+//                                       left: Get.width * .01,
+//                                       right: Get.width * .01,
+//                                       bottom: Get.height * .009),
+//                                   padding: EdgeInsets.all(Get.height * .02),
+//                                   decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.circular(5),
+//                                       color: ColorsApp.bleuLight),
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                         MainAxisAlignment.spaceBetween,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         'Selectionne point de livraison',
+//                                         overflow: TextOverflow.ellipsis,
+//                                       ),
+//                                       Icon(Icons.my_location)
+//                                     ],
+//                                   )),
+//                               onTap: () {
+//                                 Get.bottomSheet(Container(
+//                                     height: kMdHeight * 8,
+//                                     decoration: BoxDecoration(
+//                                         color: Colors.white,
+//                                         borderRadius: BorderRadius.only(
+//                                             topRight: Radius.circular(20),
+//                                             topLeft: Radius.circular(20))),
+//                                     child: SingleChildScrollView(
+//                                         child: ListView.builder(
+//                                             physics:
+//                                                 NeverScrollableScrollPhysics(),
+//                                             shrinkWrap: true,
+//                                             itemCount: 50,
+//                                             itemBuilder: (_ctx, index) =>
+//                                                 Text('iii')))));
+//                               })
+//                         ],
+//                       )))
+//                   : _Bcontroller.state == 1
+//                           ? Container(
+//                               margin:
+//                                   EdgeInsets.symmetric(horizontal: kMarginX),
+//                               child: SingleChildScrollView(
+//                                   child: Column(
+//                                 children: [
+//                                   Container(
+//                                       margin: EdgeInsets.only(
+//                                           top: Get.size.height * .025,
+//                                           bottom: Get.size.height * .025),
+//                                       decoration: BoxDecoration(
+//                                           borderRadius:
+//                                               BorderRadius.circular(15),
+//                                           color: Colors.white),
+//                                       // padding: EdgeInsets.only(
+//                                       //   top: 25,
+//                                       // ),
+//                                       child: Column(
+//                                         children: [
+//                                           FormComponent(
+//                                               icon: Icons.account_circle,
+//                                               type: 0,
+//                                               controller: nom,
+//                                               enabled: true,
+//                                               hint: "Nom"),
+//                                           FormComponent(
+//                                               icon: Icons.account_circle,
+//                                               type: 0,
+//                                               controller: prenom,
+//                                               enabled: true,
+//                                               hint: "Prenom"),
+//                                           FormComponent(
+//                                               icon: Icons.call,
+//                                               type: 0,
+//                                               controller: phone,
+//                                               enabled: true,
+//                                               hint: "Phone"),
+//                                           // FormComponent(
+//                                           //   icon: Icons.lock,
+//                                           //   type: 1,
+//                                           //   controller: pass,
+//                                           //   enabled: true,
+//                                           //   hint: "Password",
+//                                           // )
+//                                         ],
+//                                       )),
+//                                 ],
+//                               )))
+//                           : SingleChildScrollView(
+//                               child: Column(
+//                               children: [
+//                                 Container(
+//                                     alignment: Alignment.center,
+//                                     child: Center(
+//                                       child: Text('Valider Paiement'),
+//                                     ))
+//                               ],
+//                             ))
+                    )));
       });
     });
   }

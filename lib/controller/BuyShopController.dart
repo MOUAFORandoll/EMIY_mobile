@@ -59,42 +59,42 @@ class BuyShopController extends GetxController {
     return _state == index;
   }
 
-  List<LivreurModel> _livreurList = [];
-  List<LivreurModel> get livreurList => _livreurList;
-  int _isLivreur = 0;
-  int get isLivreur => _isLivreur;
-  setLivreur(int id) {
-    _isLivreur = id;
-    update();
-  }
+  // List<LivreurModel> _livreurList = [];
+  // List<LivreurModel> get livreurList => _livreurList;
+  // int _isLivreur = 0;
+  // int get isLivreur => _isLivreur;
+  // setLivreur(int id) {
+  //   _isLivreur = id;
+  //   update();
+  // }
 
-  int _isLoaded = 0;
-  int get isLoaded => _isLoaded;
-  // CategoryController({required this.service});
-  getListLivreur() async {
-    _isLoaded = 0;
-    setLivreur(0);
-    try {
-      _livreurList.clear();
-      update();
-      Response response = await livreurRepo.getLivreur();
-      if (response.body != null) {
-        if (response.body['data'].length != 0) {
-          print('livreur------------------');
-          print(response.body['data']);
+  // int _isLoaded = 0;
+  // int get isLoaded => _isLoaded;
+  // // CategoryController({required this.service});
+  // getListLivreur() async {
+  //   _isLoaded = 0;
+  //   setLivreur(0);
+  //   try {
+  //     _livreurList.clear();
+  //     update();
+  //     Response response = await livreurRepo.getLivreur();
+  //     if (response.body != null) {
+  //       if (response.body['data'].length != 0) {
+  //         print('livreur------------------');
+  //         print(response.body['data']);
 
-          _livreurList.addAll((response.body['data'] as List)
-              .map((e) => LivreurModel.fromJson(e))
-              .toList());
-        }
-      }
-      // print(_categoryList);
-      _isLoaded = 1;
-      update();
-    } catch (e) {
-      print(e);
-    }
-  }
+  //         _livreurList.addAll((response.body['data'] as List)
+  //             .map((e) => LivreurModel.fromJson(e))
+  //             .toList());
+  //       }
+  //     }
+  //     // print(_categoryList);
+  //     _isLoaded = 1;
+  //     update();
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   bool _isOk = false;
   bool get isOk => _isOk;
@@ -118,9 +118,11 @@ class BuyShopController extends GetxController {
       commande.saveCommande(response.body['id'], response.body['codeCommande'],
           response.body['codeClient'], response.body['date']);
       Get.back();
-
       fn.snackBar('Achat', response.body['message'], ColorsApp.bleuLight);
       _isOk = response.body['status'];
+
+      Get.find<CommandeController>().getListCommandes();
+
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {

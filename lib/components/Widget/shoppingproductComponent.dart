@@ -52,7 +52,8 @@ class ShoppingproductComponent extends StatelessWidget {
                                       image: imageProvider,
                                       fit: BoxFit.cover,
                                       colorFilter: ColorFilter.mode(
-                                          Colors.transparent, BlendMode.colorBurn))),
+                                          Colors.transparent,
+                                          BlendMode.colorBurn))),
                             ),
                           );
                         },
@@ -119,13 +120,18 @@ class ShoppingproductComponent extends StatelessWidget {
                       // ),
                     ],
                   ),
-                  GetBuilder<ProductController>(builder: (cart) {
+                  GetBuilder<CartController>(builder: (cart) {
                     return Column(
                       children: [
-                        Container(
-                            width: kSmWidth * .5,
-                            margin: EdgeInsets.only(top: Get.height * .005),
-                            child: smallText(text: 'Quantite')),
+                        IconButtonF(
+                          backgroundColor: ColorsApp.greenLight,
+                          icon: Icons.add,
+                          inconSize: 15.0,
+                          onTap: () {
+                            cart.updateQuantityProduct(
+                                cartM.id, true); // Get.back();
+                          },
+                        ),
                         Container(
                           width: kSmWidth * .5,
                           margin: EdgeInsets.only(top: Get.height * .005),
@@ -134,19 +140,26 @@ class ShoppingproductComponent extends StatelessWidget {
                               bolder: true,
                               size: 15),
                         ),
+                        IconButtonF(
+                          backgroundColor: ColorsApp.greenLight,
+                          icon: Icons.remove,
+                          inconSize: 15.0,
+                          onTap: () {
+                            cart.updateQuantityProduct(
+                                cartM.id, false); // Get.back();
+                          },
+                        ),
                         // Container(
-                        //   width: kSmWidth * .6,
-                        //   margin: EdgeInsets.only(
-                        //       top: Get.height * .005, left: Get.width * .008),
-                        //   child: Text('XAF ' + price.toString(),
-                        //       overflow: TextOverflow.ellipsis,
-                        //       style: TextStyle(
-                        //           decoration: TextDecoration.lineThrough,
-                        //           decorationColor: Colors.black,
-                        //           decorationThickness: 2.85,
-                        //           color: Colors.black,
-                        //           fontSize: 12,
-                        //           fontWeight: FontWeight.bold)),
+                        //     width: kSmWidth * .5,
+                        //     margin: EdgeInsets.only(top: Get.height * .005),
+                        //     child: smallText(text: 'Quantite')),
+                        // Container(
+                        //   width: kSmWidth * .5,
+                        //   margin: EdgeInsets.only(top: Get.height * .005),
+                        //   child: smallText(
+                        //       text: cartM.quantity.toString(),
+                        //       bolder: true,
+                        //       size: 15),
                         // ),
                       ],
                     );

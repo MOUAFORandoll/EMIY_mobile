@@ -13,8 +13,15 @@ class ProductRepo extends GetxService {
     // try {
     Response response =
         await apiClient.getCollections(ApiRoutes.POPULAR_PRODUCT);
-     
+
     return response;
   }
 
+  Future<Response> getListProductAll() async {
+    print('get----------------');
+    // try {
+    Response response = await apiClient.getCollections(ApiRoutes.POPULAR_ALL);
+
+    return response;
+  }
 }

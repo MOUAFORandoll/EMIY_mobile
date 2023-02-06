@@ -88,11 +88,11 @@ class BoutiqueUserView extends StatelessWidget {
                 link: AppLinks.MANAGE_FOR_BOUTIQUE),
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            CardBoutiqueComponent(
-                title: 'Transaction Compte',
-                link: AppLinks.HISTORIQUE_FOR_BOUTIQUE),
-            CardBoutiqueComponent(
-                title: 'Retrait Compte ', link: AppLinks.MANAGE_FOR_BOUTIQUE),
+            // CardBoutiqueComponent(
+            //     title: 'Transaction Compte',
+            //     link: AppLinks.HISTORIQUE_FOR_BOUTIQUE),
+            // CardBoutiqueComponent(
+            //     title: 'Compte ', link: AppLinks.COMPTE_FOR_BOUTIQUE),
           ]),
         ]))
       ]);

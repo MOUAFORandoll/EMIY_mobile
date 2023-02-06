@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fahkapmobile/Views/ComplementView/AboutUsView.dart';
-import 'package:fahkapmobile/Views/ComplementView/SearchView.dart';
 import 'package:fahkapmobile/Views/Home/HomeView.dart';
 import 'package:fahkapmobile/Views/Shopping/ShoppingView.dart';
 import 'package:fahkapmobile/Views/UsersMange/ManageView.dart';

@@ -42,7 +42,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                 margin: EdgeInsets.symmetric(
                     horizontal: kMarginX, vertical: kMarginY),
                 decoration: BoxDecoration(
-                    color: ColorsApp.skyBlue,
+                    gradient: GradientApp.blueG,
                     borderRadius: BorderRadius.circular(8)),
                 child: /* SingleChildScrollView(
               child: */
@@ -99,7 +99,8 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                 child: Text('Nom : ' + produit.titre,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: ColorsApp.greenLight,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
                                         fontSize: 12)),
                               ),
                               Container(
@@ -109,7 +110,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                         ' XAF',
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.red,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                               ),
                               Container(
@@ -117,14 +118,14 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                     'Quantite : ' + produit.quantite.toString(),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.red,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                               ),
                               Container(
-                                child: Text('ajout : ' + produit.date,
+                                child: Text('Ajout : ' + produit.date,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.red,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                               ),
                               // Container(

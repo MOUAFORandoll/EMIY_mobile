@@ -250,6 +250,37 @@ class _ManageViewState extends State<ManageView> {
                                     ]),
                                     value: "*****",
                                   ),
+                                  InkWell(
+                                    child: Container(
+                                        padding:
+                                            EdgeInsets.only(top: 2, bottom: 2),
+                                        margin:
+                                            EdgeInsets.only(bottom: 5, top: 8),
+                                        decoration: BoxDecoration(
+                                            color: ColorsApp.grey),
+                                        height: 40,
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              smallText(
+                                                  al: true,
+                                                  width: kSmWidth,
+                                                  text: 'Gere votre compte',
+                                                  size: 16),
+                                              Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: Get.height * .005,
+                                                      left: Get.width * .008),
+                                                  child: Icon(
+                                                    Icons
+                                                        .arrow_forward_ios_outlined,
+                                                    // color: Colors.white,
+                                                  )),
+                                            ])),
+                                    onTap: () => Get.toNamed(
+                                        AppLinks.COMPTE_FOR_BOUTIQUE),
+                                  ),
                                   CustomBtn(
                                     color: ColorsApp.greenLight,
                                     title: 'Mettre a jour',

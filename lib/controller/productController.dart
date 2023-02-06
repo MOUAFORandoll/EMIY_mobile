@@ -96,8 +96,10 @@ class ProductController extends GetxController {
       Response response = await productRepo.getListProductPopular();
 
       print(response.body);
-
+      _produitList = [];
       _produitList.clear();
+      update();
+
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _produitList.addAll((response.body['data'] as List)
@@ -108,6 +110,38 @@ class ProductController extends GetxController {
               .toList());
         }
         _isLoadedP = 1;
+        update();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  List<ProduitModel> _produitListAll = [];
+  List<ProduitModel> _produitListAllSave = [];
+  List<ProduitModel> get produitListAll => _produitListAll;
+  int _isLoadedPAll = 0;
+  int get isLoadedPAll => _isLoadedPAll;
+  Future<void> getProduitAll() async {
+    print('response**********');
+
+    _isLoadedPAll = 0;
+    try {
+      Response response = await productRepo.getListProductAll();
+
+      print(response.body);
+
+      _produitListAll.clear();
+      if (response.body != null) {
+        if (response.body['data'].length != 0) {
+          _produitListAll.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+          _produitListAllSave.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+        }
+        _isLoadedPAll = 1;
         update();
       }
     } catch (e) {

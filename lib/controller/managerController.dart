@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:fahkapmobile/model/data/CategoryModel.dart';
+import 'package:fahkapmobile/model/data/CompteModel.dart';
 import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
 import 'package:fahkapmobile/model/data/ProduitModel.dart';
 import 'package:fahkapmobile/model/data/UserModel.dart';
@@ -13,6 +16,41 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ManagerController extends GetxController {
+  late Timer _timer;
+  double _tailleAdd = 0.0;
+  double get tailleAdd => _tailleAdd;
+
+  void startTimer() {
+    chageN(true);
+    if (stateN) {
+      const oneSec = const Duration(milliseconds: 3);
+      _timer = new Timer.periodic(
+        oneSec,
+        (Timer timer) {
+          // print('iii');
+          if (_tailleAdd == 120) {
+            _tailleAdd = 0;
+
+            update();
+          } else {
+            _tailleAdd += 1;
+
+            update();
+          }
+          // print(_tailleAdd);
+        },
+      );
+    }
+  }
+
+  bool _stateN = true;
+  bool get stateN => _stateN;
+
+  chageN(bool i) {
+    _stateN = i;
+    update();
+  }
+
   final service = new ApiService();
   bool _state = true;
   bool get state => _state;
@@ -75,6 +113,9 @@ class ManagerController extends GetxController {
 
   var _User;
   UserModel get User => _User;
+
+  var _Compte;
+  CompteModel get Compte => _Compte;
   int _isLoaded = 0;
   int get isLoaded => _isLoaded;
   //
@@ -83,10 +124,11 @@ class ManagerController extends GetxController {
     // print('user-------------------------${new GetStorage().read('keySecret')}');
     try {
       Response response = await manageRepo.getUser();
-      // print('user-------------------------${response.body['data']}');
+      print('user-------------------------${response.body}');
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _User = UserModel.fromJson(response.body['data']);
+          _Compte = CompteModel.fromJson(response.body['compte']);
           getKeyU();
         }
       }
