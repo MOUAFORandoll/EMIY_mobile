@@ -1,21 +1,21 @@
 // import 'dart:html';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/components/Form/formComponent.dart';
-import 'package:fahkapmobile/components/Button/themeButton.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Widget/infoComponent.dart';
-import 'package:fahkapmobile/controller/boutiqueController.dart';
-import 'package:fahkapmobile/controller/managerController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Form/formComponent.dart';
+import 'package:Fahkap/components/Button/themeButton.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Widget/infoComponent.dart';
+import 'package:Fahkap/controller/boutiqueController.dart';
+import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shimmer/shimmer.dart';
@@ -54,10 +54,10 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
     // ignore: unnecessary_null_comparison
 
     return GetBuilder<BoutiqueController>(builder: (_controller) {
-      if (_controller.Boutique != null) {
-        titre.text = _controller.Boutique.titre;
-        description.text = _controller.Boutique.description.toString();
-      }
+      // if (_controller.Boutique != null) {
+      //   titre.text = _controller.Boutique.titre;
+      //   description.text = _controller.Boutique.description.toString();
+      // }
       return Scaffold(
           appBar: AppBar(
             leading: InkWell(
@@ -165,10 +165,18 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                         InfoComponent(
                             title: Text("Titre"),
                             value: _controller.Boutique.titre),
+
+                        // Container(
+                        //     alignment: Alignment.topLeft,
+                        //     child: Text("Information localisation :")),
+                        InfoComponent(
+                          title: Text("Ville"),
+                          value: _controller.Boutique.localisation.ville,
+                        ),
+
                         Container(
                             alignment: Alignment.topLeft,
                             child: Text("Description")),
-
                         Container(
                             // height: kMdHeight * .3,
                             alignment: Alignment.topLeft,
@@ -180,12 +188,6 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.normal),
                             )),
-                        Container(
-                            alignment: Alignment.topLeft,
-                            child: Text("Infoemation localisation")),
-                        // InfoComponent(
-                        //     title: Text("Phone number"),
-                        //     value: _controller.User.phone),
                         // InfoComponent(
                         //     title: Text("Email"), value: _controller.User.email),
                         // InfoComponent(
@@ -218,7 +220,11 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                                     horizontal: kSmWidth * .07,
                                     vertical: kSmHeight * .09),
                                 // height: 800,
-                                color: ColorsApp.grey,
+                                decoration: BoxDecoration(
+                                    color: ColorsApp.grey,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15))),
                                 child: SingleChildScrollView(
                                     child: Column(
                                   // mainAxisSize: MainAxisSize.min,
@@ -346,7 +352,9 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
                                             'keySecret': new GetStorage()
                                                 .read('keySecret'),
                                             'titre': titre.text,
-                                            'description': description.text,
+
+                                            'description':
+                                                description.text.isEmpty,
                                             'codeBoutique': _controller
                                                 .Boutique.codeBoutique,
                                             // 'email': email.text,

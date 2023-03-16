@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:fahkapmobile/utils/api/apiUrl.dart';
-import 'package:fahkapmobile/utils/functions/route.dart';
+import 'package:Fahkap/utils/api/apiUrl.dart';
+import 'package:Fahkap/utils/functions/route.dart';
 
 class CustomDio {
   static GetStorage box = GetStorage();

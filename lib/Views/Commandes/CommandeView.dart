@@ -1,19 +1,19 @@
-import 'package:fahkapmobile/components/Button/btnCatList.dart';
-import 'package:fahkapmobile/components/Button/btnCatListPV.dart';
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Text/bigtitleText.dart';
-import 'package:fahkapmobile/components/Widget/CommandeComponent.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent2.dart';
-import 'package:fahkapmobile/components/Widget/productComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Text/titleText.dart';
-import 'package:fahkapmobile/controller/CommandeController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/components/Button/btnCatList.dart';
+import 'package:Fahkap/components/Button/btnCatListPV.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/CommandeComponent.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Widget/categoryComponent2.dart';
+import 'package:Fahkap/components/Widget/productComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Text/titleText.dart';
+import 'package:Fahkap/controller/CommandeController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -113,9 +113,12 @@ class CommandeView extends StatelessWidget {
                           child: ListView.builder(
                             // scrollDirection: Axis.horizontal,
                             itemCount: _commande.commandeList.length,
-                            itemBuilder: (_ctx, index) => CommandeComponent(
-                              commande: _commande.commandeList[index],
-                            ),
+                            itemBuilder: (_ctx, index) =>
+                                _commande.commandeList[index].id != null
+                                    ? CommandeComponent(
+                                        commande: _commande.commandeList[index],
+                                      )
+                                    : Text(''),
                           ),
                         ),
 

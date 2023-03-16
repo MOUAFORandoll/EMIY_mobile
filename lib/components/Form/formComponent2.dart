@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 
 // ignore: must_be_immutable
 class FormComponent2 extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:fahkapmobile/utils/api/apiUrl.dart';
+import 'package:Fahkap/utils/api/apiUrl.dart';
 
 abstract class BaseProvider {
   Dio dio = Dio();

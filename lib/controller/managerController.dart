@@ -1,22 +1,40 @@
 import 'dart:async';
 
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/CompteModel.dart';
-import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/model/data/UserModel.dart';
-import 'package:fahkapmobile/repository/ManageRepo.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/dependancies.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
-import 'package:fahkapmobile/utils/Services/storageService2.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/CompteModel.dart';
+import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/model/data/UserModel.dart';
+import 'package:Fahkap/repository/ManageRepo.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/dependancies.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/Services/storageService2.dart';
+import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'boutiqueController.dart';
+
 class ManagerController extends GetxController {
+  int _current = 0;
+  int get current => _current;
+  initCurrent() {
+    _current = 0;
+    update();
+    print('curent ${_current}');
+  }
+
+  setCurrent(int i) {
+    _current = i;
+    update();
+    print('curent ${_current}');
+  }
+
   late Timer _timer;
+
   double _tailleAdd = 0.0;
   double get tailleAdd => _tailleAdd;
 
@@ -49,21 +67,28 @@ class ManagerController extends GetxController {
   chageN(bool i) {
     _stateN = i;
     update();
+    print('st****************');
+    print(_stateN);
   }
 
   final service = new ApiService();
-  bool _state = true;
-  bool get state => _state;
+  /**
+   * 0 => init compte
+   * 1 => profile ok 
+   * 2 => boutique
+   */
+  int _state = 0;
+  int get state => _state;
 
   final ManageRepo manageRepo;
   ManagerController({required this.manageRepo});
 
-  chageState(bool i) {
+  chageState(int i) {
     _state = i;
     update();
   }
 
-  var s = Get.find<StorageService>();
+  var s = Get.find<DB>();
 
   var _ville;
   String get ville => _ville;
@@ -76,19 +101,33 @@ class ManagerController extends GetxController {
 
   getLocalU() async {
     var data = await s.getLonLat();
-    print(data);
-    _ville = data['ville'];
-    _longitude = data['long'];
-    _latitude = data['lat'];
-    update();
+    // print('******************data');
+    // print(data);
+    if (data != null) {
+      if (data.length != 0) {
+        _ville = data['ville'];
+        _longitude = data['long'];
+        _latitude = data['lat'];
+        update();
+      }
+    }
   }
 
   bool _userP = false;
   bool get userP => _userP;
-  getKeyU() {
-    _userP = s.getKey().isEmpty;
+  getKeyU() async {
+    var u = await s.getKey();
+    print('----------------uuuuu--$u');
+
+    _userP = (u == null);
+
     _isConnected = !_userP;
-    print('------------------${s.getKey()}');
+    if (!_userP) {
+      chageState(1);
+    } else {
+      chageState(0);
+    }
+    // print('------------------${s.getKey()}');
     update();
   }
 
@@ -122,6 +161,11 @@ class ManagerController extends GetxController {
   // CategoryController({required this.service});
   getUser() async {
     // print('user-------------------------${new GetStorage().read('keySecret')}');
+    var getU = await s.getKey();
+    print('key******************** ${getU}');
+    // await this.userRefresh();
+    // ignore: unnecessary_null_comparison
+
     try {
       Response response = await manageRepo.getUser();
       print('user-------------------------${response.body}');
@@ -129,12 +173,17 @@ class ManagerController extends GetxController {
         if (response.body['data'].length != 0) {
           _User = UserModel.fromJson(response.body['data']);
           _Compte = CompteModel.fromJson(response.body['compte']);
-          getKeyU();
-        }
-      }
+          update();
 
-      _isLoaded = 1;
-      update();
+          getKeyU();
+          print(
+              '_isok------------***********************-------------------------${_isLoaded}');
+          Get.find<BoutiqueController>().getBoutique();
+        }
+
+        _isLoaded = 1;
+        update();
+      }
     } catch (e) {
       _isLoaded = 1;
       update();
@@ -150,7 +199,7 @@ class ManagerController extends GetxController {
 
       if (response.body != null) {
         if (response.body['data'].length != 0) {
-          print('user-------------------------${response.body['data']}');
+          // print('user-------------------------${response.body['data']}');
           if (response.statusCode == 203) {
             await newLocalisation();
           }
@@ -162,22 +211,24 @@ class ManagerController extends GetxController {
 
   var fn = new ViewFunctions();
   deconnectUser() async {
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
-    Get.find<StorageService>().deleteStorage();
-    getKeyU();
-    _User = null;
-    Get.back();
+    // Get.defaultDialog(
+    //     title: 'En cours',
+    //     barrierDismissible: true,
+    //     content: SizedBox(
+    //         // height: Get.size.height * .02,
+    //         // width: Get.size.width * .02,
+    //         child: Center(
+    //             child: CircularProgressIndicator(
+    //       color: Colors.blueAccent,
+    //     ))));
+    Get.find<DB>().deleteAll();
+    chageState(0);
+
+    Get.find<BoutiqueController>().DeconectBoutique();
+    // Get.back();
     fn.snackBar('Mise a jour', 'Deconnecte', ColorsApp.bleuLight);
     _userP = true;
+
     update();
 
     print('---------userp---------${userP}');
@@ -242,6 +293,7 @@ class ManagerController extends GetxController {
 //       print(response.body);
       if (response.statusCode == 200) {
         s.saveKeyKen(response.body);
+
         getKeyU();
         await getUser();
         // await MyBinding().onGetAll();
@@ -281,6 +333,7 @@ class ManagerController extends GetxController {
 //  this.saveKeyKen(response.body);
       if (response.statusCode == 200) {
         s.saveKeyKen(response.body);
+
         getKeyU();
         await getUser();
         // await MyBinding().onGetAll();

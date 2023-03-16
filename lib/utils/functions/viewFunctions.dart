@@ -134,8 +134,15 @@ Future<void> _checkInternetConnection() async {
         backgroundColor: Colors.white);
   }
 
+  GetStorage box = GetStorage();
+
+  getTheme(context) {
+    print("sarttttttttttttt----------------${box.read('isDark')}");
+
+    return box.read('isDark') == null ? false : box.read('isDark');
+  }
+
   changeTheme(context) {
-    GetStorage box = GetStorage();
     print("----------------${box.read('isDark')}");
     if (Theme.of(context).brightness == Brightness.dark) {
       box.write('isDark', false);

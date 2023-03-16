@@ -1,5 +1,6 @@
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
+import 'package:Fahkap/controller/searchController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
@@ -15,6 +16,7 @@ class KFieldType {
 class KTextField extends StatelessWidget {
   final TextEditingController controllerField;
   final String? title;
+  final prefix;
   final String? type;
   Function? onChange;
   final double? dim;
@@ -24,6 +26,7 @@ class KTextField extends StatelessWidget {
       {Key? key,
       required this.controllerField,
       this.title,
+      this.prefix,
       this.type,
       this.dim,
       this.isCode = false,
@@ -46,31 +49,58 @@ class KTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: kToolbarHeight / 1.7,
-      width: kMdWidth * 2,
-      // padding: EdgeInsets.symmetric(horizontal: 10),
-      child: TextField(
-        onChanged: (String value) {
-          if (onChange != null) onChange!(value);
-        },
-
-        keyboardType: _typekeyBord,
-        // cursorRadius: const Radius.circular(20),
-        // cursorHeight: kToolbarHeight / 2,
-
-        cursorColor: const Color(0xff28255A),
-        controller: controllerField,
-        obscureText: type == KFieldType.password,
-        textAlign: TextAlign.left,
-        decoration: InputDecoration(
-          hintText: isCode ? '1234' : '',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-          hintStyle: TextStyle(
-              color: Colors.grey, fontSize: 25, fontWeight: FontWeight.w700),
+    return GetBuilder<SearchController>(builder: (searchCont) {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: ColorsApp.greySecond,
         ),
-      ),
-    );
+
+        height: kToolbarHeight / 1.7,
+        width: kMdWidth * 2,
+        // padding: EdgeInsets.symmetric(horizontal: 10),
+        child: TextField(
+          onChanged: (String value) {
+            if (onChange != null) onChange!(value);
+          },
+
+          keyboardType: _typekeyBord,
+          // cursorRadius: const Radius.circular(20),
+          // cursorHeight: kToolbarHeight / 2,
+
+          // cursorColor: const Color(0xff28255A),
+          cursorHeight: 30.0,
+          controller: controllerField,
+          obscureText: type == KFieldType.password,
+          textAlign: TextAlign.left,
+
+          decoration: InputDecoration(
+            prefix: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: ColorsApp.bgCont,
+                ),
+                height: searchCont.tsearch == 0 ? 0 : kToolbarHeight / 1.9,
+                width: searchCont.tsearch == 0 ? 0 : kMdWidth * 0.5,
+                margin: EdgeInsets.only(top: 10),
+                child: searchCont.tsearch == 1
+                    ? Icon(Icons.access_alarms_rounded)
+                    : searchCont.tsearch == 2
+                        ? Icon(Icons.ad_units)
+                        : searchCont.tsearch == 3
+                            ? Icon(Icons.ac_unit_outlined)
+                            : null),
+            hintText: isCode ? '1234' : 'Recherche',
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.zero,
+            ),
+            
+            contentPadding: EdgeInsets.symmetric(vertical: 10),
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+          ),
+        ),
+      );
+    });
   }
 }

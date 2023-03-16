@@ -1,34 +1,37 @@
 import 'package:dio/dio.dart' hide Response;
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/utils/Services/ApiClient.dart';
-import 'package:fahkapmobile/utils/Services/storageService.dart';
-import 'package:fahkapmobile/utils/constants/apiRoute.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/utils/Services/ApiClient.dart';
+import 'package:Fahkap/utils/Services/storageService.dart';
+import 'package:Fahkap/utils/constants/apiRoute.dart';
+import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get_storage/get_storage.dart';
 
-class ManageRepo extends GetxService with StorageService {
+class ManageRepo extends GetxService {
   final ApiClient apiClient;
   ManageRepo({required this.apiClient});
   // String keySecret = new GetStorage().read('keySecret');
+  var store = Get.find<DB>();
 
   Future getUser() async {
+    var getU = await store.getKey();
     // print('key******************** ${this.getKey()}');
     // await this.userRefresh();
     // ignore: unnecessary_null_comparison
-    if (this.getKey() != null) {
-      if (this.getKey().length != 0) {
-        Response a = await apiClient
-            .getCollectionsP(ApiRoutes.USER, {'keySecret': this.getKey()});
-        ;
+    if (getU != null) {
+      // if (getU.length != 0) {
+      Response a =
+          await apiClient.getCollectionsP(ApiRoutes.USER, {'keySecret': getU});
+      ;
 
-        return a;
-      } else {
-        return new Response(body: {
-          'data': [],
-          'compte': [],
-        }, statusCode: 200);
-      }
+      return a;
+      // } else {
+      //   return new Response(body: {
+      //     'data': [],
+      //     'compte': [],
+      //   }, statusCode: 200);
+      // }
     } else {
       return new Response(body: {
         'data': [],
@@ -38,16 +41,13 @@ class ManageRepo extends GetxService with StorageService {
   }
 
   Future userRefresh() async {
-    if (this.getKeyKen() != null) {
-      print('this.getKeyKen()');
-      print(this.getKeyKen());
-
-      Response a = await apiClient.getCollectionsP(ApiRoutes.Refresh,
-          {'refreshToken': this.getKeyKen()['refreshToken']});
+    var kk = await store.getKeyKen();
+    if (kk != null) {
+      Response a = await apiClient.getCollectionsP(
+          ApiRoutes.Refresh, {'refreshToken': kk['refreshToken']});
       ;
-      print('toke***n  ');
-      print(a.body);
-      this.saveKeyKen(a.body);
+
+      store.saveKeyKen(a.body);
     } else {
       return new Response(body: {'data': []}, statusCode: 200);
     }
@@ -61,40 +61,40 @@ class ManageRepo extends GetxService with StorageService {
   }
 
   Future newConnexion() async {
-    print('newlocatio-------------------------${this.getKey()}');
+    // print('newlocatio-------------------------${store.getKey()}');
+    var getU = await store.getKey();
 
     // ignore: unnecessary_null_comparison
-    if (this.getKey() != null) {
-      if (this.getKey().length != 0) {
-        /*   try {
+    if (getU != null) {
+      // if (getU.length != 0) {
+      /*   try {
      */
-        print('newlocatio-');
+      // print('newlocatio-');
 
-        var loca = await new Dio().get('https://ipapi.co/json/');
+      var loca = await new Dio().get('https://ipapi.co/json/');
 
-        print(loca.data);
-        var data = {
-          'ip': loca.data['ip'],
-          'ville': loca.data['city'],
-          'latitude': loca.data['latitude'],
-          'keySecret': this.getKey(),
-          'longitude': loca.data['longitude']
-        };
-        await this.saveLonLat(data);
-        print(data);
-        Response a =
-            await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
+      var data = {
+        'ip': loca.data['ip'],
+        'ville': loca.data['city'],
+        'latitude': loca.data['latitude'],
+        'keySecret': getU,
+        'longitude': loca.data['longitude']
+      };
+      await store.saveLonLat(data);
 
-        print('ssnewlocatio-------------------------');
-        print(a.body);
+      Response a =
+          await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
 
-        return a;
-        /*   } catch (e) {
+      // print('ssnewlocatio-------------------------');
+      // print(a.body);
+
+      return a;
+      /*   } catch (e) {
         return new Response(body: {'data': []}, statusCode: 203);
       } */
-      } else {
-        return new Response(body: {'data': []}, statusCode: 200);
-      }
+      // } else {
+      //   return new Response(body: {'data': []}, statusCode: 200);
+      // }
     } else {
       return new Response(body: {'data': []}, statusCode: 200);
     }
@@ -111,7 +111,7 @@ class ManageRepo extends GetxService with StorageService {
     Response a0 = await apiClient.getCollectionsP(ApiRoutes.SIGNUP, data);
     if (a0.statusCode == 201) {
       var logdata = {'phone': data['phone'], 'password': data['password']};
-      print(logdata);
+      //  print(logdata);
 
       Response a = await this.Login(logdata);
       return a;

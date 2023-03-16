@@ -1,22 +1,22 @@
-import 'package:fahkapmobile/controller/managerController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/Services/dependancies.dart';
-import 'package:fahkapmobile/utils/Services/storageService.dart';
+import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/dependancies.dart';
+import 'package:Fahkap/utils/Services/storageService.dart';
 import 'package:get/get.dart';
-import 'package:fahkapmobile/utils/DataBase/DataBase.dart';
-import 'package:fahkapmobile/utils/Services/routing.dart';
-import 'package:fahkapmobile/utils/api/apiUrl.dart';
-import 'package:fahkapmobile/utils/functions/route.dart';
-import 'package:fahkapmobile/utils/provider/refresh_token.dart';
+import 'package:Fahkap/utils/DataBase/DataBase.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:Fahkap/utils/api/apiUrl.dart';
+import 'package:Fahkap/utils/functions/route.dart';
+import 'package:Fahkap/utils/provider/refresh_token.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:fahkapmobile/views/UsersMange/LoginScreen.dart';
-import 'package:fahkapmobile/views/ComplementView/wrapper.dart';
+import 'package:Fahkap/views/UsersMange/LoginScreen.dart';
+import 'package:Fahkap/views/ComplementView/wrapper.dart';
 
 import 'dart:async';
 
@@ -134,7 +134,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
         NewSplashScreen(
       title: "Fah Kap",
       //  subtitle: "LEGACY FINANCE \n Digital Finance",
-      image: 'assets/logo.png',
+      image: 'assets/logo/logoH.png',
       /*  loaderColor: Colors.yellow, */
     );
     // : (isOpen == 1)
@@ -160,54 +160,45 @@ class NewSplashScreen extends StatelessWidget {
         // height: Get.height * .06,
 
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: GradientApp.blueG,
-        ),
+        // decoration: BoxDecoration(
+        //   gradient: GradientApp.blueG,
+        // ),
         child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // new Expanded(
-            //   flex: 2,
-            //   child: new Container(
-            //       child: new Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: <Widget>[
-            // new CircleAvatar(
-            //   radius: double.parse(this.size.toString()),
-            //   backgroundColor: Colors.transparent,
-            //   child: Hero(
-            //     tag: "splashscreenImage",
-            //     child:
-            //         new Container(child: Image.asset(this.image)),
-            //   ),
-            // ),
-            // new Padding(
-            //   padding: const EdgeInsets.only(top: 15.0),
-            // ),
-            Text('N',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    // fontFamily:  ,
-                    fontSize: 120 + _controller.tailleAdd,
-                    color: Colors.white))
-            //     ],
-            //   )),
-            // ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Expanded(
+                  flex: 2,
+                  child: new Container(
+                      child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(child: Image.asset(this.image)),
 
-            // Container(
-            //   padding: EdgeInsets.only(top: kMdHeight / 5),
-            //   child: SpinKitCircle(
-            //     color: Colors.blue,
-            //     size: 40,
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 20.0),
-            // ),
-            // (this.subtitle == null) ? Text('') : Text(this.subtitle)
-          ],
-        ),
+                      // Text('N',
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(
+                      //         fontWeight: FontWeight.bold,
+                      //         // fontFamily:  ,
+                      //         fontSize: 120 + _controller.tailleAdd,
+                      //         color: Colors.white))
+                      //     ],
+                      //   )),
+                      // ),
+
+                      Container(
+                        padding: EdgeInsets.only(top: kMdHeight / 6),
+                        child: SpinKitCircle(
+                          color: Colors.blue,
+                          size: 40,
+                        ),
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 20.0),
+                      // ),
+                      // (this.subtitle == null) ? Text('') : Text(this.subtitle)
+                    ],
+                  )))
+            ]),
       ));
     });
   }

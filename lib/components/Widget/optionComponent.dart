@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 
 class OptionComponent extends StatelessWidget {
   OptionComponent({this.title, this.selected = false, this.onTap});

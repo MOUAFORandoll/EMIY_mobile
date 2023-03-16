@@ -1,10 +1,10 @@
-// import 'package:fahkapmobile/Views/Shopping/BuyShoopingCart.dart';
-// import 'package:fahkapmobile/controller/BuyShopController.dart';
-// import 'package:fahkapmobile/model/data/LivreurModel.dart';
+// import 'package:Fahkap/Views/Shopping/BuyShoopingCart.dart';
+// import 'package:Fahkap/controller/BuyShopController.dart';
+// import 'package:Fahkap/model/data/LivreurModel.dart';
 // import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:get/get.dart';
-// import 'package:fahkapmobile/styles/colorApp.dart';
+// import 'package:Fahkap/styles/colorApp.dart';
 
 // class LivreurComponent extends StatelessWidget {
 //   final LivreurModel livreur;

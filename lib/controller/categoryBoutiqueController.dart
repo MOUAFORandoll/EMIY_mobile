@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/ProduitBoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
-import 'package:fahkapmobile/repository/categoryBoutiqueRepo.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/model/data/BoutiqueModel.dart';
+import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/CommandeBoutiqueModel.dart';
+import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/repository/BoutiqueRepo.dart';
+import 'package:Fahkap/repository/categoryBoutiqueRepo.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,7 +29,6 @@ class CategoryBoutiqueController extends GetxController {
   // CategoryController({required this.service});
   getCategory() async {
     try {
-      _categoryList.clear();
       _categoryList = [];
 
       _isLoadedCat = 0;
@@ -38,6 +37,8 @@ class CategoryBoutiqueController extends GetxController {
       Response response = await categoryBoutiqueRepo.getListCategory();
       if (response.body != null) {
         if (response.body['data'].length != 0) {
+          _categoryList = [];
+
           _categoryList.addAll((response.body['data'] as List)
               .map((e) => CategoryModel.fromJson(e))
               .toList());

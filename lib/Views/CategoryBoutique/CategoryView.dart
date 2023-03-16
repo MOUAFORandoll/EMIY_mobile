@@ -1,19 +1,19 @@
-import 'package:fahkapmobile/components/Button/btnCatList.dart';
-import 'package:fahkapmobile/components/Button/btnCatListPV.dart';
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Text/bigtitleText.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent2.dart';
-import 'package:fahkapmobile/components/Widget/productComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Text/titleText.dart';
-import 'package:fahkapmobile/controller/categoryBoutiqueController.dart';
-import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/components/Button/btnCatList.dart';
+import 'package:Fahkap/components/Button/btnCatListPV.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Widget/categoryComponent2.dart';
+import 'package:Fahkap/components/Widget/productComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Text/titleText.dart';
+import 'package:Fahkap/controller/categoryBoutiqueController.dart';
+import 'package:Fahkap/controller/categoryController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -123,13 +123,26 @@ class CategoryView extends StatelessWidget {
                                               fontSize: 15)),
                                     ),
                                   ])))
-                      : CategoryComponent2(
-                          category: categorys.categoryList[index],
-                        ),
+                      : Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8)),
+                          child: SingleChildScrollView(
+                              child: GridView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.all(20),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 10.0,
+                                          mainAxisSpacing: 10.0),
+                                  itemCount: categorys.categoryList.length,
+                                  itemBuilder: (_ctx, index) =>
+                                      CategoryComponent2(
+                                        category: categorys.categoryList[index],
+                                      )))),
 
-                  childCount: categorys.categoryList.length == 0
-                      ? 1
-                      : categorys.categoryList.length,
+                  childCount: 1,
                 ))
               ])));
     });

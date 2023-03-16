@@ -1,21 +1,24 @@
+import 'package:Fahkap/controller/searchController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:fahkapmobile/components/Button/AppIconButton.dart';
-import 'package:fahkapmobile/components/Button/IconButtonF.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Text/bigtitleText.dart';
-import 'package:fahkapmobile/components/Text/bigtitleText0.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/controller/cartController.dart';
-import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/controller/categoryBoutiqueController.dart';
-import 'package:fahkapmobile/controller/productController.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:Fahkap/components/Button/AppIconButton.dart';
+import 'package:Fahkap/components/Button/IconButtonF.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Text/SimpleText.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Text/bigtitleText0.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/controller/cartController.dart';
+import 'package:Fahkap/controller/categoryController.dart';
+import 'package:Fahkap/controller/categoryBoutiqueController.dart';
+import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/controller/productController.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,298 +30,384 @@ class ProductView extends StatelessWidget {
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
-    print(index);
+    Get.find<ManagerController>().initCurrent();
 
+    print(index);
     Object produ = Get.parameters['type'] == '0'
         ? Get.find<ProductController>().produitList[index]
-        : Get.parameters['type'] == '1'
-            ? Get.find<ProductController>().produitListAll[index]
-            : Get.find<CategoryBoutiqueController>().produitBoutiqueList[index];
+        : Get.parameters['type'] == 'search'
+            ? Get.find<SearchController>().listResultSeaarch[index]
+            : Get.parameters['type'] == '1'
+                ? Get.find<ProductController>().produitListAll[index]
+                : Get.find<CategoryBoutiqueController>()
+                    .produitBoutiqueList[index];
     var product = produ as ProduitModel;
     Get.find<ProductController>()
         .initProduct(Get.find<CartController>(), product);
     print(product);
-    return Scaffold(
-      body: SafeArea(
-          child: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          // Add the app bar to the CustomScrollView.
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: ColorsApp.bleuLight,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButtonF(
-                  icon: Icons.arrow_back_ios_new,
-                  color: ColorsApp.black,
-                  onTap: () {
-                    Get.back();
-                  },
-                ),
-                GetBuilder<ProductController>(builder: (controller) {
-                  return Stack(
-                    children: [
-                      Container(
-                          child: Get.find<ProductController>().totalItems >= 1
-                              ? IconButtonF(
-                                  color: ColorsApp.black,
-                                  icon: Icons.shopping_cart_outlined,
-                                  onTap: () {
-                                    Get.toNamed(
-                                      AppLinks.SHOPNEXT,
-                                    );
-                                  },
-                                )
-                              : Container()),
-                      Get.find<ProductController>().totalItems >= 1
-                          ? Positioned(
-                              top: 0,
-                              left: 1,
-                              child: Container(
-                                  child: smallText(
-                                      text: Get.find<ProductController>()
-                                          .totalItems
-                                          .toString(),
-                                      color: Colors.white)))
-                          : Container(),
-                    ],
-                  );
-                })
-              ],
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-                background: Column(children: [
-              Expanded(
-                  child: CarouselSlider.builder(
-                      carouselController: _controller,
-                      options: CarouselOptions(
-                          height: kMdHeight,
-                          aspectRatio: 4 / 4,
-                          viewportFraction: 0.8,
-                          enlargeStrategy: CenterPageEnlargeStrategy.height,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          onPageChanged: (index, reason) {
-                            Get.find<CartController>().setCurrent(index);
+    return GetBuilder<ManagerController>(
+        builder: (manage) => Scaffold(
+              body: SafeArea(
+                  child: CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  // Add the app bar to the CustomScrollView.
+                  SliverAppBar(
+                    automaticallyImplyLeading: false,
+                    backgroundColor: ColorsApp.bleuLight,
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButtonF(
+                          icon: Icons.arrow_back_ios_new,
+                          color: ColorsApp.black,
+                          onTap: () {
+                            Get.back();
                           },
-                          autoPlay: true,
-                          disableCenter: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration:
-                              Duration(milliseconds: 800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          scrollDirection: Axis.horizontal),
-                      itemCount: product.images.length,
-                      itemBuilder: (_ctx, i, j) => InkWell(
-                          child: CachedNetworkImage(
-                            height: kMdHeight * .15,
-                            width: Get.width * .5,
-                            fit: BoxFit.cover,
-                            imageUrl: product.images[i].src,
-                            imageBuilder: (context, imageProvider) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: imageProvider,
+                        ),
+                        GetBuilder<ProductController>(builder: (controller) {
+                          return Stack(
+                            children: [
+                              Container(
+                                  child: Get.find<ProductController>()
+                                              .totalItems >=
+                                          1
+                                      ? IconButtonF(
+                                          color: ColorsApp.black,
+                                          icon: Icons.shopping_cart_outlined,
+                                          onTap: () {
+                                            Get.toNamed(
+                                              AppLinks.SHOPNEXT,
+                                            );
+                                          },
+                                        )
+                                      : Container()),
+                              Get.find<ProductController>().totalItems >= 1
+                                  ? Positioned(
+                                      top: 0,
+                                      left: 1,
+                                      child: Container(
+                                          child: smallText(
+                                              text:
+                                                  Get.find<ProductController>()
+                                                      .totalItems
+                                                      .toString(),
+                                              color: Colors.white)))
+                                  : Container(),
+                            ],
+                          );
+                        })
+                      ],
+                    ),
+                    flexibleSpace: FlexibleSpaceBar(
+                        background: Column(children: [
+                      Expanded(
+                          child: CarouselSlider.builder(
+                              carouselController: _controller,
+                              options: CarouselOptions(
+                                  height: kMdHeight,
+                                  aspectRatio: 4 / 4,
+                                  viewportFraction: 0.8,
+                                  enlargeStrategy:
+                                      CenterPageEnlargeStrategy.scale,
+                                  initialPage: 0,
+                                  enableInfiniteScroll: true,
+                                  reverse: false,
+                                  onPageChanged: (index, reason) {
+                                    manage.setCurrent(index);
+                                  },
+                                  autoPlay: true,
+                                  disableCenter: true,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 800),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  scrollDirection: Axis.horizontal),
+                              // options: CarouselOptions(
+                              //   height: 380.0,
+                              //   enlargeCenterPage: true,
+                              //   autoPlay: true,
+                              //   aspectRatio: 16 / 9,
+                              //   autoPlayCurve: Curves.fastOutSlowIn,
+                              //   enableInfiniteScroll: true,
+                              //   autoPlayAnimationDuration: Duration(milliseconds: 800),
+                              //   viewportFraction: 0.8,
+                              // ),
+                              itemCount: product.images.length,
+                              itemBuilder: (_ctx, i, j) => InkWell(
+                                  child: CachedNetworkImage(
+                                    height: kMdHeight * .15,
+                                    width: Get.width * .5,
                                     fit: BoxFit.cover,
+                                    imageUrl: product.images[i].src,
+                                    imageBuilder: (context, imageProvider) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    placeholder: (context, url) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: ColorsApp.greySecond,
+                                        ),
+                                        child: Center(
+                                            child: CircularProgressIndicator(
+                                          color: ColorsApp.skyBlue,
+                                        )),
+                                      );
+                                    },
+                                    errorWidget: (context, url, error) {
+                                      return CircleAvatar(
+                                          backgroundColor: ColorsApp.skyBlue,
+                                          radius: 50,
+                                          backgroundImage: AssetImage(
+                                              "assets/images/error.gif"));
+                                    },
                                   ),
-                                ),
-                              );
-                            },
-                            placeholder: (context, url) {
-                              return Container(
-                                child: Center(
-                                    child: CircularProgressIndicator(
-                                  color: ColorsApp.skyBlue,
-                                )),
-                              );
-                            },
-                            errorWidget: (context, url, error) {
-                              return CircleAvatar(
-                                  backgroundColor: ColorsApp.skyBlue,
-                                  radius: 50,
-                                  backgroundImage:
-                                      AssetImage("assets/images/error.gif"));
-                            },
-                          ),
-                          onTap: () async {
-                            Get.bottomSheet(Container(
-                                height: kMdHeight * 2,
-                                child: CarouselSlider.builder(
-                                  carouselController: _controller,
-                                  options: CarouselOptions(
-                                      height: kMdHeight * 2,
-                                      aspectRatio: 4 / 4,
-                                      viewportFraction: 0.8,
-                                      enlargeStrategy:
-                                          CenterPageEnlargeStrategy.height,
-                                      initialPage: 0,
-                                      enableInfiniteScroll: true,
-                                      reverse: false,
-                                      onPageChanged: (index, reason) {
-                                        Get.find<CartController>()
-                                            .setCurrent(index);
-                                      },
-                                      autoPlay: true,
-                                      disableCenter: true,
-                                      autoPlayInterval: Duration(seconds: 3),
-                                      autoPlayAnimationDuration:
-                                          Duration(milliseconds: 800),
-                                      autoPlayCurve: Curves.fastOutSlowIn,
-                                      scrollDirection: Axis.horizontal),
-                                  itemCount: product.images.length,
-                                  itemBuilder: (_ctx, i, j) => InkWell(
-                                    child: CachedNetworkImage(
-                                      height: kMdHeight * .15,
-                                      width: Get.width * .5,
-                                      fit: BoxFit.cover,
-                                      imageUrl: product.images[i].src,
-                                      imageBuilder: (context, imageProvider) {
-                                        return Container(
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: imageProvider,
+                                  onTap: () async {
+                                    Get.bottomSheet(Container(
+                                        height: kMdHeight * 2,
+                                        child: CarouselSlider.builder(
+                                          carouselController: _controller,
+                                          options: CarouselOptions(
+                                              height: kMdHeight * 2,
+                                              aspectRatio: 4 / 4,
+                                              viewportFraction: 0.8,
+                                              enlargeStrategy:
+                                                  CenterPageEnlargeStrategy
+                                                      .height,
+                                              initialPage: 0,
+                                              enableInfiniteScroll: true,
+                                              reverse: false,
+                                              onPageChanged: (index, reason) {},
+                                              autoPlay: true,
+                                              disableCenter: true,
+                                              autoPlayInterval:
+                                                  Duration(seconds: 3),
+                                              autoPlayAnimationDuration:
+                                                  Duration(milliseconds: 800),
+                                              autoPlayCurve:
+                                                  Curves.fastOutSlowIn,
+                                              scrollDirection: Axis.horizontal),
+                                          itemCount: product.images.length,
+                                          itemBuilder: (_ctx, i, j) => InkWell(
+                                            child: CachedNetworkImage(
+                                              height: kMdHeight * .15,
+                                              width: Get.width * .5,
                                               fit: BoxFit.cover,
+                                              imageUrl: product.images[i].src,
+                                              imageBuilder:
+                                                  (context, imageProvider) {
+                                                return Container(
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              placeholder: (context, url) {
+                                                return Container(
+                                                  child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                    color: ColorsApp.skyBlue,
+                                                  )),
+                                                );
+                                              },
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return CircleAvatar(
+                                                    backgroundColor:
+                                                        ColorsApp.skyBlue,
+                                                    radius: 50,
+                                                    backgroundImage: AssetImage(
+                                                        "assets/images/error.gif"));
+                                              },
                                             ),
                                           ),
-                                        );
-                                      },
-                                      placeholder: (context, url) {
-                                        return Container(
-                                          child: Center(
-                                              child: CircularProgressIndicator(
-                                            color: ColorsApp.skyBlue,
-                                          )),
-                                        );
-                                      },
-                                      errorWidget: (context, url, error) {
-                                        return CircleAvatar(
-                                            backgroundColor: ColorsApp.skyBlue,
-                                            radius: 50,
-                                            backgroundImage: AssetImage(
-                                                "assets/images/error.gif"));
-                                      },
+                                        )));
+                                  })))
+                    ])),
+                    bottom: PreferredSize(
+                      preferredSize: Size.fromHeight(20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(25),
+                                topLeft: Radius.circular(25))),
+                        child: Center(
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                              // BigText(text: product.titre, bolder: true),
+                              // BigText(
+                              //     text: 'XAF ' + product.prix.toString(), bolder: true)
+                            ])),
+                        padding: EdgeInsets.only(top: 5, bottom: 5),
+                        width: double.maxFinite,
+                      ),
+                    ),
+                    expandedHeight: 300,
+                    pinned: true,
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children:
+                                    product.images.asMap().entries.map((entry) {
+                                  print(entry.key);
+                                  return GestureDetector(
+                                    onTap: () =>
+                                        _controller.animateToPage(entry.key),
+                                    child: Container(
+                                      width: 12.0,
+                                      height: 12.0,
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 8.0, horizontal: 4.0),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: (Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.dark
+                                                  ? Colors.white
+                                                  : Colors.black)
+                                              .withOpacity(
+                                                  manage.current == entry.key
+                                                      ? 0.9
+                                                      : 0.4)),
                                     ),
-                                  ),
-                                )));
-                          })))
-            ])),
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(20),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(25),
-                        topLeft: Radius.circular(25))),
-                child: Center(
-                    child: Row(
+                                  );
+                                }).toList(),
+                              ),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    BigtitleText(
+                                        text: product.titre, bolder: true),
+                                    BigtitleText0(
+                                        text: 'Disponible: ' +
+                                            product.quantite.toString() +
+                                            ' Pcs',
+                                        bolder: true),
+                                  ]),
+                              BigtitleText(
+                                  text: 'XAF ' + product.prix.toString(),
+                                  bolder: true),
+                              Container(
+                                  margin: EdgeInsets.only(top: 10, bottom: 5),
+                                  child: Text(
+                                    product.description,
+                                    textAlign: TextAlign.justify,
+                                  ))
+                            ])),
+                  ),
+                ],
+              )),
+              bottomNavigationBar:
+                  GetBuilder<ProductController>(builder: (prod) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Container(
+                    //   padding: EdgeInsets.only(
+                    //       left: kMdWidth / 2, right: kMdWidth / 2, top: 2, bottom: 2),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       IconButtonF(
+                    //         backgroundColor: ColorsApp.greenLight,
+                    //         icon: Icons.remove,
+                    //         inconSize: 15.0,
+                    //         onTap: () {
+                    //           prod.setQuantity(false); // Get.back();
+                    //         },
+                    //       ),
+                    //       BigText(
+                    //         text:
+                    //             'XAF ${product.prix * (prod.inCartItems == 0 ? 1 : prod.inCartItems)}',
+                    //       ),
+                    //       IconButtonF(
+                    //         backgroundColor: ColorsApp.greenLight,
+                    //         icon: Icons.add,
+                    //         inconSize: 15.0,
+                    //         onTap: () {
+                    //           prod.setQuantity(true); // Get.back();
+                    //         },
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    Container(
+                      decoration: BoxDecoration(color: ColorsApp.grey),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                      // BigText(text: product.titre, bolder: true),
-                      // BigText(
-                      //     text: 'XAF ' + product.prix.toString(), bolder: true)
-                    ])),
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                width: double.maxFinite,
-              ),
-            ),
-            expandedHeight: 300,
-            pinned: true,
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-                margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            BigtitleText(text: product.titre, bolder: true),
-                            BigtitleText0(
-                                text: 'Disponible: ' +
-                                    product.quantite.toString(),
-                                bolder: true),
-                          ]),
-                      BigtitleText(
-                          text: 'XAF ' + product.prix.toString(), bolder: true),
-                      Container(
-                          margin: EdgeInsets.only(top: 10, bottom: 5),
-                          child: Text(
-                            product.description,
-                            textAlign: TextAlign.justify,
-                          ))
-                    ])),
-          ),
-        ],
-      )),
-      bottomNavigationBar: GetBuilder<ProductController>(builder: (prod) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: EdgeInsets.only(
-                  left: kMdWidth / 2, right: kMdWidth / 2, top: 2, bottom: 2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButtonF(
-                    backgroundColor: ColorsApp.greenLight,
-                    icon: Icons.remove,
-                    inconSize: 15.0,
-                    onTap: () {
-                      prod.setQuantity(false); // Get.back();
-                    },
-                  ),
-                  BigText(
-                    text:
-                        'XAF ${product.prix * (prod.inCartItems == 0 ? 1 : prod.inCartItems)}',
-                  ),
-                  IconButtonF(
-                    backgroundColor: ColorsApp.greenLight,
-                    icon: Icons.add,
-                    inconSize: 15.0,
-                    onTap: () {
-                      prod.setQuantity(true); // Get.back();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(color: ColorsApp.grey),
-              // padding: EdgeInsets.only(
-              //     left: kMdWidth / 6, right: kMdWidth / 6, top: 6, bottom: 6),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // AppIconButton(
-                  //   icon: Icons.favorite,
-                  //   onTap: () {
-                  //     // Get.back();
-                  //   },
-                  // ),
-                  BigText(
-                    text: prod.inCartItems.toString(),
-                  ),
-                  CustomBtn(
-                    color: ColorsApp.greenLight,
-                    title:
-                        prod.exitP(product) ? "Augmenter" : 'Ajouter au panier',
-                    onTap: () {
-                      prod.addItem(product, index, Get.parameters['type']);
-                    },
-                  )
-                ],
-              ),
-            )
-          ],
-        );
-      }),
-    );
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: kMdWidth / 10,
+                                right: kMdWidth / 10,
+                                top: 6,
+                                bottom: 6),
+                            padding: EdgeInsets.only(
+                              left: kMdWidth / 5,
+                              right: kMdWidth / 5,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconButtonF0(
+                                  backgroundColor: ColorsApp.greenLight,
+                                  icon: Icons.remove,
+                                  inconSize: 18.0,
+                                  onTap: () {
+                                    prod.setQuantity(false); // Get.back();
+                                  },
+                                ),
+                                SimpleText(
+                                  text: prod.inCartItems.toString(),
+                                ),
+                                IconButtonF0(
+                                  backgroundColor: ColorsApp.greenLight,
+                                  icon: Icons.add,
+                                  inconSize: 18.0,
+                                  onTap: () {
+                                    prod.setQuantity(true); // Get.back();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          CustomBtn(
+                            color: ColorsApp.greenLight,
+                            title: prod.exitP(product)
+                                ? "Augmenter"
+                                : 'Ajouter au panier',
+                            onTap: () {
+                              prod.addItem(
+                                  product, index, Get.parameters['type']);
+                            },
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              }),
+            ));
   }
 }

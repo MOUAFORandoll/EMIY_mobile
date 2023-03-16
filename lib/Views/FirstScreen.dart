@@ -1,21 +1,27 @@
+import 'package:Fahkap/Views/Home/SearchView.dart';
+import 'package:Fahkap/controller/ActionController.dart';
+import 'package:Fahkap/controller/CommandeController.dart';
+import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:fahkapmobile/Views/ComplementView/AboutUsView.dart';
-import 'package:fahkapmobile/Views/Home/HomeView.dart';
-import 'package:fahkapmobile/Views/Shopping/ShoppingView.dart';
-import 'package:fahkapmobile/Views/UsersMange/ManageView.dart';
-import 'package:fahkapmobile/components/Widget/optionComponent.dart';
+import 'package:Fahkap/Views/ComplementView/AboutUsView.dart';
+import 'package:Fahkap/Views/Home/HomeView.dart';
+import 'package:Fahkap/Views/Shopping/ShoppingView.dart';
+import 'package:Fahkap/Views/UsersMange/ManageView.dart';
+import 'package:Fahkap/components/Widget/optionComponent.dart';
 // import 'package:antdesign_icons/antdesign_icons.dart';
 
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/controller/cartController.dart';
-import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/utils/Services/dependancies.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/controller/cartController.dart';
+import 'package:Fahkap/controller/categoryController.dart';
+import 'package:Fahkap/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'CategoryBoutique/CategoryView.dart';
 
@@ -29,19 +35,56 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
   int _currentIndex = 0;
   bool _isVisible = true;
-  late ScrollController controller;
+  // late ScrollController controller;
 
   @override
   void initState() {
+    iniit();
     super.initState();
-    controller = ScrollController();
-    controller.addListener(() {
-      setState(() {
-        print(_isVisible);
-        _isVisible =
-            controller.position.userScrollDirection == ScrollDirection.forward;
-      });
-    });
+    // controller = ScrollController();
+    // Get.find<ActionController>().scrollcontroller.addListener(() {
+    //   print(Get.find<ActionController>().scrollcontroller.position);
+
+    //   setState(() {
+    //     print(_isVisible);
+    //     _isVisible = Get.find<ActionController>()
+    //             .scrollcontroller
+    //             .position
+    //             .userScrollDirection ==
+    //         ScrollDirection.forward;
+    //   });
+    // });
+  }
+
+  iniit() async {
+    // await MyBinding().requestPermission();
+    var status = await Permission.storage.status;
+    print("voici le statut************* ,  $status");
+    if (!status.isGranted) {
+      await Permission.storage.request();
+      await getData();
+    } else {
+      await getData();
+    }
+  }
+
+  getData() async {
+    // await MyBinding().requestPermission();
+    var status = await Permission.storage.status;
+    print("voici le statut ,  $status");
+
+    if (status.isGranted) {
+      var database = Get.find<DB>();
+      await database.init();
+      await Get.find<ActionController>().getLanguageInit();
+
+      Get.find<ManagerController>().getKeyU();
+      Get.find<ManagerController>().getUser();
+
+      Get.find<ManagerController>().newLocalisation();
+
+      Get.find<CommandeController>().getListCommandes();
+    }
   }
 
   List<int> _badgeCounts = List<int>.generate(5, (index) => index);
@@ -57,6 +100,23 @@ class _FirstScreenState extends State<FirstScreen> {
 
       body: SafeArea(child: _buildContent(_currentIndex)),
 
+      // bottomNavigationBar:
+      //         /*     Offstage(offstage: !_isVisible, child: */ AnimatedBuilder(
+      //             animation: Get.find<ActionController>().scrollcontroller,
+      //             builder: (context, child) {
+      //               return AnimatedContainer(
+      //                 duration: Duration(milliseconds: 300),
+      //                 height: Get.find<ActionController>()
+      //                             .scrollcontroller
+      //                             .position
+      //                             .userScrollDirection ==
+      //                         ScrollDirection.reverse
+      //                     ? 0
+      //                     : 100,
+      //                 child: child,
+      //               );
+      //             },
+      //             child: _buildBorderRadiusDesign()),
       bottomNavigationBar:
           Offstage(offstage: !_isVisible, child: _buildBorderRadiusDesign()),
     );
@@ -74,8 +134,11 @@ class _FirstScreenState extends State<FirstScreen> {
         return CategoryView();
 
       case 2:
-        return ShoppingView();
+        return SearchView();
       case 3:
+        return ShoppingView();
+
+      case 4:
         return ManageView();
 
       // case 4:
@@ -90,22 +153,21 @@ class _FirstScreenState extends State<FirstScreen> {
     return GetBuilder<CartController>(builder: (_controller) {
       return CustomNavigationBar(
         iconSize: 30.0,
+        // elevation: 0.0,
         scaleFactor: 0.4,
         selectedColor: Color(0xff0c18fb),
         strokeColor: Color(0x300c18fb),
         unSelectedColor: Colors.grey[600],
         backgroundColor: Colors.black,
-        borderRadius: Radius.circular(20.0),
+        borderRadius: Radius.circular(15.0),
         isFloating: true,
         // blurEffect: true,
-        // opacity: 0.5,
         items: [
           CustomNavigationBarItem(
-            icon: Icon(Icons.home),
-            // badgeCount: _badgeCounts[0],
-            // showBadge: _badgeShows[0],
-            // title: smallText(text: 'home')
-          ),
+              icon: Icon(Icons.home),
+              // badgeCount: _badgeCounts[0],
+              // showBadge: _badgeShows[0],
+              title: Text('home', style: TextStyle(color: Colors.grey[600]))),
           // CustomNavigationBarItem(
           //   icon: Icon(Icons.search),
           //   badgeCount: _badgeCounts[3],
@@ -118,17 +180,28 @@ class _FirstScreenState extends State<FirstScreen> {
           // ),
           CustomNavigationBarItem(
             icon: Icon(Icons.dashboard_customize_outlined),
+            title: Text('Category', style: TextStyle(color: Colors.grey[600])),
+
             // badgeCount: _badgeCounts[2],
             // showBadge: _badgeShows[2],
           ),
           CustomNavigationBarItem(
+            icon: Icon(Icons.search),
+            // badgeCount: _badgeCounts[2],
+            title: Text('Search', style: TextStyle(color: Colors.grey[600])),
+            // showBadge: _badgeShows[2],
+          ),
+          CustomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
+            title: Text('Shop', style: TextStyle(color: Colors.grey[600])),
             badgeCount: _controller.totalItems /*  _badgeCounts[1] */,
             showBadge: true,
           ),
 
           CustomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
+            icon: Icon(Icons.settings),
+            title: Text('setting', style: TextStyle(color: Colors.grey[600])),
+
             // badgeCount: _badgeCounts[4],
             // showBadge: _badgeShows[4],
           ),
@@ -150,21 +223,21 @@ class _FirstScreenState extends State<FirstScreen> {
 }
 
 /**
- * import 'package:fahkapmobile/components/Button/btnCatList.dart';
-import 'package:fahkapmobile/components/Button/btnCatListPV.dart';
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Text/bigtitleText.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Widget/productComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Text/titleText.dart';
-import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/controller/popularproductController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+ * import 'package:Fahkap/components/Button/btnCatList.dart';
+import 'package:Fahkap/components/Button/btnCatListPV.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Widget/productComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Text/titleText.dart';
+import 'package:Fahkap/controller/categoryController.dart';
+import 'package:Fahkap/controller/popularproductController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

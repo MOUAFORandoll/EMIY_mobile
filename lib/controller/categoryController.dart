@@ -1,8 +1,8 @@
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/repository/categoryRepo.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/repository/categoryRepo.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
 
 // class CategoryController extends GetxController {

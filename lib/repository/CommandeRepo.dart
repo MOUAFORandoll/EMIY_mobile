@@ -1,11 +1,11 @@
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/utils/Services/ApiClient.dart';
-import 'package:fahkapmobile/utils/constants/apiRoute.dart';
-import 'package:fahkapmobile/utils/database/DataBase.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/utils/Services/ApiClient.dart';
+import 'package:Fahkap/utils/constants/apiRoute.dart';
+import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
-class CommandeRepo extends GetxService  with DB {
+class CommandeRepo extends GetxService with DB {
   final ApiClient apiClient;
   CommandeRepo({required this.apiClient});
 

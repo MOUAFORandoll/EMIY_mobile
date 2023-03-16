@@ -1,9 +1,13 @@
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/components/Button/IconButtonF.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Form/formComponent.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Text/bigtitleText0.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:get/get.dart';
 
 class ForgotPassordScreen extends StatefulWidget {
@@ -89,9 +93,19 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: InkWell(
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: ColorsApp.black,
+              ),
+              onTap: () {
+                Get.back();
+              },
+            ),
+            title: BigtitleText0(text: 'Forgot Pasword ?', bolder: true),
+            actions: []),
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           controller: _tabController,
@@ -105,26 +119,9 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                              icon: Icon(Icons.home),
-                              onPressed: () {
-                                Get.toNamed(AppLinks.HOME);
-                              })
-                        ]),
-                    Text(
-                      "Forgot Pasword ?",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     Container(
                       padding: EdgeInsets.only(
-                        top: 15,
+                        top: 50,
                         bottom: 15,
                       ),
                       child: Row(
@@ -149,70 +146,12 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                             )
                           ]),
                     ),
-                    TextFormField(
-                      enabled: enableD,
-                      controller: email,
-                      onSaved: (value) {},
-                      validator: (value) {
-                        return value == "" ? "veuillez remplir ce champ" : null;
-                      },
-                      keyboardType: TextInputType.text,
-                      decoration: new InputDecoration(
-                        counterText: "",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            // width: 10
-                          ),
-                        ),
-                        contentPadding: EdgeInsets.only(
-                          left: 15,
-                          bottom: 11,
-                          top: 15,
-                          right: 15,
-                        ),
-                        hintText: "Email or Number",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
-                      ),
-                      onChanged: (val) {
-                        if (val.isNotEmpty) {
-                          if (!val.contains(RegExp(
-                              r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$"))) {
-                            setState(() {
-                              mailSa = "mauvaise adresse mail";
-                            });
-                          } else {
-                            setState(() {
-                              mailSa = "correct mail address";
-                            });
-                          }
-                          if (val.isEmpty) {
-                            setState(() {
-                              mailSa = "";
-                            });
-                          }
-                        }
-                        if ((name.text.isNotEmpty &&
-                            surname.text.isNotEmpty &&
-                            email.text.contains(RegExp(
-                                r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")) &&
-                            phone.text.isNotEmpty &&
-                            pass.text.isNotEmpty &&
-                            (RegExp(r'^(0|[1-9]\d*)$').hasMatch(phone.text) &&
-                                phone.text.length == 9))) {
-                          setState(() {
-                            enabled = true;
-                          });
-                          print("access");
-                        } else {
-                          setState(() {
-                            enabled = false;
-                          });
-                          print("eroorrrrrrrrr");
-                        }
-                      },
-                    ),
+                    FormComponent(
+                        icon: Icons.phone,
+                        type: 0,
+                        controller: phone,
+                        enabled: true,
+                        hint: "Phone or email"),
                     Container(
                       padding: EdgeInsets.only(top: 10),
                       child: Button(
@@ -642,7 +581,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                     ),
                     Button(
                         height: 45,
-                        title: "ForgotPassord",
+                        title: "Validate",
                         width: Get.size.width,
                         textColor: Colors.white,
                         itemColor: ColorsApp.skyBlue,
@@ -761,28 +700,28 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                               _tabController.index--;
                             },
                           ),
-                          Button(
-                            height: 40, width: Get.size.width * .4,
-                            // margin: EdgeInsets.only(left: 40, right: 40),
-                            title: "Se Connecter",
-                            itemColor: Colors.transparent,
-                            loaderColor: ColorsApp.skyBlue,
-                            textColor: ColorsApp.skyBlue,
-                            state: false,
-                            enabled: true,
-                            onTap: () async {
-                              // Navigator.of(context)
-                              //     .pushReplacement(MaterialPageRoute(
-                              //         builder: (context) => LogPhone()))
-                              //     .then((value) {
-                              //   if (mounted) {
-                              //     setState(() {
-                              //       validator2 = false;
-                              //     });
-                              //   }
-                              // });
-                            },
-                          ),
+                          // Button(
+                          //   height: 40, width: Get.size.width * .4,
+                          //   // margin: EdgeInsets.only(left: 40, right: 40),
+                          //   title: "Se Connecter",
+                          //   itemColor: Colors.transparent,
+                          //   loaderColor: ColorsApp.skyBlue,
+                          //   textColor: ColorsApp.skyBlue,
+                          //   state: false,
+                          //   enabled: true,
+                          //   onTap: () async {
+                          //     // Navigator.of(context)
+                          //     //     .pushReplacement(MaterialPageRoute(
+                          //     //         builder: (context) => LogPhone()))
+                          //     //     .then((value) {
+                          //     //   if (mounted) {
+                          //     //     setState(() {
+                          //     //       validator2 = false;
+                          //     //     });
+                          //     //   }
+                          //     // });
+                          //   },
+                          // ),
                         ],
                       ),
                     )

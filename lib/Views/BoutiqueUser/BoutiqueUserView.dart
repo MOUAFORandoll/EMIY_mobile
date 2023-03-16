@@ -1,23 +1,25 @@
 import 'dart:io';
 
-import 'package:fahkapmobile/components/Button/AppIconButton.dart';
-import 'package:fahkapmobile/components/Button/IconButtonF.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/components/Form/commentForm.dart';
-import 'package:fahkapmobile/components/Form/formComponent.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Widget/cardBoutiqueComponent.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Widget/imageComp.dart';
-import 'package:fahkapmobile/components/Widget/productBoutiqueComponent.dart';
-import 'package:fahkapmobile/components/Widget/shoppingproductComponent.dart';
-import 'package:fahkapmobile/controller/boutiqueController.dart';
-import 'package:fahkapmobile/controller/cartController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:Fahkap/components/Button/AppIconButton.dart';
+import 'package:Fahkap/components/Button/IconButtonF.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Form/commentForm.dart';
+import 'package:Fahkap/components/Form/formComponent.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Text/bigtitleText0.dart';
+import 'package:Fahkap/components/Widget/cardBoutiqueComponent.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Widget/imageComp.dart';
+import 'package:Fahkap/components/Widget/productBoutiqueComponent.dart';
+import 'package:Fahkap/components/Widget/shoppingproductComponent.dart';
+import 'package:Fahkap/controller/boutiqueController.dart';
+import 'package:Fahkap/controller/cartController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,21 +56,18 @@ class BoutiqueUserView extends StatelessWidget {
                 right: kMdWidth / 6,
                 top: kMarginY * 2.2,
                 bottom: kMarginY * 2.2),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  smallText(
-                    text: _controller.Boutique.titre,
-                  ),
-                  // CustomBtn(
-                  //   color: ColorsApp.greenLight,
-                  //   title:
-                  //       _controller.addProduct ? 'Retour' : 'Ajouter Produit',
-                  //   onTap: () {
-                  //     _controller.chageState(!_controller.addProduct);
-                  //   },
-                  // )
-                ])),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              BigtitleText0(
+                  text: _controller.Boutique.titre.toUpperCase(), bolder: true),
+              // CustomBtn(
+              //   color: ColorsApp.greenLight,
+              //   title:
+              //       _controller.addProduct ? 'Retour' : 'Ajouter Produit',
+              //   onTap: () {
+              //     _controller.chageState(!_controller.addProduct);
+              //   },
+              // )
+            ])),
 
         SingleChildScrollView(
             child: Column(children: [
@@ -88,9 +87,8 @@ class BoutiqueUserView extends StatelessWidget {
                 link: AppLinks.MANAGE_FOR_BOUTIQUE),
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            // CardBoutiqueComponent(
-            //     title: 'Transaction Compte',
-            //     link: AppLinks.HISTORIQUE_FOR_BOUTIQUE),
+            CardBoutiqueComponent(
+                title: 'SHort', link: AppLinks.SHORT_BOUTIQUE),
             // CardBoutiqueComponent(
             //     title: 'Compte ', link: AppLinks.COMPTE_FOR_BOUTIQUE),
           ]),

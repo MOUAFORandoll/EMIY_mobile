@@ -1,10 +1,10 @@
-import 'package:fahkapmobile/model/data/CartModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/model/data/CartModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
@@ -12,13 +12,6 @@ class CartController extends GetxController {
 
   Map<int, CartModel> _items = {};
   Map<int, CartModel> get items => _items;
-  int _current = 0;
-  int get current => _current;
-  setCurrent(index) {
-    _current = index;
-    update();
-    // print('cureent ---${_current}');
-  }
 
   int get totalItems {
     var totalQt = 0;
@@ -37,15 +30,29 @@ class CartController extends GetxController {
       var total = 0;
       _items.update(idProduit, (value) {
         total = value.quantity + (state ? 1 : -1);
-        if (total > 0) {
+        if (total > 0 && total <= value.qtdispo) {
           return CartModel(
               id: value.id,
               name: value.name,
+              qtdispo: value.qtdispo,
               index: value.index,
               type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
               quantity: total,
+              isExist: true,
+              time: DateTime.now().toString());
+        } else if (total > value.qtdispo) {
+          fn.snackBar('Panier', 'Limite pour ce produit', ColorsApp.skyBlue);
+          return CartModel(
+              id: value.id,
+              name: value.name,
+              index: value.index,
+              qtdispo: value.qtdispo,
+              type: value.type,
+              prix: double.parse(value.prix.toString()),
+              img: value.img,
+              quantity: value.quantity,
               isExist: true,
               time: DateTime.now().toString());
         } else {
@@ -54,6 +61,7 @@ class CartController extends GetxController {
               id: value.id,
               name: value.name,
               index: value.index,
+              qtdispo: value.qtdispo,
               type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
@@ -63,7 +71,7 @@ class CartController extends GetxController {
         }
       });
       print(total);
-
+      totalItems;
       update();
     }
   }
@@ -161,6 +169,7 @@ class CartController extends GetxController {
               type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
+              qtdispo: product.quantite,
               quantity: value.quantity + quantity,
               isExist: true,
               time: DateTime.now().toString());
@@ -182,6 +191,7 @@ class CartController extends GetxController {
                   type: type,
                   prix: double.parse(product.prix.toString()),
                   img: product.images[0].src,
+                  qtdispo: product.quantite,
                   quantity: quantity,
                   isExist: true,
                   time: DateTime.now().toString()));

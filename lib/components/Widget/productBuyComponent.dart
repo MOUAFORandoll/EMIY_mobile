@@ -1,7 +1,7 @@
 // ignore: must_be_immutable
-import 'package:fahkapmobile/model/data/CartModel.dart';
+import 'package:Fahkap/model/data/CartModel.dart';
 import 'package:get/get.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

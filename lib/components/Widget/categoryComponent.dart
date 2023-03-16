@@ -1,9 +1,9 @@
-// ignore: must_be_immutable import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/Services/routing.dart';
+// ignore: must_be_immutable import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:get/get.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -50,13 +50,15 @@ class CategoryComponent extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(color: Colors.white, fontSize: 15)),
                 ),
-                Container(
-                    margin: EdgeInsets.only(
-                        top: Get.height * .005, left: Get.width * .008),
-                    child: Icon(
-                      Icons.no_backpack,
-                      color: Colors.white,
-                    )),
+                // Container(
+
+                  
+                //     margin: EdgeInsets.only(
+                //         top: Get.height * .005, left: Get.width * .008),
+                //     child: Icon(
+                //       IconData(category.icon, fontFamily: 'MaterialIcons'),
+                //       color: Colors.white,
+                //     )),
               ])),
     );
   }

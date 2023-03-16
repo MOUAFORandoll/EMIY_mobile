@@ -1,16 +1,16 @@
-import 'package:fahkapmobile/components/Button/AppIconButton.dart';
-import 'package:fahkapmobile/components/Button/IconButtonF.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Text/bigtitleText.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Widget/shoppingproductComponent.dart';
-import 'package:fahkapmobile/controller/cartController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/Services/routing.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/components/Button/AppIconButton.dart';
+import 'package:Fahkap/components/Button/IconButtonF.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Widget/shoppingproductComponent.dart';
+import 'package:Fahkap/controller/cartController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -98,10 +98,17 @@ class ShoppingViewNext extends StatelessWidget {
                         bolder: true,
                       ),
                     )
-                  : ShoppingproductComponent(
-                      cartM: _controller.getItems[index],
-                    ),
-              childCount: _controller.getItems.length,
+                  : SingleChildScrollView(
+                      child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _controller.getItems.length,
+                      // controller: _controller,
+                      itemBuilder: (_, index) => ShoppingproductComponent(
+                        cartM: _controller.getItems[index],
+                      ),
+                    )),
+              childCount: 1,
             ))
           ]),
           bottomNavigationBar: Container(
@@ -185,38 +192,38 @@ class ShoppingViewNext extends StatelessWidget {
                         ),
                       ],
                     )),
-                Container(
-                    // width: Get.size.width * 0.1,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(bottom: 2),
-                    decoration: new BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Frais de livraison :',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            '1000 XAF',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    )),
+                // Container(
+                //     // width: Get.size.width * 0.1,
+                //     alignment: Alignment.center,
+                //     padding: EdgeInsets.all(10),
+                //     margin: EdgeInsets.only(bottom: 2),
+                //     decoration: new BoxDecoration(
+                //       borderRadius: BorderRadius.circular(10),
+                //       color: Colors.white,
+                //     ),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         Container(
+                //           child: Text(
+                //             'Frais de livraison :',
+                //             style: TextStyle(
+                //                 fontFamily: 'orkney',
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.bold),
+                //           ),
+                //         ),
+                //         Container(
+                //           child: Text(
+                //             '1000 XAF',
+                //             style: TextStyle(
+                //                 fontFamily: 'orkney',
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.bold),
+                //           ),
+                //         ),
+                //       ],
+                //     )),
                 Container(
                     // width: Get.size.width * 0.1,
                     alignment: Alignment.center,

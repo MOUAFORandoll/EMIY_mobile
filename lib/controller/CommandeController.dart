@@ -1,15 +1,15 @@
-import 'package:fahkapmobile/model/data/CartModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/CommandeModel.dart';
-import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/repository/CommandeRepo.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
-import 'package:fahkapmobile/utils/database/DataBase.dart';
+import 'package:Fahkap/model/data/CartModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/CommandeModel.dart';
+import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/repository/CommandeRepo.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 
-class CommandeController extends GetxController with DB {
+class CommandeController extends GetxController {
   final service = new ApiService();
   final CommandeRepo commandeRepo;
   CommandeController({required this.commandeRepo});
@@ -17,12 +17,14 @@ class CommandeController extends GetxController with DB {
   List<CommandeModel> get commandeList => _commandeList;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
+
+  var s = Get.find<DB>();
   getListCommandes() async {
     try {
       print('DB *************response ');
       _commandeList.clear();
       _isLoaded = false;
-      var response = await this.getListCommande();
+      var response = await s.getListCommande();
       print('DB *************response ');
       print(response);
       _commandeList.addAll(
@@ -36,7 +38,7 @@ class CommandeController extends GetxController with DB {
   }
 
   saveCommande(id, codeCommande, codeClient, date) {
-    this.insert(id, codeCommande, codeClient, date);
+    s.insert(id, codeCommande, codeClient, date);
   }
 
   List<Produit> _produitList = [];
@@ -73,7 +75,6 @@ class CommandeController extends GetxController with DB {
         _isLoadedP = true;
         update();
       }
-     
     } catch (e) {
       print(e);
     }

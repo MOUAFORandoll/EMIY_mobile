@@ -1,14 +1,14 @@
-import 'package:fahkapmobile/controller/CommandeController.dart';
-import 'package:fahkapmobile/model/data/CartModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/LivreurModel.dart';
-import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/repository/BuyShoopingCartRepo.dart';
-import 'package:fahkapmobile/repository/LivreurRepo.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/controller/CommandeController.dart';
+import 'package:Fahkap/model/data/CartModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/LivreurModel.dart';
+import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/repository/BuyShoopingCartRepo.dart';
+import 'package:Fahkap/repository/LivreurRepo.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

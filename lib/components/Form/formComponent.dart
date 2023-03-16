@@ -1,13 +1,21 @@
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/components/Form/text_field.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class FormComponent extends StatefulWidget {
   FormComponent(
-      {this.type, this.controller, this.enabled, this.icon, this.hint});
+      {this.type,
+      this.typeT,
+      this.controller,
+      this.enabled,
+      this.icon,
+      this.hint});
 
   final controller;
   bool? enabled = false;
+  // final String? title;
+  final String? typeT;
 
   ///type = 0 => texte simple ; type = 1 =>password
   int? type = 0;
@@ -19,6 +27,20 @@ class FormComponent extends StatefulWidget {
 
 class _FormComponentState extends State<FormComponent> {
   String value = '';
+
+  get _typekeyBord {
+    TextInputType? textType;
+    if (widget.typeT == null ||
+        widget.typeT == KFieldType.text ||
+        widget.typeT == KFieldType.password) {
+      textType = TextInputType.text;
+    } else if (widget.typeT == KFieldType.phone) {
+      textType = TextInputType.phone;
+    } else if (widget.typeT == KFieldType.email) {
+      textType = TextInputType.emailAddress;
+    }
+    return textType;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +71,7 @@ class _FormComponentState extends State<FormComponent> {
               validator: (value) {
                 return value == "" ? "veillez remplir se champs" : null;
               },
+              // autofocus: true,
               enabled: widget.enabled,
               onChanged: (val) {
                 setState(() {
@@ -58,7 +81,8 @@ class _FormComponentState extends State<FormComponent> {
                 print('value');
                 print(value);
               },
-              keyboardType: TextInputType.text,
+              keyboardType: _typekeyBord,
+
               obscureText: widget.type == 1 ? true : false,
               decoration: new InputDecoration(
                 prefixIcon: Icon(widget.icon),

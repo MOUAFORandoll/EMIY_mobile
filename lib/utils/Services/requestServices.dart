@@ -1,18 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitCategoryModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/utils/constants/apiRoute.dart';
+import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/utils/constants/apiRoute.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 // import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart'; 
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/api/apiUrl.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/api/apiUrl.dart';
 
 class ApiService extends GetConnect {
   GetStorage box = GetStorage();

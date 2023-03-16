@@ -1,4 +1,4 @@
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

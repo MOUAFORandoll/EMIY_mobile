@@ -1,9 +1,9 @@
 // ignore: must_be_immutable
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:get/get.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -21,15 +21,16 @@ class CategoryComponent2 extends StatelessWidget {
       },
       child: Container(
           height: kSmHeight * 2,
-          width: kSmWidth,
+          width: kSmWidth / 2,
           padding: EdgeInsets.all(kMarginX),
           margin:
               EdgeInsets.symmetric(vertical: kMarginY, horizontal: kMarginX),
           decoration: BoxDecoration(
               gradient: GradientApp.blueG,
               borderRadius: BorderRadius.circular(8)),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Container(
                 //   child: ClipRRect(
@@ -42,16 +43,19 @@ class CategoryComponent2 extends StatelessWidget {
                 //         fit: BoxFit.cover),
                 //   ),
                 // ),
+
+                // Container(
+                //     decoration: BoxDecoration(
+                //         color: ColorsApp.greySecond,
+                //         borderRadius: BorderRadius.circular(20)),
+                //     //  alignment: Alignment.center,
+                //     padding: EdgeInsets.all(10),
+                //     child: Icon(
+                //       IconData(category.icon, fontFamily: 'MaterialIcons'),
+                //       color: Colors.white,
+                //     )),
                 Container(
-                    alignment: Alignment.center,
-                    // margin: EdgeInsets.only(
-                    //     top: Get.height * .005, left: Get.width * .008),
-                    child: Icon(
-                      Icons.no_backpack,
-                      color: Colors.white,
-                    )),
-                Container(
-                  width: kSmWidth * .6,
+                  width: kSmWidth,
                   alignment: Alignment.center,
                   // margin: EdgeInsets.only(
                   //     top: Get.height * .005, left: Get.width * .008),

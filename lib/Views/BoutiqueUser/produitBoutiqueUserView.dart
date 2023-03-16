@@ -1,24 +1,24 @@
 import 'dart:io';
 
-import 'package:fahkapmobile/components/Button/AppIconButton.dart';
-import 'package:fahkapmobile/components/Button/IconButtonF.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/components/Form/commentForm.dart';
-import 'package:fahkapmobile/components/Form/formComponent.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/components/Form/text_field.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Widget/imageComp.dart';
-import 'package:fahkapmobile/components/Widget/productBoutiqueComponent.dart';
-import 'package:fahkapmobile/components/Widget/shoppingproductComponent.dart';
-import 'package:fahkapmobile/controller/boutiqueController.dart';
-import 'package:fahkapmobile/controller/cartController.dart';
-import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
+import 'package:Fahkap/components/Button/AppIconButton.dart';
+import 'package:Fahkap/components/Button/IconButtonF.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Form/commentForm.dart';
+import 'package:Fahkap/components/Form/formComponent.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/components/Form/text_field.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Widget/imageComp.dart';
+import 'package:Fahkap/components/Widget/productBoutiqueComponent.dart';
+import 'package:Fahkap/components/Widget/shoppingproductComponent.dart';
+import 'package:Fahkap/controller/boutiqueController.dart';
+import 'package:Fahkap/controller/cartController.dart';
+import 'package:Fahkap/controller/categoryController.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -105,15 +105,16 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                         text: !_controller.addProduct ? 'Liste' : 'Nouveau',
                       ),
 /*                       _controller.categoryList.length != 0
-                          ? */ CustomBtn(
-                              color: ColorsApp.greenLight,
-                              title: _controller.addProduct
-                                  ? 'Retour'
-                                  : 'Ajouter Produit',
-                              onTap: () {
-                                _controller.chageState(!_controller.addProduct);
-                              },
-                            )/* 
+                          ? */
+                      CustomBtn(
+                        color: ColorsApp.greenLight,
+                        title: _controller.addProduct
+                            ? 'Retour'
+                            : 'Ajouter Produit',
+                        onTap: () {
+                          _controller.chageState(!_controller.addProduct);
+                        },
+                      ) /* 
                           : Container() */
                     ])),
             !_controller.addProduct
@@ -225,7 +226,7 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                             enabled: true,
                             titre: 'Prix',
                             hint: "1500"),
-                      /*   Container(
+                        /*   Container(
                           alignment: Alignment.topLeft,
                           margin: EdgeInsets.symmetric(vertical: 5),
                           child: Text('Categorie'),
@@ -267,7 +268,8 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                                     // });
                                   },
                                 )),
-                       */  Container(
+                       */
+                        Container(
                           alignment: Alignment.topLeft,
                           margin: EdgeInsets.symmetric(vertical: 5),
                           child: Text('Description'),
@@ -365,8 +367,9 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                                     color: ColorsApp.greenLight,
                                     title: 'Ajouter Produit',
                                     onTap: () async {
+                                      var key = await _controller.s.getKey();
                                       Map<String, Object> dataS = {
-                                        'keySecret': _controller.s.getKey(),
+                                        'keySecret': key,
                                         'titre': titre.text,
                                         'description': description.text,
                                         'prixUnitaire': prix.text,
@@ -378,7 +381,8 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                                         'countImage':
                                             _controller.listImgProduits.length
                                       };
-                                      ;
+                                      print(dataS);
+
                                       _controller.listImgProduits.forEach((e) {
                                         dataS.addAll({
                                           "file${_controller.listImgProduits.indexOf(e)}":

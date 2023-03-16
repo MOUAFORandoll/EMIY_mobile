@@ -1,23 +1,23 @@
 // import 'dart:async';
 
-// import 'package:fahkapmobile/components/Form/formComponent.dart';
-// import 'package:fahkapmobile/components/Text/smallText.dart';
-// import 'package:fahkapmobile/components/Widget/LivreurComponent.dart';
-// import 'package:fahkapmobile/components/Widget/productBuyComponent.dart';
-// import 'package:fahkapmobile/controller/BuyShopController.dart';
-// import 'package:fahkapmobile/controller/cartController.dart';
-// import 'package:fahkapmobile/styles/textStyle.dart';
+// import 'package:Fahkap/components/Form/formComponent.dart';
+// import 'package:Fahkap/components/Text/smallText.dart';
+// import 'package:Fahkap/components/Widget/LivreurComponent.dart';
+// import 'package:Fahkap/components/Widget/productBuyComponent.dart';
+// import 'package:Fahkap/controller/BuyShopController.dart';
+// import 'package:Fahkap/controller/cartController.dart';
+// import 'package:Fahkap/styles/textStyle.dart';
 // import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:get/get.dart';
 // import 'package:intl_phone_field/phone_number.dart';
-// import 'package:fahkapmobile/model/data/TrajetModel.dart';
-// import 'package:fahkapmobile/styles/colorApp.dart';
+// import 'package:Fahkap/model/data/TrajetModel.dart';
+// import 'package:Fahkap/styles/colorApp.dart';
 
 // // import 'package:cinetpay/cinetpay.dart';
-// import 'package:fahkapmobile/utils/Services/requestServices.dart';
-// import 'package:fahkapmobile/utils/database/DataBase.dart';
-// import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+// import 'package:Fahkap/utils/Services/requestServices.dart';
+// import 'package:Fahkap/utils/database/DataBase.dart';
+// import 'package:Fahkap/utils/functions/viewFunctions.dart';
 
 // class BuyShoopingCart extends StatelessWidget {
 //   BuyShoopingCart({Key? key}) : super(key: key);

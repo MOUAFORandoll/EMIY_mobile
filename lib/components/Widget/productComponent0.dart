@@ -1,15 +1,15 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/controller/CommandeController.dart';
-import 'package:fahkapmobile/model/data/CommandeModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/Services/routing.dart';
-import 'package:fahkapmobile/utils/api/apiUrl.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/controller/CommandeController.dart';
+import 'package:Fahkap/model/data/CommandeModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:get/get.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -56,10 +56,11 @@ class ProductComponent extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
-                                    colorFilter: ColorFilter.mode(
-                                        Colors.red, BlendMode.colorBurn)),
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                  /* colorFilter: ColorFilter.mode(
+                                        Colors.red, BlendMode.colorBurn) */
+                                ),
                               ),
                             );
                           },

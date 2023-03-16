@@ -1,22 +1,32 @@
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Form/formComponent.dart';
-import 'package:fahkapmobile/components/Button/themeButton.dart';
-import 'package:fahkapmobile/controller/managerController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/dependancies.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Form/formComponent.dart';
+import 'package:Fahkap/components/Button/themeButton.dart';
+import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phone = TextEditingController();
+
   TextEditingController password = TextEditingController();
+
   TextEditingController email = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   bool validator = false;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -104,6 +114,10 @@ class LoginScreen extends StatelessWidget {
                     enabled: true,
                     onTap: () async {
                       // Get.toNamed(AppLinks.FIRST);
+                      print({
+                        'phone': phone.text,
+                        'password': password.text,
+                      });
                       await _manager.loginUser({
                         'phone': phone.text,
                         'password': password.text,
@@ -114,6 +128,16 @@ class LoginScreen extends StatelessWidget {
                         MyBinding().onGetDataNew();
                       }
                     })),
+
+            Center(
+              child: TextButton(
+                style: ButtonStyle(alignment: Alignment.center),
+                child: Text('recuperer compte ?'),
+                onPressed: () {
+                  Get.toNamed(AppLinks.FORGOT);
+                },
+              ),
+            )
             // Button(
             //     borderRadius: 15.0,
             //     width: Get.size.height * .8,
@@ -145,37 +169,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
-  // showAlertDialog(
-  //   BuildContext context,
-  //   String texte2,
-  //   String texte3,
-  //   String texte4,
-  // ) {
-  // set up the button
-
-  //   Widget retryButton = TextButton(
-  //     child: Text(texte2),
-  //     onPressed: () {
-  //       setState(() {
-  //         Navigator.pop(context);
-  //       });
-  //     },
-  //   );
-
-  //   // set up the AlertDialog
-  //   AlertDialog alert = AlertDialog(
-  //     title: Text(texte3),
-  //     content: Text(texte4),
-  //     actions: [retryButton],
-  //   );
-
-  //   // show the dialog
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return alert;
-  //     },
-  //   );
-  // }
 }

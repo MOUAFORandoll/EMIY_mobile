@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:fahkapmobile/Views/FirstScreen.dart';
-import 'package:fahkapmobile/utils/functions/route.dart';
-import 'package:fahkapmobile/utils/provider/auth_provider.dart';
-import 'package:fahkapmobile/views/UsersMange/LoginScreen.dart';
+import 'package:Fahkap/Views/FirstScreen.dart';
+import 'package:Fahkap/utils/functions/route.dart';
+import 'package:Fahkap/utils/provider/auth_provider.dart';
+import 'package:Fahkap/views/UsersMange/LoginScreen.dart';
 
 class Wrapper extends StatefulWidget {
   @override
@@ -18,14 +18,11 @@ class Wrapper extends StatefulWidget {
 class _WrapperState extends State<Wrapper> {
   GetStorage box = GetStorage();
   bool isLogin = false;
-
-  AuthProvider api = AuthProvider();
-
+ 
   @override
   void initState() {
     super.initState();
-    api.onInit();
-    final userData = box.read(userKey);
+      final userData = box.read(userKey);
     if (userData != null) {
       isLogin = true;
       reloader();

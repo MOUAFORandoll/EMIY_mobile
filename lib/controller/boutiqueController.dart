@@ -1,19 +1,22 @@
 import 'dart:io';
 
-import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/ProduitBoutiqueModel.dart';
-import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
-import 'package:fahkapmobile/utils/Services/storageService2.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/model/data/BoutiqueModel.dart';
+import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/CommandeBoutiqueModel.dart';
+import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
+import 'package:Fahkap/model/data/ShortModel.dart';
+import 'package:Fahkap/repository/BoutiqueRepo.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/Services/storageService2.dart';
+import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:video_player/video_player.dart';
 
 class BoutiqueController extends GetxController {
   final service = new ApiService();
@@ -32,7 +35,7 @@ class BoutiqueController extends GetxController {
   bool get addProduct => _addProduct;
   List<File> _listImgProduits = [];
 
-  var s = Get.find<StorageService>();
+  var s = Get.find<DB>();
   List<File> get listImgProduits => _listImgProduits;
 
   chageState(bool i) {
@@ -55,7 +58,7 @@ class BoutiqueController extends GetxController {
 
       var image = await ImagePicker.pickImage(
           source: ImageSource.gallery,
-          imageQuality: 10,
+          imageQuality: 100,
           maxHeight: 500,
           maxWidth: 500);
 
@@ -71,45 +74,151 @@ class BoutiqueController extends GetxController {
     }
   }
 
-  // var _categorySelect;
-  // CategoryModel get categorySelect => _categorySelect;
-  // secelctCate(cat) {
-  //   _categorySelect = cat;
-  //   update();
-  // }
+  deleteImage(index) {
+    _listImgProduits.remove(_listImgProduits[index]);
 
-  // List<CategoryModel> _categoryList = [];
-  // List<CategoryModel> get categoryList => _categoryList;
-  // int _isLoadedC = 0;
-  // int get isLoadedC => _isLoadedC;
-  // // CategoryController({required this.service});
-  // getCategory() async {
-  //   try {
-  //     _categoryList.clear();
-  //     _isLoadedC = 0;
-  //     Response response = await boutiqueRepo.getListCategory();
+    update();
+  }
 
-  //     if (response.body != null) {
-  //       if (response.body['data'].length != 0) {
-  //         _categoryList.addAll((response.body['data'] as List)
-  //             .map((e) => CategoryModel.fromJson(e))
-  //             .toList());
-  //       }
-  //       _isLoadedC = 1;
-  //       update();
-  //     }
-  //     // print(_categoryList);
+  var _categorySelect;
+  CategoryModel get categorySelect => _categorySelect;
+  secelctCate(cat) {
+    _categorySelect = cat;
+    update();
+  }
 
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  List<CategoryModel> _categoryList = [];
+  List<CategoryModel> get categoryList => _categoryList;
+  int _isLoadedC = 0;
+  int get isLoadedC => _isLoadedC;
+  // CategoryController({required this.service});
+  getCategory() async {
+    try {
+      if (_categoryList.isEmpty) {
+        _isLoadedC = 0;
+        Response response = await boutiqueRepo.getListCategory();
+
+        if (response.body != null) {
+          if (response.body['data'].length != 0) {
+            _categoryList.addAll((response.body['data'] as List)
+                .map((e) => CategoryModel.fromJson(e))
+                .toList());
+          }
+          _isLoadedC = 1;
+          update();
+        }
+        // print(_categoryList);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  File boutiqueImage = new File('');
+  bool _isImage = false;
+  bool get isImage => _isImage;
+  Future getImageBoutique() async {
+    try {
+      print("wwwwwwwww");
+
+      var image = await ImagePicker.pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 100,
+          maxHeight: 500,
+          maxWidth: 500);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      // );
+      boutiqueImage = image;
+      _isImage = true;
+      // print(_listImgProduits.length);
+      update();
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
+  bool _isOk = false;
+  bool get isOk => _isOk;
+  newBoutique(data) async {
+    _isOk = false;
+    update();
+
+    try {
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      // );
+      if (boutiqueImage.path != '') {
+        Get.defaultDialog(
+            title: 'En cours',
+            barrierDismissible: false,
+            content: SizedBox(
+                // height: Get.size.height * .02,
+                // width: Get.size.width * .02,
+                child: Center(
+                    child: CircularProgressIndicator(
+              color: Colors.blueAccent,
+            ))));
+        var key = await s.getKey();
+
+        FormData formData = new FormData({
+          "file": await MultipartFile(
+            boutiqueImage.path,
+            filename: "Image.jpg",
+          ),
+          'titre': data['titre'],
+          'description': data['description'],
+          'idCategory': data['category'],
+          'ville': ville,
+          'longitude': longitude,
+          'latitude': latitude,
+          'keySecret': key
+        });
+
+        Response response = await boutiqueRepo.newBoutique(formData);
+        print(response.body);
+
+        if (response.statusCode == 200) {
+          _isOk = false;
+          update();
+
+          await getBoutique();
+        }
+        Get.back();
+
+        fn.snackBar(
+            'Mise a jour', response.body['message'], ColorsApp.bleuLight);
+        _isUpdatingB = false;
+        // Get.back(closeOverlays: true);
+        update();
+      } else {
+        Get.back();
+        fn.snackBar('Boutique', 'Remplir tous les champs', ColorsApp.red);
+      }
+    } catch (e) {
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      // Get.back();
+      _isUpdatingB = false;
+      update();
+      print(e);
+    }
+  }
 
   Future updateImageBoutique() async {
     try {
       var image = await ImagePicker.pickImage(
           source: ImageSource.gallery,
-          imageQuality: 10,
+          imageQuality: 100,
           maxHeight: 500,
           maxWidth: 500);
 
@@ -135,6 +244,7 @@ class BoutiqueController extends GetxController {
                     child: CircularProgressIndicator(
               color: Colors.blueAccent,
             ))));
+        var key = await s.getKey();
 
         try {
           FormData formData = new FormData({
@@ -143,7 +253,7 @@ class BoutiqueController extends GetxController {
               filename: "Image.jpg",
             ),
             'codeBoutique': Boutique.codeBoutique,
-            'keySecret': s.getKey()
+            'keySecret': key
           });
 
           print(formData.files);
@@ -179,15 +289,18 @@ class BoutiqueController extends GetxController {
     try {
       Response response = await boutiqueRepo.getBoutiqueForUser();
       if (response.body != null) {
-        if (response.body['data'].length != 0) {
+        if (response.body['data'] != null) {
+          print('-----------boutiqr************************');
+          print(response.body['data']);
           _Boutique = BoutiqueUserModel.fromJson(response.body['data']);
           _isExist = response.body['exist'];
+          update();
           // print(_Boutique);
         }
       }
       _isLoaded = 1;
 
-      update();
+      getListShort();
     } catch (e) {
       _isExist = false;
       _isLoaded = 1;
@@ -195,6 +308,12 @@ class BoutiqueController extends GetxController {
       update();
       print(e);
     }
+  }
+
+  DeconectBoutique() {
+    _Boutique = null;
+    _isExist = false;
+    update();
   }
 
   List<CommandeBoutiqueModel> _commandeBoutiqueList = [];
@@ -445,19 +564,23 @@ class BoutiqueController extends GetxController {
 
   getLocalU() async {
     var data = await s.getLonLat();
+    print('*****************data');
     print(data);
-    _ville = data['ville'];
-    _longitude = data['long'];
-    _latitude = data['lat'];
-    update();
+    if (data.isNotEmpty) {
+      _ville = data['ville'];
+      _longitude = data['long'];
+      _latitude = data['lat'];
+      update();
+    }
+    print('*****************data');
   }
 
-
   updateLocalisationBoutique() async {
+    var key = await s.getKey();
     await getLocalU();
     var data = {
       'codeBoutique': Boutique.codeBoutique,
-      'keySecret': s.getKey(),
+      'keySecret': key,
       'ville': ville,
       'longitude': longitude,
       'latitude': latitude,
@@ -588,5 +711,141 @@ class BoutiqueController extends GetxController {
     }
 
     update();
+  }
+
+  bool _addShoort = false;
+  bool get addShoort => _addShoort;
+
+  chageStateShort(bool i) {
+    _addShoort = i;
+    update();
+  }
+
+  List<ShortModel> _listShortBoutique = [];
+  List<ShortModel> get listShortBoutique => _listShortBoutique;
+  int _isLoadedShort = 0;
+  int get isLoadedShort => _isLoadedShort;
+  Future<void> getListShort() async {
+    // print('***short******************response**********');
+
+    _isLoadedShort = 0;
+    try {
+      Response response = await boutiqueRepo.getListShortBoutique(
+        {'codeBoutique': Boutique.codeBoutique},
+      );
+
+      _listShortBoutique = [];
+      _listShortBoutique.clear();
+      update();
+
+      if (response.body != null) {
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            _listShortBoutique.addAll((response.body['data'] as List)
+                .map((e) => ShortModel.fromJson(e))
+                .toList());
+          }
+          _isLoadedShort = 1;
+          update();
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  VideoPlayerController? controller;
+
+  bool _initialise = false;
+  bool get initialise => _initialise;
+  changeVideoBoutique(index) async {
+    _initialise = false;
+    // update();
+    // ignore: unnecessary_null_comparison
+    if (_listShortBoutique[index].controller == null) {
+      await _listShortBoutique[index].loadController();
+    }
+    controller = _listShortBoutique[index].controller!;
+    controller!.play();
+    _initialise = true;
+    update();
+    // ignore: unused_local_variable
+    int prevVideo = (index - 1) > 0 ? index - 1 : 0;
+    // ignore: unnecessary_null_comparison
+    // if (listShort[prevVideo].controller != null) controller!.pause();
+
+    print(index);
+  }
+
+  List<File> _videoShort = [];
+
+  List<File> get videoShort => _videoShort;
+
+  onInitDataShort() {
+    _videoShort = [];
+    _videoShort.clear();
+    _addProduct = false;
+    // update();
+  }
+
+  File videoFile = new File('');
+
+  Future getVideo() async {
+    try {
+      print("wwwwwwwww");
+
+      var image = await ImagePicker.pickVideo(source: ImageSource.gallery);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      // );
+      _videoShort.add(image);
+      print(_videoShort.length);
+      update();
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
+  deleteVideo(index) {
+    _videoShort.remove(_videoShort[index]);
+
+    update();
+  }
+
+  addShort(data) async {
+    _isUpdating = true;
+    update();
+    Get.defaultDialog(
+        title: 'En cours',
+        barrierDismissible: false,
+        content: SizedBox(
+            // height: Get.size.height * .02,
+            // width: Get.size.width * .02,
+            child: Center(
+                child: CircularProgressIndicator(
+          color: Colors.blueAccent,
+        ))));
+    try {
+      Response response = await boutiqueRepo.newShort(data);
+      print(response.body);
+      if (response.statusCode == 200) {
+        await getBoutique();
+      }
+
+      Get.back();
+      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      _isUpdating = false;
+      // Get.back(closeOverlays: true);
+      update();
+    } catch (e) {
+      Get.back();
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      // Get.back();
+      _isUpdating = false;
+      update();
+      print(e);
+    }
   }
 }

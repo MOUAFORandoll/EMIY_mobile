@@ -1,14 +1,15 @@
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/utils/Services/ApiClient.dart';
-import 'package:fahkapmobile/utils/Services/storageService2.dart';
-import 'package:fahkapmobile/utils/constants/apiRoute.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/utils/Services/ApiClient.dart';
+import 'package:Fahkap/utils/Services/storageService2.dart';
+import 'package:Fahkap/utils/constants/apiRoute.dart';
+import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
 class LivreurRepo extends GetxService {
   final ApiClient apiClient;
   LivreurRepo({required this.apiClient});
-  var s = Get.find<StorageService>();
+  var s = Get.find<DB>();
 
   Future getLivreur() async {
     print('--long---------------');

@@ -1,13 +1,13 @@
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Button/customBtn.dart';
-import 'package:fahkapmobile/components/Form/formComponent.dart';
-import 'package:fahkapmobile/controller/managerController.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/dependancies.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Button/customBtn.dart';
+import 'package:Fahkap/components/Form/formComponent.dart';
+import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/dependancies.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fahkapmobile/utils/Services/routing.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:get/get.dart';
 
 class RegisterScreen extends StatefulWidget {

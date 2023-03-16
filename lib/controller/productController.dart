@@ -1,10 +1,10 @@
 import 'package:get/get_connect/http/src/response/response.dart';
 
-import 'package:fahkapmobile/controller/cartController.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/repository/popularProductRepo.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
+import 'package:Fahkap/controller/cartController.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/repository/popularProductRepo.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
@@ -101,16 +101,18 @@ class ProductController extends GetxController {
       update();
 
       if (response.body != null) {
-        if (response.body['data'].length != 0) {
-          _produitList.addAll((response.body['data'] as List)
-              .map((e) => ProduitModel.fromJson(e))
-              .toList());
-          _produitListSave.addAll((response.body['data'] as List)
-              .map((e) => ProduitModel.fromJson(e))
-              .toList());
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            _produitList.addAll((response.body['data'] as List)
+                .map((e) => ProduitModel.fromJson(e))
+                .toList());
+            _produitListSave.addAll((response.body['data'] as List)
+                .map((e) => ProduitModel.fromJson(e))
+                .toList());
+          }
+          _isLoadedP = 1;
+          update();
         }
-        _isLoadedP = 1;
-        update();
       }
     } catch (e) {
       print(e);
@@ -149,6 +151,15 @@ class ProductController extends GetxController {
     }
   }
 
+  int _tsearch = 0;
+  int get tsearch => _tsearch;
+
+  searchType(int i) {
+    _tsearch = i; 
+    update();
+  }
+
+
   bool _searchPro = false;
   bool get searchPro => _searchPro;
 
@@ -185,26 +196,26 @@ class ProductController extends GetxController {
   }
 }
 /**
- * import 'package:fahkapmobile/components/Button/IconButtonF.dart';
-import 'package:fahkapmobile/components/Button/btnCatList.dart';
-import 'package:fahkapmobile/components/Button/btnCatListPV.dart';
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Form/formComponent2.dart';
-import 'package:fahkapmobile/components/Text/bigText.dart';
-import 'package:fahkapmobile/components/Text/bigtitleText.dart';
-import 'package:fahkapmobile/components/Widget/categoryComponent.dart';
-import 'package:fahkapmobile/components/Widget/productComponent.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Text/titleText.dart';
-import 'package:fahkapmobile/components/Widget/productForBoutiqueComponent.dart';
-import 'package:fahkapmobile/components/Widget/productForCatComponent.dart';
-import 'package:fahkapmobile/controller/categoryController.dart';
-import 'package:fahkapmobile/controller/CategoryBoutiqueController.dart';
-import 'package:fahkapmobile/controller/productController.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+ * import 'package:Fahkap/components/Button/IconButtonF.dart';
+import 'package:Fahkap/components/Button/btnCatList.dart';
+import 'package:Fahkap/components/Button/btnCatListPV.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Form/formComponent2.dart';
+import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/categoryComponent.dart';
+import 'package:Fahkap/components/Widget/productComponent.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Text/titleText.dart';
+import 'package:Fahkap/components/Widget/productForBoutiqueComponent.dart';
+import 'package:Fahkap/components/Widget/productForCatComponent.dart';
+import 'package:Fahkap/controller/categoryController.dart';
+import 'package:Fahkap/controller/CategoryBoutiqueController.dart';
+import 'package:Fahkap/controller/productController.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';

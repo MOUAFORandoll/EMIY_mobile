@@ -1,4 +1,4 @@
-name: fahkapmobile
+name: Fahkap
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -36,6 +36,8 @@ dependencies:
   share: ^2.0.4
   intl_phone_field: ^2.0.1
   jwt_decode:
+  video_player: ^2.0.0
+  chewie: ^1.0.0
   flutter_spinkit: any
   cached_network_image: ^2.4.0
   # image_gallery_saver: any
@@ -57,6 +59,7 @@ dependencies:
   badges: ^2.0.2
   screenshot: ^1.2.3
   syncfusion_flutter_pdf: ^18.4.47-beta
+  
   pdf: any
   # countdown_flutter:
   filesystem_picker: ^1.0.3
@@ -70,11 +73,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-
 dev_dependencies:
+  flutter_launcher_icons: ^0.8.0
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/logo.png"
 flutter:
   fonts:
     - family: orkney
@@ -94,6 +101,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/logo/logoH.png
     - assets/images/error.gif
     - assets/om.png
     - assets/logo.png
@@ -101,6 +109,9 @@ flutter:
     - assets/bus.png
     - assets/register.png
     - assets/busVoyage.png
+    - assets/payement/om.png
+    - assets/payement/momo.png
+    - assets/payement/paycard.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

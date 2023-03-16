@@ -1,8 +1,8 @@
 // ignore: must_be_immutable
 import 'package:get/get.dart';
-import 'package:fahkapmobile/components/Button/button.dart';
-import 'package:fahkapmobile/components/Form/commentForm.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
+import 'package:Fahkap/components/Button/button.dart';
+import 'package:Fahkap/components/Form/commentForm.dart';
+import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 import 'package:rating_bar/rating_bar.dart';

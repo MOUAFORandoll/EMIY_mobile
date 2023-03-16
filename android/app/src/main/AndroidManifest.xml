@@ -2,11 +2,12 @@
     package="com.example.fahkapmobile">
   <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission_WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.MANAGE_EXTERNAL_STORAGE "/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission_READ_EXTERNAL_STORAGE"/>
   <application
-        android:label="fahkapmobile"
-        android:icon="@mipmap/ic_launcher"  android:usesCleartextTraffic="true" android:requestLegacyExternalStorage="true">
+        android:label="OFA"
+         android:icon="@mipmap/launcher_icon" android:usesCleartextTraffic="true" android:requestLegacyExternalStorage="true">
     <activity
             
             android:screenOrientation="portrait"             
@@ -38,6 +39,12 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+     <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
     <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
     <meta-data

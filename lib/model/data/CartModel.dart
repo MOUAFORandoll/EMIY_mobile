@@ -18,6 +18,7 @@ class CartModel {
     required this.time,
     required this.img,
     required this.quantity,
+    required this.qtdispo,
     required this.prix,
     required this.isExist,
   });
@@ -28,6 +29,7 @@ class CartModel {
   final String type;
   final String img;
   final int quantity;
+  final int qtdispo;
   final double prix;
   final String time;
   final bool isExist;
@@ -38,6 +40,7 @@ class CartModel {
         name: json["name"] == null ? null : json["name"],
         img: json["img"] == null ? null : json["img"],
         quantity: json["quantity"] == null ? null : json["quantity"],
+        qtdispo: json["qtdispo"] == null ? null : json["qtdispo"],
         prix: json["prix"] == null ? null : json["prix"],
         time: json["time"] == null ? null : json["time"],
         isExist: json["isExist"] == null ? null : json["isExist"],
@@ -49,6 +52,7 @@ class CartModel {
         "id": id == null ? null : id,
         "img": img == null ? null : img,
         "quantity": quantity == null ? null : quantity,
+        "qtdispo": qtdispo == null ? null : qtdispo,
         "name": name == null ? null : name,
         "prix": prix == null ? null : prix,
         "time": time == null ? null : time,

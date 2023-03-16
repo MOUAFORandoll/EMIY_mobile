@@ -1,19 +1,19 @@
 import 'dart:io';
 
-import 'package:fahkapmobile/controller/managerController.dart';
-import 'package:fahkapmobile/model/data/BoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/BoutiqueUserModel.dart';
-import 'package:fahkapmobile/model/data/CategoryModel.dart';
-import 'package:fahkapmobile/model/data/CommandeBoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/ProduitBoutiqueModel.dart';
-import 'package:fahkapmobile/model/data/ProduitModel.dart';
-import 'package:fahkapmobile/model/data/TransactionModel.dart';
-import 'package:fahkapmobile/repository/BoutiqueRepo.dart';
-import 'package:fahkapmobile/repository/TransactionRepo.dart';
-import 'package:fahkapmobile/repository/categoryBoutiqueRepo.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/utils/Services/requestServices.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/model/data/BoutiqueModel.dart';
+import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
+import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/CommandeBoutiqueModel.dart';
+import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
+import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/model/data/TransactionModel.dart';
+import 'package:Fahkap/repository/BoutiqueRepo.dart';
+import 'package:Fahkap/repository/TransactionRepo.dart';
+import 'package:Fahkap/repository/categoryBoutiqueRepo.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,32 +27,41 @@ class TransactionController extends GetxController {
 
   List<TransactionModel> _transactionList = [];
   List<TransactionModel> get transactionList => _transactionList;
-  int _isLoadedTRansa = 0;
-  int get isLoadedTRans => _isLoadedTRansa;
+  int _isLoadedTrans = 0;
+  int get isLoadedTrans => _isLoadedTrans;
+  ManagerController managerController = Get.find();
+
   // CategoryController({required this.service});
-  getTransactions(id) async {
-    try {
-      _transactionList.clear();
-      _transactionList = [];
+  getTransactions() async {
+    if (managerController.User != null) {
+      try {
+        _transactionList.clear();
+        _transactionList = [];
 
-      _isLoadedTRansa = 0;
-      update();
-
-      Response response = await transactionRepo.getListTransaction(id);
-      if (response.body != null) {
-        print("response.body['data']");
-        print(response.body['data']);
-        if (response.body['data'].length != 0) {
-          _transactionList.addAll((response.body['data'] as List)
-              .map((e) => TransactionModel.fromJson(e))
-              .toList());
-        }
-        _isLoadedTRansa = 1;
+        _isLoadedTrans = 0;
         update();
+        print(".............");
+
+        Response response =
+            await transactionRepo.getListTransaction(managerController.User.id);
+        if (response.body != null) {
+          if (response.body['data'].length != 0) {
+            _transactionList.addAll((response.body['data'] as List)
+                .map((e) => TransactionModel.fromJson(e))
+                .toList());
+            _isLoadedTrans = 1;
+            update();
+          } else {
+            _transactionList = [];
+
+            _isLoadedTrans = 1;
+            update();
+          }
+        }
+        print(isLoadedTrans);
+      } catch (e) {
+        print(e);
       }
-      print(isLoadedTRans);
-    } catch (e) {
-      print(e);
     }
   }
 
@@ -79,6 +88,7 @@ class TransactionController extends GetxController {
 
       if (response.statusCode == 200) {
         await Get.find<ManagerController>().getUser();
+        getTransactions();
         Get.back();
         fn.snackBar('Retrait', response.body['message'], ColorsApp.bleuLight);
       } else {
@@ -88,6 +98,34 @@ class TransactionController extends GetxController {
 
       _isUpdating = false;
       // Get.back(closeOverlays: true);
+      update();
+    } catch (e) {
+      Get.back();
+      fn.snackBar('Retrait', 'Une erreur est survenue', ColorsApp.red);
+      // Get.back();
+      _isUpdating = false;
+      update();
+      print(e);
+    }
+  }
+
+  actualise() async {
+    update();
+    Get.defaultDialog(
+        title: 'En cours',
+        barrierDismissible: false,
+        content: SizedBox(
+            // height: Get.size.height * .02,
+            // width: Get.size.width * .02,
+            child: Center(
+                child: CircularProgressIndicator(
+          color: Colors.blueAccent,
+        ))));
+    try {
+      await Get.find<ManagerController>().getUser();
+      await getTransactions();
+      Get.back();
+
       update();
     } catch (e) {
       Get.back();

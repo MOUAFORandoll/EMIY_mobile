@@ -1,12 +1,12 @@
-import 'package:fahkapmobile/components/Text/bigtitleText.dart';
-import 'package:fahkapmobile/components/Text/smallText.dart';
-import 'package:fahkapmobile/components/Text/titleText.dart';
-import 'package:fahkapmobile/components/Widget/productComponent0.dart';
-import 'package:fahkapmobile/controller/CommandeController.dart';
-import 'package:fahkapmobile/model/data/CommandeModel.dart';
-import 'package:fahkapmobile/styles/colorApp.dart';
-import 'package:fahkapmobile/styles/textStyle.dart';
-import 'package:fahkapmobile/utils/functions/viewFunctions.dart';
+import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/components/Text/titleText.dart';
+import 'package:Fahkap/components/Widget/productComponent0.dart';
+import 'package:Fahkap/controller/CommandeController.dart';
+import 'package:Fahkap/model/data/CommandeModel.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -67,7 +67,11 @@ class ProduitForCommande extends StatelessWidget {
                   Get.bottomSheet(Container(
                       padding: EdgeInsets.symmetric(horizontal: kSmWidth * .07),
                       height: 800,
-                      color: ColorsApp.grey,
+                      decoration: BoxDecoration(
+                          color: ColorsApp.grey,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15))),
                       child: SingleChildScrollView(
                           child: Column(
                               // mainAxisSize: MainAxisSize.min,
