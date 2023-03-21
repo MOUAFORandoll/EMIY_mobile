@@ -38,20 +38,24 @@ class ProductComponentAll extends StatelessWidget {
                       // margin: EdgeInsets.symmetric(vertical: 1, horizontal: 1),
                       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(produit.titre,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: ColorsApp.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12)),
-                          Text('XAF ' + produit.prix.toString(),
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold)),
+                          Container(
+                              width: Get.size.width * .2,
+                              child: Text(produit.titre,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: ColorsApp.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12))),
+                          Container(
+                              width: Get.size.width * .2,
+                              child: Text('XAF ' + produit.prix.toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold))),
                         ],
                       )),
                   decoration: BoxDecoration(

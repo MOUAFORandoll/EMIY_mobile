@@ -70,28 +70,28 @@ class ManageRepo extends GetxService {
       /*   try {
      */
       // print('newlocatio-');
+      try {
+        var loca = await new Dio().get('https://ipapi.co/json/');
 
-      var loca = await new Dio().get('https://ipapi.co/json/');
+        var data = {
+          'ip': loca.data['ip'],
+          'ville': loca.data['city'],
+          'latitude': loca.data['latitude'],
+          'keySecret': getU,
+          'longitude': loca.data['longitude']
+        };
+        await store.saveLonLat(data);
 
-      var data = {
-        'ip': loca.data['ip'],
-        'ville': loca.data['city'],
-        'latitude': loca.data['latitude'],
-        'keySecret': getU,
-        'longitude': loca.data['longitude']
-      };
-      await store.saveLonLat(data);
+        Response a =
+            await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
 
-      Response a =
-          await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
+        // print('ssnewlocatio-------------------------');
+        // print(a.body);
 
-      // print('ssnewlocatio-------------------------');
-      // print(a.body);
-
-      return a;
-      /*   } catch (e) {
+        return a;
+      } catch (e) {
         return new Response(body: {'data': []}, statusCode: 203);
-      } */
+      }
       // } else {
       //   return new Response(body: {'data': []}, statusCode: 200);
       // }

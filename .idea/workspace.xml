@@ -1,36 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/main.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
   </component>
-  <component name="ToolWindowManager">
-    <editor active="true" />
-    <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-    </layout>
+  <component name="ChangeListManager">
+    <list default="true" id="2863ecd0-290f-49dd-a0c2-c248a38ef1ec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/fahkapmobile_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/fahkapmobile_android.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/test copy.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/test copy.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/api/apiUrl.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/api/apiUrl.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <option name="show-excluded-files" value="false" />
-      </pane>
-    </panes>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2N79Fcu8lwv3mqTP9pX3SXuHnin" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="dart.analysis.tool.window.force.activate" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2863ecd0-290f-49dd-a0c2-c248a38ef1ec" name="Default Changelist" comment="" />
+      <created>1679004150690</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679004150690</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.configurationType" implementationName="FlutterRunConfigurationType" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="137" y="15" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1679216075711">
+      <screen x="0" y="0" width="1366" height="720" />
+    </state>
+    <state x="137" y="15" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.720/1366.0.1920.1032@0.0.1366.720" timestamp="1679216075711" />
+    <state x="137" y="15" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.720@0.0.1366.720" timestamp="1679044142239" />
+    <state x="110" y="120" width="1146" height="480" key="AVDManager" timestamp="1679367246377">
+      <screen x="0" y="0" width="1366" height="720" />
+    </state>
+    <state x="110" y="120" width="1146" height="480" key="AVDManager/0.0.1366.720/1366.0.1920.1032@0.0.1366.720" timestamp="1679367246377" />
+    <state x="110" y="120" width="1146" height="480" key="AVDManager/0.0.1366.720@0.0.1366.720" timestamp="1679044244379" />
+    <state x="184" y="5" key="SettingsEditor" timestamp="1679366833203">
+      <screen x="0" y="0" width="1366" height="720" />
+    </state>
+    <state x="184" y="5" key="SettingsEditor/0.0.1366.720/1366.0.1920.1032@0.0.1366.720" timestamp="1679366833203" />
+    <state x="184" y="5" key="SettingsEditor/0.0.1366.720@0.0.1366.720" timestamp="1679044127689" />
   </component>
 </project>
