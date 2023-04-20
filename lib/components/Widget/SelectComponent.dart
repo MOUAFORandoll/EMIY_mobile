@@ -19,7 +19,7 @@ class SelectComponent extends StatelessWidget {
     return GetBuilder<ActionController>(
         builder: (_Acontroller) => InkWell(
               child: Container(
-                  margin: EdgeInsets.only(top: 10),
+                  margin: EdgeInsets.only(top: 8),
                   child: Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

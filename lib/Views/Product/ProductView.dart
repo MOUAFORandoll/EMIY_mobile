@@ -269,7 +269,7 @@ class ProductView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:
                                     product.images.asMap().entries.map((entry) {
-                                  print(entry.key);
+                                  // print(entry.key);
                                   return GestureDetector(
                                     onTap: () =>
                                         _controller.animateToPage(entry.key),
@@ -379,7 +379,7 @@ class ProductView extends StatelessWidget {
                                   },
                                 ),
                                 SimpleText(
-                                  text: prod.inCartItems.toString(),
+                                  text: (prod.inCartItems).toString(),
                                 ),
                                 IconButtonF0(
                                   backgroundColor: ColorsApp.greenLight,

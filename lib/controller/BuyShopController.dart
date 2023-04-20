@@ -1,4 +1,7 @@
+import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
+import 'package:Fahkap/controller/cartController.dart';
+import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/model/data/CartModel.dart';
 import 'package:Fahkap/model/data/CategoryModel.dart';
 import 'package:Fahkap/model/data/LivreurModel.dart';
@@ -11,6 +14,7 @@ import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 class BuyShopController extends GetxController {
   final BuyShoopingCartRepo buySoppingCartRepo;
@@ -59,48 +63,45 @@ class BuyShopController extends GetxController {
     return _state == index;
   }
 
-  // List<LivreurModel> _livreurList = [];
-  // List<LivreurModel> get livreurList => _livreurList;
-  // int _isLivreur = 0;
-  // int get isLivreur => _isLivreur;
-  // setLivreur(int id) {
-  //   _isLivreur = id;
-  //   update();
-  // }
-
-  // int _isLoaded = 0;
-  // int get isLoaded => _isLoaded;
-  // // CategoryController({required this.service});
-  // getListLivreur() async {
-  //   _isLoaded = 0;
-  //   setLivreur(0);
-  //   try {
-  //     _livreurList.clear();
-  //     update();
-  //     Response response = await livreurRepo.getLivreur();
-  //     if (response.body != null) {
-  //       if (response.body['data'].length != 0) {
-  //         print('livreur------------------');
-  //         print(response.body['data']);
-
-  //         _livreurList.addAll((response.body['data'] as List)
-  //             .map((e) => LivreurModel.fromJson(e))
-  //             .toList());
-  //       }
-  //     }
-  //     // print(_categoryList);
-  //     _isLoaded = 1;
-  //     update();
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
   bool _isOk = false;
   bool get isOk => _isOk;
   var fn = new ViewFunctions();
   // CategoryController({required this.service});
-  buyCart(data) async {
+  buyCart() async {
+    var produits = Get.find<CartController>().getListPinCart();
+    var user = Get.find<ManagerController>();
+    var mode = Get.find<ActionController>().selected;
+
+    var data = mode == 3
+        ? {
+            'nom': _nameController.text,
+            'prenom': _prenameController.text,
+            'phone': _phoneController.text,
+            'idModePaiement': mode,
+            // 'idLivreur': _Bcontroller.isLivreur,
+            'listProduits': produits,
+            'ville': user.ville,
+            'longitude': user.longitude,
+            'latitude': user.latitude,
+            'numCarte': cardNumberController.text,
+            'cvv': cvvController.text,
+            'exp_month': expiryMonthController.text,
+            'exp_year': '20' + expiryYearController.text
+          }
+        : {
+            'nom': _nameController.text,
+            'prenom': _prenameController.text,
+            'phone': _phoneController.text,
+            'idModePaiement': mode,
+            // 'idLivreur': _Bcontroller.isLivreur,
+            'listProduits': produits,
+            'ville': user.ville,
+            'longitude': user.longitude,
+            'latitude': user.latitude,
+          };
+
+    print(data);
+
     update();
     Get.defaultDialog(
         title: 'En cours',
@@ -115,23 +116,71 @@ class BuyShopController extends GetxController {
     try {
       Response response = await buySoppingCartRepo.buyCart(data);
       print(response.body);
+
       commande.saveCommande(response.body['id'], response.body['codeCommande'],
           response.body['codeClient'], response.body['date']);
       Get.back();
-      fn.snackBar('Achat', response.body['message'], ColorsApp.bleuLight);
-      _isOk = response.body['status'];
+      fn.snackBar('Achat', response.body['message'], true);
 
+      _isOk = response.body['status'];
+      if (response.statusCode == 200 && _isOk) {
+        await downloadFacture(response.body['pdf']);
+        fn.snackBar('Achat',
+            'Votre facture a ete energistre dans votre telephone', true);
+      }
       Get.find<CommandeController>().getListCommandes();
 
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Achat', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Achat', 'Une erreur est survenue', false);
       // Get.back();
 
       update();
       print(e);
     }
+  }
+
+  downloadFacture(url) async {
+    final taskId = await FlutterDownloader.enqueue(
+        url: url,
+        savedDir: '/storage/emulated/0/Download',
+        showNotification: true, // afficher une notification de téléchargement
+        openFileFromNotification:
+            true // ouvrir le fichier après le téléchargement
+        );
+  }
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _cardNumberController = TextEditingController();
+  final TextEditingController _expiryMonthController = TextEditingController();
+  final TextEditingController _expiryYearController = TextEditingController();
+  final TextEditingController _cvvController = TextEditingController();
+  get nameController => _nameController;
+  get cardNumberController => _cardNumberController;
+  get expiryMonthController => _expiryMonthController;
+  get expiryYearController => _expiryYearController;
+  get cvvController => _cvvController;
+
+  final TextEditingController _prenameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  get prenameController => _prenameController;
+  get phoneController => _phoneController;
+  final TextEditingController _dateController = TextEditingController();
+  get dateController => _dateController;
+  setSlash() {
+    print('fdfdf');
+    // if (_dateController.text.length == 2) {
+    //   _dateController.text = _dateController.text + '/';
+    // }
+  }
+
+  setDate() {
+    _expiryMonthController.text = _dateController.text.split('')[0].toString() +
+        _dateController.text.split('')[1].toString();
+    _expiryYearController.text = _dateController.text.split('')[2].toString() +
+        _dateController.text.split('')[3].toString();
+    update();
   }
 }

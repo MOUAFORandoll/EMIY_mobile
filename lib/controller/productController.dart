@@ -23,31 +23,29 @@ class ProductController extends GetxController {
   }
 
   void setQuantity(bool isIncrement) {
-    print(_quantity);
-    _quantity = isIncrement
+    print(
+      "QUanite $_quantity",
+    );
+
+    print("increment $isIncrement");
+    _quantity = isIncrement == true
         ? checkQuantity(_quantity + 1)
         : checkQuantity(_quantity - 1);
-    print(_quantity);
-
+    _qChanged = isIncrement == true ? _qChanged + 1 : _qChanged - 1;
+    print("*******$_quantity");
+    _inCartItems = _cart.getQuantity(_currentProduct);
     update();
   }
 
-  // void setQuantityAndUp(id, bool isIncrement) {
-  //   print(_quantity);
-  //   _quantity = isIncrement
-  //       ? checkQuantity(_quantity + 1)
-  //       : checkQuantity(_quantity - 1);
-  //   print(_quantity);
-
-  //   update();
-  //   _cart.updateItem(id, _quantity);
-  // }
-
+  int _qChanged = 0;
   int checkQuantity(int quantity) {
-    return ((quantity + inCartItems) < 0)
+    print("quantite final $quantity");
+    print("quantite final ${_currentProduct.quantite}");
+
+    return (quantity + _inCartItems) < 0
         ? 0
-        : ((quantity + inCartItems) > 20)
-            ? 20
+        : (quantity + _inCartItems > _currentProduct.quantite)
+            ? 0
             : quantity;
   }
 
@@ -55,28 +53,34 @@ class ProductController extends GetxController {
     return _cart.existInCart(product);
   }
 
+  var _currentProduct = null;
   void initProduct(CartController cart, ProduitModel product) {
+    _currentProduct = product;
     _quantity = 0;
     _inCartItems = 0;
+    _qChanged = 0;
     _cart = cart;
     var exist = false;
     exist = _cart.existInCart(product);
     if (exist) {
       _inCartItems = _cart.getQuantity(product);
+      // _quantity = _cart.getQuantity(product);
+      print(_inCartItems);
     }
+  }
+
+  getD() {
+    _inCartItems = _cart.getQuantity(_currentProduct);
+    update();
   }
 
   void addItem(ProduitModel product, index, type) {
     print('quantitte : ${_quantity} total : ${_inCartItems}');
-    // var sebd = _quantity < 0 ? _inCartItems - _quantity : _quantity;
-    // if (_quantity > 0) {
+
     _cart.addItem(product, _quantity, index, type);
     _quantity = 0;
     _inCartItems = _cart.getQuantity(product);
-    // } else {
-    // Get.snackbar("Add", 'E:ntrer une quantite correcte',
-    //     backgroundColor: ColorsApp.grey, colorText: ColorsApp.skyBlue);
-    // }
+
     update();
     _cart.items.forEach((k, v) {
       print('produit id : ${v.id}  quantite : ' + v.quantity.toString());
@@ -155,10 +159,9 @@ class ProductController extends GetxController {
   int get tsearch => _tsearch;
 
   searchType(int i) {
-    _tsearch = i; 
+    _tsearch = i;
     update();
   }
-
 
   bool _searchPro = false;
   bool get searchPro => _searchPro;
@@ -195,159 +198,3 @@ class ProductController extends GetxController {
     update();
   }
 }
-/**
- * import 'package:Fahkap/components/Button/IconButtonF.dart';
-import 'package:Fahkap/components/Button/btnCatList.dart';
-import 'package:Fahkap/components/Button/btnCatListPV.dart';
-import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/components/Form/formComponent2.dart';
-import 'package:Fahkap/components/Text/bigText.dart';
-import 'package:Fahkap/components/Text/bigtitleText.dart';
-import 'package:Fahkap/components/Widget/categoryComponent.dart';
-import 'package:Fahkap/components/Widget/productComponent.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/components/Text/titleText.dart';
-import 'package:Fahkap/components/Widget/productForBoutiqueComponent.dart';
-import 'package:Fahkap/components/Widget/productForCatComponent.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/controller/CategoryBoutiqueController.dart';
-import 'package:Fahkap/controller/productController.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
-
-class BoutiqueView extends StatelessWidget {
-  BoutiqueView({Key? key}) : super(key: key);
-  ScrollController _scrollController = new ScrollController();
-
-  @override
-  Widget build(BuildContext context) {
-    print(Get.parameters);
-
-    Get.find<CategoryBoutiqueController>()
-        .getDataForBoutique(Get.parameters['codeBoutique']);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: InkWell(
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: ColorsApp.black,
-          ),
-          onTap: () {
-            Get.back();
-          },
-        ),
-        title: BigtitleText(
-            text: Get.parameters['nomBoutique'].toString(), bolder: true),
-      ),
-      body: GetBuilder<CategoryBoutiqueController>(
-          builder: (_bscontroler) => _bscontroler.isLoadedPB == 0
-              ? Shimmer.fromColors(
-                  baseColor: Colors.blueGrey,
-                  highlightColor: Colors.greenAccent,
-                  child: SizedBox(
-                    height: kMdHeight,
-                    child: Stack(
-                      children: [
-                        GridView.builder(
-                          padding: const EdgeInsets.all(20),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 20.0,
-                                  mainAxisSpacing: 50.0),
-                          itemCount: 10,
-                          itemBuilder: (_ctx, index) => Container(
-                            height: kMdHeight * 2,
-                            width: kMdWidth * 1.1,
-                            margin: EdgeInsets.only(right: kMarginX),
-                            decoration: BoxDecoration(
-                                color: ColorsApp.greySecond,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      height: kMdHeight * .115,
-                                      width: Get.width * .5,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        image: AssetImage('assets/logo.png'),
-                                      ))),
-                                  Container(
-                                    width: kSmWidth * .6,
-                                    margin: EdgeInsets.only(
-                                        top: Get.height * .005,
-                                        left: Get.width * .008),
-                                    child: Text('produit.titre',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: ColorsApp.black,
-                                            fontSize: 12)),
-                                  ),
-                                  // Container(
-                                  //   width: kSmWidth * .6,
-                                  //   margin: EdgeInsets.only(
-                                  //       top: Get.height * .005,
-                                  //       left: Get.width * .008),
-                                  //   child: Text('XAF ' + '1000',
-                                  //       overflow: TextOverflow.ellipsis,
-                                  //       style: TextStyle(
-                                  //           color: Colors.red,
-                                  //           fontSize: 12,
-                                  //           fontWeight: FontWeight.bold)),
-                                  // ),
-                                ]),
-                          ),
-                        )
-                      ],
-                    ),
-                  ))
-              : _bscontroler.isLoadedPB == 1
-                  ? (_bscontroler.produitBoutiqueList.length != 0)
-                      ? SingleChildScrollView(
-                          child: GridView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              padding: const EdgeInsets.all(20),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 10.0,
-                                      mainAxisSpacing: 10.0),
-                              itemCount:
-                                  _bscontroler.produitBoutiqueList.length,
-                              itemBuilder: (_ctx, index) =>
-                                  ProductForBoutiqueComponent(
-                                      produit: _bscontroler
-                                          .produitBoutiqueList[index],
-                                      index: index)),
-                        )
-                      : Container(
-                          height: kMdHeight * .6,
-                          alignment: Alignment.center,
-                          child: Center(
-                            child: Text('Aucun Produit'),
-                          ))
-                  : Container(
-                      height: kMdHeight * .6,
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: Text('Error'),
-                      ))),
-
-      // Builds 1000 ListTiles
-    );
-  }
-}
-
- */

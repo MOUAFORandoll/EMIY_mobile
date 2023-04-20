@@ -90,10 +90,10 @@ class TransactionController extends GetxController {
         await Get.find<ManagerController>().getUser();
         getTransactions();
         Get.back();
-        fn.snackBar('Retrait', response.body['message'], ColorsApp.bleuLight);
+        fn.snackBar('Retrait', response.body['message'], true);
       } else {
         Get.back();
-        fn.snackBar('Retrait', response.body['message'], ColorsApp.greenLight);
+        fn.snackBar('Retrait', response.body['message'], false);
       }
 
       _isUpdating = false;
@@ -101,7 +101,7 @@ class TransactionController extends GetxController {
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Retrait', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Retrait', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdating = false;
       update();
@@ -129,7 +129,7 @@ class TransactionController extends GetxController {
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Retrait', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Retrait', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdating = false;
       update();

@@ -67,6 +67,19 @@ class BoutiqueRepo extends GetxService {
     return a;
   }
 
+  Future updateProduitiMAGEFB(data) async {
+    Response a = await apiClient.postData(ApiRoutes.UPDATE_PRODUCT_IMAGE, data);
+    ;
+
+    return a;
+  }
+  Future newProduitiMAGEFB(data) async {
+    Response a = await apiClient.postData(ApiRoutes.ADD_PRODUCT_IMAGE, data);
+    ;
+
+    return a;
+  }
+
   Future updateImageBoutique(data) async {
     Response a =
         await apiClient.postData(ApiRoutes.BOUTIQUE_IMAGE_UPDATE, data);

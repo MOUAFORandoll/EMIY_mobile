@@ -14,6 +14,7 @@ abstract class ColorsApp {
   static const Color greenLight = Color(0xFF45EFB1);
   static const Color textBlue = Color(0xFF2C0D58);
   static const Color red = Color(0xffB40001);
+  static const Color orange = Color(0xffF9C960);
   static Color textColor =
       Get.isDarkMode ? Color(0xffB40001) : Color(0xFFF1F6FA);
 }

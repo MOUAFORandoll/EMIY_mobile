@@ -32,7 +32,7 @@ class ProduitBoutiqueModel {
   String description;
   bool status;
   String date;
-  List<Image> images;
+  List<ImageU> images;
 
   factory ProduitBoutiqueModel.fromJson(Map<String, dynamic> json) =>
       ProduitBoutiqueModel(
@@ -44,7 +44,7 @@ class ProduitBoutiqueModel {
         description: json["description"],
         status: json["status"],
         date: json["date "],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        images: List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -60,8 +60,8 @@ class ProduitBoutiqueModel {
       };
 }
 
-class Image {
-  Image({
+class ImageU {
+  ImageU({
     required this.id,
     required this.src,
   });
@@ -69,7 +69,7 @@ class Image {
   int id;
   String src;
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory ImageU.fromJson(Map<String, dynamic> json) => ImageU(
         id: json["id"],
         src: json["src"],
       );

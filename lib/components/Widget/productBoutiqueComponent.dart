@@ -1,4 +1,7 @@
 // ignore: must_be_immutable
+import 'package:Fahkap/components/Widget/imageComp.dart';
+import 'package:Fahkap/components/Widget/imageCompAdd.dart';
+import 'package:Fahkap/components/Widget/imageCompUpdate.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:Fahkap/components/Button/customBtn.dart';
 import 'package:Fahkap/components/Form/commentForm.dart';
@@ -157,6 +160,31 @@ class ProductBoutiqueComponent extends StatelessWidget {
                       child: Column(
                     // mainAxisSize: MainAxisSize.min,
                     children: [
+                      produit.images.length != 0
+                          ? Container(
+                              height: kSmHeight * 2,
+                              margin:
+                                  EdgeInsets.symmetric(vertical: kMarginY * .1),
+                              child: ListView.builder(
+                                itemCount: produit.images.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (_ctx, index) {
+                                  return Row(
+                                    children: [
+                                      produit.images[index] != null
+                                          ? imageCompUpdate(
+                                              image: produit.images[index],
+                                            )
+                                          : Container(),
+                                      index == produit.images.length - 1
+                                          ? ImageCompAdd(id: produit.id)
+                                          : Container()
+                                    ],
+                                  );
+                                },
+                              ),
+                            )
+                          : Container(),
                       FormComponent2(
                           icon: Icons.account_circle,
                           type: 0,
@@ -202,7 +230,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                         },
                         // keyboardType: type,
                         // obscureText: obscureText!,
-                        maxLengthEnforced: false,
+                       
                         maxLength: 10,
                         maxLines: 10,
                         decoration: new InputDecoration(

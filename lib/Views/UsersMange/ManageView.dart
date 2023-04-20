@@ -287,7 +287,7 @@ class _ManageViewState extends State<ManageView> {
                                     }),
                               )
                             ]),
-                        _manager.stateSign ? LoginScreen() : RegisterScreen()
+                        // _manager.stateSign ? LoginScreen() : RegisterScreen()
                       ],
                     )
                   : RefreshIndicator(

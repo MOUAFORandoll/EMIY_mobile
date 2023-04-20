@@ -25,7 +25,7 @@ class KSearchField extends StatelessWidget {
       this.isCode = false,
       this.onChange})
       : super(key: key);
-
+FocusNode _focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchController>(builder: (searchCont) {
@@ -42,7 +42,7 @@ class KSearchField extends StatelessWidget {
           onChanged: (String value) {
             if (onChange != null) onChange!(value);
           },
-
+ focusNode: _focusNode,
           // cursorHeight: 30.0,
           controller: controllerField,
           // textAlign: TextAlign.left,

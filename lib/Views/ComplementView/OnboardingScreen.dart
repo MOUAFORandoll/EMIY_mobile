@@ -1,102 +1,244 @@
-import 'package:get/get.dart';
+import 'package:Fahkap/components/Button/app_button.dart';
 import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/utils/DataBase/DataBase.dart';
+import 'package:Fahkap/components/Widget/app_carroussel_item.dart';
+import 'package:Fahkap/controller/ActionController.dart';
+import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/api/apiUrl.dart';
-import 'package:Fahkap/utils/functions/route.dart';
-import 'package:Fahkap/utils/provider/refresh_token.dart';
-import 'package:dio/dio.dart';
+import 'package:Fahkap/utils/constants/assets.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
-import 'package:jwt_decode/jwt_decode.dart';
-import 'package:Fahkap/views/UsersMange/LoginScreen.dart';
-import 'package:Fahkap/views/ComplementView/wrapper.dart';
+import 'package:get/get.dart';
 
-class Onboarding extends StatefulWidget {
+class OnBoardingView extends StatelessWidget {
   @override
-  _OnboardingState createState() => _OnboardingState();
-}
-
-class _OnboardingState extends State<Onboarding>
-    with WidgetsBindingObserver, SingleTickerProviderStateMixin {
-  @override
-  void initState() {}
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-      alignment: Alignment.center,
-      fit: StackFit.expand,
-      children: <Widget>[
-        new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Expanded(
-              flex: 2,
-              child: new Container(
-                  child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Hero(
-                    tag: "splashscreenImage",
-                    child: new Container(child: Image.asset('assets/bus.png')),
+    return GetBuilder<ActionController>(
+        builder: (action) => Scaffold(
+              // appBar: AppBar(
+              //   title: const Text('Agora Video Call'),
+              // ),
+
+              body: SingleChildScrollView(
+                  child: Stack(
+                children: [
+                  CarouselSlider(
+                    carouselController: action.controller,
+                    items: [
+                      AppCarrousselItem(
+                        title: 'ctitle1'.tr,
+                        description: 'cdescription1'.tr,
+                        image: Assets.onb1,
+                      ),
+                      AppCarrousselItem(
+                          title: 'ctitle2'.tr,
+                          description: 'cdescription2'.tr,
+                          image: Assets.onb2,
+                          index: action.index),
+                      AppCarrousselItem(
+                        title: 'ctitle3'.tr,
+                        description: 'cdescription3'.tr,
+                        image: Assets.onb3,
+                      )
+                    ],
+                    options: CarouselOptions(
+                      aspectRatio: 4 / 4,
+
+                      enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                      initialPage: 0,
+                      enableInfiniteScroll: false,
+                      reverse: false,
+                      onPageChanged: (index, reason) {
+                        action.setIndex(index);
+                      },
+
+                      disableCenter: true,
+                      height: Get.height,
+                      // enlargeCenterPage: true,
+                      // autoPlay: true,
+
+                      // autoPlayCurve: Curves.fastOutSlowIn,
+                      // enableInfiniteScroll: true,
+                      viewportFraction: 1.0,
+                    ),
                   ),
-                  new Container(
-                      margin: const EdgeInsets.only(top: 15.0),
-                      child: Text('BienVenu Sur notre plateform',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20))),
-                  new Container(
-                      margin: const EdgeInsets.only(top: 15.0),
-                      child: Text(
-                        "Vous desirez voyager, vous n'avez pas de temps a perdre alors desormais reservez votre place dans les agences du cameroun via notre application ",
-                        textAlign: TextAlign.center,
-                      )),
-                  Button(
-                      borderRadius: 1.0,
-                      width: Get.size.height * .8,
-                      margin: EdgeInsets.only(
-                          top: Get.size.height * .10,
-                          bottom: 0,
-                          left: Get.size.width * .01,
-                          right: Get.size.width * .01),
-                      height: Get.size.height * .08,
-                      loaderColor: Colors.white,
-                      title: "Commencer",
-                      textColor: Colors.white,
-                      itemColor: Colors.black,
-                      borderColor: Colors.transparent,
-                      // state: validator,
-                      enabled: true,
-                      onTap: () async {
-                        Get.toNamed(AppLinks.LOGIN);
-                      }),
+                  Positioned(
+                      bottom: 5,
+                      left: 0,
+                      right: 0,
+                      child: action.index == 2
+                          ? Column(
+                              children: [
+                                Container(
+                                  // margin: EdgeInsets.all(kMarginX)
+                                  //     .add(EdgeInsets.only(bottom: 10)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: ['0', '1', '2']
+                                        .asMap()
+                                        .entries
+                                        .map((entry) {
+                                      return GestureDetector(
+                                          onTap: () {
+                                            action.controller.animateToPage(
+                                              action.index,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                              curve: Curves.easeInOut,
+                                            );
+                                          },
+                                          child: Container(
+                                            width: 8.0,
+                                            height: 8.0,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 10.0,
+                                                horizontal: 4.0),
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: (Theme.of(context)
+                                                                .brightness ==
+                                                            Brightness.dark
+                                                        ? Colors.white
+                                                        : ColorsApp.greenLight)
+                                                    .withOpacity(action.index ==
+                                                            entry.key
+                                                        ? 0.9
+                                                        : 0.2)),
+                                          ));
+                                    }).toList(),
+                                  ),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.all(kMarginX),
+                                    //     .add(EdgeInsets.only(bottom: 10)),
+                                    child: AppButton(
+                                      size: MainAxisSize.max,
+                                      bgColor: ColorsApp.skyBlue,
+                                      text: 'start'.tr,
+                                      onTap: () async {
+                                        Get.offNamedUntil(
+                                            AppLinks.FIRST, (route) => false);
+                                      },
+                                    ))
+                              ],
+                            )
+                          : Container(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                      margin: (EdgeInsets.only(bottom: 15)),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (Colors.white).withOpacity(0.5),
+                                      ),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.offNamedUntil(
+                                              AppLinks.LOGIN, (route) => false);
+                                        },
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text('Skip',
+                                                  style: TextStyle(
+                                                      color: action.index == 0
+                                                          ? Colors.white
+                                                          : ColorsApp
+                                                              .greenLight,
+                                                      fontWeight:
+                                                          FontWeight.bold))
+                                            ]),
+                                      )),
+                                  Container(
+                                    margin: EdgeInsets.all(kMarginX)
+                                        .add(EdgeInsets.only(bottom: 15)),
+                                    padding: EdgeInsets.all(kMarginX / 3.2),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: ['0', '1', '2']
+                                          .asMap()
+                                          .entries
+                                          .map((entry) {
+                                        return GestureDetector(
+                                            onTap: () {
+                                              action.controller.animateToPage(
+                                                action.index,
+                                                duration:
+                                                    Duration(milliseconds: 500),
+                                                curve: Curves.easeInOut,
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 8.0,
+                                              height: 8.0,
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 10.0,
+                                                  horizontal: 4.0),
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.dark
+                                                          ? Colors.white
+                                                          : ColorsApp
+                                                              .greenLight)
+                                                      .withOpacity(
+                                                          action.index ==
+                                                                  entry.key
+                                                              ? 0.9
+                                                              : 0.2)),
+                                            ));
+                                      }).toList(),
+                                    ),
+                                  ),
+                                  Container(
+                                      margin: (EdgeInsets.only(bottom: 15)),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: InkWell(
+                                        onTap: () {
+                                          action.index == 2
+                                              ? Get.offNamedUntil(
+                                                  AppLinks.LOGIN,
+                                                  (route) => false)
+                                              : action.controller.nextPage(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  curve: Curves.linear,
+                                                );
+                                        },
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                  padding: (EdgeInsets.only(
+                                                      bottom: 3)),
+                                                  child: Text('Next',
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .bold))),
+                                              Icon(
+                                                Icons
+                                                    .keyboard_arrow_right_outlined,
+                                                size: 25,
+                                                color: ColorsApp.black,
+                                              ),
+                                            ]),
+                                      )),
+                                ],
+                              ),
+                            )),
                 ],
               )),
-            ),
-            // Expanded(
-            //   flex: 1,
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: <Widget>[
-            //       SpinKitCircle(
-            //         color: Colors.blue,
-            //         size: 40,
-            //       ),
-            //       Padding(
-            //         padding: const EdgeInsets.only(top: 20.0),
-            //       ),
-            //       (this.subtitle == null) ? Text('') : Text(this.subtitle)
-            //     ],
-            //   ),
-            // ),
-          ],
-        ),
-      ],
-    ));
+            ));
   }
 }

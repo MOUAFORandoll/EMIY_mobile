@@ -268,7 +268,7 @@ class ShoppingViewNext extends StatelessWidget {
                             : functions.snackBar(
                                 'Panier',
                                 'Ajouter des produits au panier',
-                                ColorsApp.skyBlue);
+                                false);
                         ;
                       },
                     )

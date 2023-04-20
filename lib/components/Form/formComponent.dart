@@ -48,15 +48,15 @@ class _FormComponentState extends State<FormComponent> {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-            margin: EdgeInsets.only(
-              bottom: 1,
-              top: 1,
-            ),
-            child: Text(widget.hint.toString(),
-                style: TextStyle(
-                  color: ColorsApp.bleuLight,
-                ))),
+        // Container(
+        //     margin: EdgeInsets.only(
+        //       bottom: 1,
+        //       top: 1,
+        //     ),
+        //     child: Text(widget.hint.toString(),
+        //         style: TextStyle(
+        //           color: ColorsApp.bleuLight,
+        //         ))),
         Container(
             margin: EdgeInsets.only(
               bottom: 2,
@@ -85,6 +85,16 @@ class _FormComponentState extends State<FormComponent> {
 
               obscureText: widget.type == 1 ? true : false,
               decoration: new InputDecoration(
+                hintText: widget.hint,
+                hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 12),
+                labelText: widget.hint,
+                labelStyle: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
                 prefixIcon: Icon(widget.icon),
                 counterText: "",
                 // focusedBorder: OutlineInputBorder(
@@ -110,9 +120,9 @@ class _FormComponentState extends State<FormComponent> {
                 ),
 
                 // hintText: widget.hint,
-                hintStyle: TextStyle(
-                  color: Colors.grey,
-                ),
+                // hintStyle: TextStyle(
+                //   color: Colors.grey,
+                // ),
               ),
             ))
       ],

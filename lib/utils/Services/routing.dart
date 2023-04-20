@@ -2,6 +2,7 @@ import 'package:Fahkap/Views/BoutiqueUser/BoutiqueBuyView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/BoutiqueNewView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/ShortBoutiqueView.dart';
+import 'package:Fahkap/Views/Shopping/PaiementView.dart';
 import 'package:Fahkap/Views/Short/ShortView.dart';
 import 'package:Fahkap/Views/UsersMange/CompteView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/HistroriqueCBUView.dart';
@@ -76,7 +77,7 @@ class AppRoutes {
     GetPage(name: AppLinks.TEST, page: () => Test()),
     GetPage(
         name: AppLinks.ONBOARDING,
-        page: () => Onboarding(),
+        page: () => OnBoardingView(),
         transition: transitionX),
     GetPage(
         name: AppLinks.PRODUCT,
@@ -174,6 +175,10 @@ class AppRoutes {
         name: AppLinks.SHORT_BOUTIQUE,
         page: () => ShortBoutiqueView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.BUYVIEW,
+        page: () => PaiementView(),
+        transition: transitionX),
   ];
 }
 
@@ -209,6 +214,7 @@ class AppLinks {
   static const String BOUTIQUE_FOR_CATEGORY = "/bfc";
   static const String BOUTIQUE_READ_ALL = "/bra";
   static const String PRODUCT_READ_ALL = "/pra";
+  static const String BUYVIEW = "/buyview";
 }
 
 // <?php

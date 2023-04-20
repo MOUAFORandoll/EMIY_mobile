@@ -35,15 +35,16 @@ class Button extends StatelessWidget {
         ? Container(
             height: height,
             width: width,
+            constraints: const BoxConstraints(minHeight: 56),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             margin: margin,
             alignment: Alignment.center,
-            padding: EdgeInsets.all(10),
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
               border: borderColor == null
                   ? Border.all(color: Colors.black38)
                   : Border.all(color: borderColor),
-              gradient: GradientApp.blueG,
+
               // color: (enabled)
               //     ? (itemColor == null)
               //         ? ColorsApp.skyBlue
@@ -62,11 +63,10 @@ class Button extends StatelessWidget {
             alignment: Alignment.center,
             padding: EdgeInsets.all(10),
             decoration: new BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: BorderRadius.circular(10),
               border: borderColor == null
                   ? Border.all(color: Colors.black38)
                   : Border.all(color: borderColor),
-              gradient: GradientApp.blueG,
               color: (enabled)
                   ? (itemColor == null)
                       ? ColorsApp.skyBlue

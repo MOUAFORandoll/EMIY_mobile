@@ -24,13 +24,13 @@ class ManagerController extends GetxController {
   initCurrent() {
     _current = 0;
     update();
-    print('curent ${_current}');
+    // print('curent ${_current}');
   }
 
   setCurrent(int i) {
     _current = i;
     update();
-    print('curent ${_current}');
+    // print('curent ${_current}');
   }
 
   late Timer _timer;
@@ -68,7 +68,7 @@ class ManagerController extends GetxController {
     _stateN = i;
     update();
     print('st****************');
-    print(_stateN);
+    // print(_stateN);
   }
 
   final service = new ApiService();
@@ -226,7 +226,7 @@ class ManagerController extends GetxController {
 
     Get.find<BoutiqueController>().DeconectBoutique();
     // Get.back();
-    fn.snackBar('Mise a jour', 'Deconnecte', ColorsApp.bleuLight);
+    fn.snackBar('Mise a jour', 'Deconnecte', true);
     _userP = true;
 
     update();
@@ -261,13 +261,13 @@ class ManagerController extends GetxController {
       }
 
       Get.back();
-      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdating = false;
       update();
@@ -300,13 +300,13 @@ class ManagerController extends GetxController {
       }
 
       Get.back();
-      // fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      // fn.snackBar('Mise a jour', response.body['message'], true);
       _isConnected = true;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Connexion', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Connexion', 'Une erreur est survenue', false);
       // Get.back();
       _isConnected = false;
       update();
@@ -340,13 +340,13 @@ class ManagerController extends GetxController {
       }
 
       Get.back();
-      // fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      // fn.snackBar('Mise a jour', response.body['message'], true);
       _isSignUp = true;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Inscription', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Inscription', 'Une erreur est survenue', false);
       // Get.back();
       _isSignUp = false;
       update();

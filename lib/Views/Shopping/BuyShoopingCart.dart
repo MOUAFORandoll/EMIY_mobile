@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Fahkap/Views/Shopping/PaiementView.dart';
 import 'package:Fahkap/components/Button/IconButtonF.dart';
 import 'package:Fahkap/components/Button/customBtn.dart';
 import 'package:Fahkap/components/Form/formComponent.dart';
@@ -14,6 +15,7 @@ import 'package:Fahkap/controller/cartController.dart';
 import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/model/data/ModePaiementModel.dart';
 import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -63,13 +65,6 @@ class BuyShoopingCart extends StatelessWidget {
                   child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
                   onTap: () => Get.back()),
               title: Text(
-                // _Bcontroller.state == 0
-                //     ? 'Votre lieux de livraison'
-                //     : _Bcontroller.state == 1
-                //         ? "Choisissez un coursier"
-                //         : _Bcontroller.state == 2
-                //             ? "Entrer vos informations "
-                //             : "Terminer"
                 'Finalisation',
                 style: TextStyle(color: Colors.black),
               ),
@@ -77,127 +72,12 @@ class BuyShoopingCart extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            /*      bottomNavigationBar: Container(
-              height: kMarginY * 8,
-              padding: EdgeInsets.symmetric(horizontal: kMarginX),
-              decoration: BoxDecoration(
-                color: ColorsApp.greySecond,
-                // borderRadius: BorderRadius.all(
-                //   Radius.circular(12),
-                // ),
-              ),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButtonF(
-                        icon: Icons.skip_previous_rounded,
-                        inconSize: 30.0,
-                        color: ColorsApp.bleuLight,
-                        onTap: () => _Bcontroller.stateChange(false)),
-                    IconButtonF(
-                        icon: Icons.skip_next_rounded,
-                        inconSize: 30.0,
-                        color: ColorsApp.bleuLight,
-                        onTap: () async {
-                          var user = Get.find<ManagerController>();
-                          if (_Bcontroller.state == 0) {
-                            _Bcontroller.stateChange(true);
-                          } else if (_Bcontroller.state == 1) {
-                            if ((nom.text.isEmpty ||
-                                prenom.text.isEmpty ||
-                                phone.text.isEmpty)) {
-                              functions.snackBar(
-                                  'Achat',
-                                  'Veuillez remplir tous les champs',
-                                  ColorsApp.red);
-                              return;
-                            } else {
-                              _Bcontroller.stateChange(true);
-                            }
-                          } else if (_Bcontroller.state == 3) {
-                            if (nom.text.isNotEmpty &&
-                                    prenom.text.isNotEmpty &&
-                                    phone.text
-                                        .isNotEmpty /* &&
-                                _Bcontroller.isLivreur != 0 */
-                                ) {
-                              var data = {
-                                'nom': nom.text,
-                                'prenom': prenom.text,
-                                'phone': phone.text,
-                                'idModePaiement': 1,
-                                // 'idLivreur': _Bcontroller.isLivreur,
-                                'listProduits': _controller.getListPinCart(),
-                                'ville': user.ville,
-                                'longitude': user.longitude,
-                                'latitude': user.latitude,
-                              };
-                              print(data);
-                              await _Bcontroller.buyCart(data);
-                            } else {
-                              functions.snackBar(
-                                  'Achat',
-                                  'Veuillez verifier vos informations',
-                                  ColorsApp.red);
-                            }
-                            // _Bcontroller.stateChange(true);
-                          }
-                        }),
-                  ]),
-            ),
-            */
             body: Container(
                 margin: EdgeInsets.symmetric(horizontal: kMarginX),
                 child: SingleChildScrollView(
                     child: Column(mainAxisAlignment: MainAxisAlignment.start,
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                      // Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       Container(child: Text('Nom')),
-                      //       Container(
-                      //         // margin: EdgeInsets.only(left: Get.width * .008),
-                      //         child:
-                      //             Text('Prix ', style: TextStyle(fontSize: 15)),
-                      //       ),
-                      //       Container(
-                      //         // margin: EdgeInsets.only(left: Get.width * .008),
-                      //         child: Text('Quantity',
-                      //             style: TextStyle(fontSize: 15)),
-                      //       ),
-                      //       Container(
-                      //         // margin: EdgeInsets.only(left: Get.width * .008),
-                      //         child: Text('Total (XAF)',
-                      //             style: TextStyle(fontSize: 15)),
-                      //       ),
-                      //     ]),
-                      // SingleChildScrollView(
-                      //     child: ListView.builder(
-                      //         physics: NeverScrollableScrollPhysics(),
-                      //         shrinkWrap: true,
-                      //         itemCount: _controller.getItems.length,
-                      //         itemBuilder: (_ctx, index) => ProductBuyComponent(
-                      //             cartModel: _controller.getItems[index]))),
-
-                      // Table(
-                      //   border:
-                      //       TableBorder.all(width: 1.0, color: Colors.black),
-                      //   children: [
-
-                      //     TableRow(children: [
-                      //       ListView.builder(
-                      //           // physics: NeverScrollableScrollPhysics(),
-                      //           shrinkWrap: true,
-                      //           itemCount: 100,
-                      //           itemBuilder: (_ctx, index) => TableCell(
-                      //                 child: Text('fdfdf'),
-                      //               ))
-                      //     ]),
-                      //   ],
-                      // ),
-
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,37 +88,13 @@ class BuyShoopingCart extends StatelessWidget {
                             Container(child: Icon(Icons.location_pin)),
                           ]),
 
-                      // InkWell(
-                      //     child: Container(
-                      //         margin: EdgeInsets.only(
-                      //             top: Get.height * .05,
-                      //             left: Get.width * .01,
-                      //             right: Get.width * .01,
-                      //             bottom: Get.height * .009),
-                      //         padding: EdgeInsets.all(Get.height * .02),
-                      //         decoration: BoxDecoration(
-                      //             borderRadius: BorderRadius.circular(5),
-                      //             color: ColorsApp.bleuLight),
-                      //         child: Row(
-                      //           mainAxisAlignment:
-                      //               MainAxisAlignment.spaceBetween,
-                      //           children: <Widget>[
-                      //             Text(
-                      //               'Mon Emplacement actuel',
-                      //               overflow: TextOverflow.ellipsis,
-                      //             ),
-                      //             Icon(Icons.location_pin)
-                      //           ],
-                      //         )),
-                      //     onTap: () {
-                      //       // _controller.setLivreur(livreur.id);
-                      //     }),
                       InkWell(
                           child: Container(
                               margin: EdgeInsets.only(
-                                  top: Get.height * .05,
-                                  left: Get.width * .01,
-                                  right: Get.width * .01,
+                                  top: Get.size.height * .015,
+
+                                  // left: Get.width * .01,
+                                  // right: Get.width * .01,
                                   bottom: Get.height * .009),
                               padding: EdgeInsets.all(Get.height * .02),
                               decoration: BoxDecoration(
@@ -282,7 +138,7 @@ class BuyShoopingCart extends StatelessWidget {
                           ]),
                       Container(
                           margin: EdgeInsets.only(
-                              top: Get.size.height * .025,
+                              top: Get.size.height * .015,
                               bottom: Get.size.height * .025),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
@@ -295,19 +151,19 @@ class BuyShoopingCart extends StatelessWidget {
                               FormComponent(
                                   icon: Icons.account_circle,
                                   type: 0,
-                                  controller: nom,
+                                  controller: _Bcontroller.nameController,
                                   enabled: true,
                                   hint: "Nom"),
                               FormComponent(
                                   icon: Icons.account_circle,
                                   type: 0,
-                                  controller: prenom,
+                                  controller: _Bcontroller.prenameController,
                                   enabled: true,
                                   hint: "Prenom"),
                               FormComponent(
                                   icon: Icons.call,
                                   typeT: KFieldType.phone,
-                                  controller: phone,
+                                  controller: _Bcontroller.phoneController,
                                   enabled: true,
                                   hint: "Phone"),
                               // FormComponent(
@@ -326,7 +182,13 @@ class BuyShoopingCart extends StatelessWidget {
                             Container(
                                 child: Text(
                                     'Etape 3 : Choisir un moyen de payement ')),
-                            Container(child: Icon(Icons.money_sharp)),
+                            GetBuilder<ActionController>(
+                                builder: (_Acontroller) => InkWell(
+                                    child:
+                                        Container(child: Icon(Icons.payments)),
+                                    onTap: () async {
+                                      await _Acontroller.getListModePaiement();
+                                    })),
                           ]),
                       GetBuilder<ActionController>(
                           builder: (_Acontroller) => _Acontroller.isLoadedMP ==
@@ -339,7 +201,7 @@ class BuyShoopingCart extends StatelessWidget {
                                 )
                               : Container(
                                   margin: EdgeInsets.only(
-                                      top: Get.size.height * .025,
+                                      // top: Get.size.height * .015,
                                       bottom: Get.size.height * .025),
                                   // decoration: BoxDecoration(
                                   //     borderRadius: BorderRadius.circular(15),
@@ -377,20 +239,22 @@ class BuyShoopingCart extends StatelessWidget {
                         color: ColorsApp.greenLight,
                         title: 'Terminer',
                         onTap: () async {
-                          var user = Get.find<ManagerController>();
-                          var data = {
-                            'nom': nom.text,
-                            'prenom': prenom.text,
-                            'phone': phone.text,
-                            'idModePaiement': 1,
-                            // 'idLivreur': _Bcontroller.isLivreur,
-                            'listProduits': _controller.getListPinCart(),
-                            'ville': user.ville,
-                            'longitude': user.longitude,
-                            'latitude': user.latitude,
-                          };
-                          print(data);
-                          await _Bcontroller.buyCart(data);
+                          await Get.bottomSheet(PaiementView());
+                          // Get.toNamed(AppLinks.BUYVIEW);
+                          // var user = Get.find<ManagerController>();
+                          // var data = {
+                          //   'nom': nom.text,
+                          //   'prenom': prenom.text,
+                          //   'phone': phone.text,
+                          //   'idModePaiement': 1,
+                          //   // 'idLivreur': _Bcontroller.isLivreur,
+                          //   'listProduits': _controller.getListPinCart(),
+                          //   'ville': user.ville,
+                          //   'longitude': user.longitude,
+                          //   'latitude': user.latitude,
+                          // };
+                          // print(data);
+                          // await _Bcontroller.buyCart(data);
                         },
                       )
                       // SingleChildScrollView(

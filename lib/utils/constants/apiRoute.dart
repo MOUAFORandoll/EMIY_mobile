@@ -20,6 +20,10 @@ class ApiRoutes {
   static const LIVREUR = '/livreur/read/ville';
   static const BUY = '/commande/newX';
   static const UPDATE_PRODUCT = '/produit/update';
+
+  static const UPDATE_PRODUCT_IMAGE = '/produit/image/update';
+  static const ADD_PRODUCT_IMAGE = '/produit/image/add';
+
   static const NEW_PRODUCT = '/produit/new';
   static const DESABLED_PRODUCT = '/produit/state';
   static const LOGIN = '/api/logins';
@@ -34,5 +38,4 @@ class ApiRoutes {
   static const SHORT_READ = '/short/read';
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';
   static const SHORT_NEW = '/short/new';
-
 }

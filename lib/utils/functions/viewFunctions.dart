@@ -1,27 +1,64 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 
 class ViewFunctions {
-  snackBar(title, body, bgColor) {
+  snackBar(String title, String body, bool correct) {
     return Get.snackbar(
       title,
       body,
-      icon: Icon(Icons.shopping_bag, color: Colors.white),
-      snackPosition: SnackPosition.TOP,
-      backgroundColor: bgColor,
-      borderRadius: 10,
-      margin: EdgeInsets.all(10),
+      icon: Icon(correct ? FontAwesomeIcons.check : Icons.error,
+          color: correct ? Colors.greenAccent : Colors.red),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.grey[500],
+      borderRadius: 20,
+      margin: EdgeInsets.all(20),
       colorText: Colors.white,
       duration: Duration(seconds: 5),
       // isDismissible: true,
       dismissDirection: DismissDirection.horizontal,
-      forwardAnimationCurve: Curves.easeOutBack,
+      forwardAnimationCurve: Curves.linear,
     );
   }
+
+  toast(
+    title,
+  ) {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.greenAccent,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text("This is a Custom Toast"),
+        ],
+      ),
+    );
+
+    Get.snackbar(
+      'Notification',
+      'This is a WhatsApp Toast',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.grey[600],
+      colorText: Colors.white,
+      margin: EdgeInsets.all(16),
+      borderRadius: 16,
+      duration: Duration(seconds: 3),
+    );
+  }
+  /*
+   leftBarIndicatorColor,   Gradient? backgroundGradient, TextButton? mainButton, void Function(GetSnackBar)? onTap, bool? isDismissible, bool? showProgressIndicator, DismissDirection? dismissDirection, AnimationController? progressIndicatorController, Color? progressIndicatorBackgroundColor, Animation<Color>? progressIndicatorValueColor, SnackStyle? snackStyle, Curve? forwardAnimationCurve, Curve? reverseAnimationCurve, Duration? animationDuration, double? barBlur, double? overlayBlur, void Function(SnackbarStatus?)? snackbarStatus, Color? overlayColor, Form? userInputForm*/
 
   cronFunction(timer) {
     var i = 0;

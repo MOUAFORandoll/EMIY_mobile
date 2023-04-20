@@ -1,3 +1,4 @@
+import 'package:Fahkap/controller/productController.dart';
 import 'package:Fahkap/model/data/CartModel.dart';
 import 'package:Fahkap/model/data/CategoryModel.dart';
 import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
@@ -5,6 +6,7 @@ import 'package:Fahkap/model/data/ProduitModel.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
@@ -43,7 +45,7 @@ class CartController extends GetxController {
               isExist: true,
               time: DateTime.now().toString());
         } else if (total > value.qtdispo) {
-          fn.snackBar('Panier', 'Limite pour ce produit', ColorsApp.skyBlue);
+          fn.snackBar('Panier', 'Limite pour ce produit', false);
           return CartModel(
               id: value.id,
               name: value.name,
@@ -56,7 +58,7 @@ class CartController extends GetxController {
               isExist: true,
               time: DateTime.now().toString());
         } else {
-          fn.snackBar('Panier', 'Impossible', ColorsApp.red);
+          fn.snackBar('Panier', 'Impossible', false);
           return CartModel(
               id: value.id,
               name: value.name,
@@ -72,6 +74,7 @@ class CartController extends GetxController {
       });
       print(total);
       totalItems;
+      Get.find<ProductController>().getD();
       update();
     }
   }
@@ -201,7 +204,8 @@ class CartController extends GetxController {
         }
       }
     } else {
-      fn.snackBar('Panier', 'Qunatite incorrect', ColorsApp.bleuLight);
+      fn.snackBar('Panier', 'Qunatite incorrect', false);
     }
   }
+
 }

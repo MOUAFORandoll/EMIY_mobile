@@ -53,7 +53,7 @@ class CommentForm extends StatelessWidget {
                 },
                 keyboardType: type,
                 obscureText: obscureText!,
-                maxLengthEnforced: false,
+                // maxLengthEnforced: false,
                 maxLength: 10,
                 maxLines: 10,
                 decoration: new InputDecoration(

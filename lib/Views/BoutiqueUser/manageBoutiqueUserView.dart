@@ -246,7 +246,7 @@ class _ManageBoutiqueUserViewState extends State<ManageBoutiqueUserView> {
 
                                       // keyboardType: type,
                                       // obscureText: obscureText!,
-                                      maxLengthEnforced: false,
+                                      // maxLengthEnforced: false,
                                       maxLength: 10,
                                       maxLines: 10,
                                       decoration: new InputDecoration(

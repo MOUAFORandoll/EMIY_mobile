@@ -20,14 +20,17 @@ class SearchRepo extends GetxService with DB {
 
   Future searchData(type, search) async {
     // try {
-    print('response-----------------------------');
+    // print(
+    //     'response------------------${type}-----${search}----${ApiRoutes.SEARCH}--');
 
     Response response = await apiClient.postData(ApiRoutes.SEARCH, {
       'type': type,
       'search': search,
     });
-    print('response.body');
-    print(response.body);
+    // print('response.body');
+    // print(response.body);
     return response;
   }
 }
+
+ 

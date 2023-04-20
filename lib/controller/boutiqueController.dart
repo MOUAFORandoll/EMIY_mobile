@@ -56,7 +56,7 @@ class BoutiqueController extends GetxController {
     try {
       print("wwwwwwwww");
 
-      var image = await ImagePicker.pickImage(
+      var image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
           imageQuality: 100,
           maxHeight: 500,
@@ -66,7 +66,7 @@ class BoutiqueController extends GetxController {
       //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
       //   sourcePath: image.path,
       // );
-      _listImgProduits.add(image);
+      _listImgProduits.add(File(image!.path));
       print(_listImgProduits.length);
       update();
     } catch (e) {
@@ -121,7 +121,7 @@ class BoutiqueController extends GetxController {
     try {
       print("wwwwwwwww");
 
-      var image = await ImagePicker.pickImage(
+      var image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
           imageQuality: 100,
           maxHeight: 500,
@@ -131,7 +131,7 @@ class BoutiqueController extends GetxController {
       //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
       //   sourcePath: image.path,
       // );
-      boutiqueImage = image;
+      boutiqueImage = (File(image!.path));
       _isImage = true;
       // print(_listImgProduits.length);
       update();
@@ -196,17 +196,16 @@ class BoutiqueController extends GetxController {
         }
         Get.back();
 
-        fn.snackBar(
-            'Mise a jour', response.body['message'], ColorsApp.bleuLight);
+        fn.snackBar('Mise a jour', response.body['message'], true);
         _isUpdatingB = false;
         // Get.back(closeOverlays: true);
         update();
       } else {
         Get.back();
-        fn.snackBar('Boutique', 'Remplir tous les champs', ColorsApp.red);
+        fn.snackBar('Boutique', 'Remplir tous les champs', false);
       }
     } catch (e) {
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdatingB = false;
       update();
@@ -216,7 +215,7 @@ class BoutiqueController extends GetxController {
 
   Future updateImageBoutique() async {
     try {
-      var image = await ImagePicker.pickImage(
+      var image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
           imageQuality: 100,
           maxHeight: 500,
@@ -265,14 +264,13 @@ class BoutiqueController extends GetxController {
           }
 
           Get.back();
-          fn.snackBar(
-              'Mise a jour', response.body['message'], ColorsApp.bleuLight);
+          fn.snackBar('Mise a jour', response.body['message'], true);
           _isUpdating = false;
           // Get.back(closeOverlays: true);
           update();
         } catch (e) {
           Get.back();
-          fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+          fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
           // Get.back();
           _isUpdating = false;
           update();
@@ -408,6 +406,148 @@ class BoutiqueController extends GetxController {
     }
   }
 
+  updateProduitImage(idProduitObject) async {
+    try {
+      var image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 100,
+          maxHeight: 500,
+          maxWidth: 500);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      // );
+      if (image != null) {
+        Get.defaultDialog(
+            title: 'En cours',
+            barrierDismissible: false,
+            content: SizedBox(
+                // height: Get.size.height * .02,
+                // width: Get.size.width * .02,
+                child: Center(
+                    child: CircularProgressIndicator(
+              color: Colors.blueAccent,
+            ))));
+        var key = await s.getKey();
+
+        try {
+          FormData formData = new FormData({
+            "file": await MultipartFile(
+              image.path,
+              filename: "Image.jpg",
+            ),
+            'codeBoutique': Boutique.codeBoutique,
+            'keySecret': key,
+            'idProduitObject': idProduitObject
+          });
+
+          print(formData.files);
+
+          Response response = await boutiqueRepo.updateProduitiMAGEFB(formData);
+          print(response.body);
+          if (response.statusCode == 200) {
+            await getListProduitForBoutique();
+            Get.back();
+          }
+
+          Get.back();
+          fn.snackBar('Mise a jour', response.body['message'], true);
+          _isUpdating = false;
+          // Get.back(closeOverlays: true);
+          update();
+        } catch (e) {
+          Get.back();
+          fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+          // Get.back();
+          _isUpdating = false;
+          update();
+          print(e);
+        }
+      }
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
+  addProduitImage(idProduit) async {
+    try {
+      var image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 100,
+          maxHeight: 500,
+          maxWidth: 500);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      // );
+      if (image != null) {
+        Get.defaultDialog(
+            title: 'En cours',
+            barrierDismissible: false,
+            content: SizedBox(
+                // height: Get.size.height * .02,
+                // width: Get.size.width * .02,
+                child: Center(
+                    child: CircularProgressIndicator(
+              color: Colors.blueAccent,
+            ))));
+        var key = await s.getKey();
+
+        try {
+          FormData formData = new FormData({
+            "file": await MultipartFile(
+              image.path,
+              filename: "Image.jpg",
+            ),
+            'codeBoutique': Boutique.codeBoutique,
+            'keySecret': key,
+            'idProduit': idProduit
+          });
+
+          print(formData.files);
+
+          Response response = await boutiqueRepo.newProduitiMAGEFB(formData);
+          print(response.body);
+          if (response.statusCode == 200) {
+            await getListProduitForBoutique();
+            Get.back();
+          }
+
+          Get.back();
+          fn.snackBar('Mise a jour', response.body['message'], true);
+          _isUpdating = false;
+          // Get.back(closeOverlays: true);
+          update();
+        } catch (e) {
+          Get.back();
+          fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+          // Get.back();
+          _isUpdating = false;
+          update();
+          print(e);
+        }
+      }
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
   bool _isUpdating = false;
   bool get isUpdating => _isUpdating;
   updateProduit(data) async {
@@ -431,13 +571,13 @@ class BoutiqueController extends GetxController {
       }
 
       Get.back();
-      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdating = false;
       update();
@@ -466,13 +606,13 @@ class BoutiqueController extends GetxController {
       }
 
       Get.back();
-      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdating = false;
       update();
@@ -501,13 +641,13 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
       Get.back();
-      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdating = false;
       update();
@@ -539,13 +679,13 @@ class BoutiqueController extends GetxController {
       }
 
       Get.back();
-      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdatingB = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdatingB = false;
       update();
@@ -607,13 +747,13 @@ class BoutiqueController extends GetxController {
       }
 
       Get.back();
-      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdatingB = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdatingB = false;
       update();
@@ -793,14 +933,15 @@ class BoutiqueController extends GetxController {
   Future getVideo() async {
     try {
       print("wwwwwwwww");
-
-      var image = await ImagePicker.pickVideo(source: ImageSource.gallery);
+      // ignore: deprecated_member_use
+      PickedFile? video =
+          await ImagePicker().getVideo(source: ImageSource.gallery);
 
       // File? croppedFile = await ImageCropper().cropImage(
       //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
-      //   sourcePath: image.path,
+      //   sourcePath: video.path,
       // );
-      _videoShort.add(image);
+      _videoShort.add(File(video!.path));
       print(_videoShort.length);
       update();
     } catch (e) {
@@ -835,13 +976,13 @@ class BoutiqueController extends GetxController {
       }
 
       Get.back();
-      fn.snackBar('Mise a jour', response.body['message'], ColorsApp.bleuLight);
+      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
       Get.back();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', ColorsApp.red);
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
       // Get.back();
       _isUpdating = false;
       update();

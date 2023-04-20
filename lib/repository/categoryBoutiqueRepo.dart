@@ -56,28 +56,5 @@ class CategoryBoutiqueRepo extends GetxService  {
 
     return a;
   }
-
-  Future updateProduitFB(data) async {
-    Response a =
-        await apiClient.getCollectionsP(ApiRoutes.UPDATE_PRODUCT, data);
-    ;
-
-    return a;
-  }
-
-  Future desibledProduitFB(data) async {
-    Response a =
-        await apiClient.getCollectionsP(ApiRoutes.DESABLED_PRODUCT, data);
-    ;
-
-    return a;
-  }
-
-  Future updateBoutique(data) async {
-    Response a =
-        await apiClient.getCollectionsP(ApiRoutes.BOUTIQUE_FOR_UPDATE, data);
-    ;
-
-    return a;
-  }
+ 
 }

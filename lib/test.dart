@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:Fahkap/components/Button/button.dart';
@@ -21,32 +22,81 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
   @override
-  void initState() {
-    super.initState();
-  }
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _cardNumberController = TextEditingController();
+  final TextEditingController _expiryDateController = TextEditingController();
+  final TextEditingController _cvvController = TextEditingController();
 
-  ScrollController _scrollController = new ScrollController();
-
-  getH() {
-    print(1 + Random().nextInt(6 - 2));
-    return int.parse((1 + Random().nextInt(6 - 2)).toString());
-  }
-
-  List<double> list = [18.0, 10, 9, 5, 18.5, 7.5, 3.9];
+  @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(child: GetBuilder<ActionController>(builder: (action) {
-          return Button(
-            title: 'Ass',
-            onTap: () {
-              var a = getH();
-              print('dd');
-              action.notificationSnackBar('teste ${a}', a);
-            },
-          );
-        })),
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 20),
+            Text("Nom du titulaire de la carte"),
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                hintText: "Nom complet",
+              ),
+            ),
+            SizedBox(height: 20),
+            Text("Numéro de carte"),
+            TextField(
+              controller: _cardNumberController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "XXXX XXXX XXXX XXXX",
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Date d'expiration"),
+                      TextField(
+                        controller: _expiryDateController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "MM/YY",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("CVV"),
+                      TextField(
+                        controller: _cvvController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "XXX",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Envoyer les informations de paiement au serveur
+              },
+              child: Text("Payer"),
+            ),
+          ],
+        ),
       ),
     );
   }

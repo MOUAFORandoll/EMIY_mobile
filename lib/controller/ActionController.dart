@@ -13,6 +13,7 @@ import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/Services/storageService2.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
@@ -43,9 +44,9 @@ class ActionController extends GetxController {
     NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     // if (box.read("open") == false) {
-    return await flutterLocalNotificationsPlugin.show(
-        id, 'Notification in :', '$title', platformChannelSpecifics,
-        payload: 'item x');
+    // return await flutterLocalNotificationsPlugin.show(
+    //     id, 'Notification in :', '$title', platformChannelSpecifics,
+    //     payload: 'item x');
     // } else {
     //   return Fluttertoast.showToast(
     //       msg: 'New Notifications in : $title',
@@ -204,4 +205,16 @@ class ActionController extends GetxController {
       // return locale[index]['locale'];
     }
   }
+
+  final CarouselController _controller = CarouselController();
+  CarouselController get controller => _controller;
+  int _index = 0;
+  int get index => _index;
+
+  setIndex(index) {
+    _index = index;
+    update();
+  }
+   
+
 }

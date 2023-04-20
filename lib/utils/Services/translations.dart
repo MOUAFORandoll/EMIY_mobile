@@ -6,23 +6,126 @@ class Transalations extends Translations {
   Map<String, Map<String, String>> get keys => {
         //ENGLISH LANGUAGE
         'en_US': {
+          'send': 'Send',
           'setting': 'Setting',
-          'hello': 'Hello World',
+          'logtext': 'Enter Your Mobile Number',
           'message': 'Welcome to Proto Coders Point',
           'title': 'Flutter Language - Localization',
           'sub': 'Subscribe Now',
-          'changelang': 'Change Language'
+          'changelang': 'Change Language',
+          'home': 'Home',
+          'activity': 'Activity',
+          'search': 'Search',
+          'account': 'Account',
+          'ctitle1': 'Welcome ',
+          'cdescription1':
+              'Connect to medicine professionals from around the world',
+          'ctitle2': 'Online consultation',
+          'cdescription2': 'Consult online and get the medications',
+          'ctitle3': 'Online Medical Training',
+          'cdescription3':
+              'To be trained by medicine professionals from all over the world',
+          'sauter': "Jump",
+          'deconnecter': "Disconnect",
+          'bienvenue': "Welcome",
+          'categories': "Categories",
+          'rendezvous': "Appointment",
+          'alert': "Alert",
+          'parcoursante': "Health Journey",
+          'invalidMail': "Invalid email address",
+          'labellog': "Phone",
+          'labelpassword': "Password",
+          'forgotpass': "Forgot your password ?",
+          'logbtn': 'Login',
+          'regText': "Enter Your  Information",
+          'regbtn': 'SignUp',
+          't1Reini': "Reset password",
+          't2Reini':
+              "Enter the email address associated with your account and we'll send you an email with instructions on how to reset your password.",
+          'mail': "Email",
+          'start': "Begin",
+          'verifyaddre': "Email Address Verification",
+          'verifydescrip':
+              "Enter the numeric password recovery code sent to your email address",
+          'ncodeR': "Didn't receive the code?",
+          'resend': "Return",
+          'newpasst': "Create a new password",
+          'newpassd':
+              "Your new password must be different from the password previously used and contain at least 8 characters",
+          'validatornewpass': "Must consist of at least 8 characters",
+          'difpassword': 'The password does not match',
+          'confirmpassword': 'Confirm password',
+          'reinitialise': 'Reset',
+          'selectaccount': 'Choose an account',
+          'selectaccountd':
+              'Select the account for which you want to reset the password',
+          'next': 'Next',
+          'succestitle': "Updating the password",
+          'successdescription': "Your new current password has been updated!",
+          'connexion': "Connection",
         },
-      
+
         //FRENCH LANGUAGE
         'fr_FR': {
+          'send': 'Envoyer',
           'setting': 'Parametre',
-          'hello': 'Hello World',
+          'logtext': 'Enter Your Mobile Number',
           'message': 'Welcome to Proto Coders Point',
           'title': 'Flutter Language - Localization',
           'sub': 'Subscribe Now',
-          'changelang': 'Change Language'
+          'changelang': 'Change Language',
+          'home': 'Accueil',
+          'activity': 'Activité',
+          'search': 'Rechercher',
+          'account': 'Compte',
+          'ctitle1': 'Bienvenu',
+          'cdescription1':
+              'Besoin de matériels électroniques ? Vous avez un petit creux ? Vous êtes au bon endroit',
+          'ctitle2': 'Livraison',
+          'cdescription2':
+              'Commandez et faites vous livrer en moins d’une heure',
+          'ctitle3': 'Extra',
+          'cdescription3':
+              "Rapidité, Confiance et fiabilité sont notre devise C'est le Cameroun qui gagne",
+          'sauter': "Sauter",
+          'deconnecter': "Deconnecter",
+          'bienvenue': "Bienvenue",
+          'categories': "Catégories",
+          'rendezvous': "Rendez-vous",
+          'alert': "Alerte",
+          'parcoursante': "Parcour de sante",
+          'invalidMail': "Adresse Email Invalide",
+          'labellog': "Numero de telephone",
+          'labelpassword': "Mot de passe",
+          'forgotpass': "Mot de passe oublié?",
+          'logbtn': 'Login',
+          'regbtn': "S'Inscrire",
+          'regText': "Entrer vos informations",
+          't1Reini': "Réinitialiser le mot de passe",
+          't2Reini':
+              "Saisissez l'adresse électronique associée a votre compte et nous vous enverrons un courriel avec les instructions pour réinitialiser votre mot de passe",
+          'mail': "Email",
+          'start': "Commencer",
+          'verifyaddre': "Vérification de l'adresse électronique",
+          'verifydescrip':
+              "Saisissez le code numerique de récupération du mot de passe envoyé a votre adresse électronique",
+          'ncodeR': "Vous n'avez pas recu le code ?",
+          'resend': "Renvoyer",
+          'newpasst': "Créer un nouveau mot de passe ",
+          'newpassd':
+              "Votre nouveau mot de passe doit être différent du mot de passe utilisé précédemment et contenir minimum 8 caractères",
+          'validatornewpass': "Doit etre compose d'au moins 8 caracteres",
+          'difpassword': 'Le mot de passe ne correspond pas',
+          'confirmpassword': 'Confirmer le mot de passe',
+          'reinitialise': 'Reinitialiser',
+          'selectaccount': 'Choisir un compte',
+          'selectaccountd':
+              'Selectionnez le compte pour lequel vous souhaitez reinitialiser le mot de passe',
+          'next': 'Suivant',
+          'succestitle': "Mise a jour du mot de passe",
+          'successdescription':
+              "Votre nouveau mot de passe actuel a ete mis a jour !",
+          'connexion': "Connexion",
         },
-      
       };
 }

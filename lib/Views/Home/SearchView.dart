@@ -73,6 +73,9 @@ class SearchView extends StatelessWidget {
                               )),
                           onTap: () {
                             Get.back();
+                            // Créez une référence au noeud de focus actif
+                          
+
                             searchCont.searchForCont();
                           })
                     ]),
@@ -140,7 +143,8 @@ class SearchView extends StatelessWidget {
                                       ? ProductComponentAll(
                                           produit: searchCont
                                               .listResultSeaarch[index],
-                                          index: index,type :'search')
+                                          index: index,
+                                          type: 'search')
                                       : searchCont.tsearch == 1
                                           ? BoutiqueComponent(
                                               boutique: searchCont

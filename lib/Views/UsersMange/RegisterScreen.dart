@@ -1,8 +1,13 @@
+import 'package:Fahkap/components/Button/app_button.dart';
 import 'package:Fahkap/components/Button/button.dart';
 import 'package:Fahkap/components/Button/customBtn.dart';
 import 'package:Fahkap/components/Form/formComponent.dart';
+import 'package:Fahkap/components/Widget/app_back_button.dart';
+import 'package:Fahkap/components/Widget/app_input.dart';
+import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/dependancies.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
@@ -68,227 +73,207 @@ class _RegisterScreenState extends State<RegisterScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ManagerController>(builder: (_manager) {
+    return Scaffold(body: GetBuilder<ManagerController>(builder: (_manager) {
       return SingleChildScrollView(
           child: Container(
-              padding: EdgeInsets.only(top: 0, left: 10, right: 10),
-              child: _manager.stateCreate
-                  ? Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Create your Account',
-                          // textAlign: TextAlign.justify,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
-                        // Text(
-                        //   "Sign Up here !",
-                        //   // textAlign: TextAlign.center,
-                        //   style: TextStyle(
-                        //     fontSize: 20,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
-                        // Text(
-                        //   "Your Welcome.",
-                        //   textAlign: TextAlign.center,
-                        //   style: TextStyle(
-                        //     fontSize: 17,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
-                        Container(
-                            margin: EdgeInsets.only(
-                                top: Get.size.height * .02,
-                                bottom: Get.size.height * .025),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white),
-                            // padding: EdgeInsets.only(
-                            //   top: 25,
-                            // ),
-                            child: Column(
+              margin: EdgeInsets.symmetric(horizontal: kMarginX),
+              child: Column(children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(child: AppBackButton()),
+                      Container(
+                        child: AppTitleRight(
+                            title: 'regbtn'.tr,
+                            description: 'Welcome dear',
+                            icon: Icons.account_circle_outlined),
+                        margin: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width * .005),
+                      ),
+                    ]),
+                Container(
+                  padding: EdgeInsets.only(top: 0, left: 10, right: 10),
+                  child: Container(
+                      margin: EdgeInsets.only(
+                          top: Get.size.height * .02,
+                          bottom: Get.size.height * .025),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      // padding: EdgeInsets.only(
+                      //   top: 25,
+                      // ),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(bottom: kMarginY * 3),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                FormComponent(
-                                    icon: Icons.account_circle,
-                                    type: 0,
-                                    controller: name,
-                                    enabled: true,
-                                    hint: "Nom"),
-                                FormComponent(
-                                    icon: Icons.account_circle,
-                                    type: 0,
-                                    controller: surname,
-                                    enabled: true,
-                                    hint: "Prenom"),
-                                // FormComponent(
-                                //     icon: Icons.account_circle,
-                                //     type: 0,
-                                //     controller: phone,
-                                //     enabled: true,
-                                //     hint: "Ville"),
-                                FormComponent(
-                                    icon: Icons.phone,
-                                    type: 0,
-                                    controller: phone,
-                                    enabled: true,
-                                    hint: "Phone"),
-                                // FormComponent(
-                                //     icon: Icons.lock,
-                                //     type: 1,
-                                //     controller: pass,
-                                //     enabled: true,
-                                //     hint: "password"),
-                                // FormComponent(
-                                //     icon: Icons.lock,
-                                //     type: 1,
-                                //     controller: repass,
-                                //     enabled: true,
-                                //     hint: "repeat-password")
+                                Text('regText'.tr,
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                    )),
                               ],
-                            )),
-                        Button(
-                            borderRadius: 15.0,
-                            width: Get.size.height * .8,
-                            margin: EdgeInsets.only(
-                                top: Get.size.height * .025, bottom: 0),
-                            height: Get.size.height * .08,
-                            loaderColor: Colors.white,
-                            title: "Next",
-                            textColor: Colors.white,
-                            itemColor: Colors.blue,
-                            borderColor: Colors.transparent,
-                            state: validator,
-                            enabled: true,
-                            onTap: () async {
-                              _manager.steStateCreate();
-                            }),
-                        /*  Text(
-                              "Confirm your register!",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
                             ),
-                            Text(
-                              "Enter security code.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                           */
-                      ],
-                    )
-                  : Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Finish your Account',
-                          // textAlign: TextAlign.justify,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(
-                                top: Get.size.height * .02,
-                                bottom: Get.size.height * .025),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white),
-                            // padding: EdgeInsets.only(
-                            //   top: 25,
-                            // ),
-                            child: Column(
-                              children: [
-                                // FormComponent(
-                                //     icon: Icons.account_circle,
-                                //     type: 0,
-                                //     controller: phone,
-                                //     enabled: true,
-                                //     hint: "Code"),
-                                FormComponent(
-                                    icon: Icons.lock,
-                                    type: 1,
-                                    controller: pass,
-                                    enabled: true,
-                                    hint: "password"),
-                                FormComponent(
-                                    icon: Icons.lock,
-                                    type: 1,
-                                    controller: repass,
-                                    enabled: true,
-                                    hint: "repeat-password")
-                              ],
-                            )),
-                        GetBuilder<ManagerController>(
-                            builder: (_manager) => Button(
-                                borderRadius: 15.0,
-                                width: Get.size.height * .8,
-                                margin: EdgeInsets.only(
-                                    top: Get.size.height * .025, bottom: 0),
-                                height: Get.size.height * .08,
-                                loaderColor: Colors.white,
-                                title: "S'inscrire",
-                                textColor: Colors.white,
-                                itemColor: Colors.blue,
-                                borderColor: Colors.transparent,
-                                state: validator,
-                                enabled: true,
-                                onTap: () async {
-                                  if (pass.text != repass.text) {
-                                    fn.snackBar(
-                                        'Mot de passse',
-                                        'Mot de passe differents',
-                                        ColorsApp.red);
-                                  } else {
-                                    // Get.toNamed(AppLinks.FIRST);
-                                    await _manager.signUp({
-                                      'phone': phone.text,
-                                      'password': pass.text,
-                                      "nom": name.text,
-                                      "prenom": surname.text,
-                                      "email": email.text,
-                                      "status": true,
-                                    });
-                                    if (_manager.isSignUp) {
-                                      // Get.offNamedUntil(AppLinks.FIRST,
-                                      //     (route) => false);
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: kMarginY,
+                            ),
+                            child: AppInput(
+                              controller: name,
+                              icon: Icon(
+                                Icons.check_circle_sharp,
+                                // color: authCont.validMailLogin
+                                //     ? AppColors.primaryGreen
+                                //     : AppColors.grayColor,
+                              ),
+                              onChanged: (value) {
+                                // authCont.validMailLoginU(!(Validators.isValidEmail(
+                                //         authCont.emailController.text) ==
+                                //     'invalidMail'.tr));
+                              },
+                              label: 'labellog'.tr,
+                              validator: (value) {
+                                //  int.parse(authCont.emailController.text)
+                                // return Validators.isValidEmail(
+                                //     authCont.emailController.text);
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: kMarginY,
+                            ),
+                            child: AppInput(
+                              controller: surname,
+                              icon: Icon(
+                                Icons.check_circle_sharp,
+                                // color: authCont.validMailLogin
+                                //     ? AppColors.primaryGreen
+                                //     : AppColors.grayColor,
+                              ),
+                              onChanged: (value) {
+                                // authCont.validMailLoginU(!(Validators.isValidEmail(
+                                //         authCont.emailController.text) ==
+                                //     'invalidMail'.tr));
+                              },
+                              label: 'labellog'.tr,
+                              validator: (value) {
+                                //  int.parse(authCont.emailController.text)
+                                // return Validators.isValidEmail(
+                                //     authCont.emailController.text);
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: kMarginY,
+                            ),
+                            child: AppInput(
+                              controller: email,
+                              icon: Icon(
+                                Icons.check_circle_sharp,
+                                // color: authCont.validMailLogin
+                                //     ? AppColors.primaryGreen
+                                //     : AppColors.grayColor,
+                              ),
+                              onChanged: (value) {
+                                // authCont.validMailLoginU(!(Validators.isValidEmail(
+                                //         authCont.emailController.text) ==
+                                //     'invalidMail'.tr));
+                              },
+                              label: 'labellog'.tr,
+                              validator: (value) {
+                                //  int.parse(authCont.emailController.text)
+                                // return Validators.isValidEmail(
+                                //     authCont.emailController.text);
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: kMarginY,
+                            ),
+                            child: AppInput(
+                              controller: phone,
+                              icon: Icon(
+                                Icons.check_circle_sharp,
+                                // color: authCont.validMailLogin
+                                //     ? AppColors.primaryGreen
+                                //     : AppColors.grayColor,
+                              ),
+                              onChanged: (value) {
+                                // authCont.validMailLoginU(!(Validators.isValidEmail(
+                                //         authCont.emailController.text) ==
+                                //     'invalidMail'.tr));
+                              },
+                              label: 'labellog'.tr,
+                              validator: (value) {
+                                //  int.parse(authCont.emailController.text)
+                                // return Validators.isValidEmail(
+                                //     authCont.emailController.text);
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: kMarginY,
+                            ),
+                            child: AppInputPassword(
+                              controller: pass,
+                              label: 'labelpassword'.tr,
+                              obscureText: true,
+                              validator: (value) {
+                                print('fdfdfd');
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: kMarginY,
+                            ),
+                            child: AppInputPassword(
+                              controller: pass,
+                              label: 'labelpassword'.tr,
+                              obscureText: true,
+                              validator: (value) {
+                                print('fdfdfd');
+                              },
+                            ),
+                          ),
+                          GetBuilder<ManagerController>(
+                              builder: (_manager) => AppButton(
+                                  size: MainAxisSize.max,
+                                  bgColor: ColorsApp.skyBlue,
+                                  text: 'regbtn'.tr,
+                                  onTap: () async {
+                                    if (pass.text != repass.text) {
+                                      fn.snackBar('Mot de passse',
+                                          'Mot de passe differents', false);
+                                    } else {
+                                      // Get.toNamed(AppLinks.FIRST);
+                                      await _manager.signUp({
+                                        'phone': phone.text,
+                                        'password': pass.text,
+                                        "nom": name.text,
+                                        "prenom": surname.text,
+                                        "email": email.text,
+                                        "status": true,
+                                      });
+                                      if (_manager.isSignUp) {
+                                        // Get.offNamedUntil(AppLinks.FIRST,
+                                        //     (route) => false);
 
-                                      MyBinding().onGetDataNew();
+                                        MyBinding().onGetDataNew();
+                                      }
                                     }
-                                  }
-                                })),
-                        Button(
-                            borderRadius: 15.0,
-                            width: Get.size.height * .8,
-                            margin: EdgeInsets.only(
-                                top: Get.size.height * .025, bottom: 0),
-                            height: Get.size.height * .08,
-                            loaderColor: Colors.white,
-                            title: "Back",
-                            textColor: Colors.white,
-                            itemColor: Colors.grey,
-                            borderColor: Colors.transparent,
-                            state: validator,
-                            enabled: true,
-                            onTap: () async {
-                              _manager.steStateCreate();
-                            }),
-                      ],
-                    )));
-    });
+                                  })),
+                        ],
+                      )),
+                )
+              ])));
+    }));
   }
 }
