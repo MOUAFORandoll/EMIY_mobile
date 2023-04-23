@@ -22,7 +22,7 @@ class AppBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert(debugCheckHasMaterialLocalizations(context));
+    // assert(debugCheckHasMaterialLocalizations(context));
     return IconButton(
       padding: EdgeInsets.zero,
       alignment: Alignment.centerLeft,

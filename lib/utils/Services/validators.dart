@@ -19,29 +19,41 @@ class Validators {
   }
 
   static String? isValidPassword(String password) {
-    if (password.length < 4) {
-      return "At least 04 characters";
+    if (password.length < 5) {
+      return "invalidCaractP".tr;
     }
     return null;
   }
 
-  static String? isValidUsername(String username) {
-    return username.length >= 4 ? null : "At least 04 characters";
+  static String? isValidRePassword(bool verif) {
+    if (verif) {
+      return "invalidRepasss".tr;
+    }
+    return null;
   }
 
-  static String? usPhoneValid(String input) {
+  static isValidUsername(String username) {
+    return username.length > 3 ? null : "invalidCaract".tr;
+  }
+
+  static usPhoneValid(String input) {
     final RegExp phone =
         RegExp(r'^(\+0?1\s)?((\d{3})|(\(\d{3}\)))?(\s|-)\d{3}(\s|-)\d{4}$');
-    if (phone.hasMatch(input)) {
-      return null;
+    print(int.tryParse(input));
+    if (input.length == 9) {
+      if (int.tryParse(input) != null) {
+        return null;
+      } else {
+        return 'invalidPhone'.tr;
+      }
     } else {
-      return "Invalid Phone Number";
+      return 'invalidPhone'.tr;
     }
   }
 
   static String? required(String field, String? value) {
     if (value == null) return null;
-    return value.isEmpty ? "$field Obligatoire" : null;
+    return value.isEmpty ? " $field Obligatoire" : '';
   }
 
   static String? isValidDate(String? inputDate) {

@@ -157,11 +157,13 @@ class BuyShopController extends GetxController {
   final TextEditingController _expiryMonthController = TextEditingController();
   final TextEditingController _expiryYearController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
+  final TextEditingController _lieuxController = TextEditingController();
   get nameController => _nameController;
   get cardNumberController => _cardNumberController;
   get expiryMonthController => _expiryMonthController;
   get expiryYearController => _expiryYearController;
   get cvvController => _cvvController;
+  get lieuxController => _lieuxController;
 
   final TextEditingController _prenameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();

@@ -21,7 +21,12 @@ class IconButtonF extends StatelessWidget {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: backgroundColor),
-        child: Icon(icon, color: color, size: inconSize,semanticLabel: semanticLabel ,),
+        child: Icon(
+          icon,
+          color: color,
+          size: inconSize,
+          semanticLabel: semanticLabel,
+        ),
       ),
       onTap: onTap,
     );
@@ -33,7 +38,7 @@ class IconButtonF0 extends StatelessWidget {
   var icon, color, onTap, inconSize, backgroundColor;
   IconButtonF0(
       {this.icon,
-      this.color = Colors.white,
+      this.color = Colors.black,
       this.backgroundColor = Colors.white,
       this.inconSize = 20.0,
       this.onTap});
@@ -42,10 +47,10 @@ class IconButtonF0 extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: kMarginX * 1.2),
+        margin: EdgeInsets.symmetric(horizontal: kMarginX),
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: backgroundColor),
+            borderRadius: BorderRadius.circular(5), color: backgroundColor),
         child: Icon(icon, color: color, size: inconSize),
       ),
       onTap: onTap,

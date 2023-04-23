@@ -44,25 +44,24 @@ class OnBoardingView extends StatelessWidget {
                       )
                     ],
                     options: CarouselOptions(
-                      aspectRatio: 4 / 4,
+                        aspectRatio: 4 / 4,
+                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                        initialPage: 0,
+                        enableInfiniteScroll: false,
+                        reverse: false,
+                        onPageChanged: (index, reason) {
+                          action.setIndex(index);
+                        },
+                        disableCenter: true,
+                        height: Get.height,
+                        // enlargeCenterPage: true,
+                        // autoPlay: true,
 
-                      enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                      initialPage: 0,
-                      enableInfiniteScroll: false,
-                      reverse: false,
-                      onPageChanged: (index, reason) {
-                        action.setIndex(index);
-                      },
-
-                      disableCenter: true,
-                      height: Get.height,
-                      // enlargeCenterPage: true,
-                      // autoPlay: true,
-
-                      // autoPlayCurve: Curves.fastOutSlowIn,
-                      // enableInfiniteScroll: true,
-                      viewportFraction: 1.0,
-                    ),
+                        // autoPlayCurve: Curves.fastOutSlowIn,
+                        // enableInfiniteScroll: true,
+                        viewportFraction: 1.0,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        scrollDirection: Axis.horizontal),
                   ),
                   Positioned(
                       bottom: 5,
@@ -83,7 +82,7 @@ class OnBoardingView extends StatelessWidget {
                                       return GestureDetector(
                                           onTap: () {
                                             action.controller.animateToPage(
-                                              action.index,
+                                              entry.key,
                                               duration:
                                                   Duration(milliseconds: 500),
                                               curve: Curves.easeInOut,
@@ -168,7 +167,7 @@ class OnBoardingView extends StatelessWidget {
                                         return GestureDetector(
                                             onTap: () {
                                               action.controller.animateToPage(
-                                                action.index,
+                                                entry.key,
                                                 duration:
                                                     Duration(milliseconds: 500),
                                                 curve: Curves.easeInOut,

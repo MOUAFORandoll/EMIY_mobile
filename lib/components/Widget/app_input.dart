@@ -1,4 +1,5 @@
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,7 @@ class _AppInputState extends State<AppInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
+      // height: kHeight / 10,
       child: TextFormField(
         autofocus: false,
         controller: widget.controller,
@@ -47,8 +48,8 @@ class _AppInputState extends State<AppInput> {
         onChanged: widget.onChanged,
         decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorsApp.greenLight, width: 2),
-              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: ColorsApp.orange, width: 2),
+              borderRadius: BorderRadius.circular(8),
             ),
             border: OutlineInputBorder(
               //  borderSide : BorderSide(color:Colors.blue,width: 3),
@@ -61,7 +62,7 @@ class _AppInputState extends State<AppInput> {
             ),
             labelText: widget.label,
             labelStyle: TextStyle(
-              color: ColorsApp.greenLight, fontFamily: 'Montserrat',
+              color: ColorsApp.orange, fontFamily: 'Montserrat',
               // fontWeight: FontWeight.w500,
               fontSize: 12,
             ),
@@ -107,7 +108,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
+      height: kHeight / 10,
       child: TextFormField(
         autofocus: false,
         controller: widget.controller,
@@ -119,7 +120,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
         onChanged: widget.onChanged,
         decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorsApp.greenLight, width: 2),
+              borderSide: BorderSide(color: ColorsApp.orange, width: 2),
               borderRadius: BorderRadius.circular(10),
             ),
             border: OutlineInputBorder(
@@ -133,7 +134,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
             ),
             labelText: widget.label,
             labelStyle: TextStyle(
-              color: ColorsApp.greenLight, fontFamily: 'Montserrat',
+              color: ColorsApp.orange, fontFamily: 'Montserrat',
               // fontWeight: FontWeight.w500,
               fontSize: 12,
             ),

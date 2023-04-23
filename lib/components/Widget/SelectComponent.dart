@@ -19,33 +19,47 @@ class SelectComponent extends StatelessWidget {
     return GetBuilder<ActionController>(
         builder: (_Acontroller) => InkWell(
               child: Container(
-                  margin: EdgeInsets.only(top: 8),
+                  decoration: BoxDecoration(
+                      color: select
+                          ? ColorsApp.orange.withOpacity(0.3)
+                          : ColorsApp.greySearch,
+                      borderRadius: BorderRadius.circular(8)),
+                  margin: EdgeInsets.symmetric(vertical: kMarginY),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: kMarginX, vertical: kMarginY),
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                    color: select
+                                        ? ColorsApp.skyBlue
+                                        : Colors.white,
+                                    border:
+                                        Border.all(color: ColorsApp.skyBlue),
+                                    borderRadius: BorderRadius.circular(8))),
+                            Container(
+                                margin: EdgeInsets.only(left: kMarginX),
+                                child: Text(mode.libelle))
+                          ]),
                       Container(
                           height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              color: select ? ColorsApp.skyBlue : Colors.white,
-                              border: Border.all(color: ColorsApp.skyBlue),
-                              borderRadius: BorderRadius.circular(20))),
-                      Container(
-                          height: 40,
-                          margin: EdgeInsets.only(left: kMarginX * 10),
+                          margin: EdgeInsets.only(left: kMarginX),
                           child: CachedNetworkImage(
                             width: kMdWidth / 2,
-                            height: 40,
-                            fit: BoxFit.cover,
+                            height: 30,
+                            // fit: BoxFit.cover,
                             imageUrl: mode.img,
                             imageBuilder: (context, imageProvider) {
                               return Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: imageProvider,
-                                    fit: BoxFit.cover,
-                                    /* colorFilter: ColorFilter.mode(
-                                        Colors.red, BlendMode.colorBurn) */
                                   ),
                                 ),
                               );

@@ -259,12 +259,14 @@ class BoutiqueView extends StatelessWidget {
                                           physics:
                                               NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
-                                          padding: const EdgeInsets.all(20),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: kMarginX),
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 2,
-                                                  crossAxisSpacing: 10.0,
-                                                  mainAxisSpacing: 10.0),
+                                                  crossAxisSpacing: 20.0,
+                                                  childAspectRatio: 0.8,
+                                                  mainAxisSpacing: 20.0),
                                           itemCount: _bscontroler
                                               .produitBoutiqueList.length,
                                           itemBuilder: (_ctx, index) =>

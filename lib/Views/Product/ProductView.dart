@@ -1,3 +1,4 @@
+import 'package:Fahkap/components/Button/app_button.dart';
 import 'package:Fahkap/controller/searchController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -46,7 +47,12 @@ class ProductView extends StatelessWidget {
         .initProduct(Get.find<CartController>(), product);
     print(product);
     return GetBuilder<ManagerController>(
-        builder: (manage) => Scaffold(
+        builder: (manage) => WillPopScope(
+            onWillPop: () async {
+              Get.find<ProductController>().unSetConf();
+              return true;
+            },
+            child: Scaffold(
               body: SafeArea(
                   child: CustomScrollView(
                 controller: _scrollController,
@@ -63,6 +69,8 @@ class ProductView extends StatelessWidget {
                           color: ColorsApp.black,
                           onTap: () {
                             Get.back();
+
+                            Get.find<ProductController>().unSetConf();
                           },
                         ),
                         GetBuilder<ProductController>(builder: (controller) {
@@ -105,19 +113,24 @@ class ProductView extends StatelessWidget {
                           child: CarouselSlider.builder(
                               carouselController: _controller,
                               options: CarouselOptions(
-                                  height: kMdHeight,
                                   aspectRatio: 4 / 4,
-                                  viewportFraction: 0.8,
                                   enlargeStrategy:
                                       CenterPageEnlargeStrategy.scale,
                                   initialPage: 0,
-                                  enableInfiniteScroll: true,
+                                  enableInfiniteScroll: false,
                                   reverse: false,
+                                  disableCenter: true,
+                                  height: Get.height,
+                                  // enlargeCenterPage: true,
+                                  // autoPlay: true,
+
+                                  // autoPlayCurve: Curves.fastOutSlowIn,
+                                  // enableInfiniteScroll: true,
+                                  viewportFraction: 1.0,
                                   onPageChanged: (index, reason) {
                                     manage.setCurrent(index);
                                   },
                                   autoPlay: true,
-                                  disableCenter: true,
                                   autoPlayInterval: Duration(seconds: 3),
                                   autoPlayAnimationDuration:
                                       Duration(milliseconds: 800),
@@ -169,71 +182,7 @@ class ProductView extends StatelessWidget {
                                               "assets/images/error.gif"));
                                     },
                                   ),
-                                  onTap: () async {
-                                    Get.bottomSheet(Container(
-                                        height: kMdHeight * 2,
-                                        child: CarouselSlider.builder(
-                                          carouselController: _controller,
-                                          options: CarouselOptions(
-                                              height: kMdHeight * 2,
-                                              aspectRatio: 4 / 4,
-                                              viewportFraction: 0.8,
-                                              enlargeStrategy:
-                                                  CenterPageEnlargeStrategy
-                                                      .height,
-                                              initialPage: 0,
-                                              enableInfiniteScroll: true,
-                                              reverse: false,
-                                              onPageChanged: (index, reason) {},
-                                              autoPlay: true,
-                                              disableCenter: true,
-                                              autoPlayInterval:
-                                                  Duration(seconds: 3),
-                                              autoPlayAnimationDuration:
-                                                  Duration(milliseconds: 800),
-                                              autoPlayCurve:
-                                                  Curves.fastOutSlowIn,
-                                              scrollDirection: Axis.horizontal),
-                                          itemCount: product.images.length,
-                                          itemBuilder: (_ctx, i, j) => InkWell(
-                                            child: CachedNetworkImage(
-                                              height: kMdHeight * .15,
-                                              width: Get.width * .5,
-                                              fit: BoxFit.cover,
-                                              imageUrl: product.images[i].src,
-                                              imageBuilder:
-                                                  (context, imageProvider) {
-                                                return Container(
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                      image: imageProvider,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              placeholder: (context, url) {
-                                                return Container(
-                                                  child: Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                    color: ColorsApp.skyBlue,
-                                                  )),
-                                                );
-                                              },
-                                              errorWidget:
-                                                  (context, url, error) {
-                                                return CircleAvatar(
-                                                    backgroundColor:
-                                                        ColorsApp.skyBlue,
-                                                    radius: 50,
-                                                    backgroundImage: AssetImage(
-                                                        "assets/images/error.gif"));
-                                              },
-                                            ),
-                                          ),
-                                        )));
-                                  })))
+                                  onTap: () async {})))
                     ])),
                     bottom: PreferredSize(
                       preferredSize: Size.fromHeight(20),
@@ -274,10 +223,10 @@ class ProductView extends StatelessWidget {
                                     onTap: () =>
                                         _controller.animateToPage(entry.key),
                                     child: Container(
-                                      width: 12.0,
-                                      height: 12.0,
+                                      width: 8.0,
+                                      height: 8.0,
                                       margin: EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 4.0),
+                                          vertical: 10.0, horizontal: 4.0),
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           color: (Theme.of(context)
@@ -288,7 +237,7 @@ class ProductView extends StatelessWidget {
                                               .withOpacity(
                                                   manage.current == entry.key
                                                       ? 0.9
-                                                      : 0.4)),
+                                                      : 0.2)),
                                     ),
                                   );
                                 }).toList(),
@@ -299,21 +248,39 @@ class ProductView extends StatelessWidget {
                                   children: [
                                     BigtitleText(
                                         text: product.titre, bolder: true),
-                                    BigtitleText0(
-                                        text: 'Disponible: ' +
-                                            product.quantite.toString() +
-                                            ' Pcs',
+                                    BigtitleText(
+                                        text: 'XAF ' + product.prix.toString(),
+                                        color: ColorsApp.orange,
                                         bolder: true),
                                   ]),
-                              BigtitleText(
-                                  text: 'XAF ' + product.prix.toString(),
-                                  bolder: true),
                               Container(
-                                  margin: EdgeInsets.only(top: 10, bottom: 5),
-                                  child: Text(
-                                    product.description,
-                                    textAlign: TextAlign.justify,
-                                  ))
+                                  margin: EdgeInsets.only(top: 2, left: 3),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        color: ColorsApp.orange,
+                                      ),
+                                      BigtitleText(
+                                          size: 12,
+                                          color: ColorsApp.orange,
+                                          text: product.quantite.toString() +
+                                              ' Pieces disponible: ')
+                                    ],
+                                  )),
+                              Container(
+                                  margin: EdgeInsets.only(top: 8),
+                                  child: BigtitleText(
+                                    size: 14,
+                                    text: 'Details',
+                                  )),
+                              Container(
+                                  margin: EdgeInsets.only(top: 8, bottom: 5),
+                                  child: Text(product.description,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                          color: ColorsApp.greySearch,
+                                          fontSize: 12)))
                             ])),
                   ),
                 ],
@@ -323,91 +290,103 @@ class ProductView extends StatelessWidget {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Container(
-                    //   padding: EdgeInsets.only(
-                    //       left: kMdWidth / 2, right: kMdWidth / 2, top: 2, bottom: 2),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       IconButtonF(
-                    //         backgroundColor: ColorsApp.greenLight,
-                    //         icon: Icons.remove,
-                    //         inconSize: 15.0,
-                    //         onTap: () {
-                    //           prod.setQuantity(false); // Get.back();
-                    //         },
-                    //       ),
-                    //       BigText(
-                    //         text:
-                    //             'XAF ${product.prix * (prod.inCartItems == 0 ? 1 : prod.inCartItems)}',
-                    //       ),
-                    //       IconButtonF(
-                    //         backgroundColor: ColorsApp.greenLight,
-                    //         icon: Icons.add,
-                    //         inconSize: 15.0,
-                    //         onTap: () {
-                    //           prod.setQuantity(true); // Get.back();
-                    //         },
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     Container(
-                      decoration: BoxDecoration(color: ColorsApp.grey),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: kMdWidth / 10,
-                                right: kMdWidth / 10,
-                                top: 6,
-                                bottom: 6),
-                            padding: EdgeInsets.only(
-                              left: kMdWidth / 5,
-                              right: kMdWidth / 5,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                IconButtonF0(
-                                  backgroundColor: ColorsApp.greenLight,
-                                  icon: Icons.remove,
-                                  inconSize: 18.0,
-                                  onTap: () {
-                                    prod.setQuantity(false); // Get.back();
-                                  },
-                                ),
-                                SimpleText(
-                                  text: (prod.inCartItems).toString(),
-                                ),
-                                IconButtonF0(
-                                  backgroundColor: ColorsApp.greenLight,
-                                  icon: Icons.add,
-                                  inconSize: 18.0,
-                                  onTap: () {
-                                    prod.setQuantity(true); // Get.back();
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          CustomBtn(
-                            color: ColorsApp.greenLight,
-                            title: prod.exitP(product)
-                                ? "Augmenter"
-                                : 'Ajouter au panier',
-                            onTap: () {
-                              prod.addItem(
-                                  product, index, Get.parameters['type']);
-                            },
-                          )
-                        ],
-                      ),
+                      margin: EdgeInsets.all(kMarginX)
+                          .add(EdgeInsets.only(bottom: 15)),
+                      padding: EdgeInsets.all(kMarginX / 3.2),
+                      // decoration: BoxDecoration(color: ColorsApp.grey),
+                      child: prod.conf == false
+                          ? AppButton(
+                              size: MainAxisSize.max,
+                              bgColor: ColorsApp.orange,
+                              text:
+                                  prod.exitP(product) ? "Augmenter" : 'Ajouter',
+                              onTap: () {
+                                prod.setConf();
+                              },
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                  color: ColorsApp.greySearch,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15))),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: kSmWidth * .07,
+                              ).add(EdgeInsets.only(bottom: 5)),
+                              child: SingleChildScrollView(
+                                  child: Column(
+                                      // mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                    Container(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 8),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          BigtitleText(
+                                              size: 12,
+                                              text: 'Quantite',
+                                              bolder: true),
+                                          InkWell(
+                                              child: Container(
+                                                child: Icon(Icons.close,
+                                                    color: ColorsApp.black),
+                                              ),
+                                              onTap: () {
+                                                prod.unSetConf();
+                                              }),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              IconButtonF0(
+                                                icon: Icons.remove,
+                                                inconSize: 15.0,
+                                                onTap: () {
+                                                  prod.setQuantity(false);
+                                                  prod.addItem(product, index,
+                                                      Get.parameters['type']);
+                                                },
+                                              ),
+                                              SimpleText(
+                                                  text: (prod.inCartItems)
+                                                      .toString(),
+                                                  bolder: true),
+                                              IconButtonF0(
+                                                icon: Icons.add,
+                                                inconSize: 15.0,
+                                                onTap: () {
+                                                  prod.setQuantity(true);
+                                                  prod.addItem(product, index,
+                                                      Get.parameters['type']);
+                                                  print(
+                                                      "****************${prod.inCartItems}");
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          // SimpleText(
+                                          //     text:
+                                          //         (prod.inCartItems).toString(),
+                                          //     bolder: true),
+                                        ],
+                                      ),
+                                    )
+                                  ]))),
                     )
                   ],
                 );
               }),
-            ));
+            )));
   }
 }

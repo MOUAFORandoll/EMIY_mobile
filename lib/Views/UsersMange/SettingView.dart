@@ -1,38 +1,12 @@
-import 'package:Fahkap/controller/boutiqueController.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:Fahkap/components/Button/AppIconButton.dart';
-import 'package:Fahkap/components/Button/IconButtonF.dart';
-import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/components/Button/customBtn.dart';
-import 'package:Fahkap/components/Form/formComponent2.dart';
-import 'package:Fahkap/components/Form/text_field.dart';
-import 'package:Fahkap/components/Form/textform.dart';
-import 'package:Fahkap/components/Text/SimpleText.dart';
-import 'package:Fahkap/components/Text/bigText.dart';
-import 'package:Fahkap/components/Text/bigtitleText0.dart';
-import 'package:Fahkap/components/Widget/TransactionComponent.dart';
-import 'package:Fahkap/components/Widget/categoryComponent.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
+import 'package:Fahkap/controller/boutiqueController.dart'; 
+import 'package:carousel_slider/carousel_slider.dart'; 
 import 'package:Fahkap/components/Widget/settingComponent.dart';
-import 'package:Fahkap/controller/ActionController.dart';
-import 'package:Fahkap/controller/TransactionController.dart';
-import 'package:Fahkap/controller/cartController.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/controller/categoryBoutiqueController.dart';
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/controller/productController.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/repository/TransactionRepo.dart';
+import 'package:Fahkap/controller/ActionController.dart'; 
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:flutter/material.dart'; 
+import 'package:get/get.dart'; 
 
 class SettingView extends StatelessWidget {
   SettingView({

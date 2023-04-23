@@ -248,6 +248,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_svg",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-0.19.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -432,6 +438,18 @@
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "path_drawing",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/path_drawing-0.4.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "1.19"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/path_parsing-0.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "1.19"
     },
     {
       "name": "path_provider",
@@ -842,7 +860,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-04-19T12:50:59.789195Z",
+  "generated": "2023-04-22T08:40:16.269994Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }

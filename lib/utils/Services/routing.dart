@@ -1,10 +1,11 @@
 import 'package:Fahkap/Views/BoutiqueUser/BoutiqueBuyView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/BoutiqueNewView.dart';
+import 'package:Fahkap/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:Fahkap/Views/Shopping/PaiementView.dart';
 import 'package:Fahkap/Views/Short/ShortView.dart';
-import 'package:Fahkap/Views/UsersMange/CompteView.dart';
+import 'package:Fahkap/Views/UsersMange/WalletView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/HistroriqueCBUView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/manageBoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/produitBoutiqueUserView.dart';
@@ -26,6 +27,7 @@ import 'package:Fahkap/Views/UsersMange/HelpView.dart';
 import 'package:Fahkap/Views/UsersMange/PolitiqueView.dart';
 import 'package:Fahkap/Views/UsersMange/RegisterScreen.dart';
 import 'package:Fahkap/Views/UsersMange/SettingView.dart';
+import 'package:Fahkap/Views/UsersMange/UserManageView.dart';
 import 'package:Fahkap/Views/UsersMange/forgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:Fahkap/Views/UsersMange/LoginScreen.dart';
@@ -129,6 +131,10 @@ class AppRoutes {
         page: () => ManageBoutiqueUserView(),
         transition: transitionX),
     GetPage(
+        name: AppLinks.BOUTIQUE_USER,
+        page: () => BoutiqueUserView(),
+        transition: transitionX),
+    GetPage(
         name: AppLinks.SHOPNEXT,
         page: () => ShoppingViewNext(),
         transition: transitionX),
@@ -138,8 +144,8 @@ class AppRoutes {
         page: () => ListBoutiquesView(),
         transition: transitionX),
     GetPage(
-        name: AppLinks.COMPTE_FOR_BOUTIQUE,
-        page: () => CompteView(),
+        name: AppLinks.WALLET,
+        page: () => WalletView(),
         transition: transitionX),
     GetPage(
         name: AppLinks.PRODUCT_READ_ALL,
@@ -179,6 +185,10 @@ class AppRoutes {
         name: AppLinks.BUYVIEW,
         page: () => PaiementView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.USERVIEW,
+        page: () => UserManageView(),
+        transition: transitionX),
   ];
 }
 
@@ -192,7 +202,7 @@ class AppLinks {
   static const String POLITIQUE = "/politique";
   static const String HELP = "/help";
   static const String MANAGE_FOR_BOUTIQUE = "/mfb";
-  static const String COMPTE_FOR_BOUTIQUE = "/cb";
+  static const String WALLET = "/cb";
   static const String SETTING = "/setting";
   static const String HISTORIQUE_FOR_BOUTIQUE = "/hfb";
   static const String COMMANDE_FOR_BOUTIQUE = "/cfb";
@@ -215,6 +225,8 @@ class AppLinks {
   static const String BOUTIQUE_READ_ALL = "/bra";
   static const String PRODUCT_READ_ALL = "/pra";
   static const String BUYVIEW = "/buyview";
+  static const String USERVIEW = "/userview"; 
+  static const String BOUTIQUE_USER = "/boutiqueuserview";
 }
 
 // <?php

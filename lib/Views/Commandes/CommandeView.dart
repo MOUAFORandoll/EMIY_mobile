@@ -5,6 +5,8 @@ import 'package:Fahkap/components/Form/formComponent2.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
 import 'package:Fahkap/components/Widget/CommandeComponent.dart';
+import 'package:Fahkap/components/Widget/app_back_button.dart';
+import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/categoryComponent2.dart';
 import 'package:Fahkap/components/Widget/productComponent.dart';
@@ -26,86 +28,92 @@ class CommandeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CommandeController>(builder: (_commande) {
       return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: InkWell(
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: ColorsApp.black,
-              ),
-              onTap: () {
-                Get.back();
-              },
-            ),
-            title: BigtitleText(text: 'Commandes', bolder: true),
-          ),
           body: CustomScrollView(controller: _scrollController, slivers: [
-            SliverList(
+        SliverList(
 
-                // Use a delegate to build items as they're scrolled on screen.
-                delegate: SliverChildBuilderDelegate(
-              // The builder function returns a ListTile with a title that
-              // displays the index of the current item.
-              (context, index) => _commande.isLoaded == 0
-                  ? Shimmer.fromColors(
-                      baseColor: Colors.blueGrey,
-                      highlightColor: Colors.greenAccent,
-                      child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                          child: ListView.builder(
-                              itemCount: 10,
-                              itemBuilder: (_ctx, index) => Container(
-                                  height: kMdHeight / 8,
-                                  // width: kMdWidth,
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: kMarginX, vertical: kMarginY),
-                                  decoration: BoxDecoration(
-                                      color: ColorsApp.skyBlue,
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child:
-                                      /* SingleChildScrollView(
+            // Use a delegate to build items as they're scrolled on screen.
+            delegate: SliverChildBuilderDelegate(
+          // The builder function returns a ListTile with a title that
+          // displays the index of the current item.
+          (context, index) => _commande.isLoaded == 0
+              ? Shimmer.fromColors(
+                  baseColor: Colors.blueGrey,
+                  highlightColor: Colors.greenAccent,
+                  child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                      child: ListView.builder(
+                          itemCount: 10,
+                          itemBuilder: (_ctx, index) => Container(
+                              height: kMdHeight / 8,
+                              // width: kMdWidth,
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: kMarginX, vertical: kMarginY),
+                              decoration: BoxDecoration(
+                                  color: ColorsApp.skyBlue,
+                                  borderRadius: BorderRadius.circular(8)),
+                              child:
+                                  /* SingleChildScrollView(
                 child: */
-                                      Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: kMarginX,
-                                              vertical: kMarginY),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                // width: kSmWidth * .6,
+                                  Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: kMarginX,
+                                          vertical: kMarginY),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            // width: kSmWidth * .6,
 
-                                                child: Text('Code Commande : ',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: ColorsApp
-                                                            .greenLight,
-                                                        fontSize: 12)),
-                                              ),
-                                              Container(
-                                                child: Text('Date : ',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colors.red,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              ),
-                                            ],
-                                          ))
-                                    ],
-                                  )))))
-                  : _commande.commandeList.length == 0
+                                            child: Text('Code Commande : ',
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color: ColorsApp.greenLight,
+                                                    fontSize: 12)),
+                                          ),
+                                          Container(
+                                            child: Text('Date : ',
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ),
+                                        ],
+                                      ))
+                                ],
+                              )))))
+              : Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: kMarginY * 2),
+                    decoration: BoxDecoration(color: ColorsApp.grey),
+                    padding: EdgeInsets.only(
+                        left: kMdWidth / 6,
+                        right: kMdWidth / 6,
+                        top: kMarginY * 2.2,
+                        bottom: kMarginY * 2.2),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(child: AppBackButton()),
+                          Container(
+                            child: AppTitleRight(
+                                title: 'ycom'.tr,
+                                description: 'yscom'.tr,
+                                icon: null),
+                            margin: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * .005),
+                          ),
+                        ]),
+                  ),
+                  _commande.commandeList.length == 0
                       ? Center(child: Text('Aucune Commande'))
                       : Container(
                           height: kMdHeight,
@@ -120,11 +128,12 @@ class CommandeView extends StatelessWidget {
                                       )
                                     : Text(''),
                           ),
-                        ),
+                        )
+                ]),
 
-              childCount: 1, //_commande.commandeList.length,
-            ))
-          ]));
+          childCount: 1, //_commande.commandeList.length,
+        ))
+      ]));
     });
   }
 }

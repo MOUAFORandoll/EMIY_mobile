@@ -1,7 +1,12 @@
+import 'package:Fahkap/components/Form/home_search_field.dart';
+import 'package:Fahkap/components/Form/search_field.dart';
+import 'package:Fahkap/components/Widget/BoutiqueComponentHomeN.dart';
+import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/controller/ShortController.dart';
 import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/utils/constants/assets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:Fahkap/Views/Home/SearchView.dart';
 import 'package:Fahkap/components/Button/btnCatList.dart';
@@ -24,11 +29,15 @@ import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../components/Button/app_button.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
@@ -38,8 +47,6 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController controllerField = TextEditingController();
 
-    // Get.find<ProductController>().getPopularProduit();
-    //  Get.find<CategoryController>().getCategory();
     return GetBuilder<ProductController>(builder: (prods) {
       return RefreshIndicator(
           color: ColorsApp.skyBlue,
@@ -52,12 +59,9 @@ class HomeView extends StatelessWidget {
             await Get.find<ManagerController>().getKeyU();
             await Get.find<ManagerController>().getLocalU();
             await Get.find<ManagerController>().getUser();
-    await  Get.find<ShortController>().getListShort();
-
-            print('****mid');
+            await Get.find<ShortController>().getListShort();
 
             await prods.getPopularProduit();
-            print('****fin');
           },
           child: CustomScrollView(
               controller: Get.find<ActionController>().scrollcontroller,
@@ -80,7 +84,15 @@ class HomeView extends StatelessWidget {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            BigtitleText(text: 'Home', bolder: true),
+                            Container(
+                              child: AppTitleRight(
+                                  title: 'Hi Boy!',
+                                  description: 'Welcome dear',
+                                  icon: Assets.home),
+                              margin: EdgeInsets.only(
+                                  right:
+                                      MediaQuery.of(context).size.width * .005),
+                            ),
                             InkWell(
                                 child: Container(
                                     // margin: EdgeInsets.only(right: 10),
@@ -92,8 +104,7 @@ class HomeView extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(30)),
                                     child: Icon(
- Icons.amp_stories,
- 
+                                      Icons.amp_stories,
                                       color: Colors.red,
                                     )),
                                 onTap: () {
@@ -463,11 +474,14 @@ class HomeView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                titleText(text: 'Categorie'),
+                                KHomeSearchField(
+                                  controllerField: controllerField,
+                                  prefix: null,
+                                ),
                                 Container(
-                                  height: kSmHeight,
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: kMarginY * .2),
+                                  height: kSmHeight / 1.2,
+                                  margin:
+                                      EdgeInsets.symmetric(vertical: kMarginY),
                                   child: ListView.builder(
                                     itemCount: categorys.categoryList.length,
                                     scrollDirection: Axis.horizontal,
@@ -477,111 +491,82 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                categorys.ListBoutiqueF.length != 0
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          titleText(
-                                              text: 'Boutique Populaire(s)'),
-                                          Container(
-                                              margin: EdgeInsets.only(
-                                                  top: Get.height * .005,
-                                                  left: Get.width * .008),
-                                              child: InkWell(
-                                                  child: Icon(
-                                                    Icons
-                                                        .arrow_forward_ios_outlined,
-                                                    // color: Colors.white,
-                                                  ),
-                                                  onTap: () {
-                                                    Get.toNamed(AppLinks
-                                                        .BOUTIQUE_READ_ALL);
-                                                  })),
-                                        ],
-                                      )
-                                    : Container(),
-                                categorys.ListBoutiqueF.length != 0
-                                    ? Container(
-                                        height: kMdHeight * .30,
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: kMarginY * .2),
-                                        child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: categorys
-                                                        .ListBoutiqueF.length <
-                                                    5
-                                                ? categorys.ListBoutiqueF.length
-                                                : 5,
-                                            itemBuilder: (_ctx, index) =>
-                                                BoutiqueComponentHome(
-                                                  boutique: categorys
-                                                      .ListBoutiqueF[index],
-                                                )),
-                                      )
-                                    : Container(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    titleText(text: 'Best Selling'),
-                                    Container(
-                                        margin: EdgeInsets.only(
-                                            top: Get.height * .005,
-                                            left: Get.width * .008),
-                                        child: InkWell(
-                                            child: Icon(
-                                              Icons.arrow_forward_ios_outlined,
-                                              // color: Colors.white,
-                                            ),
-                                            onTap: () {
-                                              Get.toNamed(
-                                                  AppLinks.PRODUCT_READ_ALL);
-                                            })),
-                                  ],
+                                Container(
+                                  height: kMdHeight / 6,
+                                  child: CarouselSlider.builder(
+                                    itemCount: categorys.ListBoutiqueF.length,
+                                    itemBuilder: (_ctx, i, index) =>
+                                        BoutiqueComponentHomeN(
+                                      boutique: categorys.ListBoutiqueF[index],
+                                    ),
+                                    options: CarouselOptions(
+                                      aspectRatio: 4 / 4,
+
+                                      enlargeStrategy:
+                                          CenterPageEnlargeStrategy.scale,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: false,
+                                      reverse: false,
+                                      onPageChanged: (index, reason) {
+                                        categorys.setCurrent(index);
+                                      },
+
+                                      disableCenter: true,
+                                      height: Get.height,
+                                      // enlargeCenterPage: true,
+                                      // autoPlay: true,
+
+                                      // autoPlayCurve: Curves.fastOutSlowIn,
+                                      // enableInfiniteScroll: true,
+                                      viewportFraction: 1.0,
+                                    ),
+                                  ),
                                 ),
-                                SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height * 2,
-                                    child: Stack(
-                                      children: [
-                                        StaggeredGridView.countBuilder(
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          shrinkWrap: false,
-                                          crossAxisCount: 4,
-                                          itemCount: prods.produitList.length,
-                                          itemBuilder: (_ctx, index) =>
-                                              ProductComponentAll(
-                                                  produit:
-                                                      prods.produitList[index],
-                                                  index: index),
-                                          staggeredTileBuilder: (int index) =>
-                                              new StaggeredTile.count(
-                                                  2, index.isEven ? 3 : 2),
-                                          mainAxisSpacing: 2.0,
-                                          crossAxisSpacing: 4.0,
-                                        ),
-                                        //   GridView.builder(
-                                        //       physics:
-                                        //           NeverScrollableScrollPhysics(),
-                                        //       gridDelegate:
-                                        //           const SliverGridDelegateWithFixedCrossAxisCount(
-                                        //               crossAxisCount: 2,
-                                        //               crossAxisSpacing:
-                                        //                   10.0,
-                                        //               mainAxisSpacing:
-                                        //                   50.0),
-                                        //       itemCount:
-                                        //           prods.produitList.length,
-                                        //       itemBuilder: (_ctx, index) =>
-                                        //           ProductComponentAll(
-                                        //               produit:
-                                        //                   prods.produitList[
-                                        //                       index],
-                                        //               index: index)),
-                                      ],
-                                    )),
+                                Container(
+                                  margin: EdgeInsets.symmetric(
+                                    vertical: 2.0,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: ['0', '1', '2']
+                                        .asMap()
+                                        .entries
+                                        .map((entry) {
+                                      return GestureDetector(
+                                          child: Container(
+                                        width: 6.0,
+                                        height: 6.0,
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 2.0, horizontal: 4.0),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: (ColorsApp.greenLight)
+                                                .withOpacity(categorys.indexB ==
+                                                        entry.key
+                                                    ? 1
+                                                    : 0.2)),
+                                      ));
+                                    }).toList(),
+                                  ),
+                                ),
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: const BouncingScrollPhysics(),
+                                    // Ratio largeur/hauteur pour chaque élément
+
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 20.0,
+                                            childAspectRatio: kMarginX / 12,
+                                            mainAxisSpacing: 10.0),
+                                    itemCount: prods.produitList.length,
+                                    itemBuilder: (_ctx, index) =>
+                                        // Créez un widget ProductComponentAll pour chaque produit dans la liste
+                                        ProductComponentAll(
+                                          produit: prods.produitList[index],
+                                          index: index,
+                                        )),
                               ],
                             )),
                           );

@@ -1,8 +1,10 @@
 import 'package:Fahkap/components/Button/AppIconButton.dart';
 import 'package:Fahkap/components/Button/IconButtonF.dart';
+import 'package:Fahkap/components/Button/app_button.dart';
 import 'package:Fahkap/components/Button/customBtn.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
 import 'package:Fahkap/components/Widget/shoppingproductComponent.dart';
@@ -11,6 +13,7 @@ import 'package:Fahkap/controller/cartController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:Fahkap/utils/constants/assets.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,7 +49,15 @@ class ShoppingView extends StatelessWidget {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              BigtitleText(text: 'Panier', bolder: true),
+                              Container(
+                                child: AppTitleRight(
+                                    title: 'Panier',
+                                    description: 'Votre panier',
+                                    icon: Assets.shoppingCart),
+                                margin: EdgeInsets.only(
+                                    right: MediaQuery.of(context).size.width *
+                                        .005),
+                              ),
                               IconButtonF(
                                   icon: Icons.delete_forever,
                                   color: Colors.red,
@@ -93,168 +104,66 @@ class ShoppingView extends StatelessWidget {
           ]),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              gradient: GradientApp.blueG,
+              color: ColorsApp.greySearch,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             ),
-            padding: EdgeInsets.only(
-                left: kMdWidth / 8,
-                right: kMdWidth / 8,
-                // top: kMdHeight / 20,
-                bottom: 6),
+            padding: EdgeInsets.symmetric(
+              vertical: kMarginX,
+              horizontal: kMarginY,
+              // top: kMdHeight / 20,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                    // width: Get.size.width * 0.1,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(
-                      bottom: 2,
-                      top: kMdHeight / 20,
-                    ),
-                    decoration: new BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Nombre de produits : ',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            '${_controller.getItems.length}',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    )),
-                Container(
-                    // width: Get.size.width * 0.1,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(bottom: 2),
-                    decoration: new BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Montant du panier :',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            '${_controller.totalPrix} XAF',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    )),
-                // Container(
-                //     // width: Get.size.width * 0.1,
-                //     alignment: Alignment.center,
-                //     padding: EdgeInsets.all(10),
-                //     margin: EdgeInsets.only(bottom: 2),
-                //     decoration: new BoxDecoration(
-                //       borderRadius: BorderRadius.circular(10),
-                //       color: Colors.white,
-                //     ),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Container(
-                //           child: Text(
-                //             'Frais de livraison :',
-                //             style: TextStyle(
-                //                 fontFamily: 'orkney',
-                //                 color: Colors.black,
-                //                 fontWeight: FontWeight.bold),
-                //           ),
-                //         ),
-                //         Container(
-                //           child: Text(
-                //             '1000 XAF',
-                //             style: TextStyle(
-                //                 fontFamily: 'orkney',
-                //                 color: Colors.black,
-                //                 fontWeight: FontWeight.bold),
-                //           ),
-                //         ),
-                //       ],
-                //     )),
-                Container(
-                    // width: Get.size.width * 0.1,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(bottom: 2),
-                    decoration: new BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Total ',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            ' ${_controller.totalPrix} XAF',
-                            style: TextStyle(
-                                fontFamily: 'orkney',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    )),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomBtn(
-                      color: ColorsApp.greenLight,
-                      title: 'Buy',
-                      onTap: () {
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            // width: Get.size.width * 0.1,
 
-                        _controller.getItems.length != 0
-                            ? Get.toNamed(AppLinks.BUYSHOP)
-                            : functions.snackBar(
-                                'Panier',
-                                'Ajouter des produits au panier',
-                                false);
-                        ;
-                      },
-                    )
+                            margin: EdgeInsets.only(
+                              bottom: 2,
+                            ),
+                            child: Text(
+                              'Nombre de produits : ${_controller.getItems.length}',
+                              style: TextStyle(
+                                fontFamily: 'orkney',
+                                fontSize: 11,
+                                color: Colors.black,
+                              ),
+                            )),
+                        Container(
+                            width: Get.size.width * 0.65,
+                            child: Text(
+                              'Montant du panier :  ${_controller.totalPrix} XAF',
+                              style: TextStyle(
+                                  fontFamily: 'orkney',
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.black,
+                                  fontSize: 11),
+                            )),
+                      ],
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(bottom: kMarginY),
+                        child: AppButton(
+                          size: MainAxisSize.max,
+                          bgColor: ColorsApp.skyBlue,
+                          text: 'Buy',
+                          onTap: () {
+                            _controller.getItems.length != 0
+                                ? Get.toNamed(AppLinks.BUYSHOP)
+                                : functions.snackBar('Panier',
+                                    'Ajouter des produits au panier', false);
+                            ;
+                          },
+                        ))
                   ],
-                ),
+                )
               ],
             ),
           ));

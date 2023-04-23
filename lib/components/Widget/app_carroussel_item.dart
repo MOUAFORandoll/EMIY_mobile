@@ -28,7 +28,8 @@ class AppCarrousselItem extends StatelessWidget {
             //     vertical: kMarginY, horizontal: kMarginX * 3),
             child: Image.asset(
               image,
-              height: kMdHeight / 3,
+              height: kMdHeight / 2.5,
+              width: kMdHeight / 3,
             ),
           ),
           Container(

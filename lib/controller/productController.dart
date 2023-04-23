@@ -11,6 +11,17 @@ class ProductController extends GetxController {
   final ProductRepo productRepo;
   ProductController({required this.productRepo});
 
+  bool _conf = false;
+  bool get conf => _conf;
+  setConf() {
+    _conf = true;
+    update();
+  }
+  unSetConf() {
+    _conf = false;
+    update();
+  }
+
   late CartController _cart;
   int _quantity = 0;
   int get quantity => _quantity;

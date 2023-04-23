@@ -20,74 +20,63 @@ class ProductComponentAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        child: CachedNetworkImage(
-          fit: BoxFit.cover,
-          imageUrl: produit.images[0].src,
-          imageBuilder: (context, imageProvider) {
-            return Container(
-              child: Container(
-                  alignment: Alignment.bottomCenter,
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Container(
-                      decoration: BoxDecoration(
+          height: kHeight / 4,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: produit.images[0].src,
+                imageBuilder: (context, imageProvider) {
+                  return Container(
+                      height: kHeight / 4,
+                    decoration: BoxDecoration(
                         color: ColorsApp.greySecond,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(8),
-                            bottomRight: Radius.circular(8)),
-                      ),
-                      // margin: EdgeInsets.symmetric(vertical: 1, horizontal: 1),
-                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                              width: Get.size.width * .2,
-                              child: Text(produit.titre,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: ColorsApp.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12))),
-                          Container(
-                              width: Get.size.width * .2,
-                              child: Text('XAF ' + produit.prix.toString(),
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold))),
-                        ],
-                      )),
-                  decoration: BoxDecoration(
-                    color: ColorsApp.greySecond,
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                            Colors.transparent, BlendMode.colorBurn)),
-                  )),
-            );
-          },
-          placeholder: (context, url) {
-            return Container(
-              child: Center(
-                  child: CircularProgressIndicator(
-                color: ColorsApp.skyBlue,
-              )),
-            );
-          },
-          errorWidget: (context, url, error) {
-            return Container(
-                height: kMdHeight * .15,
-                width: Get.width * .5,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: AssetImage('assets/logo.png'),
-                )));
-          },
-        ),
-      ),
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.transparent, BlendMode.colorBurn)),
+                      ));
+                },
+                placeholder: (context, url) {
+                  return Container(
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: ColorsApp.skyBlue,
+                    )),
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return Container(
+                      height: kHeight / 4,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage('assets/logo.png'),
+                      )));
+                },
+              ),
+              Container(
+                  width: kWidth / 2,
+                  child: Text(produit.titre,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: ColorsApp.greySecond,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12))),
+              Container(
+                  width: kWidth / 2,
+                  child: Text('XAF ' + produit.prix.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: ColorsApp.black,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold))),
+            ],
+          )),
       onTap: () {
         Get.toNamed(AppLinks.PRODUCT +
             '?index=${index}&type=${type}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');

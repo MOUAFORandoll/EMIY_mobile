@@ -64,6 +64,7 @@ dependencies:
   sqflite: ^2.0.0+3
   syncfusion_flutter_pdf: ^18.4.47-beta
   theme_provider: any
+  flutter_svg: any
   toast: ^0.1.5
   video_player: ^2.0.0
   flutter_downloader:  any
@@ -104,9 +105,18 @@ flutter:
     - assets/busVoyage.png
     - assets/payement/om.png
     - assets/payement/momo.png
-    - assets/payement/paycard.png
-    
-    - assets/
+    - assets/payement/paycard.png 
+    - assets/svg_icones/user.svg
+    - assets/svg_icones/callreceive.svg
+    - assets/svg_icones/mapTagUser.svg
+    - assets/svg_icones/onbo1.png
+    - assets/svg_icones/onbo2.png
+    - assets/svg_icones/onbo3.png
+    - assets/svg_icones/logImg.png
+    - assets/svg_icones/logUser1.svg
+    - assets/svg_icones/shoppingCart.svg
+    - assets/svg_icones/refresh.svg
+    - assets/svg_icones/home.svg
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

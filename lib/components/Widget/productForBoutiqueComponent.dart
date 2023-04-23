@@ -23,75 +23,63 @@ class ProductForBoutiqueComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: kMdHeight * 25,
-        width: kMdWidth * 1.1,
-        // alignment: Alignment.,
-        // padding: EdgeInsets.all(kMarginX),
-        margin: EdgeInsets.only(right: kMarginX),
-        decoration: BoxDecoration(
-            color: ColorsApp.greySecond,
-            borderRadius: BorderRadius.circular(8)),
-
+        height: kHeight / 4,
         child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                child: CachedNetworkImage(
-                  height: kMdHeight * .115,
-                  width: Get.width * .5,
-                  fit: BoxFit.cover,
-                  imageUrl: produit.images[0].src,
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
+              CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: produit.images[0].src,
+                imageBuilder: (context, imageProvider) {
+                  return Container(
+                    height: kHeight / 4,
+                    decoration: BoxDecoration(
+                      color: ColorsApp.greySecond,
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.transparent, BlendMode.colorBurn)),
+                    ),
+                  );
+                },
+                placeholder: (context, url) {
+                  return Container(
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: ColorsApp.skyBlue,
+                    )),
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return Container(
+                      height: kHeight / 4,
                       decoration: BoxDecoration(
-                        color: ColorsApp.greySecond,
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
-                                Colors.transparent, BlendMode.colorBurn)),
-                      ),
-                    );
-                  },
-                  placeholder: (context, url) {
-                    return Container(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: ColorsApp.skyBlue,
-                      )),
-                    );
-                  },
-                  errorWidget: (context, url, error) {
-                    return Container(
-                        height: kMdHeight * .15,
-                        width: Get.width * .5,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: AssetImage('assets/logo.png'),
-                        )));
-                  },
-                ),
+                          image: DecorationImage(
+                        image: AssetImage('assets/logo.png'),
+                      )));
+                },
               ),
               Container(
-                width: kSmWidth * .6,
-                margin: EdgeInsets.only(
-                    top: Get.height * .005, left: Get.width * .008),
+                width: kWidth / 2,
                 child: Text(produit.titre,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: ColorsApp.black, fontSize: 12)),
+                     overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: ColorsApp.greySecond,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
               ),
               Container(
-                width: kSmWidth * .6,
-                margin: EdgeInsets.only(
-                    top: Get.height * .002, left: Get.width * .008),
+                width: kWidth / 2,
                 child: Text('XAF ' + produit.prix.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold)),
+                       color: ColorsApp.black,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold)),
               ),
             ]),
       ),

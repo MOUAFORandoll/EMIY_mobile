@@ -1,13 +1,8 @@
-// ignore: must_be_immutable
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Fahkap/components/Button/customBtn.dart';
-import 'package:Fahkap/components/Form/formComponent2.dart';
-import 'package:Fahkap/controller/CommandeController.dart';
-import 'package:Fahkap/model/data/CommandeModel.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/api/apiUrl.dart';
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
+import 'package:cached_network_image/cached_network_image.dart'; 
+import 'package:Fahkap/model/data/CommandeModel.dart'; 
+import 'package:Fahkap/styles/textStyle.dart'; 
 import 'package:get/get.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +14,7 @@ class ProductComponent extends StatelessWidget {
   ProductComponent({required this.produit});
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController codeBoutique = TextEditingController();
-    TextEditingController codeCommande = TextEditingController();
-
+  Widget build(BuildContext context) { 
     return InkWell(
       child: Container(
           // height: kMdHeight * 1.2,

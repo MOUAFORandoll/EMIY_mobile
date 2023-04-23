@@ -19,6 +19,7 @@ import 'package:Fahkap/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -39,7 +40,7 @@ class _FirstScreenState extends State<FirstScreen> {
 
   @override
   void initState() {
-    iniit();
+    // iniit();
     super.initState();
     // controller = ScrollController();
     // Get.find<ActionController>().scrollcontroller.addListener(() {
@@ -100,23 +101,6 @@ class _FirstScreenState extends State<FirstScreen> {
 
       body: SafeArea(child: _buildContent(_currentIndex)),
 
-      // bottomNavigationBar:
-      //         /*     Offstage(offstage: !_isVisible, child: */ AnimatedBuilder(
-      //             animation: Get.find<ActionController>().scrollcontroller,
-      //             builder: (context, child) {
-      //               return AnimatedContainer(
-      //                 duration: Duration(milliseconds: 300),
-      //                 height: Get.find<ActionController>()
-      //                             .scrollcontroller
-      //                             .position
-      //                             .userScrollDirection ==
-      //                         ScrollDirection.reverse
-      //                     ? 0
-      //                     : 100,
-      //                 child: child,
-      //               );
-      //             },
-      //             child: _buildBorderRadiusDesign()),
       bottomNavigationBar:
           Offstage(offstage: !_isVisible, child: _buildBorderRadiusDesign()),
     );
@@ -133,12 +117,12 @@ class _FirstScreenState extends State<FirstScreen> {
         // case 2:
         return CategoryView();
 
+      // case 2:
+      //   return SearchView();
       case 2:
-        return SearchView();
-      case 3:
         return ShoppingView();
 
-      case 4:
+      case 3:
         return ManageView();
 
       // case 4:
@@ -159,8 +143,8 @@ class _FirstScreenState extends State<FirstScreen> {
         strokeColor: Color(0x300c18fb),
         unSelectedColor: Colors.grey[600],
         backgroundColor: Colors.black,
-        borderRadius: Radius.circular(15.0),
-        isFloating: true,
+        // borderRadius: Radius.circular(15.0),
+        // isFloating: true,
         // blurEffect: true,
         items: [
           CustomNavigationBarItem(
@@ -179,23 +163,25 @@ class _FirstScreenState extends State<FirstScreen> {
           //   // showBadge: _badgeShows[2],
           // ),
           CustomNavigationBarItem(
-            icon: Icon(Icons.dashboard_customize_outlined),
+            icon: Icon(
+              FontAwesomeIcons.bars,
+              size: 25,
+            ),
             title: Text('Category', style: TextStyle(color: Colors.grey[600])),
 
             // badgeCount: _badgeCounts[2],
             // showBadge: _badgeShows[2],
           ),
+          // CustomNavigationBarItem(
+          //   icon: Icon(Icons.search),
+          //   // badgeCount: _badgeCounts[2],
+          //   title: Text('Search', style: TextStyle(color: Colors.grey[600])),
+          //   // showBadge: _badgeShows[2],
+          // ),
           CustomNavigationBarItem(
-            icon: Icon(Icons.search),
-            // badgeCount: _badgeCounts[2],
-            title: Text('Search', style: TextStyle(color: Colors.grey[600])),
-            // showBadge: _badgeShows[2],
-          ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
+            icon: Icon(FontAwesomeIcons.shoppingCart),
             title: Text('Shop', style: TextStyle(color: Colors.grey[600])),
-            badgeCount: _controller.totalItems /*  _badgeCounts[1] */,
-            showBadge: true,
+          
           ),
 
           CustomNavigationBarItem(

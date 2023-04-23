@@ -153,7 +153,7 @@ class ManagerController extends GetxController {
   var _User;
   UserModel get User => _User;
 
-  var _Compte;
+  CompteModel _Compte = new CompteModel(solde: 0, id: 0);
   CompteModel get Compte => _Compte;
   int _isLoaded = 0;
   int get isLoaded => _isLoaded;
@@ -174,7 +174,12 @@ class ManagerController extends GetxController {
           _User = UserModel.fromJson(response.body['data']);
           _Compte = CompteModel.fromJson(response.body['compte']);
           update();
-
+          if (_User != null) {
+            nameU.text = User.nom;
+            surnameU.text = User.prenom.toString();
+            phoneU.text = User.phone.toString();
+            emailU.text = User.email;
+          }
           getKeyU();
           print(
               '_isok------------***********************-------------------------${_isLoaded}');
@@ -236,11 +241,34 @@ class ManagerController extends GetxController {
     // Get.find<DB>().deleteAll();
   }
 
+  TextEditingController _nameU = TextEditingController();
+  get nameU => _nameU;
+  TextEditingController _surnameU = TextEditingController();
+  get surnameU => _surnameU;
+
+  TextEditingController _phoneU = TextEditingController();
+  get phoneU => _phoneU;
+
+  TextEditingController _descriptionU = TextEditingController();
+  get descriptionU => _descriptionU;
+
+  TextEditingController _emailU = TextEditingController();
+  get emailU => _emailU;
+  final _formKeyUpdateU = GlobalKey<FormState>();
+  get formKeyUpdateU => _formKeyUpdateU;
   bool _isUpdating = false;
   bool get isUpdating => _isUpdating;
-  updateUser(data) async {
+  updateUser() async {
     _isUpdating = true;
     update();
+    var data = {
+      'keySecret': new GetStorage().read('keySecret'),
+      'nom': nameU.text,
+      'prenom': surnameU.text,
+      'phone': phoneU.text,
+      'email': emailU.text,
+    };
+    print(data);
     Get.defaultDialog(
         title: 'En cours',
         barrierDismissible: false,
@@ -275,9 +303,20 @@ class ManagerController extends GetxController {
     }
   }
 
+  TextEditingController _phoneLog = TextEditingController();
+  get phoneLog => _phoneLog;
+  TextEditingController _passwordLog = TextEditingController();
+  get passwordLog => _passwordLog;
+
+  final _formKeyLog = GlobalKey<FormState>();
+  get formKeyLog => _formKeyLog;
   bool _isConnected = false;
   bool get isConnected => _isConnected;
-  loginUser(data) async {
+  loginUser() async {
+    var data = {
+      'phone': phoneLog.text,
+      'password': passwordLog.text,
+    };
     Get.defaultDialog(
         title: 'En cours',
         barrierDismissible: false,
@@ -314,9 +353,46 @@ class ManagerController extends GetxController {
     }
   }
 
+  TextEditingController _name = TextEditingController();
+  TextEditingController get name => _name;
+
+  TextEditingController _surname = TextEditingController();
+  TextEditingController get surname => _surname;
+
+  TextEditingController _phone = TextEditingController();
+  TextEditingController get phone => _phone;
+
+  TextEditingController _pass = TextEditingController();
+  TextEditingController get pass => _pass;
+
+  TextEditingController repass = TextEditingController();
+  TextEditingController get _repass => _repass;
+
+  TextEditingController _email = TextEditingController();
+  TextEditingController get email => _email;
+  final _formKeyReg = GlobalKey<FormState>();
+  get formKeyReg => _formKeyReg;
   bool _isSignUp = false;
   bool get isSignUp => _isSignUp;
-  signUp(data) async {
+  signUp() async {
+    if (pass.text != repass.text) {
+      fn.snackBar('Mot de passse', 'Mot de passe differents', false);
+      return false;
+    }
+    if (pass.text.length < 5 || repass.text.length < 5) {
+      fn.snackBar('Mot de passse', '5 caractes minimum', false);
+      return false;
+    }
+
+    var data = {
+      'phone': phone.text,
+      'password': pass.text,
+      "nom": name.text,
+      "prenom": surname.text,
+      "email": email.text,
+      "status": true,
+    };
+    print(data);
     Get.defaultDialog(
         title: 'En cours',
         barrierDismissible: false,

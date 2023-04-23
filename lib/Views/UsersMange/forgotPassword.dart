@@ -12,6 +12,7 @@ import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/constants/assets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:Fahkap/utils/Services/routing.dart';
@@ -116,7 +117,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           child: AppTitleRight(
                               title: 'Forgot',
                               description: 'Welcome dear',
-                              icon: Icons.account_circle_outlined),
+                              icon: Assets.user),
                           margin: EdgeInsets.only(
                               right: MediaQuery.of(context).size.width * .005),
                         ),
@@ -124,8 +125,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                     ),
                     new Hero(
                       tag: "login screen",
-                      child:
-                          new Container(child: Image.asset('assets/login.png')),
+                      child: new Container(child: Image.asset(Assets.logImg)),
                     ),
                     Text(
                       "logtext".tr,
@@ -172,7 +172,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                                   //         authCont.emailController.text) ==
                                   //     'invalidMail'.tr));
                                 },
-                                label: 'labellog'.tr,
+                                label: 'labelphone'.tr,
                                 validator: (value) {
                                   //  int.parse(authCont.emailController.text)
                                   // return Validators.isValidEmail(
@@ -185,16 +185,16 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                                     margin: EdgeInsets.only(top: kMarginY * 2),
                                     child: AppButton(
                                         size: MainAxisSize.max,
-                                        bgColor: ColorsApp.skyBlue,
+                                        bgColor: ColorsApp.orange,
                                         text: 'send'.tr,
                                         onTap: () async {
                                           // Get.toNamed(AppLinks.FIRST);
                                           print({
                                             'phone': phone.text,
                                           });
-                                          await _manager.loginUser({
-                                            'phone': phone.text,
-                                          });
+                                          // await _manager.loginUser({
+                                          //   'phone': phone.text,
+                                          // });
                                           if (_manager.isConnected) {
                                             // Get.offNamedUntil(AppLinks.FIRST, (route) => false);
                                           }

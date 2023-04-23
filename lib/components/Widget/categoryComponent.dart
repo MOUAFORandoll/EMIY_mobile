@@ -15,51 +15,22 @@ class CategoryComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.toNamed(AppLinks.BOUTIQUE_FOR_CATEGORY +
-            '?id=${category.id}&libelle=${category.libelle}');
-      },
-      child: Container(
-          height: kSmHeight,
-          width: kSmWidth,
-          padding: EdgeInsets.all(kMarginX),
+        onTap: () {
+          Get.toNamed(AppLinks.BOUTIQUE_FOR_CATEGORY +
+              '?id=${category.id}&libelle=${category.libelle}');
+        },
+        child: Container(
+          // height: kSmHeight,
+          // width: kSmWidth,
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(kMarginX / 2),
           margin: EdgeInsets.only(right: kMarginX),
           decoration: BoxDecoration(
-              gradient: GradientApp.blueG,
+              border: Border.all(color: ColorsApp.greySearch),
               borderRadius: BorderRadius.circular(8)),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Container(
-                //   child: ClipRRect(
-                //     borderRadius: BorderRadius.only(
-                //         topRight: Radius.circular(10),
-                //         topLeft: Radius.circular(10)),
-                //     child: Image.asset('assets/om.png',
-                //         height: kSmHeight * .8,
-                //         width: Get.width * .5,
-                //         fit: BoxFit.cover),
-                //   ),
-                // ),
-                Container(
-                  width: kSmWidth * .6,
-                  margin: EdgeInsets.only(
-                      top: Get.height * .005, left: Get.width * .008),
-                  child: Text(category.libelle,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white, fontSize: 15)),
-                ),
-                // Container(
-
-                  
-                //     margin: EdgeInsets.only(
-                //         top: Get.height * .005, left: Get.width * .008),
-                //     child: Icon(
-                //       IconData(category.icon, fontFamily: 'MaterialIcons'),
-                //       color: Colors.white,
-                //     )),
-              ])),
-    );
+          child: Text(category.libelle,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: ColorsApp.greySearch, fontSize: 12)),
+        ));
   }
 }

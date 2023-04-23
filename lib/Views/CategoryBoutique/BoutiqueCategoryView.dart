@@ -6,6 +6,8 @@ import 'package:Fahkap/components/Form/formComponent2.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
 import 'package:Fahkap/components/Widget/BoutiqueComponent.dart';
+import 'package:Fahkap/components/Widget/app_back_button.dart';
+import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/productComponent.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
@@ -32,167 +34,149 @@ class BoutiqueCategoryView extends StatelessWidget {
         .getCategoryBoutique(Get.parameters['id']);
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: InkWell(
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: ColorsApp.black,
-            ),
-            onTap: () {
-              Get.back();
-            },
-          ),
-          title: BigtitleText(
-              text: Get.parameters['libelle'].toString(), bolder: true),
-        ),
         body: RefreshIndicator(
-          color: ColorsApp.skyBlue,
-          onRefresh: () async {
-            await Get.find<CategoryBoutiqueController>()
-                .getCategoryBoutique(Get.parameters['id']);
-          },
-          child: CustomScrollView(controller: _scrollController, slivers: [
-            // Add the app bar to the CustomScrollView.
-            // SliverAppBar(
-            //   backgroundColor: Colors.white,
-            //   elevation: 0,
-            //   // Provide a standard title.
-            //   // title: Text('title'),
-            //   // Allows the user to reveal the app bar if they begin scrolling
-            //   // back up the list of items.
-            //   floating: true,
-            //   // Display a placeholder widget to visualize the shrinking size.
-            //   flexibleSpace: InkWell(
-            //     child: SingleChildScrollView(
-            //       child: Column(children: [
-            //         Container(
-            //             margin: EdgeInsets.only(top: Get.height * .030),
-            //             padding: EdgeInsets.only(
-            //                 left: Get.width * .030, right: Get.width * .030),
-            //             child: Row(
-            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                 children: [
-            //                   BigtitleText(text: 'Les Boutiques', bolder: true),
-            //                   // Container(
-            //                   //     child: InkWell(
-            //                   //         child: Icon(Icons.search),
-            //                   //         onTap: () => Scaffold.of(context).openDrawer())
-            //                   //     // padding: EdgeInsets.only(right: 10),
-            //                   //     ),
-            //                 ])),
-            //       ]),
-            //     ),
-            //     /*   onTap: () => filterDest() */
-            //   ),
-            //   // Make the initial height of the SliverAppBar larger than normal.
-            //   expandedHeight: 60,
-            // ),
-            SliverList(
-              // Use a delegate to build items as they're scrolled on screen.
-              delegate: SliverChildBuilderDelegate(
-                // The builder function returns a ListTile with a title that
-                // displays the index of the current item.
-                (context, index) => GetBuilder<CategoryBoutiqueController>(
-                    builder: (_lbcontroller) => _lbcontroller.isLoadedP == 0
-                        ? Shimmer.fromColors(
-                            baseColor: Colors.blueGrey,
-                            highlightColor: Colors.greenAccent,
-                            child: SizedBox(
-                              height: kMdHeight,
-                              child: Stack(
-                                children: [
-                                  GridView.builder(
-                                    padding: const EdgeInsets.all(20),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 20.0,
-                                            mainAxisSpacing: 50.0),
-                                    itemCount: 10,
-                                    itemBuilder: (_ctx, index) => Container(
-                                      height: kMdHeight * 2,
-                                      width: kMdWidth * 1.1,
-                                      margin: EdgeInsets.only(right: kMarginX),
-                                      decoration: BoxDecoration(
-                                          color: ColorsApp.greySecond,
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                                height: kMdHeight * .115,
-                                                width: Get.width * .5,
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/logo.png'),
-                                                ))),
-                                            Container(
-                                              width: kSmWidth * .6,
-                                              margin: EdgeInsets.only(
-                                                  top: Get.height * .005,
-                                                  left: Get.width * .008),
-                                              child: Text('produit.titre',
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      color: ColorsApp.black,
-                                                      fontSize: 12)),
-                                            ),
-                                            // Container(
-                                            //   width: kSmWidth * .6,
-                                            //   margin: EdgeInsets.only(
-                                            //       top: Get.height * .005,
-                                            //       left: Get.width * .008),
-                                            //   child: Text('XAF ' + '1000',
-                                            //       overflow: TextOverflow.ellipsis,
-                                            //       style: TextStyle(
-                                            //           color: Colors.red,
-                                            //           fontSize: 12,
-                                            //           fontWeight: FontWeight.bold)),
-                                            // ),
-                                          ]),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ))
-                        : (_lbcontroller.ListBoutique.length != 0)
-                            ? SingleChildScrollView(
-                                child: GridView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    padding: const EdgeInsets.all(5),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 10.0,
-                                            mainAxisSpacing: 10.0),
-                                    itemCount:
-                                        _lbcontroller.ListBoutique.length,
-                                    itemBuilder: (_ctx, index) =>
-                                        BoutiqueComponent(
-                                          boutique:
-                                              _lbcontroller.ListBoutique[index],
-                                        )))
-                            : Container(
-                                height: kMdHeight * .6,
-                                alignment: Alignment.center,
-                                child: Center(
-                                  child: Text('Aucune boutique'),
-                                ))),
+      color: ColorsApp.skyBlue,
+      onRefresh: () async {
+        await Get.find<CategoryBoutiqueController>()
+            .getCategoryBoutique(Get.parameters['id']);
+      },
+      child: CustomScrollView(controller: _scrollController, slivers: [
+        SliverAppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          // Provide a standard title.
+          // title: Text('title'),
+          // Allows the user to reveal the app bar if they begin scrolling
+          // back up the list of items.
+          floating: true,
+          // Display a placeholder widget to visualize the shrinking size.
+          flexibleSpace: InkWell(
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Container(
+                    margin: EdgeInsets.only(top: Get.height * .030),
+                    padding: EdgeInsets.only(
+                        left: Get.width * .030, right: Get.width * .030),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          AppBackButton(),
+                          Container(
+                            child: AppTitleRight(
+                                title: 'Boutique',
+                                description:
+                                    Get.parameters['libelle'].toString(),
+                                icon: null),
+                            margin: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * .005),
+                          ),
+                        ])),
+              ]),
+            ),
+          ),
+          // Make the initial height of the SliverAppBar larger than normal.
+          expandedHeight: 60,
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => GetBuilder<CategoryBoutiqueController>(
+                builder: (_lbcontroller) => _lbcontroller.isLoadedP == 0
+                    ? Shimmer.fromColors(
+                        baseColor: Colors.blueGrey,
+                        highlightColor: Colors.greenAccent,
+                        child: SizedBox(
+                          height: kMdHeight,
+                          child: Stack(
+                            children: [
+                              GridView.builder(
+                                padding: const EdgeInsets.all(20),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 20.0,
+                                        mainAxisSpacing: 50.0),
+                                itemCount: 10,
+                                itemBuilder: (_ctx, index) => Container(
+                                  height: kMdHeight * 2,
+                                  width: kMdWidth * 1.1,
+                                  margin: EdgeInsets.only(right: kMarginX),
+                                  decoration: BoxDecoration(
+                                      color: ColorsApp.greySecond,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                            height: kMdHeight * .115,
+                                            width: Get.width * .5,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                              image:
+                                                  AssetImage('assets/logo.png'),
+                                            ))),
+                                        Container(
+                                          width: kSmWidth * .6,
+                                          margin: EdgeInsets.only(
+                                              top: Get.height * .005,
+                                              left: Get.width * .008),
+                                          child: Text('produit.titre',
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  color: ColorsApp.black,
+                                                  fontSize: 12)),
+                                        ),
+                                        // Container(
+                                        //   width: kSmWidth * .6,
+                                        //   margin: EdgeInsets.only(
+                                        //       top: Get.height * .005,
+                                        //       left: Get.width * .008),
+                                        //   child: Text('XAF ' + '1000',
+                                        //       overflow: TextOverflow.ellipsis,
+                                        //       style: TextStyle(
+                                        //           color: Colors.red,
+                                        //           fontSize: 12,
+                                        //           fontWeight: FontWeight.bold)),
+                                        // ),
+                                      ]),
+                                ),
+                              )
+                            ],
+                          ),
+                        ))
+                    : (_lbcontroller.ListBoutique.length != 0)
+                        ? SingleChildScrollView(
+                            child: GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: kMarginX),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 20.0,
+                                        childAspectRatio: 0.8,
+                                        mainAxisSpacing: 20.0),
+                                itemCount: _lbcontroller.ListBoutique.length,
+                                itemBuilder: (_ctx, index) => BoutiqueComponent(
+                                      boutique:
+                                          _lbcontroller.ListBoutique[index],
+                                    )))
+                        : Container(
+                            height: kMdHeight * .6,
+                            alignment: Alignment.center,
+                            child: Center(
+                              child: Text('Aucune boutique'),
+                            ))),
 
-                // Builds 1000 ListTiles
-                childCount: 1,
-              ),
-            )
-          ]),
-        ));
+            // Builds 1000 ListTiles
+            childCount: 1,
+          ),
+        )
+      ]),
+    ));
   }
 }

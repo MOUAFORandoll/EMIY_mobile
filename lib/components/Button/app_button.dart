@@ -1,4 +1,5 @@
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
@@ -27,7 +28,9 @@ class AppButton extends StatelessWidget {
     return GestureDetector(
       onTap: disabled ? null : onTap,
       child: Container(
-        constraints: const BoxConstraints(minHeight: 35),
+        constraints:
+            BoxConstraints(minHeight: kHeight / 15, minWidth: kWidth / 5),
+        padding: EdgeInsets.symmetric(horizontal: kMarginX),
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -40,26 +43,16 @@ class AppButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: disabled ? bgColor.withOpacity(.5) : bgColor,
             border: border),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: size,
-          children: [
-            if (leading != null)
-              Padding(
-                padding: const EdgeInsets.only(right: 5.0),
-                child: leading!,
-              ),
-            Text(
-              text,
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                color: disabled ? textColor.withOpacity(.5) : textColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ),
-          ],
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: TextStyle(
+            fontFamily: 'Montserrat',
+            color: disabled ? textColor.withOpacity(.5) : textColor,
+            fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,
+            fontSize: 12,
+          ),
         ),
       ),
     );

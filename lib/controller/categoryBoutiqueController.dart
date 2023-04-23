@@ -47,7 +47,6 @@ class CategoryBoutiqueController extends GetxController {
         update();
       }
       // print(_categoryList);
-
     } catch (e) {
       print(e);
     }
@@ -101,6 +100,13 @@ class CategoryBoutiqueController extends GetxController {
 
   bool _gA = false;
   bool get gA => _gA;
+
+  int _indexB = 0;
+  int get indexB => _indexB;
+  setCurrent(index) {
+    _indexB = index;
+    update();
+  }
 
   List<BoutiqueModel> _ListBoutiqueF = [];
   List<BoutiqueModel> get ListBoutiqueF => _ListBoutiqueF;

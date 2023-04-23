@@ -28,7 +28,7 @@ class ApiRoutes {
   static const DESABLED_PRODUCT = '/produit/state';
   static const LOGIN = '/api/logins';
   static const Refresh = '/api/token/refresh';
-  static const SIGNUP = '/api/users';
+  static const SIGNUP = '/api/user_plateforms';
   static const SEARCH = '/search';
   static const MODEPAIEMENT = '/modepaiement/read';
 

@@ -16,9 +16,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:Fahkap/views/UsersMange/LoginScreen.dart';
-import 'package:Fahkap/views/ComplementView/wrapper.dart';
-
+import 'package:Fahkap/views/UsersMange/LoginScreen.dart'; 
 import 'dart:async';
 
 class SplashScreenPage extends StatefulWidget {
@@ -45,30 +43,11 @@ class _SplashScreenPageState extends State<SplashScreenPage>
 
   @override
   void initState() {
-    // start();
+    super.initState();
+    start();
   }
-
-  late double height = 0;
-  late String texte = "";
-
-  bool _isOpened = false;
-  late AnimationController _animationController;
-
-  bool tile = false;
-
-  @override
-  void animate() {
-    if (_isOpened) {
-      _animationController.reverse();
-    } else {
-      _animationController.forward();
-    }
-
-    setState(() {
-      _isOpened = !_isOpened;
-    });
-  }
-
+  
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

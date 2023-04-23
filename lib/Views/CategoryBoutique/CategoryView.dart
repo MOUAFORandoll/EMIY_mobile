@@ -4,6 +4,7 @@ import 'package:Fahkap/components/Button/button.dart';
 import 'package:Fahkap/components/Form/formComponent2.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/categoryComponent2.dart';
 import 'package:Fahkap/components/Widget/productComponent.dart';
@@ -55,10 +56,19 @@ class CategoryView extends StatelessWidget {
                                 left: Get.width * .030,
                                 right: Get.width * .030),
                             child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  BigtitleText(text: 'Category', bolder: true),
+                                  // BigtitleText(text: 'Category', bolder: true),
+                                  Container(
+                                    child: AppTitleRight(
+                                        title: 'Category',
+                                        description: 'liste des categories',
+                                        icon: null),
+                                    margin: EdgeInsets.only(
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                .005),
+                                  ),
                                   // Container(
                                   //     child: InkWell(
                                   //         child: Icon(Icons.search),
@@ -123,24 +133,22 @@ class CategoryView extends StatelessWidget {
                                               fontSize: 15)),
                                     ),
                                   ])))
-                      : Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8)),
-                          child: SingleChildScrollView(
-                              child: GridView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  padding: const EdgeInsets.all(20),
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 10.0,
-                                          mainAxisSpacing: 10.0),
-                                  itemCount: categorys.categoryList.length,
-                                  itemBuilder: (_ctx, index) =>
-                                      CategoryComponent2(
-                                        category: categorys.categoryList[index],
-                                      )))),
+                      : SingleChildScrollView(
+                          child: GridView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kMarginX),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 20.0,
+                                      childAspectRatio: 0.8,
+                                      mainAxisSpacing: 20.0),
+                              itemCount: categorys.categoryList.length,
+                              itemBuilder: (_ctx, index) => CategoryComponent2(
+                                    category: categorys.categoryList[index],
+                                  ))),
 
                   childCount: 1,
                 ))

@@ -105,54 +105,31 @@ class ShoppingproductComponent extends StatelessWidget {
                                               "assets/images/error.gif"));
                                     },
                                   )),
-                                  // Positioned(
-                                  //   top: 0,
-                                  //   left: Get.height * .1,
-                                  //   child: Container(
-                                  //     padding: EdgeInsets.all(3),
-                                  //     decoration: BoxDecoration(
-                                  //         gradient: GradientApp.blueG,
-                                  //         borderRadius: BorderRadius.only(
-                                  //             bottomLeft: Radius.circular(10),
-                                  //             topRight: Radius.circular(10))),
-                                  //     child: Icon(Icons.shopping_cart_outlined,
-                                  //         color: Colors.red),
-                                  //   ),
-                                  // )
                                 ],
                               ),
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                      width: kSmWidth * .6,
+                                      width: kWidth * .4,
                                       margin: EdgeInsets.only(
                                           top: Get.height * .005,
-                                          left: Get.width * .008),
+                                          left: kWidth * .05),
                                       child: smallText(
-                                          text: cartM.name, size: 15)),
+                                          text: cartM.name,
+                                          al: true,
+                                          size: 15)),
                                   Container(
-                                      width: kSmWidth * .6,
+                                      width: kWidth * .4,
                                       margin: EdgeInsets.only(
                                           top: Get.height * .005,
-                                          left: Get.width * .008),
+                                          left: kWidth * .05),
                                       child: smallText(
                                           text: 'XAF ' + cartM.prix.toString(),
                                           bolder: true,
-                                          size: 15)),
-                                  // Container(
-                                  //   width: kSmWidth * .6,
-                                  //   margin: EdgeInsets.only(
-                                  //       top: Get.height * .005, left: Get.width * .008),
-                                  //   child: Text('XAF ' + price.toString(),
-                                  //       overflow: TextOverflow.ellipsis,
-                                  //       style: TextStyle(
-                                  //           decoration: TextDecoration.lineThrough,
-                                  //           decorationColor: Colors.black,
-                                  //           decorationThickness: 2.85,
-                                  //           color: Colors.black,
-                                  //           fontSize: 12,
-                                  //           fontWeight: FontWeight.bold)),
-                                  // ),
+                                          al: true,
+                                          size: 12)),
                                 ],
                               ),
                             ]),
@@ -167,7 +144,7 @@ class ShoppingproductComponent extends StatelessWidget {
                                   IconButtonF(
                                     backgroundColor: Colors.transparent,
                                     icon: Icons.add,
-                                    inconSize: 15.0,
+                                    inconSize: 12.0,
                                     semanticLabel: "Ajouter",
                                     onTap: () {
                                       cart.updateQuantityProduct(
@@ -176,8 +153,8 @@ class ShoppingproductComponent extends StatelessWidget {
                                   ),
                                   Container(
                                     width: kSmWidth * .2,
-                                    margin:
-                                        EdgeInsets.only(top: Get.height * .005),
+                                    // margin:
+                                    //     EdgeInsets.only(top: Get.height * .005),
                                     child: smallText(
                                         text: cartM.quantity.toString(),
                                         bolder: true,
@@ -187,24 +164,12 @@ class ShoppingproductComponent extends StatelessWidget {
                                     backgroundColor: Colors.transparent,
                                     icon: Icons.remove,
                                     semanticLabel: "Reduire",
-                                    inconSize: 15.0,
+                                    inconSize: 12.0,
                                     onTap: () {
                                       cart.updateQuantityProduct(
                                           cartM.id, false); // Get.back();
                                     },
                                   ),
-                                  // Container(
-                                  //     width: kSmWidth * .5,
-                                  //     margin: EdgeInsets.only(top: Get.height * .005),
-                                  //     child: smallText(text: 'Quantite')),
-                                  // Container(
-                                  //   width: kSmWidth * .5,
-                                  //   margin: EdgeInsets.only(top: Get.height * .005),
-                                  //   child: smallText(
-                                  //       text: cartM.quantity.toString(),
-                                  //       bolder: true,
-                                  //       size: 15),
-                                  // ),
                                 ],
                               ));
                         }),
