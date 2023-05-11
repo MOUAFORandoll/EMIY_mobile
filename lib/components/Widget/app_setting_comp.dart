@@ -1,3 +1,4 @@
+import 'package:Fahkap/components/Widget/icon_svg.dart';
 import 'package:get/get.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:Fahkap/styles/textStyle.dart';
 // ignore: must_be_immutable
 class AppSettingComp extends StatelessWidget {
   String title;
-  IconData icon;
+  var icon;
   var onTap;
   Color color;
   AppSettingComp(
@@ -34,7 +35,7 @@ class AppSettingComp extends StatelessWidget {
                 ),
                 padding: EdgeInsets.all(3),
                 margin: EdgeInsets.only(right: kMarginX * 2),
-                child: Icon(icon, size: 20)),
+                child: SvgIcon(icon: icon)),
             Expanded(
                 child: Container(
                     child: Text(title,

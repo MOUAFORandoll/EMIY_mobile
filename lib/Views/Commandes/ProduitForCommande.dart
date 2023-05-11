@@ -1,6 +1,7 @@
 import 'package:Fahkap/components/Text/bigtitleText.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
 import 'package:Fahkap/components/Text/titleText.dart';
+import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/components/Widget/productComponent0.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/model/data/CommandeModel.dart';
@@ -87,80 +88,7 @@ class ProduitForCommande extends StatelessWidget {
             ],
           ),
           body: _commande.isLoadedP == false
-              ? Shimmer.fromColors(
-                  baseColor: Colors.blueGrey,
-                  highlightColor: Colors.greenAccent,
-                  child: ListView.builder(
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (_ctx, x) => Container(
-                        // height: kMdHeight * 1.2,
-                        width: kMdWidth * .06,
-                        // padding: EdgeInsets.all(kMarginX),
-                        margin: EdgeInsets.only(
-                            right: kMarginX, left: kMarginX, top: kMarginY),
-                        decoration: BoxDecoration(
-                            color: ColorsApp.greySecond,
-                            borderRadius: BorderRadius.circular(8)),
-                        child:
-                            /* SingleChildScrollView(
-              child: */
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                              Stack(children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: ColorsApp.greySecond,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  height: kMdHeight * .10,
-                                  width: Get.width * .3,
-                                )
-                              ]),
-                              Column(
-                                children: [
-                                  Container(
-                                    width: kSmWidth * .6,
-                                    margin: EdgeInsets.only(
-                                        top: Get.height * .005,
-                                        left: Get.width * .008),
-                                    child: Text('Nom : ',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: ColorsApp.greenLight,
-                                            fontSize: 12)),
-                                  ),
-                                  Container(
-                                    width: kSmWidth * .6,
-                                    margin: EdgeInsets.only(
-                                        top: Get.height * .005,
-                                        left: Get.width * .008),
-                                    child: Text('Quantite : ',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  Container(
-                                    width: kSmWidth * .6,
-                                    margin: EdgeInsets.only(
-                                        top: Get.height * .005,
-                                        left: Get.width * .008),
-                                    child: Text('Status : ',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                ],
-                              )
-                            ])),
-                  ))
+              ? AppLoading()
               : ListView.builder(
                   // scrollDirection: Axis.horizontal,
                   itemCount: _commande.produitList.length,

@@ -12,12 +12,26 @@ class ActionRepo extends GetxService {
   var store = Get.find<DB>();
 
   Future getModePaiement() async {
-   
-      Response a = await apiClient
-          .getCollections(ApiRoutes.MODEPAIEMENT,  );
+    Response a = await apiClient.getCollections(
+      ApiRoutes.MODEPAIEMENT,
+    );
 
-      return a;
-    
+    return a;
   }
- 
+
+  Future addNotationProduit(data) async {
+    Response a =
+        await apiClient.getCollectionsP(ApiRoutes.NOTAITON_PRODUIT, data);
+    ;
+
+    return a;
+  }
+
+  Future addNotationBoutique(data) async {
+    Response a =
+        await apiClient.getCollectionsP(ApiRoutes.NOTAITON_BOUTIQUE, data);
+    ;
+
+    return a;
+  }
 }

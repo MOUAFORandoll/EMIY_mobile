@@ -67,7 +67,7 @@ class CategoryComponent2 extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: ColorsApp.greySecond,
+                            color: ColorsApp.marron,
                             fontWeight: FontWeight.bold,
                             fontSize: 12))),
               ],

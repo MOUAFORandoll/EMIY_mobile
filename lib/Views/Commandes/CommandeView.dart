@@ -6,6 +6,8 @@ import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
 import 'package:Fahkap/components/Widget/CommandeComponent.dart';
 import 'package:Fahkap/components/Widget/app_back_button.dart';
+import 'package:Fahkap/components/Widget/app_empty.dart';
+import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/categoryComponent2.dart';
@@ -36,59 +38,7 @@ class CommandeView extends StatelessWidget {
           // The builder function returns a ListTile with a title that
           // displays the index of the current item.
           (context, index) => _commande.isLoaded == 0
-              ? Shimmer.fromColors(
-                  baseColor: Colors.blueGrey,
-                  highlightColor: Colors.greenAccent,
-                  child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                      child: ListView.builder(
-                          itemCount: 10,
-                          itemBuilder: (_ctx, index) => Container(
-                              height: kMdHeight / 8,
-                              // width: kMdWidth,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: kMarginX, vertical: kMarginY),
-                              decoration: BoxDecoration(
-                                  color: ColorsApp.skyBlue,
-                                  borderRadius: BorderRadius.circular(8)),
-                              child:
-                                  /* SingleChildScrollView(
-                child: */
-                                  Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: kMarginX,
-                                          vertical: kMarginY),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            // width: kSmWidth * .6,
-
-                                            child: Text('Code Commande : ',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color: ColorsApp.greenLight,
-                                                    fontSize: 12)),
-                                          ),
-                                          Container(
-                                            child: Text('Date : ',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color: Colors.red,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ),
-                                        ],
-                                      ))
-                                ],
-                              )))))
+              ? AppLoading()
               : Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                   Container(
                     margin: EdgeInsets.only(bottom: kMarginY * 2),
@@ -114,7 +64,9 @@ class CommandeView extends StatelessWidget {
                         ]),
                   ),
                   _commande.commandeList.length == 0
-                      ? Center(child: Text('Aucune Commande'))
+                      ? Container(
+                          height: kHeight,
+                          child: AppEmpty(title: 'Aucune Commande'))
                       : Container(
                           height: kMdHeight,
                           margin: EdgeInsets.symmetric(vertical: kMarginY * .2),

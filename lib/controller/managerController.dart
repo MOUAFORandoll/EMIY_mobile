@@ -15,6 +15,7 @@ import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:Fahkap/utils/constants/apiRoute.dart';
 
 import 'boutiqueController.dart';
 
@@ -254,6 +255,15 @@ class ManagerController extends GetxController {
 
   TextEditingController _emailU = TextEditingController();
   get emailU => _emailU;
+
+  TextEditingController _pwdCurrentU = TextEditingController();
+  get pwdCurrentU => _pwdCurrentU;
+
+  TextEditingController _newpwdU = TextEditingController();
+  get newpwdU => _newpwdU;
+
+  TextEditingController _rnewpwdU = TextEditingController();
+  get rnewpwdU => _rnewpwdU;
   final _formKeyUpdateU = GlobalKey<FormState>();
   get formKeyUpdateU => _formKeyUpdateU;
   bool _isUpdating = false;
@@ -335,7 +345,9 @@ class ManagerController extends GetxController {
 
         getKeyU();
         await getUser();
-        // await MyBinding().onGetAll();
+        _isConnected = true;
+        // Get.back(closeOverlays: true);
+        update(); // await MyBinding().onGetAll();
       }
 
       Get.back();
@@ -427,6 +439,25 @@ class ManagerController extends GetxController {
       _isSignUp = false;
       update();
       print(e);
+    }
+  }
+
+  refreshToken(url) async {
+    bool finalV = false;
+
+    if (url != ApiRoutes.LOGIN &&
+        // url != ApiRoutes.forgot &&
+        url != ApiRoutes.Refresh) {
+      try {
+        Response rep = await manageRepo.userRefresh();
+        if (rep.statusCode == 200) {
+          s.saveKeyKen(rep.body);
+          finalV = true;
+        }
+      } catch (e) {
+        finalV = false;
+      }
+      return finalV;
     }
   }
 }

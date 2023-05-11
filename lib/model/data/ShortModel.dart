@@ -13,15 +13,15 @@ ShortModel shortModelFromJson(String str) =>
 String shortModelToJson(ShortModel data) => json.encode(data.toJson());
 
 class ShortModel {
-  ShortModel({
-    required this.id,
-    required this.titre,
-    required this.src,
-    required this.srcBoutique,
-    required this.description,
-    required this.date,
-    required this.status,
-  });
+  ShortModel(
+      {required this.id,
+      required this.titre,
+      required this.src,
+      required this.srcBoutique,
+      required this.description,
+      required this.date,
+      required this.status,
+      required this.controller});
 
   final int id;
   final String titre;
@@ -30,17 +30,17 @@ class ShortModel {
   final String description;
   final String date;
   final bool status;
-  VideoPlayerController? controller;
+  var controller;
 
   factory ShortModel.fromJson(Map<String, dynamic> json) => ShortModel(
-        id: json["id"] == null ? null : json["id"],
-        titre: json["titre"] == null ? null : json["titre"],
-        src: json["src"] == null ? null : json["src"],
-        srcBoutique: json["srcBoutique"] == null ? null : json["srcBoutique"],
-        description: json["description"] == null ? null : json["description"],
-        date: json["date"] == null ? null : json["date"],
-        status: json["status"] == null ? null : json["status"],
-      );
+      id: json["id"] == null ? null : json["id"],
+      titre: json["titre"] == null ? null : json["titre"],
+      src: json["src"] == null ? null : json["src"],
+      srcBoutique: json["srcBoutique"] == null ? null : json["srcBoutique"],
+      description: json["description"] == null ? null : json["description"],
+      date: json["date"] == null ? null : json["date"],
+      status: json["status"] == null ? null : json["status"],
+      controller: VideoPlayerController.network(json["src"]));
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
@@ -52,11 +52,12 @@ class ShortModel {
         "status": status == null ? null : status,
       };
 
-  Future<Null> loadController() async {
-    controller = VideoPlayerController.network(src);
-    await controller?.initialize();
+  loadController() async {
+    // controller.network(src);
+    await controller.initialize().then((_) {
+      controller.play();
+    });
 
-    controller?.setLooping(true);
-    
+    controller.setLooping(true);
   }
 }

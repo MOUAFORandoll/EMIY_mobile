@@ -33,6 +33,7 @@ import 'package:sqflite/sqlite_api.dart';
 
 class MyBinding extends Bindings {
   void dependencies() async {
+    
     Get.lazyPut(() => DB(), fenix: true);
     Get.lazyPut(() => ActionRepo(apiClient: Get.find()));
 
@@ -100,9 +101,11 @@ class MyBinding extends Bindings {
     Get.find<CategoryBoutiqueController>().getCategory();
     // Get.find<CommandeController>().getListCommandes();
     Get.find<CategoryBoutiqueController>().getListBoutiques();
-    // Get.find<ShortController>().getListShort();
+    Get.find<ShortController>().getListShort();
 
     Get.find<ActionController>().getListModePaiement();
+    Get.find<BoutiqueController>().getBoutique();
+
     // Get.find<BuyShopController>().getListLivreur();
   }
 
@@ -168,7 +171,9 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => SearchRepo(apiClient: Get.find()), fenix: true);
     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
-    // Get.find<ShortController>().getListShort();
+    Get.find<BoutiqueController>().getBoutique();
+
+    Get.find<ShortController>().getListShort();
 
     // Get.find<CommandeController>().insertAll();
   }
@@ -183,7 +188,7 @@ class MyBinding extends Bindings {
     Get.find<CommandeController>().getListCommandes();
     Get.find<BoutiqueController>().getBoutique();
     Get.find<ManagerController>().getUser();
-    // Get.find<ShortController>().getListShort();
+    Get.find<ShortController>().getListShort();
   }
 
   requestPermission() async {

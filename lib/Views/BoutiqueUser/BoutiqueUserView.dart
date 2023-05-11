@@ -10,6 +10,7 @@ import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
 import 'package:Fahkap/components/Text/bigtitleText0.dart';
 import 'package:Fahkap/components/Widget/app_back_button.dart';
+import 'package:Fahkap/components/Widget/app_boutique_options.dart';
 import 'package:Fahkap/components/Widget/cardBoutiqueComponent.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
@@ -28,64 +29,82 @@ import 'package:image_picker/image_picker.dart';
 import '../../components/Widget/app_title_right.dart';
 
 class BoutiqueUserView extends StatelessWidget {
-  BoutiqueUserView({Key? key}) : super(key: key);
   ScrollController _scrollController = new ScrollController();
-
-  TextEditingController name = TextEditingController();
-  TextEditingController titre = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController pass = TextEditingController();
-  TextEditingController repass = TextEditingController();
-  TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BoutiqueController>(builder: (_controller) {
-      // Get.find<BoutiqueController>().getCategory();
+    return GetBuilder<BoutiqueController>(builder: (_bcontroller) {
       return Scaffold(
-          body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-          margin: EdgeInsets.only(bottom: kMarginY * 2),
-          decoration: BoxDecoration(color: ColorsApp.grey),
-          padding: EdgeInsets.only(
-              left: kMdWidth / 6,
-              right: kMdWidth / 6,
-              top: kMarginY * 2.2,
-              bottom: kMarginY * 2.2),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Container(child: AppBackButton()),
-            Container(
-              child: AppTitleRight(
-                  title: 'yboutique'.tr, description: 'ysboutique'.tr, icon: null),
-              margin: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width * .005),
-            ),
-          ]),
+          body: CustomScrollView(controller: _scrollController, slivers: [
+        // Add the app bar to the CustomScrollView.
+        SliverAppBar(
+          backgroundColor: Colors.white,
+
+          elevation: 0,
+          // Provide a standard title.
+          // title: Text('title'),
+          // Allows the user to reveal the app bar if they begin scrolling
+          // back up the list of items.
+          floating: true,
+          // Display a placeholder widget to visualize the shrinking size.
+          flexibleSpace: Container(
+              margin: EdgeInsets.only(top: Get.height * .030, left: 0),
+              padding: EdgeInsets.only(
+                  left: Get.width * .030, right: Get.width * .030),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                              child: InkWell(
+                                  child: Icon(Icons.arrow_back_ios_new,
+                                      color: Colors.black),
+                                  onTap: () => Get.back())),
+                          Container(
+                            child: AppTitleRight(
+                                title: 'yboutique'.tr,
+                                description: 'ysboutique'.tr,
+                                icon: null),
+                            margin: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * .005),
+                          ),
+                        ]),
+                    Container(
+                      height: kSmHeight / 1.2,
+                      margin: EdgeInsets.symmetric(vertical: kMarginY),
+                      child: ListView.builder(
+                          itemCount: _bcontroller.contentBoutique.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (_ctx, index) => AppBoutiqueOption(
+                              title: _bcontroller.contentBoutique[index],
+                              select: _bcontroller.i == index,
+                              onTap: () async {
+                                // if (index == 0) {
+                                //   await _bcontroller.getListProduitForBoutique();
+                                // }
+                                await _bcontroller.setBoutiqueContent(index);
+                              })),
+                    ),
+                  ],
+                ),
+              )
+
+              /*   onTap: () => filterDest() */
+              ),
+          // Make the initial height of the SliverAppBar larger than normal.
+          expandedHeight: 100,
         ),
-        SingleChildScrollView(
-            child: Column(children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            CardBoutiqueComponent(
-                title: 'Produits', link: AppLinks.PRODUCT_FOR_BOUTIQUE),
-            CardBoutiqueComponent(
-              title: 'Commandes',
-              link: AppLinks.COMMANDE_FOR_BOUTIQUE,
-            ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            CardBoutiqueComponent(
-                title: 'Historiques', link: AppLinks.HISTORIQUE_FOR_BOUTIQUE),
-            CardBoutiqueComponent(
-                title: 'Gerer votre Boutique ',
-                link: AppLinks.MANAGE_FOR_BOUTIQUE),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            CardBoutiqueComponent(
-                title: 'SHort', link: AppLinks.SHORT_BOUTIQUE),
-            // CardBoutiqueComponent(
-            //     title: 'Compte ', link: AppLinks.COMPTE_FOR_BOUTIQUE),
-          ]),
-        ]))
+
+        SliverList(
+
+            // Use a delegate to build items as they're scrolled on screen.
+            delegate: SliverChildBuilderDelegate(
+          // The builder function returns a ListTile with a title that
+          // displays the index of the current item.
+          (context, index) => _bcontroller.boutiqueContent(), childCount: 1,
+        ))
       ]));
     });
   }

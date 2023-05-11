@@ -19,6 +19,7 @@ class ProduitModel {
     required this.titre,
     required this.quantite,
     required this.prix,
+    required this.note,
     required this.status,
     required this.images,
   });
@@ -30,6 +31,7 @@ class ProduitModel {
   final int quantite;
   final int id;
   final int prix;
+  final note;
   final bool status;
   final List<ImageU> images;
 
@@ -41,6 +43,8 @@ class ProduitModel {
         titre: json["titre"] == null ? null : json["titre"],
         quantite: json["quantite"] == null ? null : json["quantite"],
         prix: json["prix"] == null ? null : json["prix"],
+        note: double.parse(
+            (json["note"] == null ? null : json["note"]).toString()),
         status: json["status"] == null ? null : json["status"],
         images: json["images"] == null
             ? []
@@ -55,6 +59,7 @@ class ProduitModel {
         "titre": titre == null ? null : titre,
         "quantite": quantite == null ? null : quantite,
         "prix": prix == null ? null : prix,
+        "note": note == null ? null : double.parse(note.toString()),
         "status": status == null ? null : status,
         "images": images == null
             ? null
@@ -73,7 +78,7 @@ class ImageU {
 
   factory ImageU.fromJson(Map<String, dynamic> json) => ImageU(
         id: json["id"] == null ? null : json["id"],
-        src: json["src"] == null ? null :  json["src"],
+        src: json["src"] == null ? null : json["src"],
       );
 
   Map<String, dynamic> toJson() => {

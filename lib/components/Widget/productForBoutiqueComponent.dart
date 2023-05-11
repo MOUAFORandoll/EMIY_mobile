@@ -65,21 +65,21 @@ class ProductForBoutiqueComponent extends StatelessWidget {
               Container(
                 width: kWidth / 2,
                 child: Text(produit.titre,
-                     overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          color: ColorsApp.greySecond,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12)),
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        color: ColorsApp.marron,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12)),
               ),
               Container(
                 width: kWidth / 2,
                 child: Text('XAF ' + produit.prix.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                       color: ColorsApp.black,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold)),
+                        color: ColorsApp.skyBlue,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold)),
               ),
             ]),
       ),

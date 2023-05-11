@@ -210,11 +210,95 @@ class ActionController extends GetxController {
   CarouselController get controller => _controller;
   int _index = 0;
   int get index => _index;
+  var fn = new ViewFunctions();
 
   setIndex(index) {
     _index = index;
     update();
   }
-   
 
+  var s = Get.find<DB>();
+
+  notationProduit(note, codeProduit) async {
+    if (note < 0 || note > 5) {
+      return false;
+    }
+    // var getU = await s.getKey();
+    // if (getU == null) {
+    //   fn.snackBar('Note', 'Veuillez vous connecter', true);
+    // }
+    var data = {
+      'note': note,
+      'codeProduit': codeProduit,
+      "keySecret": 12341 //getU,
+    };
+    print(data);
+    Get.defaultDialog(
+        title: 'En cours',
+        barrierDismissible: false,
+        content: SizedBox(
+            // height: Get.size.height * .02,
+            // width: Get.size.width * .02,
+            child: Center(
+                child: CircularProgressIndicator(
+          color: Colors.blueAccent,
+        ))));
+    try {
+      Response response = await actionRepo.addNotationProduit(data);
+
+      Get.back();
+      update();
+      if (response.statusCode == 200) {
+        fn.snackBar('Note', 'Effectue', true);
+      } else {
+        fn.snackBar('Note', 'Erreur', false);
+      }
+    } catch (e) {
+      Get.back();
+      fn.snackBar('Note', 'Erreur', false);
+
+      print(e);
+    }
+  }
+
+  notationBoutique(note, codeBoutique) async {
+    if (note < 0 || note > 5) {
+      return false;
+    }
+    // var getU = await s.getKey();
+    // if (getU == null) {
+    //   fn.snackBar('Note', 'Veuillez vous connecter', true);
+    // }
+    var data = {
+      'note': note,
+      'codeBoutique': codeBoutique,
+      "keySecret": 12341 //getU,
+    };
+    print(data);
+    Get.defaultDialog(
+        title: 'En cours',
+        barrierDismissible: false,
+        content: SizedBox(
+            // height: Get.size.height * .02,
+            // width: Get.size.width * .02,
+            child: Center(
+                child: CircularProgressIndicator(
+          color: Colors.blueAccent,
+        ))));
+    try {
+      Response response = await actionRepo.addNotationBoutique(data);
+      print(response.body);
+      Get.back();
+      update();
+      if (response.statusCode == 200) {
+        fn.snackBar('Note', 'Effectue', true);
+      } else {
+        fn.snackBar('Note', 'Erreur', false);
+      }
+    } catch (e) {
+      Get.back();
+      fn.snackBar('Note', 'Erreur', false);
+      print(e);
+    }
+  }
 }

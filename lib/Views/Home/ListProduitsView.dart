@@ -6,6 +6,8 @@ import 'package:Fahkap/components/Form/formComponent2.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText0.dart';
 import 'package:Fahkap/components/Widget/BoutiqueComponent.dart';
+import 'package:Fahkap/components/Widget/app_empty.dart';
+import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/productComponent.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
@@ -55,69 +57,7 @@ class ListProduitsView extends StatelessWidget {
               ;
             },
             child: prods.isLoadedPAll == 0
-                ? Shimmer.fromColors(
-                    baseColor: Colors.blueGrey,
-                    highlightColor: Colors.greenAccent,
-                    child: SizedBox(
-                      height: kMdHeight,
-                      child: Stack(
-                        children: [
-                          GridView.builder(
-                            padding: const EdgeInsets.all(20),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 20.0,
-                                    mainAxisSpacing: 50.0),
-                            itemCount: 10,
-                            itemBuilder: (_ctx, index) => Container(
-                              height: kMdHeight * 2,
-                              width: kMdWidth * 1.1,
-                              margin: EdgeInsets.only(right: kMarginX),
-                              decoration: BoxDecoration(
-                                  color: ColorsApp.greySecond,
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        height: kMdHeight * .115,
-                                        width: Get.width * .5,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                          image: AssetImage('assets/logo.png'),
-                                        ))),
-                                    Container(
-                                      width: kSmWidth * .6,
-                                      margin: EdgeInsets.only(
-                                          top: Get.height * .005,
-                                          left: Get.width * .008),
-                                      child: Text('produit.titre',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: ColorsApp.black,
-                                              fontSize: 12)),
-                                    ),
-                                    // Container(
-                                    //   width: kSmWidth * .6,
-                                    //   margin: EdgeInsets.only(
-                                    //       top: Get.height * .005,
-                                    //       left: Get.width * .008),
-                                    //   child: Text('XAF ' + '1000',
-                                    //       overflow: TextOverflow.ellipsis,
-                                    //       style: TextStyle(
-                                    //           color: Colors.red,
-                                    //           fontSize: 12,
-                                    //           fontWeight: FontWeight.bold)),
-                                    // ),
-                                  ]),
-                            ),
-                          )
-                        ],
-                      ),
-                    ))
+                ? AppLoading()
                 : (prods.produitListAll.length != 0)
                     ? StaggeredGridView.countBuilder(
                         physics: ScrollPhysics(),
@@ -152,11 +92,8 @@ class ListProduitsView extends StatelessWidget {
                         //               index: index)),
                       )
                     : Container(
-                        height: kMdHeight * .6,
-                        alignment: Alignment.center,
-                        child: Center(
-                          child: Text('Aucune produit'),
-                        )),
+                        height: kHeight,
+                        child: AppEmpty(title: 'Aucun Produit')),
 
             // Builds 1000 ListTiles
           );

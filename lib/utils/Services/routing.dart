@@ -29,6 +29,7 @@ import 'package:Fahkap/Views/UsersMange/RegisterScreen.dart';
 import 'package:Fahkap/Views/UsersMange/SettingView.dart';
 import 'package:Fahkap/Views/UsersMange/UserManageView.dart';
 import 'package:Fahkap/Views/UsersMange/forgotPassword.dart';
+import 'package:Fahkap/controller/boutiqueController.dart';
 import 'package:flutter/material.dart';
 import 'package:Fahkap/Views/UsersMange/LoginScreen.dart';
 import 'package:Fahkap/Views/ComplementView/AboutUsView.dart';
@@ -132,7 +133,10 @@ class AppRoutes {
         transition: transitionX),
     GetPage(
         name: AppLinks.BOUTIQUE_USER,
-        page: () => BoutiqueUserView(),
+        page: () {
+          Get.find<BoutiqueController>().getListProduitForBoutique();
+          return BoutiqueUserView();
+        },
         transition: transitionX),
     GetPage(
         name: AppLinks.SHOPNEXT,
@@ -225,8 +229,8 @@ class AppLinks {
   static const String BOUTIQUE_READ_ALL = "/bra";
   static const String PRODUCT_READ_ALL = "/pra";
   static const String BUYVIEW = "/buyview";
-  static const String USERVIEW = "/userview"; 
-  static const String BOUTIQUE_USER = "/boutiqueuserview";
+  static const String USERVIEW = "/userview";
+  static const String BOUTIQUE_USER = "/boutique/user";
 }
 
 // <?php

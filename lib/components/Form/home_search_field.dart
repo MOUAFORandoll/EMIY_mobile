@@ -69,11 +69,14 @@ class KHomeSearchField extends StatelessWidget {
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: ColorsApp.red,
+                    color: ColorsApp.black,
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                   // margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(Icons.search))
+                  child: Icon(
+                    Icons.search,
+                    color: ColorsApp.white,
+                  ))
             ],
           ));
     });

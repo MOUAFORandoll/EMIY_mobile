@@ -31,7 +31,7 @@ class ProductComponentAll extends StatelessWidget {
                 imageBuilder: (context, imageProvider) {
                   return Container(
                       height: kHeight / 4,
-                    decoration: BoxDecoration(
+                      decoration: BoxDecoration(
                         color: ColorsApp.greySecond,
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
@@ -64,7 +64,7 @@ class ProductComponentAll extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          color: ColorsApp.greySecond,
+                          color: ColorsApp.marron,
                           fontWeight: FontWeight.bold,
                           fontSize: 12))),
               Container(
@@ -72,7 +72,7 @@ class ProductComponentAll extends StatelessWidget {
                   child: Text('XAF ' + produit.prix.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          color: ColorsApp.black,
+                          color: ColorsApp.skyBlue,
                           fontSize: 10,
                           fontWeight: FontWeight.bold))),
             ],

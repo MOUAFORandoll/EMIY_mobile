@@ -4,6 +4,7 @@ import 'package:Fahkap/components/Button/button.dart';
 import 'package:Fahkap/components/Form/formComponent2.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/categoryComponent2.dart';
@@ -97,42 +98,7 @@ class CategoryView extends StatelessWidget {
                   // The builder function returns a ListTile with a title that
                   // displays the index of the current item.
                   (context, index) => categorys.isLoadedCat == 0
-                      ? Shimmer.fromColors(
-                          baseColor: Colors.blueGrey,
-                          highlightColor: Colors.greenAccent,
-                          child: Container(
-                              height: kSmHeight * 2,
-                              width: kSmWidth,
-                              padding: EdgeInsets.all(kMarginX),
-                              margin: EdgeInsets.symmetric(
-                                  vertical: kMarginY, horizontal: kMarginX),
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Column(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        alignment: Alignment.center,
-                                        // margin: EdgeInsets.only(
-                                        //     top: Get.height * .005, left: Get.width * .008),
-                                        child: Icon(
-                                          Icons.no_backpack,
-                                          color: Colors.white,
-                                        )),
-                                    Container(
-                                      width: kSmWidth * .6,
-                                      alignment: Alignment.center,
-                                      // margin: EdgeInsets.only(
-                                      //     top: Get.height * .005, left: Get.width * .008),
-                                      child: Text('',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)),
-                                    ),
-                                  ])))
+                      ? AppLoading()
                       : SingleChildScrollView(
                           child: GridView.builder(
                               physics: NeverScrollableScrollPhysics(),

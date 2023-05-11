@@ -16,6 +16,7 @@ class BoutiqueModel {
     required this.description,
     required this.titre,
     required this.status,
+    required this.note,
     required this.dateCreated,
     required this.images,
     required this.localisation,
@@ -26,6 +27,7 @@ class BoutiqueModel {
   String description;
   String titre;
   bool status;
+  final note;
   String dateCreated;
   List<Image> images;
   Localisation localisation;
@@ -37,6 +39,8 @@ class BoutiqueModel {
         titre: json["titre"],
         status: json["status"],
         dateCreated: json["dateCreated"],
+        note: double.parse(
+            (json["note"] == null ? null : json["note"]).toString()),
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
         localisation: Localisation.fromJson(json["localisation"]),
       );
@@ -47,6 +51,7 @@ class BoutiqueModel {
         "description": description,
         "titre": titre,
         "status": status,
+        "note": note == null ? null : double.parse(note.toString()),
         "dateCreated": dateCreated,
         "images": List<dynamic>.from(images.map((x) => x.toJson())),
         "localisation": localisation.toJson(),

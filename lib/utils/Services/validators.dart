@@ -39,7 +39,7 @@ class Validators {
   static usPhoneValid(String input) {
     final RegExp phone =
         RegExp(r'^(\+0?1\s)?((\d{3})|(\(\d{3}\)))?(\s|-)\d{3}(\s|-)\d{4}$');
-    print(int.tryParse(input));
+
     if (input.length == 9) {
       if (int.tryParse(input) != null) {
         return null;
@@ -51,9 +51,18 @@ class Validators {
     }
   }
 
+  static usNumeriqValid(String input) {
+    print(int.tryParse(input));
+    if (int.tryParse(input) != null) {
+      return null;
+    } else {
+      return 'invalidChiffre'.tr;
+    }
+  }
+
   static String? required(String field, String? value) {
     if (value == null) return null;
-    return value.isEmpty ? " $field Obligatoire" : '';
+    return value.isEmpty ? " $field Obligatoire" : null;
   }
 
   static String? isValidDate(String? inputDate) {

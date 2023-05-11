@@ -17,12 +17,12 @@ class OnBoardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ActionController>(
         builder: (action) => Scaffold(
-              // appBar: AppBar(
-              //   title: const Text('Agora Video Call'),
-              // ),
+                // appBar: AppBar(
+                //   title: const Text('Agora Video Call'),
+                // ),
 
-              body: SingleChildScrollView(
-                  child: Stack(
+                body: SingleChildScrollView(
+              child: Stack(
                 children: [
                   CarouselSlider(
                     carouselController: action.controller,
@@ -100,7 +100,7 @@ class OnBoardingView extends StatelessWidget {
                                                                 .brightness ==
                                                             Brightness.dark
                                                         ? Colors.white
-                                                        : ColorsApp.greenLight)
+                                                        : ColorsApp.skyBlue)
                                                     .withOpacity(action.index ==
                                                             entry.key
                                                         ? 0.9
@@ -114,7 +114,7 @@ class OnBoardingView extends StatelessWidget {
                                     //     .add(EdgeInsets.only(bottom: 10)),
                                     child: AppButton(
                                       size: MainAxisSize.max,
-                                      bgColor: ColorsApp.skyBlue,
+                                      bgColor: ColorsApp.black,
                                       text: 'start'.tr,
                                       onTap: () async {
                                         Get.offNamedUntil(
@@ -136,8 +136,9 @@ class OnBoardingView extends StatelessWidget {
                                       ),
                                       child: InkWell(
                                         onTap: () {
-                                          Get.offNamedUntil(
-                                              AppLinks.LOGIN, (route) => false);
+                                          Get.toNamed(
+                                            AppLinks.LOGIN,
+                                          );
                                         },
                                         child: Row(
                                             mainAxisAlignment:
@@ -147,8 +148,7 @@ class OnBoardingView extends StatelessWidget {
                                                   style: TextStyle(
                                                       color: action.index == 0
                                                           ? Colors.white
-                                                          : ColorsApp
-                                                              .greenLight,
+                                                          : ColorsApp.black,
                                                       fontWeight:
                                                           FontWeight.bold))
                                             ]),
@@ -185,8 +185,7 @@ class OnBoardingView extends StatelessWidget {
                                                                   .brightness ==
                                                               Brightness.dark
                                                           ? Colors.white
-                                                          : ColorsApp
-                                                              .greenLight)
+                                                          : ColorsApp.skyBlue)
                                                       .withOpacity(
                                                           action.index ==
                                                                   entry.key
@@ -206,7 +205,7 @@ class OnBoardingView extends StatelessWidget {
                                         onTap: () {
                                           action.index == 2
                                               ? Get.offNamedUntil(
-                                                  AppLinks.LOGIN,
+                                                  AppLinks.FIRST,
                                                   (route) => false)
                                               : action.controller.nextPage(
                                                   duration: Duration(
@@ -237,7 +236,7 @@ class OnBoardingView extends StatelessWidget {
                               ),
                             )),
                 ],
-              )),
-            ));
+              ),
+            )));
   }
 }

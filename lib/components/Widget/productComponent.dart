@@ -52,7 +52,8 @@ class ProductComponent extends StatelessWidget {
                                     image: imageProvider,
                                     fit: BoxFit.cover,
                                     colorFilter: ColorFilter.mode(
-                                        Colors.transparent, BlendMode.colorBurn)),
+                                        Colors.transparent,
+                                        BlendMode.colorBurn)),
                               ),
                             );
                           },
@@ -95,7 +96,7 @@ class ProductComponent extends StatelessWidget {
                   child: Text(produit.titre,
                       overflow: TextOverflow.ellipsis,
                       style:
-                          TextStyle(color: ColorsApp.greenLight, fontSize: 12)),
+                          TextStyle(color: ColorsApp.textBlue, fontSize: 12)),
                 ),
                 Container(
                   width: kSmWidth * .6,
@@ -104,7 +105,7 @@ class ProductComponent extends StatelessWidget {
                   child: Text('XAF ' + produit.prix.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          color: Colors.red,
+                          color: ColorsApp.marron,
                           fontSize: 12,
                           fontWeight: FontWeight.bold)),
                 ),

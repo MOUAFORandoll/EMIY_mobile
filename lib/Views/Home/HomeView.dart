@@ -491,64 +491,79 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  height: kMdHeight / 6,
-                                  child: CarouselSlider.builder(
-                                    itemCount: categorys.ListBoutiqueF.length,
-                                    itemBuilder: (_ctx, i, index) =>
-                                        BoutiqueComponentHomeN(
-                                      boutique: categorys.ListBoutiqueF[index],
-                                    ),
-                                    options: CarouselOptions(
-                                      aspectRatio: 4 / 4,
+                                !categorys.gA
+                                    ? Container(
+                                        height: kMdHeight / 6,
+                                        child: CarouselSlider.builder(
+                                          itemCount:
+                                              categorys.ListBoutiqueF.length,
+                                          itemBuilder: (_ctx, i, index) =>
+                                              BoutiqueComponentHomeN(
+                                            boutique:
+                                                categorys.ListBoutiqueF[index],
+                                          ),
+                                          options: CarouselOptions(
+                                            aspectRatio: 4 / 4,
 
-                                      enlargeStrategy:
-                                          CenterPageEnlargeStrategy.scale,
-                                      initialPage: 0,
-                                      enableInfiniteScroll: false,
-                                      reverse: false,
-                                      onPageChanged: (index, reason) {
-                                        categorys.setCurrent(index);
-                                      },
+                                            enlargeStrategy:
+                                                CenterPageEnlargeStrategy.scale,
+                                            initialPage: 0,
+                                            enableInfiniteScroll: false,
+                                            reverse: false,
+                                            onPageChanged: (index, reason) {
+                                              categorys.setCurrent(index);
+                                            },
 
-                                      disableCenter: true,
-                                      height: Get.height,
-                                      // enlargeCenterPage: true,
-                                      // autoPlay: true,
+                                            disableCenter: true,
+                                            height: Get.height,
+                                            // enlargeCenterPage: true,
+                                            // autoPlay: true,
 
-                                      // autoPlayCurve: Curves.fastOutSlowIn,
-                                      // enableInfiniteScroll: true,
-                                      viewportFraction: 1.0,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                    vertical: 2.0,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: ['0', '1', '2']
-                                        .asMap()
-                                        .entries
-                                        .map((entry) {
-                                      return GestureDetector(
-                                          child: Container(
-                                        width: 6.0,
-                                        height: 6.0,
+                                            // autoPlayCurve: Curves.fastOutSlowIn,
+                                            // enableInfiniteScroll: true,
+                                            viewportFraction: 1.0,
+                                          ),
+                                        ),
+                                      )
+                                    : Container(
+                                        height: kMdHeight / 6,
+                                        child: Center(
+                                            child: CircularProgressIndicator(
+                                          color: ColorsApp.skyBlue,
+                                        ))),
+                                !categorys.gA &&
+                                        categorys.ListBoutiqueF.length != 0
+                                    ? Container(
                                         margin: EdgeInsets.symmetric(
-                                            vertical: 2.0, horizontal: 4.0),
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: (ColorsApp.greenLight)
-                                                .withOpacity(categorys.indexB ==
-                                                        entry.key
-                                                    ? 1
-                                                    : 0.2)),
-                                      ));
-                                    }).toList(),
-                                  ),
-                                ),
+                                          vertical: 2.0,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: ['0', '1', '2']
+                                              .asMap()
+                                              .entries
+                                              .map((entry) {
+                                            return GestureDetector(
+                                                child: Container(
+                                              width: 6.0,
+                                              height: 6.0,
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 2.0,
+                                                  horizontal: 4.0),
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (ColorsApp.black)
+                                                      .withOpacity(
+                                                          categorys.indexB ==
+                                                                  entry.key
+                                                              ? 1
+                                                              : 0.2)),
+                                            ));
+                                          }).toList(),
+                                        ),
+                                      )
+                                    : Container(),
                                 GridView.builder(
                                     shrinkWrap: true,
                                     physics: const BouncingScrollPhysics(),

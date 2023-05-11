@@ -112,38 +112,38 @@ class CategoryBoutiqueController extends GetxController {
   List<BoutiqueModel> get ListBoutiqueF => _ListBoutiqueF;
   // BoutiqueController({required this.service});
   getListBoutiques() async {
-    if (_gA == false) {
+    // if (_gA == false) {
+
+    try {
+      Response response = await categoryBoutiqueRepo.getListBoutiques();
+
       _gA = true;
+      _ListBoutiqueF = [];
+      _ListBoutiqueF.clear();
+      _isLoaded = 0;
+      update(); // print('------------------------/*****************************');
+      // print(response.body);
+      if (response.body != null) {
+        if (response.body['data'].length != 0) {
+          _ListBoutiqueF.addAll((response.body['data'] as List)
+              .map((e) => BoutiqueModel.fromJson(e))
+              .toList());
 
-      try {
-        _ListBoutiqueF = [];
-        _ListBoutiqueF.clear();
-        _isLoaded = 0;
-        update();
-        Response response = await categoryBoutiqueRepo.getListBoutiques();
-        // print('------------------------/*****************************');
-        // print(response.body);
-        if (response.body != null) {
-          if (response.body['data'].length != 0) {
-            _ListBoutiqueF.addAll((response.body['data'] as List)
-                .map((e) => BoutiqueModel.fromJson(e))
-                .toList());
-
-            _isExist = response.body['exist'];
-            // print(_ListBoutiqueF);
-          }
+          _isExist = response.body['exist'];
+          // print(_ListBoutiqueF);
         }
-        _gA = false;
-        // _isLoaded = 1;
-
-        update();
-      } catch (e) {
-        // _isLoaded = 1;
-        _gA = false;
-
-        update();
-        print(e);
       }
+      _gA = false;
+      // _isLoaded = 1;
+
+      update();
+    } catch (e) {
+      // _isLoaded = 1;
+      _gA = false;
+
+      update();
+      print(e);
+      // }
     }
   }
 

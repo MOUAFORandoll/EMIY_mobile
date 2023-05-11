@@ -38,4 +38,6 @@ class ApiRoutes {
   static const SHORT_READ = '/short/read';
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';
   static const SHORT_NEW = '/short/new';
+  static const NOTAITON_PRODUIT = '/notation/produit';
+  static const NOTAITON_BOUTIQUE = '/notation/boutique';
 }

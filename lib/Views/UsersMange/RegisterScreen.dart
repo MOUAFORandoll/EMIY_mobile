@@ -25,7 +25,6 @@ class RegisterScreen extends StatelessWidget {
             body: SingleChildScrollView(
                 child: Container(
                     margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                   
                     child: Column(children: [
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,8 +65,8 @@ class RegisterScreen extends StatelessWidget {
                                         children: [
                                           Text('regText'.tr,
                                               style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                              )),
+                                                  fontFamily: 'Montserrat',
+                                                  fontWeight: FontWeight.bold)),
                                         ],
                                       ),
                                     ),
@@ -154,7 +153,6 @@ class RegisterScreen extends StatelessWidget {
                                     GetBuilder<ManagerController>(
                                         builder: (_manager) => AppButton(
                                             size: MainAxisSize.max,
-                                            bgColor: ColorsApp.orange,
                                             text: 'regbtn'.tr,
                                             onTap: () async {
                                               if (_manager

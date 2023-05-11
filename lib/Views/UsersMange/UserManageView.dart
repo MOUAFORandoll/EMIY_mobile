@@ -15,6 +15,7 @@ import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:Fahkap/utils/Services/validators.dart';
+import 'package:Fahkap/utils/constants/assets.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -140,11 +141,10 @@ class UserManageView extends StatelessWidget {
                 ),
                 AppSettingComp(
                   title: 'Modifier informations',
-                  icon: FontAwesomeIcons.passport,
+                  icon: Assets.user,
                   color: ColorsApp.orange,
                   onTap: () async {
-                    Get.bottomSheet(
-                      Container(
+                    Get.bottomSheet(Container(
                         height: kHeight,
                         padding: EdgeInsets.symmetric(
                             horizontal: kSmWidth * .07,
@@ -156,82 +156,155 @@ class UserManageView extends StatelessWidget {
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15))),
                         child: SingleChildScrollView(
-                            child: Form(
-                                key: _manager.formKeyUpdateU,
-                                child:Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: kMarginY,
-                              ),
-                              child: AppInput(
-                                controller: _manager.nameU,
-                                label: 'labelname'.tr,
-                                validator: (value) {
-                                  return Validators.isValidUsername(value!);
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: kMarginY,
-                              ),
-                              child: AppInput(
-                                controller: _manager.surnameU,
-                                label: 'labelsurname'.tr,
-                                validator: (value) {
-                                  return Validators.isValidUsername(value!);
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: kMarginY,
-                              ),
-                              child: AppInput(
-                                controller: _manager.emailU,
-                                label: 'labelemail'.tr,
-                                validator: (value) {
-                                  return Validators.isValidEmail(value);
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: kMarginY,
-                              ),
-                              child: AppInput(
-                                controller: _manager.phoneU,
-                                label: 'labelphone'.tr,
-                                validator: (value) {
-                                  return Validators.usPhoneValid(value!);
-                                },
-                              ),
-                            ),
-                            CustomBtn(
-                                color: ColorsApp.greenLight,
-                                title: 'Mettre a jour',
-                                onTap: () async {
-                                
-                                  if (_manager.formKeyUpdateU.currentState!
-                                      .validate()) {
-                                    await _manager.updateUser( );
-                                  }
-                                })
-                          ],
-                        )),
-                    )
-                    )
-                    );
+                          child: Form(
+                              key: _manager.formKeyUpdateU,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: kMarginY,
+                                    ),
+                                    child: AppInput(
+                                      controller: _manager.nameU,
+                                      label: 'labelname'.tr,
+                                      validator: (value) {
+                                        return Validators.isValidUsername(
+                                            value!);
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: kMarginY,
+                                    ),
+                                    child: AppInput(
+                                      controller: _manager.surnameU,
+                                      label: 'labelsurname'.tr,
+                                      validator: (value) {
+                                        return Validators.isValidUsername(
+                                            value!);
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: kMarginY,
+                                    ),
+                                    child: AppInput(
+                                      controller: _manager.emailU,
+                                      label: 'labelemail'.tr,
+                                      validator: (value) {
+                                        return Validators.isValidEmail(value);
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: kMarginY,
+                                    ),
+                                    child: AppInput(
+                                      controller: _manager.phoneU,
+                                      label: 'labelphone'.tr,
+                                      validator: (value) {
+                                        return Validators.usPhoneValid(value!);
+                                      },
+                                    ),
+                                  ),
+                                  CustomBtn(
+                                      color: ColorsApp.greenLight,
+                                      title: 'Mettre a jour',
+                                      onTap: () async {
+                                        if (_manager
+                                            .formKeyUpdateU.currentState!
+                                            .validate()) {
+                                          await _manager.updateUser();
+                                        }
+                                      })
+                                ],
+                              )),
+                        )));
                   },
                 ),
                 AppSettingComp(
-                    title: 'Modifier mot de passe',
-                    icon: Icons.key,
-                    onTap: () {
-                      print('iii');
-                    }),
+                  title: 'Modifier mot de passe',
+                  icon: Assets.key,
+                  onTap: () async {
+                    Get.bottomSheet(Container(
+                        height: kHeight,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: kSmWidth * .07,
+                            vertical: kSmHeight * .09),
+                        // height: 800,
+                        decoration: BoxDecoration(
+                            color: ColorsApp.grey,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15))),
+                        child: SingleChildScrollView(
+                          child: Form(
+                              key: _manager.formKeyUpdateU,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: kMarginY,
+                                    ),
+                                    child: AppInputPassword(
+                                      controller: _manager.pwdCurrentU,
+                                      label: 'labelpassword'.tr,
+                                      obscureText: true,
+                                      validator: (value) {
+                                        return Validators.isValidPassword(
+                                            value!);
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: kMarginY,
+                                    ),
+                                    child: AppInputPassword(
+                                      controller: _manager.newpwdU,
+                                      label: 'labelnewpassword'.tr,
+                                      obscureText: true,
+                                      validator: (value) {
+                                        return Validators.isValidPassword(
+                                            value!);
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: kMarginY,
+                                    ),
+                                    child: AppInputPassword(
+                                      controller: _manager.rnewpwdU,
+                                      label: 'labelrpassword'.tr,
+                                      obscureText: true,
+                                      validator: (value) {
+                                        return Validators.isValidRePassword(
+                                            _manager.repass.text !=
+                                                _manager.pass.text);
+                                      },
+                                    ),
+                                  ),
+                                  CustomBtn(
+                                      color: ColorsApp.greenLight,
+                                      title: 'Mettre a jour',
+                                      onTap: () async {
+                                        if (_manager
+                                            .formKeyUpdateU.currentState!
+                                            .validate()) {
+                                          await _manager.updateUser();
+                                        }
+                                      })
+                                ],
+                              )),
+                        )));
+                  },
+                ),
               ],
             )),
           ),

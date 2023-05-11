@@ -48,7 +48,7 @@ class _AppInputState extends State<AppInput> {
         onChanged: widget.onChanged,
         decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorsApp.orange, width: 2),
+              borderSide: BorderSide(color: ColorsApp.skyBlue, width: 2),
               borderRadius: BorderRadius.circular(8),
             ),
             border: OutlineInputBorder(
@@ -62,7 +62,7 @@ class _AppInputState extends State<AppInput> {
             ),
             labelText: widget.label,
             labelStyle: TextStyle(
-              color: ColorsApp.orange, fontFamily: 'Montserrat',
+              color: ColorsApp.black, fontFamily: 'Montserrat',
               // fontWeight: FontWeight.w500,
               fontSize: 12,
             ),
@@ -120,7 +120,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
         onChanged: widget.onChanged,
         decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorsApp.orange, width: 2),
+              borderSide: BorderSide(color: ColorsApp.skyBlue, width: 2),
               borderRadius: BorderRadius.circular(10),
             ),
             border: OutlineInputBorder(
@@ -134,7 +134,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
             ),
             labelText: widget.label,
             labelStyle: TextStyle(
-              color: ColorsApp.orange, fontFamily: 'Montserrat',
+              color: ColorsApp.black, fontFamily: 'Montserrat',
               // fontWeight: FontWeight.w500,
               fontSize: 12,
             ),

@@ -185,7 +185,6 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                                     margin: EdgeInsets.only(top: kMarginY * 2),
                                     child: AppButton(
                                         size: MainAxisSize.max,
-                                        bgColor: ColorsApp.orange,
                                         text: 'send'.tr,
                                         onTap: () async {
                                           // Get.toNamed(AppLinks.FIRST);

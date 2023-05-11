@@ -8,6 +8,10 @@ import 'package:Fahkap/components/Form/formComponent.dart';
 import 'package:Fahkap/components/Form/formComponent2.dart';
 import 'package:Fahkap/components/Form/text_field.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
+import 'package:Fahkap/components/Widget/app_bar_custom.dart';
+import 'package:Fahkap/components/Widget/app_empty.dart';
+import 'package:Fahkap/components/Widget/app_input.dart';
+import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
 import 'package:Fahkap/components/Widget/imageComp.dart';
@@ -19,6 +23,7 @@ import 'package:Fahkap/controller/categoryController.dart';
 import 'package:Fahkap/model/data/CategoryModel.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -44,364 +49,236 @@ class ProduitBoutiqueUserView extends StatelessWidget {
     CategoryModel dropdownvalue = new CategoryModel.fromJson(
         {"id": 0, "libelle": '', "description": '', "status": false});
 
-    Get.find<BoutiqueController>().getListProduitForBoutique();
-    Get.find<BoutiqueController>().onInitData();
+    // Get.find<BoutiqueController>().onInitData();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
-      return Scaffold(
-          appBar: AppBar(
-            leading: InkWell(
-                child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
-                onTap: () => Get.back()),
-            title: _controller.searchProB
-                ? KTextField(
-                    controllerField: controllerField,
-                    onChange: _controller.searchProduitB)
-                : Text(
-                    'Vos produits',
-                    style: TextStyle(color: Colors.black),
-                  ),
-            actions: [
-              InkWell(
-                  child: Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: !_controller.searchProB
-                          ? Icon(
-                              Icons.search,
-                              color: Colors.red,
-                            )
-                          : Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            )),
-                  onTap: () {
-                    controllerField.text = '';
-                    _controller.searchProBButtom();
-                  })
-            ],
-            foregroundColor: Colors.red,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
-          body: SingleChildScrollView(
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            // Container(
-            //   decoration: BoxDecoration(color: ColorsApp.grey),
-            //   padding: EdgeInsets.only(
-            //       left: kMdWidth / 6, right: kMdWidth / 6, top: 6, bottom: 6),
-            //   alignment: Alignment.topLeft,
-            //   child: smallText(
-            //     text: 'Nom Boutique',
-            //   ),
-            // ),
-            Container(
-                decoration: BoxDecoration(color: ColorsApp.grey),
-                padding: EdgeInsets.only(
-                    left: kMdWidth / 6, right: kMdWidth / 6, top: 6, bottom: 6),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      smallText(
-                        text: !_controller.addProduct ? 'Liste' : 'Nouveau',
-                      ),
-/*                       _controller.categoryList.length != 0
-                          ? */
-                      CustomBtn(
-                        color: ColorsApp.greenLight,
-                        title: _controller.addProduct
-                            ? 'Retour'
-                            : 'Ajouter Produit',
-                        onTap: () {
-                          _controller.chageState(!_controller.addProduct);
+      return SingleChildScrollView(
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+        // Container(
+        //   decoration: BoxDecoration(color: ColorsApp.grey),
+        //   child:
+        //       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        //     Container(
+        //       child: _controller.searchProB
+        //           ? KTextField(
+        //               controllerField: controllerField,
+        //               onChange: _controller.searchProduitB)
+        //           : Text(
+        //               'Vos produits',
+        //               style: TextStyle(color: Colors.black),
+        //             ),
+        //     ),
+        //     InkWell(
+        //         child: Container(
+        //             margin: EdgeInsets.only(right: 10),
+        //             child: !_controller.searchProB
+        //                 ? Icon(
+        //                     Icons.search,
+        //                     color: Colors.red,
+        //                   )
+        //                 : Icon(
+        //                     Icons.close,
+        //                     color: Colors.red,
+        //                   )),
+        //         onTap: () {
+        //           controllerField.text = '';
+        //           _controller.searchProBButtom();
+        //         })
+        //   ]),
+        // ),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: kMarginX),
+            child: AppBarCustom(
+              title: !_controller.addProduct
+                  ? 'Liste de vos produits'
+                  : 'Ajouter un produit',
+              titleBtn: !_controller.addProduct ? 'Ajouter' : 'Liste',
+              onTap: () {
+                _controller.chageState(!_controller.addProduct);
+              },
+            )),
+        !_controller.addProduct
+            ? _controller.isLoadedPB == 0
+                ? AppLoading()
+                : _controller.produitBoutiqueList.length == 0
+                    ? Container(
+                        height: kHeight,
+                        child: AppEmpty(title: 'Aucun Produit'))
+                    : SingleChildScrollView(
+                        child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _controller.produitBoutiqueList.length,
+                        itemBuilder: (_ctx, index) {
+                          return ProductBoutiqueComponent(
+                              produit: _controller.produitBoutiqueList[index]);
                         },
-                      ) /* 
-                          : Container() */
-                    ])),
-            !_controller.addProduct
-                ? _controller.isLoadedPB == 0
-                    ? Shimmer.fromColors(
-                        baseColor: Colors.blueGrey,
-                        highlightColor: Colors.greenAccent,
-                        child: Container(
-                            // margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                            child: SingleChildScrollView(
-                                child: ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: 10,
-                                    itemBuilder: (_ctx, index) => Row(
-                                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                  height: kMdHeight / 9,
-                                                  // width: kMdWidth,
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: kMarginX,
-                                                      vertical: kMarginY),
-                                                  width: Get.width / 3,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(8),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    8)),
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            "assets/images/error.gif"),
-                                                        fit: BoxFit.cover,
-                                                        colorFilter:
-                                                            ColorFilter.mode(
-                                                                Colors.blue,
-                                                                BlendMode
-                                                                    .colorBurn)),
-                                                  )),
-                                              Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: kMarginX,
-                                                      vertical: kMarginY),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Container(
-                                                        // width: kSmWidth * .6,
-
-                                                        child: Text('Nom : ',
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: TextStyle(
-                                                                color: ColorsApp
-                                                                    .greenLight,
-                                                                fontSize: 12)),
-                                                      ),
-                                                    ],
-                                                  ))
-                                            ])))))
-                    : _controller.produitBoutiqueList.length == 0
-                        ? Center(child: Text('Aucun Produit'))
-                        : SingleChildScrollView(
-                            child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: _controller.produitBoutiqueList.length,
-                            itemBuilder: (_ctx, index) {
-                              return ProductBoutiqueComponent(
-                                  produit:
-                                      _controller.produitBoutiqueList[index]);
-                            },
-                          ))
-                : Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5),
-                    child: SingleChildScrollView(
-                        child: Column(
-                      children: [
-                        FormComponent2(
-                            icon: Icons.account_circle,
-                            type: 0,
-                            controller: titre,
-                            enabled: true,
-                            titre: 'Nom du produit',
-                            hint: "Iphone 11"),
-                        FormComponent2(
-                            icon: Icons.account_circle,
-                            type: 0,
-                            controller: quantite,
-                            enabled: true,
-                            titre: 'Quantite',
-                            kType: TextInputType.number,
-                            hint: "10"),
-                        FormComponent2(
-                            icon: Icons.account_circle,
-                            type: 0,
-                            controller: prix,
-                            kType: TextInputType.number,
-                            enabled: true,
-                            titre: 'Prix',
-                            hint: "1500"),
-                        /*   Container(
-                          alignment: Alignment.topLeft,
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          child: Text('Categorie'),
+                      ))
+            : Container(
+                margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                child: SingleChildScrollView(
+                    child: Column(
+                  children: [
+                    _controller.listImgProduits.length != 0
+                        ? smallText(
+                            text: 'Listes images',
+                          )
+                        : Container(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: kMarginY,
+                      ),
+                      child: AppInput(
+                        controller: titre,
+                        label: 'lbnameprod'.tr,
+                        validator: (value) {
+                          return Validators.isValidUsername(value!);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: kMarginY,
+                      ),
+                      child: AppInput(
+                        controller: prix,
+                        label: 'lbprixprod'.tr,
+                        validator: (value) {
+                          return Validators.usNumeriqValid(value!);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: kMarginY,
+                      ),
+                      child: AppInput(
+                        controller: quantite,
+                        label: 'lbnqteprod'.tr,
+                        validator: (value) {
+                          return Validators.usNumeriqValid(value!);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: kMarginY,
+                      ),
+                      child: TextFormField(
+                        onChanged: (String value) {},
+                        validator: (value) {
+                          return Validators.isValidUsername(value!);
+                        },
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontFamily: 'Montserrat',
                         ),
-                        _controller.isLoadedC == 0
-                            ? CircularProgressIndicator(
-                                color: Colors.blueAccent,
-                              )
-                            : Container(
-                                alignment: Alignment.center,
-                                width: Get.width,
-                                margin: EdgeInsets.symmetric(vertical: 5),
-                                padding: EdgeInsets.only(
-                                  left: Get.width * .08,
-                                  right: Get.width * .08,
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: DropdownButton(
-                                  // Initial Value
-                                  value: _controller.categorySelect,
-                                  // Down Arrow Icon
-                                  icon: const Icon(Icons.keyboard_arrow_down),
-
-                                  // Array list of items
-                                  items: _controller.categoryList.map((item) {
-                                    return DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item.libelle),
-                                    );
-                                  }).toList(),
-                                  // After selecting the desired option,it will
-                                  // change button value to selected value
-                                  onChanged: (newValue) {
-                                    _controller.secelctCate(newValue);
-                                    // setState(() {
-                                    //   dropdownvalue = newValue!;
-                                    // });
-                                  },
-                                )),
-                       */
-                        Container(
-                          alignment: Alignment.topLeft,
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          child: Text('Description'),
-                        ),
-                        TextFormField(
-                          onChanged: (String value) {
-                            // if (onChange != null) onChange!(value);
-                          },
-                          controller: description,
-                          validator: (value) {
-                            return value!.isEmpty
-                                ? "veillez remplir se champs"
-                                : null;
-                          },
-                          // keyboardType: type,
-                          // obscureText: obscureText!,
-                           
-                          maxLength: 10,
-                          maxLines: 10,
-                          decoration: new InputDecoration(
-                            fillColor: ColorsApp.skyBlue,
-                            counter: Offstage(),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
-                                  color: ColorsApp.bleuLight,
-                                )),
-                            // border: OutlineInputBorder(
-                            //   borderRadius: BorderRadius.circular(10),
-                            //   borderSide: BorderSide(
-                            //     color: ColorsApp.skyBlue,
-                            //   ),
-                            // ),
-                            contentPadding: EdgeInsets.only(
-                              left: 12,
-                              bottom: 10,
-                              top: 10,
-                              right: 12,
-                            ),
-                            hintText: 'Entrer une description',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontFamily: 'orkney',
-                            ),
-                            // suffixIcon: InkWell(
-                            //   onTap: () => onTap,
-                            //   child: Icon(
-                            //     icon,
-                            //     color: Colors.grey,
-                            //   ),
-                            // ),
+                        maxLines: 10,
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: ColorsApp.orange, width: 2),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          border: OutlineInputBorder(
+                            //  borderSide : BorderSide(color:Colors.blue,width: 3),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          errorStyle: TextStyle(
+                            fontSize: 8,
+                            fontFamily: 'Montserrat',
+                          ),
+                          labelStyle: TextStyle(
+                            color: ColorsApp.orange, fontFamily: 'Montserrat',
+                            // fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                          ),
+                          labelText: 'lbdescprod'.tr,
+                          fillColor: ColorsApp.skyBlue,
+                          counter: Offstage(),
+                          hintText: 'lbdescprod'.tr,
+                          alignLabelWithHint: true,
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'orkney',
                           ),
                         ),
-                        _controller.listImgProduits.length != 0
-                            ? smallText(
-                                text: 'Listes images',
-                              )
-                            : Container(),
-                        _controller.listImgProduits.length != 0
-                            ? Container(
-                                height: kSmHeight * 2,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: kMarginY * .1),
-                                child: ListView.builder(
-                                  itemCount: _controller.listImgProduits.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (_ctx, index) =>
-                                      _controller.listImgProduits[index] != null
-                                          ? ImageComp(
-                                              file: _controller
-                                                  .listImgProduits[index],
-                                              index: index)
-                                          : Container(),
-                                ),
-                              )
-                            : Container(),
-                        Container(
-                            decoration: BoxDecoration(color: ColorsApp.grey),
-                            child: CustomBtn(
-                              color: ColorsApp.greenLight,
-                              title: 'Selectionner image',
-                              onTap: () {
-                                _controller.getImage();
-                              },
-                            )),
-                        Container(
-                            decoration: BoxDecoration(color: ColorsApp.grey),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  // smallText(
-                                  //   text: _controller.Boutique.titre,
-                                  // ),
-                                  CustomBtn(
-                                    color: ColorsApp.greenLight,
-                                    title: 'Ajouter Produit',
-                                    onTap: () async {
-                                      var key = await _controller.s.getKey();
-                                      Map<String, Object> dataS = {
-                                        'keySecret': key,
-                                        'titre': titre.text,
-                                        'description': description.text,
-                                        'prixUnitaire': prix.text,
-                                        'quantite': quantite.text,
-                                        // 'idCategory':
-                                        //     _controller.categorySelect.id,
-                                        'codeBoutique':
-                                            _controller.Boutique.codeBoutique,
-                                        'countImage':
-                                            _controller.listImgProduits.length
-                                      };
-                                      print(dataS);
+                      ),
+                    ),
+                    _controller.listImgProduits.length != 0
+                        ? Container(
+                            height: kSmHeight * 2,
+                            margin:
+                                EdgeInsets.symmetric(vertical: kMarginY * .1),
+                            child: ListView.builder(
+                              itemCount: _controller.listImgProduits.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (_ctx, index) => _controller
+                                          .listImgProduits[index] !=
+                                      null
+                                  ? ImageComp(
+                                      file: _controller.listImgProduits[index],
+                                      index: index)
+                                  : Container(),
+                            ),
+                          )
+                        : Container(),
+                    Container(
+                        decoration: BoxDecoration(color: ColorsApp.grey),
+                        child: CustomBtn(
+                          color: ColorsApp.greenLight,
+                          title: 'Selectionner image',
+                          onTap: () {
+                            _controller.getImage();
+                          },
+                        )),
+                    Container(
+                        decoration: BoxDecoration(color: ColorsApp.grey),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              // smallText(
+                              //   text: _controller.Boutique.titre,
+                              // ),
+                              CustomBtn(
+                                color: ColorsApp.greenLight,
+                                title: 'Ajouter Produit',
+                                onTap: () async {
+                                  var key = await _controller.s.getKey();
+                                  Map<String, Object> dataS = {
+                                    'keySecret': key,
+                                    'titre': titre.text,
+                                    'description': description.text,
+                                    'prixUnitaire': prix.text,
+                                    'quantite': quantite.text,
+                                    // 'idCategory':
+                                    //     _controller.categorySelect.id,
+                                    'codeBoutique':
+                                        _controller.Boutique.codeBoutique,
+                                    'countImage':
+                                        _controller.listImgProduits.length
+                                  };
+                                  print(dataS);
 
-                                      _controller.listImgProduits.forEach((e) {
-                                        dataS.addAll({
-                                          "file${_controller.listImgProduits.indexOf(e)}":
-                                              MultipartFile(
-                                            e.path,
-                                            filename: "Image.jpg",
-                                          )
-                                        });
-                                      });
-                                      FormData data = new FormData(dataS);
+                                  _controller.listImgProduits.forEach((e) {
+                                    dataS.addAll({
+                                      "file${_controller.listImgProduits.indexOf(e)}":
+                                          MultipartFile(
+                                        e.path,
+                                        filename: "Image.jpg",
+                                      )
+                                    });
+                                  });
+                                  FormData data = new FormData(dataS);
 
-                                      await _controller.addProduit(data);
-                                      // _controller.chageState(!_controller.addProduct);
-                                    },
-                                  )
-                                ])),
-                      ],
-                    ))),
-          ])));
+                                  await _controller.addProduit(data);
+                                  // _controller.chageState(!_controller.addProduct);
+                                },
+                              )
+                            ])),
+                  ],
+                ))),
+      ]));
     });
   }
 }

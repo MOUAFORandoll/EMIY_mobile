@@ -14,7 +14,7 @@ class AppButton extends StatelessWidget {
   AppButton({
     Key? key,
     required this.text,
-    this.bgColor = ColorsApp.blue,
+    this.bgColor = ColorsApp.black,
     this.textColor = Colors.white,
     this.onTap,
     this.leading,
@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
       onTap: disabled ? null : onTap,
       child: Container(
         constraints:
-            BoxConstraints(minHeight: kHeight / 15, minWidth: kWidth / 5),
+            BoxConstraints(minHeight: kHeight / 17, minWidth: kWidth / 5),
         padding: EdgeInsets.symmetric(horizontal: kMarginX),
         decoration: BoxDecoration(
             boxShadow: [

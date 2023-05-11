@@ -1,4 +1,5 @@
 import 'package:Fahkap/components/Button/app_button.dart';
+import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/controller/searchController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -22,6 +23,7 @@ import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rating_bar/rating_bar.dart';
 
 class ProductView extends StatelessWidget {
   final int index;
@@ -182,7 +184,15 @@ class ProductView extends StatelessWidget {
                                               "assets/images/error.gif"));
                                     },
                                   ),
-                                  onTap: () async {})))
+                                  onTap: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ImageScreen(
+                                            imagePath: product.images[i].src),
+                                      ),
+                                    );
+                                  })))
                     ])),
                     bottom: PreferredSize(
                       preferredSize: Size.fromHeight(20),
@@ -250,22 +260,89 @@ class ProductView extends StatelessWidget {
                                         text: product.titre, bolder: true),
                                     BigtitleText(
                                         text: 'XAF ' + product.prix.toString(),
-                                        color: ColorsApp.orange,
+                                        color: ColorsApp.black,
                                         bolder: true),
                                   ]),
                               Container(
                                   margin: EdgeInsets.only(top: 2, left: 3),
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: ColorsApp.orange,
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: ColorsApp.orange,
+                                          ),
+                                          BigtitleText(
+                                              size: 12,
+                                              color: ColorsApp.black,
+                                              text:
+                                                  product.quantite.toString() +
+                                                      ' Pieces disponible: ')
+                                        ],
                                       ),
-                                      BigtitleText(
-                                          size: 12,
-                                          color: ColorsApp.orange,
-                                          text: product.quantite.toString() +
-                                              ' Pieces disponible: ')
+                                      InkWell(
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.star,
+                                                color: ColorsApp.orange,
+                                              ),
+                                              BigtitleText(
+                                                  size: 12,
+                                                  color: ColorsApp.black,
+                                                  text: product.note.toString())
+                                            ],
+                                          ),
+                                          onTap: () {
+                                            Get.bottomSheet(Container(
+                                                decoration: BoxDecoration(
+                                                    color: ColorsApp.grey,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(15),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    15))),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: kSmWidth * .07),
+                                                height: 800,
+                                                child: SingleChildScrollView(
+                                                    child: Column(
+                                                        // mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                      RatingBar(
+                                                        initialRating:
+                                                            product.note,
+                                                        filledIcon: Icons.star,
+                                                        emptyIcon:
+                                                            Icons.star_border,
+                                                        halfFilledIcon:
+                                                            Icons.star_half,
+                                                        isHalfAllowed: true,
+                                                        filledColor:
+                                                            Colors.yellow,
+                                                        emptyColor:
+                                                            Colors.yellow,
+                                                        halfFilledColor:
+                                                            Colors.yellow,
+                                                        size: 30,
+                                                        onRatingChanged:
+                                                            (double rating) {
+                                                          print(rating);
+                                                          Get.find<
+                                                                  ActionController>()
+                                                              .notationProduit(
+                                                                  rating,
+                                                                  product
+                                                                      .codeProduit);
+                                                        },
+                                                      ),
+                                                    ]))));
+                                          })
                                     ],
                                   )),
                               Container(
@@ -279,7 +356,7 @@ class ProductView extends StatelessWidget {
                                   child: Text(product.description,
                                       textAlign: TextAlign.justify,
                                       style: TextStyle(
-                                          color: ColorsApp.greySearch,
+                                          color: ColorsApp.black,
                                           fontSize: 12)))
                             ])),
                   ),
@@ -298,7 +375,6 @@ class ProductView extends StatelessWidget {
                       child: prod.conf == false
                           ? AppButton(
                               size: MainAxisSize.max,
-                              bgColor: ColorsApp.orange,
                               text:
                                   prod.exitP(product) ? "Augmenter" : 'Ajouter',
                               onTap: () {
@@ -388,5 +464,62 @@ class ProductView extends StatelessWidget {
                 );
               }),
             )));
+  }
+}
+
+class ImageScreen extends StatelessWidget {
+  final String imagePath;
+
+  ImageScreen({required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor:
+          ColorsApp.greyFirst, // Fond noir pour l'effet d'agrandissement
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context); // Ferme l'écran d'image agrandie lors du clic
+        },
+        child: Center(
+          child: Hero(
+            tag: 'imageTag',
+            child: CachedNetworkImage(
+              height: kHeight,
+              width: kWidth,
+              fit: BoxFit.contain,
+              imageUrl: imagePath,
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                );
+              },
+              placeholder: (context, url) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: ColorsApp.greySecond,
+                  ),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: ColorsApp.skyBlue,
+                  )),
+                );
+              },
+              errorWidget: (context, url, error) {
+                return CircleAvatar(
+                    backgroundColor: ColorsApp.skyBlue,
+                    radius: 50,
+                    backgroundImage: AssetImage("assets/images/error.gif"));
+              },
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

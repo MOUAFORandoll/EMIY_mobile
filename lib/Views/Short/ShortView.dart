@@ -1,5 +1,6 @@
 import 'package:Fahkap/components/Button/IconButtonF.dart';
 import 'package:Fahkap/components/ShortComponent/shortAction.dart';
+import 'package:Fahkap/components/Widget/app_empty.dart';
 import 'package:Fahkap/controller/ShortController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
@@ -26,15 +27,16 @@ class _ShortViewState extends State<ShortView> {
                   width: Get.width,
                   child: _ShortController.isLoadedP == 0
                       ? Container(
-                          child: SpinKitCircle(
-                            color: Colors.blue,
-                            size: 40,
+                          child: SpinKitRing(
+                            lineWidth: 4,
+                            color: ColorsApp.skyBlue,
+                            size: 45,
                           ),
                         )
                       : _ShortController.listShort.length == 0
                           ? Container(
-                              child: Text('Aucun Short'),
-                            )
+                              height: kHeight,
+                              child: AppEmpty(title: 'Aucun Short'))
                           : ShortViewF()),
               Positioned(
                   top: 30,
@@ -50,9 +52,10 @@ class _ShortViewState extends State<ShortView> {
                   ))),
               _ShortController.isLoadedP == 0
                   ? Container(
-                      child: SpinKitCircle(
-                        color: Colors.blue,
-                        size: 40,
+                      child: SpinKitRing(
+                        lineWidth: 4,
+                        color: ColorsApp.skyBlue,
+                        size: 45,
                       ),
                     )
                   : Positioned(
@@ -68,6 +71,8 @@ class _ShortViewState extends State<ShortView> {
     });
   }
 }
+
+
 
 class ShortViewF extends StatefulWidget {
   // final List<String> videoUrls;
@@ -92,8 +97,7 @@ class _ShortViewFState extends State<ShortViewF> {
   //   'https://www.youtube.com/watch?v=_voM01HKp4E',
   //   'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
   // ];
-  ShortController short = Get.find();
-  List<VideoPlayerController> _ListController = [];
+  ShortController short = Get.find(); 
   double position = 0.0;
   @override
   void initState() {
@@ -101,57 +105,24 @@ class _ShortViewFState extends State<ShortViewF> {
     _pageController = PageController(initialPage: 0);
     print('**********************short.listShort');
     Get.find<ShortController>().changeVideo(0);
-    // if (mounted) {
-    //
-    //   // print(short.listShort);
-    //   Get.find<ShortController>().controller!.addListener(() {
-    //     print('0000');
-    //     setState(() {
-    //       position = Get.find<ShortController>()
-    //               .controller!
-    //               .value
-    //               .position
-    //               .inSeconds
-    //               .toDouble() /
-    //           Get.find<ShortController>()
-    //               .controller!
-    //               .value
-    //               .duration
-    //               .inSeconds
-    //               .toDouble();
-    //     });
-    //     print(
-    //       'poition******${position}',
-    //     );
-    //     if (position == 1) {
-    //       Get.find<ShortController>()
-    //           .changeVideo(Get.find<ShortController>().currentShort + 1);
-    //       print(
-    //         'ici***************',
-    //       );
-    //     }
-    //   });
-    // }
+    // _initializeVideoPlayer('https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4');
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-    // if (Get.find<ShortController>().controller!.value.isInitialized) {
-    // if (mounted) {
-    //   Get.find<ShortController>().controller!.dispose();
-    // }
+    
     super.dispose();
   }
 
   void _initializeVideoPlayer(String url) async {
     print(url);
-    // if (_videoPlayerController != null) {
-    //   if (_videoPlayerController.value.isPlaying) {
-    //     print('********');
-    //     _videoPlayerController.dispose();
-    //   }
-    // }
+    if (_videoPlayerController != null) {
+      if (_videoPlayerController.value.isPlaying) {
+        print('********');
+        _videoPlayerController.dispose();
+      }
+    }
     _videoPlayerController = VideoPlayerController.network(url)
       ..initialize().then((_) {
         if (widget.autoPlay) {
@@ -179,9 +150,7 @@ class _ShortViewFState extends State<ShortViewF> {
               print(index);
               print(_ShortController.listShort[index].src);
               index = index % (_ShortController.listShort.length);
-              // _videoPlayerController.pause();
-              // _videoPlayerController.seekTo(Duration.zero);
-              // _ShortController.controller!.dispose();
+             
               if (_ShortController.controller!.value.isInitialized) {
                 _ShortController.controller!.dispose();
               }
@@ -248,29 +217,13 @@ class _ShortViewFState extends State<ShortViewF> {
                               ),
                             ),
                           )
-                          // Positioned(
-                          //     bottom: 0.0,
-                          //     left: 0.0,
-                          //     right: 0.0,
-                          //     child: Padding(
-                          //       padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          //       child: Slider(
-                          //         min: 0.0,
-                          //         max: 1.0,
-                          //         value:
-                          //             _ShortController.progressValue.toDouble(),
-                          //         onChanged: (double value) {
-                          //           _ShortController.changeVideoSlide(value);
-                          //         },
-                          //         activeColor: Colors.white,
-                          //         inactiveColor: Colors.grey[700],
-                          //       ),
-                          //     )),
+                        
                         ]))
                       : Container(
-                          child: SpinKitCircle(
-                            color: Colors.blue,
-                            size: 40,
+                          child: SpinKitRing(
+                            lineWidth: 4,
+                            color: ColorsApp.skyBlue,
+                            size: 45,
                           ),
                         ),
                 ),

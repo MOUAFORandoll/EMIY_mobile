@@ -16,7 +16,6 @@ class SvgIcon extends StatelessWidget {
                 icon,
                 width: width,
                 height: height,
-                color: ColorsApp.orange,
               )
             : null);
   }

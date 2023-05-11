@@ -19,6 +19,7 @@ class KTextField extends StatelessWidget {
   final prefix;
   final String? type;
   Function? onChange;
+  var onTap;
   final double? dim;
   bool isCode;
 
@@ -30,6 +31,7 @@ class KTextField extends StatelessWidget {
       this.type,
       this.dim,
       this.isCode = false,
+      this.onTap,
       this.onChange})
       : super(key: key);
 
@@ -57,7 +59,7 @@ class KTextField extends StatelessWidget {
         ),
 
         height: kToolbarHeight / 1.7,
-        width: kMdWidth * 2,
+        // width: kMdWidth * 2,
         // padding: EdgeInsets.symmetric(horizontal: 10),
         child: TextField(
           onChanged: (String value) {
@@ -95,8 +97,15 @@ class KTextField extends StatelessWidget {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.zero,
             ),
-            
-            contentPadding: EdgeInsets.symmetric(vertical: 10),
+            suffixIcon: Container(
+                child: InkWell(
+                    child: Icon(
+                      Icons.close,
+                      color: ColorsApp.red,
+                    ),
+                    onTap: onTap)),
+            contentPadding: EdgeInsets.symmetric(vertical: 10)
+                .add(EdgeInsets.only(left: kMarginX)),
             hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
           ),
         ),

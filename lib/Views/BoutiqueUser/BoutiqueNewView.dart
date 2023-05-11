@@ -229,7 +229,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                                     // keyboardType: type,
                                     // obscureText: obscureText!,
                                     // maxLengthEnforced: false,
-                                    maxLength: 10,
+
                                     maxLines: 10,
                                     decoration: new InputDecoration(
                                       fillColor: ColorsApp.skyBlue,
@@ -357,7 +357,6 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                                 await _controller.newBoutique(data);
                                 if (_controller.isOk) {
                                   // Get.offNamedUntil(AppLinks.FIRST, (route) => false);
-
                                 }
                               }),
                           // Center(

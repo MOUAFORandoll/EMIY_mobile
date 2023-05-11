@@ -2,6 +2,8 @@ import 'package:Fahkap/Views/Home/SearchView.dart';
 import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/constants/assets.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:Fahkap/Views/ComplementView/AboutUsView.dart';
@@ -19,6 +21,7 @@ import 'package:Fahkap/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
@@ -142,51 +145,120 @@ class _FirstScreenState extends State<FirstScreen> {
         selectedColor: Color(0xff0c18fb),
         strokeColor: Color(0x300c18fb),
         unSelectedColor: Colors.grey[600],
-        backgroundColor: Colors.black,
+        backgroundColor: ColorsApp.greySearch,
         // borderRadius: Radius.circular(15.0),
         // isFloating: true,
         // blurEffect: true,
         items: [
           CustomNavigationBarItem(
-              icon: Icon(Icons.home),
-              // badgeCount: _badgeCounts[0],
-              // showBadge: _badgeShows[0],
-              title: Text('home', style: TextStyle(color: Colors.grey[600]))),
-          // CustomNavigationBarItem(
-          //   icon: Icon(Icons.search),
-          //   badgeCount: _badgeCounts[3],
-          //   showBadge: _badgeShows[3],
-          // ),
-          // CustomNavigationBarItem(
-          //   icon: Icon(Icons.leave_bags_at_home),
-          //   // badgeCount: _badgeCounts[2],
-          //   // showBadge: _badgeShows[2],
-          // ),
+              icon: Container(
+                height: kSmHeight,
+                width: kSmWidth / 4.2,
+                child: SvgPicture.asset(
+                  Assets.home,
+                  width: 90,
+                  height: 90,
+                  color: _currentIndex == 0 ? ColorsApp.black : ColorsApp.grey,
+                ),
+              ),
+              title: Container(
+                  padding: EdgeInsets.only(bottom: 3),
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: _currentIndex == 0
+                              ? BorderSide(color: ColorsApp.black, width: 2)
+                              : BorderSide.none,
+                          top: BorderSide.none)),
+                  child: Text('home'.tr,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: _currentIndex == 0
+                            ? ColorsApp.black
+                            : ColorsApp.grey,
+                      )))), // CustomNavigationBarItem(
+
           CustomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.bars,
-              size: 25,
+            icon: Container(
+              height: kSmHeight,
+              width: kSmWidth / 4.2,
+              child: SvgPicture.asset(
+                Assets.grid1,
+                width: 80,
+                height: 80,
+                color: _currentIndex == 1 ? ColorsApp.black : ColorsApp.grey,
+              ),
             ),
-            title: Text('Category', style: TextStyle(color: Colors.grey[600])),
-
-            // badgeCount: _badgeCounts[2],
-            // showBadge: _badgeShows[2],
+            title: Container(
+                padding: EdgeInsets.only(bottom: 3),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: _currentIndex == 1
+                            ? BorderSide(color: ColorsApp.black, width: 2)
+                            : BorderSide.none,
+                        top: BorderSide.none)),
+                child: Text('categories'.tr,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color:
+                          _currentIndex == 1 ? ColorsApp.black : ColorsApp.grey,
+                    ))),
           ),
-          // CustomNavigationBarItem(
-          //   icon: Icon(Icons.search),
-          //   // badgeCount: _badgeCounts[2],
-          //   title: Text('Search', style: TextStyle(color: Colors.grey[600])),
-          //   // showBadge: _badgeShows[2],
-          // ),
+
           CustomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.shoppingCart),
-            title: Text('Shop', style: TextStyle(color: Colors.grey[600])),
-          
+            icon: Container(
+              height: kSmHeight,
+              width: kSmWidth / 4.2,
+              child: SvgPicture.asset(
+                Assets.shoppingCart,
+                width: 90,
+                height: 90,
+                color: _currentIndex == 2 ? ColorsApp.black : ColorsApp.grey,
+              ),
+            ),
+            title: Container(
+                padding: EdgeInsets.only(bottom: 3),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: _currentIndex == 2
+                            ? BorderSide(color: ColorsApp.black, width: 2)
+                            : BorderSide.none,
+                        top: BorderSide.none)),
+                child: Text('Shop',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color:
+                          _currentIndex == 2 ? ColorsApp.black : ColorsApp.grey,
+                    ))),
           ),
 
           CustomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('setting', style: TextStyle(color: Colors.grey[600])),
+            icon: Container(
+              height: kSmHeight,
+              width: kSmWidth / 4.2,
+              child: Icon(
+                Icons.settings,
+                size: 25,
+                color: _currentIndex == 3 ? ColorsApp.black : ColorsApp.grey,
+              ),
+            ),
+            title: Container(
+                padding: EdgeInsets.only(bottom: 3),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: _currentIndex == 3
+                            ? BorderSide(color: ColorsApp.black, width: 2)
+                            : BorderSide.none,
+                        top: BorderSide.none)),
+                child: Text('setting'.tr,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color:
+                          _currentIndex == 3 ? ColorsApp.black : ColorsApp.grey,
+                    ))),
 
             // badgeCount: _badgeCounts[4],
             // showBadge: _badgeShows[4],

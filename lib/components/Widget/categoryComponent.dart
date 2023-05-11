@@ -26,11 +26,11 @@ class CategoryComponent extends StatelessWidget {
           padding: EdgeInsets.all(kMarginX / 2),
           margin: EdgeInsets.only(right: kMarginX),
           decoration: BoxDecoration(
-              border: Border.all(color: ColorsApp.greySearch),
+              border: Border.all(color: ColorsApp.greyFirst),
               borderRadius: BorderRadius.circular(8)),
           child: Text(category.libelle,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: ColorsApp.greySearch, fontSize: 12)),
+              style: TextStyle(color: ColorsApp.greyFirst, fontSize: 12)),
         ));
   }
 }

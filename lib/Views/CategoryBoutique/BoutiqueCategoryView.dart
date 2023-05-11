@@ -7,6 +7,8 @@ import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
 import 'package:Fahkap/components/Widget/BoutiqueComponent.dart';
 import 'package:Fahkap/components/Widget/app_back_button.dart';
+import 'package:Fahkap/components/Widget/app_empty.dart';
+import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/productComponent.dart';
@@ -81,96 +83,27 @@ class BoutiqueCategoryView extends StatelessWidget {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) => GetBuilder<CategoryBoutiqueController>(
-                builder: (_lbcontroller) => _lbcontroller.isLoadedP == 0
-                    ? Shimmer.fromColors(
-                        baseColor: Colors.blueGrey,
-                        highlightColor: Colors.greenAccent,
-                        child: SizedBox(
-                          height: kMdHeight,
-                          child: Stack(
-                            children: [
-                              GridView.builder(
-                                padding: const EdgeInsets.all(20),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        crossAxisSpacing: 20.0,
-                                        mainAxisSpacing: 50.0),
-                                itemCount: 10,
-                                itemBuilder: (_ctx, index) => Container(
-                                  height: kMdHeight * 2,
-                                  width: kMdWidth * 1.1,
-                                  margin: EdgeInsets.only(right: kMarginX),
-                                  decoration: BoxDecoration(
-                                      color: ColorsApp.greySecond,
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                            height: kMdHeight * .115,
-                                            width: Get.width * .5,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                              image:
-                                                  AssetImage('assets/logo.png'),
-                                            ))),
-                                        Container(
-                                          width: kSmWidth * .6,
-                                          margin: EdgeInsets.only(
-                                              top: Get.height * .005,
-                                              left: Get.width * .008),
-                                          child: Text('produit.titre',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: ColorsApp.black,
-                                                  fontSize: 12)),
-                                        ),
-                                        // Container(
-                                        //   width: kSmWidth * .6,
-                                        //   margin: EdgeInsets.only(
-                                        //       top: Get.height * .005,
-                                        //       left: Get.width * .008),
-                                        //   child: Text('XAF ' + '1000',
-                                        //       overflow: TextOverflow.ellipsis,
-                                        //       style: TextStyle(
-                                        //           color: Colors.red,
-                                        //           fontSize: 12,
-                                        //           fontWeight: FontWeight.bold)),
-                                        // ),
-                                      ]),
-                                ),
-                              )
-                            ],
-                          ),
-                        ))
-                    : (_lbcontroller.ListBoutique.length != 0)
-                        ? SingleChildScrollView(
-                            child: GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: kMarginX),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        crossAxisSpacing: 20.0,
-                                        childAspectRatio: 0.8,
-                                        mainAxisSpacing: 20.0),
-                                itemCount: _lbcontroller.ListBoutique.length,
-                                itemBuilder: (_ctx, index) => BoutiqueComponent(
-                                      boutique:
-                                          _lbcontroller.ListBoutique[index],
-                                    )))
-                        : Container(
-                            height: kMdHeight * .6,
-                            alignment: Alignment.center,
-                            child: Center(
-                              child: Text('Aucune boutique'),
-                            ))),
+              builder: (_lbcontroller) => _lbcontroller.isLoadedP == 0
+                  ? AppLoading()
+                  : (_lbcontroller.ListBoutique.length != 0)
+                      ? SingleChildScrollView(
+                          child: GridView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kMarginX),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 20.0,
+                                      childAspectRatio: 0.8,
+                                      mainAxisSpacing: 20.0),
+                              itemCount: _lbcontroller.ListBoutique.length,
+                              itemBuilder: (_ctx, index) => BoutiqueComponent(
+                                    boutique: _lbcontroller.ListBoutique[index],
+                                  )))
+                      : AppEmpty(title: 'Aucune boutique'),
+            ),
 
             // Builds 1000 ListTiles
             childCount: 1,

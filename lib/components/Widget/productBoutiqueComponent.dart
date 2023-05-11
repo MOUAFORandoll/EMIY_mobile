@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:Fahkap/components/Widget/app_input.dart';
 import 'package:Fahkap/components/Widget/imageComp.dart';
 import 'package:Fahkap/components/Widget/imageCompAdd.dart';
 import 'package:Fahkap/components/Widget/imageCompUpdate.dart';
@@ -16,6 +17,8 @@ import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:get/get.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/Services/validators.dart';
 
 // ignore: must_be_immutable
 class ProductBoutiqueComponent extends StatelessWidget {
@@ -45,7 +48,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                 margin: EdgeInsets.symmetric(
                     horizontal: kMarginX, vertical: kMarginY),
                 decoration: BoxDecoration(
-                    gradient: GradientApp.blueG,
+                    color: ColorsApp.grey, // gradient: GradientApp.blueG,
                     borderRadius: BorderRadius.circular(8)),
                 child: /* SingleChildScrollView(
               child: */
@@ -103,8 +106,8 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12)),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 11)),
                               ),
                               Container(
                                 child: Text(
@@ -114,7 +117,8 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontWeight: FontWeight.bold)),
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600)),
                               ),
                               Container(
                                 child: Text(
@@ -122,14 +126,16 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontWeight: FontWeight.bold)),
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600)),
                               ),
                               Container(
                                 child: Text('Ajout : ' + produit.date,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontWeight: FontWeight.bold)),
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600)),
                               ),
                               // Container(
                               //   // width: kSmWidth * .6,
@@ -141,7 +147,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                               //           decorationThickness: 2.85,
                               //           color: Colors.black,
                               //           fontSize: 12,
-                              //           fontWeight: FontWeight.bold)),
+                              //           fontWeight: FontWeight.w600)),
                               // )
                             ],
                           )),
@@ -185,86 +191,90 @@ class ProductBoutiqueComponent extends StatelessWidget {
                               ),
                             )
                           : Container(),
-                      FormComponent2(
-                          icon: Icons.account_circle,
-                          type: 0,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: kMarginY,
+                        ),
+                        child: AppInput(
                           controller: titre,
-                          enabled: true,
-                          titre: 'Nom du produit',
-                          hint: "Iphone 11"),
-                      FormComponent2(
-                          icon: Icons.account_circle,
-                          type: 0,
-                          controller: quantite,
-                          enabled: true,
-                          titre: 'Quantite',
-                          kType: TextInputType.number,
-                          hint: "10"),
-                      FormComponent2(
-                          icon: Icons.account_circle,
-                          type: 0,
-                          controller: prix,
-                          kType: TextInputType.number,
-                          enabled: true,
-                          titre: 'Prix',
-                          hint: "1500"),
-                      // CommentForm(
-                      //   titre: 'Description',
-                      //   controller: description,
-                      //   width: kMdWidth * 4,
-                      // ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        margin: EdgeInsets.symmetric(vertical: 5),
-                        child: Text('Description'),
+                          label: 'lbnameprod'.tr,
+                          validator: (value) {
+                            return Validators.isValidUsername(value!);
+                          },
+                        ),
                       ),
-                      TextFormField(
-                        onChanged: (String value) {
-                          // if (onChange != null) onChange!(value);
-                        },
-                        controller: description,
-                        validator: (value) {
-                          return value!.isEmpty
-                              ? "veillez remplir se champs"
-                              : null;
-                        },
-                        // keyboardType: type,
-                        // obscureText: obscureText!,
-                       
-                        maxLength: 10,
-                        maxLines: 10,
-                        decoration: new InputDecoration(
-                          fillColor: ColorsApp.skyBlue,
-                          counter: Offstage(),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
-                                color: ColorsApp.grey,
-                              )),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: ColorsApp.skyBlue,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: kMarginY,
+                        ),
+                        child: AppInput(
+                          controller: quantite,
+                          label: 'lbnqteprod'.tr,
+                          validator: (value) {
+                            return Validators.usNumeriqValid(value!);
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: kMarginY,
+                        ),
+                        child: AppInput(
+                          controller: prix,
+                          label: 'lbprixprod'.tr,
+                          validator: (value) {
+                            return Validators.usNumeriqValid(value!);
+                          },
+                        ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: kMarginY,
+                        ),
+                        child: TextFormField(
+                          onChanged: (String value) {
+                            // if (onChange != null) onChange!(value);
+                          },
+                          controller: description,
+                          validator: (value) {
+                            return value!.isEmpty
+                                ? "veillez remplir se champs"
+                                : null;
+                          },
+                          // keyboardType: type,
+                          // obscureText: obscureText!,
+
+                          maxLines: 10,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorsApp.orange, width: 2),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            border: OutlineInputBorder(
+                              //  borderSide : BorderSide(color:Colors.blue,width: 3),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            errorStyle: TextStyle(
+                              fontSize: 8,
+                              fontFamily: 'Montserrat',
+                            ),
+                            labelStyle: TextStyle(
+                              color: ColorsApp.orange, fontFamily: 'Montserrat',
+                              // fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                            ),
+                            labelText: 'lbdescprod'.tr,
+                            fillColor: ColorsApp.skyBlue,
+                            counter: Offstage(),
+                            hintText: 'lbdescprod'.tr,
+                            alignLabelWithHint: true,
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'orkney',
                             ),
                           ),
-                          contentPadding: EdgeInsets.only(
-                            left: 12,
-                            bottom: 10,
-                            top: 10,
-                            right: 12,
-                          ),
-                          hintText: 'Entrer une description',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontFamily: 'orkney',
-                          ),
-                          // suffixIcon: InkWell(
-                          //   onTap: () => onTap,
-                          //   child: Icon(
-                          //     icon,
-                          //     color: Colors.grey,
-                          //   ),
-                          // ),
                         ),
                       ),
 

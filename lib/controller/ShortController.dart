@@ -45,23 +45,17 @@ class ShortController extends GetxController {
   }
 
   changeVideo(index) async {
+    // listShort[index].controller.initialize();
+    print('---------------------');
     _initialise = false;
     // update();
     // ignore: unnecessary_null_comparison
     // if (listShort[index].controller == null) {
-    await listShort[index].loadController();
+    listShort[index].loadController();
     // }
     // changeVideoSlide(0.0);
-    controller = listShort[index].controller!;
-    // chewieController = ChewieController(
-    //   videoPlayerController: controller!,
-    //   autoPlay: true,
-    //   looping: true,
-    //   allowMuting: false,
-    //   allowPlaybackSpeedChanging: false,
-    //   showControlsOnInitialize: false,
-    //   showOptions: false,
-    // );
+    controller = listShort[index].controller;
+
     controller!.play();
     _initialise = true;
     update();

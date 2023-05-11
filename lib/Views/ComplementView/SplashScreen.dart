@@ -16,7 +16,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:Fahkap/views/UsersMange/LoginScreen.dart'; 
+import 'package:Fahkap/views/UsersMange/LoginScreen.dart';
 import 'dart:async';
 
 class SplashScreenPage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
       Get.offNamedUntil(AppLinks.ONBOARDING, (route) => false);
       Get.find<ManagerController>().chageN(false);
 
-      MyBinding().onGetAll();
+      // MyBinding().onGetAll();
     });
   }
 
@@ -46,11 +46,11 @@ class _SplashScreenPageState extends State<SplashScreenPage>
     super.initState();
     start();
   }
-  
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ColorsApp.blue,
         body: Container(
             alignment: Alignment.center,
             child: new Column(
@@ -63,9 +63,10 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                       Container(child: Image.asset(Assets.logo)),
                       Container(
                         padding: EdgeInsets.only(top: kMdHeight / 4),
-                        child: SpinKitCircle(
-                          color: Colors.blue,
-                          size: 40,
+                        child: SpinKitRing(
+                          lineWidth: 4,
+                          color: ColorsApp.skyBlue,
+                          size: 45,
                         ),
                       ),
                     ],

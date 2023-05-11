@@ -33,7 +33,7 @@ class AppTitleRight extends StatelessWidget {
                       icon,
                       width: 18,
                       height: 18,
-                      color: ColorsApp.orange,
+                      color: ColorsApp.black,
                     )
                   : null),
         ],
