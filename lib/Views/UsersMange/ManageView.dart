@@ -23,6 +23,9 @@ import 'package:Fahkap/components/Widget/infoComponent.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '../../utils/functions/viewFunctions.dart';
+
 // ignore: must_be_immutable
 class ManageView extends StatelessWidget {
   ScrollController _scrollController = new ScrollController();
@@ -118,10 +121,10 @@ class ManageView extends StatelessWidget {
                   title: 'Parrainage',
                   icon: Assets.bagmoney,
                   onTap: () {
-                  
+                    ViewFunctions().showIndisponible();
                     // Get.toNamed(AppLinks.COMMANDE_FOR_USER);
-                    Share.share('check out my website https://example.com',
-                        subject: 'Look what I made!');
+                    // Share.share('check out my website https://example.com',
+                    //     subject: 'Look what I made!');
                   }),
             ],
           )),

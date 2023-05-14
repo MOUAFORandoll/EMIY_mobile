@@ -1,3 +1,4 @@
+import 'package:Fahkap/Views/Shopping/PaiementView.dart';
 import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/controller/cartController.dart';
@@ -13,13 +14,16 @@ import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class BuyShopController extends GetxController {
   final BuyShoopingCartRepo buySoppingCartRepo;
   BuyShopController({required this.buySoppingCartRepo});
-
+  String _paiementUrl = '';
+  get paiementUrl => _paiementUrl;
   final service = new ApiService();
   LivreurRepo livreurRepo = Get.find();
   CommandeController commande = Get.find();
@@ -95,9 +99,12 @@ class BuyShopController extends GetxController {
             'idModePaiement': mode,
             // 'idLivreur': _Bcontroller.isLivreur,
             'listProduits': produits,
-            'ville': user.ville,
-            'longitude': user.longitude,
-            'latitude': user.latitude,
+            // 'ville': user.ville,
+            // 'longitude': user.longitude,
+            // 'latitude': user.latitude,
+            'ville': "user.ville",
+            'longitude': "1.01",
+            'latitude': "12.5",
           };
 
     print(data);
@@ -110,23 +117,34 @@ class BuyShopController extends GetxController {
             // height: Get.size.height * .02,
             // width: Get.size.width * .02,
             child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+          child: SpinKitRing(
+            lineWidth: 4,
+            color: ColorsApp.skyBlue,
+            size: 45,
+          ),
+        )));
     try {
       Response response = await buySoppingCartRepo.buyCart(data);
       print(response.body);
 
-      commande.saveCommande(response.body['id'], response.body['codeCommande'],
-          response.body['codeClient'], response.body['date']);
       Get.back();
-      fn.snackBar('Achat', response.body['message'], true);
-
+      // fn.snackBar('Achat', response.body['message'], true);
+      print(response.body);
       _isOk = response.body['status'];
-      if (response.statusCode == 200 && _isOk) {
-        await downloadFacture(response.body['pdf']);
-        fn.snackBar('Achat',
-            'Votre facture a ete energistre dans votre telephone', true);
+      if (response.statusCode == 201 && _isOk) {
+        _paiementUrl = response.body['url'];
+        update();
+        print(_paiementUrl);
+        await Get.bottomSheet(PaiementView());
+        print('dssdsd');
+        commande.saveCommande(
+            response.body['id'],
+            response.body['codeCommande'],
+            response.body['codeClient'],
+            response.body['date']);
+        // await downloadFacture(response.body['pdf']);
+        // fn.snackBar('Achat',
+        //     'Votre facture a ete energistre dans votre telephone', true);
       }
       Get.find<CommandeController>().getListCommandes();
 

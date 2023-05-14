@@ -171,6 +171,30 @@ Future<void> _checkInternetConnection() async {
         backgroundColor: Colors.white);
   }
 
+  showIndisponible() {
+    Color? color =  Colors.green ;
+   
+    Get.snackbar(
+          'fonctionnalite',
+        'Bientot disponible...',
+        icon: Icon(
+           Icons.warning,
+          color: color,
+        ),
+        borderRadius: 5,
+        isDismissible: true,
+        onTap: (getBar) {},
+        snackPosition: SnackPosition.TOP,
+        duration:
+           const Duration(seconds:2) ,
+        barBlur: 20,
+        shouldIconPulse: true,
+        maxWidth: 450,
+        snackStyle: SnackStyle.GROUNDED,
+        leftBarIndicatorColor: color,
+        backgroundColor: Colors.white);
+  }
+
   GetStorage box = GetStorage();
 
   getTheme(context) {

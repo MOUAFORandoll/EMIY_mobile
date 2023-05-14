@@ -654,22 +654,7 @@ class BuyShoopingCart extends StatelessWidget {
                                       color: ColorsApp.greenLight,
                                       title: 'Terminer',
                                       onTap: () async {
-                                        await Get.bottomSheet(PaiementView());
-                                        // Get.toNamed(AppLinks.BUYVIEW);
-                                        // var user = Get.find<ManagerController>();
-                                        // var data = {
-                                        //   'nom': nom.text,
-                                        //   'prenom': prenom.text,
-                                        //   'phone': phone.text,
-                                        //   'idModePaiement': 1,
-                                        //   // 'idLivreur': _Bcontroller.isLivreur,
-                                        //   'listProduits': _controller.getListPinCart(),
-                                        //   'ville': user.ville,
-                                        //   'longitude': user.longitude,
-                                        //   'latitude': user.latitude,
-                                        // };
-                                        // print(data);
-                                        // await _Bcontroller.buyCart(data);
+                                        await _Bcontroller.buyCart();
                                       },
                                     )
                                   ]))),

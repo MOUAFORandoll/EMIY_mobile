@@ -31,82 +31,56 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-class Test extends StatelessWidget {
-  final VideoController controller = Get.put(VideoController());
+class Test extends StatefulWidget {
+  @override
+  State<Test> createState() => _TestState();
+}
 
+class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('Video Player'),
+    //   ),
+    //   body: GetBuilder<VideoController>(
+    //     init: controller,
+    //     builder: (_) {
+    //       return Center(
+    //         child: _.videoPlayerController.value.isInitialized
+    //             ? AspectRatio(
+    //                 aspectRatio: _.videoPlayerController.value.aspectRatio,
+    //                 child: VideoPlayer(_.videoPlayerController),
+    //               )
+    //             : CircularProgressIndicator(),
+    //       );
+    //     },
+    //   ),
+    //   floatingActionButton: FloatingActionButton(
+    //     onPressed: () => controller.changeVideo(),
+    //     child: Icon(Icons.skip_next),
+    //   ),
+    // );
+    void initState() {
+      super.initState();
+      // Enable hybrid composition.
+      if (Platform.isWindows) WebView.platform = SurfaceAndroidWebView();
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Video Player'),
+        title: Text('WebView Example'),
       ),
-      body: GetBuilder<VideoController>(
-        init: controller,
-        builder: (_) {
-          return Center(
-            child: _.videoPlayerController.value.isInitialized
-                ? AspectRatio(
-                    aspectRatio: _.videoPlayerController.value.aspectRatio,
-                    child: VideoPlayer(_.videoPlayerController),
-                  )
-                : CircularProgressIndicator(),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.changeVideo(),
-        child: Icon(Icons.skip_next),
+      // body: WebView(
+      //   initialUrl: 'https://example.com', // Replace with your desired URL
+      // ),
+
+      body: WebviewScaffold(
+        url: 'https://google.com', // Replace with your desired URL
       ),
     );
-  }
-}
-
-class VideoModel {
-  final String videoUrl;
-
-  VideoModel({required this.videoUrl});
-}
-
-class VideoController extends GetxController {
-  late VideoPlayerController videoPlayerController;
-  late List<VideoModel> videoList;
-  int currentIndex = 0;
-
-  @override
-  void onInit() {
-    super.onInit();
-    videoList = [
-      VideoModel(
-          videoUrl: 'http://127.0.0.1:8000/videos/shorts/produitWxCZH.mp4'),
-      VideoModel(
-          videoUrl: 'http://127.0.0.1:8000/videos/shorts/produitWxCZH.mp4'),
-
-      // Ajoutez d'autres vidéos ici
-    ];
-    loadVideo();
-  }
-
-  void loadVideo() {
-    final videoUrl = videoList[currentIndex].videoUrl;
-    
-    videoPlayerController = VideoPlayerController.network(videoUrl)
-      ..initialize().then((_) {
-        videoPlayerController.play();
-        update();
-      });
-  }
-
-  void changeVideo() {
-    currentIndex = (currentIndex + 1) % videoList.length;
-    videoPlayerController.pause();
-    videoPlayerController.dispose();
-    loadVideo();
-  }
-
-  @override
-  void onClose() {
-    videoPlayerController.dispose();
-    super.onClose();
   }
 }

@@ -18,6 +18,8 @@ import 'package:intl/intl.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:Fahkap/views/UsersMange/LoginScreen.dart';
 import 'dart:async';
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -41,9 +43,29 @@ class _SplashScreenPageState extends State<SplashScreenPage>
     });
   }
 
+  Future<void> initUniLinks() async {
+    try {
+      StreamSubscription _sub ;
+       
+      // Écoutez les liens entrants
+   _sub =   linkStream.listen((uri) {
+        // Traitez les liens entrants ici
+        handleDeepLink(uri);
+      });
+    } on PlatformException {
+      // Gestion des erreurs
+    }
+  }
+
+  void handleDeepLink(uri) {
+    // Votre logique pour traiter les liens entrants
+    // Extrait les informations nécessaires de l'URL
+  }
+
   @override
   void initState() {
     super.initState();
+    initUniLinks();
     start();
   }
 

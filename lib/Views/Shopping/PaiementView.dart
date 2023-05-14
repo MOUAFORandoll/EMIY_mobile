@@ -16,10 +16,19 @@ import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:get/get.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class PaiementView extends StatelessWidget {
+class PaiementView extends StatefulWidget {
   PaiementView({Key? key}) : super(key: key);
+
+  @override
+  State<PaiementView> createState() => _PaiementViewState();
+}
+
+class _PaiementViewState extends State<PaiementView> {
   ScrollController _scrollController = new ScrollController();
 
   @override
@@ -160,28 +169,12 @@ class PaiementView extends StatelessWidget {
                         )
                       ],
                     ))
-                  : SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              InkWell(
-                                  child: Icon(Icons.close,
-                                      color: ColorsApp.greySecond),
-                                  onTap: () => Get.back()),
-                              SizedBox(width: 20),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          BigtitleText0(
-                            text: "Payement mobile",
-                            bolder: true,
-                          ),
-                          SizedBox(height: 20),
-                        ],
-                      ),
-                    )));
+                  :/*  WebView(
+                        initialUrl: _Bcontroller
+                            .paiementUrl, // Replace with your desired URL
+                      ) */ WebviewScaffold(
+        url: _Bcontroller.paiementUrl, // Replace with your desired URL
+      ),));
     });
   }
 }
