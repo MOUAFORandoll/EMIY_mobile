@@ -42,9 +42,12 @@ class CategoryBoutiqueController extends GetxController {
           _categoryList.addAll((response.body['data'] as List)
               .map((e) => CategoryModel.fromJson(e))
               .toList());
+          _isLoadedCat = 1;
+          update();
+        } else {
+          _isLoadedCat = 1;
+          update();
         }
-        _isLoadedCat = 1;
-        update();
       }
       // print(_categoryList);
     } catch (e) {

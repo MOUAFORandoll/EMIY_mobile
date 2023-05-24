@@ -45,18 +45,9 @@ class ProduitForCommande extends StatelessWidget {
                   margin: EdgeInsets.only(right: 15),
                 ),
                 onTap: () async {
-                  Get.defaultDialog(
-                      title: 'En cours',
-                      barrierDismissible: false,
-                      content: SizedBox(
-                          // height: Get.size.height * .02,
-                          // width: Get.size.width * .02,
-                          child: Center(
-                              child: CircularProgressIndicator(
-                        color: Colors.blueAccent,
-                      ))));
+                  
                   await _commande.getProduitForCommandes(id);
-                  Get.back();
+               
                 },
               ),
               InkWell(

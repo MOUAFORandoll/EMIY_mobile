@@ -217,22 +217,16 @@ class ManagerController extends GetxController {
 
   var fn = new ViewFunctions();
   deconnectUser() async {
-    // Get.defaultDialog(
-    //     title: 'En cours',
-    //     barrierDismissible: true,
-    //     content: SizedBox(
-    //         // height: Get.size.height * .02,
-    //         // width: Get.size.width * .02,
-    //         child: Center(
-    //             child: CircularProgressIndicator(
-    //       color: Colors.blueAccent,
-    //     ))));
+    fn.loading('Compte', 'Deconnexion en cours');
+
     Get.find<DB>().deleteAll();
     chageState(0);
 
     Get.find<BoutiqueController>().DeconectBoutique();
-    // Get.back();
-    fn.snackBar('Mise a jour', 'Deconnecte', true);
+    //        fn.closeSnack();
+    fn.closeSnack();
+
+    fn.snackBar('Compte', 'Deconnecte', true);
     _userP = true;
 
     update();
@@ -279,16 +273,8 @@ class ManagerController extends GetxController {
       'email': emailU.text,
     };
     print(data);
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Compte', 'Mise a jour de votre compte en cours');
+
     try {
       Response response = await manageRepo.updateUser(data);
       print(response.body);
@@ -298,15 +284,18 @@ class ManagerController extends GetxController {
         await getUser();
       }
 
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isUpdating = false;
       update();
       print(e);
@@ -327,16 +316,8 @@ class ManagerController extends GetxController {
       'phone': phoneLog.text,
       'password': passwordLog.text,
     };
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Connexion', 'Connexion a votre compte en cours');
+
     try {
       Response response = await manageRepo.Login(data);
 //       print(response.body);
@@ -348,17 +329,23 @@ class ManagerController extends GetxController {
         _isConnected = true;
         // Get.back(closeOverlays: true);
         update(); // await MyBinding().onGetAll();
+        fn.closeSnack();
+      } else {
+        fn.closeSnack();
+
+        fn.snackBar('Connexion', 'Identifiants incorrects', false);
       }
 
-      Get.back();
       // fn.snackBar('Mise a jour', response.body['message'], true);
-      _isConnected = true;
-      // Get.back(closeOverlays: true);
-      update();
+      // _isConnected = true;
+      // // Get.back(closeOverlays: true);
+      // update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Connexion', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isConnected = false;
       update();
       print(e);
@@ -405,16 +392,8 @@ class ManagerController extends GetxController {
       "status": true,
     };
     print(data);
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Inscription', 'Creatoin de votre compte en cours');
+
     try {
       Response response = await manageRepo.SignUp(data);
 //       print(response.body);
@@ -427,15 +406,18 @@ class ManagerController extends GetxController {
         // await MyBinding().onGetAll();
       }
 
-      Get.back();
+      fn.closeSnack();
+
       // fn.snackBar('Mise a jour', response.body['message'], true);
       _isSignUp = true;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Inscription', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isSignUp = false;
       update();
       print(e);

@@ -1,12 +1,13 @@
-import 'package:Fahkap/controller/boutiqueController.dart'; 
-import 'package:carousel_slider/carousel_slider.dart'; 
+import 'package:Fahkap/controller/boutiqueController.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:Fahkap/components/Widget/settingComponent.dart';
-import 'package:Fahkap/controller/ActionController.dart'; 
+import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:flutter/material.dart'; 
-import 'package:get/get.dart'; 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SettingView extends StatelessWidget {
   SettingView({
@@ -129,7 +130,8 @@ class SettingView extends StatelessWidget {
                                 value: actionControl.dark,
                                 onChanged: (val) {
                                   actionControl.changeTheme();
-                                }))),
+                                })),
+                        onTap: () {}),
                     SettingComponent(
                         title: "Langue de l'application",
                         action: Container(
@@ -174,36 +176,41 @@ class SettingView extends StatelessWidget {
                                   );
                                 }).toList()),
                           ),
-                        )),
+                        ),
+                        onTap: () {}),
                     SettingComponent(
                         title: 'Creer une boutique',
                         action: InkWell(
-                            child: Icon(Icons.arrow_forward_ios_outlined),
-                            onTap: () {
-                              Get.find<BoutiqueController>().getCategory();
-                              Get.toNamed(AppLinks.BOUTIQUE_NEW);
-                            })),
+                            child: Icon(Icons.arrow_forward_ios_outlined)),
+                        onTap: () {
+                          Get.find<BoutiqueController>().getCategory();
+                          Get.toNamed(AppLinks.BOUTIQUE_NEW);
+                        }),
                     SettingComponent(
                         title: 'Payer loyer boutique',
                         action: InkWell(
-                            child: Icon(Icons.arrow_forward_ios_outlined),
-                            onTap: () {
-                              Get.toNamed(AppLinks.BOUTIQUE_LOYER);
-                            })),
+                            child: Icon(Icons.arrow_forward_ios_outlined)),
+                        onTap: () {
+                          ViewFunctions().showIndisponible();
+                          // Get.toNamed(AppLinks.BOUTIQUE_LOYER);
+                        }),
                     SettingComponent(
                         title: 'Politique de confidentialite',
                         action: InkWell(
-                            child: Icon(Icons.arrow_forward_ios_outlined),
-                            onTap: () {
-                              Get.toNamed(AppLinks.POLITIQUE);
-                            })),
+                          child: Icon(Icons.arrow_forward_ios_outlined),
+                        ),
+                        onTap: () {
+                          Get.toNamed(AppLinks.POLITIQUE);
+                        }),
                     SettingComponent(
                         title: "Aide et assistance",
                         action: InkWell(
-                            child: Icon(Icons.arrow_forward_ios_outlined),
-                            onTap: () {
-                              Get.toNamed(AppLinks.HELP);
-                            })),
+                          child: Icon(Icons.arrow_forward_ios_outlined),
+                        ),
+                        onTap: () {
+                          ViewFunctions().showIndisponible();
+                          // Get.toNamed(AppLinks.HELP);
+                        }),
                   ],
                 )),
             childCount: 1,

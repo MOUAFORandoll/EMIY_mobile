@@ -2,6 +2,7 @@ import 'package:Fahkap/components/Button/app_button.dart';
 import 'package:Fahkap/components/Button/button.dart';
 import 'package:Fahkap/components/Widget/app_carroussel_item.dart';
 import 'package:Fahkap/controller/ActionController.dart';
+import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
@@ -136,8 +137,12 @@ class OnBoardingView extends StatelessWidget {
                                       ),
                                       child: InkWell(
                                         onTap: () {
-                                          Get.toNamed(
-                                            AppLinks.LOGIN,
+                                          Get.offAndToNamed(
+                                            Get.find<ManagerController>()
+                                                        .User ==
+                                                    null
+                                                ? AppLinks.LOGIN
+                                                : AppLinks.FIRST,
                                           );
                                         },
                                         child: Row(

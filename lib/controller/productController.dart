@@ -17,6 +17,7 @@ class ProductController extends GetxController {
     _conf = true;
     update();
   }
+
   unSetConf() {
     _conf = false;
     update();
@@ -124,9 +125,12 @@ class ProductController extends GetxController {
             _produitListSave.addAll((response.body['data'] as List)
                 .map((e) => ProduitModel.fromJson(e))
                 .toList());
+            _isLoadedP = 1;
+            update();
+          } else {
+            _isLoadedP = 1;
+            update();
           }
-          _isLoadedP = 1;
-          update();
         }
       }
     } catch (e) {

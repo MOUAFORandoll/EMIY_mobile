@@ -18,14 +18,45 @@ class ShortView extends StatefulWidget {
 class _ShortViewState extends State<ShortView> {
   Widget build(BuildContext context) {
     return GetBuilder<ShortController>(builder: (_ShortController) {
-      return Scaffold(
-          backgroundColor: ColorsApp.black,
-          body: Stack(
-            children: [
-              Container(
-                  height: Get.height,
-                  width: Get.width,
-                  child: _ShortController.isLoadedP == 0
+      return WillPopScope(
+          onWillPop: () async {
+            _ShortController.controller!.play();
+
+            return true;
+          },
+          child: Scaffold(
+              backgroundColor: ColorsApp.black,
+              body: Stack(
+                children: [
+                  Container(
+                      height: Get.height,
+                      width: Get.width,
+                      child: _ShortController.isLoadedP == 0
+                          ? Container(
+                              child: SpinKitRing(
+                                lineWidth: 4,
+                                color: ColorsApp.skyBlue,
+                                size: 45,
+                              ),
+                            )
+                          : _ShortController.listShort.length == 0
+                              ? Container(
+                                  height: kHeight,
+                                  child: AppEmpty(title: 'Aucun Short'))
+                              : ShortViewF()),
+                  Positioned(
+                      top: 30,
+                      left: 0,
+                      child: Container(
+                          child: IconButtonF0(
+                        color: Colors.black,
+                        icon: Icons.arrow_back_ios_new,
+                        onTap: () {
+                          _ShortController.disposePLayer();
+                          Get.back();
+                        },
+                      ))),
+                  _ShortController.isLoadedP == 0
                       ? Container(
                           child: SpinKitRing(
                             lineWidth: 4,
@@ -33,115 +64,52 @@ class _ShortViewState extends State<ShortView> {
                             size: 45,
                           ),
                         )
-                      : _ShortController.listShort.length == 0
-                          ? Container(
-                              height: kHeight,
-                              child: AppEmpty(title: 'Aucun Short'))
-                          : ShortViewF()),
-              Positioned(
-                  top: 30,
-                  left: 0,
-                  child: Container(
-                      child: IconButtonF0(
-                    color: Colors.black,
-                    icon: Icons.arrow_back_ios_new,
-                    onTap: () {
-                      Get.find<ShortController>().disposePLayer();
-                      Get.back();
-                    },
-                  ))),
-              _ShortController.isLoadedP == 0
-                  ? Container(
-                      child: SpinKitRing(
-                        lineWidth: 4,
-                        color: ColorsApp.skyBlue,
-                        size: 45,
-                      ),
-                    )
-                  : Positioned(
-                      top: 300,
-                      left: 290,
-                      child: Container(
-                          child: ShortAction(
-                        short: _ShortController
-                            .listShort[_ShortController.currentShort],
-                      ))),
-            ],
-          ));
+                      : Positioned(
+                          top: kHeight / 1.7,
+                          left: kWidth / 1.3,
+                          child: Container(
+                              child: ShortAction(
+                            short: _ShortController
+                                .listShort[_ShortController.currentShort],
+                          ))),
+                ],
+              )));
     });
   }
 }
 
-
-
 class ShortViewF extends StatefulWidget {
-  // final List<String> videoUrls;
-  final bool autoPlay;
-  final bool loop;
-
-  ShortViewF({
-    // @required this.videoUrls,
-    this.autoPlay = true,
-    this.loop = false,
-  });
-
   @override
-  _ShortViewFState createState() => _ShortViewFState();
+  State<ShortViewF> createState() => _ShortViewFState();
 }
 
 class _ShortViewFState extends State<ShortViewF> {
-  late PageController _pageController;
+  PageController _pageController = PageController(initialPage: 0);
+
   late VideoPlayerController _videoPlayerController;
+
   int _currentIndex = 0;
+
   // List videoUrls = [
-  //   'https://www.youtube.com/watch?v=_voM01HKp4E',
-  //   'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
-  // ];
-  ShortController short = Get.find(); 
+  ShortController short = Get.find();
+
   double position = 0.0;
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
     print('**********************short.listShort');
-    Get.find<ShortController>().changeVideo(0);
-    // _initializeVideoPlayer('https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4');
+    Get.find<ShortController>().initialise
+        ? Get.find<ShortController>().controller!.play()
+        : Get.find<ShortController>().changeVideo(0);
   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    
-    super.dispose();
-  }
-
-  void _initializeVideoPlayer(String url) async {
-    print(url);
-    if (_videoPlayerController != null) {
-      if (_videoPlayerController.value.isPlaying) {
-        print('********');
-        _videoPlayerController.dispose();
-      }
-    }
-    _videoPlayerController = VideoPlayerController.network(url)
-      ..initialize().then((_) {
-        if (widget.autoPlay) {
-          // _videoPlayerController.pause();
-          _videoPlayerController.play();
-        }
-        setState(() {});
-      });
-    // _videoPlayerController.setLooping(widget.loop);
-    // print(_videoPlayerController.value.aspectRatio);
-  }
-
-  bool init = false;
-
+  // @override
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ShortController>(builder: (_ShortController) {
       return Container(
-          height: 200.0,
+          height: kHeight,
           child: PageView.builder(
             itemCount: _ShortController.listShort.length,
             scrollDirection: Axis.vertical,
@@ -150,10 +118,10 @@ class _ShortViewFState extends State<ShortViewF> {
               print(index);
               print(_ShortController.listShort[index].src);
               index = index % (_ShortController.listShort.length);
-             
-              if (_ShortController.controller!.value.isInitialized) {
-                _ShortController.controller!.dispose();
-              }
+
+              // if (_ShortController.controller!.value.isInitialized) {
+              //   _ShortController.controller!.dispose();
+              // }
               _ShortController.changeVideo(index);
               // _initializeVideoPlayer(_ShortController.listShort[index].src);
               _ShortController.setCurrent(index);
@@ -162,14 +130,19 @@ class _ShortViewFState extends State<ShortViewF> {
               return Center(
                 child: GestureDetector(
                   onTap: () {
-                    // setState(() {
-                    //   if (_ShortController
-                    //       .listShort[index].controller!.value.isPlaying) {
-                    //     _ShortController.listShort[index].controller!.pause();
-                    //   } else {
-                    //     _ShortController.listShort[index].controller!.play();
-                    //   }
-                    // });
+                    setState(() {
+                      // if (_ShortController
+                      //     .listShort[index].controller!.value.isPlaying) {
+                      //   _ShortController.listShort[index].controller!.pause();
+                      // } else {
+                      //   _ShortController.listShort[index].controller!.play();
+                      // }
+                      if (_ShortController.controller!.value.isPlaying) {
+                        _ShortController.controller!.pause();
+                      } else {
+                        _ShortController.controller!.play();
+                      }
+                    });
                   },
                   child: _ShortController.initialise
                       ? SingleChildScrollView(
@@ -182,11 +155,8 @@ class _ShortViewFState extends State<ShortViewF> {
                             child: VideoPlayer(_ShortController.controller!),
                           ),
                           Positioned(
-                            // bottom: 0.0,
-                            // left: Get.size.width / 2.2,
-                            // top: 500.0,
-                            top: 250,
-                            left: 297,
+                            top: kHeight * .5,
+                            left: kWidth * .8,
                             child: Container(
                               height: 200,
                               margin: EdgeInsets.symmetric(
@@ -217,7 +187,6 @@ class _ShortViewFState extends State<ShortViewF> {
                               ),
                             ),
                           )
-                        
                         ]))
                       : Container(
                           child: SpinKitRing(

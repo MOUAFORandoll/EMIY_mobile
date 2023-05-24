@@ -22,14 +22,18 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ManagerController>(
         builder: (_manager) => Scaffold(
-            body: SingleChildScrollView(
-                child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                    child: Column(children: [
-                      Row(
+            appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: AppBackButton(),
+                actions: [
+                  Container(
+                      margin: EdgeInsets.only(top: Get.height * .020),
+                      padding: EdgeInsets.only(
+                          left: Get.width * .030, right: Get.width * .030),
+                      child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(child: AppBackButton()),
                             Container(
                               child: AppTitleRight(
                                   title: 'regbtn'.tr,
@@ -39,7 +43,12 @@ class RegisterScreen extends StatelessWidget {
                                   right:
                                       MediaQuery.of(context).size.width * .005),
                             ),
-                          ]),
+                          ])),
+                ]),
+            body: SingleChildScrollView(
+                child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                    child: Column(children: [
                       Container(
                           padding: EdgeInsets.only(top: 0, left: 10, right: 10),
                           child: Container(

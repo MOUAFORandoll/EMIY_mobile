@@ -34,21 +34,25 @@ class _SplashScreenPageState extends State<SplashScreenPage>
     Get.find<ManagerController>().startTimer();
 
     Future.delayed(Duration(seconds: 10), () async {
-      print('10');
-
-      Get.offNamedUntil(AppLinks.ONBOARDING, (route) => false);
+      print(box.read('first'));
+      if (box.read('first') != 1) {
+        box.write('first', 1);
+        Get.offNamedUntil(AppLinks.ONBOARDING, (route) => false);
+      } else {
+        Get.offNamedUntil(AppLinks.FIRST, (route) => false);
+      }
       Get.find<ManagerController>().chageN(false);
 
-      // MyBinding().onGetAll();
+      MyBinding().onGetAll();
     });
   }
 
   Future<void> initUniLinks() async {
     try {
-      StreamSubscription _sub ;
-       
+      StreamSubscription _sub;
+
       // Écoutez les liens entrants
-   _sub =   linkStream.listen((uri) {
+      _sub = linkStream.listen((uri) {
         // Traitez les liens entrants ici
         handleDeepLink(uri);
       });

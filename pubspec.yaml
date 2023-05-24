@@ -69,9 +69,9 @@ dependencies:
   video_player: ^2.0.0 
   smooth_star_rating_null_safety: ^1.0.4+2
   share_plus: 
-  flutter_downloader:  any
+  # flutter_downloader:  any
+  flutter_mobx : any
   webview_flutter: ^2.0.13
-  flutter_webview_plugin: ^0.4.0 
   uni_links: ^0.5.0
 dev_dependencies:
   flutter_launcher_icons: ^0.8.0
@@ -84,6 +84,41 @@ flutter_icons:
   image_path: "assets/logo/logo.png"
 flutter:
   fonts:
+    - family: OpenSan
+      fonts:
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Light.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Regular.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Medium.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-SemiBold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Bold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-ExtraBold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Light.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Regular.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Medium.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-SemiBold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Bold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-ExtraBold.ttf
+        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Light.ttf
+        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf
+        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Medium.ttf
+        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-SemiBold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Bold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans/OpenSans-ExtraBold.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-LightItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Italic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-MediumItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-SemiBoldItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-BoldItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-ExtraBoldItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-LightItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Italic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-MediumItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-SemiBoldItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-BoldItalic.ttf
+        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-ExtraBoldItalic.ttf
+        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-LightItalic.ttf
+        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Italic.ttf
+        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-MediumItalic.ttf
     - family: orkney
       fonts:
         - asset: assets/police/orkney-bold.otf

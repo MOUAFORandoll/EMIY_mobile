@@ -24,10 +24,8 @@ class AppBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // assert(debugCheckHasMaterialLocalizations(context));
     return IconButton(
-      padding: EdgeInsets.zero,
-      alignment: Alignment.centerLeft,
       icon: Icon(Icons.keyboard_arrow_left_outlined),
-      color: color,
+      color: Colors.black,
       // tooltip: MaterialLocalizations.of(context).backButtonTooltip,
       onPressed: () {
         Get.back();

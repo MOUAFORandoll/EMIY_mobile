@@ -10,7 +10,13 @@ class BuyShoopingCartRepo extends GetxService {
  
   Future buyCart(data) async {
     Response a = await apiClient.getCollectionsP(ApiRoutes.BUY, data);
-    ;
+    
+
+    return a;
+  }
+  Future verifyCom(data) async {
+    Response a = await apiClient.getCollectionsP(ApiRoutes.VERIFY, data);
+ 
 
     return a;
   }

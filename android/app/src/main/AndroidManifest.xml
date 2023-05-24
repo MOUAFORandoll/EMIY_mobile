@@ -1,66 +1,80 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fahkapmobile">
-  <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission_WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.MANAGE_EXTERNAL_STORAGE "/>
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission_READ_EXTERNAL_STORAGE"/>
+  package="com.example.fahkapmobile">
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
   <application
     android:label="OFA"
     android:exported="false"
     android:grantUriPermissions="true"
     android:icon="@mipmap/launcher_icon"
-     android:usesCleartextTraffic="true"
+    android:networkSecurityConfig="@xml/network_security_config"
+    android:usesCleartextTraffic="true"
     android:requestLegacyExternalStorage="true">
+
     <activity
-            
-            android:screenOrientation="portrait"             
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".MainActivity"
-            android:launchMode="singleTop" 
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+      android:screenOrientation="portrait"
+      android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+      android:name="com.example.fahkapmobile.MainActivity"
+      android:exported="true"
+      android:launchMode="singleTop"
+      android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+      android:hardwareAccelerated="true"
+      android:windowSoftInputMode="adjustResize">
+
       <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
       <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
+        android:name="io.flutter.embedding.android.NormalTheme"
+        android:resource="@style/NormalTheme" />
+
       <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
                  screen fades out. A splash screen is useful to avoid any visual
                  gap between the end of Android's launch screen and the painting of
                  Flutter's first frame. -->
       <meta-data
-              android:name="io.flutter.embedding.android.SplashScreenDrawable"
-              android:resource="@drawable/launch_background"
-              />
+        android:name="io.flutter.embedding.android.SplashScreenDrawable"
+        android:resource="@drawable/launch_background" />
+
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+
+      <!-- Ajout du filtre d'intention pour le schéma d'URL personnalisé -->
+      <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <!-- Accepts URIs that begin with YOUR_SCHEME://YOUR_HOST -->
+        <!-- Remplacez "monapp" par votre schéma d'URL personnalisé -->
         <data
-          android:scheme="http"
-          android:host="127.0.0.1:8000" />
+          android:scheme="monapp"
+          android:host="localhost"
+          android:port="8005" />
       </intent-filter>
     </activity>
-     <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+
+    <receiver
+      android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
       </intent-filter>
     </receiver>
-        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
-    <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+
+    <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+
+    <!-- Ne supprimez pas les métadonnées ci-dessous.
+             Cela est utilisé par l'outil Flutter pour générer GeneratedPluginRegistrant.java -->
     <meta-data
-            android:name="flutterEmbedding"
-            android:value="2" />
+      android:name="flutterEmbedding"
+      android:value="2" />
   </application>
 </manifest>

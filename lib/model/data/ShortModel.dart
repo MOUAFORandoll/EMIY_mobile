@@ -53,11 +53,13 @@ class ShortModel {
       };
 
   loadController() async {
-    // controller.network(src);
+    print('**************lectyre');
+    controller = VideoPlayerController.network(src);
     await controller.initialize().then((_) {
+      print('**************lectyre');
+
       controller.play();
     });
-
     controller.setLooping(true);
   }
 }

@@ -4,6 +4,8 @@ import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
+import '../functions/viewFunctions.dart';
+
 class ApiClient extends GetConnect implements GetxService {
   String token = '';
   String appBaseUrl = ApiUrl.baseUrl;
@@ -56,9 +58,11 @@ class ApiClient extends GetConnect implements GetxService {
       headers: request.headers,
     );
   }
+  var fn = new ViewFunctions();
 
   void onInit() {
     _setAuthHeaders();
+   fn. verifiedConnection();
     super.onInit();
   }
 

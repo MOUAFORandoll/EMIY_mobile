@@ -157,16 +157,8 @@ class BoutiqueController extends GetxController {
       //   ],
       // );
       if (boutiqueImage.path != '') {
-        Get.defaultDialog(
-            title: 'En cours',
-            barrierDismissible: false,
-            content: SizedBox(
-                // height: Get.size.height * .02,
-                // width: Get.size.width * .02,
-                child: Center(
-                    child: CircularProgressIndicator(
-              color: Colors.blueAccent,
-            ))));
+        fn.loading('Boutique', 'Creation de votre boutique en cours');
+
         var key = await s.getKey();
 
         FormData formData = new FormData({
@@ -191,20 +183,23 @@ class BoutiqueController extends GetxController {
           update();
 
           await getBoutique();
+          fn.closeSnack();
         }
-        Get.back();
+        fn.closeSnack();
 
         fn.snackBar('Mise a jour', response.body['message'], true);
         _isUpdatingB = false;
         // Get.back(closeOverlays: true);
         update();
       } else {
-        Get.back();
+        fn.closeSnack();
+
         fn.snackBar('Boutique', 'Remplir tous les champs', false);
       }
     } catch (e) {
+      fn.closeSnack();
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+
       _isUpdatingB = false;
       update();
       print(e);
@@ -231,16 +226,8 @@ class BoutiqueController extends GetxController {
       //   ],
       // );
       if (image != null) {
-        Get.defaultDialog(
-            title: 'En cours',
-            barrierDismissible: false,
-            content: SizedBox(
-                // height: Get.size.height * .02,
-                // width: Get.size.width * .02,
-                child: Center(
-                    child: CircularProgressIndicator(
-              color: Colors.blueAccent,
-            ))));
+        fn.loading(
+            'Boutique', 'Mise a jour de l\'affiche de votre boutique en cours');
         var key = await s.getKey();
 
         try {
@@ -249,7 +236,7 @@ class BoutiqueController extends GetxController {
               image.path,
               filename: "Image.jpg",
             ),
-            'codeBoutique': 'boutiqueopQ0O' /* Boutique.codeBoutique */,
+            'codeBoutique': Boutique.codeBoutique,
             'keySecret': key
           });
 
@@ -261,15 +248,17 @@ class BoutiqueController extends GetxController {
             await getBoutique();
           }
 
-          Get.back();
+          fn.closeSnack();
+
           fn.snackBar('Mise a jour', response.body['message'], true);
           _isUpdating = false;
           // Get.back(closeOverlays: true);
           update();
         } catch (e) {
-          Get.back();
+          fn.closeSnack();
+
           fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-          // Get.back();
+
           _isUpdating = false;
           update();
           print(e);
@@ -292,14 +281,19 @@ class BoutiqueController extends GetxController {
       if (response.body != null) {
         print('---111--------boutiqr************************');
 
-        if (response.body['data'] != null) {
+        if (response.body['data'] != null &&
+            response.body['data'].length != 0) {
           print('-----------boutiqr************************');
-          print(response.body['data']);
+          print(response.body['data'].length);
           _Boutique = BoutiqueUserModel.fromJson(response.body['data']);
+          update();
           _isExist = response.body['exist'];
+          titre.text = Boutique.titre;
+          description.text = Boutique.description;
 
           _isLoaded = 1;
           update();
+          getEltBoutique();
           // print(_Boutique);
         }
       }
@@ -333,8 +327,8 @@ class BoutiqueController extends GetxController {
     _isLoadedPC = 0;
     print('getCOmeee---------');
     try {
-      Response response = await boutiqueRepo.getListCommandeForBoutique(
-          'boutiqueopQ0O' /* Boutique.codeBoutique */);
+      Response response =
+          await boutiqueRepo.getListCommandeForBoutique(Boutique.codeBoutique);
       _commandeBoutiqueList.clear();
       if (response.body != null) {
         if (response.body['data'].length != 0) {
@@ -362,8 +356,8 @@ class BoutiqueController extends GetxController {
     _isLoadedPH = 0;
     _HsearchCom = false;
     try {
-      Response response = await boutiqueRepo.getListHCommandeForBoutique(
-          'boutiqueopQ0O' /* Boutique.codeBoutique */);
+      Response response =
+          await boutiqueRepo.getListHCommandeForBoutique(Boutique.codeBoutique);
       _HcommandeBoutiqueList.clear();
       if (response.body != null) {
         if (response.body['data'].length != 0) {
@@ -399,8 +393,8 @@ class BoutiqueController extends GetxController {
     print('getProduit---------');
 
     try {
-      Response response = await boutiqueRepo.getListProduitForBoutique(
-          'boutiqueopQ0O' /* Boutique.codeBoutique */);
+      Response response =
+          await boutiqueRepo.getListProduitForBoutique(Boutique.codeBoutique);
       _produitBoutiqueList.clear();
       if (response.body != null) {
         if (response.body['data'].length != 0) {
@@ -438,16 +432,7 @@ class BoutiqueController extends GetxController {
       //   ],
       // );
       if (image != null) {
-        Get.defaultDialog(
-            title: 'En cours',
-            barrierDismissible: false,
-            content: SizedBox(
-                // height: Get.size.height * .02,
-                // width: Get.size.width * .02,
-                child: Center(
-                    child: CircularProgressIndicator(
-              color: Colors.blueAccent,
-            ))));
+        fn.loading('Produit', 'Mise a jour de la photo du produit en cours');
         var key = await s.getKey();
 
         try {
@@ -456,7 +441,7 @@ class BoutiqueController extends GetxController {
               image.path,
               filename: "Image.jpg",
             ),
-            'codeBoutique': 'boutiqueopQ0O' /* Boutique.codeBoutique */,
+            'codeBoutique': Boutique.codeBoutique,
             'keySecret': key,
             'idProduitObject': idProduitObject
           });
@@ -467,18 +452,21 @@ class BoutiqueController extends GetxController {
           print(response.body);
           if (response.statusCode == 200) {
             await getListProduitForBoutique();
-            Get.back();
+            fn.closeSnack();
           }
 
-          Get.back();
+          fn.closeSnack();
+
           fn.snackBar('Mise a jour', response.body['message'], true);
           _isUpdating = false;
           // Get.back(closeOverlays: true);
           update();
         } catch (e) {
-          Get.back();
+          fn.closeSnack();
+
           fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-          // Get.back();
+          //        fn.closeSnack();
+
           _isUpdating = false;
           update();
           print(e);
@@ -509,16 +497,8 @@ class BoutiqueController extends GetxController {
       //   ],
       // );
       if (image != null) {
-        Get.defaultDialog(
-            title: 'En cours',
-            barrierDismissible: false,
-            content: SizedBox(
-                // height: Get.size.height * .02,
-                // width: Get.size.width * .02,
-                child: Center(
-                    child: CircularProgressIndicator(
-              color: Colors.blueAccent,
-            ))));
+        fn.loading('Produit', 'Ajout d\'une image au produit en cours');
+
         var key = await s.getKey();
 
         try {
@@ -527,7 +507,7 @@ class BoutiqueController extends GetxController {
               image.path,
               filename: "Image.jpg",
             ),
-            'codeBoutique': 'boutiqueopQ0O' /* Boutique.codeBoutique */,
+            'codeBoutique': Boutique.codeBoutique,
             'keySecret': key,
             'idProduit': idProduit
           });
@@ -538,18 +518,21 @@ class BoutiqueController extends GetxController {
           print(response.body);
           if (response.statusCode == 200) {
             await getListProduitForBoutique();
-            Get.back();
+            fn.closeSnack();
           }
 
-          Get.back();
+          fn.closeSnack();
+
           fn.snackBar('Mise a jour', response.body['message'], true);
           _isUpdating = false;
           // Get.back(closeOverlays: true);
           update();
         } catch (e) {
-          Get.back();
+          fn.closeSnack();
+
           fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-          // Get.back();
+          //        fn.closeSnack();
+
           _isUpdating = false;
           update();
           print(e);
@@ -565,16 +548,9 @@ class BoutiqueController extends GetxController {
   updateProduit(data) async {
     _isUpdating = true;
     update();
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+
+    fn.loading('Produit', 'Mise a jour du produit en cours');
+
     try {
       Response response = await boutiqueRepo.updateProduitFB(data);
       print(response.body);
@@ -582,15 +558,18 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isUpdating = false;
       update();
       print(e);
@@ -600,16 +579,8 @@ class BoutiqueController extends GetxController {
   addProduit(data) async {
     _isUpdating = true;
     update();
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Produit', 'Ajout d\'un nouveau produit en cours');
+
     try {
       Response response = await boutiqueRepo.newProduit(data);
       print(response.body);
@@ -617,15 +588,18 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isUpdating = false;
       update();
       print(e);
@@ -635,16 +609,8 @@ class BoutiqueController extends GetxController {
   deletteProduit(data) async {
     _isUpdating = true;
     update();
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Produit', 'Suppression du produit en cours');
+
     try {
       Response response = await boutiqueRepo.desibledProduitFB(data);
       print(response.body);
@@ -652,15 +618,18 @@ class BoutiqueController extends GetxController {
       if (response.statusCode == 200) {
         await getBoutique();
       }
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isUpdating = false;
       update();
       print(e);
@@ -669,19 +638,26 @@ class BoutiqueController extends GetxController {
 
   bool _isUpdatingB = false;
   bool get isUpdatingB => _isUpdatingB;
-  updateBoutique(data) async {
+
+  TextEditingController _titre = TextEditingController();
+  TextEditingController get titre => _titre;
+  TextEditingController _description = TextEditingController();
+  TextEditingController get description => _description;
+  updateBoutique() async {
+    var key = await s.getKey();
+    var data = {
+      'keySecret': key,
+      'titre': titre.text,
+
+      'description': description.text,
+      'codeBoutique': Boutique.codeBoutique,
+      // 'email': email.text,
+    };
+    print(data);
     _isUpdatingB = true;
     update();
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Boutique', 'Mise a jour de la boutique en cours');
+
     try {
       Response response = await boutiqueRepo.updateBoutique(data);
       print(response.body);
@@ -690,15 +666,18 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdatingB = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isUpdatingB = false;
       update();
       print(e);
@@ -731,7 +710,7 @@ class BoutiqueController extends GetxController {
     var key = await s.getKey();
     await getLocalU();
     var data = {
-      'codeBoutique': 'boutiqueopQ0O' /* Boutique.codeBoutique */,
+      'codeBoutique': Boutique.codeBoutique,
       'keySecret': key,
       'ville': ville,
       'longitude': longitude,
@@ -740,16 +719,9 @@ class BoutiqueController extends GetxController {
     print(data);
     _isUpdatingB = true;
     update();
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading(
+        'Boutique', 'Mise a jour de l\'emplacement de la boutique en cours');
+
     try {
       Response response = await boutiqueRepo.updateLocalisationBoutique(data);
       print(response.body);
@@ -758,15 +730,18 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdatingB = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isUpdatingB = false;
       update();
       print(e);
@@ -867,13 +842,6 @@ class BoutiqueController extends GetxController {
     update();
   }
 
-  bool _addShoort = false;
-  bool get addShoort => _addShoort;
-
-  chageStateShort(bool i) {
-    _addShoort = i;
-    update();
-  }
 
   bool _addProduct = false;
   bool get addProduct => _addProduct;
@@ -894,7 +862,7 @@ class BoutiqueController extends GetxController {
     _isLoadedShort = 0;
     try {
       Response response = await boutiqueRepo.getListShortBoutique(
-        {'codeBoutique': 'boutiqueopQ0O' /* Boutique.codeBoutique */},
+        {'codeBoutique': Boutique.codeBoutique},
       );
 
       _listShortBoutique = [];
@@ -955,7 +923,9 @@ class BoutiqueController extends GetxController {
 
   Future getVideo() async {
     try {
-      print("wwwwwwwww");
+      _videoShort.clear();
+      update();
+      print("wwwwwwwww  ${_videoShort.length}");
       // ignore: deprecated_member_use
       PickedFile? video =
           await ImagePicker().getVideo(source: ImageSource.gallery);
@@ -964,33 +934,73 @@ class BoutiqueController extends GetxController {
       //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
       //   sourcePath: video.path,
       // );
-      _videoShort.add(File(video!.path));
-      print(_videoShort.length);
-      update();
+      if (video != null) {
+        _videoShort.add(File(video.path));
+        update();
+
+        var _videoFile = File(video.path);
+        _videoPlayerController = VideoPlayerController.file(_videoFile)
+          ..initialize().then((_) {
+            _videoPlayerController!.play();
+          });
+      
+        update();
+      }
     } catch (e) {
       // _showToastPictureError(context);
     }
   }
 
-  deleteVideo(index) {
-    _videoShort.remove(_videoShort[index]);
+  bool _addShoort = false;
+  bool get addShoort => _addShoort;
 
+  chageStateShort(bool i) {
+    _addShoort = i;
     update();
   }
+  // deleteVideo(index) {
+  //   _videoShort.remove(_videoShort[index]);
 
-  addShort(data) async {
+  //   update();
+  // }
+
+  VideoPlayerController? _videoPlayerController;
+  VideoPlayerController get videoPlayerController => _videoPlayerController!;
+  File? _videoFile;
+
+  void playPauseVideo() {
+    if (_videoPlayerController != null) {
+      if (_videoPlayerController!.value.isPlaying) {
+        _videoPlayerController!.pause();
+      } else {
+        _videoPlayerController!.play();
+      }
+    }
+  }
+
+  TextEditingController _titreShort = TextEditingController();
+  TextEditingController get titreShort => _titreShort;
+  TextEditingController _descriptionShort = TextEditingController();
+  TextEditingController get descriptionShort => _descriptionShort;
+  addShort() async {
     _isUpdating = true;
     update();
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Short', 'Ajout d\'un short en cours');
+    Map<String, Object> dataS = {
+      'titre': titreShort.text,
+      'description': descriptionShort.text,
+      'codeBoutique': Boutique.codeBoutique,
+    };
+
+    videoShort.forEach((e) {
+      dataS.addAll({
+        "file": MultipartFile(
+          e.path,
+          filename: "video.mp4",
+        )
+      });
+    });
+    FormData data = new FormData(dataS);
     try {
       Response response = await boutiqueRepo.newShort(data);
       print(response.body);
@@ -998,15 +1008,18 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      // Get.back();
+      //        fn.closeSnack();
+
       _isUpdating = false;
       update();
       print(e);
@@ -1021,18 +1034,28 @@ class BoutiqueController extends GetxController {
   setBoutiqueContent(index) async {
     _i = index;
     update();
-    if (index == 0) {
-      await getListProduitForBoutique();
-    } else if (index == 1) {
-      await getListCommandeForBoutique();
-    } else if (index == 2) {
-      await getListHCommandeForBoutique();
-    } else if (index == 3) {
-      await getListShort();
-    } else if (index == 4) {
-      print('*************${isLoaded}');
-      await getBoutique();
-    }
+    // if (index == 0) {
+    //   await getListProduitForBoutique();
+    // } else if (index == 1) {
+    //   await getListCommandeForBoutique();
+    // } else if (index == 2) {
+    //   await getListHCommandeForBoutique();
+    // } else if (index == 3) {
+    //   await getListShort();
+    // } else if (index == 4) {
+    //   print('*************${isLoaded}');
+    //   await getBoutique();
+    // }
+  }
+
+  getEltBoutique() {
+    getListProduitForBoutique();
+
+    getListCommandeForBoutique();
+
+    getListHCommandeForBoutique();
+    getListShort();
+    print('*************${isLoaded}');
   }
 
   boutiqueContent() {

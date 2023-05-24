@@ -74,23 +74,22 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => ShortRepo(apiClient: Get.find()), fenix: true);
     Get.lazyPut(() => ShortController(shortRepo: Get.find()), fenix: true);
 
-    // var database = Get.find<DB>();
-    // await database.init();
-    // await Get.find<ActionController>().getLanguageInit();
+    var database = Get.find<DB>();
+    await database.init();
+    await Get.find<ActionController>().getLanguageInit();
   }
 
   onInit() async {
-    // Get.find<ManagerController>().chageN(true);
-    // await requestPermission();
+    Get.find<ManagerController>().chageN(true);
+    await requestPermission();
 
-    // await GetStorage.init();
-    // var database = Get.find<DB>();
-    // await database.init();
-    // Get.find<StorageService>().init();
-    // Get.find<ManagerController>().getKeyU();
-    // Get.find<ManagerController>().getUser();
+    await GetStorage.init();
+    var database = Get.find<DB>();
+    await database.init(); 
+    Get.find<ManagerController>().getKeyU();
+    Get.find<ManagerController>().getUser();
 
-    // Get.find<ManagerController>().newLocalisation();
+    Get.find<ManagerController>().newLocalisation();
 
     Get.find<ProductController>().getPopularProduit();
 
@@ -99,7 +98,7 @@ class MyBinding extends Bindings {
     Get.find<BuyShopController>();
     Get.find<BoutiqueController>().getBoutique();
     Get.find<CategoryBoutiqueController>().getCategory();
-    // Get.find<CommandeController>().getListCommandes();
+    Get.find<CommandeController>().getListCommandes();
     Get.find<CategoryBoutiqueController>().getListBoutiques();
     Get.find<ShortController>().getListShort();
 
@@ -147,16 +146,16 @@ class MyBinding extends Bindings {
     Get.lazyPut(() => ShortController(shortRepo: Get.find()), fenix: true);
 
     Get.find<ActionController>();
-    // Get.find<ManagerController>().getKeyU();
-    // Get.find<ManagerController>().getUser();
+    Get.find<ManagerController>().getKeyU();
+    Get.find<ManagerController>().getUser();
 
-    // Get.find<ManagerController>().newLocalisation();
+    Get.find<ManagerController>().newLocalisation();
 
-    // Get.find<CommandeController>().getListCommandes();
-    // Get.find<ManagerController>().getUser();
+    Get.find<CommandeController>().getListCommandes();
+    Get.find<ManagerController>().getUser();
 
     Get.find<ProductController>().getPopularProduit();
-    // Get.find<BoutiqueController>().getCategory();
+    Get.find<BoutiqueController>().getCategory();
     Get.find<CategoryBoutiqueController>().getCategory();
     Get.find<CategoryBoutiqueController>().getListBoutiques();
 

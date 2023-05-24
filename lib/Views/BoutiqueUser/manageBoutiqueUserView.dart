@@ -28,8 +28,6 @@ class ManageBoutiqueUserView extends StatelessWidget {
   ScrollController _scrollController = new ScrollController();
 
   bool imgBool = true;
-  TextEditingController titre = TextEditingController();
-  TextEditingController description = TextEditingController();
   bool udateAdd = false;
   bool udatePass = false;
   @override
@@ -158,7 +156,7 @@ class ManageBoutiqueUserView extends StatelessWidget {
                             FormComponent2(
                                 icon: Icons.account_circle,
                                 type: 0,
-                                controller: titre,
+                                controller: _controller.titre,
                                 enabled: true,
                                 titre: 'Nom',
                                 hint: ""),
@@ -168,7 +166,7 @@ class ManageBoutiqueUserView extends StatelessWidget {
                               child: Text('Description'),
                             ),
                             TextFormField(
-                              controller: description,
+                              controller: _controller.description,
 
                               // keyboardType: type,
                               // obscureText: obscureText!,
@@ -267,18 +265,7 @@ class ManageBoutiqueUserView extends StatelessWidget {
                                 color: ColorsApp.greenLight,
                                 title: 'Mettre a jour',
                                 onTap: () async {
-                                  var data = {
-                                    'keySecret':
-                                        new GetStorage().read('keySecret'),
-                                    'titre': titre.text,
-
-                                    'description': description.text.isEmpty,
-                                    'codeBoutique':
-                                        _controller.Boutique.codeBoutique,
-                                    // 'email': email.text,
-                                  };
-                                  print(data);
-                                  await _controller.updateBoutique(data);
+                                  await _controller.updateBoutique();
                                 })
                           ],
                         )),

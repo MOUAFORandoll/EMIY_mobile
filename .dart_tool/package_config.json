@@ -206,12 +206,6 @@
       "languageVersion": "2.6"
     },
     {
-      "name": "flutter_downloader",
-      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_downloader-1.10.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "flutter_launcher_icons",
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_launcher_icons-0.8.1",
       "packageUri": "lib/",
@@ -228,6 +222,12 @@
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications_platform_interface-4.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_mobx",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_mobx-2.0.6+5",
+      "packageUri": "lib/",
+      "languageVersion": "2.13"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -264,12 +264,6 @@
       "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.17"
-    },
-    {
-      "name": "flutter_webview_plugin",
-      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_webview_plugin-0.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "font_awesome_flutter",
@@ -414,6 +408,12 @@
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "mobx",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/mobx-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "nested",
@@ -974,7 +974,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-05-14T13:20:18.140744Z",
+  "generated": "2023-05-21T12:16:29.980093Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }

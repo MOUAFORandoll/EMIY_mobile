@@ -3,6 +3,7 @@ import 'package:Fahkap/components/Button/IconButtonF.dart';
 import 'package:Fahkap/components/Button/customBtn.dart';
 import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Text/bigtitleText.dart';
+import 'package:Fahkap/components/Widget/app_back_button.dart';
 import 'package:Fahkap/components/Widget/app_title_right.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
@@ -30,15 +31,7 @@ class ShoppingViewNext extends StatelessWidget {
           appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              leading: InkWell(
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: ColorsApp.black,
-                ),
-                onTap: () {
-                  Get.back();
-                },
-              ),
+              leading: AppBackButton(),
               actions: [
                 Container(
                     margin: EdgeInsets.only(top: Get.height * .020),

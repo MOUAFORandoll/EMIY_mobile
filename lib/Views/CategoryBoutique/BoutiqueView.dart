@@ -179,6 +179,8 @@ class BoutiqueView extends StatelessWidget {
                                         size: 19,
                                         onRatingChanged: (double rating) {
                                           print(rating);
+                                          print(Get.parameters['codeBoutique']
+                                              .toString());
                                           Get.find<ActionController>()
                                               .notationBoutique(
                                             rating,

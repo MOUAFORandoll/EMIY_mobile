@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 
 abstract class ColorsApp {
   static const Color blue = Color(0xFF021040);
+  static const Color bg = Color.fromRGBO(243, 243, 243, 1);
 
   static const Color skyBlue = Color(0xFF459FD6);
   static const Color textBlue = Color(0xFF1137FF) ;
   static const Color marron = Color(0xFFE7C76D) ;
-
-  static const Color bg = Color.fromRGBO(243, 243, 243, 1);
+ 
   static const Color bleuLight = Color(0xFF4E9DD9);
   static const Color black = Colors.black;
   static const Color grey = Color(0xffD9D9D9);

@@ -16,7 +16,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DB {
-  String linkDb = 'FahKap10.db';
+  String linkDb = 'FahKap0.db';
   // ignore: unused_field
   Database? _db;
 
@@ -437,6 +437,7 @@ class DB {
     //   version: 1,
     // );
     try {
+       if (_db != null) {
       var data = await _db!.rawQuery('SELECT * FROM THEME');
 
       print(data);
@@ -446,6 +447,7 @@ class DB {
         // Get.find<ActionController>().getLanguage0(name);
       } else {
         return null;
+      }
       }
     } catch (e) {
       print(e);

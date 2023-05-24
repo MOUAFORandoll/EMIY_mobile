@@ -58,7 +58,7 @@ class ShortController extends GetxController {
 
     controller!.play();
     _initialise = true;
-    update();
+    // update();
     // ignore: unused_local_variable
     int prevVideo = (index - 1) > 0 ? index - 1 : 0;
     // ignore: unnecessary_null_comparison
@@ -69,34 +69,44 @@ class ShortController extends GetxController {
       print('0000');
 
       _progressValue = Get.find<ShortController>()
-              .controller!
-              .value
-              .position
-              .inSeconds
-              .toDouble() /
-          Get.find<ShortController>()
-              .controller!
-              .value
-              .duration
-              .inSeconds
-              .toDouble();
+                  .controller!
+                  .value
+                  .duration
+                  .inSeconds
+                  .toDouble() ==
+              0
+          ? 0
+          : Get.find<ShortController>()
+                  .controller!
+                  .value
+                  .position
+                  .inSeconds
+                  .toDouble() /
+              Get.find<ShortController>()
+                  .controller!
+                  .value
+                  .duration
+                  .inSeconds
+                  .toDouble();
       update();
-      print(
-        'poition******${_progressValue}',
-      );
+      // print(
+      //   'poition******${_progressValue}',
+      // );
       if (_progressValue == 1) {
         // await listShort[index].loadController();
 
-        print(
-          'ici***************',
-        );
+        // print(
+        //   'ici***************',
+        // );
       }
     });
+
+    return 0;
   }
 
   disposePLayer() {
     if (controller != null) {
-      controller!.dispose();
+      controller!.pause();
 
       update();
     }

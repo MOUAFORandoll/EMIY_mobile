@@ -7,16 +7,6 @@ import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/controller/ShortController.dart';
 import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/utils/constants/assets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Fahkap/Views/Home/SearchView.dart';
-import 'package:Fahkap/components/Button/btnCatList.dart';
-import 'package:Fahkap/components/Button/btnCatListPV.dart';
-import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/components/Form/formComponent2.dart';
-import 'package:Fahkap/components/Form/text_field.dart';
-import 'package:Fahkap/components/Text/bigText.dart';
-import 'package:Fahkap/components/Text/bigtitleText.dart';
-import 'package:Fahkap/components/Widget/BoutiqueComponentHome.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
 import 'package:Fahkap/components/Widget/productComponent.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
@@ -128,7 +118,7 @@ class HomeView extends StatelessWidget {
                   // displays the index of the current item.
                   (context, index) => GetBuilder<CategoryBoutiqueController>(
                       builder: (categorys) {
-                    return categorys.isLoadedCat == 0 || prods.isLoadedP == 0
+                    return categorys.isLoadedCat == 0 && prods.isLoadedP == 0
                         ? Shimmer.fromColors(
                             baseColor: Colors.blueGrey,
                             highlightColor: Colors.greenAccent,

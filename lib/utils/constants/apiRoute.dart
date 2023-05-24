@@ -19,6 +19,7 @@ class ApiRoutes {
   static const USER = '/user/get';
   static const LIVREUR = '/livreur/read/ville';
   static const BUY = '/commande/newX';
+  static const VERIFY = '/commande/verify';
   static const UPDATE_PRODUCT = '/produit/update';
 
   static const UPDATE_PRODUCT_IMAGE = '/produit/image/update';
@@ -34,6 +35,8 @@ class ApiRoutes {
 
   static const TRANSACTION_READ = '/transaction/read';
   static const TRANSACTION_RETRAIT = '/transaction/retrait';
+  static const TRANSACTION_DEPOT = '/compte/credit';
+  static const VERIFY_DEPOT = '/compte/credit/verify';
 
   static const SHORT_READ = '/short/read';
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';

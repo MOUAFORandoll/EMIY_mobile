@@ -1,13 +1,14 @@
 import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/utils/Services/NotificationService.dart';
+import 'package:Fahkap/utils/Services/core.dart';
 import 'package:Fahkap/utils/Services/dependancies.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:Fahkap/utils/Services/storageService2.dart';
 import 'package:Fahkap/utils/Services/translations.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
+// import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -23,10 +24,9 @@ Future<void> main() async {
 //
 //
 //
-//   var database0 = new DB();
-//   await database0.init();
-
-  MyBinding().dependencies();
+  var database0 = new DB();
+  await database0.init();
+  await initApp();
 
 // await MyBinding().onInit();
 
@@ -53,6 +53,16 @@ final _lightTheme = ThemeData(
   accentIconTheme: IconThemeData(color: Colors.white),
   dividerColor: Colors.white54,
 );
+final light = ThemeData(
+    fontFamily: 'OpenSan',
+    textTheme: const TextTheme(
+        bodyText1: TextStyle(color: Colors.black),
+        bodyText2: TextStyle(color: Colors.black)),
+    backgroundColor: ColorsApp.bg,
+    appBarTheme: const AppBarTheme(foregroundColor: Colors.black87));
+final dark = ThemeData.dark().copyWith(
+  backgroundColor: Colors.black,
+);
 
 class MyApp extends StatelessWidget {
   @override
@@ -63,15 +73,15 @@ class MyApp extends StatelessWidget {
     //   box.write('isDark', false);
     // }
 
-    // MyBinding().requestPermission();
-    MyBinding().onInit();
+    MyBinding().requestPermission();
+    // MyBinding().onInit();
     Get.find<ActionController>().getThemeInit(context);
 
     return GetMaterialApp(
       translations: Transalations(),
       locale: Get.find<ActionController>().lan,
-      theme: _lightTheme,
-      darkTheme: _darkTheme,
+      theme: light,
+      darkTheme: dark,
       themeMode: ThemeMode.light, //ThemeMode.system,
       debugShowCheckedModeBanner: false,
       initialBinding: MyBinding(),

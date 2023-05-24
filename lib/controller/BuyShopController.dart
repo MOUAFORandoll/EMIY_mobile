@@ -16,7 +16,8 @@ import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
+import 'dart:async';
+// import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class BuyShopController extends GetxController {
@@ -27,31 +28,6 @@ class BuyShopController extends GetxController {
   final service = new ApiService();
   LivreurRepo livreurRepo = Get.find();
   CommandeController commande = Get.find();
-  int _state = 0;
-  int get state => _state;
-  // ignore: must_call_super
-  onInit() {
-    _state = 0;
-    update();
-  }
-
-  // int _current = 0;
-  // int get current => _current;
-
-  stateChangeX(i) {
-    // _current = _state;
-    _state = i;
-
-    update();
-    print('_state..........${_state}');
-  }
-
-  stateChange(bool i) {
-    // _current = _state;
-    _state = i ? checkVal(_state + 1) : checkVal(_state - 1);
-
-    update();
-  }
 
   checkVal(val) {
     if (val > 3) {
@@ -63,12 +39,11 @@ class BuyShopController extends GetxController {
     }
   }
 
-  isCurrent(int index) {
-    return _state == index;
-  }
-
   bool _isOk = false;
   bool get isOk => _isOk;
+
+  int _isIdCom = 0;
+  int get isIdCom => _isIdCom;
   var fn = new ViewFunctions();
   // CategoryController({required this.service});
   buyCart() async {
@@ -99,49 +74,128 @@ class BuyShopController extends GetxController {
             'idModePaiement': mode,
             // 'idLivreur': _Bcontroller.isLivreur,
             'listProduits': produits,
-            // 'ville': user.ville,
-            // 'longitude': user.longitude,
-            // 'latitude': user.latitude,
-            'ville': "user.ville",
-            'longitude': "1.01",
-            'latitude': "12.5",
+
+            'longitude': user.longitude,
+            'latitude': user.latitude,
+            'ville': user.ville,
           };
 
     print(data);
 
     update();
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-          child: SpinKitRing(
-            lineWidth: 4,
-            color: ColorsApp.skyBlue,
-            size: 45,
-          ),
-        )));
+
     try {
+      fn.loading('Paiement', 'Initialisation de votre paiement en cours');
       Response response = await buySoppingCartRepo.buyCart(data);
       print(response.body);
 
-      Get.back();
       // fn.snackBar('Achat', response.body['message'], true);
       print(response.body);
-      _isOk = response.body['status'];
-      if (response.statusCode == 201 && _isOk) {
-        _paiementUrl = response.body['url'];
+
+      if (response.statusCode == 201) {
+        _isOk = response.body['status'];
+        var finish = response.body['finish'];
+        if (_isOk) {
+          fn.snackBar('Achat', response.body['message'], true);
+          if (finish) {
+            commande.saveCommande(
+                response.body['id'],
+                response.body['codeCommande'],
+                response.body['codeClient'],
+                response.body['date']);
+            fn.closeSnack();
+          } else {
+            _startTimer();
+            _paiementUrl = response.body['url'];
+            _isIdCom = response.body['id'];
+            update();
+            print(_paiementUrl);
+            fn.closeSnack();
+
+            await Get.to(() => PaiementView());
+            //ici on doit lancer la verification
+            print('dssdsd');
+          }
+        }
+
+        // await downloadFacture(response.body['pdf']);
+        // fn.snackBar('Achat',
+        //     'Votre facture a ete energistre dans votre telephone', true);
+      } else {
+        fn.closeSnack();
+
+        fn.snackBar('Achat', response.body['message'], false);
+      }
+      Get.find<CommandeController>().getListCommandes();
+
+      // Get.back(closeOverlays: true);
+      update();
+    } catch (e) {
+      fn.snackBar('Achat', 'Une erreur est survenue', false);
+      fn.closeSnack();
+      update();
+      print(e);
+    }
+  }
+
+  int _isCounter = 0;
+  int get isCounter => _isCounter;
+
+  bool _validateBuy = false;
+  bool get validateBuy => _validateBuy;
+  Timer? _timer;
+  void _startTimer() {
+    if (_isOk && _isCounter < 10 && !_validateBuy) {
+      Timer.periodic(Duration(seconds: 5), (_) {
+        // Appeler la fonction souhaitée ici
+
+        print('La fonction se relance toutes les 10 secondes.');
+        verifyCom();
+        _isCounter = _isCounter + 1;
         update();
-        print(_paiementUrl);
-        await Get.bottomSheet(PaiementView());
-        print('dssdsd');
-        commande.saveCommande(
-            response.body['id'],
-            response.body['codeCommande'],
-            response.body['codeClient'],
-            response.body['date']);
+        if (_isCounter == 9) {
+          Get.back();
+        }
+      });
+    }
+  }
+
+  void _stopTimer() {
+    print('stop***********************');
+    _timer?.cancel();
+  }
+
+  int _idSave = 0;
+  int get idSave => _idSave;
+  verifyCom() async {
+    var data = {
+      'id': _isIdCom,
+    };
+
+    print(data);
+
+    try {
+      Response response = await buySoppingCartRepo.verifyCom(data);
+      print(response.body);
+
+      // fn.snackBar('Achat', response.body['message'], true);
+      print(response.body);
+
+      if (response.statusCode == 201) {
+        _isOk = response.body['status'];
+        _validateBuy = true;
+
+        update();
+        if (_isOk && _idSave != response.body['id']) {
+          _idSave = response.body['id'];
+          commande.saveCommande(
+              response.body['id'],
+              response.body['codeCommande'],
+              response.body['codeClient'],
+              response.body['date']);
+          _stopTimer();
+        }
+
         // await downloadFacture(response.body['pdf']);
         // fn.snackBar('Achat',
         //     'Votre facture a ete energistre dans votre telephone', true);
@@ -151,9 +205,10 @@ class BuyShopController extends GetxController {
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      Get.back();
-      fn.snackBar('Achat', 'Une erreur est survenue', false);
-      // Get.back();
+      //         fn.closeSnack();
+
+      // fn.snackBar('Achat', 'Une erreur est survenue', false);
+      //         fn.closeSnack();
 
       update();
       print(e);
@@ -161,13 +216,13 @@ class BuyShopController extends GetxController {
   }
 
   downloadFacture(url) async {
-    final taskId = await FlutterDownloader.enqueue(
-        url: url,
-        savedDir: '/storage/emulated/0/Download',
-        showNotification: true, // afficher une notification de téléchargement
-        openFileFromNotification:
-            true // ouvrir le fichier après le téléchargement
-        );
+    // final taskId = await FlutterDownloader.enqueue(
+    //     url: url,
+    //     savedDir: '/storage/emulated/0/Download',
+    //     showNotification: true, // afficher une notification de téléchargement
+    //     openFileFromNotification:
+    //         true // ouvrir le fichier après le téléchargement
+    //     );
   }
 
   final TextEditingController _nameController = TextEditingController();

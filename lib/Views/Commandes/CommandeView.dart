@@ -30,62 +30,44 @@ class CommandeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CommandeController>(builder: (_commande) {
       return Scaffold(
-          body: CustomScrollView(controller: _scrollController, slivers: [
-        SliverList(
-
-            // Use a delegate to build items as they're scrolled on screen.
-            delegate: SliverChildBuilderDelegate(
-          // The builder function returns a ListTile with a title that
-          // displays the index of the current item.
-          (context, index) => _commande.isLoaded == 0
-              ? AppLoading()
-              : Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: kMarginY * 2),
-                    decoration: BoxDecoration(color: ColorsApp.grey),
-                    padding: EdgeInsets.only(
-                        left: kMdWidth / 6,
-                        right: kMdWidth / 6,
-                        top: kMarginY * 2.2,
-                        bottom: kMarginY * 2.2),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(child: AppBackButton()),
-                          Container(
-                            child: AppTitleRight(
-                                title: 'ycom'.tr,
-                                description: 'yscom'.tr,
-                                icon: null),
-                            margin: EdgeInsets.only(
-                                right:
-                                    MediaQuery.of(context).size.width * .005),
-                          ),
-                        ]),
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: AppBackButton(),
+            actions: [
+              Container(
+                  margin: EdgeInsets.only(top: Get.height * .020),
+                  padding: EdgeInsets.only(
+                      left: Get.width * .030, right: Get.width * .030),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: AppTitleRight(
+                              title: 'ycom'.tr,
+                              description: 'yscom'.tr,
+                              icon: null),
+                          margin: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * .005),
+                        ),
+                      ])),
+            ]),
+        body: _commande.isLoaded == 0
+            ? AppLoading()
+            : _commande.commandeList.length == 0
+                ? Container(
+                    height: kHeight, child: AppEmpty(title: 'Aucune Commande'))
+                : ListView.builder(
+                    // scrollDirection: Axis.horizontal,
+                    itemCount: _commande.commandeList.length,
+                    itemBuilder: (_ctx, index) =>
+                        _commande.commandeList[index].id != null
+                            ? CommandeComponent(
+                                commande: _commande.commandeList[index],
+                              )
+                            : Text(''),
                   ),
-                  _commande.commandeList.length == 0
-                      ? Container(
-                          height: kHeight,
-                          child: AppEmpty(title: 'Aucune Commande'))
-                      : Container(
-                          height: kMdHeight,
-                          margin: EdgeInsets.symmetric(vertical: kMarginY * .2),
-                          child: ListView.builder(
-                            // scrollDirection: Axis.horizontal,
-                            itemCount: _commande.commandeList.length,
-                            itemBuilder: (_ctx, index) =>
-                                _commande.commandeList[index].id != null
-                                    ? CommandeComponent(
-                                        commande: _commande.commandeList[index],
-                                      )
-                                    : Text(''),
-                          ),
-                        )
-                ]),
-
-          childCount: 1, //_commande.commandeList.length,
-        ))
-      ]));
+      );
     });
   }
 }

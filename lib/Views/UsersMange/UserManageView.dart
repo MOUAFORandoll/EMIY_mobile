@@ -34,23 +34,20 @@ class UserManageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ManagerController>(builder: (_manager) {
       return Scaffold(
-          body: CustomScrollView(controller: _scrollController, slivers: [
-        SliverAppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          floating: true,
-          flexibleSpace: InkWell(
-            child: SingleChildScrollView(
-              child: Column(children: [
+
+          appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: AppBackButton(),
+              actions: [
                 Container(
-                    margin: EdgeInsets.only(top: Get.height * .030),
+                    margin: EdgeInsets.only(top: Get.height * .020),
                     padding: EdgeInsets.only(
                         left: Get.width * .030, right: Get.width * .030),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(child: AppBackButton()),
-                          Container(
+                           Container(
                             child: AppTitleRight(
                                 title: 'yutilisateur'.tr,
                                 description: 'ysutilisateur'.tr,
@@ -61,10 +58,8 @@ class UserManageView extends StatelessWidget {
                           ),
                         ])),
               ]),
-            ),
-          ),
-          expandedHeight: 60,
-        ),
+          body: CustomScrollView(controller: _scrollController, slivers: [
+       
         SliverList(
 
             // Use a delegate to build items as they're scrolled on screen.
@@ -99,7 +94,7 @@ class UserManageView extends StatelessWidget {
                             children: [
                               Container(
                                   child: Text(
-                                'Mouafo Takoumbo Hariel',
+                                _manager.User.nom,
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: true,
@@ -112,7 +107,7 @@ class UserManageView extends StatelessWidget {
                               )),
                               Container(
                                   child: Text(
-                                'hari.randoll@gmail.com',
+                                _manager.User.email,
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: true,
@@ -125,7 +120,7 @@ class UserManageView extends StatelessWidget {
                               )),
                               Container(
                                   child: Text(
-                                '690863838',
+                                _manager.User.phone,
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: true,

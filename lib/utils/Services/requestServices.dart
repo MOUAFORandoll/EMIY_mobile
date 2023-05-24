@@ -16,7 +16,7 @@ import 'package:Fahkap/utils/api/apiUrl.dart';
 
 class ApiService extends GetConnect {
   GetStorage box = GetStorage();
-  var keySecret = /* new GetStorage().read('keySecret') ?? */ "1234";
+  var keySecret =   new GetStorage().read('keySecret')  ;
   init() {
     httpClient.baseUrl = ApiUrl.baseUrl;
     print('init********00 ${httpClient.baseUrl}----  ${ApiUrl.baseUrl}');

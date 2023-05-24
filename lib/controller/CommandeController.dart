@@ -7,6 +7,7 @@ import 'package:Fahkap/repository/CommandeRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:get/get.dart';
 
 class CommandeController extends GetxController {
@@ -56,10 +57,14 @@ class CommandeController extends GetxController {
     });
   }
 
+  var fn = new ViewFunctions();
+
   getProduitForCommandes(id) async {
     print('*------33333333333333333333${id}');
 
     try {
+      // fn.loading(
+      //     'Commande', 'Recuperation des produits de la commande en cours');
       _isLoadedP = false;
       _produitList.clear();
       findComBuyId(id);
@@ -71,11 +76,18 @@ class CommandeController extends GetxController {
           produitList.addAll((response.body['data'] as List)
               .map((e) => Produit.fromJson(e))
               .toList());
+
+          // fn.closeSnack();
         }
         _isLoadedP = true;
         update();
+        // fn.closeSnack();
       }
+
+      // fn.closeSnack();
     } catch (e) {
+      // fn.closeSnack();
+
       print(e);
     }
   }

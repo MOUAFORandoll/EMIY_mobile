@@ -175,7 +175,8 @@ class ActionController extends GetxController {
     int index = locale.indexWhere((element) => element['name'] == localLang);
     if (index != -1) {
       lang.value = locale[index]['name'];
-      // Get.back();
+      //        fn.closeSnack();
+
       Get.updateLocale(locale[index]['locale']);
       print(lang.value);
       await store.saveLan(lang.value);
@@ -223,30 +224,24 @@ class ActionController extends GetxController {
     if (note < 0 || note > 5) {
       return false;
     }
-    // var getU = await s.getKey();
-    // if (getU == null) {
-    //   fn.snackBar('Note', 'Veuillez vous connecter', true);
-    // }
+    var getU = await s.getKey();
+    if (getU == null) {
+      fn.snackBar('Note', 'Veuillez vous connecter', true);
+    }
     var data = {
       'note': note,
       'codeProduit': codeProduit,
-      "keySecret": 12341 //getU,
+      "keySecret": getU,
     };
     print(data);
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+
+    fn.loading('Note', 'Notation du produit en cours');
+
     try {
       Response response = await actionRepo.addNotationProduit(data);
 
-      Get.back();
+      fn.closeSnack();
+
       update();
       if (response.statusCode == 200) {
         fn.snackBar('Note', 'Effectue', true);
@@ -254,7 +249,8 @@ class ActionController extends GetxController {
         fn.snackBar('Note', 'Erreur', false);
       }
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Note', 'Erreur', false);
 
       print(e);
@@ -275,20 +271,13 @@ class ActionController extends GetxController {
       "keySecret": 12341 //getU,
     };
     print(data);
-    Get.defaultDialog(
-        title: 'En cours',
-        barrierDismissible: false,
-        content: SizedBox(
-            // height: Get.size.height * .02,
-            // width: Get.size.width * .02,
-            child: Center(
-                child: CircularProgressIndicator(
-          color: Colors.blueAccent,
-        ))));
+    fn.loading('Note', 'Notation de la boutique en cours');
+
     try {
       Response response = await actionRepo.addNotationBoutique(data);
       print(response.body);
-      Get.back();
+      fn.closeSnack();
+
       update();
       if (response.statusCode == 200) {
         fn.snackBar('Note', 'Effectue', true);
@@ -296,7 +285,8 @@ class ActionController extends GetxController {
         fn.snackBar('Note', 'Erreur', false);
       }
     } catch (e) {
-      Get.back();
+      fn.closeSnack();
+
       fn.snackBar('Note', 'Erreur', false);
       print(e);
     }
