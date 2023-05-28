@@ -19,6 +19,8 @@ class ImageComp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: Colors.white),
           margin: EdgeInsets.only(right: 5),
           height: kMdHeight / 5,
           width: Get.width / 3,
@@ -27,14 +29,14 @@ class ImageComp extends StatelessWidget {
             fit: BoxFit.cover,
           )),
       Positioned(
-          left: 0,
+          right: 0,
           top: 0,
           child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: Colors.white),
+                  borderRadius: BorderRadius.circular(10), color: Colors.white),
               padding: EdgeInsets.all(5),
               child: InkWell(
-                  child: Icon(Icons.close, color: Colors.red),
+                  child: Icon(Icons.close, color: Colors.red, size: 15),
                   onTap: () async {
                     await Get.find<BoutiqueController>().deleteImage(index);
                   })))

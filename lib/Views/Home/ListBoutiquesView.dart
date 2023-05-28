@@ -29,7 +29,7 @@ class ListBoutiquesView extends StatelessWidget {
   ScrollController _scrollController = new ScrollController();
   @override
   Widget build(BuildContext context) {
-    print(Get.parameters);
+    //print(Get.parameters);
     // Get.find<CategoryBoutiqueController>().getListBoutiques();
 
     return Scaffold(

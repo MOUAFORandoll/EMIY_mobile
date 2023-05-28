@@ -27,7 +27,7 @@ class SearchController extends GetxController {
     _listResultSeaarch = [];
 
     update();
-    print(_tsearch);
+    //print(_tsearch);
   }
 
   TextEditingController _controllerField = TextEditingController();
@@ -83,8 +83,8 @@ class SearchController extends GetxController {
           await searchRepo.searchData(tsearch, controllerField.text);
 
       if (response.body != null) {
-        print('**********search');
-        print(response.body['data']);
+        //print('**********search');
+        //print(response.body['data']);
         if (response.body['data'].length != 0) {
           _listResultSeaarch.addAll((response.body['data'] as List)
               .map((e) => tsearch == 0
@@ -98,7 +98,7 @@ class SearchController extends GetxController {
         update();
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 }

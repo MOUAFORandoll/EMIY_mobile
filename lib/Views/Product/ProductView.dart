@@ -35,7 +35,7 @@ class ProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.find<ManagerController>().initCurrent();
 
-    print(index);
+    //print(index);
     Object produ = Get.parameters['type'] == '0'
         ? Get.find<ProductController>().produitList[index]
         : Get.parameters['type'] == 'search'
@@ -47,7 +47,7 @@ class ProductView extends StatelessWidget {
     var product = produ as ProduitModel;
     Get.find<ProductController>()
         .initProduct(Get.find<CartController>(), product);
-    print(product);
+    //print(product);
     return GetBuilder<ManagerController>(
         builder: (manage) => WillPopScope(
             onWillPop: () async {
@@ -228,7 +228,7 @@ class ProductView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:
                                     product.images.asMap().entries.map((entry) {
-                                  // print(entry.key);
+                                  // //print(entry.key);
                                   return GestureDetector(
                                     onTap: () =>
                                         _controller.animateToPage(entry.key),
@@ -332,7 +332,7 @@ class ProductView extends StatelessWidget {
                                                         size: 30,
                                                         onRatingChanged:
                                                             (double rating) {
-                                                          print(rating);
+                                                          //print(rating);
                                                           Get.find<
                                                                   ActionController>()
                                                               .notationProduit(
@@ -445,8 +445,8 @@ class ProductView extends StatelessWidget {
                                                   prod.setQuantity(true);
                                                   prod.addItem(product, index,
                                                       Get.parameters['type']);
-                                                  print(
-                                                      "****************${prod.inCartItems}");
+                                                  //print(
+                                                      // "****************${prod.inCartItems}");
                                                 },
                                               ),
                                             ],

@@ -1,5 +1,7 @@
 import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/controller/ActionController.dart';
+import 'package:Fahkap/controller/ShortController.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:Fahkap/components/Button/IconButtonF.dart';
 import 'package:Fahkap/components/Button/btnCatList.dart';
@@ -37,7 +39,7 @@ class BoutiqueView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Get.parameters);
+    //print(Get.parameters);
 
     Get.find<CategoryBoutiqueController>()
         .getDataForBoutique(Get.parameters['codeBoutique']);
@@ -70,57 +72,66 @@ class BoutiqueView extends StatelessWidget {
                     Get.back();
                   },
                 ),
-                // BigtitleText0(
-                //     text: Get.parameters['nomBoutique'].toString(),
-                //     bolder: true),
-                Container(
-                  margin: EdgeInsets.only(right: kMdWidth * .2),
-                ),
+                InkWell(
+                    child: Container(
+                        // margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.all(kMarginX / 3),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue, width: 2),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Icon(
+                          Icons.amp_stories,
+                          color: Colors.red,
+                        )),
+                    onTap: () {
+                      Get.find<ShortController>().getListShort();
+
+                      Get.toNamed(AppLinks.SHORT);
+                    })
               ],
             )),
             flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: GradientApp.blueG,
-                ),
-                child: CachedNetworkImage(
-                  height: kMdHeight * .30,
-                  width: kSmWidth * 1.3,
-                  fit: BoxFit.cover,
-                  imageUrl: Get.parameters['image'].toString(),
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: ColorsApp.greySecond,
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
-                                Colors.transparent, BlendMode.colorBurn)),
-                      ),
-                    );
-                  },
-                  placeholder: (context, url) {
-                    return Container(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: ColorsApp.skyBlue,
-                      )),
-                    );
-                  },
-                  errorWidget: (context, url, error) {
-                    return Container(
-                        height: kMdHeight * .15,
-                        width: Get.width * .5,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: AssetImage('assets/logo.png'),
-                        )));
-                  },
-                ),
+                background: Container(
+              decoration: BoxDecoration(
+                gradient: GradientApp.blueG,
               ),
-            ),
+              child: CachedNetworkImage(
+                height: kMdHeight * .30,
+                width: kWidth,
+                fit: BoxFit.cover,
+                imageUrl: Get.parameters['image'].toString(),
+                imageBuilder: (context, imageProvider) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: ColorsApp.greySecond,
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.transparent, BlendMode.colorBurn)),
+                    ),
+                  );
+                },
+                placeholder: (context, url) {
+                  return Container(
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: ColorsApp.skyBlue,
+                    )),
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return Container(
+                      height: kMdHeight * .15,
+                      width: Get.width * .5,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage('assets/logo.png'),
+                      )));
+                },
+              ),
+            )),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(35),
               child: Container(
@@ -178,9 +189,9 @@ class BoutiqueView extends StatelessWidget {
                                         halfFilledColor: Colors.yellow,
                                         size: 19,
                                         onRatingChanged: (double rating) {
-                                          print(rating);
-                                          print(Get.parameters['codeBoutique']
-                                              .toString());
+                                          //print(rating);
+                                          //print(Get.parameters['codeBoutique']
+                                          // .toString());
                                           Get.find<ActionController>()
                                               .notationBoutique(
                                             rating,
@@ -195,13 +206,13 @@ class BoutiqueView extends StatelessWidget {
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              Get.parameters['description'].toString(),
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            // Text(
+                            //   Get.parameters['description'].toString(),
+                            //   style: TextStyle(
+                            //     fontSize: 14,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
                             Text(
                               'Situe a ' + Get.parameters['ville'].toString(),
                               style: TextStyle(
@@ -404,7 +415,7 @@ class BoutiqueView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Get.parameters);
+    //print(Get.parameters);
 
     Get.find<CategoryBoutiqueController>()
         .getDataForBoutique(Get.parameters['codeBoutique']);

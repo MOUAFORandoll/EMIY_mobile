@@ -34,7 +34,7 @@ class BoutiqueRepo extends GetxService {
   Future getListHCommandeForBoutique(codeBoutique) async {
     Response a = await apiClient.getCollectionsP(
         ApiRoutes.BOUTIQUE_READ_HCOMMANDE, {'codeBoutique': codeBoutique});
-    print(a.body);
+    //print(a.body);
 
     return a;
   }
@@ -73,6 +73,7 @@ class BoutiqueRepo extends GetxService {
 
     return a;
   }
+
   Future newProduitiMAGEFB(data) async {
     Response a = await apiClient.postData(ApiRoutes.ADD_PRODUCT_IMAGE, data);
     ;
@@ -103,10 +104,10 @@ class BoutiqueRepo extends GetxService {
   }
 
   Future newBoutique(data) async {
-    print('************oc');
+    //print('************oc');
     Response a = await apiClient.postData(ApiRoutes.BOUTIQUE_NEW, data);
 
-    print(a.body);
+    //print(a.body);
     return a;
   }
 
@@ -118,7 +119,6 @@ class BoutiqueRepo extends GetxService {
     return a;
   }
 
-  
   Future getListShortBoutique(data) async {
     Response a = await apiClient.postData(ApiRoutes.SHORT_READ_BOUTIQUE, data);
 
@@ -132,5 +132,3 @@ class BoutiqueRepo extends GetxService {
     return a;
   }
 }
-
-

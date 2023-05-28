@@ -424,7 +424,7 @@ class WalletView extends StatelessWidget {
                                             'prenom': prenom,
                                             'idModePaiement': mode
                                           };
-                                          print(data);
+                                          //print(data);
                                           await transControll.depot(data);
                                         })
                                   ],
@@ -495,7 +495,7 @@ class WalletView extends StatelessWidget {
                                             'montant': montant.text,
                                             'phone': phone.text,
                                           };
-                                          print(data);
+                                          //print(data);
                                           await transControll.retrait(data);
                                         })
                                   ],

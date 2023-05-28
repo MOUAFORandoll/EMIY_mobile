@@ -55,8 +55,8 @@ class _FormComponent2State extends State<FormComponent2> {
                   value = val;
                 });
 
-                print('value');
-                print(value);
+                //print('value');
+                //print(value);
               },
               keyboardType: widget.kType,
               obscureText: widget.type == 1 ? true : false,

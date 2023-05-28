@@ -7,6 +7,7 @@ import 'package:Fahkap/model/data/ProduitModel.dart';
 import 'package:Fahkap/model/data/UserModel.dart';
 import 'package:Fahkap/repository/ManageRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/core.dart';
 import 'package:Fahkap/utils/Services/dependancies.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/Services/storageService2.dart';
@@ -25,13 +26,13 @@ class ManagerController extends GetxController {
   initCurrent() {
     _current = 0;
     update();
-    // print('curent ${_current}');
+    // //print('curent ${_current}');
   }
 
   setCurrent(int i) {
     _current = i;
     update();
-    // print('curent ${_current}');
+    // //print('curent ${_current}');
   }
 
   late Timer _timer;
@@ -46,7 +47,7 @@ class ManagerController extends GetxController {
       _timer = new Timer.periodic(
         oneSec,
         (Timer timer) {
-          // print('iii');
+          // //print('iii');
           if (_tailleAdd == 120) {
             _tailleAdd = 0;
 
@@ -56,7 +57,7 @@ class ManagerController extends GetxController {
 
             update();
           }
-          // print(_tailleAdd);
+          // //print(_tailleAdd);
         },
       );
     }
@@ -68,8 +69,8 @@ class ManagerController extends GetxController {
   chageN(bool i) {
     _stateN = i;
     update();
-    print('st****************');
-    // print(_stateN);
+    //print('st****************');
+    // //print(_stateN);
   }
 
   final service = new ApiService();
@@ -102,8 +103,8 @@ class ManagerController extends GetxController {
 
   getLocalU() async {
     var data = await s.getLonLat();
-    // print('******************data');
-    // print(data);
+    // //print('******************data');
+    // //print(data);
     if (data != null) {
       if (data.length != 0) {
         _ville = data['ville'];
@@ -118,7 +119,7 @@ class ManagerController extends GetxController {
   bool get userP => _userP;
   getKeyU() async {
     var u = await s.getKey();
-    print('----------------uuuuu--$u');
+    //print('----------------uuuuu--$u');
 
     _userP = (u == null);
 
@@ -128,7 +129,7 @@ class ManagerController extends GetxController {
     } else {
       chageState(0);
     }
-    // print('------------------${s.getKey()}');
+    // //print('------------------${s.getKey()}');
     update();
   }
 
@@ -161,15 +162,15 @@ class ManagerController extends GetxController {
   //
   // CategoryController({required this.service});
   getUser() async {
-    // print('user-------------------------${new GetStorage().read('keySecret')}');
+    // //print('user-------------------------${new GetStorage().read('keySecret')}');
     var getU = await s.getKey();
-    print('key******************** ${getU}');
+    //print('key******************** ${getU}');
     // await this.userRefresh();
     // ignore: unnecessary_null_comparison
 
     try {
       Response response = await manageRepo.getUser();
-      print('user-------------------------${response.body}');
+      //print('user-------------------------${response.body}');
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _User = UserModel.fromJson(response.body['data']);
@@ -182,8 +183,8 @@ class ManagerController extends GetxController {
             emailU.text = User.email;
           }
           getKeyU();
-          print(
-              '_isok------------***********************-------------------------${_isLoaded}');
+          //print(
+          // '_isok------------***********************-------------------------${_isLoaded}');
           Get.find<BoutiqueController>().getBoutique();
         }
 
@@ -193,19 +194,19 @@ class ManagerController extends GetxController {
     } catch (e) {
       _isLoaded = 1;
       update();
-      print(e);
+      //print(e);
     }
   }
 
   // CategoryController({required this.service});
   newLocalisation() async {
-    // print('user-------------------------${new GetStorage().read('keySecret')}');
+    // //print('user-------------------------${new GetStorage().read('keySecret')}');
     try {
       Response response = await manageRepo.newConnexion();
 
       if (response.body != null) {
         if (response.body['data'].length != 0) {
-          // print('user-------------------------${response.body['data']}');
+          // //print('user-------------------------${response.body['data']}');
           if (response.statusCode == 203) {
             await newLocalisation();
           }
@@ -231,7 +232,7 @@ class ManagerController extends GetxController {
 
     update();
 
-    print('---------userp---------${userP}');
+    //print('---------userp---------${userP}');
 
     // Get.find<DB>().deleteAll();
   }
@@ -272,12 +273,12 @@ class ManagerController extends GetxController {
       'phone': phoneU.text,
       'email': emailU.text,
     };
-    print(data);
+    //print(data);
     fn.loading('Compte', 'Mise a jour de votre compte en cours');
 
     try {
       Response response = await manageRepo.updateUser(data);
-      print(response.body);
+      //print(response.body);
 
       if (response.statusCode == 200) {
         getKeyU();
@@ -298,7 +299,7 @@ class ManagerController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -320,11 +321,12 @@ class ManagerController extends GetxController {
 
     try {
       Response response = await manageRepo.Login(data);
-//       print(response.body);
+//       //print(response.body);
       if (response.statusCode == 200) {
         s.saveKeyKen(response.body);
 
         getKeyU();
+        await initApp();
         await getUser();
         _isConnected = true;
         // Get.back(closeOverlays: true);
@@ -348,7 +350,7 @@ class ManagerController extends GetxController {
 
       _isConnected = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -391,17 +393,19 @@ class ManagerController extends GetxController {
       "email": email.text,
       "status": true,
     };
-    print(data);
+    //print(data);
     fn.loading('Inscription', 'Creatoin de votre compte en cours');
 
     try {
       Response response = await manageRepo.SignUp(data);
-//       print(response.body);
+//       //print(response.body);
 //  this.saveKeyKen(response.body);
       if (response.statusCode == 200) {
         s.saveKeyKen(response.body);
 
         getKeyU();
+        await initApp();
+
         await getUser();
         // await MyBinding().onGetAll();
       }
@@ -420,7 +424,7 @@ class ManagerController extends GetxController {
 
       _isSignUp = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 

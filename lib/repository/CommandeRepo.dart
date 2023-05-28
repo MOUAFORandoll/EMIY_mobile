@@ -10,11 +10,11 @@ class CommandeRepo extends GetxService with DB {
   CommandeRepo({required this.apiClient});
 
   // Future getListCommande() async {
-  //   // print('get----------------');
+  //   // //print('get----------------');
   //   // try {
   //   var response = this.getListCommande();
-  //   print('response-----------------------------');
-  //   print(response);
+  //   //print('response-----------------------------');
+  //   //print(response);
   //   return response;
   // }
 
@@ -24,7 +24,7 @@ class CommandeRepo extends GetxService with DB {
         .getCollectionsP(ApiRoutes.USER_READ_COMMANDE_PRODUIT, {
       'idCom': id, /* 'keySecret': keySecret */
     });
-    print(response.body);
+    //print(response.body);
     return response;
   }
 }

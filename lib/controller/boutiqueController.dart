@@ -5,6 +5,7 @@ import 'package:Fahkap/Views/BoutiqueUser/HistroriqueCBUView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/manageBoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/produitBoutiqueUserView.dart';
+import 'package:Fahkap/controller/categoryBoutiqueController.dart';
 import 'package:Fahkap/model/data/BoutiqueModel.dart';
 import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
 import 'package:Fahkap/model/data/CategoryModel.dart';
@@ -50,9 +51,31 @@ class BoutiqueController extends GetxController {
 
   File imageFile = new File('');
 
-  Future getImage() async {
+  Future getImageAppareil() async {
     try {
-      print("wwwwwwwww");
+      //print("wwwwwwwww");
+
+      var image = await ImagePicker().pickImage(
+          source: ImageSource.camera,
+          imageQuality: 100,
+          maxHeight: 500,
+          maxWidth: 500);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      // );
+      _listImgProduits.add(File(image!.path));
+
+      update();
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
+  Future getImageGalerie() async {
+    try {
+      //print("wwwwwwwww");
 
       var image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
@@ -65,7 +88,7 @@ class BoutiqueController extends GetxController {
       //   sourcePath: image.path,
       // );
       _listImgProduits.add(File(image!.path));
-      print(_listImgProduits.length);
+      //print(_listImgProduits.length);
       update();
     } catch (e) {
       // _showToastPictureError(context);
@@ -94,30 +117,54 @@ class BoutiqueController extends GetxController {
     try {
       if (_categoryList.isEmpty) {
         _isLoadedC = 0;
-        Response response = await boutiqueRepo.getListCategory();
+        _categoryList = Get.find<CategoryBoutiqueController>().categoryList;
+        // Response response = await boutiqueRepo.getListCategory();
 
-        if (response.body != null) {
-          if (response.body['data'].length != 0) {
-            _categoryList.addAll((response.body['data'] as List)
-                .map((e) => CategoryModel.fromJson(e))
-                .toList());
-          }
-          _isLoadedC = 1;
-          update();
-        }
-        // print(_categoryList);
+        // if (response.body != null) {
+        //   if (response.body['data'].length != 0) {
+        //     _categoryList.addAll((response.body['data'] as List)
+        //         .map((e) => CategoryModel.fromJson(e))
+        //         .toList());
+        //   }
+        _isLoadedC = 1;
+        update();
+        // }
+        // //print(_categoryList);
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
   File boutiqueImage = new File('');
   bool _isImage = false;
   bool get isImage => _isImage;
-  Future getImageBoutique() async {
+  Future getImageBoutiqueCamera() async {
     try {
-      print("wwwwwwwww");
+      //print("wwwwwwwww");
+
+      var image = await ImagePicker().pickImage(
+          source: ImageSource.camera,
+          imageQuality: 100,
+          maxHeight: 500,
+          maxWidth: 500);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      // );
+      boutiqueImage = (File(image!.path));
+      _isImage = true;
+      // //print(_listImgProduits.length);
+      update();
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
+  Future getImageBoutiqueGallery() async {
+    try {
+      //print("wwwwwwwww");
 
       var image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
@@ -131,7 +178,7 @@ class BoutiqueController extends GetxController {
       // );
       boutiqueImage = (File(image!.path));
       _isImage = true;
-      // print(_listImgProduits.length);
+      // //print(_listImgProduits.length);
       update();
     } catch (e) {
       // _showToastPictureError(context);
@@ -140,7 +187,13 @@ class BoutiqueController extends GetxController {
 
   bool _isOk = false;
   bool get isOk => _isOk;
-  newBoutique(data) async {
+
+  TextEditingController _titreBoutique = TextEditingController();
+  get titreBoutique => _titreBoutique;
+
+  TextEditingController _descriptionBoutique = TextEditingController();
+  get descriptionBoutique => _descriptionBoutique;
+  newBoutique() async {
     _isOk = false;
     update();
 
@@ -166,9 +219,9 @@ class BoutiqueController extends GetxController {
             boutiqueImage.path,
             filename: "Image.jpg",
           ),
-          'titre': data['titre'],
-          'description': data['description'],
-          'idCategory': data['category'],
+          'titre': titreBoutique.text,
+          'description': descriptionBoutique.text,
+          'idCategory': categorySelect.id,
           'ville': ville,
           'longitude': longitude,
           'latitude': latitude,
@@ -176,7 +229,7 @@ class BoutiqueController extends GetxController {
         });
 
         Response response = await boutiqueRepo.newBoutique(formData);
-        print(response.body);
+        //print(response.body);
 
         if (response.statusCode == 200) {
           _isOk = false;
@@ -202,7 +255,7 @@ class BoutiqueController extends GetxController {
 
       _isUpdatingB = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -240,10 +293,10 @@ class BoutiqueController extends GetxController {
             'keySecret': key
           });
 
-          print(formData.files);
+          //print(formData.files);
 
           Response response = await boutiqueRepo.updateImageBoutique(formData);
-          print(response.body);
+          //print(response.body);
           if (response.statusCode == 200) {
             await getBoutique();
           }
@@ -261,7 +314,7 @@ class BoutiqueController extends GetxController {
 
           _isUpdating = false;
           update();
-          print(e);
+          //print(e);
         }
       }
     } catch (e) {
@@ -272,19 +325,19 @@ class BoutiqueController extends GetxController {
   // BoutiqueController({required this.service});
   getBoutique() async {
     try {
-      print('---0000--------boutiqr************************');
+      //print('---0000--------boutiqr************************');
 
       _isLoaded = 0;
       update();
 
       Response response = await boutiqueRepo.getBoutiqueForUser();
       if (response.body != null) {
-        print('---111--------boutiqr************************');
+        //print('---111--------boutiqr************************');
 
         if (response.body['data'] != null &&
             response.body['data'].length != 0) {
           print('-----------boutiqr************************');
-          print(response.body['data'].length);
+          print(response.body['data']);
           _Boutique = BoutiqueUserModel.fromJson(response.body['data']);
           update();
           _isExist = response.body['exist'];
@@ -294,19 +347,19 @@ class BoutiqueController extends GetxController {
           _isLoaded = 1;
           update();
           getEltBoutique();
-          // print(_Boutique);
+          // //print(_Boutique);
         }
       }
 
       getListShort();
     } catch (e) {
       _isExist = false;
-      print('---error--------boutiqr************************');
+      //print('---error--------boutiqr************************');
 
       _isLoaded = 2;
 
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -325,7 +378,7 @@ class BoutiqueController extends GetxController {
     // _commandeBoutiqueList = [];
     _searchCom = false;
     _isLoadedPC = 0;
-    print('getCOmeee---------');
+    //print('getCOmeee---------');
     try {
       Response response =
           await boutiqueRepo.getListCommandeForBoutique(Boutique.codeBoutique);
@@ -341,7 +394,7 @@ class BoutiqueController extends GetxController {
         update();
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -370,12 +423,12 @@ class BoutiqueController extends GetxController {
         update();
       }
       _HcommandeBoutiqueListSave = _HcommandeBoutiqueList;
-      print('i-----');
-      print(response.body['data']);
+      //print('i-----');
+      //print(response.body['data']);
       _isLoadedPH = 1;
       update();
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -390,7 +443,7 @@ class BoutiqueController extends GetxController {
     update();
 
     _searchProB = false;
-    print('getProduit---------');
+    //print('getProduit---------');
 
     try {
       Response response =
@@ -408,7 +461,7 @@ class BoutiqueController extends GetxController {
       }
       _produitBoutiqueListSave = _produitBoutiqueList;
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -446,10 +499,10 @@ class BoutiqueController extends GetxController {
             'idProduitObject': idProduitObject
           });
 
-          print(formData.files);
+          //print(formData.files);
 
           Response response = await boutiqueRepo.updateProduitiMAGEFB(formData);
-          print(response.body);
+          //print(response.body);
           if (response.statusCode == 200) {
             await getListProduitForBoutique();
             fn.closeSnack();
@@ -469,7 +522,7 @@ class BoutiqueController extends GetxController {
 
           _isUpdating = false;
           update();
-          print(e);
+          //print(e);
         }
       }
     } catch (e) {
@@ -512,10 +565,10 @@ class BoutiqueController extends GetxController {
             'idProduit': idProduit
           });
 
-          print(formData.files);
+          //print(formData.files);
 
           Response response = await boutiqueRepo.newProduitiMAGEFB(formData);
-          print(response.body);
+          //print(response.body);
           if (response.statusCode == 200) {
             await getListProduitForBoutique();
             fn.closeSnack();
@@ -535,7 +588,7 @@ class BoutiqueController extends GetxController {
 
           _isUpdating = false;
           update();
-          print(e);
+          //print(e);
         }
       }
     } catch (e) {
@@ -553,7 +606,7 @@ class BoutiqueController extends GetxController {
 
     try {
       Response response = await boutiqueRepo.updateProduitFB(data);
-      print(response.body);
+      //print(response.body);
       if (response.statusCode == 200) {
         await getBoutique();
       }
@@ -572,18 +625,72 @@ class BoutiqueController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
-  addProduit(data) async {
-    _isUpdating = true;
-    update();
-    fn.loading('Produit', 'Ajout d\'un nouveau produit en cours');
+  onInit() {
+    super.onInit();
+    _quantite.text = '0';
+  }
 
+  TextEditingController _name = TextEditingController();
+  get name => _name;
+
+  TextEditingController _quantite = TextEditingController();
+  get quantite => _quantite;
+
+  TextEditingController _prix = TextEditingController();
+  get prix => _prix;
+
+  TextEditingController _descriptionP = TextEditingController();
+  get descriptionP => _descriptionP;
+  mamageQte(val) {
+    quantite.text = val
+        ? check(int.parse(quantite.text) + 1)
+        : check(int.parse(quantite.text) - 1);
+    update();
+  }
+
+  check(val) {
+    return val < 0 ? '0' : val.toString();
+  }
+
+  addProduit() async {
     try {
+      fn.loading('Produit', 'Ajout d\'un nouveau produit en cours');
+      var key = await s.getKey();
+      if (Boutique == null) {
+        await getBoutique();
+      }
+      Map<String, Object> dataS = {
+        'keySecret': key,
+        'titre': name.text,
+        'description': descriptionP.text,
+        'prixUnitaire': prix.text,
+        'quantite': quantite.text,
+        // 'idCategory':
+        //     _controller.categorySelect.id,
+        'codeBoutique': Boutique.codeBoutique,
+        'countImage': listImgProduits.length
+      };
+      //print(dataS);
+
+      listImgProduits.forEach((e) {
+        dataS.addAll({
+          "file${listImgProduits.indexOf(e)}": MultipartFile(
+            e.path,
+            filename: "Image.jpg",
+          )
+        });
+      });
+      FormData data = new FormData(dataS);
+
+      _isUpdating = true;
+      update();
+
       Response response = await boutiqueRepo.newProduit(data);
-      print(response.body);
+      //print(response.body);
       if (response.statusCode == 200) {
         await getBoutique();
       }
@@ -602,7 +709,7 @@ class BoutiqueController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -613,7 +720,7 @@ class BoutiqueController extends GetxController {
 
     try {
       Response response = await boutiqueRepo.desibledProduitFB(data);
-      print(response.body);
+      //print(response.body);
 
       if (response.statusCode == 200) {
         await getBoutique();
@@ -632,7 +739,7 @@ class BoutiqueController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -653,14 +760,14 @@ class BoutiqueController extends GetxController {
       'codeBoutique': Boutique.codeBoutique,
       // 'email': email.text,
     };
-    print(data);
+    //print(data);
     _isUpdatingB = true;
     update();
     fn.loading('Boutique', 'Mise a jour de la boutique en cours');
 
     try {
       Response response = await boutiqueRepo.updateBoutique(data);
-      print(response.body);
+      //print(response.body);
 
       if (response.statusCode == 200) {
         await getBoutique();
@@ -680,7 +787,7 @@ class BoutiqueController extends GetxController {
 
       _isUpdatingB = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -695,15 +802,15 @@ class BoutiqueController extends GetxController {
 
   getLocalU() async {
     var data = await s.getLonLat();
-    print('*****************data');
-    print(data);
+    //print('*****************data');
+    //print(data);
     if (data.isNotEmpty) {
       _ville = data['ville'];
       _longitude = data['long'];
       _latitude = data['lat'];
       update();
     }
-    print('*****************data');
+    //print('*****************data');
   }
 
   updateLocalisationBoutique() async {
@@ -716,7 +823,7 @@ class BoutiqueController extends GetxController {
       'longitude': longitude,
       'latitude': latitude,
     };
-    print(data);
+    //print(data);
     _isUpdatingB = true;
     update();
     fn.loading(
@@ -724,7 +831,7 @@ class BoutiqueController extends GetxController {
 
     try {
       Response response = await boutiqueRepo.updateLocalisationBoutique(data);
-      print(response.body);
+      //print(response.body);
 
       if (response.statusCode == 200) {
         await getBoutique();
@@ -744,7 +851,7 @@ class BoutiqueController extends GetxController {
 
       _isUpdatingB = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -763,7 +870,7 @@ class BoutiqueController extends GetxController {
   }
 
   searchCommande(text) {
-    print(text);
+    //print(text);
     _commandeBoutiqueList = [];
     List<CommandeBoutiqueModel> cont = [];
     _commandeBoutiqueListSave.forEach((item) {
@@ -772,7 +879,7 @@ class BoutiqueController extends GetxController {
         cont.add(item);
       }
     });
-    print(cont.length);
+    //print(cont.length);
     if (cont.length != 0) {
       _commandeBoutiqueList = cont;
     } else {
@@ -792,7 +899,7 @@ class BoutiqueController extends GetxController {
   }
 
   HsearchCommande(text) {
-    print(text);
+    //print(text);
     _HcommandeBoutiqueList = [];
     List<CommandeBoutiqueModel> cont = [];
     _HcommandeBoutiqueListSave.forEach((item) {
@@ -801,7 +908,7 @@ class BoutiqueController extends GetxController {
         cont.add(item);
       }
     });
-    print(cont.length);
+    //print(cont.length);
     if (cont.length != 0) {
       _HcommandeBoutiqueList = cont;
     } else {
@@ -823,7 +930,7 @@ class BoutiqueController extends GetxController {
   }
 
   searchProduitB(text) {
-    print(text);
+    //print(text);
     _produitBoutiqueList.clear();
     List<ProduitBoutiqueModel> cont = [];
     _produitBoutiqueListSave.forEach((item) {
@@ -832,7 +939,7 @@ class BoutiqueController extends GetxController {
         cont.add(item);
       }
     });
-    print(cont.length);
+    //print(cont.length);
     if (cont.length != 0) {
       _produitBoutiqueList = cont;
     } else {
@@ -842,14 +949,13 @@ class BoutiqueController extends GetxController {
     update();
   }
 
-
   bool _addProduct = false;
   bool get addProduct => _addProduct;
   chageState(i) {
     _addProduct = i;
     update();
-    print(_addProduct);
-    print(!_addProduct);
+    //print(_addProduct);
+    //print(!_addProduct);
   }
 
   List<ShortModel> _listShortBoutique = [];
@@ -857,7 +963,7 @@ class BoutiqueController extends GetxController {
   int _isLoadedShort = 0;
   int get isLoadedShort => _isLoadedShort;
   Future<void> getListShort() async {
-    // print('***short******************response**********');
+    // //print('***short******************response**********');
 
     _isLoadedShort = 0;
     try {
@@ -881,7 +987,7 @@ class BoutiqueController extends GetxController {
         }
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -905,7 +1011,7 @@ class BoutiqueController extends GetxController {
     // ignore: unnecessary_null_comparison
     // if (listShort[prevVideo].controller != null) controller!.pause();
 
-    print(index);
+    //print(index);
   }
 
   List<File> _videoShort = [];
@@ -925,7 +1031,7 @@ class BoutiqueController extends GetxController {
     try {
       _videoShort.clear();
       update();
-      print("wwwwwwwww  ${_videoShort.length}");
+      //print("wwwwwwwww  ${_videoShort.length}");
       // ignore: deprecated_member_use
       PickedFile? video =
           await ImagePicker().getVideo(source: ImageSource.gallery);
@@ -943,7 +1049,7 @@ class BoutiqueController extends GetxController {
           ..initialize().then((_) {
             _videoPlayerController!.play();
           });
-      
+
         update();
       }
     } catch (e) {
@@ -1003,7 +1109,7 @@ class BoutiqueController extends GetxController {
     FormData data = new FormData(dataS);
     try {
       Response response = await boutiqueRepo.newShort(data);
-      print(response.body);
+      //print(response.body);
       if (response.statusCode == 200) {
         await getBoutique();
       }
@@ -1022,7 +1128,7 @@ class BoutiqueController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -1043,7 +1149,7 @@ class BoutiqueController extends GetxController {
     // } else if (index == 3) {
     //   await getListShort();
     // } else if (index == 4) {
-    //   print('*************${isLoaded}');
+    //   //print('*************${isLoaded}');
     //   await getBoutique();
     // }
   }
@@ -1055,7 +1161,7 @@ class BoutiqueController extends GetxController {
 
     getListHCommandeForBoutique();
     getListShort();
-    print('*************${isLoaded}');
+    //print('*************${isLoaded}');
   }
 
   boutiqueContent() {

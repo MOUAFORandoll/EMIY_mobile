@@ -282,7 +282,7 @@
 //                                     title: 'Creer compte',
 //                                     onTap: () {
 //                                       _manager.steStateSign();
-//                                       print(_manager.stateSign);
+//                                       //print(_manager.stateSign);
 //                                       // Get.toNamed(AppLinks.REGISTER);
 //                                     }),
 //                               )
@@ -538,7 +538,7 @@
 //                                                     'phone': phone.text,
 //                                                     'email': email.text,
 //                                                   };
-//                                                   print(data);
+//                                                   //print(data);
 //                                                   await _manager
 //                                                       .updateUser(data);
 //                                                 })
@@ -555,7 +555,7 @@
 //                                         onTap: () async {
 //                                           await _manager.deconnectUser();
 //                                           await _manager.deconnectUser();
-//                                           print(_manager.state);
+//                                           //print(_manager.state);
 //                                           // Get.toNamed(AppLinks.LOGIN);
 //                                         })),
 //                               ]))

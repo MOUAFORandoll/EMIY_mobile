@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:Fahkap/Views/Shopping/PaiementView.dart';
 import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/controller/cartController.dart';
 import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/model/data/CartModel.dart';
-import 'package:Fahkap/model/data/CategoryModel.dart';
+import 'package:Fahkap/model/data/PointLivraisonModel.dart';
 import 'package:Fahkap/model/data/LivreurModel.dart';
 import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
 import 'package:Fahkap/model/data/ProduitModel.dart';
@@ -12,19 +14,32 @@ import 'package:Fahkap/repository/BuyShoopingCartRepo.dart';
 import 'package:Fahkap/repository/LivreurRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:dio/dio.dart' hide Response;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'dart:async';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../Views/Shopping/PaiementBuyCarteView.dart';
 
 class BuyShopController extends GetxController {
   final BuyShoopingCartRepo buySoppingCartRepo;
   BuyShopController({required this.buySoppingCartRepo});
   String _paiementUrl = '';
   get paiementUrl => _paiementUrl;
+
+  bool _isLoad = false;
+  bool get isLoad => _isLoad;
+  setLoadTransaction(val) {
+    _isLoad = val;
+    update();
+  }
+
   final service = new ApiService();
   LivreurRepo livreurRepo = Get.find();
   CommandeController commande = Get.find();
@@ -36,6 +51,80 @@ class BuyShopController extends GetxController {
       return 0;
     } else {
       return val;
+    }
+  }
+
+  onInit() {
+    super.onInit();
+    setUserInfo();
+  }
+
+  PointLivraisonModel _selected_livraison_point = new PointLivraisonModel(
+      id: 0, libelle: '', ville: '', quartier: '', image: '');
+  PointLivraisonModel get selected_livraison_point => _selected_livraison_point;
+  selectPoint(point) {
+    _selected_livraison_point = point;
+    update();
+  }
+
+  final TextEditingController _searchController = TextEditingController();
+  get searchController => _searchController;
+  searchPointLivraison() {
+    _search_livraison_point = [];
+    update();
+
+    _search_livraison_point.addAll(livraison_point.where(
+      (element) =>
+          element.libelle
+              .toLowerCase()
+              .contains(searchController.text.toLowerCase()) ||
+          element.quartier
+              .toLowerCase()
+              .contains(searchController.text.toLowerCase()) ||
+          element.ville
+              .toLowerCase()
+              .contains(searchController.text.toLowerCase()),
+    ));
+    if (_search_livraison_point.isEmpty) {
+      _search_livraison_point = livraison_point;
+      update();
+    }
+    update();
+    print(_search_livraison_point.length);
+  }
+
+  List<PointLivraisonModel> _search_livraison_point = [];
+  List<PointLivraisonModel> get search_livraison_point =>
+      _search_livraison_point;
+  List<PointLivraisonModel> _livraison_point = [];
+  List<PointLivraisonModel> get livraison_point => _livraison_point;
+  int _isLoaded = 0;
+  int get isLoaded => _isLoaded;
+  // CategoryController({required this.service});
+  getPointLivraisom() async {
+    try {
+      print('*********debut get point');
+      _livraison_point.clear();
+      _isLoaded = 0;
+      update();
+      print('*********3...... get point');
+
+      Response response = await buySoppingCartRepo.getLivraison_point();
+      print('*********fin get point ${response.body}');
+      if (response.body != null) {
+        // if (response.body['data'].length != 0) {
+
+        _livraison_point.addAll((response.body['data'] as List)
+            .map((e) => PointLivraisonModel.fromJson(e))
+            .toList());
+        _isLoaded = 1;
+        update();
+      }
+
+      // }
+      // //print(_livraison_point);
+    } catch (e) {
+      //print(e);
     }
   }
 
@@ -65,7 +154,8 @@ class BuyShopController extends GetxController {
             'numCarte': cardNumberController.text,
             'cvv': cvvController.text,
             'exp_month': expiryMonthController.text,
-            'exp_year': '20' + expiryYearController.text
+            'point_livraison': selected_livraison_point.id,
+            'exp_year': '20' + expiryYearController.text,
           }
         : {
             'nom': _nameController.text,
@@ -78,19 +168,20 @@ class BuyShopController extends GetxController {
             'longitude': user.longitude,
             'latitude': user.latitude,
             'ville': user.ville,
+            'point_livraison': selected_livraison_point.id
           };
 
-    print(data);
+    //print(data);
 
     update();
 
     try {
       fn.loading('Paiement', 'Initialisation de votre paiement en cours');
       Response response = await buySoppingCartRepo.buyCart(data);
-      print(response.body);
+      //print(response.body);
 
       // fn.snackBar('Achat', response.body['message'], true);
-      print(response.body);
+      //print(response.body);
 
       if (response.statusCode == 201) {
         _isOk = response.body['status'];
@@ -109,16 +200,16 @@ class BuyShopController extends GetxController {
             _paiementUrl = response.body['url'];
             _isIdCom = response.body['id'];
             update();
-            print(_paiementUrl);
+            //print(_paiementUrl);
             fn.closeSnack();
 
-            await Get.to(() => PaiementView());
+            await Get.to(
+                () => mode == 3 ? PaiementBuyCarteView() : PaiementView());
             //ici on doit lancer la verification
-            print('dssdsd');
+            //print('dssdsd');
           }
         }
 
-        // await downloadFacture(response.body['pdf']);
         // fn.snackBar('Achat',
         //     'Votre facture a ete energistre dans votre telephone', true);
       } else {
@@ -134,7 +225,7 @@ class BuyShopController extends GetxController {
       fn.snackBar('Achat', 'Une erreur est survenue', false);
       fn.closeSnack();
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -149,7 +240,7 @@ class BuyShopController extends GetxController {
       Timer.periodic(Duration(seconds: 5), (_) {
         // Appeler la fonction souhaitée ici
 
-        print('La fonction se relance toutes les 10 secondes.');
+        //print('La fonction se relance toutes les 10 secondes.');
         verifyCom();
         _isCounter = _isCounter + 1;
         update();
@@ -161,7 +252,7 @@ class BuyShopController extends GetxController {
   }
 
   void _stopTimer() {
-    print('stop***********************');
+    //print('stop***********************');
     _timer?.cancel();
   }
 
@@ -172,14 +263,14 @@ class BuyShopController extends GetxController {
       'id': _isIdCom,
     };
 
-    print(data);
+    //print(data);
 
     try {
       Response response = await buySoppingCartRepo.verifyCom(data);
-      print(response.body);
+      //print(response.body);
 
       // fn.snackBar('Achat', response.body['message'], true);
-      print(response.body);
+      //print(response.body);
 
       if (response.statusCode == 201) {
         _isOk = response.body['status'];
@@ -196,7 +287,7 @@ class BuyShopController extends GetxController {
           _stopTimer();
         }
 
-        // await downloadFacture(response.body['pdf']);
+        await downloadFacture(response.body['pdf']);
         // fn.snackBar('Achat',
         //     'Votre facture a ete energistre dans votre telephone', true);
       }
@@ -211,11 +302,42 @@ class BuyShopController extends GetxController {
       //         fn.closeSnack();
 
       update();
-      print(e);
+      //print(e);
     }
   }
 
   downloadFacture(url) async {
+    try {
+      // ProgressDialog progress;
+      // progress =
+      //     new ProgressDialog(context, type: ProgressDialogType.Download);
+      // progress.style(message: "Téléchargement en du fichier ...");
+
+      Directory d = Directory('/storage/emulated/0/Download');
+
+      final file = File('/storage/emulated/0/Download/${url.split("/")[1]}');
+
+      await Dio().download(
+        "${ApiUrl.baseUrl}" + url,
+        file.path,
+        onReceiveProgress: (rec, total) {
+          print(rec);
+          print(total);
+          if (rec == total) {
+            fn.snackBar('Facture',
+                'Une facture a ete enregistre dans votre portable', true);
+          }
+          // progressDowloading =
+          //     ((rec / total) * 100).toStringAsFixed(0) + "%";
+          // print(progressDowloading);
+          // progress.update(message: "svp veillez patienter ");
+        },
+      );
+
+      // progress.hide();
+    } catch (e) {
+      print(e);
+    }
     // final taskId = await FlutterDownloader.enqueue(
     //     url: url,
     //     savedDir: '/storage/emulated/0/Download',
@@ -244,11 +366,15 @@ class BuyShopController extends GetxController {
   get phoneController => _phoneController;
   final TextEditingController _dateController = TextEditingController();
   get dateController => _dateController;
-  setSlash() {
-    print('fdfdf');
-    // if (_dateController.text.length == 2) {
-    //   _dateController.text = _dateController.text + '/';
-    // }
+  var manager = Get.find<ManagerController>();
+  setUserInfo() {
+    print('--setinfo');
+    if (manager.User != null) {
+      _nameController.text = manager.User.nom;
+      _phoneController.text = manager.User.phone;
+      update();
+      print('--setinfo---update');
+    }
   }
 
   setDate() {

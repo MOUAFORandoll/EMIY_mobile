@@ -70,7 +70,7 @@ class BoutiqueUserView extends StatelessWidget {
               floating: true,
               // Display a placeholder widget to visualize the shrinking size.
               flexibleSpace: Container(
-                  margin: EdgeInsets.only(top: Get.height * .030, left: 0),
+                  margin: EdgeInsets.only(left: 0),
                   padding: EdgeInsets.only(
                       left: Get.width * .030, right: Get.width * .030),
                   child: SingleChildScrollView(

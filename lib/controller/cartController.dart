@@ -27,7 +27,7 @@ class CartController extends GetxController {
 
   void updateQuantityProduct(int idProduit, bool state) {
     // if (quantity <= product.quantite) {
-    print('taillen');
+    //print('taillen');
     if (_items.containsKey(idProduit)) {
       var total = 0;
       _items.update(idProduit, (value) {
@@ -72,7 +72,7 @@ class CartController extends GetxController {
               time: DateTime.now().toString());
         }
       });
-      print(total);
+      //print(total);
       totalItems;
       Get.find<ProductController>().getD();
       update();
@@ -94,9 +94,9 @@ class CartController extends GetxController {
   }
 
   // void updateItem(id, int quantity) {
-  //   print(quantity);
+  //   //print(quantity);
 
-  //   print('taillen');
+  //   //print('taillen');
   //   if (_items.containsKey(id)) {
   //     var total = 0;
   //     _items.update(id, (value) {
@@ -130,7 +130,7 @@ class CartController extends GetxController {
     _items.forEach((k, v) {
       listF.add([v.id, v.quantity]);
     });
-    print(listF);
+    //print(listF);
     return listF;
   }
 
@@ -157,9 +157,9 @@ class CartController extends GetxController {
   }
 
   void addItem(ProduitModel product, int quantity, index, type) {
-    print(quantity);
+    //print(quantity);
     if (quantity <= product.quantite) {
-      print('taillen');
+      //print('taillen');
       if (_items.containsKey(product.id)) {
         var total = 0;
         _items.update(product.id, (value) {
@@ -183,8 +183,8 @@ class CartController extends GetxController {
         }
       } else {
         if (quantity > 0) {
-          print(index);
-          print(type);
+          //print(index);
+          //print(type);
           _items.putIfAbsent(
               product.id,
               () => CartModel(
@@ -199,7 +199,7 @@ class CartController extends GetxController {
                   isExist: true,
                   time: DateTime.now().toString()));
           _items.forEach((k, v) {
-            print('vall ' + v.quantity.toString());
+            //print('vall ' + v.quantity.toString());
           });
         }
       }
@@ -207,5 +207,4 @@ class CartController extends GetxController {
       fn.snackBar('Panier', 'Qunatite incorrect', false);
     }
   }
-
 }

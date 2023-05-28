@@ -190,7 +190,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                           ),
                         ]))));
               } else {
-                print('deja recup');
+                //print('deja recup');
               }
             },
           ),

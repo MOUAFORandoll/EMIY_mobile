@@ -33,7 +33,7 @@ import 'package:sqflite/sqlite_api.dart';
 
 Future<void> initApp() async {
   await requestPermission();
-  await initServices();
+
   Get.find<ManagerController>().chageN(true);
   await GetStorage.init();
   var database = Get.find<DB>();
@@ -44,10 +44,7 @@ Future<void> initApp() async {
   Get.find<ManagerController>().newLocalisation();
 
   Get.find<ProductController>().getPopularProduit();
-
-  Get.find<CartController>();
-
-  Get.find<BuyShopController>();
+  Get.find<BuyShopController>().getPointLivraisom();
   Get.find<BoutiqueController>().getBoutique();
   Get.find<CategoryBoutiqueController>().getCategory();
   Get.find<CommandeController>().getListCommandes();
@@ -55,7 +52,6 @@ Future<void> initApp() async {
   Get.find<ShortController>().getListShort();
 
   Get.find<ActionController>().getListModePaiement();
-  Get.find<BoutiqueController>().getBoutique();
 }
 
 Future<void> initServices() async {
@@ -98,8 +94,30 @@ Future<void> initServices() async {
 
 requestPermission() async {
   var status = await Permission.storage.status;
-  print("voici le statut ,  $status");
+  //print("voici le statut ,  $status");
   if (!status.isGranted) {
     await Permission.storage.request();
+    await requestPermission();
+  } else {
+    await getData();
+  }
+}
+
+getData() async {
+  // await MyBinding().requestPermission();
+  var status = await Permission.storage.status;
+  //print("voici le statut ,  $status");
+
+  if (status.isGranted) {
+    var database = Get.find<DB>();
+    await database.init();
+    await Get.find<ActionController>().getLanguageInit();
+
+    Get.find<ManagerController>().getKeyU();
+    Get.find<ManagerController>().getUser();
+
+    Get.find<ManagerController>().newLocalisation();
+
+    Get.find<CommandeController>().getListCommandes();
   }
 }

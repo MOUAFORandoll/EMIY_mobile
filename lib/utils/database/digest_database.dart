@@ -24,10 +24,10 @@ Future<void> digestInsert(digests) async {
   List<Map<String, dynamic>> download_digests =
       await database.rawQuery('SELECT * FROM digests_download');
   for (var i = 0; i < download_digests.length; i++) {
-    print(download_digests[i]["name"]);
+    //print(download_digests[i]["name"]);
   }
-  print("---------------------------");
-  print(download_digests.length);
+  //print("---------------------------");
+  //print(download_digests.length);
 
   await database.close();
 }
@@ -112,14 +112,14 @@ class _DigestePageState extends State<DigestePage> {
   Future getCategDigest(List category) async {
     var dio = await CustomDio().getApiClient();
     var data = box.read(userKey);
-    print("debut get categories");
-    print(category[1]);
+    //print("debut get categories");
+    //print(category[1]);
     Response response = await dio.get(
       "/api/category_digest_peut_avoirs?name=${category[1]}",
     );
     if (response.statusCode == 200) {
-      //   print("voici les categories de digeste ${response.data}");
-      //   print("fin get categories");
+      //   //print("voici les categories de digeste ${response.data}");
+      //   //print("fin get categories");
 
       return CategoriesDigestModel.fromJson(response.data[0]);
     } else {
@@ -134,13 +134,13 @@ class _DigestePageState extends State<DigestePage> {
             categories = value;
           })
         });
-    print("Get by categoeierd");
+    //print("Get by categoeierd");
     for (var y = 0; y < categories.listDigestCategories.length; y++) {
-      //     print(categories.listDigestCategories.length);
+      //     //print(categories.listDigestCategories.length);
       setState(() {
         if (categories.listDigestCategories[y].digest.status == true) {
           listDigest.add(categories.listDigestCategories[y].digest);
-          print(categories.listDigestCategories[y].digest.name);
+          //print(categories.listDigestCategories[y].digest.name);
         }
       });
     }
@@ -150,7 +150,7 @@ class _DigestePageState extends State<DigestePage> {
     var dio = await CustomDio().getApiClient();
     List<DigestModel> allD = [];
     try {
-      // print("debut get  digest");
+      // //print("debut get  digest");
       Response response = await dio.get("/api/digests");
       if (response.statusCode == 200) {
         var digestList = (response.data as List)
@@ -159,18 +159,18 @@ class _DigestePageState extends State<DigestePage> {
         if (response.statusCode == 200) {
           for (var digest in digestList) {
             if (digest.status == true) {
-              print(digest.status);
+              //print(digest.status);
               allD.add(digest);
             }
           }
         }
         for (var a in allD) {
-          print(a.name);
+          //print(a.name);
         }
         return allD;
       }
     } catch (error, stacktrace) {
-      print("voici error: $error");
+      //print("voici error: $error");
       throw Exception("Exception occured: $error stackTrace: $stacktrace");
     }
   }
@@ -180,11 +180,11 @@ class _DigestePageState extends State<DigestePage> {
 // ignore: must_call_super
 void dispose()   {
     //(!mounted) ? AudioService.stop() : 0;
-    print("bbbbbbbbbbbbbbbbbbbbbbb");
+    //print("bbbbbbbbbbbbbbbbbbbbbbb");
     AudioService.stop();
     AudioService.disconnect();
     /* Future(() async {
-      print("aaaaaaaaaaaaaaa");
+      //print("aaaaaaaaaaaaaaa");
       await AudioService.stop();
       await AudioService.disconnect();
     }); */
@@ -218,7 +218,7 @@ void dispose()   {
         return allD;
       }
     } catch (error, stacktrace) {
-      print("Erreur favorit digestss: $error");
+      //print("Erreur favorit digestss: $error");
 
       throw Exception("Exception occured: $error stackTrace: $stacktrace");
     }
@@ -243,7 +243,7 @@ void dispose()   {
       final lu = (digestlu.data as List)
           .map((e) => BibiothequeModels.fromJson(e))
           .toList();
-      // print("Voici lu $lu");
+      // //print("Voici lu $lu");
       if (digestlu.statusCode == 200) {
         for (var biblio in lu) {
           if (biblio.digest.status == true) {
@@ -254,7 +254,7 @@ void dispose()   {
         }
       }
     } catch (error, stacktrace) {
-      print("voici error de list category_digest_peut_avoirs: $error");
+      //print("voici error de list category_digest_peut_avoirs: $error");
 
       throw Exception("Exception occured: $error stackTrace: $stacktrace");
     }
@@ -270,7 +270,7 @@ void dispose()   {
 
   digestByProvenace(List category) async {
     listDigest.clear();
-    print(category[0].toString().toUpperCase());
+    //print(category[0].toString().toUpperCase());
     switch (category[0].toString().toUpperCase()) {
       case "HOME":
         return returnDigesteWithCategory(category);
@@ -292,16 +292,16 @@ void dispose()   {
     }
 /* 
     if (widget.category[0].toString().toUpperCase() == "HOME") {
-      print(widget.category);
+      //print(widget.category);
       return returnAllDigeste();
     } else if (widget.category[0].toString().toUpperCase() == "SEARCH") {
-      print(widget.category);
+      //print(widget.category);
       return getAllDigeste();
     } else if (widget.category[0].toString().toUpperCase() == "DBC") {
-      print(widget.category);
+      //print(widget.category);
       return returnDigesteWithCategory();
     } else if (widget.category[0].toString().toUpperCase() == "BIBLIOTHEQUE") {
-      print(widget.category);
+      //print(widget.category);
       return;
     } */
   }
@@ -309,7 +309,7 @@ void dispose()   {
   @override
   void initState() {
     GetStorage.init();
-    print("------------------------a");
+    //print("------------------------a");
     if (widget.index != null && widget.category != null) {
       indexe.remove("index");
       categorysave.remove("category");
@@ -334,15 +334,15 @@ void dispose()   {
     requestPermission();
 
     loading = false;
-    print("asdfghj   final digest ");
+    //print("asdfghj   final digest ");
 
     super.initState();
   }
 
   inComme(int index, List category, bool read) async {
     await GetStorage.init();
-    print("voici index $index");
-    print("voici category $category");
+    //print("voici index $index");
+    //print("voici category $category");
 
     await digestByProvenace(category);
     setState(() {
@@ -354,21 +354,21 @@ void dispose()   {
       indexe.write("index", index);
     });
     if (read) {
-      print("EN lecture ");
-      /* print(index);
-      print(listDigest[index].name); */
+      //print("EN lecture ");
+      /* //print(index);
+      //print(listDigest[index].name); */
       setState(() {
         finalDigest = digeste.read("digest");
         disponible = true;
       });
       if (listDigest[index].id == finalDigest.id) {
-        print("Digest Identique");
+        //print("Digest Identique");
         setState(() {
           finalDigest = digeste.read("digest");
           disponible = true;
         });
       } else {
-        print("Digest differents jsuquaaaaaaaaaaaaaaa");
+        //print("Digest differents jsuquaaaaaaaaaaaaaaa");
         digeste.remove("digest");
         digeste.write("digest", listDigest[index]);
         setState(() {
@@ -379,9 +379,9 @@ void dispose()   {
             finalDigest.image.contentUrl);   */
         start(listDigest, index);
       }
-      //  print("Voici l\'id boroooooooo ${finalDigest.id}");
+      //  //print("Voici l\'id boroooooooo ${finalDigest.id}");
     } else {
-      print("Nouvelle lecture");
+      //print("Nouvelle lecture");
       digeste.remove("digest");
       digeste.write("digest", listDigest[index]);
       setState(() {
@@ -403,7 +403,7 @@ void dispose()   {
               }
           });
       getDigestSellerModel(finalDigest.id).then((value) => {
-            //  print(value),
+            //  //print(value),
             setState(() {
               listseller = value;
             })
@@ -448,7 +448,7 @@ void dispose()   {
             //    "duration": finalDigest.duration
           });
     } catch (e) {
-      print("** Error on start : $e");
+      //print("** Error on start : $e");
     }
   }
 
@@ -465,7 +465,7 @@ void dispose()   {
 
       return seller;
     } catch (error, stacktrace) {
-      ///  print("voici error de list category_digest_peut_avoirs: $error");
+      ///  //print("voici error de list category_digest_peut_avoirs: $error");
 
       throw Exception("Exception occured: $error stackTrace: $stacktrace");
     }
@@ -478,7 +478,7 @@ void dispose()   {
         "/api/bibiotheques?digest=${finalDigest.id}&digesteur=${widget.idDigesteur}");
     var result =
         (dejaLue.data as List).map((e) => FavoriteDigestModel.fromJson(e));
-    //  print(result);
+    //  //print(result);
     if (result.isEmpty) {
       try {
         var data = {
@@ -486,12 +486,12 @@ void dispose()   {
           "digest": "/api/digests/${finalDigest.id}",
           "digesteur": "/api/digesteurs/${widget.idDigesteur}"
         };
-        //  print(data);
+        //  //print(data);
         Response response = await dio.post("/api/bibiotheques", data: data);
 
-        //   print("Digests ajoute avec succes : ${response.statusCode}");
+        //   //print("Digests ajoute avec succes : ${response.statusCode}");
       } catch (error, stacktrace) {
-        print("voici error: $error");
+        //print("voici error: $error");
 
         throw Exception("Exception occured: $error stackTrace: $stacktrace");
       }
@@ -506,21 +506,21 @@ void dispose()   {
         "/api/favory_digests?digest=${finalDigest.duration}&digesteur=${widget.idDigesteur}");
     var result =
         (dejaFavorit.data as List).map((e) => FavoriteDigestModel.fromJson(e));
-    // print(result);
+    // //print(result);
     if (result.isEmpty) {
       var data = {
         "digest": "/api/digests/${finalDigest.duration}",
         "digesteur": "/api/digesteurs/${widget.idDigesteur}"
       };
-      // print(finalDigest.id);
-      // print(widget.idDigesteur);
+      // //print(finalDigest.id);
+      // //print(widget.idDigesteur);
       await dio
           .post(
             "/api/favory_digests",
             data: jsonEncode(data),
           )
           .then((value) => {
-                print(value),
+                //print(value),
                 setState(() {
                   isPostLiked = !isPostLiked;
                   _showToastFavorite(context);
@@ -529,7 +529,7 @@ void dispose()   {
           .onError(
             (error, stackTrace) => {
               setState(() => {error = error}),
-              print(error)
+              //print(error)
             },
           );
     } else {
@@ -557,7 +557,7 @@ void dispose()   {
 
       if (response.statusCode == 200) {
         var rep = (response.data as List).toList();
-        // print(rep);
+        // //print(rep);
         if (rep.isNotEmpty) {
           rat = true;
           return double.parse(response.data[0]['note'].toString());
@@ -569,7 +569,7 @@ void dispose()   {
         return 0;
       }
     } catch (error, stacktrace) {
-      print("voici error: $error");
+      //print("voici error: $error");
 
       throw Exception("Exception occured: $error stackTrace: $stacktrace");
     }
@@ -617,7 +617,7 @@ void dispose()   {
 
   void _note_digest(note, id) async {
     final item = "/api/digests/$id";
-    print(item);
+    //print(item);
     var dio = await CustomDio().getApiClient();
     var data = {
       "note": note,
@@ -632,7 +632,7 @@ void dispose()   {
 
       _showToastRating(context, note);
     } catch (e) {
-      print("err46456454uerSDFTYCFU456AS4DVFGDH4ASD56FSGD4565SDFG4H");
+      //print("err46456454uerSDFTYCFU456AS4DVFGDH4ASD56FSGD4565SDFG4H");
     }
   }
 
@@ -645,7 +645,7 @@ void dispose()   {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final userInfo = box.read(userKey);
-    print(userInfo);
+    //print(userInfo);
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
@@ -1031,7 +1031,7 @@ void dispose()   {
                                             //  await inComme(indexFinal, categoryFinal, false);
                                           }
 
-                                          print(indexFinal);
+                                          //print(indexFinal);
                                         } else {}
                                       } else {}
                                       return (mediaState != null)
@@ -1077,7 +1077,7 @@ void dispose()   {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        print((finalDigest.id).toDouble());
+                                        //print((finalDigest.id).toDouble());
                                         setState(() {
                                           _toggleFavorite();
                                         });
@@ -1144,7 +1144,7 @@ void dispose()   {
                                                     size: 30,
                                                     onRatingChanged:
                                                         (double rating) {
-                                                      print(rating);
+                                                      //print(rating);
                                                       _note_digest(
                                                           rating,
                                                           (finalDigest.id)
@@ -1177,7 +1177,7 @@ void dispose()   {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        print("nothing");
+                                        //print("nothing");
                                         // Share.share(
                                         //     "Merci de télécharger notre  application sur play store grace au liens ",
                                         //     subject: 'Look what I made!');
@@ -1261,7 +1261,7 @@ void dispose()   {
                                       await inComme(
                                           indexFinal, categoryFinal, false);
                                     }
-                                    print(indexFinal);
+                                    //print(indexFinal);
                                   },
                                   icon: Icon(Icons.skip_previous_rounded,
                                       color: (themeProvider.themeMode ==
@@ -1384,11 +1384,11 @@ void dispose()   {
                                     });
                                     if (indexFinal < listDigest.length &&
                                         indexFinal > 0) {
-                                      print("1");
+                                      //print("1");
                                       await inComme(
                                           indexFinal, categoryFinal, false);
                                     } else {
-                                      print("2");
+                                      //print("2");
                                       setState(() {
                                         indexFinal = 0;
                                       });
@@ -1396,7 +1396,7 @@ void dispose()   {
                                           indexFinal, categoryFinal, false);
                                     }
 
-                                    print(indexFinal);
+                                    //print(indexFinal);
                                   },
                                   icon: Icon(Icons.skip_next_rounded,
                                       color: (themeProvider.themeMode ==
@@ -1442,7 +1442,7 @@ void dispose()   {
                         /*   InkWell(
                           child: Icon(FontAwesomeIcons.angleDown),
                           onTap: () {
-                            print("ss");
+                            //print("ss");
                           },
                         ), */
                       ]),
@@ -1555,9 +1555,9 @@ void dispose()   {
 
   Future _downlaodAndSaveDigestToStorage(
       BuildContext context, String urlPath, String fileName) async {
-    print("${ApiUrl.baseUrl}" + urlPath);
-    print("----------------------------");
-    print(fileName);
+    //print("${ApiUrl.baseUrl}" + urlPath);
+    //print("----------------------------");
+    //print(fileName);
 
     try {
       ProgressDialog progress;
@@ -1567,7 +1567,7 @@ void dispose()   {
       Directory d = Directory('/storage/emulated/0/Android/media/digester');
 
       final file = File('${d.path}/$fileName.mp3');
-      print('${d.path}/$fileName.mp3');
+      //print('${d.path}/$fileName.mp3');
       await Dio().download(
         "${ApiUrl.baseUrl}" + urlPath,
         file.path,
@@ -1575,7 +1575,7 @@ void dispose()   {
           setState(() {
             _isDownloading = true;
             progressDowloading = ((rec / total) * 100).toStringAsFixed(0) + "%";
-            print(progressDowloading);
+            //print(progressDowloading);
             progress.update(message: "svp veillez patienter ");
           });
         },
@@ -1584,12 +1584,12 @@ void dispose()   {
       _save(listDigest[widget.index]);
       _fileFullPath = file.path;
       progress.hide();
-      print(_fileFullPath);
+      //print(_fileFullPath);
       setState(() {
         _isDownloading = false;
       });
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 }

@@ -28,10 +28,10 @@ import 'package:get/get.dart';
 //         _isLoaded = 1;
 //         update();
 //       }
-//       // print(_categoryList);
+//       // //print(_categoryList);
      
 //     } catch (e) {
-//       print(e);
+//       //print(e);
 //     }
 //   }
 // }

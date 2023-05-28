@@ -12,14 +12,14 @@ class LivreurRepo extends GetxService {
   var s = Get.find<DB>();
 
   Future getLivreur() async {
-    print('--long---------------');
-    print(await s.getLonLat());
+    //print('--long---------------');
+    //print(await s.getLonLat());
 
     var longlat = await s.getLonLat();
     Response a = await apiClient.getCollectionsP(ApiRoutes.LIVREUR,
         {'longitude': longlat['long'], 'latitude': longlat['lat']});
     ;
-    print(a.body);
+    //print(a.body);
     return a;
   }
 }

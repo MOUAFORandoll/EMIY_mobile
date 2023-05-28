@@ -134,6 +134,10 @@ flutter_cache_manager
 2.6
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_cache_manager-2.1.2/
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_cache_manager-2.1.2/lib/
+flutter_downloader
+2.17
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_downloader-1.10.4/
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_downloader-1.10.4/lib/
 flutter_launcher_icons
 2.3
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_launcher_icons-0.8.1/
@@ -246,6 +250,10 @@ jwt_decode
 2.12
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/jwt_decode-0.3.1/
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/jwt_decode-0.3.1/lib/
+logging
+2.19
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0/
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0/lib/
 matcher
 2.18
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.13/
@@ -438,6 +446,14 @@ smooth_star_rating_null_safety
 2.12
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/smooth_star_rating_null_safety-1.0.4+2/
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/smooth_star_rating_null_safety-1.0.4+2/lib/
+socket_io_client
+2.12
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_client-2.0.2/
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_client-2.0.2/lib/
+socket_io_common
+2.12
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_common-2.0.3/
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_common-2.0.3/lib/
 source_span
 2.14
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.9.1/
@@ -598,6 +614,10 @@ wakelock_windows
 2.12
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/wakelock_windows-0.2.1/
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/wakelock_windows-0.2.1/lib/
+web_socket_channel
+2.10
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-1.2.0/
+file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-1.2.0/lib/
 webview_flutter
 2.14
 file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter-2.8.0/

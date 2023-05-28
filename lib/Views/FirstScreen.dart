@@ -2,6 +2,7 @@ import 'package:Fahkap/Views/Home/SearchView.dart';
 import 'package:Fahkap/controller/ActionController.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/controller/productController.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/constants/assets.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
@@ -29,28 +30,28 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'CategoryBoutique/CategoryView.dart';
 
-class FirstScreen extends StatefulWidget {
+class FirstScreen extends   StatelessWidget{/* StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
 
   @override
   _FirstScreenState createState() => _FirstScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
-  int _currentIndex = 0;
-  bool _isVisible = true;
+class _FirstScreenState extends State<FirstScreen> { */
+  // int _currentIndex = 0;
+  // bool _isVisible = true;
   // late ScrollController controller;
 
-  @override
-  void initState() {
+  // @override
+  // void initState() {
     // iniit();
-    super.initState();
+    // super.initState();
     // controller = ScrollController();
     // Get.find<ActionController>().scrollcontroller.addListener(() {
-    //   print(Get.find<ActionController>().scrollcontroller.position);
+    //   //print(Get.find<ActionController>().scrollcontroller.position);
 
     //   setState(() {
-    //     print(_isVisible);
+    //     //print(_isVisible);
     //     _isVisible = Get.find<ActionController>()
     //             .scrollcontroller
     //             .position
@@ -58,57 +59,53 @@ class _FirstScreenState extends State<FirstScreen> {
     //         ScrollDirection.forward;
     //   });
     // });
-  }
+  // }
 
-  iniit() async {
-    // await MyBinding().requestPermission();
-    var status = await Permission.storage.status;
-    print("voici le statut************* ,  $status");
-    if (!status.isGranted) {
-      await Permission.storage.request();
-      await getData();
-    } else {
-      await getData();
-    }
-  }
+  // iniit() async {
+  //   // await MyBinding().requestPermission();
+  //   var status = await Permission.storage.status;
+  //   //print("voici le statut************* ,  $status");
+  //   if (!status.isGranted) {
+  //     await Permission.storage.request();
+  //     await getData();
+  //   } else {
+  //     await getData();
+  //   }
+  // }
 
-  getData() async {
-    // await MyBinding().requestPermission();
-    var status = await Permission.storage.status;
-    print("voici le statut ,  $status");
+  // getData() async {
+  //   // await MyBinding().requestPermission();
+  //   var status = await Permission.storage.status;
+  //   //print("voici le statut ,  $status");
 
-    if (status.isGranted) {
-      var database = Get.find<DB>();
-      await database.init();
-      await Get.find<ActionController>().getLanguageInit();
+  //   if (status.isGranted) {
+  //     var database = Get.find<DB>();
+  //     await database.init();
+  //     await Get.find<ActionController>().getLanguageInit();
 
-      Get.find<ManagerController>().getKeyU();
-      Get.find<ManagerController>().getUser();
+  //     Get.find<ManagerController>().getKeyU();
+  //     Get.find<ManagerController>().getUser();
 
-      Get.find<ManagerController>().newLocalisation();
+  //     Get.find<ManagerController>().newLocalisation();
 
-      Get.find<CommandeController>().getListCommandes();
-    }
-  }
-
-  List<int> _badgeCounts = List<int>.generate(5, (index) => index);
-
-  List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
-
+  //     Get.find<CommandeController>().getListCommandes();
+  //   }
+  // }
+ 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  GetBuilder<ActionController>(builder: (_controller) => Scaffold(
       // extendBody for floating bar get better perfomance
       // extendBody: true,
       backgroundColor: Colors.white,
 
-      body: SafeArea(child: _buildContent(_currentIndex)),
+      body: SafeArea(child: _controller.buildContent()),
 
       bottomNavigationBar:
-          Offstage(offstage: !_isVisible, child: _buildBorderRadiusDesign()),
-    );
+         _controller.buildBorderRadiusDesign(),
+    ));
   }
-
+/* 
   Widget _buildContent(index) {
     switch (index) {
       case 0:
@@ -152,13 +149,14 @@ class _FirstScreenState extends State<FirstScreen> {
         items: [
           CustomNavigationBarItem(
               icon: Container(
-                height: kSmHeight,
+                height: kSmHeight / 1.7,
                 width: kSmWidth / 4.2,
                 child: SvgPicture.asset(
                   Assets.home,
                   width: 90,
                   height: 90,
-                  color: _currentIndex == 0 ? ColorsApp.black : ColorsApp.grey,
+                  color:
+                      _currentIndex == 0 ? ColorsApp.skyBlue : ColorsApp.grey,
                 ),
               ),
               title: Container(
@@ -166,7 +164,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   decoration: BoxDecoration(
                       border: Border(
                           bottom: _currentIndex == 0
-                              ? BorderSide(color: ColorsApp.black, width: 2)
+                              ? BorderSide(color: ColorsApp.skyBlue, width: 2)
                               : BorderSide.none,
                           top: BorderSide.none)),
                   child: Text('home'.tr,
@@ -174,19 +172,19 @@ class _FirstScreenState extends State<FirstScreen> {
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
                         color: _currentIndex == 0
-                            ? ColorsApp.black
+                            ? ColorsApp.skyBlue
                             : ColorsApp.grey,
                       )))), // CustomNavigationBarItem(
 
           CustomNavigationBarItem(
             icon: Container(
-              height: kSmHeight,
+              height: kSmHeight / 1.7,
               width: kSmWidth / 4.2,
               child: SvgPicture.asset(
                 Assets.grid1,
                 width: 80,
                 height: 80,
-                color: _currentIndex == 1 ? ColorsApp.black : ColorsApp.grey,
+                color: _currentIndex == 1 ? ColorsApp.skyBlue : ColorsApp.grey,
               ),
             ),
             title: Container(
@@ -194,27 +192,28 @@ class _FirstScreenState extends State<FirstScreen> {
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: _currentIndex == 1
-                            ? BorderSide(color: ColorsApp.black, width: 2)
+                            ? BorderSide(color: ColorsApp.skyBlue, width: 2)
                             : BorderSide.none,
                         top: BorderSide.none)),
                 child: Text('categories'.tr,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
-                      color:
-                          _currentIndex == 1 ? ColorsApp.black : ColorsApp.grey,
+                      color: _currentIndex == 1
+                          ? ColorsApp.skyBlue
+                          : ColorsApp.grey,
                     ))),
           ),
 
           CustomNavigationBarItem(
             icon: Container(
-              height: kSmHeight,
+              height: kSmHeight / 1.7,
               width: kSmWidth / 4.2,
               child: SvgPicture.asset(
                 Assets.shoppingCart,
                 width: 90,
                 height: 90,
-                color: _currentIndex == 2 ? ColorsApp.black : ColorsApp.grey,
+                color: _currentIndex == 2 ? ColorsApp.skyBlue : ColorsApp.grey,
               ),
             ),
             title: Container(
@@ -222,26 +221,27 @@ class _FirstScreenState extends State<FirstScreen> {
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: _currentIndex == 2
-                            ? BorderSide(color: ColorsApp.black, width: 2)
+                            ? BorderSide(color: ColorsApp.skyBlue, width: 2)
                             : BorderSide.none,
                         top: BorderSide.none)),
                 child: Text('Shop',
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
-                      color:
-                          _currentIndex == 2 ? ColorsApp.black : ColorsApp.grey,
+                      color: _currentIndex == 2
+                          ? ColorsApp.skyBlue
+                          : ColorsApp.grey,
                     ))),
           ),
 
           CustomNavigationBarItem(
             icon: Container(
-              height: kSmHeight,
+              height: kSmHeight / 1.7,
               width: kSmWidth / 4.2,
               child: Icon(
                 Icons.settings,
                 size: 25,
-                color: _currentIndex == 3 ? ColorsApp.black : ColorsApp.grey,
+                color: _currentIndex == 3 ? ColorsApp.skyBlue : ColorsApp.grey,
               ),
             ),
             title: Container(
@@ -249,15 +249,16 @@ class _FirstScreenState extends State<FirstScreen> {
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: _currentIndex == 3
-                            ? BorderSide(color: ColorsApp.black, width: 2)
+                            ? BorderSide(color: ColorsApp.skyBlue, width: 2)
                             : BorderSide.none,
                         top: BorderSide.none)),
                 child: Text('setting'.tr,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
-                      color:
-                          _currentIndex == 3 ? ColorsApp.black : ColorsApp.grey,
+                      color: _currentIndex == 3
+                          ? ColorsApp.skyBlue
+                          : ColorsApp.grey,
                     ))),
 
             // badgeCount: _badgeCounts[4],
@@ -274,11 +275,16 @@ class _FirstScreenState extends State<FirstScreen> {
           setState(() {
             _currentIndex = index;
           });
+          if (index == 0) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Get.find<ProductController>().restoreScrollPosition();
+            });
+          }
         },
       );
     });
   }
-}
+ */}
 
 /**
  * import 'package:Fahkap/components/Button/btnCatList.dart';

@@ -307,7 +307,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                                 )),
                           ),
                           InkWell(
-                              onTap: () => _controller.getImageBoutique(),
+                              onTap: () => _controller.getImageBoutiqueGallery(),
                               child: !_controller.isImage
                                   ? Container(
                                       height: kMdHeight * .3,
@@ -354,7 +354,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                                   'category': _controller.categorySelect.id,
                                   // 'email': email.text,
                                 };
-                                await _controller.newBoutique(data);
+                                await _controller.newBoutique( );
                                 if (_controller.isOk) {
                                   // Get.offNamedUntil(AppLinks.FIRST, (route) => false);
                                 }

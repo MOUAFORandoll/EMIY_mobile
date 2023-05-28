@@ -18,6 +18,7 @@ class ApiRoutes {
   static const LOCATION_USER = '/user/location';
   static const USER = '/user/get';
   static const LIVREUR = '/livreur/read/ville';
+  static const LIVRAISON_POINT= '/point_livraison/read';
   static const BUY = '/commande/newX';
   static const VERIFY = '/commande/verify';
   static const UPDATE_PRODUCT = '/produit/update';
@@ -43,4 +44,5 @@ class ApiRoutes {
   static const SHORT_NEW = '/short/new';
   static const NOTAITON_PRODUIT = '/notation/produit';
   static const NOTAITON_BOUTIQUE = '/notation/boutique';
+  static const TEST = '/test/scroll';
 }

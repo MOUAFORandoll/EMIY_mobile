@@ -21,20 +21,10 @@ import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class DepotView extends StatefulWidget {
-  DepotView({Key? key}) : super(key: key);
-
-  @override
-  State<DepotView> createState() => _DepotViewState();
-}
-
-class _DepotViewState extends State<DepotView> {
-  ScrollController _scrollController = new ScrollController();
-  bool isLoading = true;
+class DepotView extends StatelessWidget  { 
 
   @override
   Widget build(BuildContext context) {
-    var functions = ViewFunctions();
     return GetBuilder<TransactionController>(
         builder: (_Tcontroller) => Scaffold(
             appBar: AppBar(
@@ -56,17 +46,13 @@ class _DepotViewState extends State<DepotView> {
                 initialUrl: _Tcontroller.paiementUrl,
                 javascriptMode: JavascriptMode.unrestricted,
                 onPageStarted: (String url) {
-                  setState(() {
-                    isLoading = true;
-                  });
+                  _Tcontroller.setLoadTransaction(true);
                 },
                 onPageFinished: (String url) {
-                  setState(() {
-                    isLoading = false;
-                  });
+                  _Tcontroller.setLoadTransaction(false);
                 },
               ),
-              if (isLoading)
+              if (_Tcontroller.isLoad)
                 Center(
                   child: CircularProgressIndicator(),
                 ),

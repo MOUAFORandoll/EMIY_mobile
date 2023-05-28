@@ -42,7 +42,7 @@ class TransactionController extends GetxController {
 
         _isLoadedTrans = 0;
         update();
-        print(".............");
+        //print(".............");
 
         Response response =
             await transactionRepo.getListTransaction(managerController.User.id);
@@ -60,9 +60,9 @@ class TransactionController extends GetxController {
             update();
           }
         }
-        print(isLoadedTrans);
+        //print(isLoadedTrans);
       } catch (e) {
-        print(e);
+        //print(e);
       }
     }
   }
@@ -79,7 +79,7 @@ class TransactionController extends GetxController {
 
     try {
       Response response = await transactionRepo.retraitCompte(data);
-      print(response.body);
+      //print(response.body);
 
       if (response.statusCode == 200) {
         await Get.find<ManagerController>().getUser();
@@ -104,12 +104,20 @@ class TransactionController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
   String _paiementUrl = '';
   get paiementUrl => _paiementUrl;
+
+  bool _isLoad = false;
+  bool get isLoad => _isLoad;
+  setLoadTransaction(val) {
+    _isLoad = val;
+    update();
+  }
+
   String _token = '';
   get token => _token;
   depot(data) async {
@@ -119,13 +127,13 @@ class TransactionController extends GetxController {
     fn.loading('Depot', 'Vous allez effectuer un depot sur votre compte');
     try {
       Response response = await transactionRepo.depotCompte(data);
-      print(response.body);
-      print(_isCounter);
+      //print(response.body);
+      //print(_isCounter);
       if (response.statusCode == 201) {
         _paiementUrl = response.body['url'];
         _token = response.body['token'];
         update();
-        print(_paiementUrl);
+        //print(_paiementUrl);
         fn.closeSnack();
 
         Get.to(() => DepotView());
@@ -147,7 +155,7 @@ class TransactionController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 
@@ -159,22 +167,22 @@ class TransactionController extends GetxController {
 
   late Timer _timer;
   void _startTimer() {
-    if (isCounter < 10 && !validateBuy) {
+    if (_isCounter < 10 && !_validateBuy) {
       _timer = new Timer.periodic(Duration(seconds: 2), (_) {
         // Appeler la fonction souhaitée ici
 
-        print('counter********.${validateBuy}....*************. ${_isCounter}');
+        //print('counter********.${validateBuy}....*************. ${_isCounter}');
         verifyDepot();
       });
     }
   }
 
   void _stopTimer() {
-    print('stop***********************');
+    //print('stop***********************');
 
     _timer.cancel();
     update();
-    print('stop***********************');
+    //print('stop***********************');
   }
 
   verifyDepot() async {
@@ -182,14 +190,14 @@ class TransactionController extends GetxController {
       'token': token,
     };
 
-    print(data);
+    //print(data);
 
     try {
       Response response = await transactionRepo.verifyDepot(data);
-      print(response.body);
+      //print(response.body);
 
       // fn.snackBar('Achat', response.body['message'], true);
-      print(response.body);
+      //print(response.body);
       _isCounter = _isCounter + 1;
       update();
       if (response.statusCode == 201) {
@@ -197,8 +205,8 @@ class TransactionController extends GetxController {
           _validateBuy = true;
           _stopTimer();
           update();
+          await actualise();
           fn.snackBar('Depot', response.body['message'], true);
-          getTransactions();
         }
       }
     } catch (e) {
@@ -207,14 +215,16 @@ class TransactionController extends GetxController {
       // fn.snackBar('Achat', 'Une erreur est survenue', false);
 
       update();
-      print(e);
+      //print(e);
     }
   }
 
   actualise() async {
     update();
-
-    fn.snackBar('Compte', 'Actualisation de vos transactions', false);
+    fn.loading(
+      'Compte',
+      'Actualisation de vos transactions',
+    );
 
     try {
       await Get.find<ManagerController>().getUser();
@@ -230,7 +240,7 @@ class TransactionController extends GetxController {
 
       _isUpdating = false;
       update();
-      print(e);
+      //print(e);
     }
   }
 }

@@ -55,7 +55,7 @@
 //   }
 
 //   String getKey() {
-//     print(
+//     //print(
 //         "******************************************* ${this.find('keySecret')}");
 //     return this.find('keySecret').toString();
 //   }
@@ -66,7 +66,7 @@
 
 //   Locale getLan() {
 //     final name = this.find('name') ?? 'Fr';
-//     print('namw---${this.find('name')}-------${name}');
+//     //print('namw---${this.find('name')}-------${name}');
 //     return Get.find<ActionController>().getLanguage(name);
 //   }
 // }

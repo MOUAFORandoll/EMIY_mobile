@@ -66,9 +66,9 @@
        
 //       )""");
 //     });
-//     print("La bd a ete cree");
-//     print(_db);
-//     print("Go next");
+//     //print("La bd a ete cree");
+//     //print(_db);
+//     //print("Go next");
 
 //     return _db;
 //   }
@@ -88,7 +88,7 @@
 //         "codeClient": codeClient,
 //         "date": date,
 //       });
-//       print(a);
+//       //print(a);
 //       return true;
 //     } catch (e) {
 //       return false;
@@ -110,7 +110,7 @@
 //           "codeCommande": 'codeCommande${i}',
 //           "date": 'date${i}',
 //         });
-//         print(a);
+//         //print(a);
 //       }
 //       return true;
 //     } catch (e) {
@@ -140,8 +140,8 @@
 //       version: 1,
 //     );
 //     var data = await _db.rawQuery('SELECT * FROM COMMANDE');
-//     print('com*****ta');
-//     print(data);
+//     //print('com*****ta');
+//     //print(data);
 //     return data;
 //   }
 
@@ -155,14 +155,14 @@
 //     );
 //     databaseFactory.deleteDatabase(path);
 //     init();
-//     print("fin delette");
+//     //print("fin delette");
 //   }
 
 //   // updateUser(data) async {
 //   //   var user = select();
 //   //   await _db!.update("User", data, where: 'id = ${user['id']}');
 //   //   var data1 = await _db!.rawQuery('SELECT * FROM User');
-//   //   print("*---------------------------up date user $data1");
+//   //   //print("*---------------------------up date user $data1");
 //   // }
 
 //   saveKeyKen(key) async {
@@ -175,7 +175,7 @@
 //         version: 1,
 //       );
 //       var data = await _db.rawQuery('SELECT * FROM KEYUSER');
-//       print(data);
+//       //print(data);
 //       if (data.isNotEmpty) {
 //         var a = await _db.update(
 //             "KEYUSER",
@@ -195,7 +195,7 @@
 //           "keySecret": Jwt.parseJwt(key['token'])['keySecret'],
 //         });
 //       }
-//       // print(a);
+//       // //print(a);
 //       return true;
 //     } catch (e) {
 //       return false;
@@ -212,7 +212,7 @@
 //         version: 1,
 //       );
 //       var data = await _db.rawQuery('SELECT * FROM LOCALISATION');
-//       print(data);
+//       //print(data);
 //       if (data.isNotEmpty) {
 //         var a = await _db.update(
 //             "LOCALISATION",
@@ -233,7 +233,7 @@
 //           "lat": key['latitude'],
 //           "ip": key['ip'],
 //         });
-//         print(a);
+//         //print(a);
 //       }
 //       return true;
 //     } catch (e) {
@@ -250,8 +250,8 @@
 //       version: 1,
 //     );
 //     var data = await _db.rawQuery('SELECT * FROM LOCALISATION');
-//     print('***************data[0]');
-//     print(data);
+//     //print('***************data[0]');
+//     //print(data);
 //     if (data.isNotEmpty) {
 //       return {
 //         "id": 0,
@@ -295,7 +295,7 @@
 //       version: 1,
 //     );
 //     var data = await _db.rawQuery('SELECT * FROM KEYUSER');
-//     // print(data);
+//     // //print(data);
 //     if (data.isNotEmpty) {
 //       return /* {'keySecret':  */ data[0]['keySecret'] /* } */;
 //     } else {
@@ -313,7 +313,7 @@
 //         version: 1,
 //       );
 //       var data = await _db.rawQuery('SELECT * FROM LANG');
-//       print(
+//       //print(
 //           ' ${data}lan----------------------------****************************************');
 
 //       if (data.isNotEmpty) {
@@ -332,7 +332,7 @@
 //         });
 //       }
 //       var data0 = await _db.rawQuery('SELECT * FROM LANG');
-//       print(
+//       //print(
 //           ' ${data0}lan----------------------------****************************************');
 
 //       return true;
@@ -352,7 +352,7 @@
 //     try {
 //       var data = await _db.rawQuery('SELECT * FROM LANG');
 
-//       print(data);
+//       //print(data);
 //       if (data.isNotEmpty) {
 //         var name = data[0]['name'].toString();
 //         return name;
@@ -361,7 +361,7 @@
 //         return '';
 //       }
 //     } catch (e) {
-//       print(e);
+//       //print(e);
 //     }
 //   }
 
@@ -375,12 +375,12 @@
 //     );
 //     try {
 //       var data = await _db.rawQuery('SELECT * FROM LANG');
-//       print(
+//       //print(
 //           'lan----------------------------****************************************');
-//       print(data);
+//       //print(data);
 //       return data.isNotEmpty;
 //     } catch (e) {
-//       print(e);
+//       //print(e);
 //     }
 //   }
 
@@ -394,7 +394,7 @@
 //         version: 1,
 //       );
 //       var data = await _db.rawQuery('SELECT * FROM THEME');
-//       print(
+//       //print(
 //           ' ${data}lan----------------------------****************************************');
 
 //       if (data.isNotEmpty) {
@@ -413,7 +413,7 @@
 //         });
 //       }
 //       var data0 = await _db.rawQuery('SELECT * FROM THEME');
-//       print(
+//       //print(
 //           ' ${data0}lan----------------------------****************************************');
 
 //       return true;
@@ -433,7 +433,7 @@
 //     try {
 //       var data = await _db.rawQuery('SELECT * FROM THEME');
 
-//       print(data);
+//       //print(data);
 //       if (data.isNotEmpty) {
 //         var value = data[0]['value'].toString();
 //         return value;
@@ -442,7 +442,7 @@
 //         return null;
 //       }
 //     } catch (e) {
-//       print(e);
+//       //print(e);
 //     }
 //   }
 // }

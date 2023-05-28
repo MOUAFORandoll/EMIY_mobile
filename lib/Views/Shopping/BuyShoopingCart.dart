@@ -7,7 +7,7 @@ import 'package:Fahkap/components/Form/formComponent.dart';
 import 'package:Fahkap/components/Form/text_field.dart';
 import 'package:Fahkap/components/Text/smallText.dart';
 import 'package:Fahkap/components/Widget/DeliveryComponent.dart';
-import 'package:Fahkap/components/Widget/LivreurComponent.dart';
+import 'package:Fahkap/components/Widget/pointLivraisonComponent.dart';
 import 'package:Fahkap/components/Widget/SelectComponent.dart';
 import 'package:Fahkap/components/Widget/app_back_button.dart';
 import 'package:Fahkap/components/Widget/app_input.dart';
@@ -149,13 +149,22 @@ class BuyShoopingCart extends StatelessWidget {
                                                         onTap: () {
                                                           Get.bottomSheet(
                                                             Container(
-                                                                height: Get.height *2,
+                                                                height:
+                                                                    Get.height *
+                                                                        2,
                                                                 padding: EdgeInsets
                                                                     .symmetric(
                                                                   vertical:
                                                                       kMarginY,
                                                                   horizontal:
                                                                       kMarginX,
+                                                                ),
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .only(
+                                                                  top:
+                                                                      kMarginY *
+                                                                          8,
                                                                 ),
                                                                 decoration: BoxDecoration(
                                                                     borderRadius: BorderRadius.only(
@@ -254,32 +263,22 @@ class BuyShoopingCart extends StatelessWidget {
                                                                             (value) {},
                                                                       ),
                                                                     ),
-                                                                    Padding(
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .only(
-                                                                        top:
-                                                                            kMarginY,
-                                                                      ),
-                                                                      child:
-                                                                          AppInput(
-                                                                        controller:
-                                                                            _Bcontroller.phoneController,
-                                                                        icon:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .check_circle_sharp,
-                                                                        ),
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          ;
-                                                                        },
-                                                                        label: 'mail'
-                                                                            .tr,
-                                                                        validator:
-                                                                            (value) {},
-                                                                      ),
-                                                                    ),
+                                                                    // Padding(
+                                                                    //   padding: EdgeInsets.only(
+                                                                    //     top: kMarginY,
+                                                                    //   ),
+                                                                    //   child: AppInput(
+                                                                    //     controller: _Bcontroller.phoneController,
+                                                                    //     icon: Icon(
+                                                                    //       Icons.check_circle_sharp,
+                                                                    //     ),
+                                                                    //     onChanged: (value) {
+                                                                    //       ;
+                                                                    //     },
+                                                                    //     label: 'mail'.tr,
+                                                                    //     validator: (value) {},
+                                                                    //   ),
+                                                                    // ),
                                                                     InkWell(
                                                                         child: Container(
                                                                             padding: EdgeInsets.all(Get.height * .02),
@@ -308,38 +307,58 @@ class BuyShoopingCart extends StatelessWidget {
                                                                               ],
                                                                             )),
                                                                         onTap: () {
-                                                                          Get.bottomSheet(Container(
-                                                                              padding: EdgeInsets.symmetric(
-                                                                                vertical: kMarginY,
-                                                                                horizontal: kMarginX,
-                                                                              ),
-                                                                              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15))),
-                                                                              child: SingleChildScrollView(
-                                                                                  child: Column(children: [
-                                                                                Padding(
-                                                                                    padding: EdgeInsets.only(
-                                                                                      top: kMarginY,
+                                                                          Get.bottomSheet(
+                                                                            GetBuilder<BuyShopController>(
+                                                                                builder: (_BCcontroller) => Container(
+                                                                                    padding: EdgeInsets.symmetric(
+                                                                                      vertical: kMarginY,
+                                                                                      horizontal: kMarginX,
                                                                                     ),
-                                                                                    child: Row(
-                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          'livrInfo'.tr,
-                                                                                          style: TextStyle(
-                                                                                            fontSize: 12,
-                                                                                            fontFamily: 'orkney',
+                                                                                    margin: EdgeInsets.only(
+                                                                                      top: kMarginY * 8,
+                                                                                    ),
+                                                                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15))),
+                                                                                    child: SingleChildScrollView(
+                                                                                        child: Column(children: [
+                                                                                      Padding(
+                                                                                          padding: EdgeInsets.only(
+                                                                                            top: kMarginY,
                                                                                           ),
+                                                                                          child: Row(
+                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                'livrInfo'.tr,
+                                                                                                style: TextStyle(
+                                                                                                  fontSize: 12,
+                                                                                                  fontFamily: 'orkney',
+                                                                                                ),
+                                                                                              ),
+                                                                                              InkWell(
+                                                                                                child: Icon(Icons.close),
+                                                                                                onTap: () {
+                                                                                                  Get.back();
+                                                                                                },
+                                                                                              )
+                                                                                            ],
+                                                                                          )),
+                                                                                      Padding(
+                                                                                        padding: EdgeInsets.symmetric(
+                                                                                          vertical: kMarginY * 2,
                                                                                         ),
-                                                                                        InkWell(
-                                                                                          child: Icon(Icons.close),
-                                                                                          onTap: () {
-                                                                                            Get.back();
+                                                                                        child: AppInput(
+                                                                                          controller: _BCcontroller.searchController,
+                                                                                          label: 'Rechercher'.tr,
+                                                                                          onChanged: (value) {
+                                                                                            return _BCcontroller.searchPointLivraison();
                                                                                           },
-                                                                                        )
-                                                                                      ],
-                                                                                    )),
-                                                                                ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: 50, itemBuilder: (_ctx, index) => Text('iii'))
-                                                                              ]))));
+                                                                                        ),
+                                                                                      ),
+                                                                                      _BCcontroller.searchController.text.length == 0 ? ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.livraison_point[index])) : ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.search_livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.search_livraison_point[index]))
+                                                                                    ])))),
+                                                                            isScrollControlled:
+                                                                                true,
+                                                                          );
                                                                         }),
                                                                     Container(
                                                                       margin: EdgeInsets
@@ -390,7 +409,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                                                 12,
                                                                           ),
                                                                           hintText:
-                                                                              'Entrer une description',
+                                                                              'Donnez moi plus d\'indication, un petit texte sera un plus',
                                                                           hintStyle:
                                                                               TextStyle(
                                                                             color:
@@ -410,6 +429,8 @@ class BuyShoopingCart extends StatelessWidget {
                                                                     ),
                                                                   ],
                                                                 ))),
+                                                            isScrollControlled:
+                                                                true,
                                                           );
                                                         }))
                                               ])),
@@ -441,7 +462,8 @@ class BuyShoopingCart extends StatelessWidget {
                                                 DeliveryComponent(
                                                   icon: Assets.localisation,
                                                   text: _Bcontroller
-                                                      .lieuxController.text,
+                                                      .selected_livraison_point
+                                                      .libelle,
                                                 ),
                                               ]))),
                                       Container(

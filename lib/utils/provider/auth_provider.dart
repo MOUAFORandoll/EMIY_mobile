@@ -17,17 +17,17 @@
 //   StorageService service = Get.find();
 
 //   Future login(data) async {
-//     print('******** envoi du login');
+//     //print('******** envoi du login');
 
 //     try {
 //       final response = await dio.post("/api/logins",
 //           options: Options(headers: {"Accept": "application/json"}),
 //           data: data);
-//       print('****a**** ${response.data}');
+//       //print('****a**** ${response.data}');
 //       await saveToken(response.data['token'], response.data['refreshToken']);
 //       return response.data;
 //     } catch (e) {
-//       print('********eroor $e');
+//       //print('********eroor $e');
 //       return null;
 //     }
 //   }
@@ -39,12 +39,12 @@
 //         options: Options(headers: {"Accept": "application/json"}),
 //         data: data,
 //       );
-//       print('****a**** ${response.data}');
+//       //print('****a**** ${response.data}');
 //       var dataLogin = {'phone': data['phone'], 'password': data['password']};
 //       login(dataLogin);
 //       return response.data;
 //     } catch (e) {
-//       print('********eroor $e');
+//       //print('********eroor $e');
 //       return null;
 //     }
 //   }

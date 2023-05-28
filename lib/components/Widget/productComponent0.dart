@@ -174,7 +174,7 @@ class ProductComponent extends StatelessWidget {
         //                   'codeProduitPanier': produit.codeProduit,
         //                   'keySecret': 0056 // _commande.getKey()
         //                 };
-        //                 print(data);
+        //                 //print(data);
         //                 // await _commande.validateProduit(data);
         //                 // // _controller.chageState(!_controller.addProduct);
         //               },
@@ -185,7 +185,7 @@ class ProductComponent extends StatelessWidget {
         //     ),
         //   );
         // } else {
-        //   print('deja recup');
+        //   //print('deja recup');
         // }
         // Get.toNamed(AppLinks.PRODUCT +
       },

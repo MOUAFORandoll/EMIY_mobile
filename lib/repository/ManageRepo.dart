@@ -16,7 +16,7 @@ class ManageRepo extends GetxService {
 
   Future getUser() async {
     var getU = await store.getKey();
-    // print('key******************** ${this.getKey()}');
+    // //print('key******************** ${this.getKey()}');
     // await this.userRefresh();
     // ignore: unnecessary_null_comparison
     if (getU != null) {
@@ -61,7 +61,7 @@ class ManageRepo extends GetxService {
   }
 
   Future newConnexion() async {
-    // print('newlocatio-------------------------${store.getKey()}');
+    // //print('newlocatio-------------------------${store.getKey()}');
     var getU = await store.getKey();
 
     // ignore: unnecessary_null_comparison
@@ -69,7 +69,7 @@ class ManageRepo extends GetxService {
       // if (getU.length != 0) {
       /*   try {
      */
-      // print('newlocatio-');
+      // //print('newlocatio-');
       try {
         var loca = await new Dio().get('https://ipapi.co/json/');
 
@@ -85,8 +85,8 @@ class ManageRepo extends GetxService {
         Response a =
             await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
 
-        // print('ssnewlocatio-------------------------');
-        // print(a.body);
+        // //print('ssnewlocatio-------------------------');
+        // //print(a.body);
 
         return a;
       } catch (e) {
@@ -107,11 +107,11 @@ class ManageRepo extends GetxService {
   }
 
   Future SignUp(data) async {
-    print(data);
+    //print(data);
     Response a0 = await apiClient.getCollectionsP(ApiRoutes.SIGNUP, data);
     if (a0.statusCode == 201) {
       var logdata = {'phone': data['phone'], 'password': data['password']};
-      //  print(logdata);
+      //  //print(logdata);
 
       Response a = await this.Login(logdata);
       return a;

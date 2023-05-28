@@ -11,12 +11,11 @@ class ShortRepo extends GetxService {
   ShortRepo({required this.apiClient});
   var store = Get.find<DB>();
 
-  Future getListShort() async {
-      Response a = await apiClient
-          .getCollections(ApiRoutes.SHORT_READ );
+  Future getListShort(indexC) async {
+    Response a = await apiClient
+        .getCollections(ApiRoutes.SHORT_READ + '/' + indexC.toString());
 
-      return a;
-   
+    return a;
   }
 
   Future getListCommandeForBoutique(codeBoutique) async {
@@ -30,7 +29,7 @@ class ShortRepo extends GetxService {
   Future getListHCommandeForBoutique(codeBoutique) async {
     Response a = await apiClient.getCollectionsP(
         ApiRoutes.BOUTIQUE_READ_HCOMMANDE, {'codeBoutique': codeBoutique});
-    print(a.body);
+    //print(a.body);
 
     return a;
   }
@@ -86,10 +85,10 @@ class ShortRepo extends GetxService {
   }
 
   Future newBoutique(data) async {
-    print('************oc');
+    //print('************oc');
     Response a = await apiClient.postData(ApiRoutes.BOUTIQUE_NEW, data);
 
-    print(a.body);
+    //print(a.body);
     return a;
   }
 

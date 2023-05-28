@@ -5,13 +5,13 @@ import 'package:Fahkap/utils/constants/apiRoute.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
-class CategoryBoutiqueRepo extends GetxService  {
+class CategoryBoutiqueRepo extends GetxService {
   final ApiClient apiClient;
   CategoryBoutiqueRepo({required this.apiClient});
 
   Future getListCategory() async {
     Response a = await apiClient.getCollections(ApiRoutes.CATEGORY_PRODUCT);
-    print(a.body);
+    //print(a.body);
     return a;
   }
 
@@ -37,14 +37,14 @@ class CategoryBoutiqueRepo extends GetxService  {
         await await apiClient.getCollectionsP(ApiRoutes.BOUTIQUE_FOR_CATEGORY, {
       'id': id, /* 'keySecret': keySecret */
     });
-    print(response.body);
+    //print(response.body);
     return response;
   }
 
   Future getListHCommandeForBoutique(codeBoutique) async {
     Response a = await apiClient.getCollectionsP(
         ApiRoutes.BOUTIQUE_READ_HCOMMANDE, {'codeBoutique': codeBoutique});
-    print(a.body);
+    //print(a.body);
 
     return a;
   }
@@ -56,5 +56,4 @@ class CategoryBoutiqueRepo extends GetxService  {
 
     return a;
   }
- 
 }

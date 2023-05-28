@@ -10,7 +10,7 @@ import 'package:get/get_connect/http/src/response/response.dart';
 
 //   Future getListCategory() async {
 //     Response a = await apiClient.getCollections(ApiRoutes.CATEGORY_PRODUCT);
-//     print(a.body);
+//     //print(a.body);
 //     return a;
 //   }
 // }

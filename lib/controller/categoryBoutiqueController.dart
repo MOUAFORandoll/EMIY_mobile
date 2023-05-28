@@ -29,8 +29,6 @@ class CategoryBoutiqueController extends GetxController {
   // CategoryController({required this.service});
   getCategory() async {
     try {
-      _categoryList = [];
-
       _isLoadedCat = 0;
       update();
 
@@ -38,7 +36,7 @@ class CategoryBoutiqueController extends GetxController {
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _categoryList = [];
-
+          print(response.body['data']);
           _categoryList.addAll((response.body['data'] as List)
               .map((e) => CategoryModel.fromJson(e))
               .toList());
@@ -49,9 +47,9 @@ class CategoryBoutiqueController extends GetxController {
           update();
         }
       }
-      // print(_categoryList);
+      // //print(_categoryList);
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -77,7 +75,7 @@ class CategoryBoutiqueController extends GetxController {
   List<BoutiqueModel> _ListBoutique = [];
   List<BoutiqueModel> get ListBoutique => _ListBoutique;
   getCategoryBoutique(id) async {
-    print(id);
+    //print(id);
     _ListBoutique.clear();
     _isLoadedP = 0;
     try {
@@ -86,18 +84,18 @@ class CategoryBoutiqueController extends GetxController {
 
       if (response.body != null) {
         if (response.body['data'].length != 0) {
-          print('****');
-          print(response.body['data']);
+          //print('****');
+          //print(response.body['data']);
           _ListBoutique.addAll((response.body['data'] as List)
               .map((e) => BoutiqueModel.fromJson(e))
               .toList());
         }
-        print(_ListBoutique);
+        //print(_ListBoutique);
         _isLoadedP = 1;
         update();
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -124,8 +122,8 @@ class CategoryBoutiqueController extends GetxController {
       _ListBoutiqueF = [];
       _ListBoutiqueF.clear();
       _isLoaded = 0;
-      update(); // print('------------------------/*****************************');
-      // print(response.body);
+      update(); // //print('------------------------/*****************************');
+      // //print(response.body);
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _ListBoutiqueF.addAll((response.body['data'] as List)
@@ -133,7 +131,7 @@ class CategoryBoutiqueController extends GetxController {
               .toList());
 
           _isExist = response.body['exist'];
-          // print(_ListBoutiqueF);
+          // //print(_ListBoutiqueF);
         }
       }
       _gA = false;
@@ -145,7 +143,7 @@ class CategoryBoutiqueController extends GetxController {
       _gA = false;
 
       update();
-      print(e);
+      //print(e);
       // }
     }
   }
@@ -163,8 +161,8 @@ class CategoryBoutiqueController extends GetxController {
       Response response =
           await categoryBoutiqueRepo.getListProduitForBoutique(codeBoutique);
       _produitBoutiqueList.clear();
-      print('-----------------');
-      print(response.body);
+      //print('-----------------');
+      //print(response.body);
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _produitBoutiqueList.addAll((response.body['data'] as List)
@@ -176,7 +174,7 @@ class CategoryBoutiqueController extends GetxController {
       }
       _produitBoutiqueListSave = _produitBoutiqueList;
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 }

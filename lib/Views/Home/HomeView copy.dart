@@ -45,7 +45,7 @@ class HomeView extends StatelessWidget {
       return RefreshIndicator(
           color: ColorsApp.skyBlue,
           onRefresh: () async {
-            print('****debut');
+            //print('****debut');
             await Get.find<CategoryBoutiqueController>().getCategory();
             await Get.find<CategoryBoutiqueController>().getListBoutiques();
 
@@ -53,12 +53,12 @@ class HomeView extends StatelessWidget {
             await Get.find<ManagerController>().getKeyU();
             await Get.find<ManagerController>().getLocalU();
             await Get.find<ManagerController>().getUser();
-    await  Get.find<ShortController>().getListShort();
+            await Get.find<ShortController>().getListShort();
 
-            print('****mid');
+            //print('****mid');
 
             await prods.getPopularProduit();
-            print('****fin');
+            //print('****fin');
           },
           child: CustomScrollView(
               controller: Get.find<ActionController>().scrollcontroller,
@@ -93,8 +93,7 @@ class HomeView extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(30)),
                                     child: Icon(
- Icons.amp_stories,
- 
+                                      Icons.amp_stories,
                                       color: Colors.red,
                                     )),
                                 onTap: () {

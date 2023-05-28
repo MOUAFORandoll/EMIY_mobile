@@ -38,10 +38,10 @@ class ShoppingproductComponent extends StatelessWidget {
                 if (direction == DismissDirection.startToEnd) {
                   // Left to right
 
-                  print("Edit");
+                  //print("Edit");
                 } else if (direction == DismissDirection.endToStart) {
                   // Right to left
-                  print("Delete");
+                  //print("Delete");
                   cart.removeItem(cartM.id);
                 }
               },

@@ -14,28 +14,28 @@ class CategoryModel {
   CategoryModel({
     required this.id,
     required this.libelle,
-    required this.icon,
+    required this.logo,
     required this.description,
     required this.status,
   });
 
   final int id;
   final String libelle;
-  final int icon;
+  final String logo;
   final String description;
   final bool status;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         id: json["id"] == null ? null : json["id"],
         libelle: json["libelle"] == null ? null : json["libelle"],
-        icon:  json["icon"] == null ? null : json["icon"],
+        logo:  json["logo"] == null ? null : json["logo"],
         description: json["description"] == null ? null : json["description"],
         status: json["status"] == null ? null : json["status"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
-        "icon": icon == null ? null : icon,
+        "logo": logo == null ? null : logo,
         "libelle": libelle == null ? null : libelle,
         "description": description == null ? null : description,
         "status": status == null ? null : status,

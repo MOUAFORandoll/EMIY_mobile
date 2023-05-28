@@ -77,9 +77,7 @@ class _FormComponentState extends State<FormComponent> {
                 setState(() {
                   value = val;
                 });
-
-                print('value');
-                print(value);
+ 
               },
               keyboardType: _typekeyBord,
 

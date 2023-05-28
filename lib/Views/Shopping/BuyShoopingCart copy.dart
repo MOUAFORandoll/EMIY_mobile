@@ -36,13 +36,13 @@
 
 // //  newSaveSql() async {
 // //     var send = await BuyShoopingCart().insert(newR);
-// //     print(send);
+// //     //print(send);
 // //   }
 // //   // ignore: must_call_super
 // //   getData() async {
 // //     await new ApiService().getListTrajet().then((value) {
 // //       setState(() {
-// //         // print(value);
+// //         // //print(value);
 // //         listTrajet = value;
 // //         dropdownvalueD = listTrajet[0];
 // //         ok = true;
@@ -50,7 +50,7 @@
 // //     }).catchError((e) {
 // //       ViewFunctions().verifiedConnection();
 // //       Timer(Duration(seconds: 3), () {
-// //         // print('********************${counter}');
+// //         // //print('********************${counter}');
 // //         getData();
 // //       });
 // //       // getData();
@@ -86,7 +86,7 @@
 
 //   //       color = value['color'];
 //   //     });
-//   //     // print(value['message']);
+//   //     // //print(value['message']);
 //   //     // functions.snackBar('Reservation', 'cccccccccccc', ColorsApp.skyBlue, 2);
 //   //     Get.back();
 //   //   }).catchError((e) {
@@ -95,7 +95,7 @@
 //   //       message = 'Echec de Reservation ';
 //   //       color = ColorsApp.red;
 //   //     });
-//   //     // print(value['message']);
+//   //     // //print(value['message']);
 //   //     // functions.snackBar('Reservation', 'cccccccccccc', ColorsApp.skyBlue, 2);
 
 //   //     // functions.snackBar('Reservation', 'Echec de Reservation ', Colors.red, 3);
@@ -141,7 +141,7 @@
 //                         _Bcontroller.stateChange(false);
 //                       },
 //                       onStepTapped: (int index) {
-//                         // print('index------------------' + widget.currentStep);
+//                         // //print('index------------------' + widget.currentStep);
 //                       },
 //                       onStepContinue: () async {
 //                         // if (_Bcontroller.state == 0) {
@@ -187,7 +187,7 @@
 //                         // }
 //                         // ;
 
-//                         // print(_Bcontroller.isCurrent(3));
+//                         // //print(_Bcontroller.isCurrent(3));
 //                         // if (_Bcontroller.isCurrent(3)) {
 //                         // if (nom.text.isEmpty ||
 //                         //     prenom.text.isEmpty ||
@@ -205,7 +205,7 @@
 //                         // }
 //                         // var listProd = await _controller.getListPinCart();
 
-//                         // print(listProd);
+//                         // //print(listProd);
 //                         if (nom.text.isNotEmpty &&
 //                             prenom.text.isNotEmpty &&
 //                             phone.text.isNotEmpty &&
@@ -218,7 +218,7 @@
 //                             'idLivreur': _Bcontroller.isLivreur,
 //                             'listProduits': _controller.getListPinCart(),
 //                           };
-//                           print(data);
+//                           //print(data);
 //                           await _Bcontroller.buyCart(data);
 //                         } else {}
 //                       },

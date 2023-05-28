@@ -336,7 +336,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                             'prixUnitaire': prix.text,
                             'description': description.text
                           };
-                          print(data);
+                          //print(data);
                           await _controller.updateProduit(data);
                           // _controller.chageState(!_controller.addProduct);
                         },

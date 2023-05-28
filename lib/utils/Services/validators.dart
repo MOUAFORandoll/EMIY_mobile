@@ -52,7 +52,7 @@ class Validators {
   }
 
   static usNumeriqValid(String input) {
-    print(int.tryParse(input));
+    //print(int.tryParse(input));
     if (int.tryParse(input) != null) {
       return null;
     } else {

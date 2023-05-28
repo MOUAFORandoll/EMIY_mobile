@@ -102,7 +102,7 @@
 //       }
 //     } catch (e) {
 //       // Gérer les erreurs de connexion
-//       print('Error syncing users: $e');
+//       //print('Error syncing users: $e');
 //     }
 //   }
 // }

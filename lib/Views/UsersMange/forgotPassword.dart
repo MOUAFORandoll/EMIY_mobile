@@ -188,9 +188,9 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                                         text: 'send'.tr,
                                         onTap: () async {
                                           // Get.toNamed(AppLinks.FIRST);
-                                          print({
-                                            'phone': phone.text,
-                                          });
+                                          //print({
+                                            // 'phone': phone.text,
+                                          // });
                                           // await _manager.loginUser({
                                           //   'phone': phone.text,
                                           // });
@@ -304,12 +304,12 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           setState(() {
                             enabled = true;
                           });
-                          print("access");
+                          //print("access");
                         } else {
                           setState(() {
                             enabled = false;
                           });
-                          print("eroorrrrrrrrr");
+                          //print("eroorrrrrrrrr");
                         }
                       },
                     ),
@@ -359,12 +359,12 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           setState(() {
                             enabledData = true;
                           });
-                          print("Activate ber *********");
+                          //print("Activate ber *********");
                         } else {
                           setState(() {
                             enabledData = false;
                           });
-                          print("DesaActivate ber *********");
+                          //print("DesaActivate ber *********");
                         }
                         if ((name.text.isNotEmpty &&
                             surname.text.isNotEmpty &&
@@ -377,12 +377,12 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           setState(() {
                             enabled = true;
                           });
-                          print("access");
+                          //print("access");
                         } else {
                           setState(() {
                             enabled = false;
                           });
-                          print("eroorrrrrrrrr");
+                          //print("eroorrrrrrrrr");
                         }
                       },
                       onFieldSubmitted: (String value) {
@@ -464,12 +464,12 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           setState(() {
                             enabledData = true;
                           });
-                          print("Activate ber *********");
+                          //print("Activate ber *********");
                         } else {
                           setState(() {
                             enabledData = false;
                           });
-                          print("DesaActivate ber *********");
+                          //print("DesaActivate ber *********");
                         }
                         if ((name.text.isNotEmpty &&
                             surname.text.isNotEmpty &&
@@ -482,12 +482,12 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           setState(() {
                             enabled = true;
                           });
-                          print("access");
+                          //print("access");
                         } else {
                           setState(() {
                             enabled = false;
                           });
-                          print("eroorrrrrrrrr");
+                          //print("eroorrrrrrrrr");
                         }
                       },
                       onFieldSubmitted: (String value) {
@@ -536,7 +536,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                         enabled: enabled,
                         state: validator,
                         onTap: () async {
-                          print("deb");
+                          //print("deb");
 
                           // if (phone.text.isEmpty ||
                           //     pass.text.isEmpty ||
@@ -581,7 +581,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           //     "latitude": 0,
                           //     "longitude": 0
                           //   };
-                          //   print(
+                          //   //print(
                           //       "Incription en cours********************* $data");
                           // } else {
                           //   if (name.text.length < 4) {

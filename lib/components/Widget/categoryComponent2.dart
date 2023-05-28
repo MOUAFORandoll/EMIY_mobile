@@ -28,7 +28,7 @@ class CategoryComponent2 extends StatelessWidget {
               children: [
                 CachedNetworkImage(
                   fit: BoxFit.cover,
-                  imageUrl: 'https://placehold.co/600x400@2x.png',
+                  imageUrl: category.logo /* 'https://placehold.co/600x400@2x.png' */,
                   imageBuilder: (context, imageProvider) {
                     return Container(
                         height: kHeight / 4,

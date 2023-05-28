@@ -31,11 +31,11 @@ class CategoryView extends StatelessWidget {
           body: RefreshIndicator(
               color: ColorsApp.skyBlue,
               onRefresh: () async {
-                print('****debut');
+                //print('****debut');
                 await Get.find<CategoryBoutiqueController>().getCategory();
-                print('****mid');
+                //print('****mid');
 
-                print('****fin');
+                //print('****fin');
               },
               child: CustomScrollView(controller: _scrollController, slivers: [
                 // Add the app bar to the CustomScrollView.

@@ -39,7 +39,7 @@ class _FirstScreenState extends State<FirstScreen> {
     controller = ScrollController();
     controller.addListener(() {
       setState(() {
-        print(_isVisible);
+        //print(_isVisible);
         _isVisible =
             controller.position.userScrollDirection == ScrollDirection.forward;
       });
@@ -50,7 +50,7 @@ class _FirstScreenState extends State<FirstScreen> {
     Get.find<ManagerController>().startTimer();
 
     Future.delayed(Duration(seconds: 10), () async {
-      print('10');
+      //print('10');
 
       // Get.offNamedUntil(AppLinks.FIRST, (route) => false);
 

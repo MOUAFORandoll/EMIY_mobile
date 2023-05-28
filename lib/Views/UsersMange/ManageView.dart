@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:Fahkap/Views/UsersMange/RegisterScreen.dart';
 import 'package:Fahkap/components/Widget/BtnManageView.dart';
 import 'package:Fahkap/components/Widget/app_setting_comp.dart';
 import 'package:Fahkap/components/Widget/app_title_right.dart';
@@ -13,6 +14,7 @@ import 'package:Fahkap/controller/managerController.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:Fahkap/utils/constants/assets.dart';
+import 'package:Fahkap/views/UsersMange/LoginScreen.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -105,7 +107,60 @@ class ManageView extends StatelessWidget {
                               icon: Assets.user,
                               color: ColorsApp.skyBlue,
                               onTap: () {
-                                Get.toNamed(AppLinks.LOGIN);
+                                // Get.toNamed(AppLinks.LOGIN);
+                                Get.bottomSheet(
+                                  Container(
+                                      margin: EdgeInsets.only(
+                                        top: kMarginY * 8,
+                                      ),
+                                      decoration: BoxDecoration(
+                                          color: ColorsApp.white,
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              topRight: Radius.circular(15))),
+                                      height: 800,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: kMarginX),
+                                      child: Column(children: [
+                                        Container(
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                TextButton(
+                                                  child: Text('Annuler'),
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                ),
+                                                // TextButton(
+                                                //   child: Text('Ajouter'),
+                                                //   onPressed: () async {
+                                                //     // await _controller.addShort();
+                                                //     // _controller.chageState(!_controller.addProduct);
+                                                //   },
+                                                // )
+                                              ]),
+                                        ),
+                                        Expanded(
+                                            child: SingleChildScrollView(
+                                                child: Column(children: [
+                                          // _controller.listImgProduits.length != 0
+                                          //     ? smallText(
+                                          //         text: 'Listes images',
+                                          //       )
+                                          //     : Container(),
+
+                                          Container(
+                                              margin: EdgeInsets.only(
+                                                top: 50,
+                                              ),
+                                              child: LoginScreen())
+                                        ])))
+                                      ])),
+                                  isScrollControlled: true,
+                                );
                               }),
                       _manager.User != null
                           ? AppSettingComp(
@@ -122,13 +177,70 @@ class ManageView extends StatelessWidget {
                               icon: Assets.user,
                               color: ColorsApp.skyBlue,
                               onTap: () {
-                                Get.toNamed(AppLinks.REGISTER);
+                                // Get.toNamed(AppLinks.REGISTER);
+                                Get.bottomSheet(
+                                  Container(
+                                      margin: EdgeInsets.only(
+                                        top: kMarginY * 8,
+                                      ),
+                                      decoration: BoxDecoration(
+                                          color: ColorsApp.white,
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              topRight: Radius.circular(15))),
+                                      height: 800,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: kMarginX),
+                                      child: Column(children: [
+                                        Container(
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                TextButton(
+                                                  child: Text('Annuler'),
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                ),
+                                                // TextButton(
+                                                //   child: Text('Ajouter'),
+                                                //   onPressed: () async {
+                                                //     // await _controller.addShort();
+                                                //     // _controller.chageState(!_controller.addProduct);
+                                                //   },
+                                                // )
+                                              ]),
+                                        ),
+                                        Expanded(
+                                            child: SingleChildScrollView(
+                                                child: Column(children: [
+                                          // _controller.listImgProduits.length != 0
+                                          //     ? smallText(
+                                          //         text: 'Listes images',
+                                          //       )
+                                          //     : Container(),
+
+                                          Container(
+                                              margin: EdgeInsets.only(
+                                                top: 50,
+                                              ),
+                                              child: RegisterScreen())
+                                        ])))
+                                      ])),
+                                  isScrollControlled: true,
+                                );
                               }),
                       AppSettingComp(
                           title: 'Boutique',
                           icon: Assets.bagmoney,
                           color: ColorsApp.orange,
                           onTap: () {
+                            /*  Get.find<BoutiqueController>().isLoaded == 0
+                                ? ViewFunctions()
+                                    .loading('Boutique', 'Veuillez patienter')
+                                : */
                             Get.toNamed(AppLinks.BOUTIQUE_USER);
                           }),
                       AppSettingComp(

@@ -270,6 +270,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  flutter_downloader:
+    dependency: "direct main"
+    description:
+      name: flutter_downloader
+      sha256: "79e05335471e23593f2e22483d2c909a03f19000293cbc7f39c8c2fd4d5d9c3d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.10.4"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -504,6 +512,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   matcher:
     dependency: transitive
     description:
@@ -893,6 +909,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4+2"
+  socket_io_client:
+    dependency: "direct main"
+    description:
+      name: socket_io_client
+      sha256: "5d2a0a12c2a4a5f48d14e5b6aef7db78d3b425a9b084071059fa54bd12d2576c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
+  socket_io_common:
+    dependency: transitive
+    description:
+      name: socket_io_common
+      sha256: "2ab92f8ff3ebbd4b353bf4a98bee45cc157e3255464b2f90f66e09c4472047eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   source_span:
     dependency: transitive
     description:
@@ -1213,6 +1245,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
+  web_socket_channel:
+    dependency: "direct main"
+    description:
+      name: web_socket_channel
+      sha256: bfd93faab893a64920903d7d375517c18789c21e4c7daa5232a31ee126b7fea1
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   webview_flutter:
     dependency: "direct main"
     description:
@@ -1278,5 +1318,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
+  dart: ">=2.19.0 <3.0.0"
   flutter: ">=3.3.0"

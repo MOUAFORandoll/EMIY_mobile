@@ -22,19 +22,19 @@ class CommandeController extends GetxController {
   var s = Get.find<DB>();
   getListCommandes() async {
     try {
-      print('DB *************response ');
+      //print('DB *************response ');
       _commandeList.clear();
       _isLoaded = false;
       var response = await s.getListCommande();
-      print('DB *************response ');
-      print(response);
+      //print('DB *************response ');
+      //print(response);
       _commandeList.addAll(
           (response as List).map((e) => CommandeModel.fromJson(e)).toList());
-      // print(_categoryList);
+      // //print(_categoryList);
       _isLoaded = true;
       update();
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
@@ -60,7 +60,7 @@ class CommandeController extends GetxController {
   var fn = new ViewFunctions();
 
   getProduitForCommandes(id) async {
-    print('*------33333333333333333333${id}');
+    //print('*------33333333333333333333${id}');
 
     try {
       // fn.loading(
@@ -69,8 +69,8 @@ class CommandeController extends GetxController {
       _produitList.clear();
       findComBuyId(id);
       Response response = await commandeRepo.getListProductForComm(id);
-      print('*------response');
-      print(response.body);
+      //print('*------response');
+      //print(response.body);
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           produitList.addAll((response.body['data'] as List)
@@ -88,7 +88,7 @@ class CommandeController extends GetxController {
     } catch (e) {
       // fn.closeSnack();
 
-      print(e);
+      //print(e);
     }
   }
 }

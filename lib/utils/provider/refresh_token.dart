@@ -38,7 +38,7 @@
 //           _dio.interceptors.requestLock.lock();
 //           _dio.interceptors.responseLock.lock();
 //           RequestOptions options = error.response.request;
-//           print("Debut refresh token......ancien.......$token..............");
+//           //print("Debut refresh token......ancien.......$token..............");
 //           await refreshToken();
 
 //           var userData = box.read(userKey);
@@ -47,13 +47,13 @@
 //           } else if (userData['token'] is Map) {
 //             token = userData['token']["token"];
 //           }
-//           print(
+//           //print(
 //               " refresh token...........Termineeeeeeeee. NOuveau..$token.............");
 //           options.headers["Authorization"] = "Bearer" + token;
 //           _dio.interceptors.requestLock.unlock();
 //           _dio.interceptors.responseLock.unlock();
-//           // print("voici lo token ${options.headers["Authorization"]}");
-//           print("voici  la requette qui a ete faite ${options.path}");
+//           // //print("voici lo token ${options.headers["Authorization"]}");
+//           //print("voici  la requette qui a ete faite ${options.path}");
 
 //           return await _dio.request(
 //             options.path,
@@ -69,7 +69,7 @@
 //   }
 
 //   Future<bool> refreshToken() async {
-//     print("****************----------------");
+//     //print("****************----------------");
 //     var userData = box.read(userKey);
 //     var data;
 //     /* box.write(userKey, {
@@ -77,29 +77,29 @@
 //     }); */
 
 //     var refreshToken = await userData['refreshToken'];
-//     print("refreshTo $refreshToken");
+//     //print("refreshTo $refreshToken");
 //     if (refreshToken is String) {
 //       data = {"refreshToken": refreshToken};
-//       print("refresh token on type string");
+//       //print("refresh token on type string");
 //     } else if (refreshToken is Map) {
 //       data = {"refreshToken": refreshToken["refreshToken"]};
-//       print("refresh token on type map");
-//       // print("refresh token on type string");
+//       //print("refresh token on type map");
+//       // //print("refresh token on type string");
 //     }
-//     // print("refresh token on type a la sortir $data");
+//     // //print("refresh token on type a la sortir $data");
 
 //     Response response = await Dio()
 //         .post(ApiUrl.baseUrl + '/api/token/refresh', data: jsonEncode(data));
 
 //     if (response.statusCode == 200 || response.statusCode == 201) {
 //       var user = response.data;
-//       print('use on resfresh token $user');
+//       //print('use on resfresh token $user');
 //       Variable.token = user["token"];
 //       var user1 = box.read(userKey);
-//       //    print('user1 du box reda  $user1');
+//       //    //print('user1 du box reda  $user1');
 
 //       var data = response.data;
-//       //    print('data du response data $data');
+//       //    //print('data du response data $data');
 //       // box.write(
 //       //   userKey,
 //       //   user1
@@ -116,10 +116,10 @@
 //         "token": data['token'],
 //         "refreshToken": data['refreshToken'],
 //       });
-//       print("inale----------------------------");
+//       //print("inale----------------------------");
 //       return true;
 //     } else {
-//       //   print("voici error userrefresh: ");
+//       //   //print("voici error userrefresh: ");
 //       throw Exception("Exception occured: ");
 //     }
 //   }

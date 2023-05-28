@@ -8,6 +8,7 @@ import 'package:Fahkap/utils/Services/storageService2.dart';
 import 'package:Fahkap/utils/Services/translations.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
@@ -20,12 +21,10 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initializePlatformNotifications();
-  // await FlutterDownloader.initialize(debug: true);
-//
-//
-//
+  await FlutterDownloader.initialize(debug: true);
   var database0 = new DB();
   await database0.init();
+  await initServices();
   await initApp();
 
 // await MyBinding().onInit();
@@ -73,8 +72,6 @@ class MyApp extends StatelessWidget {
     //   box.write('isDark', false);
     // }
 
-    MyBinding().requestPermission();
-    // MyBinding().onInit();
     Get.find<ActionController>().getThemeInit(context);
 
     return GetMaterialApp(
@@ -84,8 +81,8 @@ class MyApp extends StatelessWidget {
       darkTheme: dark,
       themeMode: ThemeMode.light, //ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      initialBinding: MyBinding(),
-      initialRoute: AppLinks.SPLASHSCREEN,
+      // initialBinding: MyBinding(),
+      initialRoute: AppLinks.TEST,
       getPages: AppRoutes.pages,
     );
   }

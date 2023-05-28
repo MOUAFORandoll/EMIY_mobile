@@ -8,17 +8,18 @@ class ProductRepo extends GetxService {
   final ApiClient apiClient;
   ProductRepo({required this.apiClient});
 
-  Future<Response> getListProductPopular() async {
-    print('get----------------');
+  Future<Response> getListProductPopular(indexC) async {
+    //print('get----------------');
     // try {
-    Response response =
-        await apiClient.getCollections(ApiRoutes.POPULAR_PRODUCT);
+    Response response = await apiClient.getCollections(
+      ApiRoutes.POPULAR_PRODUCT + '/' + indexC.toString(),
+    );
 
     return response;
   }
 
   Future<Response> getListProductAll() async {
-    print('get----------------');
+    //print('get----------------');
     // try {
     Response response = await apiClient.getCollections(ApiRoutes.POPULAR_ALL);
 

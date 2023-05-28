@@ -84,7 +84,7 @@ class ProductForBoutiqueComponent extends StatelessWidget {
             ]),
       ),
       onTap: () {
-        // print(AppLinks.PRODUCT);
+        // //print(AppLinks.PRODUCT);
 
         Get.toNamed(AppLinks.PRODUCT +
             '?index=${index}&type=2&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');

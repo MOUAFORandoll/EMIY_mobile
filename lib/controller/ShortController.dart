@@ -46,7 +46,7 @@ class ShortController extends GetxController {
 
   changeVideo(index) async {
     // listShort[index].controller.initialize();
-    print('---------------------');
+    //print('---------------------');
     _initialise = false;
     // update();
     // ignore: unnecessary_null_comparison
@@ -64,9 +64,9 @@ class ShortController extends GetxController {
     // ignore: unnecessary_null_comparison
     // if (listShort[prevVideo].controller != null) controller!.pause();
 
-    print(index);
+    //print(index);
     controller!.addListener(() async {
-      print('0000');
+      //print('0000');
 
       _progressValue = Get.find<ShortController>()
                   .controller!
@@ -89,13 +89,13 @@ class ShortController extends GetxController {
                   .inSeconds
                   .toDouble();
       update();
-      // print(
+      // //print(
       //   'poition******${_progressValue}',
       // );
       if (_progressValue == 1) {
         // await listShort[index].loadController();
 
-        // print(
+        // //print(
         //   'ici***************',
         // );
       }
@@ -115,32 +115,75 @@ class ShortController extends GetxController {
   List<ShortModel> get listShort => _listShort;
   int _isLoadedP = 0;
   int get isLoadedP => _isLoadedP;
+  int _isCurrent = 0;
+  int get isCurrent => _isCurrent;
+  setCOurrent(indexC) {
+    _isCurrent = indexC;
+    update();
+  }
+
+  late PageController _pageController;
+  get pageController => _pageController;
+  @override
+  void onInit() {
+    print('-----------init--------------');
+
+    super.onInit();
+    _pageController = PageController(initialPage: 0);
+    _pageController = PageController()..addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    print('-----------uuuuuuuu---');
+
+    if (isCurrent + 3 >= _listShort.length) {
+      print('-----------00000000---');
+
+      getListShort();
+    }
+  }
+
+  bool _loaddata = false;
+  bool get loaddata => _loaddata;
+
+  int indexC = 0;
   Future<void> getListShort() async {
-    // print('***short******************response**********');
+    // //print('***short******************response**********');
 
-    _isLoadedP = 0;
-    try {
-      Response response = await shortRepo.getListShort();
-
-      _listShort = [];
-      _listShort.clear();
+    if (_loaddata == false) {
+      print('-----------get---');
+      _isLoadedP = 0;
+      _loaddata = true;
       update();
+      try {
+        Response response = await shortRepo.getListShort(indexC);
 
-      if (response.body != null) {
-        if (response.body['data'] != null) {
-          if (response.body['data'].length != 0) {
-            print('short**************************');
-            print(response.body['data']);
-            _listShort.addAll((response.body['data'] as List)
-                .map((e) => ShortModel.fromJson(e))
-                .toList());
+        // _listShort = [];
+        // _listShort.clear();
+        // update();
+        print(
+            '-----------------------------------88888${response.body['data']}');
+        if (response.body != null) {
+          if (response.body['data'] != null) {
+            if (response.body['data'].length != 0) {
+              //print('short**************************');
+              //print(response.body['data']);
+              _listShort.addAll((response.body['data'] as List)
+                  .map((e) => ShortModel.fromJson(e))
+                  .toList());
+            }
+            _isLoadedP = 1;
+            indexC += int.parse(_listShort.length.toString());
+
+            _loaddata = false;
+            update();
           }
-          _isLoadedP = 1;
-          update();
         }
+      } catch (e) {
+        _loaddata = false;
+        update();
+        //print(e);
       }
-    } catch (e) {
-      print(e);
     }
   }
 

@@ -29,9 +29,44 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../components/Button/app_button.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   HomeView({Key? key}) : super(key: key);
-  ScrollController _scrollController = new ScrollController();
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
+  // ScrollController _scrollController = new ScrollController();
+  // void initState() {
+  //   super.initState();
+  //   _scrollController = ScrollController()..addListener(handleScrolling);
+  // }
+
+  // void handleScrolling() {
+  //   if (_scrollController.offset >=
+  //       _scrollController.position.maxScrollExtent) {
+  //     //print('gin*************************');
+  //   }
+  // }
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(AppLifecycleState.resumed);
+    if (state == AppLifecycleState.resumed) {
+      // Perform actions when the app is resumed
+    }
+    // You can also handle other lifecycle states if needed
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +76,7 @@ class HomeView extends StatelessWidget {
       return RefreshIndicator(
           color: ColorsApp.skyBlue,
           onRefresh: () async {
-            print('****debut');
+            //print('****debut');
             await Get.find<CategoryBoutiqueController>().getCategory();
             await Get.find<CategoryBoutiqueController>().getListBoutiques();
 
@@ -54,7 +89,8 @@ class HomeView extends StatelessWidget {
             await prods.getPopularProduit();
           },
           child: CustomScrollView(
-              controller: Get.find<ActionController>().scrollcontroller,
+              controller: prods
+                  .controllerT, // controller: Get.find<ActionController>().scrollcontroller,
               slivers: [
                 // Add the app bar to the CustomScrollView.
                 SliverAppBar(
@@ -558,20 +594,94 @@ class HomeView extends StatelessWidget {
                                     shrinkWrap: true,
                                     physics: const BouncingScrollPhysics(),
                                     // Ratio largeur/hauteur pour chaque élément
-
+                                    // controller: prods.controllerT,
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 20.0,
-                                            childAspectRatio: kMarginX / 12,
-                                            mainAxisSpacing: 10.0),
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 20.0,
+                                      childAspectRatio: kMarginX / 12,
+                                      mainAxisSpacing: 10.0,
+                                    ),
                                     itemCount: prods.produitList.length,
                                     itemBuilder: (_ctx, index) =>
-                                        // Créez un widget ProductComponentAll pour chaque produit dans la liste
                                         ProductComponentAll(
                                           produit: prods.produitList[index],
                                           index: index,
                                         )),
+                                prods.loaddata == true
+                                    ? Shimmer.fromColors(
+                                        baseColor: Colors.blueGrey,
+                                        highlightColor: Colors.greenAccent,
+                                        child: Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: kMarginX),
+                                            child: SingleChildScrollView(
+                                                child: Column(children: [
+                                              SizedBox(
+                                                  height: kMdHeight,
+                                                  child: Stack(children: [
+                                                    GridView.builder(
+                                                        physics:
+                                                            NeverScrollableScrollPhysics(),
+                                                        gridDelegate:
+                                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                                crossAxisCount:
+                                                                    2,
+                                                                crossAxisSpacing:
+                                                                    10.0,
+                                                                mainAxisSpacing:
+                                                                    50.0),
+                                                        itemCount: 10,
+                                                        itemBuilder:
+                                                            (_ctx, index) =>
+                                                                Container(
+                                                                    height:
+                                                                        kMdHeight /
+                                                                            4,
+                                                                    width:
+                                                                        kMdWidth *
+                                                                            1.1,
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                    // padding: EdgeInsets.all(kMarginX),
+                                                                    margin: EdgeInsets.only(
+                                                                        right:
+                                                                            kMarginX),
+                                                                    decoration: BoxDecoration(
+                                                                        color: ColorsApp
+                                                                            .greySecond,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                8)),
+                                                                    child: Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment
+                                                                                .spaceEvenly,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        children: [
+                                                                          Container(
+                                                                              height: kMdHeight * .15,
+                                                                              width: Get.width * .5,
+                                                                              decoration: BoxDecoration(
+                                                                                  image: DecorationImage(
+                                                                                image: AssetImage('assets/logo.png'),
+                                                                              ))),
+                                                                          Container(
+                                                                            width:
+                                                                                kSmWidth * .6,
+                                                                            margin:
+                                                                                EdgeInsets.only(top: Get.height * .005, left: Get.width * .008),
+                                                                            child: Text('produit.titre',
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                style: TextStyle(color: ColorsApp.black, fontSize: 12)),
+                                                                          ),
+                                                                        ])))
+                                                  ]))
+                                            ]))),
+                                      )
+                                    : Container(),
                               ],
                             )),
                           );

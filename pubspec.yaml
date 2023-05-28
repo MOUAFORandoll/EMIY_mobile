@@ -69,10 +69,13 @@ dependencies:
   video_player: ^2.0.0 
   smooth_star_rating_null_safety: ^1.0.4+2
   share_plus: 
-  # flutter_downloader:  any
+  flutter_downloader:  any
   flutter_mobx : any
   webview_flutter: ^2.0.13
   uni_links: ^0.5.0
+  socket_io_client: any
+  web_socket_channel: any
+
 dev_dependencies:
   flutter_launcher_icons: ^0.8.0
   flutter_test:

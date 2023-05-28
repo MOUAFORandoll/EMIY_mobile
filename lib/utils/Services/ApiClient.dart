@@ -21,7 +21,7 @@ class ApiClient extends GetConnect implements GetxService {
     httpClient.addRequestModifier<dynamic>((request) {
       _setAuthHeaders();
 
-      // print('===========================$token============================');
+      // //print('===========================$token============================');
       // Intercept the request before it is sent to the server
       token.length != 0
           ? request.headers['Authorization'] = 'Bearer $token'
@@ -34,10 +34,10 @@ class ApiClient extends GetConnect implements GetxService {
       _setAuthHeaders();
 
       if ((response.statusCode == '401' || response.statusCode == '403')) {
-        print(response.statusCode);
+        //print(response.statusCode);
         await Get.find<ManagerController>()
             .refreshToken(request.url.path.toString());
-        //  print('secomnd8888888=+++}+++++++++++++++++++++++++++}-=======================================================');
+        //  //print('secomnd8888888=+++}+++++++++++++++++++++++++++}-=======================================================');
         _setAuthHeaders();
         _mainHeaders['Authorization'] = 'Bearer $token';
 
@@ -58,11 +58,12 @@ class ApiClient extends GetConnect implements GetxService {
       headers: request.headers,
     );
   }
+
   var fn = new ViewFunctions();
 
   void onInit() {
     _setAuthHeaders();
-   fn. verifiedConnection();
+    fn.verifiedConnection();
     super.onInit();
   }
 
@@ -71,7 +72,7 @@ class ApiClient extends GetConnect implements GetxService {
   void _setAuthHeaders() async {
     // var getU = await db.getKeyKen();
     // token = getU['token'];
-    print(token);
+    //print(token);
   }
 
   Future<Response> getCollections(url) async {
@@ -85,8 +86,8 @@ class ApiClient extends GetConnect implements GetxService {
   }
 
   Future<Response> postData(url, data) async {
-    // print(this.httpClient.defaultContentType);
-    print(data);
+    // //print(this.httpClient.defaultContentType);
+    //print(data);
     Response rep = await post(url.toString(), data);
     return rep;
   }

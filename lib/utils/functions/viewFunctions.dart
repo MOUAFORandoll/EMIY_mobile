@@ -89,7 +89,7 @@ class ViewFunctions {
   }
 
   closeSnack() {
-    print('*****************************${Get.isSnackbarOpen}');
+    //print('*****************************${Get.isSnackbarOpen}');
     Get.closeCurrentSnackbar();
     // Get.closeAllSnackbars();
   }
@@ -134,7 +134,7 @@ class ViewFunctions {
     var cron = Cron();
     cron.schedule(Schedule.parse('*/$timer * * * * *'), () {
       verifiedConnection();
-      print(i);
+      //print(i);
       i++;
     });
   }
@@ -152,35 +152,35 @@ Future<void> _checkInternetConnection() async {
         _isConnected = false;
       });
       if (kDebugMode) {
-        print(err);
+        //print(err);
       }
     }
   } */
 
   bool connexion = true;
   verifiedConnection() {
-    print("debut check connexion");
+    //print("debut check connexion");
     DataConnectionChecker().onStatusChange.listen((status) {
       switch (status) {
         case DataConnectionStatus.connected:
-          print("connecte $connexion");
+          //print("connecte $connexion");
           if (connexion == false) {
             // Get.back();
             showToast(true);
             connexion = true;
           } else {
-            print(" deja connextio $connexion");
+            //print(" deja connextio $connexion");
           }
           break;
         case DataConnectionStatus.disconnected:
-          print("pas de connextio $connexion");
+          //print("pas de connextio $connexion");
 
           if (connexion == true) {
             showToast(false);
             connexion = false;
           } else {
             // Get.back();
-            print("attente de connextio $connexion");
+            //print("attente de connextio $connexion");
           }
           break;
       }
@@ -189,28 +189,28 @@ Future<void> _checkInternetConnection() async {
     //   var cron = Cron();
     //   cron.schedule(Schedule.parse('*/2 * * * * *'), () async {
     //     var a = Connectivity().checkConnectivity;
-    //     print("voici *********************** $a");
+    //     //print("voici *********************** $a");
     //     bool result = await InternetConnectionChecker().hasConnection;
     //     if (result == true) {
-    //       print("connecte $connexion");
+    //       //print("connecte $connexion");
     //       if (connexion == false) {
     //         Get.back();
     //         showToast(result);
     //         connexion = true;
     //       } else {
-    //         print(" deja connextio $connexion");
+    //         //print(" deja connextio $connexion");
     //       }
     //     } else {
-    //       print("pas de connextio $connexion");
+    //       //print("pas de connextio $connexion");
 
     //       if (connexion == true) {
     //         showToast(result);
     //         connexion = false;
     //       } else {
     //         // Get.back();
-    //         print("attente de connextio $connexion");
+    //         //print("attente de connextio $connexion");
     //       }
-    //       print(InternetConnectionChecker().connectionStatus.obs);
+    //       //print(InternetConnectionChecker().connectionStatus.obs);
     //     }
     //   });
   }
@@ -269,13 +269,13 @@ Future<void> _checkInternetConnection() async {
   GetStorage box = GetStorage();
 
   getTheme(context) {
-    print("sarttttttttttttt----------------${box.read('isDark')}");
+    //print("sarttttttttttttt----------------${box.read('isDark')}");
 
     return box.read('isDark') == null ? false : box.read('isDark');
   }
 
   changeTheme(context) {
-    print("----------------${box.read('isDark')}");
+    //print("----------------${box.read('isDark')}");
     if (Theme.of(context).brightness == Brightness.dark) {
       box.write('isDark', false);
       Get.changeTheme(ThemeData.light());

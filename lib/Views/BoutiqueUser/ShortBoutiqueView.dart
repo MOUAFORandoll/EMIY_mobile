@@ -11,6 +11,7 @@ import 'package:Fahkap/components/Text/bigText.dart';
 import 'package:Fahkap/components/Widget/app_bar_custom.dart';
 import 'package:Fahkap/components/Widget/app_empty.dart';
 import 'package:Fahkap/components/Widget/app_input.dart';
+import 'package:Fahkap/components/Widget/app_input_new.dart';
 import 'package:Fahkap/components/Widget/app_loading.dart';
 import 'package:Fahkap/components/Widget/app_short_add.dart';
 import 'package:Fahkap/components/Widget/categoryComponent.dart';
@@ -54,178 +55,176 @@ class ShortBoutiqueView extends StatelessWidget {
               title: 'Vos shorts',
               titleBtn: !_controller.addShoort ? 'Ajouter' : 'Retour',
               onTap: () {
-                // Get.bottomSheet(
-                //   Observer(
-                //       builder: (_) => Container(
-                //           height: kHeight,
-                //           color: Colors.white,
-                //           child: Stack(
-                //             children: [
-                //                Positioned(
-                //                   top: 30,
-                //                   left: 0,
-                //                   child: Row(
-                //                       mainAxisAlignment:
-                //                           MainAxisAlignment.spaceBetween,
-                //                       children: [
-                //                         Container(
-                //                             child: IconButtonF0(
-                //                           color: Colors.black,
-                //                           icon: Icons.close,
-                //                           onTap: () {
-                //                             Get.back();
-                //                           },
-                //                         )),
-                //                         Container(
-                //                             child: Text('Ajouter votre short'))
-                //                       ])),
-                //             ],
-                //           ))),
-                //   isScrollControlled: true,
-                //   isDismissible: true,
-                // );
-                _controller.chageStateShort(!_controller.addShoort);
-              },
-            )),
-        _controller.addShoort
-            ? Container(
-                margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                child: SingleChildScrollView(
-                    child: Column(
-                  children: [
-                    _controller.videoShort.length == 0
-                        ? Container(child: AppShortAdd())
-                        : LayoutBuilder(
-                            builder: (context, constraints) {
-                              final videoPlayerWidth = constraints.maxWidth;
-                              final videoPlayerHeight = videoPlayerWidth /
-                                  _controller
-                                      .videoPlayerController.value.aspectRatio;
+                Get.bottomSheet(
+                  Container(
+                      margin: EdgeInsets.only(
+                        top: kMarginY * 8,
+                      ),
+                      decoration: BoxDecoration(
+                          color: ColorsApp.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15))),
+                      height: 800,
+                      padding: EdgeInsets.symmetric(horizontal: kMarginX),
+                      child: Column(children: [
+                        // _controller.listImgProduits.length != 0
+                        //     ? smallText(
+                        //         text: 'Listes images',
+                        //       )
+                        //     : Container(),
+                        Container(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  child: Text('Annuler'),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text('Ajouter'),
+                                  onPressed: () async {
+                                    await _controller.addShort();
+                                    // _controller.chageState(!_controller.addProduct);
+                                  },
+                                )
+                              ]),
+                        ),
+                        Expanded(
+                            child: SingleChildScrollView(
+                                child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                top: kMarginY * 1.5,
+                              ),
+                              child: AppInputNew(
+                                controller: _controller.titreShort,
+                                label: 'lbtitleshort'.tr,
+                                icon: Icon(Icons.label),
+                                validator: (value) {
+                                  return Validators.isValidUsername(value!);
+                                },
+                              ),
+                            ),
+                            GetBuilder<BoutiqueController>(
+                              builder: (_Ncontroller) => _Ncontroller
+                                          .videoShort.length ==
+                                      0
+                                  ? Container(child: AppShortAdd())
+                                  : LayoutBuilder(
+                                      builder: (context, constraints) {
+                                        final videoPlayerWidth =
+                                            constraints.maxWidth;
+                                        final videoPlayerHeight =
+                                            videoPlayerWidth /
+                                                _Ncontroller
+                                                    .videoPlayerController
+                                                    .value
+                                                    .aspectRatio;
 
-                              return GestureDetector(
-                                onTap: _controller.playPauseVideo,
-                                onDoubleTap: _controller.getVideo,
-                                child: AspectRatio(
-                                  aspectRatio: 4 / 4,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: ColorsApp.greySecond,
-                                      borderRadius: BorderRadius.circular(20),
+                                        return GestureDetector(
+                                          onTap: _Ncontroller.playPauseVideo,
+                                          onDoubleTap: _Ncontroller.getVideo,
+                                          child: AspectRatio(
+                                            aspectRatio: 4 / 4,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: ColorsApp.greySecond,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: VideoPlayer(_Ncontroller
+                                                  .videoPlayerController),
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    child: VideoPlayer(
-                                        _controller.videoPlayerController),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                top: kMarginY,
+                              ),
+                              decoration: new BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border:
+                                      Border.all(color: ColorsApp.greySecond)
+                                  // color: (color == null) ? ColorsApp.blue : color,
+                                  ),
+                              child: TextFormField(
+                                controller: _controller.descriptionShort,
+                                onChanged: (String value) {},
+                                validator: (value) {
+                                  return Validators.isValidUsername(value!);
+                                },
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  fontFamily: 'Montserrat',
+                                ),
+                                maxLines: 10,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: ColorsApp.skyBlue, width: 2),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: ColorsApp.greySearch),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorStyle: TextStyle(
+                                    fontSize: 8,
+                                    fontFamily: 'Montserrat',
+                                  ),
+                                  labelStyle: TextStyle(
+                                    color: ColorsApp.black,
+                                    fontFamily: 'Montserrat',
+                                    // fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                  ),
+                                  labelText: 'lbdescprod'.tr,
+                                  fillColor: ColorsApp.skyBlue,
+                                  counter: Offstage(),
+                                  hintText: 'lbdescprod'.tr,
+                                  alignLabelWithHint: true,
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: 'orkney',
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: kMarginY,
-                      ),
-                      child: AppInput(
-                        controller: _controller.titreShort,
-                        label: 'lbtitleshort'.tr,
-                        validator: (value) {
-                          return Validators.isValidUsername(value!);
-                        },
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      margin: EdgeInsets.symmetric(vertical: 5),
-                      child: Text('Description'),
-                    ),
-                    TextFormField(
-                      onChanged: (String value) {
-                        // if (onChange != null) onChange!(value);
-                      },
-                      controller: _controller.descriptionShort,
-                      validator: (value) {
-                        return value!.isEmpty
-                            ? "veillez remplir se champs"
-                            : null;
-                      },
-                      // keyboardType: type,
-                      // obscureText: obscureText!,
-                      // maxLengthEnforced: false,
+                              ),
+                            ),
+                          ],
+                        )))
+                      ])),
+                  isScrollControlled: true,
+                  // isDismissible: true,
+                );
 
-                      maxLines: 10,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        fontFamily: 'Montserrat',
-                      ),
-
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: ColorsApp.orange, width: 2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        border: OutlineInputBorder(
-                          //  borderSide : BorderSide(color:Colors.blue,width: 3),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        errorStyle: TextStyle(
-                          fontSize: 8,
-                          fontFamily: 'Montserrat',
-                        ),
-                        labelStyle: TextStyle(
-                          color: ColorsApp.orange,
-                          fontFamily: 'Montserrat',
-                          // fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        ),
-                        labelText: 'lbdescshort'.tr,
-                        fillColor: ColorsApp.skyBlue,
-                        counter: Offstage(),
-                        hintText: 'lbdescshort'.tr,
-                        alignLabelWithHint: true,
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontFamily: 'orkney',
-                        ),
-                      ),
-                    ),
-                    Container(
-                        decoration: BoxDecoration(color: ColorsApp.grey),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              // smallText(
-                              //   text: _controller.Boutique.titre,
-                              // ),
-                              CustomBtn(
-                                color: ColorsApp.greenLight,
-                                title: 'Ajouter Short',
-                                onTap: () async {
-                                  // var key = await _controller.s.getKey();
-
-                                  await _controller.addShort();
-                                  // _controller.chageState(!_controller.addShoort);
-                                },
-                              )
-                            ])),
-                  ],
-                )))
-            : _controller.isLoadedShort == 0
-                ? AppLoading()
-                : _controller.listShortBoutique.length == 0
-                    ? Center(child: Text('Aucun Produit'))
-                    : SingleChildScrollView(
-                        child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: _controller.listShortBoutique.length,
-                        itemBuilder: (_ctx, index) {
-                          return Text(
-                              _controller.listShortBoutique[index].titre);
-                          /* ProductBoutiqueComponent(
+                // _controller.chageStateShort(!_controller.addShoort);
+              },
+            )),
+        _controller.isLoadedShort == 0
+            ? AppLoading()
+            : _controller.listShortBoutique.length == 0
+                ? Center(child: Text('Aucun Produit'))
+                : SingleChildScrollView(
+                    child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _controller.listShortBoutique.length,
+                    itemBuilder: (_ctx, index) {
+                      return Text(_controller.listShortBoutique[index].titre);
+                      /* ProductBoutiqueComponent(
                                   produit:
                                       _controller.listShortBoutique[index]); */
-                        },
-                      ))
+                    },
+                  ))
       ]));
     });
   }

@@ -4,6 +4,7 @@ import 'package:Fahkap/components/Widget/app_empty.dart';
 import 'package:Fahkap/controller/ShortController.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,12 @@ class ShortView extends StatefulWidget {
 }
 
 class _ShortViewState extends State<ShortView> {
+  dispose() {
+    super.dispose();
+    print('dispose');
+    Get.find<ShortController>().controller!.pause();
+  }
+
   Widget build(BuildContext context) {
     return GetBuilder<ShortController>(builder: (_ShortController) {
       return WillPopScope(
@@ -68,9 +75,17 @@ class _ShortViewState extends State<ShortView> {
                           top: kHeight / 1.7,
                           left: kWidth / 1.3,
                           child: Container(
-                              child: ShortAction(
-                            short: _ShortController
-                                .listShort[_ShortController.currentShort],
+                              child: InkWell(
+                            child: ShortAction(
+                              short: _ShortController
+                                  .listShort[_ShortController.currentShort],
+                            ),
+                            onTap: () {
+                              _ShortController.controller!.pause();
+
+                              Get.toNamed(AppLinks.BOUTIQUE +
+                                  '?note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
+                            },
                           ))),
                 ],
               )));
@@ -84,7 +99,7 @@ class ShortViewF extends StatefulWidget {
 }
 
 class _ShortViewFState extends State<ShortViewF> {
-  PageController _pageController = PageController(initialPage: 0);
+  // PageController _pageController = PageController(initialPage: 0);
 
   late VideoPlayerController _videoPlayerController;
 
@@ -97,8 +112,8 @@ class _ShortViewFState extends State<ShortViewF> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0);
-    print('**********************short.listShort');
+    // _pageController = PageController(initialPage: 0);
+    //print('**********************short.listShort');
     Get.find<ShortController>().initialise
         ? Get.find<ShortController>().controller!.play()
         : Get.find<ShortController>().changeVideo(0);
@@ -113,10 +128,10 @@ class _ShortViewFState extends State<ShortViewF> {
           child: PageView.builder(
             itemCount: _ShortController.listShort.length,
             scrollDirection: Axis.vertical,
-            controller: _pageController,
+            controller: _ShortController.pageController,
             onPageChanged: (index) {
-              print(index);
-              print(_ShortController.listShort[index].src);
+              //print(index);
+              //print(_ShortController.listShort[index].src);
               index = index % (_ShortController.listShort.length);
 
               // if (_ShortController.controller!.value.isInitialized) {
@@ -282,8 +297,8 @@ class _ShortViewFState extends State<ShortViewF> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
-    print('**********************short.listShort');
-    // print(short.listShort);
+    //print('**********************short.listShort');
+    // //print(short.listShort);
     _initializeVideoPlayer(short.listShort[0].src);
   }
 
@@ -295,10 +310,10 @@ class _ShortViewFState extends State<ShortViewF> {
   }
 
   void _initializeVideoPlayer(String url) async {
-    print(url);
+    //print(url);
     // if (_videoPlayerController != null) {
     //   if (_videoPlayerController.value.isPlaying) {
-    //     print('********');
+    //     //print('********');
     //     _videoPlayerController.dispose();
     //   }
     // }
@@ -311,7 +326,7 @@ class _ShortViewFState extends State<ShortViewF> {
         setState(() {});
       });
     // _videoPlayerController.setLooping(widget.loop);
-    // print(_videoPlayerController.value.aspectRatio);
+    // //print(_videoPlayerController.value.aspectRatio);
   }
 
   @override
@@ -324,8 +339,8 @@ class _ShortViewFState extends State<ShortViewF> {
             scrollDirection: Axis.vertical,
             controller: _pageController,
             onPageChanged: (index) {
-              print(index);
-              print(_ShortController.listShort[index].src);
+              //print(index);
+              //print(_ShortController.listShort[index].src);
 
               // _videoPlayerController.pause();
               // _videoPlayerController.seekTo(Duration.zero);

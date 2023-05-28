@@ -25,8 +25,12 @@ import 'package:Fahkap/model/data/CategoryModel.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
 import 'package:Fahkap/utils/Services/validators.dart';
+import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:Fahkap/utils/constants/assets.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -39,135 +43,89 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/io.dart';
+
 class Test extends StatefulWidget {
   @override
   State<Test> createState() => _TestState();
 }
 
 class _TestState extends State<Test> {
-  File? _videoFile;
-  VideoPlayerController? _videoPlayerController;
-  bool _isVideoPlaying = false;
+  void _dowload() async {
+    try {
+      Directory d = Directory('/storage/emulated/0/Download');
 
-  Future<void> _pickVideo() async {
-    final pickedFile =
-        await ImagePicker().getVideo(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _videoFile = File(pickedFile.path);
-        _videoPlayerController = VideoPlayerController.file(_videoFile!)
-          ..initialize().then((_) {
-            setState(() {
-              getModal();
-              _videoPlayerController!.play();
-              _isVideoPlaying = true;
-            });
-          });
-      });
+      final file = File('/storage/emulated/0/Download/facture.pdf');
+
+      await Dio().download(
+        "${ApiUrl.baseUrl}" + "/download-pdf\/data.pdf",
+        file.path,
+        onReceiveProgress: (rec, total) {
+          print(rec);
+          print(total);
+          if (rec == total) {
+            new ViewFunctions().snackBar('Facture',
+                'Une facture a ete enregistre dans votre portable', true);
+          }
+        },
+      );
+
+      // progress.hide();
+    } catch (e) {
+      print(e);
     }
   }
 
-  void _playPauseVideo() {
-    if (_videoPlayerController != null) {
-      if (_videoPlayerController!.value.isPlaying) {
-        _videoPlayerController!.pause();
-        setState(() {
-          _isVideoPlaying = false;
-        });
-      } else {
-        _videoPlayerController!.play();
-        setState(() {
-          _isVideoPlaying = true;
-        });
-      }
-    }
+  // late IO.Socket socket;
+
+  void initState() {
+    super.initState();
+    init();
+    connectToSocket();
   }
 
-  bool _isVideoDurationValid() {
-    if (_videoPlayerController != null) {
-      final duration = _videoPlayerController!.value.duration;
-      return duration <= Duration(seconds: 30);
-    }
-    return false;
+  var socket;
+  void init() async {
+    setState(() {
+      
+    socket = IOWebSocketChannel.connect('ws://172.20.10.4:3000');
+    });
   }
 
-  @override
-  void dispose() {
-    _videoPlayerController?.dispose();
-    super.dispose();
+  void connectToSocket() async {
+    // var socket = await WebSocket.connect('ws://172.20.10.4:3000');
+
+    socket.stream.listen((socket) {
+      print(socket);
+    });
   }
 
-  getModal() {
-    Get.bottomSheet(
-      /* Scaffold(
-            appBar: AppBar(
-              title: Text("Valider Paiement",
-                  style: TextStyle(color: Colors.black)),
-              centerTitle: true,
-              elevation: 0,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
-              leading: InkWell(
-                child: Icon(Icons.close, color: Colors.black),
-                onTap: () {
-                  return Navigator.pop(context);
-                },
-              ),
-            ),
-            body: */
-      Container(
-        height: kHeight,
-        child: Stack(
-          children: [
-            Container(
-              // margin: EdgeInsets.only(top: kHeight * .1),
-              child: _videoPlayerController != null
-                  ? GestureDetector(
-                      onTap: _playPauseVideo,
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          final videoPlayerWidth = constraints.maxWidth;
-                          final videoPlayerHeight = videoPlayerWidth /
-                              _videoPlayerController!.value.aspectRatio;
-   return GestureDetector(
-                            onTap: _playPauseVideo,
-                            child: Container(
-                              width: videoPlayerWidth,
-                              height: videoPlayerHeight,
-                              color: Colors.black,
-                              child: AspectRatio(
-                                aspectRatio:
-                                    _videoPlayerController!.value.aspectRatio,
-                                child: VideoPlayer(_videoPlayerController!),
-                              ),
-                            ),
-                          );
-                        },
-                      ))
-                  : Icon(
-                      Icons.videocam,
-                      size: 60.0,
-                      color: Colors.white,
-                    ),
-            ),
-            Positioned(
-                top: 30,
-                left: 0,
-                child: Container(
-                    child: IconButtonF0(
-                  color: Colors.black,
-                  icon: Icons.close,
-                  onTap: () {
-                    Get.back();
-                  },
-                ))),
-          ],
-        ),
-      ),
-      isScrollControlled: true,
-      isDismissible: true,
-    );
+  void add() async {
+    socket.sink.add('Hello, server!');
   }
+
+  // void connectToSocket() {
+  //   socket = IO.io('http://172.20.10.4').connect();
+  //   print('socket.connected');
+  //   print(socket.connected);
+  //   socket.onConnect((_) {
+  //     print('Connected to Socket.IO server');
+  //   });
+
+  //   socket.on('event', (data) {
+  //     print('Received event: $data');
+  //     // Handle the event data as needed
+  //   });
+
+  //   socket.onDisconnect((_) {
+  //     print('Disconnected from Socket.IO server');
+  //   });
+
+  //   socket.connect();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -215,21 +173,25 @@ class _TestState extends State<Test> {
             // ),
             // SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: getModal, //_pickVideo,
+              onPressed: add, //_pickVideo,
+              child: Text('Add'),
+            ),
+            ElevatedButton(
+              onPressed: connectToSocket, //_pickVideo,
               child: Text('Choisir une vidéo'),
             ),
-            SizedBox(height: 16.0),
-            _videoFile != null && !_isVideoDurationValid()
-                ? Text(
-                    'La durée maximale autorisée est de 30 secondes.',
-                    style: TextStyle(color: Colors.red),
-                  )
-                : SizedBox.shrink(),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _pickVideo,
-              child: Text('Publier le statut'),
-            ),
+            // SizedBox(height: 16.0),
+            // _videoFile != null && !_isVideoDurationValid()
+            //     ? Text(
+            //         'La durée maximale autorisée est de 30 secondes.',
+            //         style: TextStyle(color: Colors.red),
+            //       )
+            //     : SizedBox.shrink(),
+            // SizedBox(height: 16.0),
+            // ElevatedButton(
+            //   onPressed: _pickVideo,
+            //   child: Text('Publier le statut'),
+            // ),
           ],
         ),
       ),

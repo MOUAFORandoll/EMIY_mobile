@@ -67,7 +67,7 @@ class _NoterAppComponentState extends State<NoterAppComponent> {
                               size: Get.height * .09,
                             ),
                             onTap: () {
-                              print('envoyer');
+                              //print('envoyer');
                             })
                       ],
                     ))

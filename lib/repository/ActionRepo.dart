@@ -11,6 +11,14 @@ class ActionRepo extends GetxService {
   ActionRepo({required this.apiClient});
   var store = Get.find<DB>();
 
+  Future test(indexC) async {
+    Response a = await apiClient.getCollections(
+      ApiRoutes.TEST+'/'+indexC.toString(),
+    );
+
+    return a;
+  }
+
   Future getModePaiement() async {
     Response a = await apiClient.getCollections(
       ApiRoutes.MODEPAIEMENT,
