@@ -24,6 +24,7 @@ import 'package:Fahkap/controller/categoryController.dart';
 import 'package:Fahkap/model/data/CategoryModel.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/styles/textStyle.dart';
+import 'package:Fahkap/utils/Services/SocketService.dart';
 import 'package:Fahkap/utils/Services/validators.dart';
 import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:Fahkap/utils/constants/assets.dart';
@@ -47,6 +48,8 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
+
+import 'package:web_socket_channel/status.dart' as status;
 
 class Test extends StatefulWidget {
   @override
@@ -83,29 +86,87 @@ class _TestState extends State<Test> {
 
   void initState() {
     super.initState();
-    init();
-    connectToSocket();
+    testSocket();
+    // connectToSocket();
   }
 
-  var socket;
-  void init() async {
-    setState(() {
-      
-    socket = IOWebSocketChannel.connect('ws://172.20.10.4:3000');
+  ifNotification(data) {
+    print(data);
+  }
+
+  void testSocket() {
+    new SocketService().connect('general', ifNotification);
+  }
+
+  late IO.Socket socket;
+
+  void connect() {
+    // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
+    socket = IO.io("http://172.20.10.4:3000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
     });
-  }
-
-  void connectToSocket() async {
-    // var socket = await WebSocket.connect('ws://172.20.10.4:3000');
-
-    socket.stream.listen((socket) {
-      print(socket);
+    socket.connect();
+    socket.emit("signin", 'widget.sourchat.id');
+    socket.onConnect((data) {
+      print("Connected");
+      print(data);
+      socket.on('user-channel:user1', (msg) {
+        print('---nouveau message  ${msg}');
+        // setMessage("destination", msg["message"]);
+      });
     });
+    print(socket.connected);
   }
 
-  void add() async {
-    socket.sink.add('Hello, server!');
+  void sendMessage(String message, int sourceId, int targetId) {
+    // setMessage("source", message);
+    socket.emit("message",
+        {"message": message, "sourceId": sourceId, "targetId": targetId});
   }
+  // main() {
+  //   final wsUrl = Uri.parse('ws://172.20.10.4:3000');
+  //   var channel = WebSocketChannel.connect(wsUrl);
+
+  //   channel.stream.listen((message) {
+  //     channel.sink.add('received!');
+  //     channel.sink.close(status.goingAway);
+  //   });
+  //   // Dart client
+  //   // IO.Socket socket = IO.io('ws://172.20.10.4:3000');
+  //   // socket.onConnect((_) {
+  //   //   print('connect');
+  //   //   socket.emit('msg', 'test');
+  //   // });
+  //   // socket.on('message', (data) => print(data));
+  //   // socket.onDisconnect((_) => print('disconnect'));
+  //   // socket.on('fromServer', (_) => print(_));
+  // }
+  // IO.Socket socket = IO.io('ws://172.20.10.4:3000', <String, dynamic>{
+  //   'transports': ['polling'],
+  // });
+  // void init() async {
+  //   socket.onConnect((_) {
+  //     print('connect');
+  //     socket.emit('message', 'test');
+  //   });
+  //   socket.on('message', (data) {
+  //     // Traitement des données reçues du serveur
+  //   });
+  // }
+
+  // void connectToSocket() async {
+  //   // var socket = await WebSocket.connect('ws://172.20.10.4:3000');
+
+  //   socket.on('message', (data) {
+  //     // Traitement des données reçues du serveur
+  //   });
+  // }
+
+  // void add() async {
+  //   print(socket.connected);
+  //   socket.emit('message', 'message');
+  // }
 
   // void connectToSocket() {
   //   socket = IO.io('http://172.20.10.4').connect();
@@ -173,11 +234,11 @@ class _TestState extends State<Test> {
             // ),
             // SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: add, //_pickVideo,
+              onPressed: testSocket, //_pickVideo,
               child: Text('Add'),
             ),
             ElevatedButton(
-              onPressed: connectToSocket, //_pickVideo,
+              onPressed: () => sendMessage('cxcxcx', 1, 1), //_pickVideo,
               child: Text('Choisir une vidéo'),
             ),
             // SizedBox(height: 16.0),
@@ -204,3 +265,5 @@ class _TestState extends State<Test> {
     print('Video uploaded successfully!');
   }
 }
+
+class Server {}

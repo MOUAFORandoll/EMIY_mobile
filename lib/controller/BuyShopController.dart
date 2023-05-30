@@ -13,6 +13,7 @@ import 'package:Fahkap/model/data/ProduitModel.dart';
 import 'package:Fahkap/repository/BuyShoopingCartRepo.dart';
 import 'package:Fahkap/repository/LivreurRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/SocketService.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
@@ -199,6 +200,8 @@ class BuyShopController extends GetxController {
             _startTimer();
             _paiementUrl = response.body['url'];
             _isIdCom = response.body['id'];
+            new SocketService()
+                .connect(response.body['codeCommande'], ifNotification);
             update();
             //print(_paiementUrl);
             fn.closeSnack();
@@ -227,6 +230,26 @@ class BuyShopController extends GetxController {
       update();
       //print(e);
     }
+  }
+
+  ifNotification(data) async {
+    _isOk = data['status'];
+    _validateBuy = true;
+
+    update();
+    if (_isOk && _idSave != data['id']) {
+      _idSave = data['id'];
+      commande.saveCommande(
+          data['id'], data['codeCommande'], data['codeClient'], data['date']);
+      fn.snackBar('Achat', data['message'], true);
+    }
+
+    await downloadFacture(data['pdf']);
+
+    Get.find<CommandeController>().getListCommandes();
+
+    // Get.back(closeOverlays: true);
+    update();
   }
 
   int _isCounter = 0;
