@@ -1,3 +1,6 @@
+import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:Fahkap/utils/Services/SocketService.dart';
+import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
@@ -12,7 +15,7 @@ import 'package:get/get.dart';
 class ProductController extends GetxController {
   final ProductRepo productRepo;
   ProductController({required this.productRepo});
-
+  var s = Get.find<DB>();
   bool _conf = false;
   bool get conf => _conf;
   setConf() {
@@ -170,13 +173,13 @@ class ProductController extends GetxController {
   bool _loaddata = false;
   bool get loaddata => _loaddata;
 
-  int indexC = 0;
+  int indexC = 1;
 
   Future<void> getPopularProduit() async {
-    print('----${_loaddata}-------aaaaaaaaa---');
+    // print('----${_loaddata}-------aaaaaaaaa---');
 
     if (_loaddata == false) {
-      print('-----------get---');
+      // print('-----------get---');
       _isLoadedP = 0;
       _loaddata = true;
       update();
@@ -199,11 +202,11 @@ class ProductController extends GetxController {
                   .map((e) => ProduitModel.fromJson(e))
                   .toList());
               _isLoadedP = 1;
-              indexC += int.parse(produitList.length.toString());
+              indexC++;
 
               _loaddata = false;
               update();
-              print('----${_loaddata}-------aaaaaaaaa---');
+              // print('----${_loaddata}-------aaaaaaaaa---');
             } else {
               _isLoadedP = 1;
               update();

@@ -3,6 +3,8 @@ import 'package:Fahkap/Views/BoutiqueUser/BoutiqueNewView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/ShortBoutiqueView.dart';
+import 'package:Fahkap/Views/Negociation/ListNegociationView.dart';
+import 'package:Fahkap/Views/Negociation/NegociationView.dart';
 import 'package:Fahkap/Views/Shopping/PaiementView.dart';
 import 'package:Fahkap/Views/Short/ShortView.dart';
 import 'package:Fahkap/Views/UsersMange/WalletView.dart';
@@ -193,6 +195,14 @@ class AppRoutes {
         name: AppLinks.USERVIEW,
         page: () => UserManageView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.NEGOCIATION_NEW,
+        page: () => NegociationView(),
+        transition: transitionX),
+    GetPage(
+        name: AppLinks.NEGOCIATION_LIST,
+        page: () => ListNegociationView(),
+        transition: transitionX),
   ];
 }
 
@@ -231,6 +241,8 @@ class AppLinks {
   static const String BUYVIEW = "/buyview";
   static const String USERVIEW = "/userview";
   static const String BOUTIQUE_USER = "/boutique/user";
+  static const String NEGOCIATION_NEW = "/negociation/new";
+  static const String NEGOCIATION_LIST = "/negociation/list";
 }
 
 // <?php

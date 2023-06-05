@@ -8,7 +8,7 @@
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
   <application
-    android:label="OFA"
+    android:label="EMIY"
     android:exported="false"
     android:grantUriPermissions="true"
     android:icon="@mipmap/launcher_icon"

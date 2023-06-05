@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:Fahkap/Views/Shopping/PaiementView.dart';
@@ -10,11 +11,13 @@ import 'package:Fahkap/model/data/PointLivraisonModel.dart';
 import 'package:Fahkap/model/data/LivreurModel.dart';
 import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
 import 'package:Fahkap/model/data/ProduitModel.dart';
+import 'package:Fahkap/model/socket/SocketCommandModel.dart';
 import 'package:Fahkap/repository/BuyShoopingCartRepo.dart';
 import 'package:Fahkap/repository/LivreurRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
 import 'package:Fahkap/utils/Services/SocketService.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:Fahkap/utils/Services/routing.dart';
 import 'package:Fahkap/utils/api/apiUrl.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:dio/dio.dart' hide Response;
@@ -38,7 +41,7 @@ class BuyShopController extends GetxController {
   bool get isLoad => _isLoad;
   setLoadTransaction(val) {
     _isLoad = val;
-    update();
+    // update();
   }
 
   final service = new ApiService();
@@ -132,8 +135,8 @@ class BuyShopController extends GetxController {
   bool _isOk = false;
   bool get isOk => _isOk;
 
-  int _isIdCom = 0;
-  int get isIdCom => _isIdCom;
+  String _codeCommande = '';
+  String get isIdCom => _codeCommande;
   var fn = new ViewFunctions();
   // CategoryController({required this.service});
   buyCart() async {
@@ -197,18 +200,18 @@ class BuyShopController extends GetxController {
                 response.body['date']);
             fn.closeSnack();
           } else {
-            _startTimer();
+            print('----------------');
             _paiementUrl = response.body['url'];
-            _isIdCom = response.body['id'];
-            new SocketService()
-                .connect(response.body['codeCommande'], ifNotification);
-            update();
-            //print(_paiementUrl);
-            fn.closeSnack();
+            _codeCommande = response.body['codeCommande'];
+            print('aa----------------');
 
-            await Get.to(
-                () => mode == 3 ? PaiementBuyCarteView() : PaiementView());
-            //ici on doit lancer la verification
+            update();
+            print(_paiementUrl);
+            fn.closeSnack();
+            Get.toNamed(AppLinks.BUYVIEW);
+            new SocketService().commande(response.body['codeCommande'],
+                ifBuyingCommande); //ici on doit lancer la verification
+
             //print('dssdsd');
           }
         }
@@ -232,113 +235,113 @@ class BuyShopController extends GetxController {
     }
   }
 
-  ifNotification(data) async {
-    _isOk = data['status'];
-    _validateBuy = true;
+  ifBuyingCommande(dataSend) async {
+    SocketCommandModel dataSocket = SocketCommandModel.fromJson(dataSend);
+
+    _isOk = dataSocket.status;
 
     update();
-    if (_isOk && _idSave != data['id']) {
-      _idSave = data['id'];
-      commande.saveCommande(
-          data['id'], data['codeCommande'], data['codeClient'], data['date']);
-      fn.snackBar('Achat', data['message'], true);
-    }
 
-    await downloadFacture(data['pdf']);
+    commande.saveCommande(dataSocket.id, dataSocket.codeCommande,
+        dataSocket.codeClient, dataSocket.date);
+    fn.snackBar('Achat', dataSocket.message, true);
+
+    await downloadFacture(dataSocket.pdf);
 
     Get.find<CommandeController>().getListCommandes();
 
-    // Get.back(closeOverlays: true);
+    Get.back(closeOverlays: true);
     update();
   }
 
-  int _isCounter = 0;
-  int get isCounter => _isCounter;
+  // int _isCounter = 0;
+  // int get isCounter => _isCounter;
 
-  bool _validateBuy = false;
-  bool get validateBuy => _validateBuy;
-  Timer? _timer;
-  void _startTimer() {
-    if (_isOk && _isCounter < 10 && !_validateBuy) {
-      Timer.periodic(Duration(seconds: 5), (_) {
-        // Appeler la fonction souhaitée ici
+  // bool _validateBuy = false;
+  // bool get validateBuy => _validateBuy;
+  // Timer? _timer;
+  // void _startTimer() {
+  //   if (_isOk && _isCounter < 10 && !_validateBuy) {
+  //     Timer.periodic(Duration(seconds: 5), (_) {
+  //       // Appeler la fonction souhaitée ici
 
-        //print('La fonction se relance toutes les 10 secondes.');
-        verifyCom();
-        _isCounter = _isCounter + 1;
-        update();
-        if (_isCounter == 9) {
-          Get.back();
-        }
-      });
-    }
-  }
+  //       //print('La fonction se relance toutes les 10 secondes.');
+  //       verifyCom();
+  //       _isCounter = _isCounter + 1;
+  //       update();
+  //       if (_isCounter == 9) {
+  //         Get.back();
+  //       }
+  //     });
+  //   }
+  // }
 
-  void _stopTimer() {
-    //print('stop***********************');
-    _timer?.cancel();
-  }
+  // void _stopTimer() {
+  //   //print('stop***********************');
+  //   _timer?.cancel();
+  // }
 
-  int _idSave = 0;
-  int get idSave => _idSave;
-  verifyCom() async {
-    var data = {
-      'id': _isIdCom,
-    };
+  // int _idSave = 0;
+  // int get idSave => _idSave;
+  // verifyCom() async {
+  //   var data = {
+  //     'id': _isIdCom,
+  //   };
 
-    //print(data);
+  //   //print(data);
 
-    try {
-      Response response = await buySoppingCartRepo.verifyCom(data);
-      //print(response.body);
+  //   try {
+  //     Response response = await buySoppingCartRepo.verifyCom(data);
+  //     //print(response.body);
 
-      // fn.snackBar('Achat', response.body['message'], true);
-      //print(response.body);
+  //     // fn.snackBar('Achat', response.body['message'], true);
+  //     //print(response.body);
 
-      if (response.statusCode == 201) {
-        _isOk = response.body['status'];
-        _validateBuy = true;
+  //     if (response.statusCode == 201) {
+  //       _isOk = response.body['status'];
+  //       _validateBuy = true;
 
-        update();
-        if (_isOk && _idSave != response.body['id']) {
-          _idSave = response.body['id'];
-          commande.saveCommande(
-              response.body['id'],
-              response.body['codeCommande'],
-              response.body['codeClient'],
-              response.body['date']);
-          _stopTimer();
-        }
+  //       update();
+  //       if (_isOk && _idSave != response.body['id']) {
+  //         _idSave = response.body['id'];
+  //         commande.saveCommande(
+  //             response.body['id'],
+  //             response.body['codeCommande'],
+  //             response.body['codeClient'],
+  //             response.body['date']);
+  //         _stopTimer();
+  //       }
 
-        await downloadFacture(response.body['pdf']);
-        // fn.snackBar('Achat',
-        //     'Votre facture a ete energistre dans votre telephone', true);
-      }
-      Get.find<CommandeController>().getListCommandes();
+  //       await downloadFacture(response.body['pdf']);
+  //       // fn.snackBar('Achat',
+  //       //     'Votre facture a ete energistre dans votre telephone', true);
+  //     }
+  //     Get.find<CommandeController>().getListCommandes();
 
-      // Get.back(closeOverlays: true);
-      update();
-    } catch (e) {
-      //         fn.closeSnack();
+  //     // Get.back(closeOverlays: true);
+  //     update();
+  //   } catch (e) {
+  //     //         fn.closeSnack();
 
-      // fn.snackBar('Achat', 'Une erreur est survenue', false);
-      //         fn.closeSnack();
+  //     // fn.snackBar('Achat', 'Une erreur est survenue', false);
+  //     //         fn.closeSnack();
 
-      update();
-      //print(e);
-    }
-  }
+  //     update();
+  //     //print(e);
+  //   }
+  // }
 
   downloadFacture(url) async {
     try {
-      // ProgressDialog progress;
+      DateTime now = DateTime.now(); // ProgressDialog progress;
       // progress =
       //     new ProgressDialog(context, type: ProgressDialogType.Download);
       // progress.style(message: "Téléchargement en du fichier ...");
 
       Directory d = Directory('/storage/emulated/0/Download');
 
-      final file = File('/storage/emulated/0/Download/${url.split("/")[1]}');
+      final file = File(
+          '/storage/emulated/0/Download/facture_${now.hour}_${now.minute}_${now.second}.pdf');
 
       await Dio().download(
         "${ApiUrl.baseUrl}" + url,
@@ -392,7 +395,9 @@ class BuyShopController extends GetxController {
   var manager = Get.find<ManagerController>();
   setUserInfo() {
     print('--setinfo');
-    if (manager.User != null) {
+    if (manager.User != null &&
+        _nameController.text.length != 0 &&
+        _phoneController.text.length != 0) {
       _nameController.text = manager.User.nom;
       _phoneController.text = manager.User.phone;
       update();

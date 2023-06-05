@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:Fahkap/Views/UsersMange/DepotView.dart';
@@ -10,10 +11,12 @@ import 'package:Fahkap/model/data/CommandeBoutiqueModel.dart';
 import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
 import 'package:Fahkap/model/data/ProduitModel.dart';
 import 'package:Fahkap/model/data/TransactionModel.dart';
+import 'package:Fahkap/model/socket/SocketDepotModel.dart';
 import 'package:Fahkap/repository/BoutiqueRepo.dart';
 import 'package:Fahkap/repository/TransactionRepo.dart';
 import 'package:Fahkap/repository/categoryBoutiqueRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/SocketService.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
@@ -122,12 +125,12 @@ class TransactionController extends GetxController {
   get token => _token;
   depot(data) async {
     _isUpdating = false;
-    _isCounter = 0;
+
     update();
     fn.loading('Depot', 'Vous allez effectuer un depot sur votre compte');
     try {
       Response response = await transactionRepo.depotCompte(data);
-      //print(response.body);
+      print(response.body);
       //print(_isCounter);
       if (response.statusCode == 201) {
         _paiementUrl = response.body['url'];
@@ -136,8 +139,9 @@ class TransactionController extends GetxController {
         //print(_paiementUrl);
         fn.closeSnack();
 
+        new SocketService().transaction(response.body['token'], ifBuyingDepot);
         Get.to(() => DepotView());
-        _startTimer();
+        update();
       } else {
         fn.closeSnack();
 
@@ -159,65 +163,77 @@ class TransactionController extends GetxController {
     }
   }
 
-  int _isCounter = 0;
-  int get isCounter => _isCounter;
+  ifBuyingDepot(dataSend) async {
+    SocketDepotModel dataSocket = SocketDepotModel.fromJson(dataSend);
 
-  bool _validateBuy = false;
-  bool get validateBuy => _validateBuy;
-
-  late Timer _timer;
-  void _startTimer() {
-    if (_isCounter < 10 && !_validateBuy) {
-      _timer = new Timer.periodic(Duration(seconds: 2), (_) {
-        // Appeler la fonction souhaitée ici
-
-        //print('counter********.${validateBuy}....*************. ${_isCounter}');
-        verifyDepot();
-      });
-    }
-  }
-
-  void _stopTimer() {
-    //print('stop***********************');
-
-    _timer.cancel();
     update();
-    //print('stop***********************');
+    print('ic-------------${dataSocket.message}-------');
+    fn.snackBar('Depot', dataSocket.message, true);
+    await actualise();
+
+    Get.back();
+    update();
   }
 
-  verifyDepot() async {
-    var data = {
-      'token': token,
-    };
+  // int _isCounter = 0;
+  // int get isCounter => _isCounter;
 
-    //print(data);
+  // bool _validateBuy = false;
+  // bool get validateBuy => _validateBuy;
 
-    try {
-      Response response = await transactionRepo.verifyDepot(data);
-      //print(response.body);
+  // late Timer _timer;
+  // void _startTimer() {
+  //   if (_isCounter < 10 && !_validateBuy) {
+  //     _timer = new Timer.periodic(Duration(seconds: 2), (_) {
+  //       // Appeler la fonction souhaitée ici
 
-      // fn.snackBar('Achat', response.body['message'], true);
-      //print(response.body);
-      _isCounter = _isCounter + 1;
-      update();
-      if (response.statusCode == 201) {
-        if (response.body['status']) {
-          _validateBuy = true;
-          _stopTimer();
-          update();
-          await actualise();
-          fn.snackBar('Depot', response.body['message'], true);
-        }
-      }
-    } catch (e) {
-      //         fn.closeSnack();
+  //       //print('counter********.${validateBuy}....*************. ${_isCounter}');
+  //       verifyDepot();
+  //     });
+  //   }
+  // }
 
-      // fn.snackBar('Achat', 'Une erreur est survenue', false);
+  // void _stopTimer() {
+  //   //print('stop***********************');
 
-      update();
-      //print(e);
-    }
-  }
+  //   _timer.cancel();
+  //   update();
+  //   //print('stop***********************');
+  // }
+
+  // verifyDepot() async {
+  //   var data = {
+  //     'token': token,
+  //   };
+
+  //   //print(data);
+
+  //   try {
+  //     Response response = await transactionRepo.verifyDepot(data);
+  //     //print(response.body);
+
+  //     // fn.snackBar('Achat', response.body['message'], true);
+  //     //print(response.body);
+  //     _isCounter = _isCounter + 1;
+  //     update();
+  //     if (response.statusCode == 201) {
+  //       if (response.body['status']) {
+  //         _validateBuy = true;
+  //         _stopTimer();
+  //         update();
+  //         await actualise();
+  //         fn.snackBar('Depot', response.body['message'], true);
+  //       }
+  //     }
+  //   } catch (e) {
+  //     //         fn.closeSnack();
+
+  //     // fn.snackBar('Achat', 'Une erreur est survenue', false);
+
+  //     update();
+  //     //print(e);
+  //   }
+  // }
 
   actualise() async {
     update();

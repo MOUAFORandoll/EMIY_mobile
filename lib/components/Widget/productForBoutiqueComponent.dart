@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:Fahkap/controller/negociationController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:Fahkap/model/data/BoutiqueModel.dart';
 import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
@@ -28,40 +29,54 @@ class ProductForBoutiqueComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl: produit.images[0].src,
-                imageBuilder: (context, imageProvider) {
-                  return Container(
-                    height: kHeight / 4,
-                    decoration: BoxDecoration(
-                      color: ColorsApp.greySecond,
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.transparent, BlendMode.colorBurn)),
-                    ),
-                  );
-                },
-                placeholder: (context, url) {
-                  return Container(
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: ColorsApp.skyBlue,
-                    )),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return Container(
+              Stack(children: [
+                CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: produit.images[0].src,
+                  imageBuilder: (context, imageProvider) {
+                    return Container(
                       height: kHeight / 4,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: AssetImage('assets/logo.png'),
-                      )));
-                },
-              ),
+                        color: ColorsApp.greySecond,
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.transparent, BlendMode.colorBurn)),
+                      ),
+                    );
+                  },
+                  placeholder: (context, url) {
+                    return Container(
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: ColorsApp.skyBlue,
+                      )),
+                    );
+                  },
+                  errorWidget: (context, url, error) {
+                    return Container(
+                        height: kHeight / 4,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage('assets/logo.png'),
+                        )));
+                  },
+                ),
+                produit.negociable
+                    ? Positioned(
+                        top: 2,
+                        right: 2,
+                        child: InkWell(
+                            child: Icon(Icons.handshake),
+                            onTap: () {
+                              Get.find<NegociationController>()
+                                  .newNegociation(produit.codeProduit);
+                            }),
+                      )
+                    : Container()
+              ]),
               Container(
                 width: kWidth / 2,
                 child: Text(produit.titre,

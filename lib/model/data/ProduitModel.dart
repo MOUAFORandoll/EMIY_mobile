@@ -21,6 +21,7 @@ class ProduitModel {
     required this.prix,
     required this.note,
     required this.status,
+    required this.negociable,
     required this.images,
   });
 
@@ -33,6 +34,7 @@ class ProduitModel {
   final int prix;
   final note;
   final bool status;
+  final bool negociable;
   final List<ImageU> images;
 
   factory ProduitModel.fromJson(Map<String, dynamic> json) => ProduitModel(
@@ -46,6 +48,7 @@ class ProduitModel {
         note: double.parse(
             (json["note"] == null ? null : json["note"]).toString()),
         status: json["status"] == null ? null : json["status"],
+        negociable: json["negociable"] == null ? null : json["negociable"],
         images: json["images"] == null
             ? []
             : List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
@@ -61,6 +64,7 @@ class ProduitModel {
         "prix": prix == null ? null : prix,
         "note": note == null ? null : double.parse(note.toString()),
         "status": status == null ? null : status,
+        "negociable": negociable == null ? null : negociable,
         "images": images == null
             ? null
             : List<dynamic>.from(images.map((x) => x.toJson())),

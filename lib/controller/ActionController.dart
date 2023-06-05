@@ -1,5 +1,6 @@
 import 'package:Fahkap/Views/CategoryBoutique/CategoryView.dart';
 import 'package:Fahkap/Views/Home/HomeView.dart';
+import 'package:Fahkap/Views/Negociation/ListNegociationView.dart';
 import 'package:Fahkap/controller/CommandeController.dart';
 import 'package:Fahkap/controller/productController.dart';
 import 'package:Fahkap/model/data/CartModel.dart';
@@ -12,6 +13,8 @@ import 'package:Fahkap/repository/ActionRepo.dart';
 import 'package:Fahkap/repository/BuyShoopingCartRepo.dart';
 import 'package:Fahkap/repository/LivreurRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/NotificationService.dart';
+import 'package:Fahkap/utils/Services/SocketService.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/Services/storageService2.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
@@ -369,9 +372,11 @@ class ActionController extends GetxController {
       // case 2:
       //   return SearchView();
       case 2:
+        return ListNegociationView();
+      case 3:
         return ShoppingView();
 
-      case 3:
+      case 4:
         return ManageView();
 
       // case 4:
@@ -387,162 +392,198 @@ class ActionController extends GetxController {
       return Offstage(
           offstage: _controller.isBottomBarVisible,
           child: CustomNavigationBar(
-                iconSize: 30.0,
-                // elevation: 0.0,
-                scaleFactor: 0.4,
-                selectedColor: Color(0xff0c18fb),
-                strokeColor: Color(0x300c18fb),
-                unSelectedColor: Colors.grey[600],
-                backgroundColor: ColorsApp.greySearch,
-                // borderRadius: Radius.circular(15.0),
-                // isFloating: true,
-                // blurEffect: true,
-                items: [
-                  CustomNavigationBarItem(
-                      icon: Container(
-                        height: kSmHeight / 1.7,
-                        width: kSmWidth / 4.2,
-                        child: SvgPicture.asset(
-                          Assets.home,
-                          width: 90,
-                          height: 90,
-                          color: _currentIndex == 0
+            iconSize: 30.0,
+            // elevation: 0.0,
+            scaleFactor: 0.4,
+            selectedColor: Color(0xff0c18fb),
+            strokeColor: Color(0x300c18fb),
+            unSelectedColor: Colors.grey[600],
+            backgroundColor: ColorsApp.greySearch,
+            // borderRadius: Radius.circular(15.0),
+            // isFloating: true,
+            // blurEffect: true,
+            items: [
+              CustomNavigationBarItem(
+                  icon: Container(
+                    height: kSmHeight / 1.7,
+                    width: kSmWidth / 4.2,
+                    child: SvgPicture.asset(
+                      Assets.home,
+                      width: 90,
+                      height: 90,
+                      color: _currentIndex == 0
+                          ? ColorsApp.skyBlue
+                          : ColorsApp.grey,
+                    ),
+                  ),
+                  title: Container(
+                      padding: EdgeInsets.only(bottom: 3),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: _currentIndex == 0
+                                  ? BorderSide(
+                                      color: ColorsApp.skyBlue, width: 2)
+                                  : BorderSide.none,
+                              top: BorderSide.none)),
+                      child: Text('home'.tr,
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: _currentIndex == 0
+                                ? ColorsApp.skyBlue
+                                : ColorsApp.grey,
+                          )))), // CustomNavigationBarItem(
+
+              CustomNavigationBarItem(
+                icon: Container(
+                  height: kSmHeight / 1.7,
+                  width: kSmWidth / 4.2,
+                  child: SvgPicture.asset(
+                    Assets.grid1,
+                    width: 80,
+                    height: 80,
+                    color:
+                        _currentIndex == 1 ? ColorsApp.skyBlue : ColorsApp.grey,
+                  ),
+                ),
+                title: Container(
+                    padding: EdgeInsets.only(bottom: 3),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: _currentIndex == 1
+                                ? BorderSide(color: ColorsApp.skyBlue, width: 2)
+                                : BorderSide.none,
+                            top: BorderSide.none)),
+                    child: Text('categories'.tr,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: _currentIndex == 1
                               ? ColorsApp.skyBlue
                               : ColorsApp.grey,
-                        ),
-                      ),
-                      title: Container(
-                          padding: EdgeInsets.only(bottom: 3),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: _currentIndex == 0
-                                      ? BorderSide(
-                                          color: ColorsApp.skyBlue, width: 2)
-                                      : BorderSide.none,
-                                  top: BorderSide.none)),
-                          child: Text('home'.tr,
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                color: _currentIndex == 0
-                                    ? ColorsApp.skyBlue
-                                    : ColorsApp.grey,
-                              )))), // CustomNavigationBarItem(
+                        ))),
+              ),
 
-                  CustomNavigationBarItem(
-                    icon: Container(
-                      height: kSmHeight / 1.7,
-                      width: kSmWidth / 4.2,
-                      child: SvgPicture.asset(
-                        Assets.grid1,
-                        width: 80,
-                        height: 80,
-                        color: _currentIndex == 1
-                            ? ColorsApp.skyBlue
-                            : ColorsApp.grey,
-                      ),
-                    ),
-                    title: Container(
-                        padding: EdgeInsets.only(bottom: 3),
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: _currentIndex == 1
-                                    ? BorderSide(
-                                        color: ColorsApp.skyBlue, width: 2)
-                                    : BorderSide.none,
-                                top: BorderSide.none)),
-                        child: Text('categories'.tr,
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              color: _currentIndex == 1
-                                  ? ColorsApp.skyBlue
-                                  : ColorsApp.grey,
-                            ))),
+              CustomNavigationBarItem(
+                icon: Container(
+                  height: kSmHeight / 1.7,
+                  width: kSmWidth / 4.2,
+                  child: SvgPicture.asset(
+                    Assets.shoppingCart,
+                    width: 90,
+                    height: 90,
+                    color:
+                        _currentIndex == 2 ? ColorsApp.skyBlue : ColorsApp.grey,
                   ),
+                ),
+                title: Container(
+                    padding: EdgeInsets.only(bottom: 3),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: _currentIndex == 2
+                                ? BorderSide(color: ColorsApp.skyBlue, width: 2)
+                                : BorderSide.none,
+                            top: BorderSide.none)),
+                    child: Text('Message',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: _currentIndex == 2
+                              ? ColorsApp.skyBlue
+                              : ColorsApp.grey,
+                        ))),
+              ),
 
-                  CustomNavigationBarItem(
-                    icon: Container(
-                      height: kSmHeight / 1.7,
-                      width: kSmWidth / 4.2,
-                      child: SvgPicture.asset(
-                        Assets.shoppingCart,
-                        width: 90,
-                        height: 90,
-                        color: _currentIndex == 2
-                            ? ColorsApp.skyBlue
-                            : ColorsApp.grey,
-                      ),
-                    ),
-                    title: Container(
-                        padding: EdgeInsets.only(bottom: 3),
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: _currentIndex == 2
-                                    ? BorderSide(
-                                        color: ColorsApp.skyBlue, width: 2)
-                                    : BorderSide.none,
-                                top: BorderSide.none)),
-                        child: Text('Shop',
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              color: _currentIndex == 2
-                                  ? ColorsApp.skyBlue
-                                  : ColorsApp.grey,
-                            ))),
+              CustomNavigationBarItem(
+                icon: Container(
+                  height: kSmHeight / 1.7,
+                  width: kSmWidth / 4.2,
+                  child: SvgPicture.asset(
+                    Assets.shoppingCart,
+                    width: 90,
+                    height: 90,
+                    color:
+                        _currentIndex == 3 ? ColorsApp.skyBlue : ColorsApp.grey,
                   ),
+                ),
+                title: Container(
+                    padding: EdgeInsets.only(bottom: 3),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: _currentIndex == 3
+                                ? BorderSide(color: ColorsApp.skyBlue, width: 2)
+                                : BorderSide.none,
+                            top: BorderSide.none)),
+                    child: Text('Shop',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: _currentIndex == 3
+                              ? ColorsApp.skyBlue
+                              : ColorsApp.grey,
+                        ))),
+              ),
 
-                  CustomNavigationBarItem(
-                    icon: Container(
-                      height: kSmHeight / 1.7,
-                      width: kSmWidth / 4.2,
-                      child: Icon(
-                        Icons.settings,
-                        size: 25,
-                        color: _currentIndex == 3
-                            ? ColorsApp.skyBlue
-                            : ColorsApp.grey,
-                      ),
-                    ),
-                    title: Container(
-                        padding: EdgeInsets.only(bottom: 3),
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: _currentIndex == 3
-                                    ? BorderSide(
-                                        color: ColorsApp.skyBlue, width: 2)
-                                    : BorderSide.none,
-                                top: BorderSide.none)),
-                        child: Text('setting'.tr,
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              color: _currentIndex == 3
-                                  ? ColorsApp.skyBlue
-                                  : ColorsApp.grey,
-                            ))),
-
-                    // badgeCount: _badgeCounts[4],
-                    // showBadge: _badgeShows[4],
+              CustomNavigationBarItem(
+                icon: Container(
+                  height: kSmHeight / 1.7,
+                  width: kSmWidth / 4.2,
+                  child: Icon(
+                    Icons.settings,
+                    size: 25,
+                    color:
+                        _currentIndex == 4 ? ColorsApp.skyBlue : ColorsApp.grey,
                   ),
-                  // CustomNavigationBarItem(
-                  //   icon: Icon(Icons.hourglass_disabled),
-                  //   badgeCount: _badgeCounts[4],
-                  //   showBadge: _badgeShows[4],
-                  // ),
-                ],
-                currentIndex: _currentIndex,
-                onTap: (index) {
-                  _currentIndex = index;
-                  update();
-                  if (index == 0) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Get.find<ProductController>().restoreScrollPosition();
-                    });
-                  }
-                },
-              ));
+                ),
+                title: Container(
+                    padding: EdgeInsets.only(bottom: 3),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: _currentIndex == 4
+                                ? BorderSide(color: ColorsApp.skyBlue, width: 2)
+                                : BorderSide.none,
+                            top: BorderSide.none)),
+                    child: Text('setting'.tr,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: _currentIndex == 4
+                              ? ColorsApp.skyBlue
+                              : ColorsApp.grey,
+                        ))),
+
+                // badgeCount: _badgeCounts[4],
+                // showBadge: _badgeShows[4],
+              ),
+              // CustomNavigationBarItem(
+              //   icon: Icon(Icons.hourglass_disabled),
+              //   badgeCount: _badgeCounts[4],
+              //   showBadge: _badgeShows[4],
+              // ),
+            ],
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              _currentIndex = index;
+              update();
+              if (index == 0) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Get.find<ProductController>().restoreScrollPosition();
+                });
+              }
+            },
+          ));
     });
+  }
+
+  generalSocket() {
+    new SocketService().general(socketGeneralNotification);
+  }
+
+  socketGeneralNotification(data) {
+    print('000-...............');
+    print(data);
+    new NotificationService().emitNotificationGenearal(data['message']);
+    update();
+    // ici on doit faire l'ajout a la liste des message en locale dans le telephone du user
   }
 }

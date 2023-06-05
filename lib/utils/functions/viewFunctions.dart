@@ -69,7 +69,7 @@ class ViewFunctions {
         child: SpinKitWave(color: Colors.blueAccent, size: 23.0),
       ),
       borderRadius: 5,
-      isDismissible: false,
+      isDismissible: true,
       onTap: (getBar) {},
       snackPosition: SnackPosition.TOP,
       duration: Duration(seconds: 400),

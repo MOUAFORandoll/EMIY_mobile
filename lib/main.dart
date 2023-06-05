@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light, //ThemeMode.system,
       debugShowCheckedModeBanner: false,
       // initialBinding: MyBinding(),
-      initialRoute: AppLinks.TEST,
+      initialRoute: AppLinks.SPLASHSCREEN,
       getPages: AppRoutes.pages,
     );
   }

@@ -25,4 +25,6 @@ class ProductRepo extends GetxService {
 
     return response;
   }
+
+   
 }

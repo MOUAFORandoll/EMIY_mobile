@@ -8,6 +8,7 @@ import 'package:Fahkap/controller/cartController.dart';
 import 'package:Fahkap/controller/categoryController.dart';
 import 'package:Fahkap/controller/categoryBoutiqueController.dart';
 import 'package:Fahkap/controller/managerController.dart';
+import 'package:Fahkap/controller/negociationController.dart';
 import 'package:Fahkap/controller/productController.dart';
 import 'package:Fahkap/controller/searchController.dart';
 import 'package:Fahkap/repository/ActionRepo.dart';
@@ -21,6 +22,7 @@ import 'package:Fahkap/repository/categoryBoutiqueRepo.dart';
 import 'package:Fahkap/repository/LivreurRepo.dart';
 import 'package:Fahkap/repository/ManageRepo.dart';
 import 'package:Fahkap/repository/categoryRepo.dart';
+import 'package:Fahkap/repository/negociationRepo.dart';
 import 'package:Fahkap/repository/popularProductRepo.dart';
 import 'package:Fahkap/utils/Services/ApiClient.dart';
 import 'package:Fahkap/utils/Services/storageService2.dart';
@@ -40,16 +42,20 @@ Future<void> initApp() async {
   await database.init();
   Get.find<ManagerController>().getKeyU();
   Get.find<ManagerController>().getUser();
+  Get.find<ActionController>().generalSocket();
 
   Get.find<ManagerController>().newLocalisation();
 
   Get.find<ProductController>().getPopularProduit();
   Get.find<BuyShopController>().getPointLivraisom();
   Get.find<BoutiqueController>().getBoutique();
+  Get.find<BoutiqueController>().getListAbonnementForUser();
+  Get.find<BoutiqueController>().getListAbonnementForBoutique();
   Get.find<CategoryBoutiqueController>().getCategory();
   Get.find<CommandeController>().getListCommandes();
   Get.find<CategoryBoutiqueController>().getListBoutiques();
   Get.find<ShortController>().getListShort();
+  Get.find<NegociationController>().getListNegociation();
 
   Get.find<ActionController>().getListModePaiement();
 }
@@ -60,32 +66,30 @@ Future<void> initServices() async {
   Get.put(ApiClient(), permanent: true);
 
   Get.put(ActionRepo(apiClient: Get.find()));
-
   Get.put(ActionController(actionRepo: Get.find()), permanent: true);
   Get.put(LivreurRepo(apiClient: Get.find()), permanent: true);
   // Get.put(  StorageService(), permanent: true);
   Get.put(GetStorage(), permanent: true);
-  Get.put(CommandeRepo(apiClient: Get.find()), permanent: true);
   Get.put(ManageRepo(apiClient: Get.find()), permanent: true);
 
   Get.put(ManagerController(manageRepo: Get.find()), permanent: true);
-
+  Get.put(CommandeRepo(apiClient: Get.find()), permanent: true);
   Get.put(CommandeController(commandeRepo: Get.find()), permanent: true);
-  Get.put(CategoryBoutiqueRepo(apiClient: Get.find()), permanent: true);
   Get.put(ProductRepo(apiClient: Get.find()), permanent: true);
-  Get.put(BoutiqueRepo(apiClient: Get.find()), permanent: true);
-  Get.put(CategoryBoutiqueRepo(apiClient: Get.find()), permanent: true);
-  Get.put(BuyShoopingCartRepo(apiClient: Get.find()), permanent: true);
-  Get.put(TransactionRepo(apiClient: Get.find()), permanent: true);
-
   Get.put(ProductController(productRepo: Get.find()), permanent: true);
-  Get.put(CartController(), permanent: true);
-  Get.put(BuyShopController(buySoppingCartRepo: Get.find()), permanent: true);
+  Get.put(BoutiqueRepo(apiClient: Get.find()), permanent: true);
   Get.put(BoutiqueController(boutiqueRepo: Get.find()), permanent: true);
+  Get.put(CartController(), permanent: true);
+  Get.put(BuyShoopingCartRepo(apiClient: Get.find()), permanent: true);
+  Get.put(BuyShopController(buySoppingCartRepo: Get.find()), permanent: true);
+  Get.put(CategoryBoutiqueRepo(apiClient: Get.find()), permanent: true);
   Get.put(CategoryBoutiqueController(categoryBoutiqueRepo: Get.find()),
       permanent: true);
+  Get.put(TransactionRepo(apiClient: Get.find()), permanent: true);
 
   Get.put(TransactionController(transactionRepo: Get.find()), permanent: true);
+  Get.put(NegociationRepo(apiClient: Get.find()), permanent: true);
+  Get.put(NegociationController(negociationRepo: Get.find()), permanent: true);
   Get.put(SearchRepo(apiClient: Get.find()), permanent: true);
   Get.put(SearchController(searchRepo: Get.find()), permanent: true);
   Get.put(ShortRepo(apiClient: Get.find()), permanent: true);

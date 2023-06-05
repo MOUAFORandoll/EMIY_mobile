@@ -593,6 +593,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                 GridView.builder(
                                     shrinkWrap: true,
                                     physics: const BouncingScrollPhysics(),
+
                                     // Ratio largeur/hauteur pour chaque élément
                                     // controller: prods.controllerT,
                                     gridDelegate:
@@ -609,7 +610,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                           index: index,
                                         )),
                                 prods.loaddata == true
-                                    ? Shimmer.fromColors(
+                                    ? /*  Shimmer.fromColors(
                                         baseColor: Colors.blueGrey,
                                         highlightColor: Colors.greenAccent,
                                         child: Container(
@@ -681,6 +682,11 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                   ]))
                                             ]))),
                                       )
+                                   */
+                                    Container(
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.all(10),
+                                        child: CircularProgressIndicator())
                                     : Container(),
                               ],
                             )),

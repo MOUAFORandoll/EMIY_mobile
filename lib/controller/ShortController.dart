@@ -146,7 +146,7 @@ class ShortController extends GetxController {
   bool _loaddata = false;
   bool get loaddata => _loaddata;
 
-  int indexC = 0;
+  int indexC = 1;
   Future<void> getListShort() async {
     // //print('***short******************response**********');
 
@@ -173,7 +173,7 @@ class ShortController extends GetxController {
                   .toList());
             }
             _isLoadedP = 1;
-            indexC += int.parse(_listShort.length.toString());
+           indexC++;
 
             _loaddata = false;
             update();

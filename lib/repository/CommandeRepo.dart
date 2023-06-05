@@ -5,7 +5,7 @@ import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
-class CommandeRepo extends GetxService with DB {
+class CommandeRepo extends GetxService {
   final ApiClient apiClient;
   CommandeRepo({required this.apiClient});
 

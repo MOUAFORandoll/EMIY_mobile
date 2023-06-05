@@ -34,7 +34,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
     Get.find<ManagerController>().startTimer();
 
     Future.delayed(Duration(seconds: 10), () async {
-      //print(box.read('first'));
+      print(box.read('first'));
       if (box.read('first') != 1) {
         box.write('first', 1);
         Get.offNamedUntil(AppLinks.ONBOARDING, (route) => false);

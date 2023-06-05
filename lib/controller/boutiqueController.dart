@@ -6,6 +6,8 @@ import 'package:Fahkap/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/manageBoutiqueUserView.dart';
 import 'package:Fahkap/Views/BoutiqueUser/produitBoutiqueUserView.dart';
 import 'package:Fahkap/controller/categoryBoutiqueController.dart';
+import 'package:Fahkap/model/data/AbonnementBoutiqueModel.dart';
+import 'package:Fahkap/model/data/AbonnementUserModel.dart';
 import 'package:Fahkap/model/data/BoutiqueModel.dart';
 import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
 import 'package:Fahkap/model/data/CategoryModel.dart';
@@ -14,6 +16,7 @@ import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
 import 'package:Fahkap/model/data/ShortModel.dart';
 import 'package:Fahkap/repository/BoutiqueRepo.dart';
 import 'package:Fahkap/styles/colorApp.dart';
+import 'package:Fahkap/utils/Services/SocketService.dart';
 import 'package:Fahkap/utils/Services/requestServices.dart';
 import 'package:Fahkap/utils/Services/storageService2.dart';
 import 'package:Fahkap/utils/database/DataBase.dart';
@@ -336,17 +339,19 @@ class BoutiqueController extends GetxController {
 
         if (response.body['data'] != null &&
             response.body['data'].length != 0) {
-          print('-----------boutiqr************************');
-          print(response.body['data']);
+          // print('-----------boutiqr************************');
+          // print(response.body['data']);
           _Boutique = BoutiqueUserModel.fromJson(response.body['data']);
           update();
           _isExist = response.body['exist'];
           titre.text = Boutique.titre;
           description.text = Boutique.description;
-
+          new SocketService().boutique(_Boutique.codeBoutique, socketBoutique);
           _isLoaded = 1;
           update();
+
           getEltBoutique();
+
           // //print(_Boutique);
         }
       }
@@ -361,6 +366,22 @@ class BoutiqueController extends GetxController {
       update();
       //print(e);
     }
+  }
+
+  socketBoutique(data) {
+    if (data['typeEcoute'] == 0) {
+      fn.snackBar('Commande', data['message'], true);
+    }
+    if (data['typeEcoute'] == 1) {
+      fn.snackBar('Nouvelle negociation', data['message'], true);
+      new SocketService()
+          .negociation(data['canalNegociation'], socketMessageNegociation);
+    }
+  }
+
+  socketMessageNegociation(data) {
+    fn.snackBar('Message negociation', data['message'], true);
+    // ici on doit faire l'ajout a la liste des message en locale dans le telephone du user
   }
 
   DeconectBoutique() {
@@ -1128,6 +1149,110 @@ class BoutiqueController extends GetxController {
 
       _isUpdating = false;
       update();
+      //print(e);
+    }
+  }
+
+  abonnementAdd(codeBoutique) async {
+    try {
+      if (boutiqueImage.path != '') {
+        fn.loading('Abonnement', 'Abonnement a la boutique en cours');
+
+        var key = await s.getKey();
+        var data = {
+          'codeBoutique': codeBoutique,
+          'keySecret': key,
+        };
+        Response response = await boutiqueRepo.abonnementAdd(data);
+        //print(response.body);
+
+        if (response.statusCode == 200) {
+          // _isOk = false;
+          // update();
+
+          // await getBoutique();
+          fn.closeSnack();
+        }
+        fn.closeSnack();
+
+        fn.snackBar('Mise a jour', response.body['message'], true);
+        _isUpdatingB = false;
+        // Get.back(closeOverlays: true);
+        update();
+      } else {
+        fn.closeSnack();
+
+        // fn.snackBar('Boutique', 'Remplir tous les champs', false);
+      }
+    } catch (e) {
+      fn.closeSnack();
+      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+
+      _isUpdatingB = false;
+      update();
+      //print(e);
+    }
+  }
+
+  List<AbonnementUserModel> _listAbonnememtUser = [];
+  List<AbonnementUserModel> get listAbonnememtUser => _listAbonnememtUser;
+  int _isAbUserPage = 0;
+  int get isAbUserPage => _isAbUserPage;
+  Future<void> getListAbonnementForUser() async {
+    // //print('***short******************response**********');
+    var key = await s.getKey();
+
+    try {
+      Response response =
+          await boutiqueRepo.abonnementForUser(key, isAbUserPage);
+
+      _listAbonnememtUser = [];
+      _listAbonnememtUser.clear();
+      update();
+
+      if (response.body != null) {
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            _listAbonnememtUser.addAll((response.body['data'] as List)
+                .map((e) => AbonnementUserModel.fromJson(e))
+                .toList());
+            _isAbUserPage++;
+            update();
+          }
+        }
+      }
+    } catch (e) {
+      //print(e);
+    }
+  }
+
+  List<AbonnementBoutiqueModel> _listAbonnememtBoutique = [];
+  List<AbonnementBoutiqueModel> get listAbonnememtBoutique => _listAbonnememtBoutique;
+  int _isAbBoutiquePage = 0;
+  int get isAbBoutiquePage => _isAbBoutiquePage;
+  Future<void> getListAbonnementForBoutique() async {
+    // //print('***short******************response**********');
+
+    try {
+      Response response = await boutiqueRepo.abonnementForBoutique(
+          Boutique.codeBoutique, isAbBoutiquePage);
+
+      _listAbonnememtBoutique = [];
+      _listAbonnememtBoutique.clear();
+      update();
+
+      if (response.body != null) {
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            _listAbonnememtBoutique.addAll((response.body['data'] as List)
+                .map((e) => AbonnementBoutiqueModel.fromJson(e))
+                .toList());
+            _isAbUserPage++;
+            update();
+          }
+        }
+      }
+    } catch (e) {
       //print(e);
     }
   }

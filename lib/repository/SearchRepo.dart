@@ -5,7 +5,7 @@ import 'package:Fahkap/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
-class SearchRepo extends GetxService with DB {
+class SearchRepo extends GetxService {
   final ApiClient apiClient;
   SearchRepo({required this.apiClient});
 

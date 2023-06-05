@@ -15,7 +15,7 @@ import 'package:sqflite/sqflite.dart';
 
 import 'package:path/path.dart';
 
-class DB {
+class DB extends GetxController {
   String linkDb = 'FahKap0.db';
   // ignore: unused_field
   Database? _db;
@@ -320,7 +320,7 @@ class DB {
       // );
       var data = await _db!.rawQuery('SELECT * FROM LANG');
       //print(
-          // ' ${data}lan----------------------------****************************************');
+      // ' ${data}lan----------------------------****************************************');
 
       if (data.isNotEmpty) {
         var a = await _db!.update(
@@ -339,7 +339,7 @@ class DB {
       }
       var data0 = await _db!.rawQuery('SELECT * FROM LANG');
       //print(
-          // ' ${data0}lan----------------------------****************************************');
+      // ' ${data0}lan----------------------------****************************************');
 
       return true;
     } catch (e) {
@@ -382,7 +382,7 @@ class DB {
     try {
       var data = await _db!.rawQuery('SELECT * FROM LANG');
       //print(
-          // 'lan----------------------------****************************************');
+      // 'lan----------------------------****************************************');
       // print(data);
       return data.isNotEmpty;
     } catch (e) {
@@ -401,7 +401,7 @@ class DB {
       );
       var data = await _db.rawQuery('SELECT * FROM THEME');
       //print(
-          // ' ${data}lan----------------------------****************************************');
+      // ' ${data}lan----------------------------****************************************');
 
       if (data.isNotEmpty) {
         var a = await _db.update(
@@ -420,7 +420,7 @@ class DB {
       }
       var data0 = await _db.rawQuery('SELECT * FROM THEME');
       //print(
-          // ' ${data0}lan----------------------------****************************************');
+      // ' ${data0}lan----------------------------****************************************');
 
       return true;
     } catch (e) {
@@ -437,17 +437,17 @@ class DB {
     //   version: 1,
     // );
     try {
-       if (_db != null) {
-      var data = await _db!.rawQuery('SELECT * FROM THEME');
+      if (_db != null) {
+        var data = await _db!.rawQuery('SELECT * FROM THEME');
 
-      //print(data);
-      if (data.isNotEmpty) {
-        var value = data[0]['value'].toString();
-        return value;
-        // Get.find<ActionController>().getLanguage0(name);
-      } else {
-        return null;
-      }
+        //print(data);
+        if (data.isNotEmpty) {
+          var value = data[0]['value'].toString();
+          return value;
+          // Get.find<ActionController>().getLanguage0(name);
+        } else {
+          return null;
+        }
       }
     } catch (e) {
       //print(e);
