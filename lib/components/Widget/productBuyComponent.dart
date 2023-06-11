@@ -1,7 +1,7 @@
 // ignore: must_be_immutable
-import 'package:Fahkap/model/data/CartModel.dart';
+import 'package:EMIY/model/data/CartModel.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -18,7 +18,8 @@ class ProductBuyComponent extends StatelessWidget {
         padding: EdgeInsets.all(0),
         // decoration: BoxDecoration(
         //     color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(child: Text(cartModel.name)),

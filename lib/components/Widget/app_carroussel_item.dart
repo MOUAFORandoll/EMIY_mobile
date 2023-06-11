@@ -1,6 +1,6 @@
-import 'package:Fahkap/components/Widget/app_text_title.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:EMIY/components/Widget/app_text_title.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,16 +1,16 @@
-import 'package:Fahkap/components/Text/bigtitleText.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/components/Text/titleText.dart';
-import 'package:Fahkap/components/Widget/Conversation.dart';
-import 'package:Fahkap/components/Widget/app_loading.dart';
-import 'package:Fahkap/components/Widget/app_title_right.dart';
-import 'package:Fahkap/components/Widget/productComponent0.dart';
-import 'package:Fahkap/controller/CommandeController.dart';
-import 'package:Fahkap/controller/negociationController.dart';
-import 'package:Fahkap/model/data/CommandeModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/components/Text/titleText.dart';
+import 'package:EMIY/components/Widget/Conversation.dart';
+import 'package:EMIY/components/Widget/app_loading.dart';
+import 'package:EMIY/components/Widget/app_title_right.dart';
+import 'package:EMIY/components/Widget/productComponent0.dart';
+import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/negociationController.dart';
+import 'package:EMIY/model/data/CommandeModel.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -81,21 +81,20 @@ class ListNegociationView extends StatelessWidget {
                 ),
 
                 SliverList(
-                  // Use a delegate to build items as they're scrolled on screen.
-                  delegate: SliverChildBuilderDelegate(
-                      // The builder function returns a ListTile with a title that
-                      // displays the index of the current item.
-                      (context, index) => SingleChildScrollView(
-                          child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              // scrollDirection: Axis.horizontal,
-                              itemCount: _negociation.listNegociation.length,
-                              itemBuilder: (_ctx, x) => Conversation(
-                                  negociation:
-                                      _negociation.listNegociation[x]))),
+                    // Use a delegate to build items as they're scrolled on screen.
+                    delegate: SliverChildBuilderDelegate(
+                  // The builder function returns a ListTile with a title that
+                  // displays the index of the current item.
+                  (context, index) => SingleChildScrollView(
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          // scrollDirection: Axis.horizontal,
+                          itemCount: _negociation.listNegociation.length,
+                          itemBuilder: (_ctx, x) => Conversation(
+                              negociation: _negociation.listNegociation[x]))),
 
-                 childCount: 1,
+                  childCount: 1,
                 ))
               ])));
 

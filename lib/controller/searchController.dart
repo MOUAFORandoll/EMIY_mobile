@@ -1,16 +1,16 @@
-import 'package:Fahkap/components/Widget/BoutiqueComponentHome.dart';
-import 'package:Fahkap/components/Widget/seacrhIngCompo.dart';
-import 'package:Fahkap/model/data/BoutiqueModel.dart';
-import 'package:Fahkap/model/data/CategoryModel.dart';
-import 'package:Fahkap/repository/SearchRepo.dart';
+import 'package:EMIY/components/Widget/BoutiqueComponentHome.dart';
+import 'package:EMIY/components/Widget/seacrhIngCompo.dart';
+import 'package:EMIY/model/data/BoutiqueModel.dart';
+import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/repository/SearchRepo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
-import 'package:Fahkap/controller/cartController.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/repository/popularProductRepo.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:EMIY/controller/cartController.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/repository/popularProductRepo.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
 
 class SearchController extends GetxController {

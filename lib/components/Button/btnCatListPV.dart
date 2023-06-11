@@ -1,5 +1,5 @@
 // ignore: must_be_immutable
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,8 +20,8 @@ class btnCatListPV extends StatelessWidget {
           margin: EdgeInsets.all(this.pVal ?? 10),
           decoration: new BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: /* (active) ?  */ ColorsApp
-                .bleuLight /* : Color(0x71755050) */,
+            color: /* (active) ?  */
+                ColorsApp.bleuLight /* : Color(0x71755050) */,
           ),
           child: Text(
             title,

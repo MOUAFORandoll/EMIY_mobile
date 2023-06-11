@@ -1,10 +1,10 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Fahkap/model/data/CommandeModel.dart';
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:EMIY/model/data/CommandeModel.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

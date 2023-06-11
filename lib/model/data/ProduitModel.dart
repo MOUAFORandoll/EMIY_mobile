@@ -19,7 +19,8 @@ class ProduitModel {
     required this.titre,
     required this.quantite,
     required this.prix,
-    required this.note,
+    required this.islike,
+    required this.like,
     required this.status,
     required this.negociable,
     required this.images,
@@ -32,7 +33,8 @@ class ProduitModel {
   final int quantite;
   final int id;
   final int prix;
-  final note;
+  final int like;
+  final bool islike;
   final bool status;
   final bool negociable;
   final List<ImageU> images;
@@ -45,8 +47,9 @@ class ProduitModel {
         titre: json["titre"] == null ? null : json["titre"],
         quantite: json["quantite"] == null ? null : json["quantite"],
         prix: json["prix"] == null ? null : json["prix"],
-        note: double.parse(
-            (json["note"] == null ? null : json["note"]).toString()),
+        like:
+            int.parse((json["like"] == null ? null : json["like"]).toString()),
+        islike: json["islike"] == null ? null : json["islike"],
         status: json["status"] == null ? null : json["status"],
         negociable: json["negociable"] == null ? null : json["negociable"],
         images: json["images"] == null
@@ -62,8 +65,9 @@ class ProduitModel {
         "titre": titre == null ? null : titre,
         "quantite": quantite == null ? null : quantite,
         "prix": prix == null ? null : prix,
-        "note": note == null ? null : double.parse(note.toString()),
+        "like": like == null ? null : double.parse(like.toString()),
         "status": status == null ? null : status,
+        "islike": islike == null ? null : islike,
         "negociable": negociable == null ? null : negociable,
         "images": images == null
             ? null

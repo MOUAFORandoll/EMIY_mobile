@@ -20,6 +20,8 @@ class ProduitCategoryModel {
     required this.titre,
     required this.quantite,
     required this.prix,
+    required this.islike,
+    required this.like,
     required this.status,
     required this.images,
   });
@@ -31,6 +33,8 @@ class ProduitCategoryModel {
   final int quantite;
   final int id;
   final int prix;
+  final int like;
+  final bool islike;
   final bool status;
   final List<ImageU> images;
 
@@ -41,7 +45,10 @@ class ProduitCategoryModel {
         boutique: json["boutique"] == null ? null : json["boutique"],
         description: json["description"] == null ? null : json["description"],
         titre: json["titre"] == null ? null : json["titre"],
-        quantite: json["quantite"] == null ? null : json["quantite"],
+      like:
+            int.parse((json["like"] == null ? null : json["like"]).toString()),
+        islike: json["islike"] == null ? null : json["islike"],
+          quantite: json["quantite"] == null ? null : json["quantite"],
         prix: json["prix"] == null ? null : json["prix"],
         status: json["status"] == null ? null : json["status"],
         images: json["images"] == null
@@ -54,7 +61,9 @@ class ProduitCategoryModel {
         "codeProduit": codeProduit == null ? null : codeProduit,
         "boutique": boutique == null ? null : boutique,
         "description": description == null ? null : description,
+        "like": like == null ? null : double.parse(like.toString()),
         "titre": titre == null ? null : titre,
+        "islike": islike == null ? null : islike,
         "quantite": quantite == null ? null : quantite,
         "prix": prix == null ? null : prix,
         "status": status == null ? null : status,

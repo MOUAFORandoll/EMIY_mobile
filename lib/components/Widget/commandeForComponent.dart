@@ -1,17 +1,17 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Fahkap/components/Button/customBtn.dart';
-import 'package:Fahkap/components/Form/commentForm.dart';
-import 'package:Fahkap/components/Form/formComponent2.dart';
-import 'package:Fahkap/controller/boutiqueController.dart';
-import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
-import 'package:Fahkap/model/data/CommandeBoutiqueModel.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/api/apiUrl.dart';
+import 'package:EMIY/components/Button/customBtn.dart';
+import 'package:EMIY/components/Form/commentForm.dart';
+import 'package:EMIY/components/Form/formComponent2.dart';
+import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/model/data/BoutiqueUserModel.dart';
+import 'package:EMIY/model/data/CommandeBoutiqueModel.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/utils/api/apiUrl.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 

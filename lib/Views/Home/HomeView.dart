@@ -1,24 +1,24 @@
-import 'package:Fahkap/components/Form/home_search_field.dart';
-import 'package:Fahkap/components/Form/search_field.dart';
-import 'package:Fahkap/components/Widget/BoutiqueComponentHomeN.dart';
-import 'package:Fahkap/components/Widget/app_title_right.dart';
-import 'package:Fahkap/controller/ActionController.dart';
-import 'package:Fahkap/controller/CommandeController.dart';
-import 'package:Fahkap/controller/ShortController.dart';
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/utils/constants/assets.dart';
-import 'package:Fahkap/components/Widget/categoryComponent.dart';
-import 'package:Fahkap/components/Widget/productComponent.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/components/Text/titleText.dart';
-import 'package:Fahkap/components/Widget/productComponentAll.dart';
-import 'package:Fahkap/controller/categoryBoutiqueController.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/controller/productController.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/components/Form/home_search_field.dart';
+import 'package:EMIY/components/Form/search_field.dart';
+import 'package:EMIY/components/Widget/BoutiqueComponentHomeN.dart';
+import 'package:EMIY/components/Widget/app_title_right.dart';
+import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/ShortController.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/utils/constants/assets.dart';
+import 'package:EMIY/components/Widget/categoryComponent.dart';
+import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/components/Text/titleText.dart';
+import 'package:EMIY/components/Widget/productComponentAll.dart';
+import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/controller/categoryController.dart';
+import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -530,7 +530,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                           ),
                                           options: CarouselOptions(
                                             aspectRatio: 4 / 4,
-
+                                            autoPlay: true,
                                             enlargeStrategy:
                                                 CenterPageEnlargeStrategy.scale,
                                             initialPage: 0,

@@ -1,8 +1,8 @@
-import 'package:Fahkap/controller/ShortController.dart';
-import 'package:Fahkap/model/data/ShortModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:EMIY/controller/ShortController.dart';
+import 'package:EMIY/model/data/ShortModel.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/routing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class ShortAction extends StatelessWidget {
-  ShortAction({required this.short });
-  ShortModel short; 
+  ShortAction({required this.short});
+  ShortModel short;
 
   @override
   Widget build(BuildContext context) {
@@ -27,47 +27,46 @@ class ShortAction extends StatelessWidget {
                 // color: Colors.red,
                 child: Column(
               children: [
-               Container(
-                        width: 48,
-                        height: 48,
-                        margin: EdgeInsets.symmetric(
-                            vertical: kMarginY * 2, horizontal: kMarginX),
-                        child: CachedNetworkImage(
-                          width: 48,
-                          height: 48,
-                          fit: BoxFit.cover,
-                          imageUrl: short.boutique.images[0].src,
-                          imageBuilder: (context, imageProvider) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: ColorsApp.greySecond,
-                                borderRadius: BorderRadius.circular(30),
-                                image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
-                                    colorFilter: ColorFilter.mode(
-                                        Colors.transparent,
-                                        BlendMode.colorBurn)),
-                              ),
-                            );
-                          },
-                          placeholder: (context, url) {
-                            return Container(
-                              child: Center(
-                                  child: CircularProgressIndicator(
-                                color: ColorsApp.skyBlue,
-                              )),
-                            );
-                          },
-                          errorWidget: (context, url, error) {
-                            return CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 50,
-                                backgroundImage:
-                                    AssetImage("assets/images/error.gif"));
-                          },
-                        )),
-                    
+                Container(
+                    width: 48,
+                    height: 48,
+                    margin: EdgeInsets.symmetric(
+                        vertical: kMarginY * 2, horizontal: kMarginX),
+                    child: CachedNetworkImage(
+                      width: 48,
+                      height: 48,
+                      fit: BoxFit.cover,
+                      imageUrl: short.boutique.images[0].src,
+                      imageBuilder: (context, imageProvider) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: ColorsApp.greySecond,
+                            borderRadius: BorderRadius.circular(30),
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.transparent, BlendMode.colorBurn)),
+                          ),
+                        );
+                      },
+                      placeholder: (context, url) {
+                        return Container(
+                          child: Center(
+                              child: CircularProgressIndicator(
+                            color: ColorsApp.skyBlue,
+                          )),
+                        );
+                      },
+                      errorWidget: (context, url, error) {
+                        return CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 50,
+                            backgroundImage:
+                                AssetImage("assets/images/error.gif"));
+                      },
+                    )),
+
                 InkWell(
                   child: Container(
                     margin: EdgeInsets.symmetric(

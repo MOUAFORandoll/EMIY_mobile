@@ -1,11 +1,11 @@
-import 'package:Fahkap/Views/Shopping/BuyShoopingCart.dart';
-import 'package:Fahkap/controller/BuyShopController.dart';
-import 'package:Fahkap/model/data/LivreurModel.dart';
-import 'package:Fahkap/model/data/PointLivraisonModel.dart';
+import 'package:EMIY/Views/Shopping/BuyShoopingCart.dart';
+import 'package:EMIY/controller/BuyShopController.dart';
+import 'package:EMIY/model/data/LivreurModel.dart';
+import 'package:EMIY/model/data/PointLivraisonModel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 
 class PointLivraisonComponent extends StatelessWidget {
   final PointLivraisonModel point_livraison;

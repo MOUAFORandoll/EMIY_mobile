@@ -1,8 +1,8 @@
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/utils/Services/ApiClient.dart';
-import 'package:Fahkap/utils/Services/storageService.dart';
-import 'package:Fahkap/utils/constants/apiRoute.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/utils/Services/ApiClient.dart';
+import 'package:EMIY/utils/Services/storageService.dart';
+import 'package:EMIY/utils/constants/apiRoute.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
@@ -13,7 +13,7 @@ class ActionRepo extends GetxService {
 
   Future test(indexC) async {
     Response a = await apiClient.getCollections(
-      ApiRoutes.TEST+'/'+indexC.toString(),
+      ApiRoutes.TEST + '/' + indexC.toString(),
     );
 
     return a;
@@ -27,9 +27,9 @@ class ActionRepo extends GetxService {
     return a;
   }
 
-  Future addNotationProduit(data) async {
+  Future addLikeProduit(data) async {
     Response a =
-        await apiClient.getCollectionsP(ApiRoutes.NOTAITON_PRODUIT, data);
+        await apiClient.getCollectionsP(ApiRoutes.LIKE_PRODUIT, data);
     ;
 
     return a;

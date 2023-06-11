@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:Fahkap/controller/boutiqueController.dart';
-import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
+import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -32,7 +32,7 @@ class ImageCompAdd extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   )),
               onTap: () {
-               _controller.addProduitImage(id);
+                _controller.addProduitImage(id);
               },
             ));
   }

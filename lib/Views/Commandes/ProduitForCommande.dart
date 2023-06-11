@@ -1,13 +1,13 @@
-import 'package:Fahkap/components/Text/bigtitleText.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/components/Text/titleText.dart';
-import 'package:Fahkap/components/Widget/app_loading.dart';
-import 'package:Fahkap/components/Widget/productComponent0.dart';
-import 'package:Fahkap/controller/CommandeController.dart';
-import 'package:Fahkap/model/data/CommandeModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/components/Text/titleText.dart';
+import 'package:EMIY/components/Widget/app_loading.dart';
+import 'package:EMIY/components/Widget/productComponent0.dart';
+import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/model/data/CommandeModel.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -45,9 +45,7 @@ class ProduitForCommande extends StatelessWidget {
                   margin: EdgeInsets.only(right: 15),
                 ),
                 onTap: () async {
-                  
                   await _commande.getProduitForCommandes(id);
-               
                 },
               ),
               InkWell(

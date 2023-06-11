@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:Fahkap/controller/ActionController.dart';
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/model/data/ModePaiementModel.dart';
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/model/data/ModePaiementModel.dart';
+import 'package:EMIY/styles/textStyle.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
 

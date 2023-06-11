@@ -1,11 +1,11 @@
-import 'package:Fahkap/controller/productController.dart';
-import 'package:Fahkap/model/data/CartModel.dart';
-import 'package:Fahkap/model/data/CategoryModel.dart';
-import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/utils/Services/requestServices.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/model/data/CartModel.dart';
+import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/model/data/ProduitCategoryModel.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

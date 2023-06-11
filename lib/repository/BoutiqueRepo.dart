@@ -1,8 +1,8 @@
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/utils/Services/ApiClient.dart';
-import 'package:Fahkap/utils/Services/storageService.dart';
-import 'package:Fahkap/utils/constants/apiRoute.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/utils/Services/ApiClient.dart';
+import 'package:EMIY/utils/Services/storageService.dart';
+import 'package:EMIY/utils/constants/apiRoute.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
@@ -14,8 +14,8 @@ class BoutiqueRepo extends GetxService {
   Future getBoutiqueForUser() async {
     var s = await store.getKey();
     if (s != null /* && s.toString().length != 0 */) {
-      Response a = await apiClient
-          .getCollectionsP(ApiRoutes.BOUTIQUE_FOR_USER, {'keySecret': s});
+      Response a = await apiClient.getCollections(
+          ApiRoutes.BOUTIQUE_FOR_USER + "?keySecret=${s.toString()}");
 
       return a;
     } else {
@@ -24,24 +24,28 @@ class BoutiqueRepo extends GetxService {
   }
 
   Future getListCommandeForBoutique(codeBoutique) async {
-    Response a = await apiClient.getCollectionsP(
-        ApiRoutes.BOUTIQUE_READ_COMMANDE, {'codeBoutique': codeBoutique});
+    Response a = await apiClient.getCollections(
+        ApiRoutes.BOUTIQUE_READ_COMMANDE +
+            "?codeBoutique=${codeBoutique.toString()}");
     ;
 
     return a;
   }
 
   Future getListHCommandeForBoutique(codeBoutique) async {
-    Response a = await apiClient.getCollectionsP(
-        ApiRoutes.BOUTIQUE_READ_HCOMMANDE, {'codeBoutique': codeBoutique});
+    Response a = await apiClient.getCollections(
+        ApiRoutes.BOUTIQUE_READ_HCOMMANDE +
+            "?codeBoutique=${codeBoutique.toString()}");
+    ;
     //print(a.body);
 
     return a;
   }
 
   Future getListProduitForBoutique(codeBoutique) async {
-    Response a = await apiClient.getCollectionsP(
-        ApiRoutes.BOUTIQUE_READ_PRODUIT, {'codeBoutique': codeBoutique});
+    Response a = await apiClient.getCollections(
+        ApiRoutes.BOUTIQUE_READ_PRODUIT +
+            "?codeBoutique=${codeBoutique.toString()}");
 
     return a;
   }
@@ -132,8 +136,6 @@ class BoutiqueRepo extends GetxService {
     return a;
   }
 
-
-  
   Future abonnementAdd(data) async {
     Response a = await apiClient.postData(ApiRoutes.ABONNEMENT, data);
     ;
@@ -141,17 +143,17 @@ class BoutiqueRepo extends GetxService {
     return a;
   }
 
-  
-  
   Future abonnementForUser(keySecret, page) async {
-    Response a = await apiClient.getCollections(ApiRoutes.ABONNEMENT +'?keySecret=${keySecret}&page=${page}');
+    Response a = await apiClient.getCollections(
+        ApiRoutes.ABONNEMENT + '?keySecret=${keySecret}&page=${page}');
     ;
 
     return a;
   }
 
   Future abonnementForBoutique(codeBoutique, page) async {
-    Response a = await apiClient.getCollections(ApiRoutes.ABONNEMENT +'?codeBoutique=${codeBoutique}&page=${page}');
+    Response a = await apiClient.getCollections(
+        ApiRoutes.ABONNEMENT + '?codeBoutique=${codeBoutique}&page=${page}');
     ;
 
     return a;

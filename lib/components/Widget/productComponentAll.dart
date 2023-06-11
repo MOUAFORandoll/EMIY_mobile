@@ -1,12 +1,13 @@
 // ignore: must_be_immutable
-import 'package:Fahkap/controller/negociationController.dart';
+import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/negociationController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/api/apiUrl.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/utils/api/apiUrl.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -60,16 +61,30 @@ class ProductComponentAll extends StatelessWidget {
                         )));
                   },
                 ),
-               produit.negociable ? Positioned(
-                  top: 2,
+                produit.negociable
+                    ? Positioned(
+                        top: 2,
+                        right: 2,
+                        child: InkWell(
+                            child: Icon(Icons.handshake),
+                            onTap: () {
+                              Get.find<NegociationController>()
+                                  .newNegociation(produit.codeProduit);
+                            }),
+                      )
+                    : Container(),
+                Positioned(
+                  bottom: 2,
                   right: 2,
                   child: InkWell(
-                      child: Icon(Icons.handshake),
+                      child: Icon(Icons.favorite,
+                          color:
+                              produit.islike ? ColorsApp.red : ColorsApp.white),
                       onTap: () {
-                        Get.find<NegociationController>()
-                            .newNegociation(produit.codeProduit);
+                        Get.find<ActionController>()
+                            .likeProduit(produit.codeProduit);
                       }),
-                ) : Container()
+                )
               ]),
               Container(
                   width: kWidth / 2,

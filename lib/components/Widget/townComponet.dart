@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 
 class TownComponent extends StatefulWidget {
   TownComponent({this.ville = 'douala'});
@@ -9,7 +9,7 @@ class TownComponent extends StatefulWidget {
   @override
   State<TownComponent> createState() => _TownComponentState();
 }
- 
+
 class _TownComponentState extends State<TownComponent> {
   @override
   Widget build(BuildContext context) {

@@ -42,15 +42,13 @@ class ApiRoutes {
   static const SHORT_READ = '/short/read';
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';
   static const SHORT_NEW = '/short/new';
-  static const NOTAITON_PRODUIT = '/notation/produit';
+  static const LIKE_PRODUIT = '/like/produit';
   static const NOTAITON_BOUTIQUE = '/notation/boutique';
   static const TEST = '/test/scroll';
   static const NEW_NEGOCIATION = '/negociation/start';
   static const LIST_NEGOCIATION = '/negociation/list';
   static const LIST_MESSAGE_NEGOCIATION = '/negociation/message/list';
   static const NEW_MESSAGE_NEGOCIATION = '/negociation/message/new';
-
-
 
   static const ABONNEMENT = '/abonnement';
 }

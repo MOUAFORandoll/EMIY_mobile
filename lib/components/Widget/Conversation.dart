@@ -1,8 +1,8 @@
-import 'package:Fahkap/controller/negociationController.dart';
-import 'package:Fahkap/model/socket/NegociationModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:EMIY/controller/negociationController.dart';
+import 'package:EMIY/model/socket/NegociationModel.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/routing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,10 +17,9 @@ class Conversation extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-             Get.toNamed(AppLinks.NEGOCIATION_NEW);
+        Get.toNamed(AppLinks.NEGOCIATION_NEW);
         await Get.find<NegociationController>()
             .getListMessageNegociation(negociation);
-   
       },
       child: Container(
           margin: EdgeInsets.symmetric(vertical: kMarginY)

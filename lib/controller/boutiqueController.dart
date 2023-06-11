@@ -1,26 +1,26 @@
 import 'dart:io';
 
-import 'package:Fahkap/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
-import 'package:Fahkap/Views/BoutiqueUser/HistroriqueCBUView.dart';
-import 'package:Fahkap/Views/BoutiqueUser/ShortBoutiqueView.dart';
-import 'package:Fahkap/Views/BoutiqueUser/manageBoutiqueUserView.dart';
-import 'package:Fahkap/Views/BoutiqueUser/produitBoutiqueUserView.dart';
-import 'package:Fahkap/controller/categoryBoutiqueController.dart';
-import 'package:Fahkap/model/data/AbonnementBoutiqueModel.dart';
-import 'package:Fahkap/model/data/AbonnementUserModel.dart';
-import 'package:Fahkap/model/data/BoutiqueModel.dart';
-import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
-import 'package:Fahkap/model/data/CategoryModel.dart';
-import 'package:Fahkap/model/data/CommandeBoutiqueModel.dart';
-import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
-import 'package:Fahkap/model/data/ShortModel.dart';
-import 'package:Fahkap/repository/BoutiqueRepo.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/utils/Services/SocketService.dart';
-import 'package:Fahkap/utils/Services/requestServices.dart';
-import 'package:Fahkap/utils/Services/storageService2.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
+import 'package:EMIY/Views/BoutiqueUser/HistroriqueCBUView.dart';
+import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
+import 'package:EMIY/Views/BoutiqueUser/manageBoutiqueUserView.dart';
+import 'package:EMIY/Views/BoutiqueUser/produitBoutiqueUserView.dart';
+import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/model/data/AbonnementBoutiqueModel.dart';
+import 'package:EMIY/model/data/AbonnementUserModel.dart';
+import 'package:EMIY/model/data/BoutiqueModel.dart';
+import 'package:EMIY/model/data/BoutiqueUserModel.dart';
+import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/model/data/CommandeBoutiqueModel.dart';
+import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
+import 'package:EMIY/model/data/ShortModel.dart';
+import 'package:EMIY/repository/BoutiqueRepo.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/SocketService.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
+import 'package:EMIY/utils/Services/storageService2.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -1227,7 +1227,8 @@ class BoutiqueController extends GetxController {
   }
 
   List<AbonnementBoutiqueModel> _listAbonnememtBoutique = [];
-  List<AbonnementBoutiqueModel> get listAbonnememtBoutique => _listAbonnememtBoutique;
+  List<AbonnementBoutiqueModel> get listAbonnememtBoutique =>
+      _listAbonnememtBoutique;
   int _isAbBoutiquePage = 0;
   int get isAbBoutiquePage => _isAbBoutiquePage;
   Future<void> getListAbonnementForBoutique() async {

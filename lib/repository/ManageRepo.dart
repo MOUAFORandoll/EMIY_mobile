@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart' hide Response;
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/utils/Services/ApiClient.dart';
-import 'package:Fahkap/utils/Services/storageService.dart';
-import 'package:Fahkap/utils/constants/apiRoute.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/utils/Services/ApiClient.dart';
+import 'package:EMIY/utils/Services/storageService.dart';
+import 'package:EMIY/utils/constants/apiRoute.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get_storage/get_storage.dart';

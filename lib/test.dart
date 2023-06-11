@@ -1,35 +1,35 @@
 // import 'dart:io';
 // import 'dart:convert';
 
-// import 'package:Fahkap/components/Button/AppIconButton.dart';
-// import 'package:Fahkap/components/Button/IconButtonF.dart';
-// import 'package:Fahkap/components/Button/app_button.dart';
-// import 'package:Fahkap/components/Button/button.dart';
-// import 'package:Fahkap/components/Button/customBtn.dart';
-// import 'package:Fahkap/components/Form/commentForm.dart';
-// import 'package:Fahkap/components/Form/formComponent.dart';
-// import 'package:Fahkap/components/Form/formComponent2.dart';
-// import 'package:Fahkap/components/Form/text_field.dart';
-// import 'package:Fahkap/components/Text/bigText.dart';
-// import 'package:Fahkap/components/Widget/app_bar_custom.dart';
-// import 'package:Fahkap/components/Widget/app_empty.dart';
-// import 'package:Fahkap/components/Widget/app_input.dart';
-// import 'package:Fahkap/components/Widget/categoryComponent.dart';
-// import 'package:Fahkap/components/Text/smallText.dart';
-// import 'package:Fahkap/components/Widget/imageComp.dart';
-// import 'package:Fahkap/components/Widget/productBoutiqueComponent.dart';
-// import 'package:Fahkap/components/Widget/shoppingproductComponent.dart';
-// import 'package:Fahkap/controller/boutiqueController.dart';
-// import 'package:Fahkap/controller/cartController.dart';
-// import 'package:Fahkap/controller/categoryController.dart';
-// import 'package:Fahkap/model/data/CategoryModel.dart';
-// import 'package:Fahkap/styles/colorApp.dart';
-// import 'package:Fahkap/styles/textStyle.dart';
-// import 'package:Fahkap/utils/Services/SocketService.dart';
-// import 'package:Fahkap/utils/Services/validators.dart';
-// import 'package:Fahkap/utils/api/apiUrl.dart';
-// import 'package:Fahkap/utils/constants/assets.dart';
-// import 'package:Fahkap/utils/functions/viewFunctions.dart';
+// import 'package:EMIY/components/Button/AppIconButton.dart';
+// import 'package:EMIY/components/Button/IconButtonF.dart';
+// import 'package:EMIY/components/Button/app_button.dart';
+// import 'package:EMIY/components/Button/button.dart';
+// import 'package:EMIY/components/Button/customBtn.dart';
+// import 'package:EMIY/components/Form/commentForm.dart';
+// import 'package:EMIY/components/Form/formComponent.dart';
+// import 'package:EMIY/components/Form/formComponent2.dart';
+// import 'package:EMIY/components/Form/text_field.dart';
+// import 'package:EMIY/components/Text/bigText.dart';
+// import 'package:EMIY/components/Widget/app_bar_custom.dart';
+// import 'package:EMIY/components/Widget/app_empty.dart';
+// import 'package:EMIY/components/Widget/app_input.dart';
+// import 'package:EMIY/components/Widget/categoryComponent.dart';
+// import 'package:EMIY/components/Text/smallText.dart';
+// import 'package:EMIY/components/Widget/imageComp.dart';
+// import 'package:EMIY/components/Widget/productBoutiqueComponent.dart';
+// import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
+// import 'package:EMIY/controller/boutiqueController.dart';
+// import 'package:EMIY/controller/cartController.dart';
+// import 'package:EMIY/controller/categoryController.dart';
+// import 'package:EMIY/model/data/CategoryModel.dart';
+// import 'package:EMIY/styles/colorApp.dart';
+// import 'package:EMIY/styles/textStyle.dart';
+// import 'package:EMIY/utils/Services/SocketService.dart';
+// import 'package:EMIY/utils/Services/validators.dart';
+// import 'package:EMIY/utils/api/apiUrl.dart';
+// import 'package:EMIY/utils/constants/assets.dart';
+// import 'package:EMIY/utils/functions/viewFunctions.dart';
 // import 'package:dio/dio.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
@@ -47,9 +47,9 @@
 
 import 'dart:convert';
 
-import 'package:Fahkap/components/Button/app_button.dart';
-import 'package:Fahkap/controller/negociationController.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/components/Button/app_button.dart';
+import 'package:EMIY/controller/negociationController.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -269,14 +269,14 @@ class _TestState extends State<Test> {
 
   @override
   Widget build(BuildContext context) {
-    return   GetBuilder<NegociationController>(
-              builder: (_negociation) =>  Scaffold(
-      appBar: AppBar(
-        title: Text('Conversation'),
-      ),
-      body: Column(
-        children: [
-        Container(
+    return GetBuilder<NegociationController>(
+      builder: (_negociation) => Scaffold(
+          appBar: AppBar(
+            title: Text('Conversation'),
+          ),
+          body: Column(
+            children: [
+              Container(
                   margin: EdgeInsets.only(
                       top: Get.size.height * .02,
                       bottom: Get.size.height * .025),
@@ -293,8 +293,8 @@ class _TestState extends State<Test> {
                       onTap: () async {
                         _negociation.newNegociation("produit4Snif");
                       }))
-        ],
-      )),
+            ],
+          )),
     );
   }
 }

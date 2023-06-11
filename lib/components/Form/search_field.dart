@@ -1,6 +1,6 @@
-import 'package:Fahkap/controller/searchController.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:EMIY/controller/searchController.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
@@ -25,7 +25,7 @@ class KSearchField extends StatelessWidget {
       this.isCode = false,
       this.onChange})
       : super(key: key);
-FocusNode _focusNode = FocusNode();
+  FocusNode _focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchController>(builder: (searchCont) {
@@ -42,7 +42,7 @@ FocusNode _focusNode = FocusNode();
           onChanged: (String value) {
             if (onChange != null) onChange!(value);
           },
- focusNode: _focusNode,
+          focusNode: _focusNode,
           // cursorHeight: 30.0,
           controller: controllerField,
           // textAlign: TextAlign.left,

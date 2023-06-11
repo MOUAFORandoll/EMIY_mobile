@@ -18,6 +18,8 @@ class ProduitBoutiqueModel {
     required this.titre,
     required this.quantite,
     required this.prix,
+    required this.islike,
+    required this.like,
     required this.description,
     required this.status,
     required this.date,
@@ -29,6 +31,8 @@ class ProduitBoutiqueModel {
   String titre;
   int quantite;
   int prix;
+  final int like;
+  final bool islike;
   String description;
   bool status;
   String date;
@@ -40,11 +44,15 @@ class ProduitBoutiqueModel {
         codeProduit: json["codeProduit"],
         titre: json["titre"],
         quantite: json["quantite"],
+        like:
+            int.parse((json["like"] == null ? null : json["like"]).toString()),
+        islike: json["islike"] == null ? null : json["islike"],
         prix: json["prix"],
         description: json["description"],
         status: json["status"],
         date: json["date "],
-        images: List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
+        images:
+            List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,6 +61,8 @@ class ProduitBoutiqueModel {
         "titre": titre,
         "quantite": quantite,
         "prix": prix,
+        "like": like == null ? null : double.parse(like.toString()),
+        "islike": islike == null ? null : islike,
         "description": description,
         "status": status,
         "date ": date,

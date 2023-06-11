@@ -1,4 +1,4 @@
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 class SocialLogBtn extends StatelessWidget {

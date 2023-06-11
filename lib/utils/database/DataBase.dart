@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:async';
 
-import 'package:Fahkap/controller/ActionController.dart';
-import 'package:Fahkap/controller/ActionController.dart';
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/utils/Services/dependancies.dart';
+import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

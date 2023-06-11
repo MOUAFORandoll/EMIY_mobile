@@ -1,6 +1,6 @@
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

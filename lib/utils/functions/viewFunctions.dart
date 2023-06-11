@@ -1,4 +1,4 @@
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';

@@ -1,14 +1,14 @@
-import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/components/Form/formComponent.dart';
-import 'package:Fahkap/components/Button/themeButton.dart';
-import 'package:Fahkap/controller/boutiqueController.dart';
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/dependancies.dart';
+import 'package:EMIY/components/Button/button.dart';
+import 'package:EMIY/components/Form/formComponent.dart';
+import 'package:EMIY/components/Button/themeButton.dart';
+import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 
-import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
 
 class PolitiqueView extends StatefulWidget {

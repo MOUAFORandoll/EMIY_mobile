@@ -1,19 +1,19 @@
-import 'package:Fahkap/model/socket/MessageNegociationModel.dart';
-import 'package:Fahkap/model/socket/NegociationModel.dart';
-import 'package:Fahkap/repository/negociationRepo.dart';
-import 'package:Fahkap/utils/Services/NotificationService.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
-import 'package:Fahkap/utils/Services/SocketService.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/model/socket/MessageNegociationModel.dart';
+import 'package:EMIY/model/socket/NegociationModel.dart';
+import 'package:EMIY/repository/negociationRepo.dart';
+import 'package:EMIY/utils/Services/NotificationService.dart';
+import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/utils/Services/SocketService.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
-import 'package:Fahkap/controller/cartController.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:EMIY/controller/cartController.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
@@ -80,11 +80,11 @@ class NegociationController extends GetxController {
     textEditingController.text = '';
     update();
     var key = await s.getKey();
-    var token = await s.getKeyKen();
-// if(token.length !=0){
+//     var token = await s.getKeyKen();
+// // if(token.length !=0){
 
-    _idUser = Jwt.parseJwt(token['token'])['id'];
-    print('---------------idd------------!!${_idUser}');
+//     _idUser = Jwt.parseJwt(token['token'])['id'];
+//     print('---------------idd------------!!${_idUser}');
     try {
       Response response = await negociationRepo.getListnegociationProduit(key);
 

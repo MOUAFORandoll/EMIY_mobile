@@ -1,21 +1,21 @@
-import 'package:Fahkap/components/Button/btnCatList.dart';
-import 'package:Fahkap/components/Button/btnCatListPV.dart';
-import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/components/Form/formComponent2.dart';
-import 'package:Fahkap/components/Text/bigText.dart';
-import 'package:Fahkap/components/Text/bigtitleText.dart';
-import 'package:Fahkap/components/Widget/app_loading.dart';
-import 'package:Fahkap/components/Widget/app_title_right.dart';
-import 'package:Fahkap/components/Widget/categoryComponent.dart';
-import 'package:Fahkap/components/Widget/categoryComponent2.dart';
-import 'package:Fahkap/components/Widget/productComponent.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/components/Text/titleText.dart';
-import 'package:Fahkap/controller/categoryBoutiqueController.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/components/Button/btnCatList.dart';
+import 'package:EMIY/components/Button/btnCatListPV.dart';
+import 'package:EMIY/components/Button/button.dart';
+import 'package:EMIY/components/Form/formComponent2.dart';
+import 'package:EMIY/components/Text/bigText.dart';
+import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Widget/app_loading.dart';
+import 'package:EMIY/components/Widget/app_title_right.dart';
+import 'package:EMIY/components/Widget/categoryComponent.dart';
+import 'package:EMIY/components/Widget/categoryComponent2.dart';
+import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/components/Text/titleText.dart';
+import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/controller/categoryController.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -84,7 +84,7 @@ class CategoryView extends StatelessWidget {
                   // Make the initial height of the SliverAppBar larger than normal.
                   expandedHeight: 60,
                 ),
-            
+
                 SliverList(
 
                     // Use a delegate to build items as they're scrolled on screen.

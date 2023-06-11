@@ -1,26 +1,26 @@
-import 'package:Fahkap/Views/Home/SearchView.dart';
-import 'package:Fahkap/controller/ActionController.dart';
-import 'package:Fahkap/controller/CommandeController.dart';
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/controller/productController.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/constants/assets.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:EMIY/Views/Home/SearchView.dart';
+import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/constants/assets.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:Fahkap/Views/ComplementView/AboutUsView.dart';
-import 'package:Fahkap/Views/Home/HomeView.dart';
-import 'package:Fahkap/Views/Shopping/ShoppingView.dart';
-import 'package:Fahkap/Views/UsersMange/ManageView.dart';
-import 'package:Fahkap/components/Widget/optionComponent.dart';
+import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
+import 'package:EMIY/Views/Home/HomeView.dart';
+import 'package:EMIY/Views/Shopping/ShoppingView.dart';
+import 'package:EMIY/Views/UsersMange/ManageView.dart';
+import 'package:EMIY/components/Widget/optionComponent.dart';
 // import 'package:antdesign_icons/antdesign_icons.dart';
 
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/controller/cartController.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/utils/Services/dependancies.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/controller/cartController.dart';
+import 'package:EMIY/controller/categoryController.dart';
+import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,7 +30,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'CategoryBoutique/CategoryView.dart';
 
-class FirstScreen extends   StatelessWidget{/* StatefulWidget {
+class FirstScreen extends StatelessWidget {
+  /* StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
 
   @override
@@ -44,21 +45,21 @@ class _FirstScreenState extends State<FirstScreen> { */
 
   // @override
   // void initState() {
-    // iniit();
-    // super.initState();
-    // controller = ScrollController();
-    // Get.find<ActionController>().scrollcontroller.addListener(() {
-    //   //print(Get.find<ActionController>().scrollcontroller.position);
+  // iniit();
+  // super.initState();
+  // controller = ScrollController();
+  // Get.find<ActionController>().scrollcontroller.addListener(() {
+  //   //print(Get.find<ActionController>().scrollcontroller.position);
 
-    //   setState(() {
-    //     //print(_isVisible);
-    //     _isVisible = Get.find<ActionController>()
-    //             .scrollcontroller
-    //             .position
-    //             .userScrollDirection ==
-    //         ScrollDirection.forward;
-    //   });
-    // });
+  //   setState(() {
+  //     //print(_isVisible);
+  //     _isVisible = Get.find<ActionController>()
+  //             .scrollcontroller
+  //             .position
+  //             .userScrollDirection ==
+  //         ScrollDirection.forward;
+  //   });
+  // });
   // }
 
   // iniit() async {
@@ -91,19 +92,19 @@ class _FirstScreenState extends State<FirstScreen> { */
   //     Get.find<CommandeController>().getListCommandes();
   //   }
   // }
- 
+
   @override
   Widget build(BuildContext context) {
-    return  GetBuilder<ActionController>(builder: (_controller) => Scaffold(
-      // extendBody for floating bar get better perfomance
-      // extendBody: true,
-      backgroundColor: Colors.white,
+    return GetBuilder<ActionController>(
+        builder: (_controller) => Scaffold(
+              // extendBody for floating bar get better perfomance
+              // extendBody: true,
+              backgroundColor: Colors.white,
 
-      body: SafeArea(child: _controller.buildContent()),
+              body: SafeArea(child: _controller.buildContent()),
 
-      bottomNavigationBar:
-         _controller.buildBorderRadiusDesign(),
-    ));
+              bottomNavigationBar: _controller.buildBorderRadiusDesign(),
+            ));
   }
 /* 
   Widget _buildContent(index) {
@@ -284,24 +285,25 @@ class _FirstScreenState extends State<FirstScreen> { */
       );
     });
   }
- */}
+ */
+}
 
 /**
- * import 'package:Fahkap/components/Button/btnCatList.dart';
-import 'package:Fahkap/components/Button/btnCatListPV.dart';
-import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/components/Form/formComponent2.dart';
-import 'package:Fahkap/components/Text/bigText.dart';
-import 'package:Fahkap/components/Text/bigtitleText.dart';
-import 'package:Fahkap/components/Widget/categoryComponent.dart';
-import 'package:Fahkap/components/Widget/productComponent.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/components/Text/titleText.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/controller/popularproductController.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+ * import 'package:EMIY/components/Button/btnCatList.dart';
+import 'package:EMIY/components/Button/btnCatListPV.dart';
+import 'package:EMIY/components/Button/button.dart';
+import 'package:EMIY/components/Form/formComponent2.dart';
+import 'package:EMIY/components/Text/bigText.dart';
+import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Widget/categoryComponent.dart';
+import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/components/Text/titleText.dart';
+import 'package:EMIY/controller/categoryController.dart';
+import 'package:EMIY/controller/popularproductController.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

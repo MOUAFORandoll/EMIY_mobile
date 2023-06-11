@@ -1,26 +1,26 @@
-import 'package:Fahkap/components/Button/app_button.dart';
-import 'package:Fahkap/controller/ActionController.dart';
-import 'package:Fahkap/controller/searchController.dart';
+import 'package:EMIY/components/Button/app_button.dart';
+import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/searchController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:Fahkap/components/Button/AppIconButton.dart';
-import 'package:Fahkap/components/Button/IconButtonF.dart';
-import 'package:Fahkap/components/Button/customBtn.dart';
-import 'package:Fahkap/components/Text/SimpleText.dart';
-import 'package:Fahkap/components/Text/bigText.dart';
-import 'package:Fahkap/components/Text/bigtitleText.dart';
-import 'package:Fahkap/components/Text/bigtitleText0.dart';
-import 'package:Fahkap/components/Widget/categoryComponent.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/controller/cartController.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/controller/categoryBoutiqueController.dart';
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/controller/productController.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:EMIY/components/Button/AppIconButton.dart';
+import 'package:EMIY/components/Button/IconButtonF.dart';
+import 'package:EMIY/components/Button/customBtn.dart';
+import 'package:EMIY/components/Text/SimpleText.dart';
+import 'package:EMIY/components/Text/bigText.dart';
+import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Text/bigtitleText0.dart';
+import 'package:EMIY/components/Widget/categoryComponent.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/controller/cartController.dart';
+import 'package:EMIY/controller/categoryController.dart';
+import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rating_bar/rating_bar.dart';
@@ -283,7 +283,7 @@ class ProductView extends StatelessWidget {
                                                       ' Pieces disponible: ')
                                         ],
                                       ),
-                                      InkWell(
+                                     /*  InkWell(
                                           child: Row(
                                             children: [
                                               Icon(
@@ -314,35 +314,35 @@ class ProductView extends StatelessWidget {
                                                     child: Column(
                                                         // mainAxisSize: MainAxisSize.min,
                                                         children: [
-                                                      RatingBar(
-                                                        initialRating:
-                                                            product.note,
-                                                        filledIcon: Icons.star,
-                                                        emptyIcon:
-                                                            Icons.star_border,
-                                                        halfFilledIcon:
-                                                            Icons.star_half,
-                                                        isHalfAllowed: true,
-                                                        filledColor:
-                                                            Colors.yellow,
-                                                        emptyColor:
-                                                            Colors.yellow,
-                                                        halfFilledColor:
-                                                            Colors.yellow,
-                                                        size: 30,
-                                                        onRatingChanged:
-                                                            (double rating) {
-                                                          //print(rating);
-                                                          Get.find<
-                                                                  ActionController>()
-                                                              .notationProduit(
-                                                                  rating,
-                                                                  product
-                                                                      .codeProduit);
-                                                        },
-                                                      ),
+                                                      // RatingBar(
+                                                      //   initialRating:
+                                                      //       product.note,
+                                                      //   filledIcon: Icons.star,
+                                                      //   emptyIcon:
+                                                      //       Icons.star_border,
+                                                      //   halfFilledIcon:
+                                                      //       Icons.star_half,
+                                                      //   isHalfAllowed: true,
+                                                      //   filledColor:
+                                                      //       Colors.yellow,
+                                                      //   emptyColor:
+                                                      //       Colors.yellow,
+                                                      //   halfFilledColor:
+                                                      //       Colors.yellow,
+                                                      //   size: 30,
+                                                      //   onRatingChanged:
+                                                      //       (double rating) {
+                                                      //     //print(rating);
+                                                      //     Get.find<
+                                                      //             ActionController>()
+                                                      //         .likeProduit(
+                                                                
+                                                      //             product
+                                                      //                 .codeProduit);
+                                                      //   },
+                                                      // ),
                                                     ]))));
-                                          })
+                                          }) */
                                     ],
                                   )),
                               Container(
@@ -446,7 +446,7 @@ class ProductView extends StatelessWidget {
                                                   prod.addItem(product, index,
                                                       Get.parameters['type']);
                                                   //print(
-                                                      // "****************${prod.inCartItems}");
+                                                  // "****************${prod.inCartItems}");
                                                 },
                                               ),
                                             ],

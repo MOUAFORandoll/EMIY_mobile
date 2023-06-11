@@ -1,15 +1,15 @@
-import 'package:Fahkap/utils/database/DataBase.dart';
-import 'package:Fahkap/utils/Services/SocketService.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/utils/Services/SocketService.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
-import 'package:Fahkap/controller/cartController.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/repository/popularProductRepo.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/utils/Services/requestServices.dart';
+import 'package:EMIY/controller/cartController.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/repository/popularProductRepo.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
@@ -174,17 +174,25 @@ class ProductController extends GetxController {
   bool get loaddata => _loaddata;
 
   int indexC = 1;
+  updateProductInPopular(ProduitModel newProduct) {
+    int index = _produitList.indexWhere((product) => product.id == newProduct.id);
+    if (index >= 0) {
+      _produitList[index] = newProduct;
+      update();
+    }
+  }
 
   Future<void> getPopularProduit() async {
     // print('----${_loaddata}-------aaaaaaaaa---');
-
+    var key = await s.getKey();
     if (_loaddata == false) {
       // print('-----------get---');
       _isLoadedP = 0;
       _loaddata = true;
       update();
       try {
-        Response response = await productRepo.getListProductPopular(indexC);
+        Response response =
+            await productRepo.getListProductPopular(indexC, key);
         print('-++++++++-----${response.body['data']}');
 
         //print(response.body);

@@ -1,7 +1,7 @@
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/utils/Services/ApiClient.dart';
-import 'package:Fahkap/utils/Services/storageService.dart';
-import 'package:Fahkap/utils/constants/apiRoute.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/utils/Services/ApiClient.dart';
+import 'package:EMIY/utils/Services/storageService.dart';
+import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 

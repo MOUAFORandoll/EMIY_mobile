@@ -1,51 +1,51 @@
-import 'package:Fahkap/Views/CategoryBoutique/CategoryView.dart';
-import 'package:Fahkap/Views/Home/HomeView.dart';
-import 'package:Fahkap/Views/Negociation/ListNegociationView.dart';
-import 'package:Fahkap/controller/CommandeController.dart';
-import 'package:Fahkap/controller/productController.dart';
-import 'package:Fahkap/model/data/CartModel.dart';
-import 'package:Fahkap/model/data/CategoryModel.dart';
-import 'package:Fahkap/model/data/LivreurModel.dart';
-import 'package:Fahkap/model/data/ModePaiementModel.dart';
-import 'package:Fahkap/model/data/ProduitCategoryModel.dart';
-import 'package:Fahkap/model/data/ProduitModel.dart';
-import 'package:Fahkap/repository/ActionRepo.dart';
-import 'package:Fahkap/repository/BuyShoopingCartRepo.dart';
-import 'package:Fahkap/repository/LivreurRepo.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/utils/Services/NotificationService.dart';
-import 'package:Fahkap/utils/Services/SocketService.dart';
-import 'package:Fahkap/utils/Services/requestServices.dart';
-import 'package:Fahkap/utils/Services/storageService2.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/Views/CategoryBoutique/CategoryView.dart';
+import 'package:EMIY/Views/Home/HomeView.dart';
+import 'package:EMIY/Views/Negociation/ListNegociationView.dart';
+import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/model/data/CartModel.dart';
+import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/model/data/LivreurModel.dart';
+import 'package:EMIY/model/data/ModePaiementModel.dart';
+import 'package:EMIY/model/data/ProduitCategoryModel.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/repository/ActionRepo.dart';
+import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
+import 'package:EMIY/repository/LivreurRepo.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/NotificationService.dart';
+import 'package:EMIY/utils/Services/SocketService.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
+import 'package:EMIY/utils/Services/storageService2.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/Views/Shopping/ShoppingView.dart';
-import 'package:Fahkap/Views/UsersMange/ManageView.dart';
+import 'package:EMIY/Views/Shopping/ShoppingView.dart';
+import 'package:EMIY/Views/UsersMange/ManageView.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:Fahkap/controller/cartController.dart';
+import 'package:EMIY/controller/cartController.dart';
 
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/constants/assets.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/constants/assets.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:Fahkap/Views/ComplementView/AboutUsView.dart';
-import 'package:Fahkap/Views/Shopping/ShoppingView.dart';
-import 'package:Fahkap/Views/UsersMange/ManageView.dart';
-import 'package:Fahkap/components/Widget/optionComponent.dart';
+import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
+import 'package:EMIY/Views/Shopping/ShoppingView.dart';
+import 'package:EMIY/Views/UsersMange/ManageView.dart';
+import 'package:EMIY/components/Widget/optionComponent.dart';
 // import 'package:antdesign_icons/antdesign_icons.dart';
 
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/controller/cartController.dart';
-import 'package:Fahkap/controller/categoryController.dart';
-import 'package:Fahkap/utils/Services/dependancies.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/controller/cartController.dart';
+import 'package:EMIY/controller/categoryController.dart';
+import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -241,38 +241,38 @@ class ActionController extends GetxController {
 
   var s = Get.find<DB>();
 
-  notationProduit(note, codeProduit) async {
-    if (note < 0 || note > 5) {
-      return false;
-    }
+  likeProduit(/* note, */ codeProduit) async {
     var getU = await s.getKey();
     if (getU == null) {
       fn.snackBar('Note', 'Veuillez vous connecter', true);
+      return false;
     }
     var data = {
-      'note': note,
+      // 'like': note,
       'codeProduit': codeProduit,
       "keySecret": getU,
     };
     //print(data);
 
-    fn.loading('Note', 'Notation du produit en cours');
+    // fn.loading('Note', 'Notation du produit en cours');
 
     try {
-      Response response = await actionRepo.addNotationProduit(data);
+      Response response = await actionRepo.addLikeProduit(data);
 
       fn.closeSnack();
 
       update();
       if (response.statusCode == 200) {
-        fn.snackBar('Note', 'Effectue', true);
+        fn.snackBar('Like', 'Effectue', true);
+        ProduitModel produit = ProduitModel.fromJson(response.body['produit']);
+        Get.find<ProductController>().updateProductInPopular(produit);
       } else {
-        fn.snackBar('Note', 'Erreur', false);
+        fn.snackBar('Like', 'Erreur', false);
       }
     } catch (e) {
       fn.closeSnack();
 
-      fn.snackBar('Note', 'Erreur', false);
+      fn.snackBar('Like', 'Erreur', false);
 
       //print(e);
     }

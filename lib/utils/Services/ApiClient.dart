@@ -1,6 +1,6 @@
-import 'package:Fahkap/controller/managerController.dart';
-import 'package:Fahkap/utils/DataBase/DataBase.dart';
-import 'package:Fahkap/utils/api/apiUrl.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/utils/DataBase/DataBase.dart';
+import 'package:EMIY/utils/api/apiUrl.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
@@ -75,7 +75,7 @@ class ApiClient extends GetConnect implements GetxService {
     //print(token);
   }
 
-  Future<Response>  getCollections(url) async {
+  Future<Response> getCollections(url) async {
     Response rep = await get(url);
     return rep;
   }

@@ -1,17 +1,17 @@
 import 'dart:io';
 
-import 'package:Fahkap/model/data/BoutiqueModel.dart';
-import 'package:Fahkap/model/data/BoutiqueUserModel.dart';
-import 'package:Fahkap/model/data/CategoryModel.dart';
-import 'package:Fahkap/model/data/CommandeBoutiqueModel.dart';
-import 'package:Fahkap/model/data/ProduitBoutiqueModel.dart';
-import 'package:Fahkap/model/data/ShortModel.dart';
-import 'package:Fahkap/repository/ShortRepo.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/utils/Services/requestServices.dart';
-import 'package:Fahkap/utils/Services/storageService2.dart';
-import 'package:Fahkap/utils/database/DataBase.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:EMIY/model/data/BoutiqueModel.dart';
+import 'package:EMIY/model/data/BoutiqueUserModel.dart';
+import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/model/data/CommandeBoutiqueModel.dart';
+import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
+import 'package:EMIY/model/data/ShortModel.dart';
+import 'package:EMIY/repository/ShortRepo.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
+import 'package:EMIY/utils/Services/storageService2.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -173,7 +173,7 @@ class ShortController extends GetxController {
                   .toList());
             }
             _isLoadedP = 1;
-           indexC++;
+            indexC++;
 
             _loaddata = false;
             update();

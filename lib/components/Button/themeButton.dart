@@ -1,6 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 class ThemeButtonWidget extends StatefulWidget {
