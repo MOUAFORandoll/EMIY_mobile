@@ -32,6 +32,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqlite_api.dart';
+import 'package:flutter/material.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:uni_links/uni_links.dart' as uni_links;
 
 Future<void> initApp() async {
   await requestPermission();
@@ -125,3 +129,49 @@ getData() async {
     Get.find<CommandeController>().getListCommandes();
   }
 }
+void handleRedirect() async {
+  // Vérifier si l'application est lancée depuis un lien externe
+  Uri? initialUri;
+  try {
+    initialUri = await uni_links.getInitialUri();
+  } catch (e) {
+    print('Erreur lors de la récupération de l\'URI initial: $e');
+  }
+
+  // Rediriger vers l'application si l'URI initial est présent
+  if (initialUri != null) {
+    // Effectuer les actions nécessaires pour traiter l'URI
+    // Par exemple, vous pouvez extraire des paramètres de l'URI et les utiliser dans votre application
+    print('URI initial: $initialUri');
+  } else {
+    // L'application a été lancée normalement sans lien externe
+    // Vous pouvez afficher l'écran principal de votre application ici
+    print('Lancement normal de l\'application');
+  }
+}
+
+void redirectToAppOrStore() async {
+  // Vérifier si l'application mobile-shop est installée sur l'appareil
+  if (await canLaunch('mobile-shop://')) {
+    // Rediriger vers l'application mobile-shop
+    await launch('mobile-shop://');
+  } else {
+    // Rediriger vers le magasin d'applications correspondant à l'appareil de l'utilisateur
+    // Pour Android, le lien direct vers le Play Store
+    // Pour iOS, le lien direct vers l'App Store
+    await launch('https://play.google.com/store/apps/details?id=com.example.mobile_shop');
+  }
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialiser le gestionnaire de liens pour gérer les liens externes
+  uni_links.init();
+
+  // Appeler la fonction handleRedirect() pour gérer la redirection
+  handleRedirect();
+
+  runApp(MyApp());
+}
+
