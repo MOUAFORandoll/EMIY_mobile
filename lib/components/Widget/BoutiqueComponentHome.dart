@@ -19,7 +19,7 @@ class BoutiqueComponentHome extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(AppLinks.BOUTIQUE +
-            '?note=${boutique.note}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
+            '?status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
       },
       child: Container(
           height: kMdHeight * .30,
@@ -65,7 +65,7 @@ class BoutiqueComponentHome extends StatelessWidget {
                         width: Get.width * .5,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/logo.png'),
+                          image: AssetImage('assets/logo/logo.png'),
                         )));
                   },
                 ),

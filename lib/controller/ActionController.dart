@@ -252,6 +252,8 @@ class ActionController extends GetxController {
       'codeProduit': codeProduit,
       "keySecret": getU,
     };
+
+    Get.find<ProductController>().likeProductInPopular(codeProduit);
     //print(data);
 
     // fn.loading('Note', 'Notation du produit en cours');
@@ -263,15 +265,16 @@ class ActionController extends GetxController {
 
       update();
       if (response.statusCode == 200) {
-        fn.snackBar('Like', 'Effectue', true);
+        // fn.snackBar('Like', 'Effectue', true);
         ProduitModel produit = ProduitModel.fromJson(response.body['produit']);
         Get.find<ProductController>().updateProductInPopular(produit);
       } else {
+        Get.find<ProductController>().likeProductInPopular(codeProduit);
         fn.snackBar('Like', 'Erreur', false);
       }
     } catch (e) {
       fn.closeSnack();
-
+      Get.find<ProductController>().likeProductInPopular(codeProduit);
       fn.snackBar('Like', 'Erreur', false);
 
       //print(e);

@@ -16,6 +16,7 @@ class BoutiqueModel {
     required this.description,
     required this.titre,
     required this.status,
+    required this.status_abonnement,
     required this.note,
     required this.dateCreated,
     required this.images,
@@ -27,6 +28,7 @@ class BoutiqueModel {
   String description;
   String titre;
   bool status;
+  bool status_abonnement;
   final note;
   String dateCreated;
   List<Image> images;
@@ -38,6 +40,7 @@ class BoutiqueModel {
         description: json["description"],
         titre: json["titre"],
         status: json["status"],
+        status_abonnement: json["status_abonnement"],
         dateCreated: json["dateCreated"],
         note: double.parse(
             (json["note"] == null ? null : json["note"]).toString()),
@@ -50,6 +53,7 @@ class BoutiqueModel {
         "user": user,
         "description": description,
         "titre": titre,
+        "status_abonnement": status_abonnement,
         "status": status,
         "note": note == null ? null : double.parse(note.toString()),
         "dateCreated": dateCreated,

@@ -114,7 +114,7 @@ class BuyShopController extends GetxController {
       print('*********3...... get point');
 
       Response response = await buySoppingCartRepo.getLivraison_point();
-      print('*********fin get point ${response.body}');
+      // print('*********fin get point ${response.body}');
       if (response.body != null) {
         // if (response.body['data'].length != 0) {
 

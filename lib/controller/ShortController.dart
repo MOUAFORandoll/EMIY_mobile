@@ -45,26 +45,15 @@ class ShortController extends GetxController {
   }
 
   changeVideo(index) async {
-    // listShort[index].controller.initialize();
-    //print('---------------------');
+    print(listShort[index].src);
     _initialise = false;
-    // update();
-    // ignore: unnecessary_null_comparison
-    // if (listShort[index].controller == null) {
+
     listShort[index].loadController();
-    // }
-    // changeVideoSlide(0.0);
     controller = listShort[index].controller;
 
     controller!.play();
     _initialise = true;
-    // update();
-    // ignore: unused_local_variable
-    int prevVideo = (index - 1) > 0 ? index - 1 : 0;
-    // ignore: unnecessary_null_comparison
-    // if (listShort[prevVideo].controller != null) controller!.pause();
 
-    //print(index);
     controller!.addListener(() async {
       //print('0000');
 
@@ -161,16 +150,30 @@ class ShortController extends GetxController {
         // _listShort = [];
         // _listShort.clear();
         // update();
-        print(
-            '-----------------------------------88888${response.body['data']}');
+
         if (response.body != null) {
           if (response.body['data'] != null) {
             if (response.body['data'].length != 0) {
               //print('short**************************');
               //print(response.body['data']);
+              // (response.body['data'] as List).forEach((e) async {
+              //   var ver = await checkVideoFormat(e['src']);
+              //   print(e['src']);
+              //   print(ver);
+              //   if (ver == true) {
+              //     print('---------------------------------is ok');
+              //     _listShort.add((ShortModel.fromJson(e)));
+              //     update();
+              //     // print(
+              //     //     '----------------------------------- ${_listShort.length}');
+              //   } else {
+              //     print('---------------------------------is errorrr');
+              //   }
+              // });
               _listShort.addAll((response.body['data'] as List)
                   .map((e) => ShortModel.fromJson(e))
                   .toList());
+              update();
             }
             _isLoadedP = 1;
             indexC++;
@@ -184,6 +187,19 @@ class ShortController extends GetxController {
         update();
         //print(e);
       }
+    }
+  }
+
+  late VideoPlayerController _controller;
+  Future checkVideoFormat(videoUrl) async {
+    _controller = VideoPlayerController.network(videoUrl);
+
+    try {
+      await _controller.initialize();
+      return true;
+    } catch (error) {
+      print('Erreur de format vidéo : $error');
+      return false;
     }
   }
 

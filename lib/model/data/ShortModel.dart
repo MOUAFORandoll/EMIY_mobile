@@ -2,6 +2,7 @@
 //
 //     final shortModel = shortModelFromJson(jsonString);
 
+import 'package:EMIY/utils/api/apiUrl.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -53,10 +54,11 @@ class ShortModel {
       };
 
   loadController() async {
-    //print('**************lectyre');
-    controller = VideoPlayerController.network(src);
+    print('**************${ApiUrl.stream_serveurUrl + "/short?video=" + src}');
+    controller = VideoPlayerController.network(
+        ApiUrl.stream_serveurUrl + "/short?video=" + src);
     await controller.initialize().then((_) {
-      //print('**************lectyre');
+      print('**************lectyre');
 
       controller.play();
     });

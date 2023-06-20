@@ -144,13 +144,13 @@ class ProductController extends GetxController {
     if (_controllerT.position.userScrollDirection == ScrollDirection.reverse) {
       _isBottomBarVisible = true;
       update();
-      print('${_isBottomBarVisible}-----------------------------------');
+      // print('${_isBottomBarVisible}-----------------------------------');
     } else {
       _isBottomBarVisible = false;
       update();
-      print('${_isBottomBarVisible}-----------------------------------');
+      // print('${_isBottomBarVisible}-----------------------------------');
     }
-    print('idddd-----------------------------------');
+    // print('idddd-----------------------------------');
   }
 
   void restoreScrollPosition() {
@@ -167,7 +167,7 @@ class ProductController extends GetxController {
     //       Curves.easeInOut, // Courbe d'animation (modifiable selon vos besoins)
     // );
     update();
-    print('restore------------------------------------${_savedPosition}');
+    // print('restore------------------------------------${_savedPosition}');
   }
 
   bool _loaddata = false;
@@ -175,9 +175,24 @@ class ProductController extends GetxController {
 
   int indexC = 1;
   updateProductInPopular(ProduitModel newProduct) {
-    int index = _produitList.indexWhere((product) => product.id == newProduct.id);
+    int index =
+        _produitList.indexWhere((product) => product.id == newProduct.id);
     if (index >= 0) {
       _produitList[index] = newProduct;
+      update();
+    }
+  }
+
+  likeProductInPopular(codeProduit) {
+    int index = _produitList
+        .indexWhere((product) => product.codeProduit == codeProduit);
+    if (index >= 0) {
+      _produitList[index].islike = !_produitList[index].islike;
+      if (_produitList[index].islike) {
+        _produitList[index].like = _produitList[index].like - 1;
+      } else {
+        _produitList[index].like = _produitList[index].like + 1;
+      }
       update();
     }
   }
@@ -193,7 +208,7 @@ class ProductController extends GetxController {
       try {
         Response response =
             await productRepo.getListProductPopular(indexC, key);
-        print('-++++++++-----${response.body['data']}');
+        // print('-++++++++-----${response.body['data']}');
 
         //print(response.body);
         // _produitList = [];

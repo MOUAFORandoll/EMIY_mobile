@@ -3,6 +3,7 @@ import 'package:EMIY/Views/BoutiqueUser/BoutiqueNewView.dart';
 import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
+import 'package:EMIY/Views/CategoryBoutique/UserAbonnementView.dart';
 import 'package:EMIY/Views/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Negociation/NegociationView.dart';
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
@@ -203,10 +204,15 @@ class AppRoutes {
         name: AppLinks.NEGOCIATION_LIST,
         page: () => ListNegociationView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.ABONNEMENT,
+        page: () => UserAbonnementView(),
+        transition: transitionX),
   ];
 }
 
 class AppLinks {
+  static const String ABONNEMENT = "/abonnement";
   static const String SHORT = "/short";
   static const String SHORT_BOUTIQUE = "/shortboutique";
   static const String PRODUCT_FOR_COMMANDE = "/pfc";

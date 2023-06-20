@@ -576,14 +576,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.0"
-  open_file:
-    dependency: "direct main"
-    description:
-      name: open_file
-      sha256: c9f504ca01826a600a407628598325fb1af9f0ec12d0a0303c824255e1d0c24b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   page_view_indicator:
     dependency: "direct main"
     description:

@@ -110,15 +110,34 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              child: AppTitleRight(
-                                  title: 'Hi Boy!',
-                                  description: 'Welcome dear',
-                                  icon: Assets.home),
-                              margin: EdgeInsets.only(
-                                  right:
-                                      MediaQuery.of(context).size.width * .005),
-                            ),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    child: AppTitleRight(
+                                        title: 'Hi Boy!',
+                                        description: 'Welcome dear',
+                                        icon: Assets.home),
+                                    margin: EdgeInsets.only(
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                .005),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      left: Get.width * .030,
+                                    ),
+                                    child: AppTitleRight(
+                                        title: 'Abonnement',
+                                        description: 'Vos Abonnements',
+                                        center: true,
+                                        onTap: () {
+                                          Get.toNamed(AppLinks.ABONNEMENT);
+                                        },
+                                        icon: null),
+                                  )
+                                ]),
                             InkWell(
                                 child: Container(
                                     // margin: EdgeInsets.only(right: 10),
@@ -440,7 +459,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                                           image:
                                                                               DecorationImage(
                                                                     image: AssetImage(
-                                                                        'assets/logo.png'),
+                                                                        'assets/logo/logo.png'),
                                                                   ))),
                                                               Container(
                                                                 width:
@@ -519,7 +538,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                 ),
                                 !categorys.gA
                                     ? Container(
-                                        height: kMdHeight / 6,
+                                        // height: kMdHeight / 6,
                                         child: CarouselSlider.builder(
                                           itemCount:
                                               categorys.ListBoutiqueF.length,
@@ -529,28 +548,57 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                 categorys.ListBoutiqueF[index],
                                           ),
                                           options: CarouselOptions(
+                                            height: kMdHeight / 5,
                                             aspectRatio: 4 / 4,
                                             autoPlay: true,
                                             enlargeStrategy:
                                                 CenterPageEnlargeStrategy.scale,
                                             initialPage: 0,
+                                            enlargeCenterPage: true,
                                             enableInfiniteScroll: false,
                                             reverse: false,
                                             onPageChanged: (index, reason) {
                                               categorys.setCurrent(index);
                                             },
-
                                             disableCenter: true,
-                                            height: Get.height,
-                                            // enlargeCenterPage: true,
-                                            // autoPlay: true,
-
-                                            // autoPlayCurve: Curves.fastOutSlowIn,
-                                            // enableInfiniteScroll: true,
-                                            viewportFraction: 1.0,
+                                            autoPlayCurve: Curves.fastOutSlowIn,
+                                            viewportFraction: 0.75,
                                           ),
                                         ),
                                       )
+                                    //                                 Container(
+                                    //   height: 200, // Hauteur du carousel
+                                    //   child: ListView.builder(
+                                    //     scrollDirection: Axis.horizontal,
+                                    //     itemCount:10,
+                                    //     itemBuilder: (BuildContext context, int index) {
+
+                                    //       if (index == 1) {
+                                    //         // Afficher l'élément du milieu en grande taille
+                                    //         return Container(
+                                    //           width: 200, // Largeur de l'élément du milieu
+                                    //           child: Center(
+                                    //             child: Text(
+                                    //               index.toString(),
+                                    //               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                                    //             ),
+                                    //           ),
+                                    //         );
+                                    //       } else {
+                                    //         // Afficher les premier et dernier éléments plus petits
+                                    //         return Container(
+                                    //           width: 100, // Largeur des premiers et derniers éléments
+                                    //           child: Center(
+                                    //             child: Text(
+                                    //               index.toString(),
+                                    //               style: TextStyle(fontSize: 16),
+                                    //             ),
+                                    //           ),
+                                    //         );
+                                    //       }
+                                    //     },
+                                    //   ),
+                                    // )
                                     : Container(
                                         height: kMdHeight / 6,
                                         child: Center(
@@ -667,7 +715,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                                               width: Get.width * .5,
                                                                               decoration: BoxDecoration(
                                                                                   image: DecorationImage(
-                                                                                image: AssetImage('assets/logo.png'),
+                                                                                image: AssetImage('assets/logo/logo.png'),
                                                                               ))),
                                                                           Container(
                                                                             width:

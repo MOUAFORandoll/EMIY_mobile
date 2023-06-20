@@ -106,7 +106,7 @@ class SocketService {
     // // socket.emit("signin", 350);
 
     // socket.onConnect((data) {
-    print("Connected au canal negociation $canal ");
+    // print("Connected au canal negociation $canal ");
     //   print(socket.connected);
     socket.on('negociation', (msg) {
       print(canal);

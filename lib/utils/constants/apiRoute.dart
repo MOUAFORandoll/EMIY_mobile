@@ -51,4 +51,7 @@ class ApiRoutes {
   static const NEW_MESSAGE_NEGOCIATION = '/negociation/message/new';
 
   static const ABONNEMENT = '/abonnement';
-}
+  static const ABONNEMENT_BOUTIQUE_USER = '/abonnement/user';
+  static const ABONNEMENT_PRODUIT_USER = '/abonnement/produit/read';
+  static const ABONNEMENT_BOUTIQUE = '/abonnement/boutique';
+} 

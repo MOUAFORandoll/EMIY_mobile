@@ -20,6 +20,7 @@ import 'package:EMIY/views/UsersMange/LoginScreen.dart';
 import 'dart:async';
 import 'package:uni_links/uni_links.dart';
 import 'package:flutter/services.dart' show PlatformException;
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -70,13 +71,13 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   void initState() {
     super.initState();
     initUniLinks();
-    start();
+  start();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorsApp.blue,
+        backgroundColor: ColorsApp.white,
         body: Container(
             alignment: Alignment.center,
             child: new Column(
@@ -86,15 +87,20 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                       child: new Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Container(child: Image.asset(Assets.logo)),
                       Container(
-                        padding: EdgeInsets.only(top: kMdHeight / 4),
-                        child: SpinKitRing(
-                          lineWidth: 4,
-                          color: ColorsApp.skyBlue,
-                          size: 45,
-                        ),
-                      ),
+                          child: SvgPicture.asset(
+                        Assets.logoSvg,
+                        width: 170,
+                        height: 170,
+                      )),
+                      // Container(
+                      //   margin: EdgeInsets.only(top: kMdHeight / 15),
+                      //   child: SpinKitRing(
+                      //     lineWidth: 4,
+                      //     color: ColorsApp.skyBlue,
+                      //     size: 25,
+                      //   ),
+                      // ),
                     ],
                   ))
                 ])));

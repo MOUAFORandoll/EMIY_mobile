@@ -19,22 +19,16 @@ class BoutiqueComponentHomeN extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(AppLinks.BOUTIQUE +
-            '?note=${boutique.note.toString()}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
+            '?status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note.toString()}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
       },
       child: Container(
-        height: 10,
-        // width: kSmWidth * 1.3,
-        // alignment: Alignment.center,
-        // padding: EdgeInsets.all(kMarginX / 4),
-        margin: EdgeInsets.symmetric(vertical: Get.size.width * .02),
+        margin:
+            EdgeInsets.symmetric(vertical: Get.size.width * .02, horizontal: 1),
         decoration: BoxDecoration(
             color: ColorsApp.greySecond,
             borderRadius: BorderRadius.circular(8)),
         child: Container(
           child: CachedNetworkImage(
-            // width: kSmWidth * 1.3,
-
-            fit: BoxFit.cover,
             imageUrl: boutique.images[boutique.images.length - 1].src,
             imageBuilder: (context, imageProvider) {
               return Container(
@@ -63,7 +57,7 @@ class BoutiqueComponentHomeN extends StatelessWidget {
                   width: Get.width * .5,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                    image: AssetImage('assets/logo.png'),
+                    image: AssetImage('assets/logo/logo.png'),
                   )));
             },
           ),

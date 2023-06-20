@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.example.fahkapmobile">
+  package="com.example.emiymobile">
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -19,7 +19,7 @@
     <activity
       android:screenOrientation="portrait"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-      android:name="com.example.fahkapmobile.MainActivity"
+      android:name="com.example.emiymobile.MainActivity"
       android:exported="true"
       android:launchMode="singleTop"
       android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -47,38 +47,17 @@
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
-
-      <!-- Ajout du filtre d'intention pour le schéma d'URL personnalisé -->
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <!-- Remplacez "monapp" par votre schéma d'URL personnalisé -->
-        <data
-          android:scheme="monapp"
-          android:host="localhost"
-          android:port="8005" />
-        
-      </intent-filter>
-        <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <!-- Accepts URIs that begin with YOUR_SCHEME://YOUR_HOST -->
-        <data
-          android:scheme="[YOUR_SCHEME]"
-          android:host="[YOUR_HOST]" />
-      </intent-filter>
-
       <!-- App Links -->
-      <intent-filter android:autoVerify="true">
+      <intent-filter >
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <!-- Accepts URIs that begin with https://YOUR_HOST -->
-        <data
+      
+         <data
           android:scheme="https"
-          android:host="[YOUR_HOST]" />
+          android:pathPrefix="/users"
+          android:host="emiy-shop.000webhostapp.com" /> 
       </intent-filter>
     </activity>
 
@@ -93,7 +72,7 @@
     <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
    <!--  <provider
       android:name="androidx.core.content.FileProvider"
-      android:authorities="com.example.fahkapmobile.flutter_downloader.provider"
+      android:authorities="com.example.emiymobile.flutter_downloader.provider"
       android:exported="false"
       android:grantUriPermissions="true">
       <meta-data

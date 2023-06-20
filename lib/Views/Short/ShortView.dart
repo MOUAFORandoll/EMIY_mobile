@@ -201,7 +201,18 @@ class _ShortViewFState extends State<ShortViewF> {
                                 ],
                               ),
                             ),
-                          )
+                          ),
+                          Positioned(
+                              bottom: 2,
+                              child: Container(
+                                  height: 8,
+                                  width: kWidth,
+                                  child: VideoProgressIndicator(
+                                      _ShortController.controller!,
+                                      colors: VideoProgressColors(
+                                          playedColor:
+                                              Color.fromARGB(255, 31, 59, 151)),
+                                      allowScrubbing: true)))
                         ]))
                       : Container(
                           child: SpinKitRing(

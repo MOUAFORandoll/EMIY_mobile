@@ -145,16 +145,25 @@ class BoutiqueRepo extends GetxService {
 
   Future abonnementForUser(keySecret, page) async {
     Response a = await apiClient.getCollections(
-        ApiRoutes.ABONNEMENT + '?keySecret=${keySecret}&page=${page}');
-    ;
+        ApiRoutes.ABONNEMENT_BOUTIQUE_USER +
+            '?keySecret=${keySecret}&page=${page}');
+    
 
     return a;
   }
 
-  Future abonnementForBoutique(codeBoutique, page) async {
+  Future abonnementProduitForUser(keySecret, page) async {
     Response a = await apiClient.getCollections(
-        ApiRoutes.ABONNEMENT + '?codeBoutique=${codeBoutique}&page=${page}');
-    ;
+        ApiRoutes.ABONNEMENT_PRODUIT_USER +
+            '?keySecret=${keySecret}&page=${page}');
+    
+    return a;
+  }
+
+  Future abonnementForBoutique(codeBoutique, page) async {
+    Response a = await apiClient.getCollections(ApiRoutes.ABONNEMENT_BOUTIQUE +
+        '?codeBoutique=${codeBoutique}&page=${page}');
+     
 
     return a;
   }

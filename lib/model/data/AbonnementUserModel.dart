@@ -7,30 +7,93 @@ import 'dart:convert';
 
 class AbonnementUserModel {
   AbonnementUserModel({
-    required this.id,
-    required this.boutique_id,
-    required this.boutique_title,
-    required this.date,
+   required this.codeBoutique,
+    required this.user,
+    required this.description,
+    required this.titre,
+    required this.status,
+    required this.note,
+    required this.dateCreated,
+    required this.images,
+    required this.localisation,
   });
 
-  final int id;
-  final String boutique_id;
-  final String boutique_title;
-  final String date;
-  var controller;
+  String codeBoutique;
+  String user;
+  String description;
+  String titre;
+  bool status;
+  final note;
+  String dateCreated;
+  List<Image> images;
+  Localisation localisation;
 
-  factory AbonnementUserModel.fromJson(Map<String, dynamic> json) =>
-      AbonnementUserModel(
-          id: json["id"] == null ? null : json["id"],
-          boutique_id: json["boutique_id"] == null ? null : json["boutique_id"],
-          boutique_title:
-              json["boutique_title"] == null ? null : json["boutique_title"],
-          date: json["date"] == null ? null : json["date"]);
+  factory AbonnementUserModel.fromJson(Map<String, dynamic> json) => AbonnementUserModel(
+        codeBoutique: json["codeBoutique"],
+        user: json["user"],
+        description: json["description"],
+        titre: json["titre"],
+        status: json["status"],
+        dateCreated: json["dateCreated"],
+        note: double.parse(
+            (json["note"] == null ? null : json["note"]).toString()),
+        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        localisation: Localisation.fromJson(json["localisation"]),
+      );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "boutique_title": boutique_title == null ? null : boutique_title,
-        "boutique_id": boutique_id == null ? null : boutique_id,
-        "date": date == null ? null : date,
+        "codeBoutique": codeBoutique,
+        "user": user,
+        "description": description,
+        "titre": titre,
+        "status": status,
+        "note": note == null ? null : double.parse(note.toString()),
+        "dateCreated": dateCreated,
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "localisation": localisation.toJson(),
+      };
+}
+
+class Image {
+  Image({
+    required this.id,
+    required this.src,
+  });
+
+  int id;
+  String src;
+
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        id: json["id"],
+        src: json["src"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "src": src,
+      };
+}
+
+class Localisation {
+  Localisation({
+    required this.ville,
+    required this.longitude,
+    required this.latitude,
+  });
+
+  String ville;
+  double longitude;
+  double latitude;
+
+  factory Localisation.fromJson(Map<String, dynamic> json) => Localisation(
+        ville: json["ville"],
+        longitude: json["longitude"]?.toDouble(),
+        latitude: json["latitude"]?.toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ville": ville,
+        "longitude": longitude,
+        "latitude": latitude,
       };
 }

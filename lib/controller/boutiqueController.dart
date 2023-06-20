@@ -13,7 +13,7 @@ import 'package:EMIY/model/data/BoutiqueUserModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/CommandeBoutiqueModel.dart';
 import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
-import 'package:EMIY/model/data/ShortModel.dart';
+import 'package:EMIY/model/data/ShortModel.dart' show ShortModel;
 import 'package:EMIY/repository/BoutiqueRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
@@ -1155,35 +1155,29 @@ class BoutiqueController extends GetxController {
 
   abonnementAdd(codeBoutique) async {
     try {
-      if (boutiqueImage.path != '') {
-        fn.loading('Abonnement', 'Abonnement a la boutique en cours');
+      fn.loading('Abonnement', 'Abonnement a la boutique en cours');
 
-        var key = await s.getKey();
-        var data = {
-          'codeBoutique': codeBoutique,
-          'keySecret': key,
-        };
-        Response response = await boutiqueRepo.abonnementAdd(data);
-        //print(response.body);
+      var key = await s.getKey();
+      var data = {
+        'codeBoutique': codeBoutique,
+        'keySecret': key,
+      };
+      print(data);
+      Response response = await boutiqueRepo.abonnementAdd(data);
+      print(response.body);
 
-        if (response.statusCode == 200) {
-          // _isOk = false;
-          // update();
+      if (response.statusCode == 200) {
+        // await getListAbonnementForUser();
 
-          // await getBoutique();
-          fn.closeSnack();
-        }
+        // await getBoutique();
         fn.closeSnack();
-
-        fn.snackBar('Mise a jour', response.body['message'], true);
-        _isUpdatingB = false;
-        // Get.back(closeOverlays: true);
-        update();
-      } else {
-        fn.closeSnack();
-
-        // fn.snackBar('Boutique', 'Remplir tous les champs', false);
       }
+      fn.closeSnack();
+
+      fn.snackBar('Mise a jour', response.body['message'], true);
+      _isUpdatingB = false;
+      // Get.back(closeOverlays: true);
+      update();
     } catch (e) {
       fn.closeSnack();
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
@@ -1194,12 +1188,21 @@ class BoutiqueController extends GetxController {
     }
   }
 
-  List<AbonnementUserModel> _listAbonnememtUser = [];
-  List<AbonnementUserModel> get listAbonnememtUser => _listAbonnememtUser;
-  int _isAbUserPage = 0;
+  List<BoutiqueModel> _listAbonnememtUser = [];
+  List<BoutiqueModel> get listAbonnememtUser => _listAbonnememtUser;
+  int _isAbUserPage = 1;
   int get isAbUserPage => _isAbUserPage;
+  resetPageAbonnement() {
+    _isAbUserPage = 1;
+    update();
+    print(_isAbUserPage);
+  }
+
+  int _isAbUseLoad = 0;
+  int get isAbUseLoad => _isAbUseLoad;
   Future<void> getListAbonnementForUser() async {
-    // //print('***short******************response**********');
+    _isAbUseLoad = 0;
+    update(); // //print('***short******************response**********');
     var key = await s.getKey();
 
     try {
@@ -1214,15 +1217,17 @@ class BoutiqueController extends GetxController {
         if (response.body['data'] != null) {
           if (response.body['data'].length != 0) {
             _listAbonnememtUser.addAll((response.body['data'] as List)
-                .map((e) => AbonnementUserModel.fromJson(e))
+                .map((e) => BoutiqueModel.fromJson(e))
                 .toList());
             _isAbUserPage++;
+            _isAbUseLoad = 1;
             update();
           }
         }
       }
     } catch (e) {
-      //print(e);
+      _isAbUseLoad = 2;
+      update();
     }
   }
 

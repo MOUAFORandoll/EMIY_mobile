@@ -9,6 +9,7 @@ import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/repository/BoutiqueRepo.dart';
 import 'package:EMIY/repository/categoryBoutiqueRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/database/DataBase.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import 'package:image_cropper/image_cropper.dart';
 
 class CategoryBoutiqueController extends GetxController {
   final service = new ApiService();
+  var s = Get.find<DB>();
 
   final CategoryBoutiqueRepo categoryBoutiqueRepo;
   CategoryBoutiqueController({required this.categoryBoutiqueRepo});
@@ -75,12 +77,12 @@ class CategoryBoutiqueController extends GetxController {
   List<BoutiqueModel> _ListBoutique = [];
   List<BoutiqueModel> get ListBoutique => _ListBoutique;
   getCategoryBoutique(id) async {
-    //print(id);
+    var key = await s.getKey();
     _ListBoutique.clear();
     _isLoadedP = 0;
     try {
       Response response =
-          await categoryBoutiqueRepo.getListBoutiqueForCategory(id);
+          await categoryBoutiqueRepo.getListBoutiqueForCategory(id, key);
 
       if (response.body != null) {
         if (response.body['data'].length != 0) {
@@ -114,16 +116,18 @@ class CategoryBoutiqueController extends GetxController {
   // BoutiqueController({required this.service});
   getListBoutiques() async {
     // if (_gA == false) {
-
+    var key = await s.getKey();
     try {
-      Response response = await categoryBoutiqueRepo.getListBoutiques();
+      Response response = await categoryBoutiqueRepo.getListBoutiques(key);
 
       _gA = true;
       _ListBoutiqueF = [];
       _ListBoutiqueF.clear();
       _isLoaded = 0;
-      update(); // //print('------------------------/*****************************');
-      // //print(response.body);
+      update();
+      // print('------------------------/*****************************');
+      // print(response.body['data']);
+      // print('------------------------/*****************************');
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _ListBoutiqueF.addAll((response.body['data'] as List)

@@ -37,9 +37,15 @@ import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart' as uni_links;
 
+import 'dart:async';
+import 'dart:io';
+
+import 'package:uni_links/uni_links.dart';
+
+// ...
 Future<void> initApp() async {
   await requestPermission();
-
+  await initUniLinks();
   Get.find<ManagerController>().chageN(true);
   await GetStorage.init();
   var database = Get.find<DB>();
@@ -49,15 +55,14 @@ Future<void> initApp() async {
   Get.find<ActionController>().generalSocket();
 
   Get.find<ManagerController>().newLocalisation();
+  Get.find<CommandeController>().getListCommandes();
+  Get.find<CategoryBoutiqueController>().getListBoutiques();
 
   Get.find<ProductController>().getPopularProduit();
   Get.find<BuyShopController>().getPointLivraisom();
-  Get.find<BoutiqueController>().getBoutique();
-  Get.find<BoutiqueController>().getListAbonnementForUser();
+  Get.find<BoutiqueController>().getBoutique(); 
   Get.find<BoutiqueController>().getListAbonnementForBoutique();
   Get.find<CategoryBoutiqueController>().getCategory();
-  Get.find<CommandeController>().getListCommandes();
-  Get.find<CategoryBoutiqueController>().getListBoutiques();
   Get.find<ShortController>().getListShort();
   Get.find<NegociationController>().getListNegociation();
 
@@ -129,6 +134,7 @@ getData() async {
     Get.find<CommandeController>().getListCommandes();
   }
 }
+
 void handleRedirect() async {
   // Vérifier si l'application est lancée depuis un lien externe
   Uri? initialUri;
@@ -159,10 +165,28 @@ void redirectToAppOrStore() async {
     // Rediriger vers le magasin d'applications correspondant à l'appareil de l'utilisateur
     // Pour Android, le lien direct vers le Play Store
     // Pour iOS, le lien direct vers l'App Store
-    await launch('https://play.google.com/store/apps/details?id=com.example.mobile_shop');
+    await launch(
+        'https://play.google.com/store/apps/details?id=com.example.mobile_shop');
   }
 }
 
+StreamSubscription? _sub;
+
+Future<void> initUniLinks() async {
+  // ... check initialLink
+
+  // Attach a listener to the stream
+  _sub = linkStream.listen((String? link) {
+    // Parse the link and warn the user, if it is not correct
+  }, onError: (err) {
+    // Handle exception by warning the user their action did not succeed
+  });
+
+  // NOTE: Don't forget to call _sub.cancel() in dispose()
+}
+
+// ...
+/* 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -173,29 +197,29 @@ void main() async {
   handleRedirect();
 
   runApp(MyApp());
-}
-  void _handleIncomingLinks() {
-    if (!kIsWeb) {
-      // It will handle app links while the app is already started - be it in
-      // the foreground or in the background.
-      _sub = uriLinkStream.listen((Uri? uri) {
-        if (!mounted) return;
-        print('got uri: $uri');
-        setState(() {
-          _latestUri = uri;
-          _err = null;
-        });
-      }, onError: (Object err) {
-        if (!mounted) return;
-        print('got err: $err');
-        setState(() {
-          _latestUri = null;
-          if (err is FormatException) {
-            _err = err;
-          } else {
-            _err = null;
-          }
-        });
-      });
-    }
-  }
+// } */
+//   void _handleIncomingLinks() {
+//     if (!kIsWeb) {
+//       // It will handle app links while the app is already started - be it in
+//       // the foreground or in the background.
+//       _sub = uriLinkStream.listen((Uri? uri) {
+//         if (!mounted) return;
+//         print('got uri: $uri');
+//         setState(() {
+//           _latestUri = uri;
+//           _err = null;
+//         });
+//       }, onError: (Object err) {
+//         if (!mounted) return;
+//         print('got err: $err');
+//         setState(() {
+//           _latestUri = null;
+//           if (err is FormatException) {
+//             _err = err;
+//           } else {
+//             _err = null;
+//           }
+//         });
+//       });
+//     }
+//   }

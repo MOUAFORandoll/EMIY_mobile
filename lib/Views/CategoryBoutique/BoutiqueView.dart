@@ -1,6 +1,7 @@
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/controller/ActionController.dart';
 import 'package:EMIY/controller/ShortController.dart';
+import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/components/Button/IconButtonF.dart';
@@ -39,7 +40,9 @@ class BoutiqueView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print(Get.parameters);
+    print(Get.parameters);
+    print(Get.parameters['status_abonnement']);
+    var status_abonnement = Get.parameters['status_abonnement'];
 
     Get.find<CategoryBoutiqueController>()
         .getDataForBoutique(Get.parameters['codeBoutique']);
@@ -92,44 +95,70 @@ class BoutiqueView extends StatelessWidget {
             )),
             flexibleSpace: FlexibleSpaceBar(
                 background: Container(
-              decoration: BoxDecoration(
-                gradient: GradientApp.blueG,
-              ),
-              child: CachedNetworkImage(
-                height: kMdHeight * .30,
-                width: kWidth,
-                fit: BoxFit.cover,
-                imageUrl: Get.parameters['image'].toString(),
-                imageBuilder: (context, imageProvider) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: ColorsApp.greySecond,
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.transparent, BlendMode.colorBurn)),
-                    ),
-                  );
-                },
-                placeholder: (context, url) {
-                  return Container(
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: ColorsApp.skyBlue,
-                    )),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return Container(
-                      height: kMdHeight * .15,
-                      width: Get.width * .5,
-                      decoration: BoxDecoration(
+              child: Stack(
+                children: [
+                  CachedNetworkImage(
+                    height: kMdHeight * .30,
+                    width: kWidth,
+                    fit: BoxFit.cover,
+                    imageUrl: Get.parameters['image'].toString(),
+                    imageBuilder: (context, imageProvider) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: ColorsApp.greySecond,
+                          borderRadius: BorderRadius.circular(8),
                           image: DecorationImage(
-                        image: AssetImage('assets/logo.png'),
-                      )));
-                },
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.transparent, BlendMode.colorBurn)),
+                        ),
+                      );
+                    },
+                    placeholder: (context, url) {
+                      return Container(
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: ColorsApp.skyBlue,
+                        )),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return Container(
+                          height: kMdHeight * .15,
+                          width: Get.width * .5,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            image: AssetImage('assets/logo/logo.png'),
+                          )));
+                    },
+                  ),
+                  Positioned(
+                    top: kMdHeight * .30 / 2.7,
+                    // bottom: kMdHeight * .30 / 2.4,
+                    left: kWidth / 2.2,
+                    right: kWidth / 2.2,
+                    child: InkWell(
+                        child: Container(
+                            // margin: EdgeInsets.only(right: 10),
+                            // padding: EdgeInsets.all(kMarginX / 3),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: ColorsApp.white, width: 3),
+                                borderRadius: BorderRadius.circular(30)),
+                            child: Icon(
+                              status_abonnement == 'true'
+                                  ? Icons.remove
+                                  : Icons.add,
+                              color: Colors.red,
+                            )),
+                        onTap: () async {
+                          print('---------------------');
+                          await Get.find<BoutiqueController>()
+                              .abonnementAdd(Get.parameters['codeBoutique']);
+                        }),
+                  )
+                ],
               ),
             )),
             bottom: PreferredSize(
@@ -334,7 +363,7 @@ class BoutiqueView extends StatelessWidget {
       //                                     decoration: BoxDecoration(
       //                                         image: DecorationImage(
       //                                       image:
-      //                                           AssetImage('assets/logo.png'),
+      //                                           AssetImage('assets/logo/logo.png'),
       //                                     ))),
       //                                 Container(
       //                                   width: kSmWidth * .6,
@@ -477,7 +506,7 @@ class BoutiqueView extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
                                             image:
-                                                AssetImage('assets/logo.png'),
+                                                AssetImage('assets/logo/logo.png'),
                                           ))),
                                       Container(
                                         width: kSmWidth * .6,

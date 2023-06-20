@@ -60,7 +60,7 @@ class ProductForBoutiqueComponent extends StatelessWidget {
                         height: kHeight / 4,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/logo.png'),
+                          image: AssetImage('assets/logo/logo.png'),
                         )));
                   },
                 ),

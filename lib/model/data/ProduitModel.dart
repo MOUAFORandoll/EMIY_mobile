@@ -33,8 +33,8 @@ class ProduitModel {
   final int quantite;
   final int id;
   final int prix;
-  final int like;
-  final bool islike;
+    int like;
+    bool islike;
   final bool status;
   final bool negociable;
   final List<ImageU> images;

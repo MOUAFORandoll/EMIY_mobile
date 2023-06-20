@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 class AppBackButton extends StatelessWidget {
   /// Creates an [IconButton] with the appropriate "back" icon for the current
   /// target platform.
-  const AppBackButton({Key? key, this.color}) : super(key: key);
+  AppBackButton({Key? key, this.color, this.backEvent}) : super(key: key);
 
   /// The color to use for the icon.
   ///
   /// Defaults to the [IconThemeData.color] specified in the ambient [IconTheme],
   /// which usually matches the ambient [Theme]'s [ThemeData.iconTheme].
   final Color? color;
+  var backEvent;
 
   /// An override callback to perform instead of the default behavior which is
   /// to pop the [Navigator].
@@ -24,12 +25,13 @@ class AppBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // assert(debugCheckHasMaterialLocalizations(context));
     return IconButton(
-      icon: Icon(Icons.keyboard_arrow_left_outlined),
-      color: Colors.black,
-      // tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-      onPressed: () {
-        Get.back();
-      },
-    );
+        icon: Icon(Icons.keyboard_arrow_left_outlined),
+        color: Colors.black,
+        // tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+        onPressed: () {
+          backEvent;
+
+          Get.back();
+        });
   }
 }

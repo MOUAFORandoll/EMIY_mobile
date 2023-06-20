@@ -15,9 +15,9 @@ class CategoryBoutiqueRepo extends GetxService {
     return a;
   }
 
-  Future getListBoutiques() async {
+  Future getListBoutiques(keySecret) async {
     Response a = await apiClient.getCollections(
-      ApiRoutes.BOUTIQUE_READ_ALL,
+      ApiRoutes.BOUTIQUE_READ_ALL +"?keySecret=${keySecret.toString()}",
     );
 
     return a;
@@ -32,10 +32,10 @@ class CategoryBoutiqueRepo extends GetxService {
     return a;
   }
 
-  Future getListBoutiqueForCategory(id) async {
+  Future getListBoutiqueForCategory(id, keySecret) async {
     // try {
     Response response = await await apiClient.getCollections(
-        ApiRoutes.BOUTIQUE_FOR_CATEGORY + "?id=${id.toString()}");
+        ApiRoutes.BOUTIQUE_FOR_CATEGORY + "?id=${id.toString()}&keySecret=${keySecret.toString()}");
     //print(response.body);
     return response;
   }

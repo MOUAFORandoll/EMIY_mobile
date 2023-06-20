@@ -440,12 +440,6 @@
       "languageVersion": "2.7"
     },
     {
-      "name": "open_file",
-      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/open_file-2.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "page_view_indicator",
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/page_view_indicator-2.0.4",
       "packageUri": "lib/",
@@ -1004,7 +998,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-06-11T19:17:34.821020Z",
+  "generated": "2023-06-12T19:31:20.853598Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }
