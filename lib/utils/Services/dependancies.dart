@@ -73,7 +73,7 @@
 //     Get.lazyPut(() => ShortRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => ShortController(shortRepo: Get.find()), fenix: true);
 
-//     var database = Get.find<DB>();
+//     var database = dababase;
 //     await database.init();
 //     await Get.find<ActionController>().getLanguageInit();
 //   }
@@ -83,7 +83,7 @@
 //     await requestPermission();
 
 //     await GetStorage.init();
-//     var database = Get.find<DB>();
+//     var database = dababase;
 //     await database.init();
 //     Get.find<ManagerController>().getKeyU();
 //     Get.find<ManagerController>().getUser();
@@ -108,7 +108,7 @@
 //   }
 
 //   onGetAll() async {
-//     // var database = Get.find<DB>();
+//     // var database = dababase;
 //     // await database.init();
 //     // Get.find<StorageService>().init();
 //     Get.lazyPut(() => ActionRepo(apiClient: Get.find()));
@@ -177,7 +177,7 @@
 //   }
 
 //   onGetDataNew() async {
-//     var database = Get.find<DB>();
+//     var database = dababase;
 //     await database.init();
 //     Get.find<ManagerController>().newLocalisation();
 

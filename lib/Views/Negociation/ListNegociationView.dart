@@ -26,14 +26,12 @@ class ListNegociationView extends StatelessWidget {
           body: RefreshIndicator(
               color: ColorsApp.skyBlue,
               onRefresh: () async {
-                //print('****debut');
-                // await Get.find<CategoryBoutiqueController>().getCategory();
-                //print('****mid');
+                print('****debut');
+                await _negociation.getListNegociation();
 
-                //print('****fin');
+                print('****fin');
               },
               child: CustomScrollView(controller: _scrollController, slivers: [
-                // Add the app bar to the CustomScrollView.
                 SliverAppBar(
                   backgroundColor: Colors.white,
                   elevation: 0,
@@ -79,9 +77,7 @@ class ListNegociationView extends StatelessWidget {
                   // Make the initial height of the SliverAppBar larger than normal.
                   expandedHeight: 60,
                 ),
-
                 SliverList(
-                    // Use a delegate to build items as they're scrolled on screen.
                     delegate: SliverChildBuilderDelegate(
                   // The builder function returns a ListTile with a title that
                   // displays the index of the current item.

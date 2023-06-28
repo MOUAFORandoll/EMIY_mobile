@@ -29,7 +29,6 @@ class ShoppingView extends StatelessWidget {
     return GetBuilder<CartController>(builder: (_controller) {
       return Scaffold(
           body: CustomScrollView(controller: _scrollController, slivers: [
-            // Add the app bar to the CustomScrollView.
             SliverAppBar(
               backgroundColor: Colors.white,
               elevation: 0,

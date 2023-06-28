@@ -19,7 +19,7 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +43,8 @@ class BoutiqueController extends GetxController {
 
   List<File> _listImgProduits = [];
 
-  var s = Get.find<DB>();
+  final dababase = Get.find<DataBaseController>();
+
   List<File> get listImgProduits => _listImgProduits;
   onInitData() {
     _listImgProduits = [];
@@ -215,7 +216,7 @@ class BoutiqueController extends GetxController {
       if (boutiqueImage.path != '') {
         fn.loading('Boutique', 'Creation de votre boutique en cours');
 
-        var key = await s.getKey();
+        var key = await dababase.getKey();
 
         FormData formData = new FormData({
           "file": await MultipartFile(
@@ -284,7 +285,7 @@ class BoutiqueController extends GetxController {
       if (image != null) {
         fn.loading(
             'Boutique', 'Mise a jour de l\'affiche de votre boutique en cours');
-        var key = await s.getKey();
+        var key = await dababase.getKey();
 
         try {
           FormData formData = new FormData({
@@ -507,7 +508,7 @@ class BoutiqueController extends GetxController {
       // );
       if (image != null) {
         fn.loading('Produit', 'Mise a jour de la photo du produit en cours');
-        var key = await s.getKey();
+        var key = await dababase.getKey();
 
         try {
           FormData formData = new FormData({
@@ -573,7 +574,7 @@ class BoutiqueController extends GetxController {
       if (image != null) {
         fn.loading('Produit', 'Ajout d\'une image au produit en cours');
 
-        var key = await s.getKey();
+        var key = await dababase.getKey();
 
         try {
           FormData formData = new FormData({
@@ -680,7 +681,7 @@ class BoutiqueController extends GetxController {
   addProduit() async {
     try {
       fn.loading('Produit', 'Ajout d\'un nouveau produit en cours');
-      var key = await s.getKey();
+      var key = await dababase.getKey();
       if (Boutique == null) {
         await getBoutique();
       }
@@ -772,7 +773,7 @@ class BoutiqueController extends GetxController {
   TextEditingController _description = TextEditingController();
   TextEditingController get description => _description;
   updateBoutique() async {
-    var key = await s.getKey();
+    var key = await dababase.getKey();
     var data = {
       'keySecret': key,
       'titre': titre.text,
@@ -822,7 +823,7 @@ class BoutiqueController extends GetxController {
   double get latitude => _latitude;
 
   getLocalU() async {
-    var data = await s.getLonLat();
+    var data = await dababase.getLonLat();
     //print('*****************data');
     //print(data);
     if (data.isNotEmpty) {
@@ -835,7 +836,7 @@ class BoutiqueController extends GetxController {
   }
 
   updateLocalisationBoutique() async {
-    var key = await s.getKey();
+    var key = await dababase.getKey();
     await getLocalU();
     var data = {
       'codeBoutique': Boutique.codeBoutique,
@@ -1157,7 +1158,7 @@ class BoutiqueController extends GetxController {
     try {
       fn.loading('Abonnement', 'Abonnement a la boutique en cours');
 
-      var key = await s.getKey();
+      var key = await dababase.getKey();
       var data = {
         'codeBoutique': codeBoutique,
         'keySecret': key,
@@ -1203,7 +1204,7 @@ class BoutiqueController extends GetxController {
   Future<void> getListAbonnementForUser() async {
     _isAbUseLoad = 0;
     update(); // //print('***short******************response**********');
-    var key = await s.getKey();
+    var key = await dababase.getKey();
 
     try {
       Response response =

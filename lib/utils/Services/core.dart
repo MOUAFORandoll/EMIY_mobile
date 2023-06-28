@@ -1,6 +1,7 @@
 import 'package:EMIY/controller/ActionController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/ServiceClientController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
@@ -16,6 +17,7 @@ import 'package:EMIY/repository/BoutiqueRepo.dart';
 import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
 import 'package:EMIY/repository/CommandeRepo.dart';
 import 'package:EMIY/repository/SearchRepo.dart';
+import 'package:EMIY/repository/ServiceClientRepo.dart';
 import 'package:EMIY/repository/ShortRepo.dart';
 import 'package:EMIY/repository/TransactionRepo.dart';
 import 'package:EMIY/repository/categoryBoutiqueRepo.dart';
@@ -25,9 +27,10 @@ import 'package:EMIY/repository/categoryRepo.dart';
 import 'package:EMIY/repository/negociationRepo.dart';
 import 'package:EMIY/repository/popularProductRepo.dart';
 import 'package:EMIY/utils/Services/ApiClient.dart';
+import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -48,29 +51,33 @@ Future<void> initApp() async {
   await initUniLinks();
   Get.find<ManagerController>().chageN(true);
   await GetStorage.init();
-  var database = Get.find<DB>();
-  await database.init();
+
+  await Get.find<DataBaseController>().init();
   Get.find<ManagerController>().getKeyU();
   Get.find<ManagerController>().getUser();
   Get.find<ActionController>().generalSocket();
-
+ 
   Get.find<ManagerController>().newLocalisation();
   Get.find<CommandeController>().getListCommandes();
   Get.find<CategoryBoutiqueController>().getListBoutiques();
 
   Get.find<ProductController>().getPopularProduit();
   Get.find<BuyShopController>().getPointLivraisom();
-  Get.find<BoutiqueController>().getBoutique(); 
+  Get.find<BoutiqueController>().getBoutique();
   Get.find<BoutiqueController>().getListAbonnementForBoutique();
   Get.find<CategoryBoutiqueController>().getCategory();
   Get.find<ShortController>().getListShort();
   Get.find<NegociationController>().getListNegociation();
 
   Get.find<ActionController>().getListModePaiement();
+ 
+
+  Get.find<ServiceClientController>().connectSockey();
+  Get.find<ServiceClientController>().getEchange();
 }
 
 Future<void> initServices() async {
-  Get.put(DB(), permanent: true);
+  Get.put(DataBaseController(), permanent: true);
 
   Get.put(ApiClient(), permanent: true);
 
@@ -103,6 +110,9 @@ Future<void> initServices() async {
   Get.put(SearchController(searchRepo: Get.find()), permanent: true);
   Get.put(ShortRepo(apiClient: Get.find()), permanent: true);
   Get.put(ShortController(shortRepo: Get.find()), permanent: true);
+  Get.put(ServiceClientRepo(apiClient: Get.find()), permanent: true);
+  Get.put(ServiceClientController(serviceClientRepo: Get.find()),
+      permanent: true);
 }
 
 requestPermission() async {
@@ -122,7 +132,7 @@ getData() async {
   //print("voici le statut ,  $status");
 
   if (status.isGranted) {
-    var database = Get.find<DB>();
+    var database = Get.find<DataBaseController>();
     await database.init();
     await Get.find<ActionController>().getLanguageInit();
 
@@ -134,6 +144,8 @@ getData() async {
     Get.find<CommandeController>().getListCommandes();
   }
 }
+
+
 
 void handleRedirect() async {
   // Vérifier si l'application est lancée depuis un lien externe

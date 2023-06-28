@@ -1,6 +1,5 @@
 import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/utils/DataBase/DataBase.dart';
-import 'package:EMIY/utils/api/apiUrl.dart';
+import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
@@ -59,15 +58,12 @@ class ApiClient extends GetConnect implements GetxService {
     );
   }
 
-  var fn = new ViewFunctions();
-
   void onInit() {
     _setAuthHeaders();
-    fn.verifiedConnection();
     super.onInit();
   }
 
-  // var db = Get.find<DB>();
+  // var db = dababase;
 
   void _setAuthHeaders() async {
     // var getU = await db.getKeyKen();

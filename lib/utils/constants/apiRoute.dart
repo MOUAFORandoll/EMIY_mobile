@@ -54,4 +54,8 @@ class ApiRoutes {
   static const ABONNEMENT_BOUTIQUE_USER = '/abonnement/user';
   static const ABONNEMENT_PRODUIT_USER = '/abonnement/produit/read';
   static const ABONNEMENT_BOUTIQUE = '/abonnement/boutique';
+
+  static const LIST_MESSAGE_SC = '/communication/message/list';
+  static const LIST_MESSAGE_NEW = '/communication/message/new';
+
 } 

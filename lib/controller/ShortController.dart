@@ -10,7 +10,7 @@ import 'package:EMIY/repository/ShortRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';

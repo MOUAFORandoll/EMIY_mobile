@@ -3,7 +3,7 @@ import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/utils/Services/ApiClient.dart';
 import 'package:EMIY/utils/Services/storageService.dart';
 import 'package:EMIY/utils/constants/apiRoute.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,11 +12,11 @@ class ManageRepo extends GetxService {
   final ApiClient apiClient;
   ManageRepo({required this.apiClient});
   // String keySecret = new GetStorage().read('keySecret');
-  var store = Get.find<DB>();
+  final dababase = Get.find<DataBaseController>();
 
   Future getUser() async {
-    var getU = await store.getKey();
-    // //print('key******************** ${this.getKey()}');
+    var getU = await dababase.getKey();
+    // //print('key******************** ${thidababase.getKey() }');
     // await this.userRefresh();
     // ignore: unnecessary_null_comparison
     if (getU != null) {
@@ -41,13 +41,13 @@ class ManageRepo extends GetxService {
   }
 
   Future userRefresh() async {
-    var kk = await store.getKeyKen();
+    var kk = await dababase.getKeyKen();
     if (kk != null) {
       Response a = await apiClient.getCollectionsP(
           ApiRoutes.Refresh, {'refreshToken': kk['refreshToken']});
       ;
 
-      store.saveKeyKen(a.body);
+      dababase.saveKeyKen(a.body);
     } else {
       return new Response(body: {'data': []}, statusCode: 200);
     }
@@ -61,8 +61,8 @@ class ManageRepo extends GetxService {
   }
 
   Future newConnexion() async {
-    // //print('newlocatio-------------------------${store.getKey()}');
-    var getU = await store.getKey();
+    // //print('newlocatio-------------------------${dababase.getKey()}');
+    var getU = await dababase.getKey();
 
     // ignore: unnecessary_null_comparison
     if (getU != null) {
@@ -80,7 +80,7 @@ class ManageRepo extends GetxService {
           'keySecret': getU,
           'longitude': loca.data['longitude']
         };
-        await store.saveLonLat(data);
+        await dababase.saveLonLat(data);
 
         Response a =
             await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);

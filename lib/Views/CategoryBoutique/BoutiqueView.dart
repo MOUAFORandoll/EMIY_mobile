@@ -51,7 +51,6 @@ class BoutiqueView extends StatelessWidget {
           child: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          // Add the app bar to the CustomScrollView.
           SliverAppBar(
             backgroundColor: ColorsApp.greySecond,
             foregroundColor: ColorsApp.red,
@@ -260,7 +259,6 @@ class BoutiqueView extends StatelessWidget {
             pinned: true,
           ),
           SliverList(
-            // Use a delegate to build items as they're scrolled on screen.
             delegate: SliverChildBuilderDelegate(
               (context, index) => GetBuilder<CategoryBoutiqueController>(
                   builder: (_bscontroler) => _bscontroler.isLoadedPB == 0

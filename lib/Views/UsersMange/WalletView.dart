@@ -52,7 +52,6 @@ class WalletView extends StatelessWidget {
             body: CustomScrollView(
               controller: _scrollController,
               slivers: [
-                // Add the app bar to the CustomScrollView.
                 SliverAppBar(
                   automaticallyImplyLeading: false,
                   title: Container(
@@ -166,7 +165,6 @@ class WalletView extends StatelessWidget {
                   pinned: true,
                 ),
                 SliverList(
-                  // Use a delegate to build items as they're scrolled on screen.
                   delegate: SliverChildBuilderDelegate(
                     (context, index) => transControll.isLoadedTrans == 0
                         ? /* Shimmer.fromColors(
@@ -415,7 +413,7 @@ class WalletView extends StatelessWidget {
                                               Get.find<ActionController>()
                                                   .selected;
                                           var keySecret =
-                                              await _manager.s.getKey();
+                                              await _manager.dababase.getKey();
                                           var data = {
                                             'keySecret': keySecret,
                                             'montant': montant.text,

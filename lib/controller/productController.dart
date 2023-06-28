@@ -1,4 +1,4 @@
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,9 @@ import 'package:get/get.dart';
 class ProductController extends GetxController {
   final ProductRepo productRepo;
   ProductController({required this.productRepo});
-  var s = Get.find<DB>();
+
+  final dababase = Get.find<DataBaseController>();
+
   bool _conf = false;
   bool get conf => _conf;
   setConf() {
@@ -198,17 +200,17 @@ class ProductController extends GetxController {
   }
 
   Future<void> getPopularProduit() async {
-    // print('----${_loaddata}-------aaaaaaaaa---');
-    var key = await s.getKey();
-    if (_loaddata == false) {
-      // print('-----------get---');
+    print('----${_loaddata}-------aaaaaaaaa---');
+    var key = await dababase.getKey();
+    // if (_loaddata == false) {
+      print('-----------get---');
       _isLoadedP = 0;
       _loaddata = true;
       update();
       try {
         Response response =
             await productRepo.getListProductPopular(indexC, key);
-        // print('-++++++++-----${response.body['data']}');
+        print('-++++++++-----${response.body['data']}');
 
         //print(response.body);
         // _produitList = [];
@@ -241,7 +243,7 @@ class ProductController extends GetxController {
         update();
         //print(e);
       }
-    }
+    // }
   }
 
   List<ProduitModel> _produitListAll = [];

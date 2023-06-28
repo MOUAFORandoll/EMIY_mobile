@@ -18,7 +18,7 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/api/apiUrl.dart';
+import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:dio/dio.dart' hide Response;
 import 'package:flutter/material.dart';

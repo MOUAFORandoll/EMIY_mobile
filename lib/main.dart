@@ -6,7 +6,7 @@ import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
 import 'package:EMIY/utils/Services/translations.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
@@ -22,8 +22,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initializePlatformNotifications();
   await FlutterDownloader.initialize(debug: true);
-  var database0 = new DB();
-  await database0.init();
+   
   await initServices();
   await initApp();
 

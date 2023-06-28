@@ -2,7 +2,7 @@
 //
 //     final shortModel = shortModelFromJson(jsonString);
 
-import 'package:EMIY/utils/api/apiUrl.dart';
+import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -18,6 +18,7 @@ class ShortModel {
       {required this.id,
       required this.titre,
       required this.src,
+      required this.preview,
       required this.boutique,
       required this.description,
       required this.date,
@@ -26,6 +27,7 @@ class ShortModel {
 
   final int id;
   final String titre;
+  final String preview;
   final String src;
   final BoutiqueModel boutique;
   final String description;
@@ -37,14 +39,16 @@ class ShortModel {
       id: json["id"] == null ? null : json["id"],
       titre: json["titre"] == null ? null : json["titre"],
       src: json["src"] == null ? null : json["src"],
+      preview: json["preview"] == null ? null : json["preview"],
       boutique: BoutiqueModel.fromJson(json["boutique"]),
       description: json["description"] == null ? null : json["description"],
       date: json["date"] == null ? null : json["date"],
       status: json["status"] == null ? null : json["status"],
-      controller: VideoPlayerController.network(json["src"]));
+      controller: VideoPlayerController.network(json["preview"]));
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
+        "preview": preview == null ? null : preview,
         "src": src == null ? null : src,
         "localisation": boutique.toJson(),
         "titre": titre == null ? null : titre,

@@ -1,4 +1,5 @@
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/core.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
@@ -167,6 +168,7 @@ Future<void> _checkInternetConnection() async {
           if (connexion == false) {
             // Get.back();
             showToast(true);
+            initApp();
             connexion = true;
           } else {
             //print(" deja connextio $connexion");

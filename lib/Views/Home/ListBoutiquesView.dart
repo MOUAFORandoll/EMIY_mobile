@@ -54,7 +54,6 @@ class ListBoutiquesView extends StatelessWidget {
             ;
           },
           child: CustomScrollView(controller: _scrollController, slivers: [
-            // Add the app bar to the CustomScrollView.
             // SliverAppBar(
             //   backgroundColor: Colors.white,
             //   elevation: 0,
@@ -90,7 +89,6 @@ class ListBoutiquesView extends StatelessWidget {
             //   expandedHeight: 60,
             // ),
             SliverList(
-              // Use a delegate to build items as they're scrolled on screen.
               delegate: SliverChildBuilderDelegate(
                 // The builder function returns a ListTile with a title that
                 // displays the index of the current item.

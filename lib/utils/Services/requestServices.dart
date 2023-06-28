@@ -12,7 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/utils/api/apiUrl.dart';
+import 'package:EMIY/utils/Services/apiUrl.dart';
 
 class ApiService extends GetConnect {
   GetStorage box = GetStorage();

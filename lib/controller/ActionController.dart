@@ -17,7 +17,6 @@ import 'package:EMIY/utils/Services/NotificationService.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ import 'package:EMIY/controller/cartController.dart';
 
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/constants/assets.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
 import 'package:EMIY/Views/Shopping/ShoppingView.dart';
@@ -54,6 +53,7 @@ import '../main.dart';
 class ActionController extends GetxController {
   final ActionRepo actionRepo;
   ActionController({required this.actionRepo});
+  final dababase = Get.find<DataBaseController>();
 
   notificationSnackBar(title, id) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
@@ -148,7 +148,7 @@ class ActionController extends GetxController {
     _dark = !_dark;
     update();
 
-    await Get.find<DB>().saveTheme(_dark ? "1" : "0");
+    await dababase.saveTheme(_dark ? "1" : "0");
 
     // _dark = box.read('theme') != null ? box.read('theme') == '1' : false;
 
@@ -164,14 +164,14 @@ class ActionController extends GetxController {
   }
 
   getTheme() async {
-    var theme = await Get.find<DB>().getTheme();
+    var theme = await dababase.getTheme();
     _dark = theme != null ? theme == '1' : false;
     update();
     Get.changeTheme(!_dark ? ThemeData.light() : ThemeData.dark());
   }
 
   getThemeInit(context) async {
-    var theme = await Get.find<DB>().getTheme();
+    var theme = await dababase.getTheme();
     _dark = theme != null
         ? theme == '1'
         : Theme.of(context).brightness == Brightness.dark;
@@ -183,7 +183,7 @@ class ActionController extends GetxController {
   Locale get lan => _lan;
 
   // getLan() async {
-  //   _lan = await Get.find<DB>().getLan();
+  //   _lan = await dababase.getLan();
   //   //print('_lan********');
   //   //print(_lan);
 
@@ -196,7 +196,6 @@ class ActionController extends GetxController {
   ];
 
   final lang = (Get.locale?.languageCode ?? 'Fr').obs;
-  var store = Get.find<DB>();
 
   updateLanguage(String localLang) async {
     int index = locale.indexWhere((element) => element['name'] == localLang);
@@ -206,7 +205,7 @@ class ActionController extends GetxController {
 
       Get.updateLocale(locale[index]['locale']);
 
-      await store.saveLan(lang.value);
+      await dababase.saveLan(lang.value);
     }
   }
 
@@ -218,7 +217,7 @@ class ActionController extends GetxController {
   }
 
   getLanguageInit() async {
-    var lan = await Get.find<DB>().getLan();
+    var lan = await dababase.getLan();
     int index = locale.indexWhere((element) => element['name'] == lan);
     if (index != -1) {
       lang.value = locale[index]['name'];
@@ -239,10 +238,8 @@ class ActionController extends GetxController {
     update();
   }
 
-  var s = Get.find<DB>();
-
   likeProduit(/* note, */ codeProduit) async {
-    var getU = await s.getKey();
+    var getU = await dababase.getKey();
     if (getU == null) {
       fn.snackBar('Note', 'Veuillez vous connecter', true);
       return false;
@@ -285,7 +282,7 @@ class ActionController extends GetxController {
     if (note < 0 || note > 5) {
       return false;
     }
-    // var getU = await s.getKey();
+    // var getU = await dababase.getKey() ;
     // if (getU == null) {
     //   fn.snackBar('Note', 'Veuillez vous connecter', true);
     // }
@@ -320,7 +317,7 @@ class ActionController extends GetxController {
   get controllerT => _controllerT;
   @override
   void onInit() {
-    // test();
+    fn.verifiedConnection();
     // _controllerT = ScrollController()..addListener(_scrollListener);
   }
 

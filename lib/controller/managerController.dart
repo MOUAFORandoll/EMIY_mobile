@@ -11,7 +11,7 @@ import 'package:EMIY/utils/Services/core.dart';
 import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,6 +28,8 @@ class ManagerController extends GetxController {
     update();
     // //print('curent ${_current}');
   }
+
+  final dababase = Get.find<DataBaseController>();
 
   setCurrent(int i) {
     _current = i;
@@ -90,8 +92,6 @@ class ManagerController extends GetxController {
     update();
   }
 
-  var s = Get.find<DB>();
-
   var _ville;
   String get ville => _ville;
 
@@ -102,7 +102,7 @@ class ManagerController extends GetxController {
   double get latitude => _latitude;
 
   getLocalU() async {
-    var data = await s.getLonLat();
+    var data = await dababase.getLonLat();
     // //print('******************data');
     // //print(data);
     if (data != null) {
@@ -118,7 +118,7 @@ class ManagerController extends GetxController {
   bool _userP = false;
   bool get userP => _userP;
   getKeyU() async {
-    var u = await s.getKey();
+    var u = await dababase.getKey();
     //print('----------------uuuuu--$u');
 
     _userP = (u == null);
@@ -129,7 +129,7 @@ class ManagerController extends GetxController {
     } else {
       chageState(0);
     }
-    // //print('------------------${s.getKey()}');
+    // //print('------------------${dababase.getKey() }');
     update();
   }
 
@@ -163,7 +163,7 @@ class ManagerController extends GetxController {
   // CategoryController({required this.service});
   getUser() async {
     // //print('user-------------------------${new GetStorage().read('keySecret')}');
-    var getU = await s.getKey();
+    var getU = await dababase.getKey();
     //print('key******************** ${getU}');
     // await this.userRefresh();
     // ignore: unnecessary_null_comparison
@@ -218,23 +218,23 @@ class ManagerController extends GetxController {
 
   var fn = new ViewFunctions();
   deconnectUser() async {
-    fn.loading('Compte', 'Deconnexion en cours');
+    // fn.loading('Compte', 'Deconnexion en cours');
 
-    Get.find<DB>().deleteAll();
+    dababase.deleteAll();
     chageState(0);
 
     Get.find<BoutiqueController>().DeconectBoutique();
     //        fn.closeSnack();
-    fn.closeSnack();
 
     fn.snackBar('Compte', 'Deconnecte', true);
     _userP = true;
-
+    _User = null;
+    fn.closeSnack();
     update();
 
     //print('---------userp---------${userP}');
 
-    // Get.find<DB>().deleteAll();
+    // dababase.deleteAll();
   }
 
   TextEditingController _nameU = TextEditingController();
@@ -323,7 +323,7 @@ class ManagerController extends GetxController {
       Response response = await manageRepo.Login(data);
 //       //print(response.body);
       if (response.statusCode == 200) {
-        s.saveKeyKen(response.body);
+        dababase.saveKeyKen(response.body);
 
         getKeyU();
         await initApp();
@@ -401,7 +401,7 @@ class ManagerController extends GetxController {
 //       //print(response.body);
 //  this.saveKeyKen(response.body);
       if (response.statusCode == 200) {
-        s.saveKeyKen(response.body);
+        dababase.saveKeyKen(response.body);
 
         getKeyU();
         await initApp();
@@ -437,7 +437,7 @@ class ManagerController extends GetxController {
       try {
         Response rep = await manageRepo.userRefresh();
         if (rep.statusCode == 200) {
-          s.saveKeyKen(rep.body);
+          dababase.saveKeyKen(rep.body);
           finalV = true;
         }
       } catch (e) {

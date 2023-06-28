@@ -40,7 +40,6 @@ class SearchView extends StatelessWidget {
     //  Get.find<CategoryController>().getCategory();
     return GetBuilder<SearchController>(builder: (searchCont) {
       return CustomScrollView(controller: _scrollController, slivers: [
-        // Add the app bar to the CustomScrollView.
         SliverAppBar(
           pinned: true,
           backgroundColor: Colors.white,
@@ -107,9 +106,7 @@ class SearchView extends StatelessWidget {
           // Make the initial height of the SliverAppBar larger than normal.
           expandedHeight: 60,
         ),
-
         SliverList(
-            // Use a delegate to build items as they're scrolled on screen.
             delegate: SliverChildBuilderDelegate(
                 // The builder function returns a ListTile with a title that
                 // displays the index of the current item.

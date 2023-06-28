@@ -8,6 +8,7 @@ import 'package:EMIY/Views/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Negociation/NegociationView.dart';
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
 import 'package:EMIY/Views/Short/ShortView.dart';
+import 'package:EMIY/Views/UsersMange/ServiceClientView.dart';
 import 'package:EMIY/Views/UsersMange/WalletView.dart';
 import 'package:EMIY/Views/BoutiqueUser/HistroriqueCBUView.dart';
 import 'package:EMIY/Views/BoutiqueUser/manageBoutiqueUserView.dart';
@@ -208,10 +209,15 @@ class AppRoutes {
         name: AppLinks.ABONNEMENT,
         page: () => UserAbonnementView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.SERVICE_CLIENT,
+        page: () => ServiceClientView(),
+        transition: transitionX),
   ];
 }
 
 class AppLinks {
+  static const String SERVICE_CLIENT = "/service_client";
   static const String ABONNEMENT = "/abonnement";
   static const String SHORT = "/short";
   static const String SHORT_BOUTIQUE = "/shortboutique";

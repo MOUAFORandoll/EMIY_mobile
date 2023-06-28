@@ -3,7 +3,7 @@ import 'package:EMIY/model/socket/NegociationModel.dart';
 import 'package:EMIY/repository/negociationRepo.dart';
 import 'package:EMIY/utils/Services/NotificationService.dart';
 import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +20,18 @@ import 'package:jwt_decode/jwt_decode.dart';
 class NegociationController extends GetxController {
   final NegociationRepo negociationRepo;
   NegociationController({required this.negociationRepo});
-  var s = Get.find<DB>();
+
+  final dababase = Get.find<DataBaseController>();
+
   var fn = new ViewFunctions();
 
   newNegociation(codeProduit) async {
     textEditingController.text = '';
     update();
-    var key = await s.getKey();
+    var key = await dababase.getKey();
 
     fn.loading('Boutique', 'Creation de la negociation en cours');
-    var token = await s.getKeyKen();
+    var token = await dababase.getKeyKen();
     _idUser = Jwt.parseJwt(token['token'])['id'];
     print('---------------idd------------!!${_idUser}');
 
@@ -73,26 +75,26 @@ class NegociationController extends GetxController {
   List<NegociationModel> _listNegociation = [];
   List<NegociationModel> get listNegociation => _listNegociation;
   getListNegociation() async {
-    _listNegociation = [];
-
     // fn.loading('Boutique', 'Creation de la negociation en cours');
 
     textEditingController.text = '';
     update();
-    var key = await s.getKey();
+    var key = await dababase.getKey();
 //     var token = await s.getKeyKen();
 // // if(token.length !=0){
 
 //     _idUser = Jwt.parseJwt(token['token'])['id'];
-//     print('---------------idd------------!!${_idUser}');
+
     try {
       Response response = await negociationRepo.getListnegociationProduit(key);
 
       if (response.statusCode == 200) {
+        print('---------------idd------------!!${_idUser}');
         if (response.body != null) {
           if (response.body['data'] != null) {
             print(response.body['data']);
-
+            _listNegociation.clear();
+            update();
             _listNegociation.addAll((response.body['data'] as List)
                 .map((e) => NegociationModel.fromJson(e))
                 .toList());
@@ -121,7 +123,7 @@ class NegociationController extends GetxController {
 
     update();
     new SocketService().negociation(_codeNegociation, socketMessageNegociation);
-    var key = await s.getKey();
+    var key = await dababase.getKey();
 
     try {
       Response response = await negociationRepo
@@ -154,10 +156,10 @@ class NegociationController extends GetxController {
   get textEditingController => _textEditingController;
   newMessageNegociation() async {
     update();
-    var key = await s.getKey();
+    var key = await dababase.getKey();
 
     // fn.loading('Boutique', 'Creation de la negociation en cours');
-    var token = await s.getKeyKen();
+    var token = await dababase.getKeyKen();
     _idUser = Jwt.parseJwt(token['token'])['id'];
     print('---------------idd------------!!${_idUser}');
 

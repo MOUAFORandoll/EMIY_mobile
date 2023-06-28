@@ -9,7 +9,7 @@ import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/repository/BoutiqueRepo.dart';
 import 'package:EMIY/repository/categoryBoutiqueRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,8 @@ import 'package:image_cropper/image_cropper.dart';
 
 class CategoryBoutiqueController extends GetxController {
   final service = new ApiService();
-  var s = Get.find<DB>();
+
+  final dababase = Get.find<DataBaseController>();
 
   final CategoryBoutiqueRepo categoryBoutiqueRepo;
   CategoryBoutiqueController({required this.categoryBoutiqueRepo});
@@ -77,7 +78,7 @@ class CategoryBoutiqueController extends GetxController {
   List<BoutiqueModel> _ListBoutique = [];
   List<BoutiqueModel> get ListBoutique => _ListBoutique;
   getCategoryBoutique(id) async {
-    var key = await s.getKey();
+    var key = await dababase.getKey();
     _ListBoutique.clear();
     _isLoadedP = 0;
     try {
@@ -116,7 +117,7 @@ class CategoryBoutiqueController extends GetxController {
   // BoutiqueController({required this.service});
   getListBoutiques() async {
     // if (_gA == false) {
-    var key = await s.getKey();
+    var key = await dababase.getKey();
     try {
       Response response = await categoryBoutiqueRepo.getListBoutiques(key);
 

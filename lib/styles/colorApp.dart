@@ -20,7 +20,7 @@ abstract class ColorsApp {
   static const Color bgCont = Color(0xFF0FAE74);
   static const Color greenLight = Color(0xFF45EFB1);
   static const Color red = Color(0xffB40001);
-  static const Color orange = Color.fromARGB(255, 254, 123, 97);
+  static const Color orange = Color(0xffF29F05);
   static Color textColor =
       Get.isDarkMode ? Color(0xffB40001) : Color(0xFFF1F6FA);
 }

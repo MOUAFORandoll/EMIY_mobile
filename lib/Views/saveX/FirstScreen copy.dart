@@ -251,7 +251,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(controller: _scrollController, slivers: [
-      // Add the app bar to the CustomScrollView.
+     
       SliverAppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -283,7 +283,7 @@ class HomeView extends StatelessWidget {
       ),
 
       SliverList(
-        // Use a delegate to build items as they're scrolled on screen.
+       
         delegate: SliverChildBuilderDelegate(
           // The builder function returns a ListTile with a title that
           // displays the index of the current item.

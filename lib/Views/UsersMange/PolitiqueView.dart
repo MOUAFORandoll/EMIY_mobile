@@ -36,7 +36,6 @@ class _PolitiqueViewState extends State<PolitiqueView> {
           body: CustomScrollView(
               // controller: _scrollController,
               slivers: [
-            // Add the app bar to the CustomScrollView.
             SliverAppBar(
               automaticallyImplyLeading: false,
               title: Container(
@@ -125,7 +124,6 @@ class _PolitiqueViewState extends State<PolitiqueView> {
               pinned: true,
             ),
             SliverList(
-                // Use a delegate to build items as they're scrolled on screen.
                 delegate: SliverChildBuilderDelegate(
               (context, index) => Container(
                   margin: EdgeInsets.symmetric(vertical: kMarginY * .2),

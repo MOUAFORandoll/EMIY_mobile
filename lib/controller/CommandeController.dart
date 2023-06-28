@@ -6,7 +6,7 @@ import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/repository/CommandeRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:get/get.dart';
 
@@ -19,13 +19,14 @@ class CommandeController extends GetxController {
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
-  var s = Get.find<DB>();
+  final dababase = Get.find<DataBaseController>();
+
   getListCommandes() async {
     try {
       //print('DB *************response ');
       _commandeList.clear();
       _isLoaded = false;
-      var response = await s.getListCommande();
+      var response = await dababase.getListCommande();
       //print('DB *************response ');
       //print(response);
       _commandeList.addAll(
@@ -39,7 +40,7 @@ class CommandeController extends GetxController {
   }
 
   saveCommande(id, codeCommande, codeClient, date) {
-    s.insert(id, codeCommande, codeClient, date);
+    dababase.insert(id, codeCommande, codeClient, date);
   }
 
   List<Produit> _produitList = [];

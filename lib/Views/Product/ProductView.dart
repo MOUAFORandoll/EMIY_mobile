@@ -59,7 +59,6 @@ class ProductView extends StatelessWidget {
                   child: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  // Add the app bar to the CustomScrollView.
                   SliverAppBar(
                     automaticallyImplyLeading: false,
                     backgroundColor: ColorsApp.bleuLight,
@@ -283,7 +282,7 @@ class ProductView extends StatelessWidget {
                                                       ' Pieces disponible: ')
                                         ],
                                       ),
-                                     /*  InkWell(
+                                      /*  InkWell(
                                           child: Row(
                                             children: [
                                               Icon(

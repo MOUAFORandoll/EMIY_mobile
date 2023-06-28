@@ -5,7 +5,7 @@ import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/productController.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/constants/assets.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
 import 'package:EMIY/Views/Home/HomeView.dart';
@@ -80,7 +80,7 @@ class _FirstScreenState extends State<FirstScreen> { */
   //   //print("voici le statut ,  $status");
 
   //   if (status.isGranted) {
-  //     var database = Get.find<DB>();
+  //     var database = dababase;
   //     await database.init();
   //     await Get.find<ActionController>().getLanguageInit();
 
@@ -314,7 +314,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(controller: _scrollController, slivers: [
-      // Add the app bar to the CustomScrollView.
+     
       SliverAppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -346,7 +346,7 @@ class HomeView extends StatelessWidget {
       ),
 
       SliverList(
-        // Use a delegate to build items as they're scrolled on screen.
+       
         delegate: SliverChildBuilderDelegate(
           // The builder function returns a ListTile with a title that
           // displays the index of the current item.

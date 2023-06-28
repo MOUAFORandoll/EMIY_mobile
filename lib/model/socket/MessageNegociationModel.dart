@@ -11,6 +11,7 @@ import 'dart:convert';
 // String socketCommandModelToJson(SocketCommandModel data) =>
 //     json.encode(data.toJson());
 
+
 // class SocketCommandModel {
 //   int canal;
 //   Data data;

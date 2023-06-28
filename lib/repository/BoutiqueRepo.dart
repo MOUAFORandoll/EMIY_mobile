@@ -2,17 +2,17 @@ import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/utils/Services/ApiClient.dart';
 import 'package:EMIY/utils/Services/storageService.dart';
 import 'package:EMIY/utils/constants/apiRoute.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
 class BoutiqueRepo extends GetxService {
   final ApiClient apiClient;
   BoutiqueRepo({required this.apiClient});
-  var store = Get.find<DB>();
+  final dababase = Get.find<DataBaseController>();
 
   Future getBoutiqueForUser() async {
-    var s = await store.getKey();
+    var s = await dababase.getKey();
     if (s != null /* && s.toString().length != 0 */) {
       Response a = await apiClient.getCollections(
           ApiRoutes.BOUTIQUE_FOR_USER + "?keySecret=${s.toString()}");
@@ -147,7 +147,6 @@ class BoutiqueRepo extends GetxService {
     Response a = await apiClient.getCollections(
         ApiRoutes.ABONNEMENT_BOUTIQUE_USER +
             '?keySecret=${keySecret}&page=${page}');
-    
 
     return a;
   }
@@ -156,14 +155,13 @@ class BoutiqueRepo extends GetxService {
     Response a = await apiClient.getCollections(
         ApiRoutes.ABONNEMENT_PRODUIT_USER +
             '?keySecret=${keySecret}&page=${page}');
-    
+
     return a;
   }
 
   Future abonnementForBoutique(codeBoutique, page) async {
     Response a = await apiClient.getCollections(ApiRoutes.ABONNEMENT_BOUTIQUE +
         '?codeBoutique=${codeBoutique}&page=${page}');
-     
 
     return a;
   }

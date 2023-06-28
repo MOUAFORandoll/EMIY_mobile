@@ -30,7 +30,6 @@ class SettingView extends StatelessWidget {
         body: CustomScrollView(
       controller: _scrollController,
       slivers: [
-        // Add the app bar to the CustomScrollView.
         SliverAppBar(
           automaticallyImplyLeading: false,
           title: Container(
@@ -119,7 +118,6 @@ class SettingView extends StatelessWidget {
           pinned: true,
         ),
         SliverList(
-          // Use a delegate to build items as they're scrolled on screen.
           delegate: SliverChildBuilderDelegate(
             (context, index) => Container(
                 margin: EdgeInsets.symmetric(vertical: kMarginY * .2),

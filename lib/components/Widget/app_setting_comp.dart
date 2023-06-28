@@ -19,15 +19,18 @@ class AppSettingComp extends StatelessWidget {
   Widget build(BuildContext context) => InkWell(
       child: Container(
           decoration: BoxDecoration(
-            color: ColorsApp.white,
-            borderRadius: BorderRadius.circular(10),
+            color: ColorsApp.greySecond,
+            borderRadius: BorderRadius.circular(7),
           ),
-          padding:
-              EdgeInsets.symmetric(vertical: kMarginY, horizontal: kMarginX),
-          margin: EdgeInsets.symmetric(
-            vertical: kMarginY,
+          padding: EdgeInsets.symmetric(
+              vertical: kMarginY * 2, horizontal: kMarginX),
+          margin: EdgeInsets.all(
+            2,
           ),
-          child: Row(children: [
+
+          // alignment: Alignment.topLeft,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
                 decoration: BoxDecoration(
                   color: color,
@@ -36,17 +39,18 @@ class AppSettingComp extends StatelessWidget {
                 padding: EdgeInsets.all(3),
                 margin: EdgeInsets.only(right: kMarginX * 2),
                 child: SvgIcon(icon: icon)),
-            Expanded(
-                child: Container(
-                    child: Text(title,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600)))),
+            /*  Expanded(
+                child: */
             Container(
-                child: Icon(
-              Icons.keyboard_arrow_right_sharp,
-              color: ColorsApp.greySecond,
-            )),
+                child: Text(title,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600)) /* ) */),
+            // Container(
+            //     child: Icon(
+            //   Icons.keyboard_arrow_right_sharp,
+            //   color: ColorsApp.greySecond,
+            // )),
           ])),
       onTap: onTap);
 }

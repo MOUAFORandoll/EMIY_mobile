@@ -3,9 +3,12 @@ import 'dart:ui';
 
 import 'package:EMIY/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
+import 'routing.dart';
 
 class NotificationService {
   NotificationService();
@@ -38,10 +41,10 @@ class NotificationService {
       print('p----------------------ayload');
       if (payload != null) {
         // Gérer l'action selon la valeur du payload
-        if (payload == 'action1') {
-          // Action 1
-        } else if (payload == 'action2') {
-          // Action 2
+        if (payload == 'Service_Client') {
+          Get.toNamed(AppLinks.SERVICE_CLIENT);
+        } else if (payload == 'Negociation') {
+          Get.toNamed(AppLinks.NEGOCIATION_LIST);
         }
       }
     });
@@ -78,10 +81,48 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.show(
       1, // Notification ID (should be unique for each notification)
-      'Message negociation', // Notification title
+      'Negociation', // Notification title
       content, // Notification body
       platformChannelSpecifics,
-      payload: 'optional value to send when the notification is tapped',
+      payload: 'Negociation',
+    );
+  }
+
+  Future<void> emitServiceClient(content) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'emiy_general_1', // Channel ID
+      'emiy Service client', // Channel name
+      'Information Service client', // Channel description
+      importance: Importance.max,
+      priority: Priority.high,
+      // autoCancel: false,
+      // setAsGroupSummary: true,
+      styleInformation: BigTextStyleInformation(
+        '<Notification Content>', // Replace with your custom notification content
+        htmlFormatBigText: true,
+        contentTitle:
+            'Service client', // Replace with your custom notification title
+        summaryText:
+            'Service client', // Replace with your custom notification summary
+      ),
+      icon: 'launcher_icon',
+      largeIcon: DrawableResourceAndroidBitmap(
+          'launcher_icon'), // Replace with the name of your custom large icon file
+    );
+    const IOSNotificationDetails iOSPlatformChannelSpecifics =
+        IOSNotificationDetails();
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      1, // Notification ID (should be unique for each notification)
+      'Service_Client', // Notification title
+      content, // Notification body
+      platformChannelSpecifics,
+      payload: 'Service_Client',
     );
   }
 

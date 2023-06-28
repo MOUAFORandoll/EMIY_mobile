@@ -33,7 +33,7 @@ import 'package:EMIY/styles/colorApp.dart';
 
 // import 'package:cinetpay/cinetpay.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
-import 'package:EMIY/utils/database/DataBase.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 
 class BuyShoopingCart extends StatelessWidget {
@@ -95,11 +95,7 @@ class BuyShoopingCart extends StatelessWidget {
               child: CustomScrollView(
                   controller: Get.find<ActionController>().scrollcontroller,
                   slivers: [
-                    // Add the app bar to the CustomScrollView.
-
                     SliverList(
-
-                        // Use a delegate to build items as they're scrolled on screen.
                         delegate: SliverChildBuilderDelegate(
                             // The builder function returns a ListTile with a title that
                             // displays the index of the current item.
