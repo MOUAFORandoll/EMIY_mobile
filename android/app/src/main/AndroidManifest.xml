@@ -55,9 +55,12 @@
         <!-- Accepts URIs that begin with https://YOUR_HOST -->
       
          <data
-          android:scheme="https"
+          android:scheme="http"
           android:pathPrefix="/users"
           android:host="emiy-shop.000webhostapp.com" /> 
+
+
+          <data android:scheme="https"   /> 
       </intent-filter>
     </activity>
 
