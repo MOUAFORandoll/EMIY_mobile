@@ -1,6 +1,7 @@
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/core.dart';
 import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/storageService.dart';
 import 'package:EMIY/utils/constants/assets.dart';
@@ -38,38 +39,21 @@ class _SplashScreenPageState extends State<SplashScreenPage>
       if (box.read('first') != 1) {
         box.write('first', 1);
         Get.offNamedUntil(AppLinks.ONBOARDING, (route) => false);
+          await secondInit();
       } else {
         Get.offNamedUntil(AppLinks.FIRST, (route) => false);
+        await secondInit();
       }
       Get.find<ManagerController>().chageN(false);
- 
     });
-  }
-
-  Future<void> initUniLinks() async {
-    try {
-      StreamSubscription _sub;
-
-      // Écoutez les liens entrants
-      _sub = linkStream.listen((uri) {
-        // Traitez les liens entrants ici
-        handleDeepLink(uri);
-      });
-    } on PlatformException {
-      // Gestion des erreurs
-    }
-  }
-
-  void handleDeepLink(uri) {
-    // Votre logique pour traiter les liens entrants
-    // Extrait les informations nécessaires de l'URL
   }
 
   @override
   void initState() {
     super.initState();
-    initUniLinks();
-     start();
+      
+    // initUniLinks();
+    start();
   }
 
   @override

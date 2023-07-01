@@ -4,6 +4,7 @@ import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/productController.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -22,11 +23,13 @@ import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:uni_links/uni_links.dart';
 
 import 'CategoryBoutique/CategoryView.dart';
 
@@ -92,9 +95,34 @@ class _FirstScreenState extends State<FirstScreen> { */
   //     Get.find<CommandeController>().getListCommandes();
   //   }
   // }
+  uniLink() async {
+    try {
+      final uri = await getInitialUri();
+      if (uri == null) {
+        print('no initial uri');
+      } else {
+        print('got initial uri: $uri');
+      }
+      var direction = uri!.path.split('/');
+      var type = direction[1];
+      print('--${uri}---00-lien----------ici----------------------');
+      if (type == 'produits') {
+        var codeProduit = direction[2];
+        Get.toNamed(ApiRoutes.ABONNEMENT);
+        print('----------codeProduit--------${codeProduit}------');
+      } else {}
+      // var direction = uri!.path!
+    } on PlatformException {
+      // Platform messages may fail but we ignore the exception
+      print('falied to get initial uri');
+    } on FormatException catch (err) {
+      print('malformed initial uri');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    uniLink();
     return GetBuilder<ActionController>(
         builder: (_controller) => Scaffold(
               // extendBody for floating bar get better perfomance

@@ -4,8 +4,9 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
-            "name": "FahKapMobile",
+            "name": "EMIY",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -14,22 +15,13 @@
             "program": "lib/main.dart"
         },
         {
-            "name": "FahKapMobile (profile mode)",
+            "name": "EMIY (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
             "program": "lib/main.dart"
         },
-        {
-            "name": "FahKapMobile (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release",
-            "args": [
-                "--no-sound-null-safety" // Ajout de l'option "no sound null safety"
-            ],
-            "program": "lib/main.dart"
-        },
+       
         {
             "name": "Flutter",
             "request": "launch",

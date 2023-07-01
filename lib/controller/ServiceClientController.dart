@@ -134,11 +134,22 @@ class ServiceClientController extends GetxController {
     }
   }
 
+  // onOpen() {
+  //   scrollController.jumpTo(scrollController.position.maxScrollExtent);
+
+  //   update();
+
+  //   // _scrollController.animateTo(
+  //   //   Get.height,
+  //   //   duration: Duration(milliseconds: 10),
+  //   //   curve: Curves.easeInOut,
+  //   // );
+  //   // update();
+  // }
+
   int _idUser = 0;
   int get idUser => _idUser;
 
-  ScrollController _scrollController = new ScrollController();
-  ScrollController get scrollController => _scrollController;
   socketMessageCommunication(data) async {
     print('-...............');
     print(data);
@@ -150,16 +161,11 @@ class ServiceClientController extends GetxController {
     if (noContain(message)) {
       _listMessageEchange.add(message);
       // Positionner le ScrollController en bas de la liste
-//       _scrollController.jumpTo(Get.height);
-//       update();
 
-// // ou
+      update();
 
-//       _scrollController.animateTo(
-//         Get.height,
-//         duration: Duration(milliseconds: 10),
-//         curve: Curves.easeInOut,
-//       );
+// ou
+
       update();
     }
     print(_listMessageEchange.length);
@@ -172,13 +178,15 @@ class ServiceClientController extends GetxController {
 
   connectSockey() async {
     var keys = await dababase.getKeyKen();
-    _idUser = Jwt.parseJwt(keys['token'])['id'];
-    update();
-    print('---------------idd------------!!${_idUser}');
+    if (keys != null) {
+      _idUser = Jwt.parseJwt(keys['token'])['id'];
+      update();
+      print('---------------idd------------!!${_idUser}');
 
-    var codeCommunication = keys['codeCommunication'];
-    print('codeCommunication-----------------${codeCommunication}');
-    new SocketService()
-        .service_client(codeCommunication, socketMessageCommunication);
+      var codeCommunication = keys['codeCommunication'];
+      print('codeCommunication-----------------${codeCommunication}');
+      new SocketService()
+          .service_client(codeCommunication, socketMessageCommunication);
+    }
   }
 }

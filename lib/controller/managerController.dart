@@ -176,6 +176,8 @@ class ManagerController extends GetxController {
           _User = UserModel.fromJson(response.body['data']);
           _Compte = CompteModel.fromJson(response.body['compte']);
           update();
+
+          await dababase.saveUser(User);
           if (_User != null) {
             nameU.text = User.nom;
             surnameU.text = User.prenom.toString();
@@ -196,6 +198,16 @@ class ManagerController extends GetxController {
       update();
       //print(e);
     }
+  }
+
+  getUserDB() async {
+    var data = await dababase.getUserDB();
+    if(data!=null){
+
+    
+    _User = UserModel.fromJson(data);
+    update();
+  }
   }
 
   // CategoryController({required this.service});
@@ -325,9 +337,9 @@ class ManagerController extends GetxController {
       if (response.statusCode == 200) {
         dababase.saveKeyKen(response.body);
 
-        getKeyU();
-        await initApp();
-        await getUser();
+        // getKeyU();
+        // await getUser();
+        await initAllApp();
         _isConnected = true;
         // Get.back(closeOverlays: true);
         update(); // await MyBinding().onGetAll();
@@ -403,10 +415,12 @@ class ManagerController extends GetxController {
       if (response.statusCode == 200) {
         dababase.saveKeyKen(response.body);
 
-        getKeyU();
-        await initApp();
+        // getKeyU();
+        // await initApp();
 
-        await getUser();
+        // await getUser();
+        await initAllApp();
+
         // await MyBinding().onGetAll();
       }
 

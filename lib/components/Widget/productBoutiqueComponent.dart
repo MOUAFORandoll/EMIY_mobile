@@ -100,8 +100,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                // width: kSmWidth * .6,
-
+                                width: kSmWidth * .8,
                                 child: Text('Nom : ' + produit.titre,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(

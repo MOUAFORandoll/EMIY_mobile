@@ -1,3 +1,4 @@
+
 import 'package:EMIY/controller/ActionController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/NotificationService.dart';
@@ -22,7 +23,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initializePlatformNotifications();
   await FlutterDownloader.initialize(debug: true);
-   
+    
   await initServices();
   await initApp();
 

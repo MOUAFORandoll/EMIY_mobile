@@ -31,6 +31,8 @@ import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
+import 'package:EMIY/utils/constants/apiRoute.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -43,12 +45,44 @@ import 'package:uni_links/uni_links.dart' as uni_links;
 import 'dart:async';
 import 'dart:io';
 
-import 'package:uni_links/uni_links.dart';
-
 // ...
 Future<void> initApp() async {
   await requestPermission();
-  await initUniLinks();
+  Get.find<ManagerController>().chageN(true);
+  await GetStorage.init();
+
+  await Get.find<DataBaseController>().init();
+  Get.find<ManagerController>().getUserDB();
+  Get.find<ManagerController>().getKeyU();
+  Get.find<ManagerController>().getUser();
+  Get.find<ActionController>().generalSocket();
+
+  Get.find<ServiceClientController>().connectSockey();
+}
+
+Future<void> secondInit() async {
+  Get.find<CommandeController>().getListCommandes();
+  Get.find<ProductController>().getPopularProduit();
+  Get.find<CategoryBoutiqueController>().getCategory();
+  Get.find<CategoryBoutiqueController>().getListBoutiques();
+  Get.find<ManagerController>().newLocalisation();
+  Get.find<BuyShopController>().getPointLivraisom();
+  Get.find<BoutiqueController>().getBoutique();
+  Get.find<BoutiqueController>().getListAbonnementForBoutique();
+  Get.find<ShortController>().getListShort();
+  Get.find<NegociationController>().getListNegociation();
+
+  Get.find<ActionController>().getListModePaiement();
+  Get.find<BuyShopController>().setUserInfo();
+
+  Get.find<ServiceClientController>().connectSockey();
+  Get.find<ServiceClientController>().getEchange();
+}
+
+// ...
+Future<void> initAllApp() async {
+  await requestPermission();
+
   Get.find<ManagerController>().chageN(true);
   await GetStorage.init();
 
@@ -56,7 +90,7 @@ Future<void> initApp() async {
   Get.find<ManagerController>().getKeyU();
   Get.find<ManagerController>().getUser();
   Get.find<ActionController>().generalSocket();
- 
+
   Get.find<ManagerController>().newLocalisation();
   Get.find<CommandeController>().getListCommandes();
   Get.find<CategoryBoutiqueController>().getListBoutiques();
@@ -69,8 +103,8 @@ Future<void> initApp() async {
   Get.find<ShortController>().getListShort();
   Get.find<NegociationController>().getListNegociation();
 
+  Get.find<BuyShopController>().setUserInfo();
   Get.find<ActionController>().getListModePaiement();
- 
 
   Get.find<ServiceClientController>().connectSockey();
   Get.find<ServiceClientController>().getEchange();
@@ -145,50 +179,16 @@ getData() async {
   }
 }
 
-
-
-void handleRedirect() async {
-  // Vérifier si l'application est lancée depuis un lien externe
-  Uri? initialUri;
-  try {
-    initialUri = await uni_links.getInitialUri();
-  } catch (e) {
-    print('Erreur lors de la récupération de l\'URI initial: $e');
-  }
-
-  // Rediriger vers l'application si l'URI initial est présent
-  if (initialUri != null) {
-    // Effectuer les actions nécessaires pour traiter l'URI
-    // Par exemple, vous pouvez extraire des paramètres de l'URI et les utiliser dans votre application
-    print('URI initial: $initialUri');
-  } else {
-    // L'application a été lancée normalement sans lien externe
-    // Vous pouvez afficher l'écran principal de votre application ici
-    print('Lancement normal de l\'application');
-  }
-}
-
-void redirectToAppOrStore() async {
-  // Vérifier si l'application mobile-shop est installée sur l'appareil
-  if (await canLaunch('mobile-shop://')) {
-    // Rediriger vers l'application mobile-shop
-    await launch('mobile-shop://');
-  } else {
-    // Rediriger vers le magasin d'applications correspondant à l'appareil de l'utilisateur
-    // Pour Android, le lien direct vers le Play Store
-    // Pour iOS, le lien direct vers l'App Store
-    await launch(
-        'https://play.google.com/store/apps/details?id=com.example.mobile_shop');
-  }
-}
-
 StreamSubscription? _sub;
 
 Future<void> initUniLinks() async {
   // ... check initialLink
+  print('------lien----------ici----------------------');
 
   // Attach a listener to the stream
   _sub = linkStream.listen((String? link) {
+    print('--${link}---00-lien----------ici----------------------');
+
     // Parse the link and warn the user, if it is not correct
   }, onError: (err) {
     // Handle exception by warning the user their action did not succeed
@@ -197,6 +197,13 @@ Future<void> initUniLinks() async {
   // NOTE: Don't forget to call _sub.cancel() in dispose()
 }
 
+/// Handle the initial Uri - the one the app was started with
+///
+/// **ATTENTION**: `getInitialLink`/`getInitialUri` should be handled
+/// ONLY ONCE in your app's lifetime, since it is not meant to change
+/// throughout your app's life.
+///
+/// We handle all exceptions, since it is called from initState.
 // ...
 /* 
 void main() async {

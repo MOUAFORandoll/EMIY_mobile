@@ -48,7 +48,7 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../main.dart';
+
 
 class ActionController extends GetxController {
   final ActionRepo actionRepo;

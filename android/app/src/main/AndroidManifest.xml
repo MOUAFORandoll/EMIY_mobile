@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.example.emiymobile">
+  package="com.app.emiymobile">
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -19,7 +19,7 @@
     <activity
       android:screenOrientation="portrait"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-      android:name="com.example.emiymobile.MainActivity"
+      android:name="com.app.emiymobile.MainActivity"
       android:exported="true"
       android:launchMode="singleTop"
       android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -56,7 +56,7 @@
       
          <data
           android:scheme="http"
-          android:pathPrefix="/users"
+          android:pathPrefix="/produits"
           android:host="emiy-shop.000webhostapp.com" /> 
 
 
@@ -75,7 +75,7 @@
     <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
    <!--  <provider
       android:name="androidx.core.content.FileProvider"
-      android:authorities="com.example.emiymobile.flutter_downloader.provider"
+      android:authorities="com.app.emiymobile.flutter_downloader.provider"
       android:exported="false"
       android:grantUriPermissions="true">
       <meta-data

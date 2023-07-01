@@ -16,7 +16,7 @@ class UserModel {
     required this.prenom,
     required this.email,
     required this.phone,
-    required this.status,
+    this.status = true,
     required this.dateCreated,
   });
 
@@ -33,7 +33,7 @@ class UserModel {
         nom: json["nom"],
         prenom: json["prenom"],
         email: json["email"],
-        phone: json["phone"],
+        phone: json["phone"].toString(),
         status: json["status"],
         dateCreated: json["dateCreated"],
       );

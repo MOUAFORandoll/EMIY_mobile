@@ -57,12 +57,7 @@ class BuyShopController extends GetxController {
       return val;
     }
   }
-
-  onInit() {
-    super.onInit();
-    setUserInfo();
-  }
-
+ 
   PointLivraisonModel _selected_livraison_point = new PointLivraisonModel(
       id: 0, libelle: '', ville: '', quartier: '', image: '');
   PointLivraisonModel get selected_livraison_point => _selected_livraison_point;
@@ -138,10 +133,11 @@ class BuyShopController extends GetxController {
   String _codeCommande = '';
   String get isIdCom => _codeCommande;
   var fn = new ViewFunctions();
+   
   // CategoryController({required this.service});
   buyCart() async {
     var produits = Get.find<CartController>().getListPinCart();
-    var user = Get.find<ManagerController>();
+    
     var mode = Get.find<ActionController>().selected;
 
     var data = mode == 3
@@ -152,9 +148,9 @@ class BuyShopController extends GetxController {
             'idModePaiement': mode,
             // 'idLivreur': _Bcontroller.isLivreur,
             'listProduits': produits,
-            'ville': user.ville,
-            'longitude': user.longitude,
-            'latitude': user.latitude,
+            'ville': manager.ville,
+            'longitude': manager.longitude,
+            'latitude': manager.latitude,
             'numCarte': cardNumberController.text,
             'cvv': cvvController.text,
             'exp_month': expiryMonthController.text,
@@ -169,9 +165,9 @@ class BuyShopController extends GetxController {
             // 'idLivreur': _Bcontroller.isLivreur,
             'listProduits': produits,
 
-            'longitude': user.longitude,
-            'latitude': user.latitude,
-            'ville': user.ville,
+            'longitude': manager.longitude,
+            'latitude': manager.latitude,
+            'ville': manager.ville,
             'point_livraison': selected_livraison_point.id
           };
 
@@ -396,9 +392,10 @@ class BuyShopController extends GetxController {
   setUserInfo() {
     print('--setinfo');
     if (manager.User != null &&
-        _nameController.text.length != 0 &&
-        _phoneController.text.length != 0) {
-      _nameController.text = manager.User.nom;
+        _nameController.text.length == 0 &&
+        _phoneController.text.length == 0) {
+     _nameController.text = manager.User.nom;
+      _prenameController.text = manager.User.prenom;
       _phoneController.text = manager.User.phone;
       update();
       print('--setinfo---update');

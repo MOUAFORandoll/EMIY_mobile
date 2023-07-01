@@ -34,6 +34,7 @@ import 'package:EMIY/Views/UsersMange/SettingView.dart';
 import 'package:EMIY/Views/UsersMange/UserManageView.dart';
 import 'package:EMIY/Views/UsersMange/forgotPassword.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/utils/Services/core.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/Views/UsersMange/LoginScreen.dart';
 import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
@@ -48,7 +49,10 @@ class AppRoutes {
   static final pages = [
     GetPage(
         name: AppLinks.FIRST,
-        page: () => FirstScreen(),
+        page: (){
+               secondInit();
+               return  FirstScreen();
+        },
         transition: transitionX),
     GetPage(
         name: AppLinks.LOGIN,

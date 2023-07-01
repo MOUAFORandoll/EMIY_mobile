@@ -10,6 +10,7 @@ import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:EMIY/components/Button/customBtn.dart';
 import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/controller/ServiceClientController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/managerController.dart';
@@ -17,6 +18,7 @@ import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/views/UsersMange/LoginScreen.dart';
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -210,11 +212,19 @@ class ManageView extends StatelessWidget {
                                         ],
                                       ))
                                   ]))),
-                      Container(
-                          margin: EdgeInsets.symmetric(vertical: kMarginY),
-                          child: Row(children: [
-                            BigtitleText(text: 'Money', bolder: true, size: 12)
-                          ])),
+                        (_manager.User != null) ?
+                        Container(
+                            margin: EdgeInsets.symmetric(vertical: kMarginY),
+                            child: Row(children: [
+                              BigtitleText(
+                                  text: 'User', bolder: true, size: 12)
+                            ])):
+                        Container(
+                            margin: EdgeInsets.symmetric(vertical: kMarginY),
+                            child: Row(children: [
+                              BigtitleText(
+                                  text: 'Money', bolder: true, size: 12)
+                            ])),
                       Container(
                           decoration: BoxDecoration(
                             color: ColorsApp.greySecond,
@@ -361,7 +371,28 @@ class ManageView extends StatelessWidget {
                               icon: Assets.phone_mobile,
                               color: ColorsApp.orange,
                               onTap: () {
+                                // return showCupertinoDialog(
+                                //   context: context,
+                                //   builder: (context) => CupertinoAlertDialog(
+                                //     title: Text('title'),
+                                //     content: Text('content'),
+                                //     actions: <Widget>[
+                                //       CupertinoDialogAction(
+                                //         child: Text('cancelActionText'),
+                                //         onPressed: () =>
+                                //             Navigator.of(context).pop(false),
+                                //       ),
+                                //       CupertinoDialogAction(
+                                //         child: Text('defaultActionText'),
+                                //         onPressed: () =>
+                                //             Navigator.of(context).pop(true),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // );
                                 Get.toNamed(AppLinks.SERVICE_CLIENT);
+                                // return Get.find<ServiceClientController>()
+                                //     .onOpen();
                               }),
                           // _manager.User != null
                           //     ? AppSettingComp(

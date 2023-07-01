@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:EMIY/controller/ActionController.dart';
 import 'package:EMIY/controller/ActionController.dart';
 import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/model/data/UserModel.dart';
 import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DataBaseController extends GetxController {
-  String linkDb = 'FahKap2.db';
+  String linkDb = 'FahKap4.db';
   // ignore: unused_field
   static Database? _database;
 
@@ -50,6 +51,16 @@ class DataBaseController extends GetxController {
        codeCommunication String, 
        token String,
         refreshToken String
+       
+      )""");
+      await db.execute("""CREATE TABLE IF NOT EXISTS USER (
+       id INTEGER,
+       
+       nom String, 
+       prenom String, 
+       email String,
+        phone INTEGER,
+        dateCreated String
        
       )""");
 
@@ -111,22 +122,41 @@ class DataBaseController extends GetxController {
     }
   }
 
+  saveUser(UserModel User) async {
+    try {
+      var a = await _database!.insert("USER", {
+        "id": User.id,
+        "nom": User.nom,
+        "prenom": User.prenom,
+        "phone": User.phone,
+        "email": User.email,
+        "dateCreated": User.dateCreated,
+      });
+      print(a);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  getUserDB() async {
+    var data = await _database!.rawQuery('SELECT * FROM USER');
+    if (data.length != 0) {
+      print(data[0]);
+      return data[0];
+    } else {
+      return null;
+    }
+  }
+
   insertAll() async {
     try {
-      // var databasesPath = await getApplicationDocumentsDirectory();
-      // String path = join(databasesPath.path, linkDb);
-
-      // Database _database = await openDatabase(
-      //   path,
-      //   version: 1,
-      // );
       for (var i = 0; i < 10; i++) {
         var a = await _database!.insert("COMMANDE", {
           "id": i,
           "codeCommande": 'codeCommande${i}',
           "date": 'date${i}',
         });
-        //print(a);
       }
       return true;
     } catch (e) {
