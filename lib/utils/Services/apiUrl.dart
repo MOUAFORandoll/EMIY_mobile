@@ -1,12 +1,13 @@
 class ApiUrl {
-  static final String baseUrl = "http://172.20.10.10:8000";
-  static final String socketUrl = "http://172.20.10.10:3000";
-  static final String stream_serveurUrl = "http://172.20.10.10:4000";
-  // static final String baseUrl = "http://192.168.8.101:8000";
-  // static final String socketUrl = "http://192.168.8.101:3000";
-  // static final String baseUrl = "http://192.168.8.103:8000";
-  // static final String baseUrl = "http://192.168.43.98:8000";
-  // static final String baseUrl = "http://api.fahkap.com";
-  // static final String baseUrl = "http://mouafo.pubx.cm";
-  //656332160
+  // static final String backUrl = "http://192.168.137.250";
+  // static final String baseUrl = backUrl + ":81";
+  // static final String socketUrl = backUrl + ":82";
+  // static final String stream_serveurUrl = backUrl + ":83";
+  static final String backUrl = "http://172.20.10.10";
+  static final String baseUrl = backUrl + ":8000";
+  static final String socketUrl = backUrl + ":3000";
+  static final String stream_serveurUrl = backUrl + ":4000";
+  static final String external_link = "https://emiy-shop.000webhostapp.com/";
+
+  //656332160  produitqzZhJ
 }

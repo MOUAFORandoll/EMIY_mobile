@@ -7,6 +7,7 @@ import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/model/data/UserModel.dart';
 import 'package:EMIY/repository/ManageRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:EMIY/utils/Services/core.dart';
 import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
@@ -115,6 +116,8 @@ class ManagerController extends GetxController {
     }
   }
 
+  var _lienParrainnage;
+  String get lienParrainnage => _lienParrainnage;
   bool _userP = false;
   bool get userP => _userP;
   getKeyU() async {
@@ -129,6 +132,10 @@ class ManagerController extends GetxController {
     } else {
       chageState(0);
     }
+    var kk = await dababase.getKeyKen();
+    _lienParrainnage = kk == null
+        ? ''
+        : ApiUrl.external_link + 'subscribes/' + kk['codeParrainnage'];
     // //print('------------------${dababase.getKey() }');
     update();
   }
@@ -202,12 +209,10 @@ class ManagerController extends GetxController {
 
   getUserDB() async {
     var data = await dababase.getUserDB();
-    if(data!=null){
-
-    
-    _User = UserModel.fromJson(data);
-    update();
-  }
+    if (data != null) {
+      _User = UserModel.fromJson(data);
+      update();
+    }
   }
 
   // CategoryController({required this.service});
@@ -378,8 +383,15 @@ class ManagerController extends GetxController {
   TextEditingController _pass = TextEditingController();
   TextEditingController get pass => _pass;
 
-  TextEditingController repass = TextEditingController();
-  TextEditingController get _repass => _repass;
+  TextEditingController _repass = TextEditingController();
+  TextEditingController get repass => _repass;
+
+  var _codeParrain = '';
+  get codeParrain => _codeParrain;
+  setCodeParrain(codeParrain0) {
+    _codeParrain = codeParrain0;
+    update();
+  }
 
   TextEditingController _email = TextEditingController();
   TextEditingController get email => _email;
@@ -400,10 +412,10 @@ class ManagerController extends GetxController {
     var data = {
       'phone': phone.text,
       'password': pass.text,
+      "codeParrain": codeParrain,
       "nom": name.text,
       "prenom": surname.text,
       "email": email.text,
-      "status": true,
     };
     //print(data);
     fn.loading('Inscription', 'Creatoin de votre compte en cours');
@@ -458,6 +470,39 @@ class ManagerController extends GetxController {
         finalV = false;
       }
       return finalV;
+    }
+  }
+
+  int _isAbUserPage = 1;
+  int get isAbUserPage => _isAbUserPage;
+  List<UserModel> _fieulList = [];
+  List<UserModel> _fieulListSave = [];
+  List<UserModel> get fieulList => _fieulList;
+  int _isLoadedPB = 0;
+  int get isLoadedPB => _isLoadedPB;
+  getListFieul() async {
+    var key = 12341; //await dababase.getKey();
+    _isLoadedPB = 0;
+    update();
+
+    try {
+      Response response = await manageRepo.getListFieul(key, isAbUserPage);
+      _fieulList.clear();
+      if (response.body != null) {
+        if (response.body['data'].length != 0) {
+          _fieulList.addAll((response.body['data'] as List)
+              .map((e) => UserModel.fromJson(e))
+              .toList());
+
+          _isAbUserPage++;
+        }
+
+        _isLoadedPB = 1;
+        update();
+      }
+      _fieulListSave = _fieulList;
+    } catch (e) {
+      //print(e);
     }
   }
 }

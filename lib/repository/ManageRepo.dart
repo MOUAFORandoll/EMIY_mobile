@@ -120,11 +120,11 @@ class ManageRepo extends GetxService {
     }
   }
 
-  // Future desibledProduitFB(data) async {
-  //   Response a =
-  //       await apiClient.getCollectionsP(ApiRoutes.DESABLED_PRODUCT, data);
-  //   ;
+  Future getListFieul(keySecret, page) async {
+    Response a = await apiClient.getCollections(
+        ApiRoutes.LIST_FIEUL +
+            '?keySecret=${keySecret}&page=${page}');
 
-  //   return a;
-  // }
+    return a;
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/core.dart';
 import 'package:connectivity/connectivity.dart';
@@ -47,47 +48,62 @@ class ViewFunctions {
         backgroundColor: Colors.white);
   }
 
-  void loading(title, description) {
-    Get.snackbar(
-      ' ', '',
-      titleText: Container(
-          margin: EdgeInsets.only(top: 5),
-          child: Text(
-            title,
-            style: TextStyle(
-                fontFamily: 'OpenSan',
-                fontWeight: FontWeight.w600,
-                fontSize: 15),
-          )),
-      messageText: Container(
-          margin: EdgeInsets.only(bottom: 5, left: 3),
-          child: Text(
-            description,
-            style: TextStyle(fontFamily: 'OpenSan', fontSize: 12),
-          )),
-      icon: Container(
-        margin: EdgeInsets.all(9),
-        child: SpinKitWave(color: Colors.blueAccent, size: 23.0),
-      ),
-      borderRadius: 5,
-      isDismissible: true,
-      onTap: (getBar) {},
-      snackPosition: SnackPosition.TOP,
-      duration: Duration(seconds: 400),
-      barBlur: 200,
-      shouldIconPulse: true,
-      // maxWidth: 1450,
-      snackStyle: SnackStyle.FLOATING,
-      leftBarIndicatorColor: Colors.green,
-      backgroundColor: Colors.white,
-      maxWidth: kWidth,
-      margin: EdgeInsets.zero,
-      padding: EdgeInsets.zero,
-
-      borderWidth: 100,
-      // showProgressIndicator: true,
-    );
+  void loading(title, description)  {
+    Get.dialog(Container(
+        height: 18,
+        width: 18,
+        child: Container(
+            child: Center(
+                child: CircularProgressIndicator(
+          color: ColorsApp.skyBlue,
+        )))));
   }
+
+  void closeLoader() {
+    Get.close;
+  }
+
+  // void loading(title, description) {
+  //   Get.snackbar(
+  //     ' ', '',
+  //     titleText: Container(
+  //         margin: EdgeInsets.only(top: 5),
+  //         child: Text(
+  //           title,
+  //           style: TextStyle(
+  //               fontFamily: 'OpenSan',
+  //               fontWeight: FontWeight.w600,
+  //               fontSize: 15),
+  //         )),
+  //     messageText: Container(
+  //         margin: EdgeInsets.only(bottom: 5, left: 3),
+  //         child: Text(
+  //           description,
+  //           style: TextStyle(fontFamily: 'OpenSan', fontSize: 12),
+  //         )),
+  //     icon: Container(
+  //       margin: EdgeInsets.all(9),
+  //       child: SpinKitWave(color: Colors.blueAccent, size: 23.0),
+  //     ),
+  //     borderRadius: 5,
+  //     isDismissible: true,
+  //     onTap: (getBar) {},
+  //     snackPosition: SnackPosition.TOP,
+  //     duration: Duration(seconds: 400),
+  //     barBlur: 200,
+  //     shouldIconPulse: true,
+  //     // maxWidth: 1450,
+  //     snackStyle: SnackStyle.FLOATING,
+  //     leftBarIndicatorColor: Colors.green,
+  //     backgroundColor: Colors.white,
+  //     maxWidth: kWidth,
+  //     margin: EdgeInsets.zero,
+  //     padding: EdgeInsets.zero,
+
+  //     borderWidth: 100,
+  //     // showProgressIndicator: true,
+  //   );
+  // }
 
   closeSnack() {
     //print('*****************************${Get.isSnackbarOpen}');

@@ -4,7 +4,6 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "EMIY",
             "request": "launch",
@@ -21,7 +20,6 @@
             "flutterMode": "profile",
             "program": "lib/main.dart"
         },
-       
         {
             "name": "Flutter",
             "request": "launch",

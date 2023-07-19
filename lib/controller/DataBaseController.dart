@@ -17,7 +17,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DataBaseController extends GetxController {
-  String linkDb = 'FahKap4.db';
+  String linkDb = 'FahKap5.db';
   // ignore: unused_field
   static Database? _database;
 
@@ -50,6 +50,7 @@ class DataBaseController extends GetxController {
        keySecret String, 
        codeCommunication String, 
        token String,
+       codeParrainnage String,
         refreshToken String
        
       )""");
@@ -228,6 +229,7 @@ class DataBaseController extends GetxController {
             {
               "id": 0,
               "refreshToken": key['refreshToken'],
+              "codeParrainnage": Jwt.parseJwt(key['token'])['codeParrainnage'],
               "token": key['token'],
               "keySecret": Jwt.parseJwt(key['token'])['keySecret'],
               "codeCommunication":
@@ -239,6 +241,7 @@ class DataBaseController extends GetxController {
         var a = await _database!.insert("KEYUSER", {
           "id": 0,
           "refreshToken": key['refreshToken'],
+          "codeParrainnage": Jwt.parseJwt(key['token'])['codeParrainnage'],
           "token": key['token'],
           "codeCommunication": Jwt.parseJwt(key['token'])['codeCommunication'],
           "keySecret": Jwt.parseJwt(key['token'])['keySecret'],
@@ -330,12 +333,14 @@ class DataBaseController extends GetxController {
         'token': data[0]['token'],
         'refreshToken': data[0]['refreshToken'],
         "codeCommunication": data[0]['codeCommunication'],
+        "codeParrainnage": data[0]['codeParrainnage'],
       });
       return {
         "id": 0,
         'token': data[0]['token'],
         'refreshToken': data[0]['refreshToken'],
         "codeCommunication": data[0]['codeCommunication'],
+        "codeParrainnage": data[0]['codeParrainnage'],
       };
     } else {
       return null;

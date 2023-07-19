@@ -27,11 +27,12 @@ class CartController extends GetxController {
 
   void updateQuantityProduct(int idProduit, bool state) {
     // if (quantity <= product.quantite) {
-    //print('taillen');
+    var idCart = 0;
     if (_items.containsKey(idProduit)) {
       var total = 0;
       _items.update(idProduit, (value) {
         total = value.quantity + (state ? 1 : -1);
+        idCart = value.id;
         if (total > 0 && total <= value.qtdispo) {
           return CartModel(
               id: value.id,
@@ -74,7 +75,7 @@ class CartController extends GetxController {
       });
       //print(total);
       totalItems;
-      Get.find<ProductController>().getD();
+      Get.find<ProductController>().getD0(idCart);
       update();
     }
   }
@@ -146,6 +147,7 @@ class CartController extends GetxController {
 
   getQuantity(ProduitModel product) {
     var quantity = 0;
+    print('--${product}');
     if (existInCart(product)) {
       _items.forEach((key, value) {
         if (key == product.id) {

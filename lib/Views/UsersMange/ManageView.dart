@@ -167,7 +167,6 @@ class ManageView extends StatelessWidget {
                                             ])),
                                         isScrollControlled: true,
                                       );
-                                ;
                               },
                               child: Row(
                                   mainAxisAlignment:
@@ -212,19 +211,19 @@ class ManageView extends StatelessWidget {
                                         ],
                                       ))
                                   ]))),
-                        (_manager.User != null) ?
-                        Container(
-                            margin: EdgeInsets.symmetric(vertical: kMarginY),
-                            child: Row(children: [
-                              BigtitleText(
-                                  text: 'User', bolder: true, size: 12)
-                            ])):
-                        Container(
-                            margin: EdgeInsets.symmetric(vertical: kMarginY),
-                            child: Row(children: [
-                              BigtitleText(
-                                  text: 'Money', bolder: true, size: 12)
-                            ])),
+                      (_manager.User != null)
+                          ? Container(
+                              margin: EdgeInsets.symmetric(vertical: kMarginY),
+                              child: Row(children: [
+                                BigtitleText(
+                                    text: 'User', bolder: true, size: 12)
+                              ]))
+                          : Container(
+                              margin: EdgeInsets.symmetric(vertical: kMarginY),
+                              child: Row(children: [
+                                BigtitleText(
+                                    text: 'Money', bolder: true, size: 12)
+                              ])),
                       Container(
                           decoration: BoxDecoration(
                             color: ColorsApp.greySecond,
@@ -558,15 +557,16 @@ class ManageView extends StatelessWidget {
                                     .getListCommandes();
                                 Get.toNamed(AppLinks.COMMANDE_FOR_USER);
                               }),
-                          AppSettingComp(
-                              title: 'Mes affilies',
-                              icon: Assets.bagmoney,
-                              onTap: () {
-                                ViewFunctions().showIndisponible();
-                                // Get.toNamed(AppLinks.COMMANDE_FOR_USER);
-                                // Share.share('check out my website https://example.com',
-                                //     subject: 'Look what I made!');
-                              }),
+                          // if (_manager.User != null)
+                            AppSettingComp(
+                                title: 'Mes affilies',
+                                icon: Assets.bagmoney,
+                                onTap: () {
+                                  // ViewFunctions().showIndisponible();
+                                  Get.toNamed(AppLinks.FIEU_LIST);
+                                  // Share.share('check out my website https://example.com',
+                                  //     subject: 'Look what I made!');
+                                }),
                           AppSettingComp(
                               title: 'Mes Preferences',
                               icon: Assets.bagmoney,

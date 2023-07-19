@@ -1,6 +1,8 @@
 class ApiRoutes {
   static const POPULAR_ALL = '/produit/read/client';
   static const POPULAR_PRODUCT = '/produit/read/popular';
+  static const LINK_PRODUCT = '/link/produit/read';
+  static const LINK_BOUTIQUE = '/link/boutique/read';
   static const CATEGORY_PRODUCT = '/category/read';
   static const CATEGORY = '/category/read/all';
   static const BOUTIQUE_FOR_CATEGORY = '/category/read/boutique';
@@ -57,5 +59,5 @@ class ApiRoutes {
 
   static const LIST_MESSAGE_SC = '/communication/message/list';
   static const LIST_MESSAGE_NEW = '/communication/message/new';
-
-} 
+  static const LIST_FIEUL = '/user/fieul';
+}

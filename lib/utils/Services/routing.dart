@@ -4,8 +4,11 @@ import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:EMIY/Views/CategoryBoutique/UserAbonnementView.dart';
+import 'package:EMIY/Views/Link/BoutiqueViewForLink.dart';
 import 'package:EMIY/Views/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Negociation/NegociationView.dart';
+import 'package:EMIY/Views/Link/ProductViewForLink.dart';
+import 'package:EMIY/Views/Parrainnage/ParrainnageView.dart';
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
 import 'package:EMIY/Views/Short/ShortView.dart';
 import 'package:EMIY/Views/UsersMange/ServiceClientView.dart';
@@ -49,9 +52,9 @@ class AppRoutes {
   static final pages = [
     GetPage(
         name: AppLinks.FIRST,
-        page: (){
-               secondInit();
-               return  FirstScreen();
+        page: () {
+          secondInit();
+          return FirstScreen();
         },
         transition: transitionX),
     GetPage(
@@ -159,10 +162,10 @@ class AppRoutes {
         name: AppLinks.WALLET,
         page: () => WalletView(),
         transition: transitionX),
-    GetPage(
-        name: AppLinks.PRODUCT_READ_ALL,
-        page: () => ListProduitsView(),
-        transition: transitionX),
+    // GetPage(
+    //     name: AppLinks.PRODUCT_READ_ALL,
+    //     page: () => ListProduitsView(),
+    //     transition: transitionX),
     GetPage(
         name: AppLinks.SETTING,
         page: () => SettingView(),
@@ -217,6 +220,22 @@ class AppRoutes {
         name: AppLinks.SERVICE_CLIENT,
         page: () => ServiceClientView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.PRODUCT_FOR_LINK,
+        page: () => ProductViewForLink(),
+        transition: transitionX),
+    GetPage(
+        name: AppLinks.BOUTIQUE_FOR_LINK,
+        page: () => BoutiqueViewForLink(),
+        transition: transitionX),
+    GetPage(
+        name: AppLinks.BOUTIQUE_FOR_LINK,
+        page: () => BoutiqueViewForLink(),
+        transition: transitionX),
+    GetPage(
+        name: AppLinks.FIEU_LIST,
+        page: () => ParrainnageView(),
+        transition: transitionX),
   ];
 }
 
@@ -226,6 +245,8 @@ class AppLinks {
   static const String SHORT = "/short";
   static const String SHORT_BOUTIQUE = "/shortboutique";
   static const String PRODUCT_FOR_COMMANDE = "/pfc";
+  static const String PRODUCT_FOR_LINK = "/pflink";
+  static const String BOUTIQUE_FOR_LINK = "/bflink";
   static const String BOUTIQUE = "/boutique";
   static const String BOUTIQUE_NEW = "/boutique/new";
   static const String BOUTIQUE_LOYER = "/boutique/loyer";
@@ -259,6 +280,7 @@ class AppLinks {
   static const String BOUTIQUE_USER = "/boutique/user";
   static const String NEGOCIATION_NEW = "/negociation/new";
   static const String NEGOCIATION_LIST = "/negociation/list";
+  static const String FIEU_LIST = "/fieul/list";
 }
 
 // <?php

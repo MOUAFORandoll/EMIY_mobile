@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ProductForBoutiqueComponent extends StatelessWidget {
-  ProduitModel produit;
+  var produit;
   var height, index;
 
   ProductForBoutiqueComponent(

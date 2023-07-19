@@ -50,16 +50,25 @@
       <!-- App Links -->
       <intent-filter >
         <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
+        <category
+          android:name="android.intent.category.DEFAULT" />
+        <category
+          android:name="android.intent.category.BROWSABLE" />
         <!-- Accepts URIs that begin with https://YOUR_HOST -->
-      
-         <data
+
+        <data
           android:scheme="http"
           android:pathPrefix="/produits"
-          android:host="emiy-shop.000webhostapp.com" /> 
+          android:host="emiy-shop.000webhostapp.com" />  <data
+          android:scheme="http"
+          android:pathPrefix="/boutiques"
+          android:host="emiy-shop.000webhostapp.com" />
+        <data
+          android:scheme="http"
+          android:pathPrefix="/subscribes"
+          android:host="emiy-shop.000webhostapp.com" />
 
-
+        
           <data android:scheme="https"   /> 
       </intent-filter>
     </activity>

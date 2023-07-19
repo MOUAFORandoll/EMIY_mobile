@@ -147,6 +147,7 @@ class ShoppingproductComponent extends StatelessWidget {
                                     inconSize: 12.0,
                                     semanticLabel: "Ajouter",
                                     onTap: () {
+                                      print(cartM.id);
                                       cart.updateQuantityProduct(
                                           cartM.id, true); // Get.back();
                                     },

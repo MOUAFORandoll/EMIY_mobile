@@ -40,10 +40,10 @@ class ProductView extends StatelessWidget {
         ? Get.find<ProductController>().produitList[index]
         : Get.parameters['type'] == 'search'
             ? Get.find<SearchController>().listResultSeaarch[index]
-            : Get.parameters['type'] == '1'
+            /*  : Get.parameters['type'] == '1'
                 ? Get.find<ProductController>().produitListAll[index]
-                : Get.find<CategoryBoutiqueController>()
-                    .produitBoutiqueList[index];
+                */
+            : Get.find<CategoryBoutiqueController>().produitBoutiqueList[index];
     var product = produ as ProduitModel;
     Get.find<ProductController>()
         .initProduct(Get.find<CartController>(), product);

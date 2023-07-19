@@ -8,6 +8,7 @@ import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/controller/categoryController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/controller/productController.dart';
@@ -45,6 +46,8 @@ import 'package:uni_links/uni_links.dart' as uni_links;
 import 'dart:async';
 import 'dart:io';
 
+import '../../repository/linkRepo.dart';
+
 // ...
 Future<void> initApp() async {
   await requestPermission();
@@ -66,6 +69,7 @@ Future<void> secondInit() async {
   Get.find<CategoryBoutiqueController>().getCategory();
   Get.find<CategoryBoutiqueController>().getListBoutiques();
   Get.find<ManagerController>().newLocalisation();
+  Get.find<ManagerController>().getListFieul();
   Get.find<BuyShopController>().getPointLivraisom();
   Get.find<BoutiqueController>().getBoutique();
   Get.find<BoutiqueController>().getListAbonnementForBoutique();
@@ -125,11 +129,12 @@ Future<void> initServices() async {
   Get.put(ManagerController(manageRepo: Get.find()), permanent: true);
   Get.put(CommandeRepo(apiClient: Get.find()), permanent: true);
   Get.put(CommandeController(commandeRepo: Get.find()), permanent: true);
+  Get.put(CartController(), permanent: true);
   Get.put(ProductRepo(apiClient: Get.find()), permanent: true);
   Get.put(ProductController(productRepo: Get.find()), permanent: true);
   Get.put(BoutiqueRepo(apiClient: Get.find()), permanent: true);
   Get.put(BoutiqueController(boutiqueRepo: Get.find()), permanent: true);
-  Get.put(CartController(), permanent: true);
+  
   Get.put(BuyShoopingCartRepo(apiClient: Get.find()), permanent: true);
   Get.put(BuyShopController(buySoppingCartRepo: Get.find()), permanent: true);
   Get.put(CategoryBoutiqueRepo(apiClient: Get.find()), permanent: true);
@@ -147,6 +152,10 @@ Future<void> initServices() async {
   Get.put(ServiceClientRepo(apiClient: Get.find()), permanent: true);
   Get.put(ServiceClientController(serviceClientRepo: Get.find()),
       permanent: true);
+      
+  Get.put(LinkRepo(apiClient: Get.find()), permanent: true);
+
+  Get.put(LinkController(linkRepo: Get.find()), permanent: true);
 }
 
 requestPermission() async {

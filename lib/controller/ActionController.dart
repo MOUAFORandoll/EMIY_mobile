@@ -49,7 +49,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class ActionController extends GetxController {
   final ActionRepo actionRepo;
   ActionController({required this.actionRepo});
@@ -469,7 +468,7 @@ class ActionController extends GetxController {
                   height: kSmHeight / 1.7,
                   width: kSmWidth / 4.2,
                   child: SvgPicture.asset(
-                    Assets.shoppingCart,
+                    Assets.user,
                     width: 90,
                     height: 90,
                     color:
