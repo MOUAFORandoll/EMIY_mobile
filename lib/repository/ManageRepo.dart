@@ -21,8 +21,8 @@ class ManageRepo extends GetxService {
     // ignore: unnecessary_null_comparison
     if (getU != null) {
       // if (getU.length != 0) {
-      Response a =
-          await apiClient.getCollectionsP(ApiRoutes.USER, {'keySecret': getU});
+      Response a = await apiClient
+          .getCollections(ApiRoutes.USER + '?keySecret=${getU}');
       ;
 
       return a;
@@ -110,7 +110,10 @@ class ManageRepo extends GetxService {
     //print(data);
     Response a0 = await apiClient.getCollectionsP(ApiRoutes.SIGNUP, data);
     if (a0.statusCode == 201) {
-      var logdata = {'phone': data['phone'], 'password': data['password']};
+      var logdata = {
+        'phone': data['phone'].toString(),
+        'password': data['password']
+      };
       //  //print(logdata);
 
       Response a = await this.Login(logdata);
@@ -122,8 +125,14 @@ class ManageRepo extends GetxService {
 
   Future getListFieul(keySecret, page) async {
     Response a = await apiClient.getCollections(
-        ApiRoutes.LIST_FIEUL +
-            '?keySecret=${keySecret}&page=${page}');
+        ApiRoutes.LIST_FIEUL + '?keySecret=${keySecret}&page=${page}');
+
+    return a;
+  }
+
+  Future updateImageUser(data) async {
+    Response a = await apiClient.postData(ApiRoutes.USER_IMAGE_UPDATE, data);
+    ;
 
     return a;
   }

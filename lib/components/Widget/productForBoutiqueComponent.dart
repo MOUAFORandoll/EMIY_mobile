@@ -14,11 +14,11 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ProductForBoutiqueComponent extends StatelessWidget {
-  var produit;
+  var produit,type;
   var height, index;
 
   ProductForBoutiqueComponent(
-      {required this.produit, required this.index, this.height});
+      {required this.produit, required this.index, this.height,this.type='2'});
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class ProductForBoutiqueComponent extends StatelessWidget {
         // //print(AppLinks.PRODUCT);
 
         Get.toNamed(AppLinks.PRODUCT +
-            '?index=${index}&type=2&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
+            '?index=${index}&type=${type}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
       },
     );
   }

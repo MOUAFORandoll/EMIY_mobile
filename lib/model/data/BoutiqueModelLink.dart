@@ -3,6 +3,8 @@
 Map<String, dynamic> map = jsonDecode(<myJSONString>);
 var myBoutiqueModelLinkNode = BoutiqueModelLink.fromJson(map);
 */
+import 'package:EMIY/utils/Services/apiUrl.dart';
+
 class Image {
   int? id;
   String? src;
@@ -111,6 +113,7 @@ class BoutiqueModelLink {
   bool? status;
   int? note;
   bool? statusabonnement;
+  String? lienBoutique;
   String? dateCreated;
   List<Image?>? images;
   Localisation? localisation;
@@ -123,6 +126,7 @@ class BoutiqueModelLink {
       this.titre,
       this.status,
       this.note,
+      this.lienBoutique,
       this.statusabonnement,
       this.dateCreated,
       this.images,
@@ -133,6 +137,7 @@ class BoutiqueModelLink {
     codeBoutique = json['codeBoutique'];
     user = json['user'];
     description = json['description'];
+    lienBoutique = ApiUrl.external_link + 'boutiques/' + json["codeBoutique"];
     titre = json['titre'];
     status = json['status'];
     note = json['note'];

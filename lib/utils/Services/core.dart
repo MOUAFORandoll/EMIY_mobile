@@ -26,7 +26,7 @@ import 'package:EMIY/repository/LivreurRepo.dart';
 import 'package:EMIY/repository/ManageRepo.dart';
 import 'package:EMIY/repository/categoryRepo.dart';
 import 'package:EMIY/repository/negociationRepo.dart';
-import 'package:EMIY/repository/popularProductRepo.dart';
+import 'package:EMIY/repository/ProductRepo.dart';
 import 'package:EMIY/utils/Services/ApiClient.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
@@ -55,32 +55,33 @@ Future<void> initApp() async {
   await GetStorage.init();
 
   await Get.find<DataBaseController>().init();
-  Get.find<ManagerController>().getUserDB();
-  Get.find<ManagerController>().getKeyU();
-  Get.find<ManagerController>().getUser();
-  Get.find<ActionController>().generalSocket();
+  // Get.find<ManagerController>().getUserDB();
+  // Get.find<ManagerController>().getKeyU();
+  // Get.find<ManagerController>().getUser();
+  // Get.find<ActionController>().generalSocket();
 
-  Get.find<ServiceClientController>().connectSockey();
+  // Get.find<ServiceClientController>().connectSockey();
 }
 
 Future<void> secondInit() async {
-  Get.find<CommandeController>().getListCommandes();
-  Get.find<ProductController>().getPopularProduit();
-  Get.find<CategoryBoutiqueController>().getCategory();
-  Get.find<CategoryBoutiqueController>().getListBoutiques();
-  Get.find<ManagerController>().newLocalisation();
-  Get.find<ManagerController>().getListFieul();
-  Get.find<BuyShopController>().getPointLivraisom();
-  Get.find<BoutiqueController>().getBoutique();
-  Get.find<BoutiqueController>().getListAbonnementForBoutique();
+  // Get.find<CommandeController>().getListCommandes();
+  // Get.find<ProductController>().getPopularProduit();
+  // Get.find<CategoryBoutiqueController>().getCategory();
+  // Get.find<CategoryBoutiqueController>().getListBoutiques();
+  // Get.find<ManagerController>().newLocalisation();
+  // Get.find<ManagerController>().getListFieul();
+  // Get.find<BuyShopController>().getPointLivraisom();
+  // Get.find<BoutiqueController>().getBoutique();
+  // Get.find<BoutiqueController>().getListAbonnementForBoutique();
   Get.find<ShortController>().getListShort();
-  Get.find<NegociationController>().getListNegociation();
+  // Get.find<NegociationController>().getListNegociation();
+  // Get.find<ProductController>().getListProduitPreference();
 
-  Get.find<ActionController>().getListModePaiement();
-  Get.find<BuyShopController>().setUserInfo();
+  // Get.find<ActionController>().getListModePaiement();
+  // Get.find<BuyShopController>().setUserInfo();
 
-  Get.find<ServiceClientController>().connectSockey();
-  Get.find<ServiceClientController>().getEchange();
+  // Get.find<ServiceClientController>().connectSockey();
+  // Get.find<ServiceClientController>().getEchange();
 }
 
 // ...
@@ -91,27 +92,28 @@ Future<void> initAllApp() async {
   await GetStorage.init();
 
   await Get.find<DataBaseController>().init();
-  Get.find<ManagerController>().getKeyU();
-  Get.find<ManagerController>().getUser();
-  Get.find<ActionController>().generalSocket();
+  // Get.find<ManagerController>().getKeyU();
+  // Get.find<ManagerController>().getUser();
+  // Get.find<ActionController>().generalSocket();
 
-  Get.find<ManagerController>().newLocalisation();
-  Get.find<CommandeController>().getListCommandes();
-  Get.find<CategoryBoutiqueController>().getListBoutiques();
+  // Get.find<ManagerController>().newLocalisation();
+  // Get.find<CommandeController>().getListCommandes();
+  // Get.find<CategoryBoutiqueController>().getListBoutiques();
 
-  Get.find<ProductController>().getPopularProduit();
-  Get.find<BuyShopController>().getPointLivraisom();
-  Get.find<BoutiqueController>().getBoutique();
-  Get.find<BoutiqueController>().getListAbonnementForBoutique();
-  Get.find<CategoryBoutiqueController>().getCategory();
+  // Get.find<ProductController>().getPopularProduit();
+  // Get.find<BuyShopController>().getPointLivraisom();
+  // Get.find<BoutiqueController>().getBoutique();
+  // Get.find<BoutiqueController>().getListAbonnementForBoutique();
+  // Get.find<CategoryBoutiqueController>().getCategory();
   Get.find<ShortController>().getListShort();
-  Get.find<NegociationController>().getListNegociation();
+  // Get.find<NegociationController>().getListNegociation();
+  // Get.find<ProductController>().getListProduitPreference();
 
-  Get.find<BuyShopController>().setUserInfo();
-  Get.find<ActionController>().getListModePaiement();
+  // Get.find<BuyShopController>().setUserInfo();
+  // Get.find<ActionController>().getListModePaiement();
 
-  Get.find<ServiceClientController>().connectSockey();
-  Get.find<ServiceClientController>().getEchange();
+  // Get.find<ServiceClientController>().connectSockey();
+  // Get.find<ServiceClientController>().getEchange();
 }
 
 Future<void> initServices() async {
@@ -134,7 +136,7 @@ Future<void> initServices() async {
   Get.put(ProductController(productRepo: Get.find()), permanent: true);
   Get.put(BoutiqueRepo(apiClient: Get.find()), permanent: true);
   Get.put(BoutiqueController(boutiqueRepo: Get.find()), permanent: true);
-  
+
   Get.put(BuyShoopingCartRepo(apiClient: Get.find()), permanent: true);
   Get.put(BuyShopController(buySoppingCartRepo: Get.find()), permanent: true);
   Get.put(CategoryBoutiqueRepo(apiClient: Get.find()), permanent: true);
@@ -152,7 +154,7 @@ Future<void> initServices() async {
   Get.put(ServiceClientRepo(apiClient: Get.find()), permanent: true);
   Get.put(ServiceClientController(serviceClientRepo: Get.find()),
       permanent: true);
-      
+
   Get.put(LinkRepo(apiClient: Get.find()), permanent: true);
 
   Get.put(LinkController(linkRepo: Get.find()), permanent: true);

@@ -19,7 +19,7 @@ class BoutiqueComponentHomeN extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(AppLinks.BOUTIQUE +
-            '?status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note.toString()}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
+            '?lienBoutique=${boutique.lienBoutique.toString()}status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note.toString()}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
       },
       child: Container(
         margin:

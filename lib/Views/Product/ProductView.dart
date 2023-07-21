@@ -1,3 +1,4 @@
+import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Button/app_button.dart';
 import 'package:EMIY/controller/ActionController.dart';
 import 'package:EMIY/controller/searchController.dart';
@@ -24,17 +25,24 @@ import 'package:EMIY/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rating_bar/rating_bar.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ProductView extends StatelessWidget {
   final int index;
   ProductView({Key? key, required this.index}) : super(key: key);
+
   ScrollController _scrollController = new ScrollController();
 
   final CarouselController _controller = CarouselController();
+
+  // @override
+  // void initState() {
+  //   // Get.find<ManagerController>().initCurrent();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    Get.find<ManagerController>().initCurrent();
-
     //print(index);
     Object produ = Get.parameters['type'] == '0'
         ? Get.find<ProductController>().produitList[index]
@@ -43,7 +51,10 @@ class ProductView extends StatelessWidget {
             /*  : Get.parameters['type'] == '1'
                 ? Get.find<ProductController>().produitListAll[index]
                 */
-            : Get.find<CategoryBoutiqueController>().produitBoutiqueList[index];
+            : Get.parameters['type'] == 'favorite'
+                ? Get.find<ProductController>().preferenceList[index]
+                : Get.find<CategoryBoutiqueController>()
+                    .produitBoutiqueList[index];
     var product = produ as ProduitModel;
     Get.find<ProductController>()
         .initProduct(Get.find<CartController>(), product);
@@ -129,7 +140,7 @@ class ProductView extends StatelessWidget {
                                   // enableInfiniteScroll: true,
                                   viewportFraction: 1.0,
                                   onPageChanged: (index, reason) {
-                                    manage.setCurrent(index);
+                                    // manage.setCurrent(index);
                                   },
                                   autoPlay: true,
                                   autoPlayInterval: Duration(seconds: 3),
@@ -223,34 +234,34 @@ class ProductView extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children:
-                                    product.images.asMap().entries.map((entry) {
-                                  // //print(entry.key);
-                                  return GestureDetector(
-                                    onTap: () =>
-                                        _controller.animateToPage(entry.key),
-                                    child: Container(
-                                      width: 8.0,
-                                      height: 8.0,
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 10.0, horizontal: 4.0),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: (Theme.of(context)
-                                                          .brightness ==
-                                                      Brightness.dark
-                                                  ? Colors.white
-                                                  : Colors.black)
-                                              .withOpacity(
-                                                  manage.current == entry.key
-                                                      ? 0.9
-                                                      : 0.2)),
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children:
+                              //       product.images.asMap().entries.map((entry) {
+                              //     // //print(entry.key);
+                              //     return GestureDetector(
+                              //       onTap: () =>
+                              //           _controller.animateToPage(entry.key),
+                              //       child: Container(
+                              //         width: 8.0,
+                              //         height: 8.0,
+                              //         margin: EdgeInsets.symmetric(
+                              //             vertical: 10.0, horizontal: 4.0),
+                              //         decoration: BoxDecoration(
+                              //             shape: BoxShape.circle,
+                              //             color: (Theme.of(context)
+                              //                             .brightness ==
+                              //                         Brightness.dark
+                              //                     ? Colors.white
+                              //                     : Colors.black)
+                              //                 .withOpacity(
+                              //                     manage.current == entry.key
+                              //                         ? 0.9
+                              //                         : 0.2)),
+                              //       ),
+                              //     );
+                              //   }).toList(),
+                              // ),
                               Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -282,6 +293,11 @@ class ProductView extends StatelessWidget {
                                                       ' Pieces disponible: ')
                                         ],
                                       ),
+                                      ShareButton(
+                                        libelle:
+                                            'Suivez ce lien pour consulter ce produit  : ' +
+                                                product.lienProduit,
+                                      )
                                       /*  InkWell(
                                           child: Row(
                                             children: [

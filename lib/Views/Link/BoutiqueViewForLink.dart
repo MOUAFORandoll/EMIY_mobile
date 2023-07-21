@@ -1,3 +1,5 @@
+import 'package:EMIY/components/Button/AppIconButton.dart';
+import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/productForBoutiqueLinkComponent.dart';
 import 'package:EMIY/controller/ActionController.dart';
@@ -31,6 +33,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:rating_bar/rating_bar.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
@@ -256,28 +259,41 @@ class BoutiqueViewForLink extends StatelessWidget {
                                                   ]),
                                               onTap: () {})
                                         ]),
-                                    Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // Text(
-                                          //   Get.parameters['description'].toString(),
-                                          //   style: TextStyle(
-                                          //     fontSize: 14,
-                                          //     fontWeight: FontWeight.bold,
-                                          //   ),
-                                          // ),
-                                          Text(
-                                            'Situe a ' +
-                                                manageLink.boutique
-                                                    .localisation!.ville
-                                                    .toString(),
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ])
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              // Text(
+                                              //   Get.parameters['description'].toString(),
+                                              //   style: TextStyle(
+                                              //     fontSize: 14,
+                                              //     fontWeight: FontWeight.bold,
+                                              //   ),
+                                              // ),
+                                              Text(
+                                                'Situe a ' +
+                                                    manageLink.boutique
+                                                        .localisation!.ville
+                                                        .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ]),
+                                        ShareButton(
+                                          libelle:
+                                              'Suivez ce lien pour consulter cette boutique  : ' +
+                                                  manageLink
+                                                      .boutique.lienBoutique
+                                                      .toString(),
+                                        )
+                                      ],
+                                    )
                                   ])),
                               padding: EdgeInsets.only(top: 5, bottom: 10).add(
                                   EdgeInsets.symmetric(horizontal: kMarginX)),

@@ -9,6 +9,7 @@ import 'package:EMIY/Views/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Negociation/NegociationView.dart';
 import 'package:EMIY/Views/Link/ProductViewForLink.dart';
 import 'package:EMIY/Views/Parrainnage/ParrainnageView.dart';
+import 'package:EMIY/Views/Product/PreferenceView.dart';
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
 import 'package:EMIY/Views/Short/ShortView.dart';
 import 'package:EMIY/Views/UsersMange/ServiceClientView.dart';
@@ -235,11 +236,15 @@ class AppRoutes {
     GetPage(
         name: AppLinks.FIEU_LIST,
         page: () => ParrainnageView(),
+        transition: transitionX),  GetPage(
+        name: AppLinks.PREFERENCE_CLIENT,
+        page: () => PreferenceView(),
         transition: transitionX),
   ];
 }
 
 class AppLinks {
+  static const String PREFERENCE_CLIENT = "/preference_client";
   static const String SERVICE_CLIENT = "/service_client";
   static const String ABONNEMENT = "/abonnement";
   static const String SHORT = "/short";

@@ -17,7 +17,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DataBaseController extends GetxController {
-  String linkDb = 'FahKap5.db';
+  String linkDb = 'FahKap6.db';
   // ignore: unused_field
   static Database? _database;
 
@@ -60,6 +60,7 @@ class DataBaseController extends GetxController {
        nom String, 
        prenom String, 
        email String,
+       profile String,
         phone INTEGER,
         dateCreated String
        
@@ -132,6 +133,7 @@ class DataBaseController extends GetxController {
         "phone": User.phone,
         "email": User.email,
         "dateCreated": User.dateCreated,
+        "profile": User.profile,
       });
       print(a);
       return true;

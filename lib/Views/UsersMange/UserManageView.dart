@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:EMIY/components/Widget/BtnManageView.dart';
+import 'package:EMIY/components/Widget/CircleImage.dart';
 import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_input.dart';
 import 'package:EMIY/components/Widget/app_setting_comp.dart';
@@ -16,6 +17,7 @@ import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/Services/validators.dart';
 import 'package:EMIY/utils/constants/assets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -78,11 +80,10 @@ class UserManageView extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        CircleAvatar(
-                            backgroundColor: ColorsApp.skyBlue,
-                            radius: kWidth / 12,
-                            backgroundImage:
-                                AssetImage("assets/images/error.gif")),
+                        InkWell(
+                          onTap: () => _manager.updateImageUser(),
+                          child: CircleImage(imageUrl: _manager.User.profile),
+                        ),
                         Container(
                             margin: EdgeInsets.symmetric(
                                 vertical: kMarginY, horizontal: kMarginX),

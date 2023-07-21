@@ -18,25 +18,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:EMIY/utils/constants/apiRoute.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'boutiqueController.dart';
 
 class ManagerController extends GetxController {
-  int _current = 0;
-  int get current => _current;
-  initCurrent() {
-    _current = 0;
-    update();
-    // //print('curent ${_current}');
-  }
+  // int _current = 0;
+  // int get current => _current;
+  // initCurrent() {
+  //   _current = 0;
+  //   update();
+  //   // //print('curent ${_current}');
+  // }
 
   final dababase = Get.find<DataBaseController>();
 
-  setCurrent(int i) {
-    _current = i;
-    update();
-    // //print('curent ${_current}');
-  }
+  // setCurrent(int i) {
+  //   _current = i;
+  //   update();
+  //   // //print('curent ${_current}');
+  // }
 
   late Timer _timer;
 
@@ -177,10 +178,12 @@ class ManagerController extends GetxController {
 
     try {
       Response response = await manageRepo.getUser();
-      //print('user-------------------------${response.body}');
+      print('user-------------------------${response.body}');
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _User = UserModel.fromJson(response.body['data']);
+          update();
+
           _Compte = CompteModel.fromJson(response.body['compte']);
           update();
 
@@ -276,7 +279,7 @@ class ManagerController extends GetxController {
 
   TextEditingController _rnewpwdU = TextEditingController();
   get rnewpwdU => _rnewpwdU;
-  final _formKeyUpdateU = GlobalKey<FormState>();
+  final _formKeyUpdateU = new GlobalKey<FormState>();
   get formKeyUpdateU => _formKeyUpdateU;
   bool _isUpdating = false;
   bool get isUpdating => _isUpdating;
@@ -320,12 +323,75 @@ class ManagerController extends GetxController {
     }
   }
 
+  Future updateImageUser() async {
+    try {
+      var image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 100,
+          maxHeight: 500,
+          maxWidth: 500);
+
+      // File? croppedFile = await ImageCropper().cropImage(
+      //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      //   sourcePath: image.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      // );
+      if (image != null) {
+        fn.loading(
+            'Boutique', 'Mise a jour de l\'affiche de votre boutique en cours');
+        var key = await dababase.getKey();
+
+        try {
+          FormData formData = new FormData({
+            "file": await MultipartFile(
+              image.path,
+              filename: "Image.jpg",
+            ),
+            'keySecret': key
+          });
+
+          print(formData.files);
+          print(key);
+
+          Response response = await manageRepo.updateImageUser(formData);
+          print(response.body);
+          if (response.statusCode == 200) {
+            await getUser();
+          }
+
+          // fn.closeSnack();
+
+          fn.snackBar('Mise a jour', response.body['message'], true);
+          _isUpdating = false;
+          // Get.back(closeOverlays: true);
+          update();
+        } catch (e) {
+          fn.closeSnack();
+
+          fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+
+          _isUpdating = false;
+          update();
+          //print(e);
+        }
+      }
+    } catch (e) {
+      // _showToastPictureError(context);
+    }
+  }
+
   TextEditingController _phoneLog = TextEditingController();
   get phoneLog => _phoneLog;
   TextEditingController _passwordLog = TextEditingController();
   get passwordLog => _passwordLog;
 
-  final _formKeyLog = GlobalKey<FormState>();
+  final _formKeyLog = new GlobalKey<FormState>();
   get formKeyLog => _formKeyLog;
   bool _isConnected = false;
   bool get isConnected => _isConnected;
@@ -391,11 +457,12 @@ class ManagerController extends GetxController {
   setCodeParrain(codeParrain0) {
     _codeParrain = codeParrain0;
     update();
+    print('----------code :------${_codeParrain}');
   }
 
   TextEditingController _email = TextEditingController();
   TextEditingController get email => _email;
-  final _formKeyReg = GlobalKey<FormState>();
+  final _formKeyReg = new GlobalKey<FormState>();
   get formKeyReg => _formKeyReg;
   bool _isSignUp = false;
   bool get isSignUp => _isSignUp;
@@ -410,14 +477,14 @@ class ManagerController extends GetxController {
     }
 
     var data = {
-      'phone': phone.text,
+      'phone': int.parse(phone.text),
       'password': pass.text,
-      "codeParrain": codeParrain,
+      "codeParrainage": codeParrain,
       "nom": name.text,
       "prenom": surname.text,
       "email": email.text,
     };
-    //print(data);
+    print(data);
     fn.loading('Inscription', 'Creatoin de votre compte en cours');
 
     try {
@@ -494,7 +561,7 @@ class ManagerController extends GetxController {
               .map((e) => UserModel.fromJson(e))
               .toList());
 
-          _isAbUserPage++;
+          // _isAbUserPage++;
         }
 
         _isLoadedPB = 1;

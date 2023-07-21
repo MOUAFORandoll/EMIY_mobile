@@ -17,6 +17,7 @@ class UserModel {
     required this.email,
     required this.phone,
     this.status = true,
+    required this.profile,
     required this.dateCreated,
   });
 
@@ -27,6 +28,7 @@ class UserModel {
   String phone;
   bool status;
   String dateCreated;
+  String profile;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["id"],
@@ -35,6 +37,7 @@ class UserModel {
         email: json["email"],
         phone: json["phone"].toString(),
         status: json["status"],
+        profile: json["profile"],
         dateCreated: json["dateCreated"],
       );
 
@@ -46,5 +49,6 @@ class UserModel {
         "phone": phone,
         "status": status,
         "dateCreated": dateCreated,
+        "profile": profile,
       };
 }

@@ -2,6 +2,7 @@
 //
 //     final produitModel = produitModelFromJson(jsonString);
 
+import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -24,17 +25,19 @@ class ProduitModel {
     required this.status,
     required this.negociable,
     required this.images,
+    required this.lienProduit,
   });
 
   final String codeProduit;
   final String boutique;
   final String description;
   final String titre;
+  final String lienProduit;
   final int quantite;
   final int id;
   final int prix;
-    int like;
-    bool islike;
+  int like;
+  bool islike;
   final bool status;
   final bool negociable;
   final List<ImageU> images;
@@ -42,6 +45,7 @@ class ProduitModel {
   factory ProduitModel.fromJson(Map<String, dynamic> json) => ProduitModel(
         id: json["id"] == null ? null : json["id"],
         codeProduit: json["codeProduit"] == null ? null : json["codeProduit"],
+        lienProduit: ApiUrl.external_link + 'produits/' + json["codeProduit"],
         boutique: json["boutique"] == null ? null : json["boutique"],
         description: json["description"] == null ? null : json["description"],
         titre: json["titre"] == null ? null : json["titre"],

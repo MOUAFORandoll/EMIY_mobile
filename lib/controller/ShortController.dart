@@ -4,6 +4,7 @@ import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/BoutiqueUserModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/CommandeBoutiqueModel.dart';
+import 'package:EMIY/model/data/CommentShortModel.dart';
 import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
 import 'package:EMIY/model/data/ShortModel.dart';
 import 'package:EMIY/repository/ShortRepo.dart';
@@ -22,6 +23,8 @@ import 'package:video_player/video_player.dart';
 class ShortController extends GetxController {
   final service = new ApiService();
   VideoPlayerController? controller;
+  final dababase = Get.find<DataBaseController>();
+
   // ChewieController? chewieController;
   final ShortRepo shortRepo;
   ShortController({required this.shortRepo});
@@ -138,6 +141,7 @@ class ShortController extends GetxController {
   int indexC = 1;
   Future<void> getListShort() async {
     // //print('***short******************response**********');
+    var key = await dababase.getKey();
 
     if (_loaddata == false) {
       print('-----------get---');
@@ -145,7 +149,7 @@ class ShortController extends GetxController {
       _loaddata = true;
       update();
       try {
-        Response response = await shortRepo.getListShort(indexC);
+        Response response = await shortRepo.getListShort(indexC, key);
 
         // _listShort = [];
         // _listShort.clear();
@@ -154,8 +158,8 @@ class ShortController extends GetxController {
         if (response.body != null) {
           if (response.body['data'] != null) {
             if (response.body['data'].length != 0) {
-              //print('short**************************');
-              //print(response.body['data']);
+              print('short**************************');
+
               // (response.body['data'] as List).forEach((e) async {
               //   var ver = await checkVideoFormat(e['src']);
               //   print(e['src']);
@@ -173,13 +177,14 @@ class ShortController extends GetxController {
               _listShort.addAll((response.body['data'] as List)
                   .map((e) => ShortModel.fromJson(e))
                   .toList());
+              indexC++;
+              print(_listShort.length);
+              currentShortData = _listShort.first;
+              _loaddata = false;
+              _isLoadedP = 1;
               update();
+              print(_isLoadedP);
             }
-            _isLoadedP = 1;
-            indexC++;
-
-            _loaddata = false;
-            update();
           }
         }
       } catch (e) {
@@ -205,8 +210,141 @@ class ShortController extends GetxController {
 
   int _currentShort = 0;
   int get currentShort => _currentShort;
+  var currentShortData;
   setCurrent(index) {
     _currentShort = index;
+    currentShortData = _listShort[_currentShort];
     update();
+  }
+
+  newLikeShort() async {
+    currentShortData.nbre_like = currentShortData.is_like
+        ? currentShortData.nbre_like - 1
+        : currentShortData.nbre_like + 1;
+    currentShortData.is_like = !currentShortData.is_like;
+    update();
+    var key = await dababase.getKey();
+
+    try {
+      var data = {'id': currentShortData.id, 'keySecret': key};
+      print(data);
+      Response response = await shortRepo.newLike(data);
+
+      if (response.statusCode == 200) {
+        if (response.body != null) {
+          if (response.body['short'] != null) {
+            print(response.body['short']);
+            var newShort = ShortModel.fromJson(response.body['short']);
+
+            int index =
+                _listShort.indexWhere((short) => short.id == newShort.id);
+            if (index >= 0) {
+              _listShort[index] = newShort;
+
+              update();
+            }
+            update();
+          }
+        }
+      } else {
+        currentShortData.nbre_like = !currentShortData.is_like
+            ? currentShortData.nbre_like - 1
+            : currentShortData.nbre_like + 1;
+        update();
+      }
+    } catch (e) {
+      // fn.closeSnack();
+      // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      currentShortData.nbre_like = !currentShortData.is_like
+          ? currentShortData.nbre_like - 1
+          : currentShortData.nbre_like + 1;
+      currentShortData.is_like = !currentShortData.is_like;
+      update();
+      //print(e);
+    }
+  }
+
+  bool _sendComment = false;
+  bool get sendComment => _sendComment;
+  TextEditingController _textEditingController = TextEditingController();
+  TextEditingController get textEditingController => _textEditingController;
+  newCommentShort() async {
+    _sendComment = true;
+    update();
+    var key = await dababase.getKey();
+    var data = {
+      'id': currentShortData.id,
+      'keySecret': key,
+      'comment': textEditingController.text
+    };
+    try {
+      textEditingController.text = '';
+      print(data);
+      Response response = await shortRepo.newComment(data);
+
+      if (response.statusCode == 200) {
+        if (response.body != null) {
+          if (response.body['commentaire'] != null) {
+            print(response.body['commentaire']);
+
+            _sendComment = false;
+            _listCommentShort
+                .add(CommentShortModel.fromJson(response.body['commentaire']));
+            int index = _listShort
+                .indexWhere((short) => short.id == currentShortData.id);
+            if (index >= 0) {
+              _listShort[index].nbre_commentaire = _listCommentShort.length;
+
+              update();
+            }
+            update();
+          }
+        }
+      } else {
+        textEditingController.text = data['comment'];
+        update();
+      }
+    } catch (e) {
+      textEditingController.text = data['comment'];
+      // fn.closeSnack();
+      // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      _sendComment = false;
+      update();
+      //print(e);
+    }
+  }
+
+  List<CommentShortModel> _listCommentShort = [];
+  List<CommentShortModel> get listCommentShort => _listCommentShort;
+
+  int _loadComment = 0;
+  int get loadComment => _loadComment;
+  getListCommentShort() async {
+    _listCommentShort = [];
+    _loadComment = 0;
+    update();
+
+    try {
+      Response response = await shortRepo.getListComment(currentShortData.id);
+
+      if (response.statusCode == 200) {
+        if (response.body != null) {
+          if (response.body['data'] != null) {
+            print(response.body['data']);
+
+            _listCommentShort.addAll((response.body['data'] as List)
+                .map((e) => CommentShortModel.fromJson(e))
+                .toList());
+            _loadComment = 1;
+            update();
+          }
+        }
+      }
+    } catch (e) {
+      // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+
+      update();
+      //print(e);
+    }
   }
 }

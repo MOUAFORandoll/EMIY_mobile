@@ -22,7 +22,10 @@ class ShortModel {
       required this.boutique,
       required this.description,
       required this.date,
+      required this.nbre_commentaire,
+      required this.nbre_like,
       required this.status,
+      required this.is_like,
       required this.controller});
 
   final int id;
@@ -31,12 +34,18 @@ class ShortModel {
   final String src;
   final BoutiqueModel boutique;
   final String description;
+  int nbre_like;
+  int nbre_commentaire;
   final String date;
+  bool is_like;
   final bool status;
   var controller;
 
   factory ShortModel.fromJson(Map<String, dynamic> json) => ShortModel(
       id: json["id"] == null ? null : json["id"],
+      nbre_like: json["nbre_like"] == null ? null : json["nbre_like"],
+      nbre_commentaire:
+          json["nbre_commentaire"] == null ? null : json["nbre_commentaire"],
       titre: json["titre"] == null ? null : json["titre"],
       src: json["src"] == null ? null : json["src"],
       preview: json["preview"] == null ? null : json["preview"],
@@ -44,16 +53,20 @@ class ShortModel {
       description: json["description"] == null ? null : json["description"],
       date: json["date"] == null ? null : json["date"],
       status: json["status"] == null ? null : json["status"],
+      is_like: json["is_like"] == null ? null : json["is_like"],
       controller: VideoPlayerController.network(json["preview"]));
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "preview": preview == null ? null : preview,
+        "nbre_commentaire": nbre_commentaire == null ? null : nbre_commentaire,
+        "nbre_like": nbre_like == null ? null : nbre_like,
         "src": src == null ? null : src,
         "localisation": boutique.toJson(),
         "titre": titre == null ? null : titre,
         "description": description == null ? null : description,
         "date": date == null ? null : date,
+        "is_like": is_like == null ? null : is_like,
         "status": status == null ? null : status,
       };
 
@@ -78,6 +91,7 @@ class BoutiqueModel {
     required this.titre,
     required this.status,
     required this.note,
+    required this.lienBoutique,
     required this.dateCreated,
     required this.images,
     required this.localisation,
@@ -88,6 +102,7 @@ class BoutiqueModel {
   String description;
   String titre;
   bool status;
+  final String lienBoutique;
   final note;
   String dateCreated;
   List<Image> images;
@@ -98,6 +113,8 @@ class BoutiqueModel {
         user: json["user"],
         description: json["description"],
         titre: json["titre"],
+        lienBoutique:
+            ApiUrl.external_link + 'boutiques/' + json["codeBoutique"],
         status: json["status"],
         dateCreated: json["dateCreated"],
         note: double.parse(

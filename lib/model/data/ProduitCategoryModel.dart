@@ -5,6 +5,8 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
+import '../../utils/Services/apiUrl.dart';
+
 ProduitCategoryModel produitCategoryModelFromJson(String str) =>
     ProduitCategoryModel.fromJson(json.decode(str));
 
@@ -23,6 +25,7 @@ class ProduitCategoryModel {
     required this.islike,
     required this.like,
     required this.status,
+    required this.lienProduit,
     required this.images,
   });
 
@@ -32,6 +35,7 @@ class ProduitCategoryModel {
   final String titre;
   final int quantite;
   final int id;
+  final String lienProduit;
   final int prix;
   final int like;
   final bool islike;
@@ -43,6 +47,7 @@ class ProduitCategoryModel {
         id: json["id"] == null ? null : json["id"],
         codeProduit: json["codeProduit"] == null ? null : json["codeProduit"],
         boutique: json["boutique"] == null ? null : json["boutique"],
+        lienProduit: ApiUrl.external_link + 'produits/' + json["codeProduit"],
         description: json["description"] == null ? null : json["description"],
         titre: json["titre"] == null ? null : json["titre"],
       like:

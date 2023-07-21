@@ -116,7 +116,7 @@ class ActionController extends GetxController {
 
   getListModePaiement() async {
     _isLoadedMP = 0;
-    update();
+    refresh();
     try {
       Response response = await actionRepo.getModePaiement();
       _lmodePaiement.clear();
@@ -264,6 +264,7 @@ class ActionController extends GetxController {
         // fn.snackBar('Like', 'Effectue', true);
         ProduitModel produit = ProduitModel.fromJson(response.body['produit']);
         Get.find<ProductController>().updateProductInPopular(produit);
+        Get.find<ProductController>().getListProduitPreference();
       } else {
         Get.find<ProductController>().likeProductInPopular(codeProduit);
         fn.snackBar('Like', 'Erreur', false);

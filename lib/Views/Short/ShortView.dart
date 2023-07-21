@@ -38,7 +38,7 @@ class _ShortViewState extends State<ShortView> {
                   Container(
                       height: Get.height,
                       width: Get.width,
-                      child: _ShortController.isLoadedP == 0
+                      child: /*  _ShortController.isLoadedP == 0
                           ? Container(
                               child: SpinKitRing(
                                 lineWidth: 4,
@@ -46,7 +46,8 @@ class _ShortViewState extends State<ShortView> {
                                 size: 45,
                               ),
                             )
-                          : _ShortController.listShort.length == 0
+                          : */
+                          _ShortController.listShort.length == 0
                               ? Container(
                                   height: kHeight,
                                   child: AppEmpty(title: 'Aucun Short'))
@@ -63,7 +64,7 @@ class _ShortViewState extends State<ShortView> {
                           Get.back();
                         },
                       ))),
-                  _ShortController.isLoadedP == 0
+                  /*   _ShortController.isLoadedP == 0
                       ? Container(
                           child: SpinKitRing(
                             lineWidth: 4,
@@ -71,22 +72,23 @@ class _ShortViewState extends State<ShortView> {
                             size: 45,
                           ),
                         )
-                      : Positioned(
-                          top: kHeight / 1.7,
-                          left: kWidth / 1.3,
-                          child: Container(
-                              child: InkWell(
-                            child: ShortAction(
-                              short: _ShortController
-                                  .listShort[_ShortController.currentShort],
-                            ),
-                            onTap: () {
-                              _ShortController.controller!.pause();
+                      : */
+                  Positioned(
+                      top: kHeight / 2,
+                      left: kWidth / 1.3,
+                      child: Container(
+                          child: InkWell(
+                        child: ShortAction(
+                          short: _ShortController
+                              .listShort[_ShortController.currentShort],
+                        ),
+                        onTap: () {
+                          _ShortController.controller!.pause();
 
-                              Get.toNamed(AppLinks.BOUTIQUE +
-                                  '?note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
-                            },
-                          ))),
+                          Get.toNamed(AppLinks.BOUTIQUE +
+                              '?lienBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.lienBoutique.toString()}note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
+                        },
+                      ))),
                 ],
               )));
     });
@@ -113,7 +115,8 @@ class _ShortViewFState extends State<ShortViewF> {
   void initState() {
     super.initState();
     // _pageController = PageController(initialPage: 0);
-    //print('**********************short.listShort');
+    print('**********************short.listShort');
+    print('*********************${Get.find<ShortController>().initialise}');
     Get.find<ShortController>().initialise
         ? Get.find<ShortController>().controller!.play()
         : Get.find<ShortController>().changeVideo(0);

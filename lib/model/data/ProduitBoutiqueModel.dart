@@ -2,6 +2,7 @@
 //
 //     final produitBoutiqueModel = produitBoutiqueModelFromJson(jsonString);
 
+import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -23,6 +24,7 @@ class ProduitBoutiqueModel {
     required this.description,
     required this.status,
     required this.date,
+    required this.lienProduit,
     required this.images,
   });
 
@@ -33,6 +35,7 @@ class ProduitBoutiqueModel {
   int prix;
   final int like;
   final bool islike;
+  final String lienProduit;
   String description;
   bool status;
   String date;
@@ -42,6 +45,7 @@ class ProduitBoutiqueModel {
       ProduitBoutiqueModel(
         id: json["id"],
         codeProduit: json["codeProduit"],
+        lienProduit: ApiUrl.external_link + 'produits/' + json["codeProduit"],
         titre: json["titre"],
         quantite: json["quantite"],
         like:

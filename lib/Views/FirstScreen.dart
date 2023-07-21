@@ -203,7 +203,7 @@ class _FirstScreenState extends State<FirstScreen> { */
 
   @override
   Widget build(BuildContext context) {
-    uniLink();
+    // uniLink();
     return GetBuilder<ActionController>(
         builder: (_controller) => Scaffold(
               // extendBody for floating bar get better perfomance

@@ -1,3 +1,4 @@
+import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Button/app_button.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/controller/ActionController.dart';
@@ -25,6 +26,7 @@ import 'package:EMIY/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rating_bar/rating_bar.dart';
+import 'package:share_plus/share_plus.dart';
 
 // ignore: must_be_immutable
 class ProductViewForLink extends StatelessWidget {
@@ -234,39 +236,39 @@ class ProductViewForLink extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: manageLink.produit.images
-                                            .asMap()
-                                            .entries
-                                            .map((entry) {
-                                          // //print(entry.key);
-                                          return GestureDetector(
-                                            onTap: () => _controller
-                                                .animateToPage(entry.key),
-                                            child: Container(
-                                              width: 8.0,
-                                              height: 8.0,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 10.0,
-                                                  horizontal: 4.0),
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: (Theme.of(context)
-                                                                  .brightness ==
-                                                              Brightness.dark
-                                                          ? Colors.white
-                                                          : Colors.black)
-                                                      .withOpacity(
-                                                          manageLink.current ==
-                                                                  entry.key
-                                                              ? 0.9
-                                                              : 0.2)),
-                                            ),
-                                          );
-                                        }).toList(),
-                                      ),
+                                      // Row(
+                                      //   mainAxisAlignment:
+                                      //       MainAxisAlignment.center,
+                                      //   children: manageLink.produit.images
+                                      //       .asMap()
+                                      //       .entries
+                                      //       .map((entry) {
+                                      //     // //print(entry.key);
+                                      //     return GestureDetector(
+                                      //       onTap: () => _controller
+                                      //           .animateToPage(entry.key),
+                                      //       child: Container(
+                                      //         width: 8.0,
+                                      //         height: 8.0,
+                                      //         margin: EdgeInsets.symmetric(
+                                      //             vertical: 10.0,
+                                      //             horizontal: 4.0),
+                                      //         decoration: BoxDecoration(
+                                      //             shape: BoxShape.circle,
+                                      //             color: (Theme.of(context)
+                                      //                             .brightness ==
+                                      //                         Brightness.dark
+                                      //                     ? Colors.white
+                                      //                     : Colors.black)
+                                      //                 .withOpacity(
+                                      //                     manageLink.current ==
+                                      //                             entry.key
+                                      //                         ? 0.9
+                                      //                         : 0.2)),
+                                      //       ),
+                                      //     );
+                                      //   }).toList(),
+                                      // ),
                                       Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -303,6 +305,9 @@ class ProductViewForLink extends StatelessWidget {
                                                           ' Pieces disponible: ')
                                                 ],
                                               ),
+                                              ShareButton(libelle: 'Suivez ce lien pour consulter ce produit  : ' +
+                                                          manageLink.produit
+                                                              .lienProduit,) 
                                               /*  InkWell(
                                           child: Row(
                                             children: [

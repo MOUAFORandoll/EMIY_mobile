@@ -44,6 +44,8 @@ class ApiRoutes {
   static const SHORT_READ = '/short/read';
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';
   static const SHORT_NEW = '/short/new';
+  static const SHORT_LIKE = '/like/short';
+  static const SHORT_COMMENT = '/comment/short';
   static const LIKE_PRODUIT = '/like/produit';
   static const NOTAITON_BOUTIQUE = '/notation/boutique';
   static const TEST = '/test/scroll';
@@ -60,4 +62,5 @@ class ApiRoutes {
   static const LIST_MESSAGE_SC = '/communication/message/list';
   static const LIST_MESSAGE_NEW = '/communication/message/new';
   static const LIST_FIEUL = '/user/fieul';
+  static const USER_IMAGE_UPDATE = '/user/image/new';
 }

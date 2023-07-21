@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:EMIY/utils/Services/apiUrl.dart';
+
 BoutiqueModel boutiqueModelFromJson(String str) =>
     BoutiqueModel.fromJson(json.decode(str));
 
@@ -20,6 +22,7 @@ class BoutiqueModel {
     required this.note,
     required this.dateCreated,
     required this.images,
+    required this.lienBoutique,
     required this.localisation,
   });
 
@@ -29,6 +32,7 @@ class BoutiqueModel {
   String titre;
   bool status;
   bool status_abonnement;
+  final String lienBoutique;
   final note;
   String dateCreated;
   List<Image> images;
@@ -40,6 +44,7 @@ class BoutiqueModel {
         description: json["description"],
         titre: json["titre"],
         status: json["status"],
+        lienBoutique: ApiUrl.external_link + 'boutiques/' + json["codeBoutique"],
         status_abonnement: json["status_abonnement"],
         dateCreated: json["dateCreated"],
         note: double.parse(

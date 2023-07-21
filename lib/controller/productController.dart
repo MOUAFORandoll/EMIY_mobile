@@ -7,7 +7,7 @@ import 'package:get/get_connect/http/src/response/response.dart';
 
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
-import 'package:EMIY/repository/popularProductRepo.dart';
+import 'package:EMIY/repository/ProductRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
@@ -282,6 +282,38 @@ class ProductController extends GetxController {
   //     //print(e);
   //   }
   // }
+  int indexP = 1;
+
+  List<ProduitModel> _preferenceList = [];
+  List<ProduitModel> _preferenceListSave = [];
+  List<ProduitModel> get preferenceList => _preferenceList;
+  int _isLoadedPB = 0;
+  int get isLoadedPB => _isLoadedPB;
+  getListProduitPreference() async {
+    // _preferenceList = [];
+    _isLoadedPB = 0;
+    update();
+
+    var key = await dababase.getKey();
+    try {
+      Response response =
+          await productRepo.getListProduitPreference(indexP, key);
+      _preferenceList.clear();
+      if (response.body != null) {
+        if (response.body['data'].length != 0) {
+          _preferenceList.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+          indexP++;
+        }
+
+        _isLoadedPB = 1;
+        update();
+      }
+    } catch (e) {
+      //print(e);
+    }
+  }
 
   addProductInPopular(ProduitModel newProduct) {
     int index =

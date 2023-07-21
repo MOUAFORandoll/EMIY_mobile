@@ -3,6 +3,7 @@ import 'package:EMIY/Views/UsersMange/RegisterScreen.dart';
 import 'package:EMIY/components/Text/TextBackSpace.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Widget/BtnManageView.dart';
+import 'package:EMIY/components/Widget/CircleImage.dart';
 import 'package:EMIY/components/Widget/app_setting_comp.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/controller/CommandeController.dart';
@@ -18,6 +19,7 @@ import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/views/UsersMange/LoginScreen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -173,16 +175,18 @@ class ManageView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     if (_manager.User != null)
-                                      CircleAvatar(
-                                          backgroundColor: ColorsApp.skyBlue,
-                                          radius: kWidth / 16,
-                                          backgroundImage: AssetImage(
-                                              "assets/images/error.gif")),
+                                      InkWell(
+                                        onTap: () => _manager.updateImageUser(),
+                                        child: CircleImage(
+                                            imageUrl: _manager.User.profile),
+                                      ),
                                     (_manager.User != null)
                                         ? Container(
                                             padding: EdgeInsets.all(5),
                                             child: TextBackSpace(
-                                              text: 'Randoll Le Bami Premier',
+                                              text: _manager.User.prenom +
+                                                  ' ' +
+                                                  _manager.User.nom,
                                               bolder: true,
                                             ),
                                           )
@@ -311,7 +315,8 @@ class ManageView extends StatelessWidget {
                                         ? Container(
                                             padding: EdgeInsets.all(5),
                                             child: TextBackSpace(
-                                              text: '100000000 XAF',
+                                              text:
+                                                  '${_manager.Compte.solde} XAF',
                                               bolder: true,
                                             ),
                                           )
@@ -558,21 +563,21 @@ class ManageView extends StatelessWidget {
                                 Get.toNamed(AppLinks.COMMANDE_FOR_USER);
                               }),
                           // if (_manager.User != null)
-                            AppSettingComp(
-                                title: 'Mes affilies',
-                                icon: Assets.bagmoney,
-                                onTap: () {
-                                  // ViewFunctions().showIndisponible();
-                                  Get.toNamed(AppLinks.FIEU_LIST);
-                                  // Share.share('check out my website https://example.com',
-                                  //     subject: 'Look what I made!');
-                                }),
+                          AppSettingComp(
+                              title: 'Mes affilies',
+                              icon: Assets.bagmoney,
+                              onTap: () {
+                                // ViewFunctions().showIndisponible();
+                                Get.toNamed(AppLinks.FIEU_LIST);
+                                // Share.share('check out my website https://example.com',
+                                //     subject: 'Look what I made!');
+                              }),
                           AppSettingComp(
                               title: 'Mes Preferences',
                               icon: Assets.bagmoney,
                               onTap: () {
-                                ViewFunctions().showIndisponible();
-                                // Get.toNamed(AppLinks.COMMANDE_FOR_USER);
+                                // ViewFunctions().showIndisponible();
+                                Get.toNamed(AppLinks.PREFERENCE_CLIENT);
                                 // Share.share('check out my website https://example.com',
                                 //     subject: 'Look what I made!');
                               }),

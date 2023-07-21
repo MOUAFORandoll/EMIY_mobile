@@ -1,3 +1,7 @@
+import 'package:EMIY/components/Button/AppIconSendButton.dart';
+import 'package:EMIY/components/ShortComponent/iconShortComponent.dart';
+import 'package:EMIY/components/ShortComponent/commentComponent.dart';
+import 'package:EMIY/components/Widget/InputMessaage.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/model/data/ShortModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -66,39 +70,99 @@ class ShortAction extends StatelessWidget {
                                 AssetImage("assets/images/error.gif"));
                       },
                     )),
-
-                InkWell(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(
-                        vertical: kMarginY * 2, horizontal: kMarginX),
-                    child: Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                  onTap: () {
-                    //print(_ShortController
-                    // .listShort[_ShortController.currentShort].id);
-                  },
-                ),
-                // Container(
-                //     margin: EdgeInsets.symmetric(
-                //         vertical: kMarginY * 2, horizontal: kMarginX),
-                //     child: Icon(
-                //       FontAwesomeIcons.solidComment,
-                //       color: Colors.white,
-                //       size: 40,
-                //     )),
-                // Container(
-                //     margin: EdgeInsets.symmetric(
-                //         vertical: kMarginY * 2, horizontal: kMarginX),
-                //     child: Icon(
-                //       FontAwesomeIcons.share,
-                //       color: Colors.white,
-                //       size: 40,
-                //     ))
+                IconShortComponent(
+                    icon: Icons.favorite,
+                    onTap: () => _ShortController.newLikeShort(),
+                    color: short.is_like ? ColorsApp.red : Colors.white,
+                    nbr: short.nbre_like),
+                IconShortComponent(
+                    icon: FontAwesomeIcons.solidComment,
+                    nbr: short.nbre_commentaire,
+                    onTap: () {
+                      _ShortController.getListCommentShort();
+                      openModal();
+                    }),
+                IconShortComponent(
+                    icon: FontAwesomeIcons.share, onTap: () => openModal()),
               ],
             )));
+  }
+
+  void openModal() {
+    Get.bottomSheet(
+      GetBuilder<ShortController>(
+          builder: (_ShortController) => Container(
+              margin: EdgeInsets.only(
+                top: kMarginY * 8,
+              ),
+              decoration: BoxDecoration(
+                  color: ColorsApp.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15))),
+              height: kHeight / 1.5,
+              padding: EdgeInsets.symmetric(
+                  horizontal: kMarginX, vertical: kMarginY),
+              child: Column(children: [
+                Container(
+                  child: Column(children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: ColorsApp.grey,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          )),
+                      height: 5,
+                      width: kWidth * .12,
+                      padding: EdgeInsets.symmetric(horizontal: kMarginX),
+                    ),
+                    Container(
+                        margin: EdgeInsets.symmetric(vertical: kMarginY),
+                        child: Text('${short.nbre_commentaire} commentaires')),
+                  ]),
+                ),
+                _ShortController.loadComment == 0
+                    ? Container(
+                        width: 22,
+                        height: 22,
+                        margin: EdgeInsets.symmetric(vertical: kHeight / 6),
+                        child: CircularProgressIndicator())
+                    : Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                          child: SingleChildScrollView(
+                            child: ListView.builder(
+                                itemCount:
+                                    _ShortController.listCommentShort.length,
+                                shrinkWrap: true,
+                                // controller: scrollController,
+                                physics: const BouncingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (_ctx, index) => CommentComponent(
+                                    comment: _ShortController
+                                        .listCommentShort[index])),
+                          ),
+                        ),
+                      ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      /*    Container(
+                    margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                    child:  */
+                      InputMessaage(
+                        controller: _ShortController.textEditingController,
+                      ),
+                      AppIconSendButton(
+                          icon: Icons.send,
+                          sending: _ShortController.sendComment,
+                          onTap: () => _ShortController.newCommentShort()),
+                    ],
+                  ),
+                ),
+              ]))),
+      isScrollControlled: true,
+    );
   }
 }
