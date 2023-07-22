@@ -1,7 +1,7 @@
 // To parse this JSON data, do
 //
 //     final userModel = userModelFromJson(jsonString);
-
+//545
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
