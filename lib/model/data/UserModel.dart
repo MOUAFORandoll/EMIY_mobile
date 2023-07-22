@@ -15,7 +15,7 @@ class UserModel {
     required this.id,
     required this.nom,
     required this.prenom,
-    required this.email,
+    this.email = '',
     required this.phone,
     this.status = true,
     required this.profile,
