@@ -123,8 +123,9 @@ class BoutiqueRepo extends GetxService {
     return a;
   }
 
-  Future getListShortBoutique(data) async {
-    Response a = await apiClient.postData(ApiRoutes.SHORT_READ_BOUTIQUE, data);
+  Future getListShortBoutique(codeBoutique) async {
+    Response a = await apiClient.getCollections(ApiRoutes.SHORT_READ_BOUTIQUE +
+        "?codeBoutique=${codeBoutique.toString()}");
 
     return a;
   }

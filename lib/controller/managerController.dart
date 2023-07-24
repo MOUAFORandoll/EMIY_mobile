@@ -117,7 +117,7 @@ class ManagerController extends GetxController {
     }
   }
 
-  var _lienParrainnage;
+  var _lienParrainnage = '';
   String get lienParrainnage => _lienParrainnage;
   bool _userP = false;
   bool get userP => _userP;
@@ -134,9 +134,10 @@ class ManagerController extends GetxController {
       chageState(0);
     }
     var kk = await dababase.getKeyKen();
-    _lienParrainnage = kk == null
-        ? ''
-        : ApiUrl.external_link + 'subscribes/' + kk['codeParrainnage'];
+    if (kk == null || kk == 'null') {
+      _lienParrainnage =
+          ApiUrl.external_link + 'subscribes/' + kk['codeParrainnage'];
+    }
     // //print('------------------${dababase.getKey() }');
     update();
   }
@@ -244,12 +245,12 @@ class ManagerController extends GetxController {
     chageState(0);
 
     Get.find<BoutiqueController>().DeconectBoutique();
-    //        fn.closeSnack();
+    //        fn.closeLoader();
 
     fn.snackBar('Compte', 'Deconnecte', true);
     _userP = true;
     _User = null;
-    fn.closeSnack();
+    fn.closeLoader();
     update();
 
     //print('---------userp---------${userP}');
@@ -305,17 +306,17 @@ class ManagerController extends GetxController {
         await getUser();
       }
 
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isUpdating = false;
       update();
@@ -365,14 +366,14 @@ class ManagerController extends GetxController {
             await getUser();
           }
 
-          // fn.closeSnack();
+          // fn.closeLoader();
 
           fn.snackBar('Mise a jour', response.body['message'], true);
           _isUpdating = false;
           // Get.back(closeOverlays: true);
           update();
         } catch (e) {
-          fn.closeSnack();
+          fn.closeLoader();
 
           fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
 
@@ -414,9 +415,9 @@ class ManagerController extends GetxController {
         _isConnected = true;
         // Get.back(closeOverlays: true);
         update(); // await MyBinding().onGetAll();
-        fn.closeSnack();
+        fn.closeLoader();
       } else {
-        fn.closeSnack();
+        fn.closeLoader();
 
         fn.snackBar('Connexion', 'Identifiants incorrects', false);
       }
@@ -426,10 +427,10 @@ class ManagerController extends GetxController {
       // // Get.back(closeOverlays: true);
       // update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Connexion', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isConnected = false;
       update();
@@ -503,17 +504,17 @@ class ManagerController extends GetxController {
         // await MyBinding().onGetAll();
       }
 
-      fn.closeSnack();
+      fn.closeLoader();
 
       // fn.snackBar('Mise a jour', response.body['message'], true);
       _isSignUp = true;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Inscription', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isSignUp = false;
       update();

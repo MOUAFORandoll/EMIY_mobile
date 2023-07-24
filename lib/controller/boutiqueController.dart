@@ -240,21 +240,22 @@ class BoutiqueController extends GetxController {
           update();
 
           await getBoutique();
-          fn.closeSnack();
-        }
-        fn.closeSnack();
+          fn.closeLoader();
 
-        fn.snackBar('Mise a jour', response.body['message'], true);
-        _isUpdatingB = false;
-        // Get.back(closeOverlays: true);
-        update();
+          fn.snackBar('Mise a jour', response.body['message'], true);
+          _isUpdatingB = false;
+          // Get.back(closeOverlays: true);
+          update();
+        } else {
+          fn.closeLoader();
+        }
       } else {
-        fn.closeSnack();
+        fn.closeLoader();
 
         fn.snackBar('Boutique', 'Remplir tous les champs', false);
       }
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
 
       _isUpdatingB = false;
@@ -305,14 +306,14 @@ class BoutiqueController extends GetxController {
             await getBoutique();
           }
 
-          fn.closeSnack();
+          fn.closeLoader();
 
           fn.snackBar('Mise a jour', response.body['message'], true);
           _isUpdating = false;
           // Get.back(closeOverlays: true);
           update();
         } catch (e) {
-          fn.closeSnack();
+          fn.closeLoader();
 
           fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
 
@@ -527,20 +528,20 @@ class BoutiqueController extends GetxController {
           //print(response.body);
           if (response.statusCode == 200) {
             await getListProduitForBoutique();
-            fn.closeSnack();
+            fn.closeLoader();
+
+            fn.snackBar('Mise a jour', response.body['message'], true);
+            _isUpdating = false;
+            // Get.back(closeOverlays: true);
+            update();
+          } else {
+            fn.closeLoader();
           }
-
-          fn.closeSnack();
-
-          fn.snackBar('Mise a jour', response.body['message'], true);
-          _isUpdating = false;
-          // Get.back(closeOverlays: true);
-          update();
         } catch (e) {
-          fn.closeSnack();
+          fn.closeLoader();
 
           fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-          //        fn.closeSnack();
+          //        fn.closeLoader();
 
           _isUpdating = false;
           update();
@@ -593,20 +594,20 @@ class BoutiqueController extends GetxController {
           //print(response.body);
           if (response.statusCode == 200) {
             await getListProduitForBoutique();
-            fn.closeSnack();
+            fn.closeLoader();
+
+            fn.snackBar('Mise a jour', response.body['message'], true);
+            _isUpdating = false;
+            // Get.back(closeOverlays: true);
+            update();
+          } else {
+            fn.closeLoader();
           }
-
-          fn.closeSnack();
-
-          fn.snackBar('Mise a jour', response.body['message'], true);
-          _isUpdating = false;
-          // Get.back(closeOverlays: true);
-          update();
         } catch (e) {
-          fn.closeSnack();
+          fn.closeLoader();
 
           fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-          //        fn.closeSnack();
+          //        fn.closeLoader();
 
           _isUpdating = false;
           update();
@@ -631,19 +632,18 @@ class BoutiqueController extends GetxController {
       //print(response.body);
       if (response.statusCode == 200) {
         await getBoutique();
+        fn.snackBar('Mise a jour', response.body['message'], true);
       }
+      fn.closeLoader();
 
-      fn.closeSnack();
-
-      fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isUpdating = false;
       update();
@@ -717,17 +717,17 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isUpdating = false;
       update();
@@ -747,17 +747,17 @@ class BoutiqueController extends GetxController {
       if (response.statusCode == 200) {
         await getBoutique();
       }
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isUpdating = false;
       update();
@@ -795,17 +795,17 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdatingB = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isUpdatingB = false;
       update();
@@ -859,17 +859,17 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdatingB = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isUpdatingB = false;
       update();
@@ -989,9 +989,8 @@ class BoutiqueController extends GetxController {
 
     _isLoadedShort = 0;
     try {
-      Response response = await boutiqueRepo.getListShortBoutique(
-        {'codeBoutique': Boutique.codeBoutique},
-      );
+      Response response =
+          await boutiqueRepo.getListShortBoutique(Boutique.codeBoutique);
 
       _listShortBoutique = [];
       _listShortBoutique.clear();
@@ -1136,17 +1135,17 @@ class BoutiqueController extends GetxController {
         await getBoutique();
       }
 
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', response.body['message'], true);
       _isUpdating = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      //        fn.closeSnack();
+      //        fn.closeLoader();
 
       _isUpdating = false;
       update();
@@ -1155,37 +1154,40 @@ class BoutiqueController extends GetxController {
   }
 
   abonnementAdd(codeBoutique) async {
-    try {
-      fn.loading('Abonnement', 'Abonnement a la boutique en cours');
+    bool isConnected = await fn.isConnected();
+    if (isConnected == true) {
+      try {
+        fn.loading('Abonnement', 'Abonnement a la boutique en cours');
 
-      var key = await dababase.getKey();
-      var data = {
-        'codeBoutique': codeBoutique,
-        'keySecret': key,
-      };
-      print(data);
-      Response response = await boutiqueRepo.abonnementAdd(data);
-      print(response.body);
+        var key = await dababase.getKey();
+        var data = {
+          'codeBoutique': codeBoutique,
+          'keySecret': key,
+        };
+        print(data);
+        Response response = await boutiqueRepo.abonnementAdd(data);
+        print(response.body);
 
-      if (response.statusCode == 200) {
-        // await getListAbonnementForUser();
+        if (response.statusCode == 200) {
+          await getListAbonnementForUser();
 
-        // await getBoutique();
-        fn.closeSnack();
+          // await getBoutique();
+          print('*-------------------------data');
+        }
+        fn.closeLoader();
+
+        fn.snackBar('Mise a jour', response.body['message'], true);
+        _isUpdatingB = false;
+        // Get.back(closeOverlays: true);
+        update();
+      } catch (e) {
+        fn.closeLoader();
+        fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+
+        _isUpdatingB = false;
+        update();
+        //print(e);
       }
-      fn.closeSnack();
-
-      fn.snackBar('Mise a jour', response.body['message'], true);
-      _isUpdatingB = false;
-      // Get.back(closeOverlays: true);
-      update();
-    } catch (e) {
-      fn.closeSnack();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-
-      _isUpdatingB = false;
-      update();
-      //print(e);
     }
   }
 

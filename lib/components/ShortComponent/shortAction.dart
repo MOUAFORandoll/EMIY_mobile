@@ -92,76 +92,114 @@ class ShortAction extends StatelessWidget {
     Get.bottomSheet(
       GetBuilder<ShortController>(
           builder: (_ShortController) => Container(
-              margin: EdgeInsets.only(
-                top: kMarginY * 8,
-              ),
-              decoration: BoxDecoration(
-                  color: ColorsApp.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15))),
-              height: kHeight / 1.5,
-              padding: EdgeInsets.symmetric(
-                  horizontal: kMarginX, vertical: kMarginY),
-              child: Column(children: [
-                Container(
-                  child: Column(children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: ColorsApp.grey,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          )),
-                      height: 5,
-                      width: kWidth * .12,
-                      padding: EdgeInsets.symmetric(horizontal: kMarginX),
-                    ),
-                    Container(
-                        margin: EdgeInsets.symmetric(vertical: kMarginY),
-                        child: Text('${short.nbre_commentaire} commentaires')),
-                  ]),
+                margin: EdgeInsets.only(
+                  top: kMarginY * 8,
                 ),
-                _ShortController.loadComment == 0
-                    ? Container(
-                        width: 22,
-                        height: 22,
-                        margin: EdgeInsets.symmetric(vertical: kHeight / 6),
-                        child: CircularProgressIndicator())
-                    : Expanded(
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                          child: SingleChildScrollView(
-                            child: ListView.builder(
-                                itemCount:
-                                    _ShortController.listCommentShort.length,
-                                shrinkWrap: true,
-                                // controller: scrollController,
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (_ctx, index) => CommentComponent(
-                                    comment: _ShortController
-                                        .listCommentShort[index])),
-                          ),
+                decoration: BoxDecoration(
+                    color: ColorsApp.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15))),
+                height: kHeight / 1.5,
+                padding: EdgeInsets.symmetric(
+                    horizontal: kMarginX, vertical: kMarginY),
+                child: Column(
+                  children: [
+                    Container(
+                      child: Column(children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorsApp.grey,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              )),
+                          height: 5,
+                          width: kWidth * .12,
+                          padding: EdgeInsets.symmetric(horizontal: kMarginX),
                         ),
-                      ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      /*    Container(
+                        Container(
+                            margin: EdgeInsets.symmetric(vertical: kMarginY),
+                            child:
+                                Text('${short.nbre_commentaire} commentaires')),
+                      ]),
+                    ),
+                    _ShortController.loadComment == 0
+                        ? Container(
+                            width: 22,
+                            height: 22,
+                            margin:
+                                EdgeInsets.symmetric(vertical: kHeight / 4.7),
+                            child: CircularProgressIndicator())
+                        : Expanded(
+                            child: Container(
+                              margin:
+                                  EdgeInsets.symmetric(horizontal: kMarginX),
+                              child: SingleChildScrollView(
+                                child: ListView.builder(
+                                    itemCount: _ShortController
+                                        .listCommentShort.length,
+                                    shrinkWrap: true,
+                                    // controller: _ShortController.scrollController,
+                                    physics: const BouncingScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (_ctx, index) =>
+                                        CommentComponent(
+                                            comment: _ShortController
+                                                .listCommentShort[index])),
+                              ),
+                            ),
+                          ),
+                    Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Column(children: [
+                          GetBuilder<ShortController>(
+                              builder: (_ShortController) =>
+                                  _ShortController.refCom != null
+                                      ? Container(
+                                          decoration: BoxDecoration(
+                                              color: ColorsApp.greySearch,
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10),
+                                                topRight: Radius.circular(10),
+                                              )),
+                                          padding: EdgeInsets.all(2.0),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text('Reponse a ' +
+                                                    _ShortController
+                                                        .refCom.username),
+                                                IconButton(
+                                                    iconSize: 20,
+                                                    onPressed: () {
+                                                      _ShortController.setIdRef(
+                                                          null);
+                                                    },
+                                                    icon: Icon(Icons.close))
+                                              ]))
+                                      : Text('')),
+                          Row(
+                            children: [
+                              /*    Container(
                     margin: EdgeInsets.symmetric(horizontal: kMarginX),
                     child:  */
-                      InputMessaage(
-                        controller: _ShortController.textEditingController,
-                      ),
-                      AppIconSendButton(
-                          icon: Icons.send,
-                          sending: _ShortController.sendComment,
-                          onTap: () => _ShortController.newCommentShort()),
-                    ],
-                  ),
+                              InputMessaage(
+                                controller:
+                                    _ShortController.textEditingController,
+                              ),
+                              AppIconSendButton(
+                                  icon: Icons.send,
+                                  sending: _ShortController.sendComment,
+                                  onTap: () =>
+                                      _ShortController.newCommentShort()),
+                            ],
+                          ),
+                        ]))
+                  ],
                 ),
-              ]))),
+              )),
       isScrollControlled: true,
     );
   }

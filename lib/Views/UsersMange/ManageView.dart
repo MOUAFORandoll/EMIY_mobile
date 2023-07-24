@@ -370,6 +370,7 @@ class ManageView extends StatelessWidget {
                               onTap: () {
                                 Get.toNamed(AppLinks.SETTING);
                               }),
+                          if (_manager.User != null)
                           AppSettingComp(
                               title: 'Service Client',
                               icon: Assets.phone_mobile,
@@ -538,49 +539,56 @@ class ManageView extends StatelessWidget {
                           //             isScrollControlled: true,
                           //           );
                           //         }),
-                          AppSettingComp(
-                              title: Get.find<BoutiqueController>().Boutique !=
-                                      null
-                                  ? 'Ma Boutique'
-                                  : "Creer ma boutique",
-                              icon: Assets.bagmoney,
-                              color: ColorsApp.orange,
-                              onTap: () {
-                                /*  Get.find<BoutiqueController>().isLoaded == 0
+                          if (_manager.User != null)
+                            AppSettingComp(
+                                title:
+                                    Get.find<BoutiqueController>().Boutique !=
+                                            null
+                                        ? 'Ma Boutique'
+                                        : "Creer ma boutique",
+                                icon: Assets.bagmoney,
+                                color: ColorsApp.orange,
+                                onTap: () {
+                                  /*  Get.find<BoutiqueController>().isLoaded == 0
                                 ? ViewFunctions()
                                     .loading('Boutique', 'Veuillez patienter')
                                 : */
-                                Get.find<BoutiqueController>().Boutique != null
-                                    ? Get.toNamed(AppLinks.BOUTIQUE_USER)
-                                    : Get.toNamed(AppLinks.BOUTIQUE_NEW);
-                              }),
-                          AppSettingComp(
-                              title: 'Mes Commandes',
-                              icon: Assets.bagmoney,
-                              onTap: () {
-                                Get.find<CommandeController>()
-                                    .getListCommandes();
-                                Get.toNamed(AppLinks.COMMANDE_FOR_USER);
-                              }),
+
+                                  Get.find<BoutiqueController>().Boutique !=
+                                          null
+                                      ? Get.toNamed(AppLinks.BOUTIQUE_USER)
+                                      : Get.toNamed(AppLinks.BOUTIQUE_NEW);
+                                }),
+                          if (_manager.User != null)
+                            AppSettingComp(
+                                title: 'Mes Commandes',
+                                icon: Assets.bagmoney,
+                                onTap: () {
+                                  Get.find<CommandeController>()
+                                      .getListCommandes();
+                                  Get.toNamed(AppLinks.COMMANDE_FOR_USER);
+                                }),
                           // if (_manager.User != null)
-                          AppSettingComp(
-                              title: 'Mes affilies',
-                              icon: Assets.bagmoney,
-                              onTap: () {
-                                // ViewFunctions().showIndisponible();
-                                Get.toNamed(AppLinks.FIEU_LIST);
-                                // Share.share('check out my website https://example.com',
-                                //     subject: 'Look what I made!');
-                              }),
-                          AppSettingComp(
-                              title: 'Mes Preferences',
-                              icon: Assets.bagmoney,
-                              onTap: () {
-                                // ViewFunctions().showIndisponible();
-                                Get.toNamed(AppLinks.PREFERENCE_CLIENT);
-                                // Share.share('check out my website https://example.com',
-                                //     subject: 'Look what I made!');
-                              }),
+                          if (_manager.User != null)
+                            AppSettingComp(
+                                title: 'Mes affilies',
+                                icon: Assets.bagmoney,
+                                onTap: () {
+                                  // ViewFunctions().showIndisponible();
+                                  Get.toNamed(AppLinks.FIEU_LIST);
+                                  // Share.share('check out my website https://example.com',
+                                  //     subject: 'Look what I made!');
+                                }),
+                          if (_manager.User != null)
+                            AppSettingComp(
+                                title: 'Mes Preferences',
+                                icon: Assets.bagmoney,
+                                onTap: () {
+                                  // ViewFunctions().showIndisponible();
+                                  Get.toNamed(AppLinks.PREFERENCE_CLIENT);
+                                  // Share.share('check out my website https://example.com',
+                                  //     subject: 'Look what I made!');
+                                }),
                         ],
                       ),
                     ],

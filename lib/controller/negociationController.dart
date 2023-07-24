@@ -59,12 +59,12 @@ class NegociationController extends GetxController {
             Get.toNamed(AppLinks.NEGOCIATION_NEW);
             await getListNegociation();
             update();
-            fn.closeSnack();
+            fn.closeLoader();
           }
         }
       }
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
 
       update();
@@ -190,12 +190,12 @@ class NegociationController extends GetxController {
             textEditingController.text = '';
             update();
             // update();
-            // fn.closeSnack();
+            // fn.closeLoader();
           }
         }
       }
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
 
       update();

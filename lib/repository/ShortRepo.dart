@@ -25,6 +25,14 @@ class ShortRepo extends GetxService {
     return a;
   }
 
+  Future newLikeComment(data) async {
+    //print('************oc');
+    Response a = await apiClient.postData(ApiRoutes.SHORT_COMMENT_LIKE, data);
+
+    //print(a.body);
+    return a;
+  }
+
   Future newComment(data) async {
     //print('************oc');
     Response a = await apiClient.postData(ApiRoutes.SHORT_COMMENT, data);
@@ -33,9 +41,16 @@ class ShortRepo extends GetxService {
     return a;
   }
 
-  Future getListComment(idShort) async {
-    Response a = await apiClient
-        .getCollections(ApiRoutes.SHORT_COMMENT + '/' + idShort.toString());
+  Future getListComment(idShort, keySecret) async {
+    Response a = await apiClient.getCollections(ApiRoutes.SHORT_COMMENT +
+        "?idShort=${idShort.toString()}&keySecret=${keySecret.toString()}");
+
+    return a;
+  }
+
+  Future getListCommentComment(idRef, keySecret) async {
+    Response a = await apiClient.getCollections(ApiRoutes.SHORT_COMMENT_COMMENT +
+        "?idRef=${idRef.toString()}&keySecret=${keySecret.toString()}");
 
     return a;
   }

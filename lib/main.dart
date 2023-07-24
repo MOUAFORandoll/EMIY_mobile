@@ -55,30 +55,7 @@ Future<void> main() async {
   runApp(MyApp());
   await uniLink();
 }
-
-Future checkDeepLink() async {
-  StreamSubscription _sub;
-  try {
-    print("checkDeepLink");
-    await UniLink.getInitialLink();
-
-    _sub = UniLink.getUriLinksStream().listen(
-        (Uri uri) {
-          print('uri: $uri');
-          WidgetsFlutterBinding.ensureInitialized();
-          // runApp(MyApp(uri: uri));
-        } as void Function(Uri? event)?, onError: (err) {
-      // Handle exception by warning the user their action did not succeed
-
-      print("onError");
-    });
-  } on PlatformException {
-    print("PlatformException");
-  } on Exception {
-    print('Exception thrown');
-  }
-}
-
+ 
 uniLink() async {
   /**
      * 

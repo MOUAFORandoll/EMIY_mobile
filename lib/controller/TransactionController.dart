@@ -87,11 +87,11 @@ class TransactionController extends GetxController {
       if (response.statusCode == 200) {
         await Get.find<ManagerController>().getUser();
         getTransactions();
-        fn.closeSnack();
+        fn.closeLoader();
 
         fn.snackBar('Retrait', response.body['message'], true);
       } else {
-        fn.closeSnack();
+        fn.closeLoader();
 
         fn.snackBar('Retrait', response.body['message'], false);
       }
@@ -100,10 +100,10 @@ class TransactionController extends GetxController {
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Retrait', 'Une erreur est survenue', false);
-      //         fn.closeSnack();
+      //         fn.closeLoader();
 
       _isUpdating = false;
       update();
@@ -137,13 +137,13 @@ class TransactionController extends GetxController {
         _token = response.body['token'];
         update();
         //print(_paiementUrl);
-        fn.closeSnack();
+        fn.closeLoader();
 
         new SocketService().transaction(response.body['token'], ifBuyingDepot);
         Get.to(() => DepotView());
         update();
       } else {
-        fn.closeSnack();
+        fn.closeLoader();
 
         fn.snackBar('Achat', response.body['message'], false);
       }
@@ -152,10 +152,10 @@ class TransactionController extends GetxController {
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Depot', 'Une erreur est survenue', false);
-      //         fn.closeSnack();
+      //         fn.closeLoader();
 
       _isUpdating = false;
       update();
@@ -226,7 +226,7 @@ class TransactionController extends GetxController {
   //       }
   //     }
   //   } catch (e) {
-  //     //         fn.closeSnack();
+  //     //         fn.closeLoader();
 
   //     // fn.snackBar('Achat', 'Une erreur est survenue', false);
 
@@ -245,14 +245,14 @@ class TransactionController extends GetxController {
     try {
       await Get.find<ManagerController>().getUser();
       await getTransactions();
-      fn.closeSnack();
+      fn.closeLoader();
 
       update();
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Retrait', 'Une erreur est survenue', false);
-      //         fn.closeSnack();
+      //         fn.closeLoader();
 
       _isUpdating = false;
       update();

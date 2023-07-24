@@ -1,14 +1,19 @@
+import 'package:EMIY/Views/UsersMange/LoginScreen.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/core.dart';
+import 'package:EMIY/utils/constants/assets.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ViewFunctions {
   snackBar(String title, String body, bool correct) {
@@ -48,19 +53,114 @@ class ViewFunctions {
         backgroundColor: Colors.white);
   }
 
-  void loading(title, description)  {
-    Get.dialog(Container(
-        height: 18,
-        width: 18,
-        child: Container(
-            child: Center(
-                child: CircularProgressIndicator(
-          color: ColorsApp.skyBlue,
-        )))));
+  // void loading(title, description) {
+  //   Get.dialog(Container(
+  //       height: 18,
+  //       width: 18,
+  //       decoration: BoxDecoration(
+  //         color: ColorsApp.greySecond,
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       margin: EdgeInsets.symmetric(
+  //           vertical: kHeight * .43, horizontal: kWidth * .40),
+  //       child: Container(
+  //           child: Center(
+  //               child: CircularProgressIndicator(
+  //         color: ColorsApp.skyBlue,
+  //       )))));
+  // }
+
+  isConnected() async {
+    final dababase = Get.find<DataBaseController>();
+
+    var key = await dababase.getKey();
+    if (key == null || key == 'null') {
+      Get.bottomSheet(
+        Container(
+            margin: EdgeInsets.only(
+              top: kMarginY * 8,
+            ),
+            decoration: BoxDecoration(
+                color: ColorsApp.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15))),
+            height: 800,
+            padding: EdgeInsets.symmetric(horizontal: kMarginX),
+            child: Column(children: [
+              Container(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        child: Text('Annuler'),
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                      // TextButton(
+                      //   child: Text('Ajouter'),
+                      //   onPressed: () async {
+                      //     // await _controller.addShort();
+                      //     // _controller.chageState(!_controller.addProduct);
+                      //   },
+                      // )
+                    ]),
+              ),
+              Expanded(
+                  child: SingleChildScrollView(
+                      child: Column(children: [
+                // _controller.listImgProduits.length != 0
+                //     ? smallText(
+                //         text: 'Listes images',
+                //       )
+                //     : Container(),
+
+                Container(
+                    margin: EdgeInsets.only(
+                      top: 50,
+                    ),
+                    child: LoginScreen())
+              ])))
+            ])),
+        isScrollControlled: true,
+      );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  void loading(title, description) {
+    Get.dialog(
+      Container(
+          height: 18,
+          width: 18,
+          decoration: BoxDecoration(
+            color: ColorsApp.greySecond,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          margin: EdgeInsets.symmetric(
+              vertical: kHeight * .43, horizontal: kWidth * .40),
+          child: Container(
+            child: Shimmer.fromColors(
+                baseColor: ColorsApp.bleuLight,
+                highlightColor: ColorsApp.grey,
+                child: SvgPicture.asset(
+                  Assets.logoSvg,
+                  height: 20,
+                  width: 20,
+                  fit: BoxFit.cover,
+                )),
+          )),
+      barrierDismissible: false,
+    );
   }
 
   void closeLoader() {
-    Get.close;
+    Get.back(
+      closeOverlays: false,
+    );
   }
 
   // void loading(title, description) {

@@ -1,48 +1,58 @@
-// To parse this JSON data, do
-//
-//     final CommentShortModel = CommentShortModelFromJson(jsonString);
-
-import 'package:EMIY/utils/Services/apiUrl.dart';
-import 'package:meta/meta.dart';
-import 'dart:convert';
-
-import 'package:video_player/video_player.dart';
-
-CommentShortModel commentShortModelFromJson(String str) =>
-    CommentShortModel.fromJson(json.decode(str));
-
-String CommentShortModelToJson(CommentShortModel data) =>
-    json.encode(data.toJson());
-
 class CommentShortModel {
   CommentShortModel({
     required this.id,
-    required this.commentaire,
-    required this.username,
-    required this.userphoto,
     required this.date,
+    required this.commentaire_text,
+    required this.username,
+    required this.target_user,
+    required this.userphoto,
+    required this.nbre_com,
+    required this.nbre_like_com,
+    required this.is_like_com,
+    required this.sub_responses,
+    this.comments = const [], // Déclaration d'une liste vide par défaut
   });
 
-  final int id;
-  final String commentaire;
-  final String userphoto;
-  final String username;
-  final String date;
+  int id;
+  String date;
+  String commentaire_text;
+  String username;
+  String target_user;
+  String userphoto;
+  int nbre_com;
+  int nbre_like_com;
+  bool sub_responses;
+  bool is_like_com;
+  List<CommentShortModel> comments; // Déclaration de la liste des commentaires
 
   factory CommentShortModel.fromJson(Map<String, dynamic> json) =>
       CommentShortModel(
-        id: json["id"] == null ? null : json["id"],
-        commentaire: json["commentaire"] == null ? null : json["commentaire"],
-        username: json["username"] == null ? null : json["username"],
-        userphoto: json["userphoto"] == null ? null : json["userphoto"],
-        date: json["date"] == null ? null : json["date"],
+        id: json["id"],
+        date: json["date"],
+        commentaire_text: json["commentaire"],
+        target_user: json["target_user"],
+        username: json["username"],
+        userphoto: json["userphoto"],
+        nbre_com: json["nbre_com"],
+        nbre_like_com: json["nbre_like_com"],
+        is_like_com: json["is_like_com"],
+        sub_responses: json["sub_responses"],
+        comments: [], // Initialisation de la liste des commentaires à vide
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "userphoto": userphoto == null ? null : userphoto,
-        "username": username == null ? null : username,
-        "commentaire": commentaire == null ? null : commentaire,
-        "date": date == null ? null : date,
+        "id": id,
+        "date": date,
+        "commentaire": commentaire_text,
+        "username": username,
+        "target_user": target_user,
+        "userphoto": userphoto,
+        "nbre_com": nbre_com,
+        "nbre_like_com": nbre_like_com,
+        "sub_responses": sub_responses,
+        "is_like_com": is_like_com,
+        "comments": comments
+            .map((comment) => comment.toJson())
+            .toList(), // Convertit la liste de CommentShortModel en liste JSON
       };
 }

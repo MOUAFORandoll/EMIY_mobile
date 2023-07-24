@@ -1,6 +1,7 @@
 import 'package:EMIY/Views/CategoryBoutique/CategoryView.dart';
 import 'package:EMIY/Views/Home/HomeView.dart';
-import 'package:EMIY/Views/Negociation/ListNegociationView.dart';
+import 'package:EMIY/Views/Space/MySpace.dart';
+import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/productController.dart';
 import 'package:EMIY/model/data/CartModel.dart';
@@ -116,7 +117,7 @@ class ActionController extends GetxController {
 
   getListModePaiement() async {
     _isLoadedMP = 0;
-    refresh();
+    // refresh();
     try {
       Response response = await actionRepo.getModePaiement();
       _lmodePaiement.clear();
@@ -297,7 +298,7 @@ class ActionController extends GetxController {
     try {
       Response response = await actionRepo.addNotationBoutique(data);
       //print(response.body);
-      fn.closeSnack();
+      fn.closeLoader();
 
       update();
       if (response.statusCode == 200) {
@@ -306,7 +307,7 @@ class ActionController extends GetxController {
         fn.snackBar('Note', 'Erreur', false);
       }
     } catch (e) {
-      fn.closeSnack();
+      fn.closeLoader();
 
       fn.snackBar('Note', 'Erreur', false);
       //print(e);
@@ -357,6 +358,28 @@ class ActionController extends GetxController {
     }
   }
 
+  // int tabCurrentIndex = 0;
+
+  // setTabIndex(index) {
+  //   tabCurrentIndex = index;
+  //   update();
+  // }
+
+  // Widget buildContentSpace() {
+  //   switch (tabCurrentIndex) {
+  //     case 0:
+  //       return ListNegociationView();
+  //     // case 1:
+  //     //   return SearchView();
+  //     case 1:
+  //       //   return ListBoutiqueView();
+  //       // case 2:
+  //       return CategoryView();
+  //     default:
+  //       return ListNegociationView();
+  //   }
+  // }
+
   int _currentIndex = 0;
   Widget buildContent() {
     switch (_currentIndex) {
@@ -372,7 +395,7 @@ class ActionController extends GetxController {
       // case 2:
       //   return SearchView();
       case 2:
-        return ListNegociationView();
+        return MySpace();
       case 3:
         return ShoppingView();
 
@@ -484,7 +507,7 @@ class ActionController extends GetxController {
                                 ? BorderSide(color: ColorsApp.skyBlue, width: 2)
                                 : BorderSide.none,
                             top: BorderSide.none)),
-                    child: Text('Message',
+                    child: Text('My Space',
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,

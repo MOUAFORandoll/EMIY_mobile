@@ -194,7 +194,7 @@ class BuyShopController extends GetxController {
                 response.body['codeCommande'],
                 response.body['codeClient'],
                 response.body['date']);
-            fn.closeSnack();
+            fn.closeLoader();
           } else {
             print('----------------');
             _paiementUrl = response.body['url'];
@@ -203,7 +203,7 @@ class BuyShopController extends GetxController {
 
             update();
             print(_paiementUrl);
-            fn.closeSnack();
+            fn.closeLoader();
             Get.toNamed(AppLinks.BUYVIEW);
             new SocketService().commande(response.body['codeCommande'],
                 ifBuyingCommande); //ici on doit lancer la verification
@@ -215,7 +215,7 @@ class BuyShopController extends GetxController {
         // fn.snackBar('Achat',
         //     'Votre facture a ete energistre dans votre telephone', true);
       } else {
-        fn.closeSnack();
+        fn.closeLoader();
 
         fn.snackBar('Achat', response.body['message'], false);
       }
@@ -225,7 +225,7 @@ class BuyShopController extends GetxController {
       update();
     } catch (e) {
       fn.snackBar('Achat', 'Une erreur est survenue', false);
-      fn.closeSnack();
+      fn.closeLoader();
       update();
       //print(e);
     }
@@ -317,10 +317,10 @@ class BuyShopController extends GetxController {
   //     // Get.back(closeOverlays: true);
   //     update();
   //   } catch (e) {
-  //     //         fn.closeSnack();
+  //     //         fn.closeLoader();
 
   //     // fn.snackBar('Achat', 'Une erreur est survenue', false);
-  //     //         fn.closeSnack();
+  //     //         fn.closeLoader();
 
   //     update();
   //     //print(e);

@@ -33,7 +33,8 @@ class IconShortComponent extends StatelessWidget {
               ),
               Container(
                   margin: EdgeInsets.symmetric(vertical: kMarginY),
-                  child: Text(nbr.toString()))
+                  child: Text(nbr.toString(),
+                      style: TextStyle(color: Colors.white)))
             ],
           ),
         ),

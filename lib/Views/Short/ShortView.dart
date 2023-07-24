@@ -38,7 +38,7 @@ class _ShortViewState extends State<ShortView> {
                   Container(
                       height: Get.height,
                       width: Get.width,
-                      child: /*  _ShortController.isLoadedP == 0
+                      child:   _ShortController.isLoadedP == 0
                           ? Container(
                               child: SpinKitRing(
                                 lineWidth: 4,
@@ -46,7 +46,7 @@ class _ShortViewState extends State<ShortView> {
                                 size: 45,
                               ),
                             )
-                          : */
+                          : 
                           _ShortController.listShort.length == 0
                               ? Container(
                                   height: kHeight,
@@ -100,7 +100,7 @@ class ShortViewF extends StatefulWidget {
   State<ShortViewF> createState() => _ShortViewFState();
 }
 
-class _ShortViewFState extends State<ShortViewF> {
+class _ShortViewFState extends State<ShortViewF> with TickerProviderStateMixin {
   // PageController _pageController = PageController(initialPage: 0);
 
   late VideoPlayerController _videoPlayerController;
@@ -111,15 +111,62 @@ class _ShortViewFState extends State<ShortViewF> {
   ShortController short = Get.find();
 
   double position = 0.0;
+  bool _showHeart = false;
+  Offset _heartPosition = Offset.zero;
+
+  late AnimationController _heartAnimationController;
+  late Animation<double> _heartAnimation;
+
   @override
   void initState() {
     super.initState();
+    super.initState();
     // _pageController = PageController(initialPage: 0);
-    print('**********************short.listShort');
-    print('*********************${Get.find<ShortController>().initialise}');
+    // print('**********************short.listShort');
+    // print('*********************${Get.find<ShortController>().initialise}');
     Get.find<ShortController>().initialise
         ? Get.find<ShortController>().controller!.play()
         : Get.find<ShortController>().changeVideo(0);
+    _heartAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1000),
+    );
+
+    _heartAnimation = Tween<double>(begin: 0.0, end: 2.0).animate(
+      CurvedAnimation(
+          parent: _heartAnimationController, curve: Curves.easeInOut),
+    );
+
+    _heartAnimationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _heartAnimationController.reverse();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _heartAnimationController.dispose();
+    super.dispose();
+  }
+
+  void _handleDoubleTap(details) {
+     
+    final RenderBox box = context.findRenderObject() as RenderBox;
+    final Offset localPosition = box.globalToLocal(details.globalPosition);
+
+    setState(() {
+      _showHeart = true;
+      _heartPosition = localPosition;
+    });
+
+    _heartAnimationController.forward();
+
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        _showHeart = false;
+      });
+    });
   }
 
   // @override
@@ -161,6 +208,10 @@ class _ShortViewFState extends State<ShortViewF> {
                         _ShortController.controller!.play();
                       }
                     });
+                  },
+                  onDoubleTapDown: _handleDoubleTap,
+                  onDoubleTap: () {
+                    _ShortController.newLikeShort();
                   },
                   child: _ShortController.initialise
                       ? SingleChildScrollView(
@@ -215,7 +266,21 @@ class _ShortViewFState extends State<ShortViewF> {
                                       colors: VideoProgressColors(
                                           playedColor:
                                               Color.fromARGB(255, 31, 59, 151)),
-                                      allowScrubbing: true)))
+                                      allowScrubbing: true))),
+                          Positioned(
+                            top: _heartPosition.dy - 40,
+                            left: _heartPosition.dx - 40,
+                            child: _showHeart
+                                ? ScaleTransition(
+                                    scale: _heartAnimation,
+                                    child: Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                      size: 80,
+                                    ),
+                                  )
+                                : Container(),
+                          )
                         ]))
                       : Container(
                           child: SpinKitRing(
@@ -231,51 +296,7 @@ class _ShortViewFState extends State<ShortViewF> {
     });
   }
 }
-
-class VideoPlayerProgressBar extends StatefulWidget {
-  final VideoPlayerController controller;
-
-  VideoPlayerProgressBar({required this.controller});
-
-  @override
-  _VideoPlayerProgressBarState createState() => _VideoPlayerProgressBarState();
-}
-
-class _VideoPlayerProgressBarState extends State<VideoPlayerProgressBar> {
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(() {
-      Get.find<ShortController>().changeVideoSlide(
-          widget.controller.value.position.inSeconds.toDouble() /
-              widget.controller.value.duration.inSeconds.toDouble());
-
-      // setState(() {
-      //   _progressValue = widget.controller.value.position.inSeconds.toDouble() /
-      //       widget.controller.value.duration.inSeconds.toDouble();
-      // });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Slider(
-      min: 0.0,
-      max: 1.0,
-      value: Get.find<ShortController>().progressValue,
-      onChanged: (value) {
-        // Get.find<ShortController>().changeVideoSlide(value);
-
-        // setState(() {
-        //   _progressValue = value;
-        // });
-        final duration = widget.controller.value.duration.inSeconds.toDouble();
-        final newPosition = value * duration;
-        widget.controller.seekTo(Duration(seconds: newPosition.toInt()));
-      },
-    );
-  }
-}
+ 
 
 
 

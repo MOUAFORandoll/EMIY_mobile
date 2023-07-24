@@ -45,7 +45,9 @@ class ApiRoutes {
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';
   static const SHORT_NEW = '/short/new';
   static const SHORT_LIKE = '/like/short';
-  static const SHORT_COMMENT = '/comment/short';
+  static const SHORT_COMMENT = '/comment/short'; 
+  static const SHORT_COMMENT_COMMENT = '/comment/comment/short'; 
+  static const SHORT_COMMENT_LIKE = '/like/comment';
   static const LIKE_PRODUIT = '/like/produit';
   static const NOTAITON_BOUTIQUE = '/notation/boutique';
   static const TEST = '/test/scroll';
