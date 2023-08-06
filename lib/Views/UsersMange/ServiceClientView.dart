@@ -1,3 +1,5 @@
+import 'package:EMIY/components/Button/AppIconSendButton.dart';
+import 'package:EMIY/components/Widget/InputMessaage.dart';
 import 'package:EMIY/components/Widget/OwnMessgaeCrad.dart';
 import 'package:EMIY/components/Widget/ReplyCard.dart';
 import 'package:EMIY/controller/ServiceClientController.dart';
@@ -211,21 +213,16 @@ class _ServiceClientViewState extends State<ServiceClientView> {
           padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _sc.textEditingController,
-                  decoration: InputDecoration(
-                    hintText: 'Entrez votre message...',
-                  ),
-                ),
+              /*    Container(
+                    margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                    child:  */
+              InputMessaage(
+                controller: _sc.textEditingController,
               ),
-              IconButton(
-                icon: Icon(Icons.send),
-                onPressed: () {
-                  _sc.newMessageMessageEchange();
-                  scrollToBottom();
-                },
-              ),
+              AppIconSendButton(
+                  icon: Icons.send,
+                  sending: _sc.sending,
+                  onTap: () => _sc.newMessageMessageEchange()),
             ],
           ),
         ),

@@ -12,15 +12,14 @@ class ServiceClientRepo extends GetxService {
   Future<Response> getEchange(code) async {
     //print('get----------------');
     // try {
-    Response response = await apiClient.getCollections(
-        ApiRoutes.LIST_MESSAGE_SC + '?code=' + code.toString());
+    Response response = await apiClient
+        .getData(ApiRoutes.LIST_MESSAGE_SC + '?code=' + code.toString());
 
     return response;
   }
 
   Future echangeMessageNew(data) async {
-    Response a =
-        await apiClient.postData(ApiRoutes.LIST_MESSAGE_NEW, data);
+    Response a = await apiClient.postData(ApiRoutes.LIST_MESSAGE_NEW, data);
     ;
 
     return a;

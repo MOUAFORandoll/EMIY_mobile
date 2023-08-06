@@ -1,5 +1,5 @@
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
@@ -61,7 +61,7 @@ class HomeView extends StatelessWidget {
             //print('****fin');
           },
           child: CustomScrollView(
-              controller: Get.find<ActionController>().scrollcontroller,
+              controller: Get.find<GeneralController>().scrollcontroller,
               slivers: [
                 SliverAppBar(
                   backgroundColor: Colors.white,

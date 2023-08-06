@@ -104,7 +104,6 @@ class ShoppingViewNext extends StatelessWidget {
                               child: Text(
                                 'Nombre de produits : ${_controller.getItems.length}',
                                 style: TextStyle(
-                                  fontFamily: 'orkney',
                                   fontSize: 11,
                                   color: Colors.black,
                                 ),
@@ -114,7 +113,6 @@ class ShoppingViewNext extends StatelessWidget {
                               child: Text(
                                 'Montant du panier :  ${_controller.totalPrix} XAF',
                                 style: TextStyle(
-                                    fontFamily: 'orkney',
                                     overflow: TextOverflow.ellipsis,
                                     color: Colors.black,
                                     fontSize: 11),

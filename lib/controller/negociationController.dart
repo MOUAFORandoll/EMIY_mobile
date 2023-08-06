@@ -32,8 +32,7 @@ class NegociationController extends GetxController {
 
     fn.loading('Boutique', 'Creation de la negociation en cours');
     var token = await dababase.getKeyKen();
-    _idUser = Jwt.parseJwt(token['token'])['id'];
-    print('---------------idd------------!!${_idUser}');
+    _idUser = Jwt.parseJwt(token['token'])['id']; 
 
     try {
       var data = {'codeProduit': codeProduit, 'keySecret': key};
@@ -46,8 +45,7 @@ class NegociationController extends GetxController {
             print(response.body['data']);
             new SocketService().negociation(
                 response.body['data']['canal'], socketMessageNegociation);
-            _codeNegociation = response.body['data']['canal'];
-            print('-------------------------');
+            _codeNegociation = response.body['data']['canal']; 
             _listMessageNegociation = [];
             textEditingController.text = '';
             _codeNegociation = '';
@@ -160,8 +158,7 @@ class NegociationController extends GetxController {
 
     // fn.loading('Boutique', 'Creation de la negociation en cours');
     var token = await dababase.getKeyKen();
-    _idUser = Jwt.parseJwt(token['token'])['id'];
-    print('---------------idd------------!!${_idUser}');
+    _idUser = Jwt.parseJwt(token['token'])['id']; 
 
     try {
       var data = {

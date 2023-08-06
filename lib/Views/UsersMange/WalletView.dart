@@ -1,5 +1,5 @@
 import 'package:EMIY/components/Widget/SelectComponent.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:EMIY/components/Button/AppIconButton.dart';
@@ -366,7 +366,7 @@ class WalletView extends StatelessWidget {
                                       margin: EdgeInsets.symmetric(vertical: 5),
                                       child: Text('Moyen de recharge'),
                                     ),
-                                    GetBuilder<ActionController>(
+                                    GetBuilder<GeneralController>(
                                         builder: (_Acontroller) => Container(
                                             margin: EdgeInsets.only(
                                                 // top: Get.size.height * .015,
@@ -410,7 +410,7 @@ class WalletView extends StatelessWidget {
                                               _manager.User.prenom.toString();
 
                                           var mode =
-                                              Get.find<ActionController>()
+                                              Get.find<GeneralController>()
                                                   .selected;
                                           var keySecret =
                                               await _manager.dababase.getKey();

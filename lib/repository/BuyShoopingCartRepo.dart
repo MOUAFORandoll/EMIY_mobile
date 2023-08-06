@@ -9,19 +9,19 @@ class BuyShoopingCartRepo extends GetxService {
   BuyShoopingCartRepo({required this.apiClient});
 
   Future buyCart(data) async {
-    Response a = await apiClient.getCollectionsP(ApiRoutes.BUY, data);
+    Response a = await apiClient.postData(ApiRoutes.BUY, data);
 
     return a;
   }
 
   Future getLivraison_point() async {
-    Response a = await apiClient.getCollections(ApiRoutes.LIVRAISON_POINT);
+    Response a = await apiClient.getData(ApiRoutes.LIVRAISON_POINT);
 
     return a;
   }
 
   Future verifyCom(data) async {
-    Response a = await apiClient.getCollectionsP(ApiRoutes.VERIFY, data);
+    Response a = await apiClient.postData(ApiRoutes.VERIFY, data);
 
     return a;
   }

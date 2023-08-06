@@ -59,7 +59,7 @@ class LinkController extends GetxController {
 
     try {
       Response response = await linkRepo.getUniLinkProduit(codeProduit, key);
-      print('-++++++++-----${response.body['data']}');
+      
 
       if (response.body != null) {
         if (response.body['data'] != null) {
@@ -149,12 +149,10 @@ class LinkController extends GetxController {
 
           _isLoaded = 1;
 
-          update();
-          print('-++++++++-----${_isLoaded}');
+          update(); 
         } else {
           // _isLoaded = 2;
-          // update();
-          print('-++++++++-----${_isLoaded}');
+          // update(); 
         }
       }
     } catch (e) {

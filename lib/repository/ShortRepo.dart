@@ -11,7 +11,7 @@ class ShortRepo extends GetxService {
   ShortRepo({required this.apiClient});
 
   Future getListShort(indexC, keySecret) async {
-    Response a = await apiClient.getCollections(ApiRoutes.SHORT_READ +
+    Response a = await apiClient.getData(ApiRoutes.SHORT_READ +
         "?page=${indexC.toString()}&keySecret=${keySecret.toString()}");
 
     return a;
@@ -42,15 +42,24 @@ class ShortRepo extends GetxService {
   }
 
   Future getListComment(idShort, keySecret) async {
-    Response a = await apiClient.getCollections(ApiRoutes.SHORT_COMMENT +
+    Response a = await apiClient.getData(ApiRoutes.SHORT_COMMENT +
         "?idShort=${idShort.toString()}&keySecret=${keySecret.toString()}");
 
     return a;
   }
 
   Future getListCommentComment(idRef, keySecret) async {
-    Response a = await apiClient.getCollections(ApiRoutes.SHORT_COMMENT_COMMENT +
+    Response a = await apiClient.getData(ApiRoutes.SHORT_COMMENT_COMMENT +
         "?idRef=${idRef.toString()}&keySecret=${keySecret.toString()}");
+
+    return a;
+  }
+
+  Future getUniqueShort(id, codeShort, keySecret) async {
+    print((ApiRoutes.SHORT_READ_UNIQUE +
+        "?id=${id.toString()}&codeShort=${codeShort.toString()}&keySecret=${keySecret.toString()}"));
+    Response a = await apiClient.getData(ApiRoutes.SHORT_READ_UNIQUE +
+        "?id=${id.toString()}&codeShort=${codeShort.toString()}&keySecret=${keySecret.toString()}");
 
     return a;
   }

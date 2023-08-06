@@ -8,6 +8,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../model/socket/NotificationModel.dart';
 import 'routing.dart';
 
 class NotificationService {
@@ -158,6 +159,43 @@ class NotificationService {
       1, // Notification ID (should be unique for each notification)
       'General', // Notification title
       content, // Notification body
+      platformChannelSpecifics,
+      payload: 'action1',
+    );
+  }
+
+  Future<void> emitNotifications(NotificationModel content) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'emiy_general_1', // Channel ID
+      'emiy general', // Channel name
+      'Notifications', // Channel description
+      importance: Importance.max,
+      priority: Priority.high,
+      autoCancel: false,
+      // setAsGroupSummary: true,
+      styleInformation: BigTextStyleInformation(
+        '<Notification Content>', // Replace with your custom notification content
+        htmlFormatBigText: true,
+        // Replace with your custom notification title
+        summaryText:
+            'Notifications', // Replace with your custom notification summary
+      ),
+      icon: 'launcher_icon',
+      largeIcon: DrawableResourceAndroidBitmap(
+          'launcher_icon'), // Replace with the name of your custom large icon file
+    );
+    const IOSNotificationDetails iOSPlatformChannelSpecifics =
+        IOSNotificationDetails();
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      1, // Notification ID (should be unique for each notification)
+      content.title, // Notification title
+      content.description, // Notification body
       platformChannelSpecifics,
       payload: 'action1',
     );

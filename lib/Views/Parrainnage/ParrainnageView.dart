@@ -2,7 +2,7 @@ import 'package:EMIY/components/Button/app_button.dart';
 import 'package:EMIY/components/Widget/Fieul.dart';
 import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/searchController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';

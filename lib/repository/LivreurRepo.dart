@@ -17,7 +17,7 @@ class LivreurRepo extends GetxService {
     //print(await s.getLonLat());
 
     var longlat = await dababase.getLonLat();
-    Response a = await apiClient.getCollectionsP(ApiRoutes.LIVREUR,
+    Response a = await apiClient.postData(ApiRoutes.LIVREUR,
         {'longitude': longlat['long'], 'latitude': longlat['lat']});
     ;
     //print(a.body);

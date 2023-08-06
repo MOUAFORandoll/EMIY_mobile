@@ -8,7 +8,7 @@ import 'package:EMIY/components/Text/bigtitleText0.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -36,7 +36,7 @@ class _PaiementBuyCarteViewState extends State<PaiementBuyCarteView> {
     bool isLoading = true;
 
     return GetBuilder<BuyShopController>(builder: (_Bcontroller) {
-      return GetBuilder<ActionController>(
+      return GetBuilder<GeneralController>(
           builder: (_Acontroller) => Scaffold(
               appBar: AppBar(
                 title: Text("Valider Paiement",
@@ -145,7 +145,7 @@ class _PaiementBuyCarteViewState extends State<PaiementBuyCarteView> {
                         color: ColorsApp.greenLight,
                         title: 'Terminer',
                         onTap: () async {
-                          var mode = Get.find<ActionController>().selected;
+                          var mode = Get.find<GeneralController>().selected;
                           if (mode == 3) {
                             if (_Bcontroller.dateController.text.length == 5 ||
                                 _Bcontroller.cardNumberController.text.length ==

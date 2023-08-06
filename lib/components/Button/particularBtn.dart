@@ -24,7 +24,6 @@ class ParticularBtn extends StatelessWidget {
         Text(
           subtitle!,
           style: TextStyle(
-            fontFamily: 'orkney',
             color: Colors.grey,
             fontSize: 10,
           ),

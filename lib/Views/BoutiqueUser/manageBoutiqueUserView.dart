@@ -196,7 +196,6 @@ class ManageBoutiqueUserView extends StatelessWidget {
                                 hintText: 'Entrer une description',
                                 hintStyle: TextStyle(
                                   color: Colors.grey,
-                                  fontFamily: 'orkney',
                                 ),
                                 // suffixIcon: InkWell(
                                 //   onTap: () => onTap,

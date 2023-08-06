@@ -1,4 +1,4 @@
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ServiceClientController.dart';
@@ -13,7 +13,7 @@ import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/controller/productController.dart';
 import 'package:EMIY/controller/searchController.dart';
-import 'package:EMIY/repository/ActionRepo.dart';
+import 'package:EMIY/repository/GeneralRepo.dart';
 import 'package:EMIY/repository/BoutiqueRepo.dart';
 import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
 import 'package:EMIY/repository/CommandeRepo.dart';
@@ -29,6 +29,7 @@ import 'package:EMIY/repository/negociationRepo.dart';
 import 'package:EMIY/repository/ProductRepo.dart';
 import 'package:EMIY/utils/Services/ApiClient.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
+import 'package:EMIY/utils/Services/UniLinkService.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
@@ -55,12 +56,14 @@ Future<void> initApp() async {
   await GetStorage.init();
 
   await Get.find<DataBaseController>().init();
-  Get.find<ManagerController>().getUserDB();
-  Get.find<ManagerController>().getKeyU();
-  Get.find<ManagerController>().getUser();
-  Get.find<ActionController>().generalSocket();
+//  await Get.find<ManagerController>().getUserDB();
+// await  Get.find<ManagerController>().getKeyU();
+//  await Get.find<ManagerController>().getUser();
+await  Get.find<GeneralController>().generalSocket();
+await  Get.find<GeneralController>().NotificationSocket();
+ await Get.find<GeneralController>().getListNotifications();
 
-  Get.find<ServiceClientController>().connectSockey();
+ await Get.find<ServiceClientController>().connectSockey();
 }
 
 Future<void> secondInit() async {
@@ -77,7 +80,7 @@ Future<void> secondInit() async {
   Get.find<NegociationController>().getListNegociation();
   Get.find<ProductController>().getListProduitPreference();
 
-  Get.find<ActionController>().getListModePaiement();
+  Get.find<GeneralController>().getListModePaiement();
   Get.find<BuyShopController>().setUserInfo();
 
   Get.find<ServiceClientController>().connectSockey();
@@ -94,7 +97,10 @@ Future<void> initAllApp() async {
   await Get.find<DataBaseController>().init();
   Get.find<ManagerController>().getKeyU();
   Get.find<ManagerController>().getUser();
-  Get.find<ActionController>().generalSocket();
+  Get.find<GeneralController>().generalSocket();
+await  Get.find<GeneralController>().NotificationSocket();
+
+  Get.find<GeneralController>().getListNotifications();
 
   Get.find<ManagerController>().newLocalisation();
   Get.find<CommandeController>().getListCommandes();
@@ -110,19 +116,20 @@ Future<void> initAllApp() async {
   Get.find<ProductController>().getListProduitPreference();
 
   Get.find<BuyShopController>().setUserInfo();
-  Get.find<ActionController>().getListModePaiement();
+  Get.find<GeneralController>().getListModePaiement();
 
   Get.find<ServiceClientController>().connectSockey();
   Get.find<ServiceClientController>().getEchange();
 }
 
 Future<void> initServices() async {
+  Get.put(UniLinkService(), permanent: true);
   Get.put(DataBaseController(), permanent: true);
 
   Get.put(ApiClient(), permanent: true);
 
-  Get.put(ActionRepo(apiClient: Get.find()));
-  Get.put(ActionController(actionRepo: Get.find()), permanent: true);
+  Get.put(GeneralRepo(apiClient: Get.find()));
+  Get.put(GeneralController(generalRepo: Get.find()), permanent: true);
   Get.put(LivreurRepo(apiClient: Get.find()), permanent: true);
   // Get.put(  StorageService(), permanent: true);
   Get.put(GetStorage(), permanent: true);
@@ -179,7 +186,7 @@ getData() async {
   if (status.isGranted) {
     var database = Get.find<DataBaseController>();
     await database.init();
-    await Get.find<ActionController>().getLanguageInit();
+    await Get.find<GeneralController>().getLanguageInit();
 
     Get.find<ManagerController>().getKeyU();
     Get.find<ManagerController>().getUser();

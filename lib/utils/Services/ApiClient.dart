@@ -5,7 +5,7 @@ import 'package:get/get_connect/http/src/request/request.dart';
 
 import '../functions/viewFunctions.dart';
 
-class ApiClient extends GetConnect implements GetxService {
+class ApiClient extends GetConnect  {
   String token = '';
   String appBaseUrl = ApiUrl.baseUrl;
   late Map<String, String> _mainHeaders;
@@ -20,7 +20,7 @@ class ApiClient extends GetConnect implements GetxService {
     httpClient.addRequestModifier<dynamic>((request) {
       _setAuthHeaders();
 
-      // //print('===========================$token============================');
+    print('===========================${request.url}============================');
       // Intercept the request before it is sent to the server
       token.length != 0
           ? request.headers['Authorization'] = 'Bearer $token'
@@ -71,14 +71,9 @@ class ApiClient extends GetConnect implements GetxService {
     //print(token);
   }
 
-  Future<Response> getCollections(url) async {
+  Future<Response> getData(url) async {
     Response rep = await get(url);
-    return rep;
-  }
-
-  Future<Response> getCollectionsP(url, data) async {
-    Response rep = await post(url.toString(), data);
-    return rep;
+    return   rep;
   }
 
   Future<Response> postData(url, data) async {

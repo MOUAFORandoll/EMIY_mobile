@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 import 'package:video_player/video_player.dart';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -139,58 +140,24 @@ class Test extends StatefulWidget {
 class _TestState extends State<Test> with TickerProviderStateMixin {
   bool _showHeart = false;
 
-  late AnimationController _heartAnimationController;
-  late Animation<double> _heartAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _heartAnimationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    );
-
-    _heartAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-          parent: _heartAnimationController, curve: Curves.easeInOut),
-    );
-
-    _heartAnimationController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _heartAnimationController.reverse();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _heartAnimationController.dispose();
-    super.dispose();
-  }
-
   var fn = new ViewFunctions();
-
-  void _handleDoubleTap() {
-    fn.loading('Note', 'Notation de la boutique en cours');
-
-    Future.delayed(Duration(seconds: 20), () {
-      print('--------------');
-      fn.closeLoader();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: GestureDetector(
-          onDoubleTap: _handleDoubleTap,
+        title: InkWell(
+          onTap: () => fn.notifivation(
+            'Commente',
+          ),
           child: Text('Double-cliquez pour aimer!'),
         ),
       ),
       body: Center(
           child: GestureDetector(
-              onTap: _handleDoubleTap,
+              onTap: () => fn.notifivation(
+                    'Commente',
+                  ),
               child: Center(
                 child: Icon(
                   Icons.favorite,

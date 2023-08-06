@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ShortAction extends StatelessWidget {
   ShortAction({required this.short});
@@ -83,7 +84,10 @@ class ShortAction extends StatelessWidget {
                       openModal();
                     }),
                 IconShortComponent(
-                    icon: FontAwesomeIcons.share, onTap: () => openModal()),
+                    icon: FontAwesomeIcons.share,
+                    onTap: () => Share.share(
+                        'Regarde ce short : ' + short.codeShort,
+                        subject: 'Look what I made!')),
               ],
             )));
   }
@@ -183,8 +187,8 @@ class ShortAction extends StatelessWidget {
                           Row(
                             children: [
                               /*    Container(
-                    margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                    child:  */
+                      margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                      child:  */
                               InputMessaage(
                                 controller:
                                     _ShortController.textEditingController,

@@ -986,29 +986,30 @@ class BoutiqueController extends GetxController {
   int get isLoadedShort => _isLoadedShort;
   Future<void> getListShort() async {
     // //print('***short******************response**********');
+    if (Boutique != null) {
+      _isLoadedShort = 0;
+      try {
+        Response response =
+            await boutiqueRepo.getListShortBoutique(Boutique.codeBoutique);
 
-    _isLoadedShort = 0;
-    try {
-      Response response =
-          await boutiqueRepo.getListShortBoutique(Boutique.codeBoutique);
+        _listShortBoutique = [];
+        _listShortBoutique.clear();
+        update();
 
-      _listShortBoutique = [];
-      _listShortBoutique.clear();
-      update();
-
-      if (response.body != null) {
-        if (response.body['data'] != null) {
-          if (response.body['data'].length != 0) {
-            _listShortBoutique.addAll((response.body['data'] as List)
-                .map((e) => ShortModel.fromJson(e))
-                .toList());
+        if (response.body != null) {
+          if (response.body['data'] != null) {
+            if (response.body['data'].length != 0) {
+              _listShortBoutique.addAll((response.body['data'] as List)
+                  .map((e) => ShortModel.fromJson(e))
+                  .toList());
+            }
+            _isLoadedShort = 1;
+            update();
           }
-          _isLoadedShort = 1;
-          update();
         }
+      } catch (e) {
+        //print(e);
       }
-    } catch (e) {
-      //print(e);
     }
   }
 
@@ -1241,28 +1242,29 @@ class BoutiqueController extends GetxController {
   int get isAbBoutiquePage => _isAbBoutiquePage;
   Future<void> getListAbonnementForBoutique() async {
     // //print('***short******************response**********');
+    if (Boutique != null) {
+      try {
+        Response response = await boutiqueRepo.abonnementForBoutique(
+            Boutique.codeBoutique, isAbBoutiquePage);
 
-    try {
-      Response response = await boutiqueRepo.abonnementForBoutique(
-          Boutique.codeBoutique, isAbBoutiquePage);
+        _listAbonnememtBoutique = [];
+        _listAbonnememtBoutique.clear();
+        update();
 
-      _listAbonnememtBoutique = [];
-      _listAbonnememtBoutique.clear();
-      update();
-
-      if (response.body != null) {
-        if (response.body['data'] != null) {
-          if (response.body['data'].length != 0) {
-            _listAbonnememtBoutique.addAll((response.body['data'] as List)
-                .map((e) => AbonnementBoutiqueModel.fromJson(e))
-                .toList());
-            _isAbUserPage++;
-            update();
+        if (response.body != null) {
+          if (response.body['data'] != null) {
+            if (response.body['data'].length != 0) {
+              _listAbonnememtBoutique.addAll((response.body['data'] as List)
+                  .map((e) => AbonnementBoutiqueModel.fromJson(e))
+                  .toList());
+              _isAbUserPage++;
+              update();
+            }
           }
         }
+      } catch (e) {
+        //print(e);
       }
-    } catch (e) {
-      //print(e);
     }
   }
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/controller/managerController.dart';
@@ -57,7 +57,7 @@ class BuyShopController extends GetxController {
       return val;
     }
   }
- 
+
   PointLivraisonModel _selected_livraison_point = new PointLivraisonModel(
       id: 0, libelle: '', ville: '', quartier: '', image: '');
   PointLivraisonModel get selected_livraison_point => _selected_livraison_point;
@@ -133,12 +133,12 @@ class BuyShopController extends GetxController {
   String _codeCommande = '';
   String get isIdCom => _codeCommande;
   var fn = new ViewFunctions();
-   
+
   // CategoryController({required this.service});
   buyCart() async {
     var produits = Get.find<CartController>().getListPinCart();
-    
-    var mode = Get.find<ActionController>().selected;
+
+    var mode = Get.find<GeneralController>().selected;
 
     var data = mode == 3
         ? {
@@ -394,7 +394,7 @@ class BuyShopController extends GetxController {
     if (manager.User != null &&
         _nameController.text.length == 0 &&
         _phoneController.text.length == 0) {
-     _nameController.text = manager.User.nom;
+      _nameController.text = manager.User.nom;
       _prenameController.text = manager.User.prenom;
       _phoneController.text = manager.User.phone;
       update();

@@ -85,48 +85,27 @@ flutter_icons:
   ios: true
   image_path: "assets/logo/logo.png"
 flutter:
+
   fonts:
-    - family: OpenSan
+    - family: Montserrat
       fonts:
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Light.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Regular.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Medium.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-SemiBold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Bold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-ExtraBold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Light.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Regular.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Medium.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-SemiBold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Bold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-ExtraBold.ttf
-        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Light.ttf
-        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf
-        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Medium.ttf
-        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-SemiBold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Bold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans/OpenSans-ExtraBold.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-LightItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-Italic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-MediumItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-SemiBoldItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-BoldItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_Condensed/OpenSans_Condensed-ExtraBoldItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-LightItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-Italic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-MediumItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-SemiBoldItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-BoldItalic.ttf
-        # - asset: fonts/Open_Sans/static/OpenSans_SemiCondensed/OpenSans_SemiCondensed-ExtraBoldItalic.ttf
-        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-LightItalic.ttf
-        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-Italic.ttf
-        - asset: fonts/Open_Sans/static/OpenSans/OpenSans-MediumItalic.ttf
-    - family: orkney
-      fonts:
-        - asset: assets/police/orkney-bold.otf
-        - asset: assets/police/orkney-light.otf
-        - asset: assets/police/orkney-medium.otf
-        - asset: assets/police/orkney-regular.otf
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-BlackItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-BoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-LightItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-MediumItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ThinItalic.ttf
+ 
   # For information on the generic Dart part of this file, see the
   # following page: https://dart.dev/tools/pub/pubspec
   # The following section is specific to Flutter.

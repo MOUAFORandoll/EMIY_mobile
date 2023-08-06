@@ -2,7 +2,7 @@ import 'package:EMIY/components/Form/home_search_field.dart';
 import 'package:EMIY/components/Form/search_field.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponentHomeN.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
@@ -90,7 +90,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
           },
           child: CustomScrollView(
               controller: prods
-                  .controllerT, // controller: Get.find<ActionController>().scrollcontroller,
+                  .controllerT, // controller: Get.find<GeneralController>().scrollcontroller,
               slivers: [
                 SliverAppBar(
                   backgroundColor: Colors.white,

@@ -28,7 +28,7 @@ class ListWidget extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: TextStyle(fontFamily: 'orkney', fontSize: 15),
+          style: TextStyle(fontSize: 15),
         ),
         subtitle: Container(
             child: Text(subtitle, style: TextStyle(fontFamily: 'orkney')),

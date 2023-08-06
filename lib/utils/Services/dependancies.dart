@@ -1,4 +1,4 @@
-// import 'package:EMIY/controller/ActionController.dart';
+// import 'package:EMIY/controller/GeneralController.dart';
 // import 'package:EMIY/controller/BuyShopController.dart';
 // import 'package:EMIY/controller/CommandeController.dart';
 // import 'package:EMIY/controller/ShortController.dart';
@@ -10,13 +10,13 @@
 // import 'package:EMIY/controller/managerController.dart';
 // import 'package:EMIY/controller/productController.dart';
 // import 'package:EMIY/controller/searchController.dart';
-// import 'package:EMIY/repository/ActionRepo.dart';
+// import 'package:EMIY/repository/GeneralRepo.dart';
 // import 'package:EMIY/repository/BoutiqueRepo.dart';
 // import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
 // import 'package:EMIY/repository/CommandeRepo.dart';
 // import 'package:EMIY/repository/SearchRepo.dart';
 // import 'package:EMIY/repository/ShortRepo.dart';
-// import 'package:EMIY/repository/TransactionRepo.dart';
+// import 'package:EMIY/repository/TransgeneralRepo.dart';
 // import 'package:EMIY/repository/categoryBoutiqueRepo.dart';
 // import 'package:EMIY/repository/LivreurRepo.dart';
 // import 'package:EMIY/repository/ManageRepo.dart';
@@ -34,9 +34,9 @@
 // class MyBinding extends Bindings {
 //   void dependencies() async {
 //     Get.lazyPut(() => DB(), fenix: true);
-//     Get.lazyPut(() => ActionRepo(apiClient: Get.find()));
+//     Get.lazyPut(() => GeneralRepo(apiClient: Get.find()));
 
-//     Get.lazyPut(() => ActionController(actionRepo: Get.find()), fenix: true);
+//     Get.lazyPut(() => GeneralController(generalRepo: Get.find()), fenix: true);
 //     Get.lazyPut(() => LivreurRepo(apiClient: Get.find()), fenix: true);
 //     // Get.lazyPut(() => StorageService(), fenix: true);
 //     Get.lazyPut(() => GetStorage(), fenix: true);
@@ -54,7 +54,7 @@
 //     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => CategoryBoutiqueRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => BuyShoopingCartRepo(apiClient: Get.find()), fenix: true);
-//     Get.lazyPut(() => TransactionRepo(apiClient: Get.find()), fenix: true);
+//     Get.lazyPut(() => TransgeneralRepo(apiClient: Get.find()), fenix: true);
 
 //     Get.lazyPut(() => ProductController(productRepo: Get.find()), fenix: true);
 //     Get.lazyPut(() => CartController(), fenix: true);
@@ -66,7 +66,7 @@
 //         () => CategoryBoutiqueController(categoryBoutiqueRepo: Get.find()),
 //         fenix: true);
 
-//     Get.lazyPut(() => TransactionController(transactionRepo: Get.find()),
+//     Get.lazyPut(() => TransactionController(transgeneralRepo: Get.find()),
 //         fenix: true);
 //     Get.lazyPut(() => SearchRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
@@ -75,7 +75,7 @@
 
 //     var database = dababase;
 //     await database.init();
-//     await Get.find<ActionController>().getLanguageInit();
+//     await Get.find<GeneralController>().getLanguageInit();
 //   }
 
 //   onInit() async {
@@ -101,7 +101,7 @@
 //     Get.find<CategoryBoutiqueController>().getListBoutiques();
 //     Get.find<ShortController>().getListShort();
 
-//     Get.find<ActionController>().getListModePaiement();
+//     Get.find<GeneralController>().getListModePaiement();
 //     Get.find<BoutiqueController>().getBoutique();
 
 //     // Get.find<BuyShopController>().getListLivreur();
@@ -111,9 +111,9 @@
 //     // var database = dababase;
 //     // await database.init();
 //     // Get.find<StorageService>().init();
-//     Get.lazyPut(() => ActionRepo(apiClient: Get.find()));
+//     Get.lazyPut(() => GeneralRepo(apiClient: Get.find()));
 
-//     Get.lazyPut(() => ActionController(actionRepo: Get.find()));
+//     Get.lazyPut(() => GeneralController(generalRepo: Get.find()));
 //     Get.lazyPut(() => LivreurRepo(apiClient: Get.find<ApiClient>()));
 //     // Get.lazyPut(() => StorageService());
 
@@ -129,7 +129,7 @@
 //     Get.lazyPut(() => ProductRepo(apiClient: Get.find()));
 //     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()));
 //     Get.lazyPut(() => BuyShoopingCartRepo(apiClient: Get.find()));
-//     Get.lazyPut(() => TransactionRepo(apiClient: Get.find()));
+//     Get.lazyPut(() => TransgeneralRepo(apiClient: Get.find()));
 //     Get.lazyPut(() => ProductController(productRepo: Get.find()));
 //     Get.lazyPut(() => CartController());
 //     Get.lazyPut(() => CommandeController(commandeRepo: Get.find()));
@@ -140,11 +140,11 @@
 //     Get.lazyPut(
 //         () => CategoryBoutiqueController(categoryBoutiqueRepo: Get.find()));
 
-//     Get.lazyPut(() => TransactionController(transactionRepo: Get.find()));
+//     Get.lazyPut(() => TransactionController(transgeneralRepo: Get.find()));
 //     Get.lazyPut(() => ShortRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => ShortController(shortRepo: Get.find()), fenix: true);
 
-//     Get.find<ActionController>();
+//     Get.find<GeneralController>();
 //     Get.find<ManagerController>().getKeyU();
 //     Get.find<ManagerController>().getUser();
 

@@ -24,6 +24,7 @@ class ShortController extends GetxController {
   final service = new ApiService();
   VideoPlayerController? controller;
   final dababase = Get.find<DataBaseController>();
+  var fn = new ViewFunctions();
 
   // ChewieController? chewieController;
   final ShortRepo shortRepo;
@@ -211,6 +212,7 @@ class ShortController extends GetxController {
   int _currentShort = 0;
   int get currentShort => _currentShort;
   var currentShortData;
+  get currentShortData0 => currentShortData;
   setCurrent(index) {
     _currentShort = index;
     currentShortData = _listShort[_currentShort];
@@ -331,6 +333,9 @@ class ShortController extends GetxController {
                 update();
               }
             }
+            fn.notifivation(
+              'Commente',
+            );
             update();
           }
         }
@@ -449,6 +454,7 @@ class ShortController extends GetxController {
       com.nbre_like_com =
           com.is_like_com ? com.nbre_like_com - 1 : com.nbre_like_com + 1;
       com.is_like_com = !com.is_like_com;
+      update();
     }
     var key = await dababase.getKey();
 
@@ -502,5 +508,90 @@ class ShortController extends GetxController {
     );
 
     update();
+  }
+
+  var _isUniqueVideoPlayer;
+  get isUniqueVideoPlayer => _isUniqueVideoPlayer;
+  int _isUnique = 0;
+  get isUnique => _isUnique;
+  getUniqueShort(idShort, code) async {
+    update();
+    _isUnique = 0;
+
+    update();
+    var key = await dababase.getKey();
+
+    try {
+      Response response = await shortRepo.getUniqueShort(idShort, code, key);
+
+      if (response.statusCode == 200) {
+        if (response.body != null) {
+          if (response.body['data'] != null) {
+            print('--short----------***************************');
+            print(response.body['data']);
+
+            currentShortData = ShortModel.fromJson(response.body['data']);
+            _isUnique = 1;
+
+            currentShortData.loadController();
+            _isUniqueVideoPlayer = currentShortData.controller;
+            update();
+            print("-----short+++++++---------------$currentShortData0.id");
+          }
+        }
+      }
+    } catch (e) {
+      // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+
+      update();
+      //print(e);
+    }
+  }
+
+  newLikeShortComSecond() async {
+    var key = await dababase.getKey();
+
+    try {
+      var data = {'id': currentShortData.id, 'keySecret': key};
+      print(data);
+      Response response = await shortRepo.newLikeComment(data);
+
+      if (response.statusCode == 200) {
+        if (response.body != null) {
+          if (response.body['short'] != null) {
+            print(response.body['short']);
+            var newShortComm =
+                CommentShortModel.fromJson(response.body['short']);
+
+            currentShortData = newShortComm;
+
+            update();
+          }
+        }
+      } else {
+        currentShortData.nbre_like_com = !currentShortData.is_like_com
+            ? currentShortData.nbre_like_com - 1
+            : currentShortData.nbre_like_com + 1;
+        update();
+      }
+    } catch (e) {
+      // fn.closeSnack();
+      // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      currentShortData.nbre_like_com = !currentShortData.is_like_com
+          ? currentShortData.nbre_like_com - 1
+          : currentShortData.nbre_like_com + 1;
+      currentShortData.is_like_com = !currentShortData.is_like_com;
+      update();
+      //print(e);
+    }
+  }
+
+  disposeUniquePLayer() {
+    // currentShortData.controller.dispose();
+    // if (_isUniqueVideoPlayer != null) {
+    _isUniqueVideoPlayer!.dispose();
+
+    //   update();
+    // }
   }
 }

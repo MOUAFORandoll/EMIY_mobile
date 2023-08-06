@@ -35,7 +35,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
           title: Text(
             widget.title,
             style: TextStyle(
-              fontFamily: 'orkney',
+              
               color: Colors.black,
             ),
           ),

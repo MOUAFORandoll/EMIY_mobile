@@ -1,11 +1,12 @@
 import 'package:EMIY/Views/Home/SearchView.dart';
 import 'package:EMIY/Views/UsersMange/RegisterScreen.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/productController.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/UniLinkService.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:EMIY/utils/constants/assets.dart';
@@ -37,37 +38,25 @@ import 'package:uni_links/uni_links.dart';
 import 'CategoryBoutique/CategoryView.dart';
 import 'UsersMange/LoginScreen.dart';
 
-class FirstScreen extends StatelessWidget {
-  /* StatefulWidget {
+class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
 
   @override
   _FirstScreenState createState() => _FirstScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> { */
+class _FirstScreenState extends State<FirstScreen> {
   // int _currentIndex = 0;
   // bool _isVisible = true;
   // late ScrollController controller;
 
   // @override
-  // void initState() {
-  // iniit();
-  // super.initState();
-  // controller = ScrollController();
-  // Get.find<ActionController>().scrollcontroller.addListener(() {
-  //   //print(Get.find<ActionController>().scrollcontroller.position);
-
-  //   setState(() {
-  //     //print(_isVisible);
-  //     _isVisible = Get.find<ActionController>()
-  //             .scrollcontroller
-  //             .position
-  //             .userScrollDirection ==
-  //         ScrollDirection.forward;
-  //   });
-  // });
-  // }
+  void initState() {
+    super.initState();
+    Get.find<UniLinkService>().initURIHandler();
+    Get.find<UniLinkService>().incomingLinkHandler();
+    // Get.find<UniLinkService>().uniLink();
+  }
 
   // iniit() async {
   //   // await MyBinding().requestPermission();
@@ -89,7 +78,7 @@ class _FirstScreenState extends State<FirstScreen> { */
   //   if (status.isGranted) {
   //     var database = dababase;
   //     await database.init();
-  //     await Get.find<ActionController>().getLanguageInit();
+  //     await Get.find<GeneralController>().getLanguageInit();
 
   //     Get.find<ManagerController>().getKeyU();
   //     Get.find<ManagerController>().getUser();
@@ -204,7 +193,7 @@ class _FirstScreenState extends State<FirstScreen> { */
   @override
   Widget build(BuildContext context) {
     // uniLink();
-    return GetBuilder<ActionController>(
+    return GetBuilder<GeneralController>(
         builder: (_controller) => Scaffold(
               // extendBody for floating bar get better perfomance
               // extendBody: true,

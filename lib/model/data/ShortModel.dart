@@ -22,6 +22,7 @@ class ShortModel {
       required this.boutique,
       required this.description,
       required this.date,
+      required this.codeShort,
       required this.nbre_commentaire,
       required this.nbre_like,
       required this.status,
@@ -37,6 +38,7 @@ class ShortModel {
   int nbre_like;
   int nbre_commentaire;
   final String date;
+  final String codeShort;
   bool is_like;
   final bool status;
   var controller;
@@ -52,6 +54,7 @@ class ShortModel {
       boutique: BoutiqueModel.fromJson(json["boutique"]),
       description: json["description"] == null ? null : json["description"],
       date: json["date"] == null ? null : json["date"],
+      codeShort: ApiUrl.external_link + 'shorts/' + json["codeShort"],
       status: json["status"] == null ? null : json["status"],
       is_like: json["is_like"] == null ? null : json["is_like"],
       controller: VideoPlayerController.network(json["preview"]));
@@ -66,6 +69,7 @@ class ShortModel {
         "titre": titre == null ? null : titre,
         "description": description == null ? null : description,
         "date": date == null ? null : date,
+        "codeShort": codeShort == null ? null : codeShort,
         "is_like": is_like == null ? null : is_like,
         "status": status == null ? null : status,
       };

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/model/data/ModePaiementModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -16,7 +16,7 @@ class SelectComponent extends StatelessWidget {
   bool select = false;
   ModePaiementModel mode;
   Widget build(BuildContext context) {
-    return GetBuilder<ActionController>(
+    return GetBuilder<GeneralController>(
         builder: (_Acontroller) => InkWell(
               child: Container(
                   decoration: BoxDecoration(

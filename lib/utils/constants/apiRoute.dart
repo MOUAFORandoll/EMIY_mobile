@@ -42,6 +42,7 @@ class ApiRoutes {
   static const VERIFY_DEPOT = '/compte/credit/verify';
 
   static const SHORT_READ = '/short/read';
+  static const SHORT_READ_UNIQUE = '/short/read/unique';
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';
   static const SHORT_NEW = '/short/new';
   static const SHORT_LIKE = '/like/short';
@@ -65,4 +66,6 @@ class ApiRoutes {
   static const LIST_MESSAGE_NEW = '/communication/message/new';
   static const LIST_FIEUL = '/user/fieul';
   static const USER_IMAGE_UPDATE = '/user/image/new';
+  static const LIST_NOTIFICATIONS = '/notifications';
+  static const READ_NOTIFICATIONS = '/notifications/read';
 }

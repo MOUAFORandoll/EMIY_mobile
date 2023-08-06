@@ -26,10 +26,7 @@ class BtnCatList extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: TextStyle(
-                fontFamily: 'orkney',
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ));
   }

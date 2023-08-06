@@ -14,7 +14,7 @@ import 'package:EMIY/components/Widget/app_input.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/icon_svg.dart';
 import 'package:EMIY/components/Widget/productBuyComponent.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/controller/managerController.dart';
@@ -93,7 +93,7 @@ class BuyShoopingCart extends StatelessWidget {
                 ]),
             body: SafeArea(
               child: CustomScrollView(
-                  controller: Get.find<ActionController>().scrollcontroller,
+                  controller: Get.find<GeneralController>().scrollcontroller,
                   slivers: [
                     SliverList(
                         delegate: SliverChildBuilderDelegate(
@@ -196,7 +196,6 @@ class BuyShoopingCart extends StatelessWidget {
                                                                               'livrInfo'.tr,
                                                                               style: TextStyle(
                                                                                 fontSize: 12,
-                                                                                fontFamily: 'orkney',
                                                                               ),
                                                                             ),
                                                                             InkWell(
@@ -289,7 +288,6 @@ class BuyShoopingCart extends StatelessWidget {
                                                                                   'livrP'.tr,
                                                                                   style: TextStyle(
                                                                                     fontSize: 12,
-                                                                                    fontFamily: 'orkney',
                                                                                   ),
                                                                                   overflow: TextOverflow.ellipsis,
                                                                                 ),
@@ -327,7 +325,6 @@ class BuyShoopingCart extends StatelessWidget {
                                                                                                 'livrInfo'.tr,
                                                                                                 style: TextStyle(
                                                                                                   fontSize: 12,
-                                                                                                  fontFamily: 'orkney',
                                                                                                 ),
                                                                                               ),
                                                                                               InkWell(
@@ -597,7 +594,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                   color: ColorsApp.black,
                                                   fontWeight: FontWeight.bold),
                                             )),
-                                            GetBuilder<ActionController>(
+                                            GetBuilder<GeneralController>(
                                                 builder: (_Acontroller) =>
                                                     InkWell(
                                                         child: Container(
@@ -611,7 +608,7 @@ class BuyShoopingCart extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      GetBuilder<ActionController>(
+                                      GetBuilder<GeneralController>(
                                           builder: (_Acontroller) => _Acontroller
                                                       .isLoadedMP ==
                                                   0

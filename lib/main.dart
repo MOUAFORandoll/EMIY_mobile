@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:EMIY/Views/UsersMange/RegisterScreen.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/NotificationService.dart';
+import 'package:EMIY/utils/Services/UniLinkService.dart';
 import 'package:EMIY/utils/Services/core.dart';
 import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -51,133 +52,12 @@ Future<void> main() async {
 
 // await MyBinding().onInit();
 
-// await init();
   runApp(MyApp());
-  await uniLink();
-}
- 
-uniLink() async {
-  /**
-     * 
-     le lien de parainage est sous cette forme :
-     * https://emiy-shop.000webhostapp.com/{type}/trgg
-     *
-     * type : 
-     *    - produits => pour afficher un produit precis 
-     *    - subscribes => pour inscrire avec un parain
-     * 
-
-     */
-  try {
-    final uri = await getInitialUri();
-    if (uri == null) {
-      print('no initial uri');
-    } else {
-      var direction = uri.path.split('/');
-      var type = direction[1];
-      print('--${uri}---00-lien----------ici----------------------');
-      if (type == 'produits') {
-        var codeProduit = direction[2];
-
-        print('----------codeProduit--------${codeProduit}------');
-        Get.find<LinkController>().getUniLinkProduit(codeProduit);
-        Get.toNamed(AppLinks.PRODUCT_FOR_LINK);
-      }
-      if (type == 'boutiques') {
-        var codeBoutique = direction[2];
-
-        print('----------codeBoutique--------${codeBoutique}------');
-        Get.find<LinkController>().getUniLinkBoutique(codeBoutique);
-        Get.toNamed(AppLinks.BOUTIQUE_FOR_LINK);
-      }
-
-      if (type == 'subscribes') {
-        var codeParrain = direction[2];
-        print('----------codeParrain--------${codeParrain}------');
-        Get.find<ManagerController>().setCodeParrain(codeParrain);
-        Get.bottomSheet(
-          Container(
-              margin: EdgeInsets.only(
-                top: kMarginY * 8,
-              ),
-              decoration: BoxDecoration(
-                  color: ColorsApp.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15))),
-              height: 800,
-              padding: EdgeInsets.symmetric(horizontal: kMarginX),
-              child: Column(children: [
-                Container(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          child: Text('Annuler'),
-                          onPressed: () {
-                            Get.back();
-                          },
-                        ),
-                        // TextButton(
-                        //   child: Text('Ajouter'),
-                        //   onPressed: () async {
-                        //     // await _controller.addShort();
-                        //     // _controller.chageState(!_controller.addProduct);
-                        //   },
-                        // )
-                      ]),
-                ),
-                Expanded(
-                    child: SingleChildScrollView(
-                        child: Column(children: [
-                  // _controller.listImgProduits.length != 0
-                  //     ? smallText(
-                  //         text: 'Listes images',
-                  //       )
-                  //     : Container(),
-
-                  Container(
-                      margin: EdgeInsets.only(
-                        top: 50,
-                      ),
-                      child: RegisterScreen())
-                ])))
-              ])),
-          isScrollControlled: true,
-        );
-      }
-      print('got initial uri: $uri');
-    }
-    // var direction = uri!.path!
-  } on PlatformException {
-    // Platform messages may fail but we ignore the exception
-    print('falied to get initial uri');
-  } on FormatException catch (err) {
-    print('malformed initial uri');
-  }
+// await init();
 }
 
-final _darkTheme = ThemeData(
-  primarySwatch: Colors.grey,
-  primaryColor: Colors.black,
-  brightness: Brightness.dark,
-  backgroundColor: const Color(0xFF212121),
-  accentColor: Colors.white,
-  accentIconTheme: IconThemeData(color: Colors.black),
-  dividerColor: Colors.black12,
-);
-
-final _lightTheme = ThemeData(
-  primarySwatch: Colors.grey,
-  primaryColor: Colors.white,
-  brightness: Brightness.light,
-  backgroundColor: const Color(0xFFE5E5E5),
-  accentColor: Colors.black,
-  accentIconTheme: IconThemeData(color: Colors.white),
-  dividerColor: Colors.white54,
-);
 final light = ThemeData(
-    fontFamily: 'OpenSan',
+    fontFamily: 'Josefin_Sans',
     textTheme: const TextTheme(
         bodyText1: TextStyle(color: Colors.black),
         bodyText2: TextStyle(color: Colors.black)),
@@ -185,6 +65,109 @@ final light = ThemeData(
     appBarTheme: const AppBarTheme(foregroundColor: Colors.black87));
 final dark = ThemeData.dark().copyWith(
   backgroundColor: Colors.black,
+);
+
+final _darkTheme = ThemeData(
+  primarySwatch: Colors.grey,
+  primaryColor: ColorsApp.primaryText,
+  brightness: Brightness.dark,
+  backgroundColor: const Color(0xFF212121),
+  accentColor: Colors.white,
+  accentIconTheme: IconThemeData(color: Colors.black),
+  dividerColor: Colors.black12,
+  textTheme: TextTheme(
+    bodyText2:
+        TextStyle(fontFamily: 'Montserrat', color: ColorsApp.primaryText),
+  ),
+);
+
+final _lightTheme = ThemeData(
+  primaryColor: Colors.white,
+  brightness: Brightness.light,
+  // Couleur du texte principal
+  primaryTextTheme: TextTheme(
+    headline6: TextStyle(
+      color: ColorsApp.primaryText,
+    ),
+  ),
+  // Couleur du bouton pour autoriser la localisation
+  buttonColor: ColorsApp.skyBlue,
+  // Couleur du bouton pour refuser la localisation
+  disabledColor: ColorsApp.greySearch,
+  dividerColor: Colors.white54,
+  textTheme: TextTheme(
+    bodyLarge: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 12,
+      color: ColorsApp.primaryText,
+    ),
+    displayLarge: TextStyle(
+      fontFamily: 'Montserrat',
+      fontWeight: FontWeight.bold,
+      fontSize: 12,
+      color: ColorsApp.primaryText,
+    ),
+    displayMedium: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 12,
+      color: ColorsApp.primaryText,
+    ),
+    displaySmall: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 12,
+      color: ColorsApp.primaryText,
+    ),
+    headlineMedium: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 12,
+      color: ColorsApp.primaryText,
+    ),
+    headlineSmall: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 12,
+      color: ColorsApp.primaryText,
+    ),
+    titleLarge: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: ColorsApp.primaryText,
+    ),
+    titleMedium: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: ColorsApp.primaryText,
+    ),
+    titleSmall: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: ColorsApp.primaryText,
+    ),
+    bodyMedium: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 14,
+      color: ColorsApp.primaryText,
+    ),
+    bodySmall: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 14,
+      color: ColorsApp.primaryText,
+    ),
+    labelLarge: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 14,
+      color: ColorsApp.primaryText,
+    ),
+    labelSmall: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 14,
+      color: ColorsApp.primaryText,
+    ),
+  ),
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
+      .copyWith(background: ColorsApp.white)
+      .copyWith(
+        secondary: ColorsApp.primaryText,
+      ),
 );
 
 class MyApp extends StatelessWidget {
@@ -196,11 +179,11 @@ class MyApp extends StatelessWidget {
     //   box.write('isDark', false);
     // }
 
-    Get.find<ActionController>().getThemeInit(context);
+    Get.find<GeneralController>().getThemeInit(context);
 
     return GetMaterialApp(
       translations: Transalations(),
-      locale: Get.find<ActionController>().lan,
+      locale: Get.find<GeneralController>().lan,
       theme: light,
       darkTheme: dark,
       themeMode: ThemeMode.light, //ThemeMode.system,

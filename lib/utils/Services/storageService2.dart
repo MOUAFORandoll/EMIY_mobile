@@ -1,6 +1,6 @@
 // import 'dart:convert';
 
-// import 'package:EMIY/controller/ActionController.dart';
+// import 'package:EMIY/controller/GeneralController.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:get_storage/get_storage.dart';
@@ -67,6 +67,6 @@
 //   Locale getLan() {
 //     final name = this.find('name') ?? 'Fr';
 //     //print('namw---${this.find('name')}-------${name}');
-//     return Get.find<ActionController>().getLanguage(name);
+//     return Get.find<GeneralController>().getLanguage(name);
 //   }
 // }

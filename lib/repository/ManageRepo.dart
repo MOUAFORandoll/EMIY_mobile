@@ -21,8 +21,8 @@ class ManageRepo extends GetxService {
     // ignore: unnecessary_null_comparison
     if (getU != null) {
       // if (getU.length != 0) {
-      Response a = await apiClient
-          .getCollections(ApiRoutes.USER + '?keySecret=${getU}');
+      Response a =
+          await apiClient.getData(ApiRoutes.USER + '?keySecret=${getU}');
       ;
 
       return a;
@@ -43,8 +43,8 @@ class ManageRepo extends GetxService {
   Future userRefresh() async {
     var kk = await dababase.getKeyKen();
     if (kk != null) {
-      Response a = await apiClient.getCollectionsP(
-          ApiRoutes.Refresh, {'refreshToken': kk['refreshToken']});
+      Response a = await apiClient
+          .postData(ApiRoutes.Refresh, {'refreshToken': kk['refreshToken']});
       ;
 
       dababase.saveKeyKen(a.body);
@@ -54,7 +54,7 @@ class ManageRepo extends GetxService {
   }
 
   Future updateUser(data) async {
-    Response a = await apiClient.getCollectionsP(ApiRoutes.UPDATE_USER, data);
+    Response a = await apiClient.postData(ApiRoutes.UPDATE_USER, data);
     ;
 
     return a;
@@ -82,8 +82,7 @@ class ManageRepo extends GetxService {
         };
         await dababase.saveLonLat(data);
 
-        Response a =
-            await apiClient.getCollectionsP(ApiRoutes.LOCATION_USER, data);
+        Response a = await apiClient.postData(ApiRoutes.LOCATION_USER, data);
 
         // //print('ssnewlocatio-------------------------');
         // //print(a.body);
@@ -101,14 +100,14 @@ class ManageRepo extends GetxService {
   }
 
   Future Login(data) async {
-    Response a = await apiClient.getCollectionsP(ApiRoutes.LOGIN, data);
+    Response a = await apiClient.postData(ApiRoutes.LOGIN, data);
 
     return a;
   }
 
   Future SignUp(data) async {
     //print(data);
-    Response a0 = await apiClient.getCollectionsP(ApiRoutes.SIGNUP, data);
+    Response a0 = await apiClient.postData(ApiRoutes.SIGNUP, data);
     if (a0.statusCode == 201) {
       var logdata = {
         'phone': data['phone'].toString(),
@@ -124,8 +123,8 @@ class ManageRepo extends GetxService {
   }
 
   Future getListFieul(keySecret, page) async {
-    Response a = await apiClient.getCollections(
-        ApiRoutes.LIST_FIEUL + '?keySecret=${keySecret}&page=${page}');
+    Response a = await apiClient
+        .getData(ApiRoutes.LIST_FIEUL + '?keySecret=${keySecret}&page=${page}');
 
     return a;
   }

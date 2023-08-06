@@ -37,7 +37,6 @@ class AppBarCommande extends StatelessWidget {
                       child: Text(
                         title,
                         style: TextStyle(
-                            fontFamily: 'orkney',
                             overflow: TextOverflow.ellipsis,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,

@@ -1,5 +1,5 @@
 // ignore: must_be_immutable
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
@@ -81,7 +81,7 @@ class ProductComponentAll extends StatelessWidget {
                           color:
                               produit.islike ? ColorsApp.red : ColorsApp.white),
                       onTap: () {
-                        Get.find<ActionController>()
+                        Get.find<GeneralController>()
                             .likeProduit(produit.codeProduit);
                       }),
                 )

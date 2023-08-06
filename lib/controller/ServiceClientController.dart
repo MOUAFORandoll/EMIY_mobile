@@ -59,7 +59,6 @@ class ServiceClientController extends GetxController {
               await serviceClientRepo.getEchange(codeCommunication);
 
           if (response.statusCode == 200) {
-            print('---------------idd------------!!${_idUser}');
             if (response.body != null) {
               if (response.body['data'] != null) {
                 print(response.body['data']);
@@ -83,11 +82,14 @@ class ServiceClientController extends GetxController {
     }
   }
 
+  bool _sending = false;
+  bool get sending => _sending;
   var _codeMessageEchange = '';
   get codeMessageEchange => _codeMessageEchange;
   TextEditingController _textEditingController = TextEditingController();
   get textEditingController => _textEditingController;
   newMessageMessageEchange() async {
+    _sending = true;
     update();
     var key = await dababase.getKey();
 
@@ -117,6 +119,7 @@ class ServiceClientController extends GetxController {
             //     .map((e) =>
             //         MessageEchangeModel.fromJson(response.body['message']))
             //     .toList());
+            _sending = false;
 
             textEditingController.text = '';
             update();
@@ -128,6 +131,7 @@ class ServiceClientController extends GetxController {
     } catch (e) {
       fn.closeSnack();
       fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      _sending = false;
 
       update();
       //print(e);
@@ -181,10 +185,8 @@ class ServiceClientController extends GetxController {
     if (keys != null) {
       _idUser = Jwt.parseJwt(keys['token'])['id'];
       update();
-      print('---------------idd------------!!${_idUser}');
 
       var codeCommunication = keys['codeCommunication'];
-      print('codeCommunication-----------------${codeCommunication}');
       new SocketService()
           .service_client(codeCommunication, socketMessageCommunication);
     }

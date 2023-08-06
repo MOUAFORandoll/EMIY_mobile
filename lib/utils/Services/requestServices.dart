@@ -41,7 +41,7 @@ class ApiService extends GetConnect {
  *  Start Section Billet 
  */
 
-  getCollections(url) async {
+  getData(url) async {
     //print('base user***** ${ApiUrl.baseUrl + url}');
     // try {
     var response =
@@ -54,7 +54,7 @@ class ApiService extends GetConnect {
     // }
   }
 
-  getCollectionsP(url, data) async {
+  postData(url, data) async {
     //print('base user***** ${ApiUrl.baseUrl + url}');
     try {
       Response response =
@@ -69,7 +69,7 @@ class ApiService extends GetConnect {
 
   Future getBoutiqueForUser() async {
     // try {
-    //   Response response = await getCollectionsP(
+    //   Response response = await postData(
     //       ApiRoutes.BOUTIQUE_FOR_USER, {'keySecret': keySecret});
     //   //print('-*-*-*-*********************0');
     //   //print(response.statusCode);
@@ -91,7 +91,7 @@ class ApiService extends GetConnect {
 
   Future getListCategory() async {
     try {
-      Response response = await getCollectionsP(ApiRoutes.CATEGORY_PRODUCT, {});
+      Response response = await postData(ApiRoutes.CATEGORY_PRODUCT, {});
       //print('-*-*-*-*********************1');
       //print(response.statusCode);
       // //print(response.body);
@@ -113,7 +113,7 @@ class ApiService extends GetConnect {
 
   Future getListProductForCategory(id) async {
     // try {
-    //   var response = await getCollectionsP(ApiRoutes.PRODUCT_FOR_CATEGORY, {
+    //   var response = await postData(ApiRoutes.PRODUCT_FOR_CATEGORY, {
     //     'id': id, /* 'keySecret': keySecret */
     //   });
     //   if (response.statusCode == 200) {
@@ -138,7 +138,7 @@ class ApiService extends GetConnect {
 
   Future getListProductPopular() async {
     // try {
-    //   var response = await getCollections(ApiRoutes.POPULAR_PRODUCT);
+    //   var response = await getData(ApiRoutes.POPULAR_PRODUCT);
     //   //print(response.statusCode);
     //   // //print(response.body);
     //   if (response.statusCode == 200) {

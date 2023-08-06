@@ -1,5 +1,5 @@
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
-import 'package:EMIY/Views/Space/NotificationView.dart';
+import 'package:EMIY/Views/Space/Notifications/NotificationView.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Text/titleText.dart';
@@ -8,7 +8,7 @@ import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/productComponent0.dart';
 import 'package:EMIY/controller/CommandeController.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/model/data/CommandeModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -23,8 +23,7 @@ class MySpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ActionController>(builder: (_action) {
-      return DefaultTabController(
+    return DefaultTabController(
         length: 2, // Nombre total d'onglets
         child: Scaffold(
           appBar: AppBar(
@@ -45,9 +44,6 @@ class MySpace extends StatelessWidget {
               ListNegociationView(),
             ],
           ),
-        ),
-      );
-      // Builds 1000 ListTiles
-    });
+        ));
   }
 }

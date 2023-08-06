@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:async';
 
-import 'package:EMIY/controller/ActionController.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/model/data/UserModel.dart';
 import 'package:EMIY/utils/Services/dependancies.dart';
@@ -419,7 +419,7 @@ class DataBaseController extends GetxController {
       if (data.isNotEmpty) {
         var name = data[0]['name'].toString();
         return name;
-        // Get.find<ActionController>().getLanguage0(name);
+        // Get.find<GeneralController>().getLanguage0(name);
       } else {
         return '';
       }
@@ -501,7 +501,7 @@ class DataBaseController extends GetxController {
         if (data.isNotEmpty) {
           var value = data[0]['value'].toString();
           return value;
-          // Get.find<ActionController>().getLanguage0(name);
+          // Get.find<GeneralController>().getLanguage0(name);
         } else {
           return null;
         }

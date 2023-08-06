@@ -7,7 +7,8 @@ abstract class ColorsApp {
 
   static const Color skyBlue = Color(0xFF459FD6);
   static const Color textBlue = Color(0xFF1137FF) ;
-  static const Color marron = Color(0xFFE7C76D) ;
+  static const Color marron = Color.fromARGB(255, 26, 24, 25) ;
+  static const Color primaryText = Color(0xFFE7C76D) ;
  
   static const Color bleuLight = Color(0xFF4E9DD9);
   static const Color black = Colors.black;

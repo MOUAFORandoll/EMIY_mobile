@@ -1,7 +1,7 @@
 import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Button/app_button.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/searchController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -305,9 +305,12 @@ class ProductViewForLink extends StatelessWidget {
                                                           ' Pieces disponible: ')
                                                 ],
                                               ),
-                                              ShareButton(libelle: 'Suivez ce lien pour consulter ce produit  : ' +
-                                                          manageLink.produit
-                                                              .lienProduit,) 
+                                              ShareButton(
+                                                libelle:
+                                                    'Suivez ce lien pour consulter ce produit  : ' +
+                                                        manageLink.produit
+                                                            .lienProduit,
+                                              )
                                               /*  InkWell(
                                           child: Row(
                                             children: [
@@ -359,7 +362,7 @@ class ProductViewForLink extends StatelessWidget {
                                                       //       (double rating) {
                                                       //     //print(rating);
                                                       //     Get.find<
-                                                      //             ActionController>()
+                                                      //             GeneralController>()
                                                       //         .likeProduit(
                                                                 
                                                       //             product

@@ -1,7 +1,7 @@
 import 'package:EMIY/components/Button/app_button.dart';
 import 'package:EMIY/components/Button/button.dart';
 import 'package:EMIY/components/Widget/app_carroussel_item.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -16,7 +16,7 @@ class OnBoardingView extends StatelessWidget {
   @override
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ActionController>(
+    return GetBuilder<GeneralController>(
         builder: (action) => Scaffold(
                 // appBar: AppBar(
                 //   title: const Text('Agora Video Call'),

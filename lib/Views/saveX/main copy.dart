@@ -1,4 +1,4 @@
-// import 'package:EMIY/controller/ActionController.dart';
+// import 'package:EMIY/controller/GeneralController.dart';
 // import 'package:EMIY/utils/Services/NotificationService.dart';
 // import 'package:EMIY/utils/Services/dependancies.dart';
 // import 'package:EMIY/utils/Services/routing.dart';
@@ -51,7 +51,7 @@
 //     MyBinding().onInit();
 //     MyBinding().requestPermission();
 //     MyBinding().onGetAll();
-//     Get.find<ActionController>().getThemeInit(context);
+//     Get.find<GeneralController>().getThemeInit(context);
 
 //     return GetMaterialApp(
 //       theme: _lightTheme,

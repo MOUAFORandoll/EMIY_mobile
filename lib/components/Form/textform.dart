@@ -52,7 +52,6 @@ class TextForm extends StatelessWidget {
         hintText: hint,
         hintStyle: TextStyle(
           color: Colors.grey,
-          fontFamily: 'orkney',
         ),
         suffixIcon: InkWell(
           onTap: () => onTap,

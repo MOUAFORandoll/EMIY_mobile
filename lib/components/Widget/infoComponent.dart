@@ -26,7 +26,7 @@ class InfoComponent extends StatelessWidget {
             Text(value,
                 style: TextStyle(
                     fontSize: 15,
-                    fontFamily: 'orkney',
+                    
                     color: Colors.black,
                     fontWeight: FontWeight.bold))
           ],

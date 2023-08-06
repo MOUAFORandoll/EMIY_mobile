@@ -20,8 +20,8 @@ class CommandeRepo extends GetxService {
 
   Future getListProductForComm(id) async {
     // try {
-    Response response = await await apiClient
-        .getCollectionsP(ApiRoutes.USER_READ_COMMANDE_PRODUIT, {
+    Response response =
+        await await apiClient.postData(ApiRoutes.USER_READ_COMMANDE_PRODUIT, {
       'idCom': id, /* 'keySecret': keySecret */
     });
     //print(response.body);

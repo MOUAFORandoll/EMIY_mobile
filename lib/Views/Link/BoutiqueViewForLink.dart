@@ -2,7 +2,7 @@ import 'package:EMIY/components/Button/AppIconButton.dart';
 import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/productForBoutiqueLinkComponent.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/linkController.dart';
@@ -248,7 +248,7 @@ class BoutiqueViewForLink extends StatelessWidget {
                                                         //print(Get.parameters['codeBoutique']
                                                         // .toString());
                                                         Get.find<
-                                                                ActionController>()
+                                                                GeneralController>()
                                                             .notationBoutique(
                                                           rating,
                                                           manageLink.boutique

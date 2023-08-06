@@ -11,7 +11,7 @@ class NegociationRepo extends GetxService {
   Future<Response> getListnegociationProduit(keySecret) async {
     //print('get----------------');
     // try {
-    Response response = await apiClient.getCollections(
+    Response response = await apiClient.getData(
         ApiRoutes.LIST_NEGOCIATION + '?keySecret=' + keySecret.toString());
 
     return response;
@@ -20,7 +20,7 @@ class NegociationRepo extends GetxService {
   Future<Response> getListMessagenegociationProduit(codeNegociation) async {
     //print('get----------------');
     // try {
-    Response response = await apiClient.getCollections(
+    Response response = await apiClient.getData(
         ApiRoutes.LIST_MESSAGE_NEGOCIATION +
             '?code=' +
             codeNegociation.toString());
@@ -29,16 +29,15 @@ class NegociationRepo extends GetxService {
   }
 
   Future negociationProduit(data) async {
-    Response a =
-        await apiClient.getCollectionsP(ApiRoutes.NEW_NEGOCIATION, data);
+    Response a = await apiClient.postData(ApiRoutes.NEW_NEGOCIATION, data);
     ;
 
     return a;
   }
 
   Future negociationMessageNew(data) async {
-    Response a = await apiClient.getCollectionsP(
-        ApiRoutes.NEW_MESSAGE_NEGOCIATION, data);
+    Response a =
+        await apiClient.postData(ApiRoutes.NEW_MESSAGE_NEGOCIATION, data);
     ;
 
     return a;

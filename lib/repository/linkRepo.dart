@@ -9,7 +9,7 @@ class LinkRepo extends GetxService {
   LinkRepo({required this.apiClient});
 
   Future<Response> getUniLinkProduit(codeProduit, keySecret) async {
-    Response response = await apiClient.getCollections(
+    Response response = await apiClient.getData(
       ApiRoutes.LINK_PRODUCT +
           "?codeProduit=${codeProduit.toString()}&keySecret=${keySecret.toString()}",
     );
@@ -18,7 +18,7 @@ class LinkRepo extends GetxService {
   }
 
   Future<Response> getUniLinkBoutique(codeBoutique, keySecret) async {
-    Response response = await apiClient.getCollections(
+    Response response = await apiClient.getData(
       ApiRoutes.LINK_BOUTIQUE +
           "?codeBoutique=${codeBoutique.toString()}&keySecret=${keySecret.toString()}",
     );

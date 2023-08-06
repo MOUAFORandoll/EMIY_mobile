@@ -1,15 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:ui';
-
+import 'package:EMIY/model/socket/NotificationModel.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
-import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/io.dart';
-
-import 'package:web_socket_channel/status.dart' as status;
 
 class SocketService {
   SocketService();
@@ -162,5 +154,23 @@ class SocketService {
     });
     // });
     // print(socket.connected);
+  }
+
+//recepteur ici est l'id du user
+  void notifications(recepteur, Function action) {
+    socket.on('notifications', (msg) {
+      print(recepteur);
+      print('------notifications----********************************-------');
+
+      if (jsonDecode(msg)['recepteur'].toString() == recepteur.toString()) {
+        print('-----------------');
+        print(jsonDecode(msg));
+        action(NotificationModel.fromJson(jsonDecode(msg)));
+      }
+      // socket.close();
+      // setMessage("destination", msg["message"]);
+    });
+    // });
+    print(socket.connected);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:EMIY/Views/UsersMange/LoginScreen.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -16,6 +18,26 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ViewFunctions {
+  notifivation(String title) {
+    return Get.showSnackbar(GetSnackBar(
+      messageText: Container(
+        child: Text(
+          title,
+          style: TextStyle(color: Colors.white, fontSize: 12),
+        ),
+        alignment: Alignment.center,
+      ),
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: ColorsApp.greyFirst,
+      borderRadius: 2,
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
+      duration: Duration(seconds: 5),
+      dismissDirection: DismissDirection.horizontal,
+      forwardAnimationCurve: Curves.linear,
+    ));
+  }
+
   snackBar(String title, String body, bool correct) {
     // return Get.snackbar(
     //   title,
@@ -273,17 +295,58 @@ Future<void> _checkInternetConnection() async {
       }
     }
   } */
+// class NetworkService extends GetxService {
+//   Future<NetworkService> init() async {
+//     return this;
+//   }
+
+//   Future<bool> checkIsOnline() async {
+//     try {
+//       final result = await InternetAddress.lookup('google.com');
+//       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+//         return true;
+//       }
+//     } on SocketException catch (_) {
+//       return false;
+//     }
+//     return false;
+//   }
+
+  // Future<bool> checkIsConnected() async {
+  //   ConnectivityResult result = await Connectivity().checkConnectivity();
+  //   if (result == ConnectivityResult.mobile) {
+  //     return true;
+  //   } else if (result == ConnectivityResult.wifi) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+// }
+
+  Future<bool> checkIsOnline() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+    return false;
+  }
 
   bool connexion = true;
   verifiedConnection() {
     //print("debut check connexion");
-    DataConnectionChecker().onStatusChange.listen((status) {
+    DataConnectionChecker().onStatusChange.listen((status) async {
+      var req = await checkIsOnline();
       switch (status) {
         case DataConnectionStatus.connected:
           //print("connecte $connexion");
           if (connexion == false) {
             // Get.back();
-            showToast(true);
+
+            showToast(req);
             initApp();
             connexion = true;
           } else {
@@ -294,7 +357,7 @@ Future<void> _checkInternetConnection() async {
           //print("pas de connextio $connexion");
 
           if (connexion == true) {
-            showToast(false);
+            showToast(req);
             connexion = false;
           } else {
             // Get.back();

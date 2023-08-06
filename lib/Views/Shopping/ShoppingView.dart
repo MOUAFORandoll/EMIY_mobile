@@ -8,7 +8,7 @@ import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -130,7 +130,6 @@ class ShoppingView extends StatelessWidget {
                             child: Text(
                               'Nombre de produits : ${_controller.getItems.length}',
                               style: TextStyle(
-                                fontFamily: 'orkney',
                                 fontSize: 11,
                                 color: Colors.black,
                               ),
@@ -140,7 +139,6 @@ class ShoppingView extends StatelessWidget {
                             child: Text(
                               'Montant du panier :  ${_controller.totalPrix} XAF',
                               style: TextStyle(
-                                  fontFamily: 'orkney',
                                   overflow: TextOverflow.ellipsis,
                                   color: Colors.black,
                                   fontSize: 11),

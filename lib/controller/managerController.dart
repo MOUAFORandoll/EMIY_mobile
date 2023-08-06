@@ -134,7 +134,7 @@ class ManagerController extends GetxController {
       chageState(0);
     }
     var kk = await dababase.getKeyKen();
-    if (kk == null || kk == 'null') {
+    if (kk != null && kk != 'null') {
       _lienParrainnage =
           ApiUrl.external_link + 'subscribes/' + kk['codeParrainnage'];
     }
@@ -161,6 +161,17 @@ class ManagerController extends GetxController {
     update();
   }
 
+  @override
+  void onReady() {
+    print('-----------------------ready++++++++++++++++');
+    // TODO: implement onReady
+    super.onReady();
+    
+   getUserDB();
+   getKeyU();
+   getUser();
+  }
+
   var _User;
   UserModel get User => _User;
 
@@ -179,7 +190,7 @@ class ManagerController extends GetxController {
 
     try {
       Response response = await manageRepo.getUser();
-      print('user-------------------------${response.body}');
+      print('user-------------------------${response}');
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _User = UserModel.fromJson(response.body['data']);
@@ -551,7 +562,6 @@ class ManagerController extends GetxController {
   getListFieul() async {
     var key = 12341; //await dababase.getKey();
     _isLoadedPB = 0;
-    update();
 
     try {
       Response response = await manageRepo.getListFieul(key, isAbUserPage);

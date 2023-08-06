@@ -66,6 +66,10 @@
         <data
           android:scheme="http"
           android:pathPrefix="/subscribes"
+          android:host="emiy-shop.000webhostapp.com" /> 
+          <data
+          android:scheme="http"
+          android:pathPrefix="/shorts"
           android:host="emiy-shop.000webhostapp.com" />
 
         

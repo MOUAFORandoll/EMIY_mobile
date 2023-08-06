@@ -8,7 +8,7 @@ import 'package:EMIY/components/Text/bigtitleText0.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/cartController.dart';

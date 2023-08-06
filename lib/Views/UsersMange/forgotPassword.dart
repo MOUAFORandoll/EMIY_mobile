@@ -242,7 +242,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           /*  Text(
                             mailSa,
                             style: TextStyle(
-                              fontFamily: 'orkney',
+                              
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.03,
                               fontWeight: FontWeight.w600,
@@ -329,7 +329,6 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           Text(
                             passSa,
                             style: TextStyle(
-                              fontFamily: 'orkney',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.03,
                               fontWeight: FontWeight.w600,
@@ -434,7 +433,6 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           Text(
                             passSa,
                             style: TextStyle(
-                              fontFamily: 'orkney',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.03,
                               fontWeight: FontWeight.w600,

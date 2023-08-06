@@ -80,7 +80,6 @@ class CommentForm extends StatelessWidget {
                   hintText: hint,
                   hintStyle: TextStyle(
                     color: Colors.grey,
-                    fontFamily: 'orkney',
                   ),
                   // suffixIcon: InkWell(
                   //   onTap: () => onTap,

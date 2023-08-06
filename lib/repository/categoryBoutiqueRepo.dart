@@ -10,23 +10,22 @@ class CategoryBoutiqueRepo extends GetxService {
   CategoryBoutiqueRepo({required this.apiClient});
 
   Future getListCategory() async {
-    Response a = await apiClient.getCollections(ApiRoutes.CATEGORY_PRODUCT);
+    Response a = await apiClient.getData(ApiRoutes.CATEGORY_PRODUCT);
     //print(a.body);
     return a;
   }
 
   Future getListBoutiques(keySecret) async {
-    Response a = await apiClient.getCollections(
-      ApiRoutes.BOUTIQUE_READ_ALL +"?keySecret=${keySecret.toString()}",
+    Response a = await apiClient.getData(
+      ApiRoutes.BOUTIQUE_READ_ALL + "?keySecret=${keySecret.toString()}",
     );
 
     return a;
   }
 
   Future getListCommandeForBoutique(codeBoutique) async {
-    Response a = await apiClient.getCollections(
-        ApiRoutes.BOUTIQUE_READ_COMMANDE +
-            "?codeBoutique=${codeBoutique.toString()}");
+    Response a = await apiClient.getData(ApiRoutes.BOUTIQUE_READ_COMMANDE +
+        "?codeBoutique=${codeBoutique.toString()}");
     ;
 
     return a;
@@ -34,25 +33,24 @@ class CategoryBoutiqueRepo extends GetxService {
 
   Future getListBoutiqueForCategory(id, keySecret) async {
     // try {
-    Response response = await await apiClient.getCollections(
-        ApiRoutes.BOUTIQUE_FOR_CATEGORY + "?id=${id.toString()}&keySecret=${keySecret.toString()}");
+    Response response = await await apiClient.getData(
+        ApiRoutes.BOUTIQUE_FOR_CATEGORY +
+            "?id=${id.toString()}&keySecret=${keySecret.toString()}");
     //print(response.body);
     return response;
   }
 
   Future getListHCommandeForBoutique(codeBoutique) async {
-    Response a = await apiClient.getCollections(
-        ApiRoutes.BOUTIQUE_READ_HCOMMANDE +
-            "?codeBoutique=${codeBoutique.toString()}");
+    Response a = await apiClient.getData(ApiRoutes.BOUTIQUE_READ_HCOMMANDE +
+        "?codeBoutique=${codeBoutique.toString()}");
     ;
 
     return a;
   }
 
   Future getListProduitForBoutique(codeBoutique) async {
-    Response a = await apiClient.getCollections(
-        ApiRoutes.BOUTIQUE_READ_PRODUIT +
-            "?codeBoutique=${codeBoutique.toString()}");
+    Response a = await apiClient.getData(ApiRoutes.BOUTIQUE_READ_PRODUIT +
+        "?codeBoutique=${codeBoutique.toString()}");
     ;
 
     return a;

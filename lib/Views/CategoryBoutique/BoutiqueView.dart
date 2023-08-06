@@ -1,7 +1,7 @@
 import 'package:EMIY/components/Button/AppIconButton.dart';
 import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -223,7 +223,7 @@ class BoutiqueView extends StatelessWidget {
                                           //print(rating);
                                           //print(Get.parameters['codeBoutique']
                                           // .toString());
-                                          Get.find<ActionController>()
+                                          Get.find<GeneralController>()
                                               .notationBoutique(
                                             rating,
                                             Get.parameters['codeBoutique']
@@ -256,10 +256,11 @@ class BoutiqueView extends StatelessWidget {
                                   ),
                                 ),
                               ]),
-                               ShareButton(libelle:  'Suivez ce lien pour consulter cette boutique : ' +
-                                      Get.parameters['lienBoutique'].toString(),
-                                 ) 
-                         
+                          ShareButton(
+                            libelle:
+                                'Suivez ce lien pour consulter cette boutique : ' +
+                                    Get.parameters['lienBoutique'].toString(),
+                          )
                         ],
                       )
                     ])),

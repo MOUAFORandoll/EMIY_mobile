@@ -271,7 +271,6 @@ class ProductBoutiqueComponent extends StatelessWidget {
                             alignLabelWithHint: true,
                             hintStyle: TextStyle(
                               color: Colors.grey,
-                              fontFamily: 'orkney',
                             ),
                           ),
                         ),

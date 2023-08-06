@@ -4,7 +4,7 @@ import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:EMIY/components/Widget/settingComponent.dart';
-import 'package:EMIY/controller/ActionController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -128,7 +128,7 @@ class SettingView extends StatelessWidget {
                   children: [
                     SettingComponent(
                         title: 'Sombre',
-                        action: GetBuilder<ActionController>(
+                        action: GetBuilder<GeneralController>(
                             builder: (actionControl) => Switch(
                                 value: actionControl.dark,
                                 onChanged: (val) {
@@ -143,7 +143,7 @@ class SettingView extends StatelessWidget {
                           //     top: Get.height * .005,
                           //     left: Get.width * .008),
                           height: 1500,
-                          child: GetBuilder<ActionController>(
+                          child: GetBuilder<GeneralController>(
                             builder: (actionControl) => DropdownButton<String>(
                                 value: actionControl.lang.value,
                                 icon: Container(
@@ -475,7 +475,6 @@ class SettingView extends StatelessWidget {
                                                     alignLabelWithHint: true,
                                                     hintStyle: TextStyle(
                                                       color: Colors.grey,
-                                                      fontFamily: 'orkney',
                                                     ),
                                                   ),
                                                 ),

@@ -12,7 +12,6 @@ final kSubtitleStyle = TextStyle(
   color: Colors.black,
   fontSize: 18.0,
   height: 1.2,
-  fontFamily: 'orkney',
 );
 
 final kMarginTop = Get.height * .08;
@@ -34,6 +33,5 @@ final kSmWidth = Get.width * .5;
 
 final kMdHeight = Get.height * 1.3;
 final kMdWidth = Get.width * .4;
-final kWidth = Get.width ;
-final kHeight = Get.height ;
-
+final kWidth = Get.width;
+final kHeight = Get.height;

@@ -11,27 +11,25 @@ class TransactionRepo extends GetxService {
 
   Future getListTransaction(id) async {
     Response a =
-        await apiClient.getCollectionsP(ApiRoutes.TRANSACTION_READ, {'id': id});
+        await apiClient.postData(ApiRoutes.TRANSACTION_READ, {'id': id});
 
     return a;
   }
 
   Future retraitCompte(data) async {
-    Response a =
-        await apiClient.getCollectionsP(ApiRoutes.TRANSACTION_RETRAIT, data);
+    Response a = await apiClient.postData(ApiRoutes.TRANSACTION_RETRAIT, data);
 
     return a;
   }
 
   Future depotCompte(data) async {
-    Response a =
-        await apiClient.getCollectionsP(ApiRoutes.TRANSACTION_DEPOT, data);
+    Response a = await apiClient.postData(ApiRoutes.TRANSACTION_DEPOT, data);
 
     return a;
   }
 
   Future verifyDepot(data) async {
-    Response a = await apiClient.getCollectionsP(ApiRoutes.VERIFY_DEPOT, data);
+    Response a = await apiClient.postData(ApiRoutes.VERIFY_DEPOT, data);
 
     return a;
   }

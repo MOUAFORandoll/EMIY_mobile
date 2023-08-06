@@ -215,7 +215,6 @@ class ProductController extends GetxController {
     update();
     try {
       Response response = await productRepo.getListProductPopular(indexC, key);
-      print('-++++++++-----${response.body['data']}');
 
       //print(response.body);
       // _produitList = [];
@@ -292,7 +291,7 @@ class ProductController extends GetxController {
   getListProduitPreference() async {
     // _preferenceList = [];
     _isLoadedPB = 0;
-    update();
+    // update();
 
     var key = await dababase.getKey();
     try {
@@ -300,11 +299,13 @@ class ProductController extends GetxController {
           await productRepo.getListProduitPreference(indexP, key);
       _preferenceList.clear();
       if (response.body != null) {
-        if (response.body['data'].length != 0) {
-          _preferenceList.addAll((response.body['data'] as List)
-              .map((e) => ProduitModel.fromJson(e))
-              .toList());
-          indexP++;
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            _preferenceList.addAll((response.body['data'] as List)
+                .map((e) => ProduitModel.fromJson(e))
+                .toList());
+            indexP++;
+          }
         }
 
         _isLoadedPB = 1;
