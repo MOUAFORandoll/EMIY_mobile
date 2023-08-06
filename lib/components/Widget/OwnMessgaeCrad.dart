@@ -52,12 +52,20 @@ class OwnMessageCard extends StatelessWidget {
                                 top: 5,
                                 bottom: 20,
                               ),
-                              child: Text(
-                                message,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
+                              child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: kWidth * .50,
+                                  ),
+                                  margin: EdgeInsets.only(left: kMarginX * .6),
+                                  // width: kWidth * .58,
+                                  child: Text(message,
+                                      softWrap: true,
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 16,
+                                        overflow: TextOverflow.fade,
+                                        color: ColorsApp.black,
+                                      ))),
                             ),
                             Positioned(
                               bottom: 4,

@@ -31,6 +31,7 @@ import 'package:EMIY/components/Widget/infoComponent.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter/services.dart';
 
 import '../../utils/functions/viewFunctions.dart';
 
@@ -371,34 +372,34 @@ class ManageView extends StatelessWidget {
                                 Get.toNamed(AppLinks.SETTING);
                               }),
                           if (_manager.User != null)
-                          AppSettingComp(
-                              title: 'Service Client',
-                              icon: Assets.phone_mobile,
-                              color: ColorsApp.orange,
-                              onTap: () {
-                                // return showCupertinoDialog(
-                                //   context: context,
-                                //   builder: (context) => CupertinoAlertDialog(
-                                //     title: Text('title'),
-                                //     content: Text('content'),
-                                //     actions: <Widget>[
-                                //       CupertinoDialogAction(
-                                //         child: Text('cancelActionText'),
-                                //         onPressed: () =>
-                                //             Navigator.of(context).pop(false),
-                                //       ),
-                                //       CupertinoDialogAction(
-                                //         child: Text('defaultActionText'),
-                                //         onPressed: () =>
-                                //             Navigator.of(context).pop(true),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // );
-                                Get.toNamed(AppLinks.SERVICE_CLIENT);
-                                // return Get.find<ServiceClientController>()
-                                //     .onOpen();
-                              }),
+                            AppSettingComp(
+                                title: 'Service Client',
+                                icon: Assets.phone_mobile,
+                                color: ColorsApp.orange,
+                                onTap: () {
+                                  // return showCupertinoDialog(
+                                  //   context: context,
+                                  //   builder: (context) => CupertinoAlertDialog(
+                                  //     title: Text('title'),
+                                  //     content: Text('content'),
+                                  //     actions: <Widget>[
+                                  //       CupertinoDialogAction(
+                                  //         child: Text('cancelActionText'),
+                                  //         onPressed: () =>
+                                  //             Navigator.of(context).pop(false),
+                                  //       ),
+                                  //       CupertinoDialogAction(
+                                  //         child: Text('defaultActionText'),
+                                  //         onPressed: () =>
+                                  //             Navigator.of(context).pop(true),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // );
+                                  Get.toNamed(AppLinks.SERVICE_CLIENT);
+                                  // return Get.find<ServiceClientController>()
+                                  //     .onOpen();
+                                }),
                           // _manager.User != null
                           //     ? AppSettingComp(
                           //         title: 'Utilisateur',
@@ -589,6 +590,16 @@ class ManageView extends StatelessWidget {
                                   // Share.share('check out my website https://example.com',
                                   //     subject: 'Look what I made!');
                                 }),
+
+                          AppSettingComp(
+                              title: 'Fermer',
+                              icon: Assets.bagmoney,
+                              onTap: () {
+                                // ViewFunctions().showIndisponible();
+                                SystemNavigator.pop();
+                                // Share.share('check out my website https://example.com',
+                                //     subject: 'Look what I made!');
+                              }),
                         ],
                       ),
                     ],

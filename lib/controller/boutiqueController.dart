@@ -1013,6 +1013,7 @@ class BoutiqueController extends GetxController {
     }
   }
 
+
   VideoPlayerController? controller;
 
   bool _initialise = false;
@@ -1316,4 +1317,6 @@ class BoutiqueController extends GetxController {
         return ProduitBoutiqueUserView();
     }
   }
+
+
 }

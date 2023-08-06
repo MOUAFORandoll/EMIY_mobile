@@ -35,3 +35,6 @@ final kMdHeight = Get.height * 1.3;
 final kMdWidth = Get.width * .4;
 final kWidth = Get.width;
 final kHeight = Get.height;
+
+final kWidthShort = Get.width / 2;
+final kHeightShort = Get.height / 5;

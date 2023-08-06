@@ -17,6 +17,12 @@ class ShortRepo extends GetxService {
     return a;
   }
 
+  Future readShort(codeShort, keySecret) async {
+    Response a = await apiClient.getData(ApiRoutes.SAVE_SHORT_USER_READ +
+        "?codeShort=${codeShort.toString()}&keySecret=${keySecret.toString()}");
+
+    return a;
+  }
   Future newLike(data) async {
     //print('************oc');
     Response a = await apiClient.postData(ApiRoutes.SHORT_LIKE, data);
@@ -44,6 +50,13 @@ class ShortRepo extends GetxService {
   Future getListComment(idShort, keySecret) async {
     Response a = await apiClient.getData(ApiRoutes.SHORT_COMMENT +
         "?idShort=${idShort.toString()}&keySecret=${keySecret.toString()}");
+
+    return a;
+  }
+
+  Future getListShortForBoutique(codeBoutique, keySecret, page) async {
+    Response a = await apiClient.getData(ApiRoutes.READ_SHORT_FOR_BOUTIQUE +
+        "?codeBoutique=${codeBoutique.toString()}&keySecret=${keySecret}&page=${page}");
 
     return a;
   }

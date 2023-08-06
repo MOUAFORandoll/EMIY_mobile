@@ -1,8 +1,12 @@
 import 'package:EMIY/Views/CategoryBoutique/CategoryView.dart';
 import 'package:EMIY/Views/Home/HomeView.dart';
+import 'package:EMIY/Views/Short/ShortView.dart';
 import 'package:EMIY/Views/Space/MySpace.dart';
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
+import 'package:EMIY/Views/Space/Notifications/NotificationView.dart';
+import 'package:EMIY/Views/Space/ServiceClient/ServiceClientView.dart';
 import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/productController.dart';
 import 'package:EMIY/model/data/CartModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
@@ -329,7 +333,8 @@ class GeneralController extends GetxController {
       // case 2:
       //   return SearchView();
       case 2:
-        return MySpace();
+        return ShortView();
+      //MySpace();
       case 3:
         return ShoppingView();
 
@@ -422,7 +427,7 @@ class GeneralController extends GetxController {
             height: kSmHeight / 1.7,
             width: kSmWidth / 4.2,
             child: SvgPicture.asset(
-              Assets.user,
+              Assets.play,
               width: 90,
               height: 90,
               color: _currentIndex == 2 ? ColorsApp.skyBlue : ColorsApp.grey,
@@ -436,7 +441,7 @@ class GeneralController extends GetxController {
                           ? BorderSide(color: ColorsApp.skyBlue, width: 2)
                           : BorderSide.none,
                       top: BorderSide.none)),
-              child: Text('My Space',
+              child: Text('Short',
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
@@ -512,6 +517,22 @@ class GeneralController extends GetxController {
       onTap: (index) {
         _currentIndex = index;
         update();
+        if (index != 2) {
+          Get.find<ShortController>().disposePLayer();
+          Get.find<ShortController>().setIntoShortView(false);
+        }
+        if (index == 2) {
+          Get.find<ShortController>().setIntoShortView(true);
+
+          if (Get.find<ShortController>().controller != null) {
+            if (Get.find<ShortController>().controller!.value.isPlaying) {
+              Get.find<ShortController>().controller!.pause();
+            } else {
+              Get.find<ShortController>().controller!.play();
+            }
+          }
+        }
+
         if (index == 0) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Get.find<ProductController>().restoreScrollPosition();
@@ -612,6 +633,33 @@ class GeneralController extends GetxController {
 
       fn.snackBar('Note', 'Erreur', false);
       //print(e);
+    }
+  }
+
+  //My Space
+  int _spaceSelect = 0;
+  int get spaceSelect => _spaceSelect;
+  sectectSpace(index) {
+    _spaceSelect = index;
+    update();
+  }
+
+  buildSpace() {
+    switch (_spaceSelect) {
+      case 0:
+        return NotificationView();
+      // case 1:
+      //   return SearchView();
+      case 1:
+        //   return ListBoutiqueView();
+        // case 2:
+        return ListNegociationView();  case 2:
+        //   return ListBoutiqueView();
+        // case 2:
+        return ServiceClientView();
+
+      default:
+        return NotificationView();
     }
   }
 }

@@ -39,7 +39,8 @@ class ServiceClientController extends GetxController {
 
   final dababase = Get.find<DataBaseController>();
   var fn = new ViewFunctions();
-
+  int _isLoadEchange = 0;
+  int get isLoadEchange => _isLoadEchange;
   List<MessageEchangeModel> _listMessageEchange = [];
   List<MessageEchangeModel> get listMessageEchange => _listMessageEchange;
   getEchange() async {
@@ -63,17 +64,18 @@ class ServiceClientController extends GetxController {
               if (response.body['data'] != null) {
                 print(response.body['data']);
                 _listMessageEchange.clear();
-                update();
+                // update();
                 _listMessageEchange.addAll((response.body['data'] as List)
                     .map((e) => MessageEchangeModel.fromJson(e))
                     .toList());
-
+                _isLoadEchange = 1;
                 update();
               }
             }
           }
         } catch (e) {
           // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+          _isLoadEchange = 2;
 
           update();
           //print(e);

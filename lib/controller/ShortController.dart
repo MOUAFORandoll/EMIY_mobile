@@ -22,7 +22,7 @@ import 'package:video_player/video_player.dart';
 
 class ShortController extends GetxController {
   final service = new ApiService();
-  VideoPlayerController? controller;
+  /* VideoPlayerController? */ var controller;
   final dababase = Get.find<DataBaseController>();
   var fn = new ViewFunctions();
 
@@ -49,57 +49,105 @@ class ShortController extends GetxController {
   }
 
   changeVideo(index) async {
-    print(listShort[index].src);
-    _initialise = false;
+    if (listShort.isNotEmpty) {
+      //  }else{}
+      print('-debut lecture short --------------------------------------' +
+          listShort[index].src);
+      _initialise = false;
 
-    listShort[index].loadController();
-    controller = listShort[index].controller;
+      listShort[index].loadController();
+      controller = listShort[index].controller;
 
-    controller!.play();
-    _initialise = true;
+      controller!.play();
+      _initialise = true;
 
-    controller!.addListener(() async {
-      //print('0000');
+      controller!.addListener(() async {
+        //print('0000');
 
-      _progressValue = Get.find<ShortController>()
-                  .controller!
-                  .value
-                  .duration
-                  .inSeconds
-                  .toDouble() ==
-              0
-          ? 0
-          : Get.find<ShortController>()
-                  .controller!
-                  .value
-                  .position
-                  .inSeconds
-                  .toDouble() /
-              Get.find<ShortController>()
-                  .controller!
-                  .value
-                  .duration
-                  .inSeconds
-                  .toDouble();
-      update();
-      // //print(
-      //   'poition******${_progressValue}',
-      // );
-      if (_progressValue == 1) {
-        // await listShort[index].loadController();
+        _progressValue = Get.find<ShortController>()
+                    .controller!
+                    .value
+                    .duration
+                    .inSeconds
+                    .toDouble() ==
+                0
+            ? 0
+            : Get.find<ShortController>()
+                    .controller!
+                    .value
+                    .position
+                    .inSeconds
+                    .toDouble() /
+                Get.find<ShortController>()
+                    .controller!
+                    .value
+                    .duration
+                    .inSeconds
+                    .toDouble();
 
+        update();
+        await readShort(listShort[index].codeShortInit
+        );
         // //print(
-        //   'ici***************',
+        //   'poition******${_progressValue}',
         // );
-      }
-    });
+        if (_progressValue == 1) {
+          // await listShort[index].loadController();
 
-    return 0;
+          // //print(
+          //   'ici***************',
+          // );
+        }
+      });
+
+      return 0;
+    }
+  }
+
+  Future<void> readShort(codeShort) async {
+    // //print('***short******************response**********');
+    var key = await dababase.getKey();
+
+    if (_loaddata == false) {
+      print('-----------get---');
+      _isLoadedP = 0;
+      _loaddata = true;
+      update();
+      try {
+        Response response = await shortRepo.readShort(codeShort, key);
+
+        print('read**************************');
+
+        print(
+            'read=+++}+++${response.body}+++++++++++++++++++++++}-=======================================================');
+      } catch (e) {
+        //print(e);
+      }
+    }
+  }
+
+  dispose() {
+    super.dispose();
+    listShort[_currentShort].controller.dispose();
+
+    controller!.dispose();
   }
 
   disposePLayer() {
     if (controller != null) {
-      controller!.pause();
+      print(
+          '--------------${controller!.value.isInitialized}----------is dispose');
+      ;
+
+      // update();
+    }
+  }
+
+  disposePLayerAll() {
+    print('------------------------is dispose');
+    // listShort[_currentShort].controller.dispose();
+    if (controller != null) {
+      listShort[_currentShort].controller.dispose(); // controller!.dispose();
 
       update();
     }
@@ -138,6 +186,12 @@ class ShortController extends GetxController {
 
   bool _loaddata = false;
   bool get loaddata => _loaddata;
+  bool _intoShortView = false;
+  bool get intoShortView => _intoShortView;
+  setIntoShortView(val) {
+    _intoShortView = val;
+    update();
+  }
 
   int indexC = 1;
   Future<void> getListShort() async {
@@ -181,10 +235,17 @@ class ShortController extends GetxController {
               indexC++;
               print(_listShort.length);
               currentShortData = _listShort.first;
+              print(
+                  '_listShort=+++}+++++++++++++++++++++++++++}-=======================================================');
               _loaddata = false;
               _isLoadedP = 1;
               update();
               print(_isLoadedP);
+              if (indexC - 1 == 1 && intoShortView) {
+                print(
+                    '----------------------------------- ${_listShort.length}');
+                changeVideo(0);
+              }
             }
           }
         }
@@ -193,6 +254,53 @@ class ShortController extends GetxController {
         update();
         //print(e);
       }
+    }
+  }
+
+  cleanListShort() {
+    _listShort = [];
+    _listShort.clear();
+    controller = null;
+    currentShortData = null;
+    indexC = 1;
+    indexC2 = 1;
+    update();
+    getListShort();
+  }
+
+  int indexC2 = 1;
+  int _isLoadedForBoutiqueShort = 0;
+  int get isLoadedForBoutiqueShort => _isLoadedForBoutiqueShort;
+  Future<void> getListShortForBoutique(codeBoutique) async {
+    // //print('***short******************response**********');
+    var key = await dababase.getKey();
+
+    _isLoadedForBoutiqueShort = 0;
+    try {
+      Response response =
+          await shortRepo.getListShortForBoutique(codeBoutique, key, indexC2);
+
+      _listShort = [];
+      _listShort.clear();
+      update();
+
+      if (response.body != null) {
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            _listShort.addAll((response.body['data'] as List)
+                .map((e) => ShortModel.fromJson(e))
+                .toList());
+            indexC2++;
+            print(_listShort.length);
+            currentShortData = _listShort.first;
+          }
+          setCurrent(0);
+          _isLoadedForBoutiqueShort = 1;
+          update();
+        }
+      }
+    } catch (e) {
+      //print(e);
     }
   }
 
@@ -588,10 +696,10 @@ class ShortController extends GetxController {
 
   disposeUniquePLayer() {
     // currentShortData.controller.dispose();
-    // if (_isUniqueVideoPlayer != null) {
-    _isUniqueVideoPlayer!.dispose();
+    if (_isUniqueVideoPlayer != null) {
+      _isUniqueVideoPlayer!.dispose();
 
-    //   update();
-    // }
+      update();
+    }
   }
 }

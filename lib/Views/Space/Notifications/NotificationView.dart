@@ -26,25 +26,22 @@ class NotificationView extends StatelessWidget {
       return _general.isLoadNotification == 0
           ? AppLoading()
           : SingleChildScrollView(
-              child: Column(
-              children: [
-                ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _general.controllerScrollNotification,
-                    shrinkWrap: true,
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: _general.notificationList.length,
-                    itemBuilder: (_ctx, x) =>
-                        (x == _general.notificationList.length - 1 &&
-                                _general.loaddata)
-                            ? Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.all(10),
-                                child: CircularProgressIndicator())
-                            : NotificationComponent(
-                                notification: _general.notificationList[x])),
-              ],
-            ));
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: _general.controllerScrollNotification,
+                  shrinkWrap: true,
+                  // scrollDirection: Axis.horizontal,
+                  itemCount: _general.notificationList.length,
+                  itemBuilder: (_ctx, x) =>
+                      (x == _general.notificationList.length - 1 &&
+                              _general.loaddata)
+                          ? Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.all(10),
+                              child: CircularProgressIndicator())
+                          : NotificationComponent(
+                              notification: _general.notificationList[x])),
+            );
 
       // Builds 1000 ListTiles
     });

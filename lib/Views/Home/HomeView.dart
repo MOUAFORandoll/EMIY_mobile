@@ -2,6 +2,7 @@ import 'package:EMIY/components/Form/home_search_field.dart';
 import 'package:EMIY/components/Form/search_field.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponentHomeN.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
+import 'package:EMIY/components/Widget/icon_svg.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
@@ -50,8 +51,10 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   //   }
   // }
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("state*************************");
     print(AppLifecycleState.resumed);
-    if (state == AppLifecycleState.resumed) {
+    if (state == AppLifecycleState.paused) {
+    Get.find<ShortController>().disposePLayer();
       // Perform actions when the app is resumed
     }
     // You can also handle other lifecycle states if needed
@@ -139,7 +142,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                 ]),
                             InkWell(
                                 child: Container(
-                                    // margin: EdgeInsets.only(right: 10),
+                                    margin: EdgeInsets.only(bottom: 15),
                                     padding: EdgeInsets.all(kMarginX / 3),
                                     // margin: EdgeInsets.only(right: kMarginX),
                                     decoration: BoxDecoration(
@@ -147,14 +150,17 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                             color: Colors.blue, width: 2),
                                         borderRadius:
                                             BorderRadius.circular(30)),
-                                    child: Icon(
+                                    child: SvgIcon(
+                                        icon: Assets
+                                            .bell) /* Icon(
                                       Icons.amp_stories,
                                       color: Colors.red,
-                                    )),
+                                    ) */
+                                    ),
                                 onTap: () {
-                                  Get.find<ShortController>().getListShort();
+                                  // Get.find<ShortController>().getListShort();
 
-                                  Get.toNamed(AppLinks.SHORT);
+                                  Get.toNamed(AppLinks.NOTIFICATION);
                                 })
                           ])
 

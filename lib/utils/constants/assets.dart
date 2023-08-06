@@ -20,4 +20,6 @@ class Assets {
   static const grid1 = 'assets/svg_icones/grid1.svg';
   static const grid2 = 'assets/svg_icones/grid2.svg';
   static const logoSvg = 'assets/svg_icones/logo.svg';
+  static const bell = 'assets/svg_icones/bell.svg';
+  static const play = 'assets/svg_icones/play.svg';
 }

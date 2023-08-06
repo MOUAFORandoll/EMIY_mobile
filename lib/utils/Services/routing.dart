@@ -5,6 +5,7 @@ import 'package:EMIY/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:EMIY/Views/CategoryBoutique/UserAbonnementView.dart';
 import 'package:EMIY/Views/Link/BoutiqueViewForLink.dart';
+import 'package:EMIY/Views/Space/MySpace.dart';
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Space/Negociation/NegociationView.dart';
 import 'package:EMIY/Views/Link/ProductViewForLink.dart';
@@ -217,10 +218,10 @@ class AppRoutes {
         name: AppLinks.ABONNEMENT,
         page: () => UserAbonnementView(),
         transition: transitionX),
-    GetPage(
-        name: AppLinks.SERVICE_CLIENT,
-        page: () => ServiceClientView(),
-        transition: transitionX),
+    // GetPage(
+    //     name: AppLinks.SERVICE_CLIENT,
+    //     page: () => ServiceClientView(),
+    //     transition: transitionX),
     GetPage(
         name: AppLinks.PRODUCT_FOR_LINK,
         page: () => ProductViewForLink(),
@@ -236,9 +237,14 @@ class AppRoutes {
     GetPage(
         name: AppLinks.FIEU_LIST,
         page: () => ParrainnageView(),
-        transition: transitionX),  GetPage(
+        transition: transitionX),
+    GetPage(
         name: AppLinks.PREFERENCE_CLIENT,
         page: () => PreferenceView(),
+        transition: transitionX),
+    GetPage(
+        name: AppLinks.NOTIFICATION,
+        page: () => MySpace(),
         transition: transitionX),
   ];
 }
@@ -286,6 +292,7 @@ class AppLinks {
   static const String NEGOCIATION_NEW = "/negociation/new";
   static const String NEGOCIATION_LIST = "/negociation/list";
   static const String FIEU_LIST = "/fieul/list";
+  static const String NOTIFICATION = "/notifications";
 }
 
 // <?php

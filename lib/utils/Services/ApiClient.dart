@@ -19,8 +19,7 @@ class ApiClient extends GetConnect  {
 
     httpClient.addRequestModifier<dynamic>((request) {
       _setAuthHeaders();
-
-    print('===========================${request.url}============================');
+ 
       // Intercept the request before it is sent to the server
       token.length != 0
           ? request.headers['Authorization'] = 'Bearer $token'

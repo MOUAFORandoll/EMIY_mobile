@@ -60,13 +60,20 @@ class ReplyCard extends StatelessWidget {
                             top: 5,
                             bottom: 10,
                           ),
-                          child: Text(
-                            message,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                          ),
+                          child: Container(
+                              constraints: BoxConstraints(
+                                maxWidth: kWidth * .45,
+                              ),
+                              margin: EdgeInsets.only(left: kMarginX * .6),
+                              // width: kWidth * .58,
+                              child: Text(message,
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 16,
+                                    overflow: TextOverflow.fade,
+                                    color: ColorsApp.black,
+                                  ))),
                         ),
                         Positioned(
                           bottom: 4,

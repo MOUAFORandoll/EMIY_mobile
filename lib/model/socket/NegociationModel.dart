@@ -33,7 +33,7 @@ import 'dart:convert';
 // }
 
 class NegociationModel {
-  final int prixNegocie;
+  final String prixNegocie;
   final String codeNegociation;
   final String titre_produit;
   final String src_produit;
@@ -51,7 +51,8 @@ class NegociationModel {
 
   factory NegociationModel.fromJson(Map<String, dynamic> json) =>
       NegociationModel(
-        prixNegocie: json["prixNegocie"] == null ? 0 : json["prixNegocie"],
+        prixNegocie:
+            json["prixNegocie"] == null ? '0' : json["prixNegocie"].toString(),
         codeNegociation:
             json["codeNegociation"] == null ? null : json["codeNegociation"],
         titre_produit:

@@ -26,7 +26,8 @@ class NotificationComponent extends StatelessWidget {
           await Get.find<ShortController>().disposeUniquePLayer();
         },
         child: Container(
-            margin: EdgeInsets.all(kMarginY),
+            margin: EdgeInsets.all(kMarginY)
+                .add(EdgeInsets.symmetric(horizontal: kMarginX)),
             decoration: !notification.read
                 ? BoxDecoration(
                     color: ColorsApp.greySecond,
@@ -39,6 +40,7 @@ class NotificationComponent extends StatelessWidget {
                 height: kWidth / 6,
                 width: kWidth / 6,
                 padding: EdgeInsets.all(3),
+
                 // decoration: BoxDecoration(color: ColorsApp.black),
                 child: Stack(
                   children: [

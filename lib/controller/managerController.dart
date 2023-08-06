@@ -163,13 +163,12 @@ class ManagerController extends GetxController {
 
   @override
   void onReady() {
-    print('-----------------------ready++++++++++++++++');
     // TODO: implement onReady
     super.onReady();
-    
-   getUserDB();
-   getKeyU();
-   getUser();
+
+    getUserDB();
+    getKeyU();
+    getUser();
   }
 
   var _User;
@@ -182,15 +181,10 @@ class ManagerController extends GetxController {
   //
   // CategoryController({required this.service});
   getUser() async {
-    // //print('user-------------------------${new GetStorage().read('keySecret')}');
     var getU = await dababase.getKey();
-    //print('key******************** ${getU}');
-    // await this.userRefresh();
-    // ignore: unnecessary_null_comparison
 
     try {
       Response response = await manageRepo.getUser();
-      print('user-------------------------${response}');
       if (response.body != null) {
         if (response.body['data'].length != 0) {
           _User = UserModel.fromJson(response.body['data']);
@@ -207,8 +201,7 @@ class ManagerController extends GetxController {
             emailU.text = User.email;
           }
           getKeyU();
-          //print(
-          // '_isok------------***********************-------------------------${_isLoaded}');
+
           Get.find<BoutiqueController>().getBoutique();
         }
 
@@ -232,15 +225,15 @@ class ManagerController extends GetxController {
 
   // CategoryController({required this.service});
   newLocalisation() async {
-    // //print('user-------------------------${new GetStorage().read('keySecret')}');
     try {
       Response response = await manageRepo.newConnexion();
 
       if (response.body != null) {
-        if (response.body['data'].length != 0) {
-          // //print('user-------------------------${response.body['data']}');
-          if (response.statusCode == 203) {
-            await newLocalisation();
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            if (response.statusCode == 203) {
+              await newLocalisation();
+            }
           }
         }
       }

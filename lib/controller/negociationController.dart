@@ -32,7 +32,7 @@ class NegociationController extends GetxController {
 
     fn.loading('Boutique', 'Creation de la negociation en cours');
     var token = await dababase.getKeyKen();
-    _idUser = Jwt.parseJwt(token['token'])['id']; 
+    _idUser = Jwt.parseJwt(token['token'])['id'];
 
     try {
       var data = {'codeProduit': codeProduit, 'keySecret': key};
@@ -45,7 +45,7 @@ class NegociationController extends GetxController {
             print(response.body['data']);
             new SocketService().negociation(
                 response.body['data']['canal'], socketMessageNegociation);
-            _codeNegociation = response.body['data']['canal']; 
+            _codeNegociation = response.body['data']['canal'];
             _listMessageNegociation = [];
             textEditingController.text = '';
             _codeNegociation = '';
@@ -72,6 +72,8 @@ class NegociationController extends GetxController {
 
   List<NegociationModel> _listNegociation = [];
   List<NegociationModel> get listNegociation => _listNegociation;
+  int _isLoadNego = 0;
+  int get isLoadNego => _isLoadNego;
   getListNegociation() async {
     // fn.loading('Boutique', 'Creation de la negociation en cours');
 
@@ -98,12 +100,14 @@ class NegociationController extends GetxController {
                 .toList());
             _listNegociation.forEach((elt) => new SocketService()
                 .negociation(elt.codeNegociation, socketMessageNegociation));
+            _isLoadNego = 1;
             update();
           }
         }
       }
     } catch (e) {
       // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      _isLoadNego = 2;
 
       update();
       //print(e);
@@ -158,7 +162,7 @@ class NegociationController extends GetxController {
 
     // fn.loading('Boutique', 'Creation de la negociation en cours');
     var token = await dababase.getKeyKen();
-    _idUser = Jwt.parseJwt(token['token'])['id']; 
+    _idUser = Jwt.parseJwt(token['token'])['id'];
 
     try {
       var data = {
@@ -214,14 +218,19 @@ class NegociationController extends GetxController {
   List<MessageNegociationModel> get listMessageNegociation =>
       _listMessageNegociation;
   socketMessageNegociation(data) {
-    print('-...............');
+    print('-....dddsd...........');
     print(data);
     if (data["emetteurId"] != idUser) {
       new NotificationService().emitNotification(data['message']);
       // fn.snackBar('Message negociation', data['message'], true);
     }
-    _listMessageNegociation.add(MessageNegociationModel.fromJson(data));
-    update();
-    // ici on doit faire l'ajout a la liste des message en locale dans le telephone du user
+    print(!_listMessageNegociation
+        .any((elt) => elt.id == MessageNegociationModel.fromJson(data).id));
+    if (!_listMessageNegociation
+        .any((elt) => elt.id == MessageNegociationModel.fromJson(data).id)) {
+      _listMessageNegociation.add(MessageNegociationModel.fromJson(data));
+      update();
+      // ici on doit faire l'ajout a la liste des message en locale dans le telephone du user
+    }
   }
 }

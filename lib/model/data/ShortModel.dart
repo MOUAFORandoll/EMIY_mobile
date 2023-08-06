@@ -23,6 +23,7 @@ class ShortModel {
       required this.description,
       required this.date,
       required this.codeShort,
+      this.codeShortInit = '',
       required this.nbre_commentaire,
       required this.nbre_like,
       required this.status,
@@ -39,6 +40,7 @@ class ShortModel {
   int nbre_commentaire;
   final String date;
   final String codeShort;
+  final String codeShortInit;
   bool is_like;
   final bool status;
   var controller;
@@ -54,6 +56,7 @@ class ShortModel {
       boutique: BoutiqueModel.fromJson(json["boutique"]),
       description: json["description"] == null ? null : json["description"],
       date: json["date"] == null ? null : json["date"],
+      codeShortInit: json["codeShort"],
       codeShort: ApiUrl.external_link + 'shorts/' + json["codeShort"],
       status: json["status"] == null ? null : json["status"],
       is_like: json["is_like"] == null ? null : json["is_like"],
@@ -81,7 +84,7 @@ class ShortModel {
     await controller.initialize().then((_) {
       print('**************lectyre');
 
-      controller.play();
+      // controller.play();
     });
     controller.setLooping(true);
   }

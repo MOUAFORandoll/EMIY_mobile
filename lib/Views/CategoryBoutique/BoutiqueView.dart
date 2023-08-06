@@ -1,3 +1,4 @@
+import 'package:EMIY/Views/CategoryBoutique/ReadShortBoutiqueView.dart';
 import 'package:EMIY/components/Button/AppIconButton.dart';
 import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
@@ -5,6 +6,7 @@ import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/utils/constants/assets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/components/Button/IconButtonF.dart';
 import 'package:EMIY/components/Button/btnCatList.dart';
@@ -28,6 +30,7 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:rating_bar/rating_bar.dart';
@@ -79,19 +82,26 @@ class BoutiqueView extends StatelessWidget {
                 ),
                 InkWell(
                     child: Container(
-                        // margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.all(kMarginX / 3),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blue, width: 2),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Icon(
-                          Icons.amp_stories,
-                          color: Colors.red,
-                        )),
+                      // margin: EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.all(kMarginX / 3),
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue, width: 2),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: SvgPicture.asset(
+                        Assets.play,
+                        width: 90,
+                        height: 90,
+                        color: ColorsApp.skyBlue,
+                      ),
+                    ),
                     onTap: () {
-                      Get.find<ShortController>().getListShort();
+                      // Get.find<ShortController>().getListShortForBoutique(
+                      //     Get.parameters['codeBoutique']) ;
 
-                      Get.toNamed(AppLinks.SHORT);
+                      Get.to(ReadShortBoutiqueView(
+                          codeBoutique: Get.parameters['codeBoutique']));
                     })
               ],
             )),

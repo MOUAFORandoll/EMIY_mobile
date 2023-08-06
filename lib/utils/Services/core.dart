@@ -59,11 +59,14 @@ Future<void> initApp() async {
 //  await Get.find<ManagerController>().getUserDB();
 // await  Get.find<ManagerController>().getKeyU();
 //  await Get.find<ManagerController>().getUser();
-await  Get.find<GeneralController>().generalSocket();
-await  Get.find<GeneralController>().NotificationSocket();
- await Get.find<GeneralController>().getListNotifications();
+  await Get.find<GeneralController>().generalSocket();
+  await Get.find<GeneralController>().NotificationSocket();
+  await Get.find<GeneralController>().getListNotifications();
 
- await Get.find<ServiceClientController>().connectSockey();
+  await Get.find<ShortController>().disposePLayerAll();
+  await Get.find<ShortController>().disposeUniquePLayer();
+
+  await Get.find<ServiceClientController>().connectSockey();
 }
 
 Future<void> secondInit() async {
@@ -98,7 +101,7 @@ Future<void> initAllApp() async {
   Get.find<ManagerController>().getKeyU();
   Get.find<ManagerController>().getUser();
   Get.find<GeneralController>().generalSocket();
-await  Get.find<GeneralController>().NotificationSocket();
+  await Get.find<GeneralController>().NotificationSocket();
 
   Get.find<GeneralController>().getListNotifications();
 

@@ -22,8 +22,10 @@ class ListNegociationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NegociationController>(builder: (_negociation) {
-      return CustomScrollView(controller: _scrollController, slivers: [
-        SliverAppBar(
+      return  _negociation.isLoadNego == 0
+          ? AppLoading()
+          : /* CustomScrollView(controller: _scrollController, slivers: [
+     SliverAppBar(
           backgroundColor: Colors.white,
           elevation: 0,
           // Provide a standard title.
@@ -70,18 +72,19 @@ class ListNegociationView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
           // The builder function returns a ListTile with a title that
           // displays the index of the current item.
-          (context, index) => SingleChildScrollView(
+          (context, index) => */
+          SingleChildScrollView(
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   // scrollDirection: Axis.horizontal,
                   itemCount: _negociation.listNegociation.length,
                   itemBuilder: (_ctx, x) => Conversation(
-                      negociation: _negociation.listNegociation[x]))),
+                      negociation: _negociation.listNegociation[x])));
 
-          childCount: 1,
+      /*     ])  childCount: 1,
         ))
-      ]);
+      ]); */
 
       // Builds 1000 ListTiles
     });
