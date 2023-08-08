@@ -20,6 +20,9 @@ class Assets {
   static const grid1 = 'assets/svg_icones/grid1.svg';
   static const grid2 = 'assets/svg_icones/grid2.svg';
   static const logoSvg = 'assets/svg_icones/logo.svg';
+  static const logo_without = 'assets/svg_icones/logo_without.svg';
   static const bell = 'assets/svg_icones/bell.svg';
   static const play = 'assets/svg_icones/play.svg';
+  static const like = 'assets/svg_icones/like.svg';
+  static const story_boutique = 'assets/svg_icones/story_boutique.svg';
 }

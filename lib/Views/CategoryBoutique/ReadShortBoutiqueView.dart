@@ -33,9 +33,9 @@ class _ReadShortBoutiqueViewState extends State<ReadShortBoutiqueView>
     Get.find<ShortController>().getListShortForBoutique(
       widget.codeBoutique,
     );
-    Get.find<ShortController>().initialise
-        ? Get.find<ShortController>().controller!.play()
-        : Get.find<ShortController>().changeVideo(0);
+    // Get.find<ShortController>().initialise
+    //     ? Get.find<ShortController>().controller!.play()
+    //     : Get.find<ShortController>().changeVideo(0);
     _heartAnimationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000),
@@ -194,7 +194,8 @@ class _ReadShortBoutiqueViewState extends State<ReadShortBoutiqueView>
                           Get.back();
                         },
                       ))),
-                  _ShortController.initialise
+                  _ShortController.initialise &&
+                          _ShortController.listShort.isNotEmpty
                       ? Positioned(
                           bottom: 2,
                           child: Container(
@@ -207,7 +208,8 @@ class _ReadShortBoutiqueViewState extends State<ReadShortBoutiqueView>
                                           Color.fromARGB(255, 31, 59, 151)),
                                   allowScrubbing: true)))
                       : Container(),
-                  _ShortController.initialise
+                  _ShortController.initialise &&
+                          _ShortController.listShort.isNotEmpty
                       ? Positioned(
                           top: _heartPosition.dy - 40,
                           left: _heartPosition.dx - 40,
@@ -223,7 +225,8 @@ class _ReadShortBoutiqueViewState extends State<ReadShortBoutiqueView>
                               : Container(),
                         )
                       : Container(),
-                  _ShortController.initialise
+                  _ShortController.initialise &&
+                          _ShortController.listShort.isNotEmpty
                       ? Positioned(
                           top: kHeight / 3,
                           left: kWidth / 1.3,

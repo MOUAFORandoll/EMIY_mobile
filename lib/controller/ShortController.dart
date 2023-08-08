@@ -51,13 +51,15 @@ class ShortController extends GetxController {
   changeVideo(index) async {
     if (listShort.isNotEmpty) {
       //  }else{}
-      print('-debut lecture short --------------------------------------' +
-          listShort[index].src);
+      print(
+          '-debut lecture short -----------${index}---------------------------' +
+              listShort[index].src);
       _initialise = false;
 
       listShort[index].loadController();
       controller = listShort[index].controller;
 
+      update();
       controller!.play();
       _initialise = true;
 
@@ -86,8 +88,7 @@ class ShortController extends GetxController {
                     .toDouble();
 
         update();
-        await readShort(listShort[index].codeShortInit
-        );
+        await readShort(listShort[index].codeShortInit);
         // //print(
         //   'poition******${_progressValue}',
         // );
@@ -193,6 +194,7 @@ class ShortController extends GetxController {
     update();
   }
 
+  List<ShortModel> _listShortSave = [];
   int indexC = 1;
   Future<void> getListShort() async {
     // //print('***short******************response**********');
@@ -232,6 +234,9 @@ class ShortController extends GetxController {
               _listShort.addAll((response.body['data'] as List)
                   .map((e) => ShortModel.fromJson(e))
                   .toList());
+              _listShortSave.addAll((response.body['data'] as List)
+                  .map((e) => ShortModel.fromJson(e))
+                  .toList());
               indexC++;
               print(_listShort.length);
               currentShortData = _listShort.first;
@@ -260,29 +265,29 @@ class ShortController extends GetxController {
   cleanListShort() {
     _listShort = [];
     _listShort.clear();
-    controller = null;
+    // controller = null;
     currentShortData = null;
     indexC = 1;
     indexC2 = 1;
+    _listShort = _listShortSave;
     update();
-    getListShort();
   }
 
   int indexC2 = 1;
   int _isLoadedForBoutiqueShort = 0;
   int get isLoadedForBoutiqueShort => _isLoadedForBoutiqueShort;
   Future<void> getListShortForBoutique(codeBoutique) async {
-    // //print('***short******************response**********');
-    var key = await dababase.getKey();
+    print('***short bouriqe******************response**********');
 
     _isLoadedForBoutiqueShort = 0;
+
+    _listShort = [];
+    _listShort.clear();
+    update();
+    var key = await dababase.getKey();
     try {
       Response response =
           await shortRepo.getListShortForBoutique(codeBoutique, key, indexC2);
-
-      _listShort = [];
-      _listShort.clear();
-      update();
 
       if (response.body != null) {
         if (response.body['data'] != null) {
@@ -291,9 +296,12 @@ class ShortController extends GetxController {
                 .map((e) => ShortModel.fromJson(e))
                 .toList());
             indexC2++;
+            print('***short bouriqe*********ok*********response**********');
+
             print(_listShort.length);
             currentShortData = _listShort.first;
           }
+          changeVideo(0);
           setCurrent(0);
           _isLoadedForBoutiqueShort = 1;
           update();

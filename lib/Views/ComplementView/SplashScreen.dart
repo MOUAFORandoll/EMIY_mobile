@@ -5,9 +5,10 @@ import 'package:EMIY/utils/Services/core.dart';
 import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/storageService.dart';
 import 'package:EMIY/utils/constants/assets.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/Services/apiUrl.dart'; 
+import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:EMIY/utils/provider/refresh_token.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +34,12 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   start() {
     Get.find<ManagerController>().startTimer();
 
-    Future.delayed(Duration(seconds: 10), () async {
+    Future.delayed(Duration(seconds: 8), () async {
       print(box.read('first'));
       if (box.read('first') != 1) {
         box.write('first', 1);
         Get.offNamedUntil(AppLinks.ONBOARDING, (route) => false);
-          await secondInit();
+        await secondInit();
       } else {
         Get.offNamedUntil(AppLinks.FIRST, (route) => false);
         await secondInit();
@@ -50,7 +51,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   @override
   void initState() {
     super.initState();
-      
+
     // initUniLinks();
     start();
   }
@@ -63,30 +64,105 @@ class _SplashScreenPageState extends State<SplashScreenPage>
             alignment: Alignment.center,
             child: new Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   new Container(
-                      child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                          child: SvgPicture.asset(
-                        Assets.logoSvg,
-                        width: kHeight,
-                        height: kHeight,
-                      )),
-                      // Container(
-                      //   margin: EdgeInsets.only(top: kMdHeight / 15),
-                      //   child: SpinKitRing(
-                      //     lineWidth: 4,
-                      //     color: ColorsApp.skyBlue,
-                      //     size: 25,
-                      //   ),
-                      // ),
-                    ],
-                  ))
+                      margin: EdgeInsets.symmetric(horizontal: kWidth / 7),
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                              width: kWidth / 5.8,
+                              height: kHeight / 1.2,
+                              child: SvgPicture.asset(
+                                Assets.logo_without,
+                                width: kWidth / 2,
+                                height: kHeight / 1.2,
+                              )),
+                          Container(
+                            // alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.only(left: 10),
+                            width: kWidth / 2.5,
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                TypewriterAnimatedText(
+                                  'Emiy',
+                                  textStyle: TextStyle(
+                                      fontSize: 34.0,
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.bold),
+                                  cursor: '_',
+                                  speed: const Duration(
+                                      milliseconds:
+                                          180), // Ajustez la vitesse d'animation
+                                ),
+                              ],
+                              repeatForever:
+                                  true, // Répéter l'animation en boucle
+                            ),
+                          ),
+
+                          // Container(
+                          //   margin: EdgeInsets.only(top: kMdHeight / 15),
+                          //   child: SpinKitRing(
+                          //     lineWidth: 4,
+                          //     color: ColorsApp.skyBlue,
+                          //     size: 25,
+                          //   ),
+                          // ),
+                        ],
+                      ))
                 ])));
   }
 }
+
+// class AnimatedText extends StatefulWidget {
+//   final String text;
+//   final TextStyle style;
+//   final Duration duration;
+
+//   AnimatedText({required this.text, required this.style, required this.duration});
+
+//   @override
+//   _AnimatedTextState createState() => new _AnimatedTextState();
+// }
+
+// class _AnimatedTextState extends State<AnimatedText>
+//     with TickerProviderStateMixin {
+//  late AnimationController _controller;
+//  late Animation<double> _opacity;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = new AnimationController(
+//       vsync: this,
+//       duration: widget.duration,
+//     );
+//     _opacity = new Tween(begin: 0.0, end: 1.0).animate(_controller);
+//     _controller.forward();
+//   }
+
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return new AnimatedBuilder(
+//       animation: _opacity,
+//       builder: (context, child) {
+//         return new Text(
+//           widget.text,
+//           style: widget.style.copyWith(opacity: _opacity.value),
+//         );
+//       },
+//     );
+//   }
+// }
 /**
  * 
 class SplashScreenPage extends StatefulWidget {

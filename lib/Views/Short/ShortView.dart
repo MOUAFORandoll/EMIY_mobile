@@ -87,107 +87,109 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
 
   Widget build(BuildContext context) {
     return GetBuilder<ShortController>(builder: (_ShortController) {
-      return Stack(
-        alignment: AlignmentDirectional.center,
-        children: [
-          _ShortController.isLoadedP == 0 ||
-                  _ShortController.listShort.length == 0 ||
-                  _ShortController.controller == null
-              ? Container(
-                  child: AppLoading(),
-                )
-              : PageView.builder(
-                  itemCount: _ShortController.listShort.length,
-                  scrollDirection: Axis.vertical,
-                  controller: _ShortController.pageController,
-                  onPageChanged: (index) {
-                    index = index % (_ShortController.listShort.length);
-
-                    _ShortController.changeVideo(index);
-                    _ShortController.setCurrent(index);
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    return Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (_ShortController.controller!.value.isPlaying) {
-                              _ShortController.controller!.pause();
-                            } else {
-                              _ShortController.controller!.play();
-                            }
-                          });
-                        },
-                        onDoubleTapDown: _handleDoubleTap,
-                        onDoubleTap: () {
-                          _ShortController.newLikeShort();
-                        },
-                        child: _ShortController.controller!.value.isInitialized
-                            ? AspectRatio(
-                                aspectRatio: 9 / 14.2,
-                                child:
-                                    VideoPlayer(_ShortController.controller!),
-                              )
-                            : Container(
-                                child:
-                                    AppLoading() /* SpinKitRing(
-                                      lineWidth: 4,
-                                      color: ColorsApp.skyBlue,
-                                      size: 45,
-                                    ) */
-                                ,
-                              ),
-                      ),
-                    );
-                  },
-                ),
-          _ShortController.initialise
-              ? Positioned(
-                  bottom: 2,
-                  child: Container(
-                      height: 8,
-                      width: kWidth,
-                      child: VideoProgressIndicator(
-                          _ShortController.controller!,
-                          colors: VideoProgressColors(
-                              playedColor: Color.fromARGB(255, 31, 59, 151)),
-                          allowScrubbing: true)))
-              : Container(),
-          _ShortController.initialise
-              ? Positioned(
-                  top: _heartPosition.dy - 40,
-                  left: _heartPosition.dx - 40,
-                  child: _showHeart
-                      ? ScaleTransition(
-                          scale: _heartAnimation,
-                          child: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 80,
-                          ),
-                        )
-                      : Container(),
-                )
-              : Container(),
-          _ShortController.initialise
-              ? Positioned(
-                  top: kHeight / 3,
-                  left: kWidth / 1.3,
-                  child: Container(
-                      child: InkWell(
-                    child: ShortAction(
-                      short: _ShortController
-                          .listShort[_ShortController.currentShort],
-                    ),
-                    onTap: () {
-                      _ShortController.controller!.pause();
-
-                      Get.toNamed(AppLinks.BOUTIQUE +
-                          '?lienBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.lienBoutique.toString()}note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
+      return Container(
+        decoration: BoxDecoration(color: ColorsApp.black),
+        child: Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            _ShortController.listShort.length == 0 ||
+                    _ShortController.controller == null
+                ? Container(child: AppLoading())
+                : PageView.builder(
+                    itemCount: _ShortController.listShort.length,
+                    scrollDirection: Axis.vertical,
+                    controller: _ShortController.pageController,
+                    onPageChanged: (index) {
+                      index = index % (_ShortController.listShort.length);
+                      _ShortController.controller.pause();
+                      _ShortController.changeVideo(index);
+                      _ShortController.setCurrent(index);
                     },
-                  )))
-              : Container(),
-        ],
+                    itemBuilder: (BuildContext context, int index) {
+                      return Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (_ShortController
+                                  .controller!.value.isPlaying) {
+                                _ShortController.controller!.pause();
+                              } else {
+                                _ShortController.controller!.play();
+                              }
+                            });
+                          },
+                          onDoubleTapDown: _handleDoubleTap,
+                          onDoubleTap: () {
+                            _ShortController.newLikeShort();
+                          },
+                          child: _ShortController
+                                  .controller!.value.isInitialized
+                              ? AspectRatio(
+                                  aspectRatio: 9 / 14.2,
+                                  child:
+                                      VideoPlayer(_ShortController.controller!),
+                                )
+                              : Container(
+                                  child:
+                                      AppLoading() /* SpinKitRing(
+                                        lineWidth: 4,
+                                        color: ColorsApp.skyBlue,
+                                        size: 45,
+                                      ) */
+                                  ,
+                                ),
+                        ),
+                      );
+                    },
+                  ),
+            _ShortController.initialise
+                ? Positioned(
+                    bottom: 2,
+                    child: Container(
+                        height: 8,
+                        width: kWidth,
+                        child: VideoProgressIndicator(
+                            _ShortController.controller!,
+                            colors: VideoProgressColors(
+                                playedColor: Color.fromARGB(255, 31, 59, 151)),
+                            allowScrubbing: true)))
+                : Container(),
+            _ShortController.initialise
+                ? Positioned(
+                    top: _heartPosition.dy - 40,
+                    left: _heartPosition.dx - 40,
+                    child: _showHeart
+                        ? ScaleTransition(
+                            scale: _heartAnimation,
+                            child: Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                              size: 80,
+                            ),
+                          )
+                        : Container(),
+                  )
+                : Container(),
+            _ShortController.initialise
+                ? Positioned(
+                    top: kHeight / 3,
+                    left: kWidth / 1.3,
+                    child: Container(
+                        child: InkWell(
+                      child: ShortAction(
+                        short: _ShortController
+                            .listShort[_ShortController.currentShort],
+                      ),
+                      onTap: () {
+                        _ShortController.controller!.pause();
+
+                        Get.toNamed(AppLinks.BOUTIQUE +
+                            '?lienBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.lienBoutique.toString()}note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
+                      },
+                    )))
+                : Container(),
+          ],
+        ),
       );
     });
   }

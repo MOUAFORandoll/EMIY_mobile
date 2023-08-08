@@ -371,35 +371,16 @@ class ManageView extends StatelessWidget {
                               onTap: () {
                                 Get.toNamed(AppLinks.SETTING);
                               }),
-                          if (_manager.User != null)
-                            AppSettingComp(
-                                title: 'Service Client',
-                                icon: Assets.phone_mobile,
-                                color: ColorsApp.orange,
-                                onTap: () {
-                                  // return showCupertinoDialog(
-                                  //   context: context,
-                                  //   builder: (context) => CupertinoAlertDialog(
-                                  //     title: Text('title'),
-                                  //     content: Text('content'),
-                                  //     actions: <Widget>[
-                                  //       CupertinoDialogAction(
-                                  //         child: Text('cancelActionText'),
-                                  //         onPressed: () =>
-                                  //             Navigator.of(context).pop(false),
-                                  //       ),
-                                  //       CupertinoDialogAction(
-                                  //         child: Text('defaultActionText'),
-                                  //         onPressed: () =>
-                                  //             Navigator.of(context).pop(true),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // );
-                                  Get.toNamed(AppLinks.SERVICE_CLIENT);
-                                  // return Get.find<ServiceClientController>()
-                                  //     .onOpen();
-                                }),
+                          // if (_manager.User != null)
+                          //   AppSettingComp(
+                          //       title: 'Service Client',
+                          //       icon: Assets.phone_mobile,
+                          //       color: ColorsApp.orange,
+                          //       onTap: () {
+
+                          //         Get.toNamed(AppLinks.SERVICE_CLIENT);
+
+                          //       }),
                           // _manager.User != null
                           //     ? AppSettingComp(
                           //         title: 'Utilisateur',

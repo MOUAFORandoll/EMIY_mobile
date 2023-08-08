@@ -86,14 +86,14 @@ class BoutiqueView extends StatelessWidget {
                       padding: EdgeInsets.all(kMarginX / 3),
                       height: 40,
                       width: 40,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blue, width: 2),
-                          borderRadius: BorderRadius.circular(30)),
+                      // decoration: BoxDecoration(
+                      // border: Border.all(color: Colors.blue, width: 2),
+                      // borderRadius: BorderRadius.circular(30)),
                       child: SvgPicture.asset(
-                        Assets.play,
+                        Assets.story_boutique,
                         width: 90,
                         height: 90,
-                        color: ColorsApp.skyBlue,
+                        // color: ColorsApp.skyBlue,
                       ),
                     ),
                     onTap: () {

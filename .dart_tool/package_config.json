@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "animated_text_kit",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/animated_text_kit-4.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "antdesign_icons",
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/antdesign_icons-0.0.3",
       "packageUri": "lib/",
@@ -998,7 +1004,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-08-06T08:53:57.816424Z",
+  "generated": "2023-08-08T14:38:49.198042Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }

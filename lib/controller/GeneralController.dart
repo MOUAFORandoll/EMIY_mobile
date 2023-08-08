@@ -361,7 +361,8 @@ class GeneralController extends GetxController {
       selectedColor: Color(0xff0c18fb),
       strokeColor: Color(0x300c18fb),
       unSelectedColor: Colors.grey[600],
-      backgroundColor: ColorsApp.greySearch,
+      backgroundColor:
+          _currentIndex == 2 ? ColorsApp.black : ColorsApp.greySearch,
       // borderRadius: Radius.circular(15.0),
       // isFloating: true,
       // blurEffect: true,
@@ -653,7 +654,8 @@ class GeneralController extends GetxController {
       case 1:
         //   return ListBoutiqueView();
         // case 2:
-        return ListNegociationView();  case 2:
+        return ListNegociationView();
+      case 2:
         //   return ListBoutiqueView();
         // case 2:
         return ServiceClientView();
