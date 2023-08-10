@@ -16,13 +16,24 @@ class ProductComponentAll extends StatelessWidget {
   var height, index, type;
 
   ProductComponentAll(
-      {required this.produit, required this.index, this.height, this.type = 0});
+      {required this.produit,
+      required this.index,
+      this.height,
+      this.type = 'home',
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-          height: kHeight / 4,
+          height: kHeight / 2.7,
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            color: ColorsApp.greyTi,
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +72,7 @@ class ProductComponentAll extends StatelessWidget {
                         )));
                   },
                 ),
-                produit.negociable
+                (produit.negociable)
                     ? Positioned(
                         top: 2,
                         right: 2,
@@ -82,14 +93,14 @@ class ProductComponentAll extends StatelessWidget {
                               produit.islike ? ColorsApp.red : ColorsApp.white),
                       onTap: () {
                         Get.find<GeneralController>()
-                            .likeProduit(produit.codeProduit);
+                            .likeProduit(produit.codeProduit, 0);
                       }),
                 )
               ]),
               Container(
                   width: kWidth / 2,
                   child: Text(produit.titre,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.fade,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           color: ColorsApp.marron,

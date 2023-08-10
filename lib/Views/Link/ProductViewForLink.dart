@@ -259,7 +259,7 @@ class ProductViewForLink extends StatelessWidget {
                                       //                             .brightness ==
                                       //                         Brightness.dark
                                       //                     ? Colors.white
-                                      //                     : Colors.black)
+                                      //                     :  ColorsApp.black)
                                       //                 .withOpacity(
                                       //                     manageLink.current ==
                                       //                             entry.key

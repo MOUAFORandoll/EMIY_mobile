@@ -120,11 +120,11 @@
 //       return Scaffold(
 //           appBar: AppBar(
 //             leading: InkWell(
-//                 child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
+//                 child: Icon(Icons.arrow_back_ios_new, color:  ColorsApp.black),
 //                 onTap: () => Get.back()),
 //             title: Text(
 //               'Effectuer votre achat',
-//               style: TextStyle(color: Colors.black),
+//               style: TextStyle(color:  ColorsApp.black),
 //             ),
 //             foregroundColor: Colors.red,
 //             backgroundColor: Colors.transparent,

@@ -10,7 +10,7 @@ class TextBackSpace extends StatelessWidget {
   bool bolder;
   Color color;
   TextBackSpace(
-      {this.text = '', this.color = Colors.black, this.bolder = false});
+      {this.text = '', this.color = ColorsApp.black, this.bolder = false});
   @override
   Widget build(BuildContext context) {
     return Container(

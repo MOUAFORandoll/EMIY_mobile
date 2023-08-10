@@ -117,16 +117,16 @@ class ProductComponent extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
-                          decorationColor: Colors.black,
+                          decorationColor: ColorsApp.black,
                           decorationThickness: 2.85,
-                          color: Colors.black,
+                          color: ColorsApp.black,
                           fontSize: 12,
                           fontWeight: FontWeight.bold)),
                 ),
               ]) /* ) */),
       onTap: () {
         Get.toNamed(AppLinks.PRODUCT +
-            '?index=${index}&type=0&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
+            '?index=${index}&type=home&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
       },
     );
   }

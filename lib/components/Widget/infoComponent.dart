@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:EMIY/styles/colorApp.dart';
 
 class InfoComponent extends StatelessWidget {
   InfoComponent({this.title, this.value, this.divider, this.onTap});
@@ -26,8 +27,7 @@ class InfoComponent extends StatelessWidget {
             Text(value,
                 style: TextStyle(
                     fontSize: 15,
-                    
-                    color: Colors.black,
+                    color: ColorsApp.black,
                     fontWeight: FontWeight.bold))
           ],
         ),

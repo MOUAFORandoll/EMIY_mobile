@@ -13,7 +13,7 @@ class GeneralRepo extends GetxService {
   Future test(indexC) async {
     Response a = await apiClient.getData(
       ApiRoutes.TEST + '/' + indexC.toString(),
-    ); 
+    );
 
     return a;
   }
@@ -28,14 +28,12 @@ class GeneralRepo extends GetxService {
 
   Future addLikeProduit(data) async {
     Response a = await apiClient.postData(ApiRoutes.LIKE_PRODUIT, data);
- 
 
     return a;
   }
 
   Future addNotationBoutique(data) async {
     Response a = await apiClient.postData(ApiRoutes.NOTAITON_BOUTIQUE, data);
- 
 
     return a;
   }
@@ -44,6 +42,14 @@ class GeneralRepo extends GetxService {
     Response a = await apiClient.getData(
       ApiRoutes.LIST_NOTIFICATIONS +
           "?page=${index.toString()}&keySecret=${keySecret.toString()}",
+    );
+
+    return a;
+  }
+
+  Future getHome(keySecret) async {
+    Response a = await apiClient.getData(
+      ApiRoutes.HOME + "?keySecret=${keySecret.toString()}",
     );
 
     return a;

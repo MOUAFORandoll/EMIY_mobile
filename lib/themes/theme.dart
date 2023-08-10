@@ -1,5 +1,5 @@
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
- 
 
 var lightThemeData = new ThemeData(
     primaryColor: Colors.white,
@@ -7,6 +7,6 @@ var lightThemeData = new ThemeData(
     accentColor: Colors.blue);
 
 var darkThemeData = ThemeData(
-    primaryColor: Colors.black,
+    primaryColor: ColorsApp.black,
     brightness: Brightness.dark,
     accentColor: Colors.blue);

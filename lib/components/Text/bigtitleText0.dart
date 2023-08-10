@@ -17,7 +17,7 @@ class BigtitleText0 extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
           fontSize: 20,
-          color: Colors.black,
+          color: ColorsApp.black,
           fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
     ));
   }

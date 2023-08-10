@@ -59,12 +59,12 @@ Future<void> main() async {
 final light = ThemeData(
     fontFamily: 'Josefin_Sans',
     textTheme: const TextTheme(
-        bodyText1: TextStyle(color: Colors.black),
-        bodyText2: TextStyle(color: Colors.black)),
+        bodyText1: TextStyle(color: ColorsApp.black),
+        bodyText2: TextStyle(color: ColorsApp.black)),
     backgroundColor: ColorsApp.bg,
-    appBarTheme: const AppBarTheme(foregroundColor: Colors.black87));
+    appBarTheme: const AppBarTheme(foregroundColor: ColorsApp.black));
 final dark = ThemeData.dark().copyWith(
-  backgroundColor: Colors.black,
+  backgroundColor: ColorsApp.black,
 );
 
 final _darkTheme = ThemeData(
@@ -73,8 +73,8 @@ final _darkTheme = ThemeData(
   brightness: Brightness.dark,
   backgroundColor: const Color(0xFF212121),
   accentColor: Colors.white,
-  accentIconTheme: IconThemeData(color: Colors.black),
-  dividerColor: Colors.black12,
+  accentIconTheme: IconThemeData(color: ColorsApp.black),
+  dividerColor: ColorsApp.greyTh,
   textTheme: TextTheme(
     bodyText2:
         TextStyle(fontFamily: 'Montserrat', color: ColorsApp.primaryText),
@@ -85,6 +85,8 @@ final _lightTheme = ThemeData(
   primaryColor: Colors.white,
   brightness: Brightness.light,
   // Couleur du texte principal
+  backgroundColor: ColorsApp.bgColor,
+
   primaryTextTheme: TextTheme(
     headline6: TextStyle(
       color: ColorsApp.primaryText,
@@ -163,8 +165,11 @@ final _lightTheme = ThemeData(
       color: ColorsApp.primaryText,
     ),
   ),
+  appBarTheme: const AppBarTheme(
+      foregroundColor: ColorsApp.bgColor, backgroundColor: ColorsApp.bgColor),
+
   colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
-      .copyWith(background: ColorsApp.white)
+      .copyWith(background: ColorsApp.bgColor)
       .copyWith(
         secondary: ColorsApp.primaryText,
       ),
@@ -184,7 +189,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       translations: Transalations(),
       locale: Get.find<GeneralController>().lan,
-      theme: light,
+      theme: _lightTheme,
       darkTheme: dark,
       themeMode: ThemeMode.light, //ThemeMode.system,
       debugShowCheckedModeBanner: false,

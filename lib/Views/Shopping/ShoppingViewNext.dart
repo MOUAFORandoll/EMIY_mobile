@@ -105,7 +105,7 @@ class ShoppingViewNext extends StatelessWidget {
                                 'Nombre de produits : ${_controller.getItems.length}',
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: Colors.black,
+                                  color: ColorsApp.black,
                                 ),
                               )),
                           Container(
@@ -114,7 +114,7 @@ class ShoppingViewNext extends StatelessWidget {
                                 'Montant du panier :  ${_controller.totalPrix} XAF',
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: Colors.black,
+                                    color: ColorsApp.black,
                                     fontSize: 11),
                               )),
                         ],

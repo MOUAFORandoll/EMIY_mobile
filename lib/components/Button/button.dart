@@ -42,7 +42,7 @@ class Button extends StatelessWidget {
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
               border: borderColor == null
-                  ? Border.all(color: Colors.black38)
+                  ? Border.all(color: ColorsApp.black)
                   : Border.all(color: borderColor),
 
               // color: (enabled)
@@ -65,7 +65,7 @@ class Button extends StatelessWidget {
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: borderColor == null
-                  ? Border.all(color: Colors.black38)
+                  ? Border.all(color: ColorsApp.black)
                   : Border.all(color: borderColor),
               color: (enabled)
                   ? (itemColor == null)

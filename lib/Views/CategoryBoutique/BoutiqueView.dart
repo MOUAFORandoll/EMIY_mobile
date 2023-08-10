@@ -1,6 +1,7 @@
 import 'package:EMIY/Views/CategoryBoutique/ReadShortBoutiqueView.dart';
 import 'package:EMIY/components/Button/AppIconButton.dart';
 import 'package:EMIY/components/Button/ShareButton.dart';
+import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/ShortController.dart';
@@ -146,10 +147,10 @@ class BoutiqueView extends StatelessWidget {
                     },
                   ),
                   Positioned(
-                    top: kMdHeight * .30 / 2.7,
-                    // bottom: kMdHeight * .30 / 2.4,
-                    left: kWidth / 2.2,
-                    right: kWidth / 2.2,
+                    // top: kMdHeight * .30 / 2.7,
+                    bottom: kHeight / 6,
+                    // left: kWidth / 2.2,
+                    right: kWidth / 17 /* kWidth / 2.2 */,
                     child: InkWell(
                         child: Container(
                             // margin: EdgeInsets.only(right: 10),
@@ -274,7 +275,7 @@ class BoutiqueView extends StatelessWidget {
                         ],
                       )
                     ])),
-                padding: EdgeInsets.only(top: 5, bottom: 10)
+                padding: EdgeInsets.only(top: 15, bottom: 10)
                     .add(EdgeInsets.symmetric(horizontal: kMarginX)),
                 width: double.maxFinite,
               ),
@@ -286,7 +287,7 @@ class BoutiqueView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) => GetBuilder<CategoryBoutiqueController>(
                   builder: (_bscontroler) => _bscontroler.isLoadedPB == 0
-                      ? AppLoading()
+                      ? ShimmerProduit()
                       : Container(
                           // height: double.maxFinite,
                           margin: EdgeInsets.symmetric(vertical: kMarginY * .2),

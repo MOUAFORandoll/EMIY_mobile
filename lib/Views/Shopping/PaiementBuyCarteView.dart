@@ -40,13 +40,13 @@ class _PaiementBuyCarteViewState extends State<PaiementBuyCarteView> {
           builder: (_Acontroller) => Scaffold(
               appBar: AppBar(
                 title: Text("Valider Paiement",
-                    style: TextStyle(color: Colors.black)),
+                    style: TextStyle(color: ColorsApp.black)),
                 centerTitle: true,
                 elevation: 0,
                 backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
+                foregroundColor: ColorsApp.black,
                 leading: InkWell(
-                  child: Icon(Icons.close, color: Colors.black),
+                  child: Icon(Icons.close, color: ColorsApp.black),
                   onTap: () {
                     return Navigator.pop(context);
                   },

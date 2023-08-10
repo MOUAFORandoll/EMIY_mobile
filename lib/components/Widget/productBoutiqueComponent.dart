@@ -104,7 +104,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                 child: Text('Nom : ' + produit.titre,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.black,
+                                        color: ColorsApp.black,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 11)),
                               ),
@@ -115,7 +115,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                         ' XAF',
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.black,
+                                        color: ColorsApp.black,
                                         fontSize: 11,
                                         fontWeight: FontWeight.w600)),
                               ),
@@ -124,7 +124,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                     'Quantite : ' + produit.quantite.toString(),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.black,
+                                        color: ColorsApp.black,
                                         fontSize: 11,
                                         fontWeight: FontWeight.w600)),
                               ),
@@ -132,7 +132,7 @@ class ProductBoutiqueComponent extends StatelessWidget {
                                 child: Text('Ajout : ' + produit.date,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.black,
+                                        color: ColorsApp.black,
                                         fontSize: 11,
                                         fontWeight: FontWeight.w600)),
                               ),
@@ -142,9 +142,9 @@ class ProductBoutiqueComponent extends StatelessWidget {
                               //       overflow: TextOverflow.ellipsis,
                               //       style: TextStyle(
                               //           decoration: TextDecoration.lineThrough,
-                              //           decorationColor: Colors.black,
+                              //           decorationColor:  ColorsApp.black,
                               //           decorationThickness: 2.85,
-                              //           color: Colors.black,
+                              //           color:  ColorsApp.black,
                               //           fontSize: 12,
                               //           fontWeight: FontWeight.w600)),
                               // )

@@ -28,7 +28,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
             },
             icon: Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color:  ColorsApp.black,
             ),
           ),
           centerTitle: true,
@@ -36,7 +36,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
             widget.title,
             style: TextStyle(
               
-              color: Colors.black,
+              color:  ColorsApp.black,
             ),
           ),
           elevation: 0,

@@ -16,7 +16,7 @@ class titleText extends StatelessWidget {
         text,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-            fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+            fontSize: 15, color: ColorsApp.black, fontWeight: FontWeight.bold),
       ),
     );
   }

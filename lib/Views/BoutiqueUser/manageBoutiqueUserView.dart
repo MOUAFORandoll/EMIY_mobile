@@ -109,7 +109,7 @@ class ManageBoutiqueUserView extends StatelessWidget {
                       // overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontSize: 18,
-                          color: Colors.black,
+                          color: ColorsApp.black,
                           fontWeight: FontWeight.normal),
                     )),
                 // InfoComponent(

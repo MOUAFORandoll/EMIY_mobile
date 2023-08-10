@@ -15,7 +15,7 @@ class smallText extends StatelessWidget {
   // bool marginBool;
   smallText(
       {this.text = '',
-      this.color = Colors.black,
+      this.color = ColorsApp.black,
       this.bolder = false,
       this.al = false,
       this.size = 12,

@@ -204,7 +204,8 @@ class CommentComponent extends StatelessWidget {
                     InkWell(
                       child: Icon(
                         Icons.favorite_outlined,
-                        color: comment.is_like_com ? Colors.red : Colors.black,
+                        color:
+                            comment.is_like_com ? Colors.red : ColorsApp.black,
                         size: 20,
                       ),
                       onTap: () => Get.find<ShortController>()

@@ -170,7 +170,7 @@ class _FirstScreenState extends State<FirstScreen> {
         selectedColor: Color(0xff0c18fb),
         strokeColor: Color(0x300c18fb),
         unSelectedColor: Colors.grey[600],
-        backgroundColor: Colors.black,
+        backgroundColor: ColorsApp.black,
         borderRadius: Radius.circular(20.0),
         isFloating: true,
         // blurEffect: true,

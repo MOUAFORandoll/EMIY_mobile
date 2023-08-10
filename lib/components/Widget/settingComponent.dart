@@ -35,7 +35,7 @@ class SettingComponent extends StatelessWidget {
                         top: Get.height * .005, left: Get.width * .008),
                     child: Text(title,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                        style: TextStyle(color: ColorsApp.black, fontSize: 15)),
                   ),
                   action
                 ])),

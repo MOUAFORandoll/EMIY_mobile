@@ -57,7 +57,7 @@ class ProduitBoutiqueUserView extends StatelessWidget {
         //               onChange: _controller.searchProduitB)
         //           : Text(
         //               'Vos produits',
-        //               style: TextStyle(color: Colors.black),
+        //               style: TextStyle(color:  ColorsApp.black),
         //             ),
         //     ),
         //     InkWell(

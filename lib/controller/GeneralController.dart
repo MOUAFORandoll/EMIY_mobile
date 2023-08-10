@@ -7,7 +7,10 @@ import 'package:EMIY/Views/Space/Notifications/NotificationView.dart';
 import 'package:EMIY/Views/Space/ServiceClient/ServiceClientView.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
+import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/controller/categoryBoutiqueController.dart';
 import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/CartModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/LivreurModel.dart';
@@ -64,17 +67,6 @@ class GeneralController extends GetxController {
   ScrollController get scrollcontroller => _scrollcontroller;
   bool _dark = false;
   bool get dark => _dark;
-  // getTheme(context) {
-  //   _dark = vf.getTheme(context);
-  //   update();
-  // }
-
-  // var vf = new ViewFunctions();
-  // changeTheme(context) {
-  //   vf.changeTheme(context);
-  //   getTheme(context);
-  // }
-
   List<ModePaiementModel> _lmodePaiement = [];
   List<ModePaiementModel> get lmodePaiement => _lmodePaiement;
   int _isLoadedMP = 0;
@@ -154,14 +146,6 @@ class GeneralController extends GetxController {
   Locale _lan = Locale('fr', 'FR');
   Locale get lan => _lan;
 
-  // getLan() async {
-  //   _lan = await dababase.getLan();
-  //   //print('_lan********');
-  //   //print(_lan);
-
-  //   update();
-  // }
-
   final List locale = [
     {'name': 'En', 'locale': const Locale('en', 'US')},
     {'name': 'Fr', 'locale': const Locale('fr', 'FR')},
@@ -210,7 +194,7 @@ class GeneralController extends GetxController {
     update();
   }
 
-  likeProduit(/* note, */ codeProduit) async {
+  likeProduit(/* note, */ codeProduit , source) async {
     var getU = await dababase.getKey();
     if (getU == null) {
       fn.snackBar('Note', 'Veuillez vous connecter', true);
@@ -222,7 +206,14 @@ class GeneralController extends GetxController {
       "keySecret": getU,
     };
 
-    Get.find<ProductController>().likeProductInPopular(codeProduit);
+    //liste produit populaire
+    if (source == 0) {
+      Get.find<ProductController>().likeProductInPopular(codeProduit);
+    }
+    //liste produit supplementaire
+    if (source == 1) {
+      Get.find<ProductController>().likeProductInSupp(codeProduit);
+    }
     //print(data);
 
     // fn.loading('Note', 'Notation du produit en cours');
@@ -295,28 +286,6 @@ class GeneralController extends GetxController {
       ..addListener(_scrollListenerNotification);
     update();
   }
-
-  // int tabCurrentIndex = 0;
-
-  // setTabIndex(index) {
-  //   tabCurrentIndex = index;
-  //   update();
-  // }
-
-  // Widget buildContentSpace() {
-  //   switch (tabCurrentIndex) {
-  //     case 0:
-  //       return ListNegociationView();
-  //     // case 1:
-  //     //   return SearchView();
-  //     case 1:
-  //       //   return ListBoutiqueView();
-  //       // case 2:
-  //       return CategoryView();
-  //     default:
-  //       return ListNegociationView();
-  //   }
-  // }
 
   int _currentIndex = 0;
   Widget buildContent() {
@@ -663,5 +632,58 @@ class GeneralController extends GetxController {
       default:
         return NotificationView();
     }
+  }
+
+  int _isLoadedHome = 0;
+  int get isLoadedHome => _isLoadedHome;
+  ProductController _prodController = Get.find();
+  CategoryBoutiqueController _categoryBoutiqueController = Get.find();
+  Future<void> getHome() async {
+    print('----${_loaddata}-------aaaaaaaaa---');
+    var key = await dababase.getKey();
+
+    print('-----------get---');
+    _isLoadedHome = 0;
+    update();
+    try {
+      Response response = await generalRepo.getHome(key);
+
+      //print(response.body);
+      // _produitList = [];
+      // _produitList.clear();
+      // update();
+
+      if (response.body != null) {
+        if (response.body['Produit'] != null &&
+            response.body['Categorie'] != null &&
+            response.body['Boutique'] != null) {
+          print('-------------------venu');
+          print(response.body);
+          _isLoadedHome = 1;
+          update();
+          var produits = ((response.body['Produit'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+          _prodController.getHomeProduct(produits);
+          var categorie = ((response.body['Categorie'] as List)
+              .map((e) => CategoryModel.fromJson(e))
+              .toList());
+          _categoryBoutiqueController.getHomeCategpry(categorie);
+
+          var boutiques = ((response.body['Boutique'] as List)
+              .map((e) => BoutiqueModel.fromJson(e))
+              .toList());
+          _categoryBoutiqueController.getHomeBoutique(boutiques);
+        } else {
+          _isLoadedHome = 2;
+          update();
+        }
+      }
+    } catch (e) {
+      _loaddata = false;
+      update();
+      //print(e);
+    }
+    // }
   }
 }

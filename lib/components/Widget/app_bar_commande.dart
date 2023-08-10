@@ -39,7 +39,7 @@ class AppBarCommande extends StatelessWidget {
                         style: TextStyle(
                             overflow: TextOverflow.ellipsis,
                             fontWeight: FontWeight.w600,
-                            color: Colors.black,
+                            color: ColorsApp.black,
                             fontSize: 11),
                       )),
                   Container(

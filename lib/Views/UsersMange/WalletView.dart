@@ -239,9 +239,9 @@ class WalletView extends StatelessWidget {
                                             //       overflow: TextOverflow.ellipsis,
                                             //       style: TextStyle(
                                             //           decoration: TextDecoration.lineThrough,
-                                            //           decorationColor: Colors.black,
+                                            //           decorationColor:  ColorsApp.black,
                                             //           decorationThickness: 2.85,
-                                            //           color: Colors.black,
+                                            //           color:  ColorsApp.black,
                                             //           fontSize: 12,
                                             //           fontWeight: FontWeight.bold)),
                                             // ),

@@ -56,6 +56,12 @@ class CategoryBoutiqueController extends GetxController {
     }
   }
 
+  getHomeCategpry(List<CategoryModel> data) {
+    _categoryList = data;
+    _isLoadedCat = 1;
+    update();
+  }
+
   var fn = new ViewFunctions();
   int _isLoaded = 0;
   int get isLoaded => _isLoaded;
@@ -79,9 +85,11 @@ class CategoryBoutiqueController extends GetxController {
   List<BoutiqueModel> get ListBoutique => _ListBoutique;
   getCategoryBoutique(id) async {
     var key = await dababase.getKey();
-    _ListBoutique.clear();
-    _isLoadedP = 0;
+
     try {
+      _ListBoutique.clear();
+      _isLoadedP = 0;
+      update();
       Response response =
           await categoryBoutiqueRepo.getListBoutiqueForCategory(id, key);
 
@@ -151,6 +159,12 @@ class CategoryBoutiqueController extends GetxController {
       //print(e);
       // }
     }
+  }
+
+  getHomeBoutique(List<BoutiqueModel> data) {
+    _ListBoutiqueF = data;
+    _gA = false;
+    update();
   }
 
   List<ProduitModel> _produitBoutiqueList = [];

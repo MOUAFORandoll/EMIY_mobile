@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:EMIY/styles/colorApp.dart';
 
 final kTitleStyle = TextStyle(
   color: Colors.white,
@@ -9,7 +10,7 @@ final kTitleStyle = TextStyle(
 );
 
 final kSubtitleStyle = TextStyle(
-  color: Colors.black,
+  color: ColorsApp.black,
   fontSize: 18.0,
   height: 1.2,
 );

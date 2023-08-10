@@ -38,7 +38,7 @@ class IconButtonF0 extends StatelessWidget {
   var icon, color, onTap, inconSize, backgroundColor;
   IconButtonF0(
       {this.icon,
-      this.color = Colors.black,
+      this.color = ColorsApp.black,
       this.backgroundColor = Colors.white,
       this.inconSize = 20.0,
       this.onTap});
@@ -51,6 +51,34 @@ class IconButtonF0 extends StatelessWidget {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5), color: backgroundColor),
+        child: Icon(icon, color: color, size: inconSize),
+      ),
+      onTap: onTap,
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class IconButtonF1 extends StatelessWidget {
+  var icon, color, onTap, padding, inconSize, backgroundColor;
+  IconButtonF1(
+      {this.icon,
+      this.color = ColorsApp.black,
+      this.backgroundColor = Colors.white,
+      this.inconSize = 20.0,
+      this.padding = 5.0,
+      this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: kMarginX),
+        padding: EdgeInsets.all(padding),
+        decoration: BoxDecoration(
+            border: Border.all(color: ColorsApp.orange),
+            borderRadius: BorderRadius.circular(5),
+            color: backgroundColor),
         child: Icon(icon, color: color, size: inconSize),
       ),
       onTap: onTap,

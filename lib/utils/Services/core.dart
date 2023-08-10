@@ -71,9 +71,10 @@ Future<void> initApp() async {
 
 Future<void> secondInit() async {
   Get.find<CommandeController>().getListCommandes();
-  Get.find<ProductController>().getPopularProduit();
-  Get.find<CategoryBoutiqueController>().getCategory();
-  Get.find<CategoryBoutiqueController>().getListBoutiques();
+  // Get.find<ProductController>().getPopularProduit();
+  // Get.find<CategoryBoutiqueController>().getCategory();
+  // Get.find<CategoryBoutiqueController>().getListBoutiques();
+  Get.find<GeneralController>().getHome();
   Get.find<ManagerController>().newLocalisation();
   Get.find<ManagerController>().getListFieul();
   Get.find<BuyShopController>().getPointLivraisom();
@@ -104,16 +105,17 @@ Future<void> initAllApp() async {
   await Get.find<GeneralController>().NotificationSocket();
 
   Get.find<GeneralController>().getListNotifications();
+  Get.find<GeneralController>().getHome();
 
   Get.find<ManagerController>().newLocalisation();
   Get.find<CommandeController>().getListCommandes();
-  Get.find<CategoryBoutiqueController>().getListBoutiques();
+  // Get.find<CategoryBoutiqueController>().getListBoutiques();
 
-  Get.find<ProductController>().getPopularProduit();
+  // Get.find<ProductController>().getPopularProduit();
   Get.find<BuyShopController>().getPointLivraisom();
   Get.find<BoutiqueController>().getBoutique();
   Get.find<BoutiqueController>().getListAbonnementForBoutique();
-  Get.find<CategoryBoutiqueController>().getCategory();
+  // Get.find<CategoryBoutiqueController>().getCategory();
   Get.find<ShortController>().getListShort();
   Get.find<NegociationController>().getListNegociation();
   Get.find<ProductController>().getListProduitPreference();
@@ -131,8 +133,6 @@ Future<void> initServices() async {
 
   Get.put(ApiClient(), permanent: true);
 
-  Get.put(GeneralRepo(apiClient: Get.find()));
-  Get.put(GeneralController(generalRepo: Get.find()), permanent: true);
   Get.put(LivreurRepo(apiClient: Get.find()), permanent: true);
   // Get.put(  StorageService(), permanent: true);
   Get.put(GetStorage(), permanent: true);
@@ -152,6 +152,9 @@ Future<void> initServices() async {
   Get.put(CategoryBoutiqueRepo(apiClient: Get.find()), permanent: true);
   Get.put(CategoryBoutiqueController(categoryBoutiqueRepo: Get.find()),
       permanent: true);
+      
+  Get.put(GeneralRepo(apiClient: Get.find()));
+  Get.put(GeneralController(generalRepo: Get.find()), permanent: true);
   Get.put(TransactionRepo(apiClient: Get.find()), permanent: true);
 
   Get.put(TransactionController(transactionRepo: Get.find()), permanent: true);

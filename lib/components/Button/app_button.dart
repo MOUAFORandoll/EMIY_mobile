@@ -40,7 +40,7 @@ class AppButton extends StatelessWidget {
                 offset: Offset(0, 1),
               ),
             ],
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
             color: disabled ? bgColor.withOpacity(.5) : bgColor,
             border: border),
         alignment: Alignment.center,

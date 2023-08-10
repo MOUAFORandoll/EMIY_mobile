@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:EMIY/styles/colorApp.dart';
 
 class AppBackButton extends StatelessWidget {
   /// Creates an [IconButton] with the appropriate "back" icon for the current
@@ -26,7 +27,7 @@ class AppBackButton extends StatelessWidget {
     // assert(debugCheckHasMaterialLocalizations(context));
     return IconButton(
         icon: Icon(Icons.keyboard_arrow_left_outlined),
-        color: Colors.black,
+        color: ColorsApp.black,
         // tooltip: MaterialLocalizations.of(context).backButtonTooltip,
         onPressed: () {
           backEvent;

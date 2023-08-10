@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:EMIY/styles/colorApp.dart';
 
 class AppTextTitle extends StatelessWidget {
   AppTextTitle(
       {required this.text,
       required this.bolder,
-      this.color = Colors.black,
+      this.color = ColorsApp.black,
       this.percent = 1.0,
       this.big = false});
   final bool bolder;

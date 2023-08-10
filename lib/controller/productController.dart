@@ -16,6 +16,13 @@ class ProductController extends GetxController {
   final ProductRepo productRepo;
   ProductController({required this.productRepo});
 
+  int _choix = 0;
+  int get choix => _choix;
+  setChoix(val) {
+    _choix = val;
+    update();
+  }
+
   final dababase = Get.find<DataBaseController>();
 
   bool _conf = false;
@@ -27,6 +34,8 @@ class ProductController extends GetxController {
 
   unSetConf() {
     _conf = false;
+    _choix = 0;
+    indexSupp = 1;
     update();
   }
 
@@ -181,7 +190,7 @@ class ProductController extends GetxController {
   bool _loaddata = false;
   bool get loaddata => _loaddata;
 
-  int indexC = 1;
+  int indexC = 2;
   updateProductInPopular(ProduitModel newProduct) {
     int index =
         _produitList.indexWhere((product) => product.id == newProduct.id);
@@ -205,49 +214,107 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<void> getPopularProduit() async {
-    print('----${_loaddata}-------aaaaaaaaa---');
-    var key = await dababase.getKey();
-    // if (_loaddata == false) {
-    print('-----------get---');
-    _isLoadedP = 0;
-    _loaddata = true;
-    update();
-    try {
-      Response response = await productRepo.getListProductPopular(indexC, key);
+  likeProductInSupp(codeProduit) {
+    int index = _produitSupplementaire
+        .indexWhere((product) => product.codeProduit == codeProduit);
+    if (index >= 0) {
+      _produitSupplementaire[index].islike =
+          !_produitSupplementaire[index].islike;
+      if (_produitSupplementaire[index].islike) {
+        _produitSupplementaire[index].like =
+            _produitSupplementaire[index].like - 1;
+      } else {
+        _produitSupplementaire[index].like =
+            _produitSupplementaire[index].like + 1;
+      }
+      update();
+    }
+  }
 
-      //print(response.body);
-      // _produitList = [];
-      // _produitList.clear();
-      // update();
+  Future<void> getPopularProduit() async {
+    var key = await dababase.getKey();
+    if (_loaddata == false) {
+      print(_produitList.length);
+      _isLoadedP = 0;
+      _loaddata = true;
+      update();
+      try {
+        Response response =
+            await productRepo.getListProductPopular(indexC, key);
+
+        //print(response.body);
+        // _produitList = [];
+        // _produitList.clear();
+        // update();
+
+        if (response.body != null) {
+          if (response.body['data'] != null) {
+            if (response.body['data'].length != 0) {
+              _produitList.addAll((response.body['data'] as List)
+                  .map((e) => ProduitModel.fromJson(e))
+                  .toList());
+              _produitListSave.addAll((response.body['data'] as List)
+                  .map((e) => ProduitModel.fromJson(e))
+                  .toList());
+              _isLoadedP = 1;
+              indexC++;
+
+              _loaddata = false;
+              update();
+              // print('----${_loaddata}-------aaaaaaaaa---');
+            } else {
+              _isLoadedP = 1;
+              update();
+            }
+          }
+        }
+      } catch (e) {
+        _loaddata = false;
+        update();
+        //print(e);
+      }
+    }
+  }
+
+  getHomeProduct(List<ProduitModel> data) {
+    _produitList = data;
+    _produitListSave = data;
+    update();
+  }
+
+  int indexSupp = 1;
+
+  List<ProduitModel> _produitSupplementaire = [];
+  List<ProduitModel> _produitSupplementaireSave = [];
+  List<ProduitModel> get produitSupplementaire => _produitSupplementaire;
+  int _isLoadedSupp = 0;
+  int get isLoadedSupp => _isLoadedSupp;
+  getListProduitSupplementaire(codeProduit) async {
+    var key = await dababase.getKey();
+    try {
+      _produitSupplementaire.clear();
+      _isLoadedSupp = 0;
+      update();
+      Response response = await productRepo.getListProduitSupplementaire(
+          codeProduit, indexP, key);
 
       if (response.body != null) {
         if (response.body['data'] != null) {
           if (response.body['data'].length != 0) {
-            _produitList.addAll((response.body['data'] as List)
+            print(response.body['data']);
+            _produitSupplementaire.addAll((response.body['data'] as List)
                 .map((e) => ProduitModel.fromJson(e))
                 .toList());
-            _produitListSave.addAll((response.body['data'] as List)
-                .map((e) => ProduitModel.fromJson(e))
-                .toList());
-            _isLoadedP = 1;
-            indexC++;
-
-            _loaddata = false;
-            update();
-            // print('----${_loaddata}-------aaaaaaaaa---');
-          } else {
-            _isLoadedP = 1;
-            update();
+            indexSupp++;
           }
         }
+
+        _isLoadedSupp = 1;
+        update();
       }
     } catch (e) {
-      _loaddata = false;
-      update();
       //print(e);
     }
-    // }
   }
 
   // List<ProduitModel> _produitListAll = [];

@@ -30,6 +30,18 @@ class ProductRepo extends GetxService {
     return response;
   }
 
+  Future<Response> getListProduitSupplementaire(
+      codeProduit, indexC, keySecret) async {
+    //print('get----------------');
+    // try {
+    Response response = await apiClient.getData(
+      ApiRoutes.SUPPLEMENTAIRE_PRODUIT +
+          "?codeProduit=$codeProduit&page=${indexC.toString()}&keySecret=${keySecret.toString()}",
+    );
+
+    return response;
+  }
+
   Future<Response> getListProductAll() async {
     //print('get----------------');
     // try {
