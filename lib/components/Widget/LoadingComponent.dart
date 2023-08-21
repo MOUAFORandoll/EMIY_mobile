@@ -26,6 +26,6 @@ class LoadingComponent {
       margin: EdgeInsets.only(top: Get.height * .5),
       alignment: Alignment.center,
       child: SpinKitCircle(
-        color: ColorsApp.bleuLight,
+        color: ColorsApp.secondBlue,
       ));
 }

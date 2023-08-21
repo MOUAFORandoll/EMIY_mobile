@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
@@ -46,12 +47,7 @@ class BoutiqueComponent extends StatelessWidget {
                   );
                 },
                 placeholder: (context, url) {
-                  return Container(
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: ColorsApp.skyBlue,
-                    )),
-                  );
+                  return ShimmerBox();
                 },
                 errorWidget: (context, url, error) {
                   return Container(

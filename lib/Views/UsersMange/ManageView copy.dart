@@ -200,7 +200,7 @@
 //                                     : Container(
 //                                         child: SpinKitCircle(
 //                                         size: 20,
-//                                         color: ColorsApp.bleuLight,
+//                                         color: ColorsApp.secondBlue,
 //                                       )),
 //                             BtnManageView(
 //                                 title: "Historique achats",

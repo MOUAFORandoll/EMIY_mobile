@@ -9,15 +9,15 @@
 // import 'package:EMIY/components/Widget/app_empty.dart';
 // import 'package:EMIY/components/Widget/app_loading.dart';
 // import 'package:EMIY/components/Widget/categoryComponent.dart';
-// import 'package:EMIY/components/Widget/productComponent.dart';
+// import 'package:EMIY/components/Widget/produitComponent.dart';
 // import 'package:EMIY/components/Text/smallText.dart';
 // import 'package:EMIY/components/Text/titleText.dart';
-// import 'package:EMIY/components/Widget/productComponentAll.dart';
-// import 'package:EMIY/components/Widget/productForCatComponent.dart';
+// import 'package:EMIY/components/Widget/produitComponentAll.dart';
+// import 'package:EMIY/components/Widget/produitForCatComponent.dart';
 // import 'package:EMIY/controller/boutiqueController.dart';
 // import 'package:EMIY/controller/categoryController.dart';
 // import 'package:EMIY/controller/categoryBoutiqueController.dart';
-// import 'package:EMIY/controller/productController.dart';
+// import 'package:EMIY/controller/produitController.dart';
 // import 'package:EMIY/styles/colorApp.dart';
 // import 'package:EMIY/styles/textStyle.dart';
 // import 'package:EMIY/utils/functions/viewFunctions.dart';
@@ -32,7 +32,7 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     //print(Get.parameters);
-//     Get.find<ProductController>().getProduitAll();
+//     Get.find<ProduitController>().getProduitAll();
 
 //     return Scaffold(
 //         appBar: AppBar(
@@ -49,11 +49,11 @@
 //           ),
 //           title: BigtitleText0(text: 'Liste des produits', bolder: true),
 //         ),
-//         body: GetBuilder<ProductController>(builder: (prods) {
+//         body: GetBuilder<ProduitController>(builder: (prods) {
 //           return RefreshIndicator(
 //             color: ColorsApp.skyBlue,
 //             onRefresh: () async {
-//               await Get.find<ProductController>().getProduitAll();
+//               await Get.find<ProduitController>().getProduitAll();
 //               ;
 //             },
 //             child: prods.isLoadedPAll == 0
@@ -63,7 +63,7 @@
 //                         physics: ScrollPhysics(),
 //                         crossAxisCount: 4,
 //                         itemCount: prods.produitListAll.length,
-//                         itemBuilder: (_ctx, index) => ProductComponentAll(
+//                         itemBuilder: (_ctx, index) => ProduitComponentAll(
 //                             type: 1,
 //                             produit: prods.produitListAll[index],
 //                             index: index),
@@ -85,7 +85,7 @@
 //                         //       itemCount:
 //                         //           prods.produitList.length,
 //                         //       itemBuilder: (_ctx, index) =>
-//                         //           ProductComponentAll(
+//                         //           ProduitComponentAll(
 //                         //               produit:
 //                         //                   prods.produitList[
 //                         //                       index],

@@ -93,7 +93,7 @@ License
 Please read the full license text (LICENSE.txt) to understand the permissions,
 restrictions and requirements for usage, redistribution, and modification.
 
-You can use them freely in your products & projects - print or digital,
+You can use them freely in your produits & projects - print or digital,
 commercial or otherwise.
 
 This isn't legal advice, please consider consulting a lawyer and see the full

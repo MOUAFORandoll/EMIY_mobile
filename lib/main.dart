@@ -55,17 +55,7 @@ Future<void> main() async {
   runApp(MyApp());
 // await init();
 }
-
-final light = ThemeData(
-    fontFamily: 'Josefin_Sans',
-    textTheme: const TextTheme(
-        bodyText1: TextStyle(color: ColorsApp.black),
-        bodyText2: TextStyle(color: ColorsApp.black)),
-    backgroundColor: ColorsApp.bg,
-    appBarTheme: const AppBarTheme(foregroundColor: ColorsApp.black));
-final dark = ThemeData.dark().copyWith(
-  backgroundColor: ColorsApp.black,
-);
+ 
 
 final _darkTheme = ThemeData(
   primarySwatch: Colors.grey,
@@ -190,7 +180,7 @@ class MyApp extends StatelessWidget {
       translations: Transalations(),
       locale: Get.find<GeneralController>().lan,
       theme: _lightTheme,
-      darkTheme: dark,
+      darkTheme: _darkTheme,
       themeMode: ThemeMode.light, //ThemeMode.system,
       debugShowCheckedModeBanner: false,
       // initialBinding: MyBinding(),

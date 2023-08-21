@@ -136,7 +136,7 @@ class ManageView extends StatelessWidget {
                                                 //   child: Text('Ajouter'),
                                                 //   onPressed: () async {
                                                 //     // await _controller.addShort();
-                                                //     // _controller.chageState(!_controller.addProduct);
+                                                //     // _controller.chageState(!_controller.addProduit);
                                                 //   },
                                                 // )
                                               ]),
@@ -164,7 +164,7 @@ class ManageView extends StatelessWidget {
                           ? AppSettingComp(
                               title: 'Porte Feuille',
                               icon: Assets.bagmoney,
-                              color: ColorsApp.blue,
+                              color: ColorsApp.secondBlue,
                               onTap: () {
                                 Get.find<TransactionController>()
                                     .getTransactions();
@@ -206,7 +206,7 @@ class ManageView extends StatelessWidget {
                                                 //   child: Text('Ajouter'),
                                                 //   onPressed: () async {
                                                 //     // await _controller.addShort();
-                                                //     // _controller.chageState(!_controller.addProduct);
+                                                //     // _controller.chageState(!_controller.addProduit);
                                                 //   },
                                                 // )
                                               ]),

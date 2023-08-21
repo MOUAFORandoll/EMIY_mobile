@@ -4,7 +4,7 @@ import 'package:EMIY/components/Text/titleText.dart';
 import 'package:EMIY/components/Widget/Conversation.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/components/Widget/productComponent0.dart';
+import 'package:EMIY/components/Widget/produitComponent0.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/model/data/CommandeModel.dart';
@@ -22,7 +22,7 @@ class ListNegociationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NegociationController>(builder: (_negociation) {
-      return  _negociation.isLoadNego == 0
+      return _negociation.isLoadNego == 0
           ? AppLoading()
           : /* CustomScrollView(controller: _scrollController, slivers: [
      SliverAppBar(

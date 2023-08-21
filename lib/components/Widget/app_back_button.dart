@@ -32,7 +32,7 @@ class AppBackButton extends StatelessWidget {
         onPressed: () {
           backEvent;
 
-          Get.back();
+          Navigator.of(context).pop();
         });
   }
 }

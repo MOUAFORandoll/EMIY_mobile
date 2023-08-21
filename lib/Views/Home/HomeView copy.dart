@@ -4,7 +4,7 @@ import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/Views/Home/SearchView.dart';
+import 'package:EMIY/Views/Search/SearchView.dart';
 import 'package:EMIY/components/Button/btnCatList.dart';
 import 'package:EMIY/components/Button/btnCatListPV.dart';
 import 'package:EMIY/components/Button/button.dart';
@@ -14,13 +14,13 @@ import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponentHome.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Widget/produitComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Text/titleText.dart';
-import 'package:EMIY/components/Widget/productComponentAll.dart';
+import 'package:EMIY/components/Widget/produitComponentAll.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
 import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -39,9 +39,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController controllerField = TextEditingController();
 
-    // Get.find<ProductController>().getPopularProduit();
+    // Get.find<ProduitController>().getPopularProduit();
     //  Get.find<CategoryController>().getCategory();
-    return GetBuilder<ProductController>(builder: (prods) {
+    return GetBuilder<ProduitController>(builder: (prods) {
       return RefreshIndicator(
           color: ColorsApp.skyBlue,
           onRefresh: () async {
@@ -211,7 +211,7 @@ class HomeView extends StatelessWidget {
                                           crossAxisCount: 4,
                                           itemCount: prods.produitList.length,
                                           itemBuilder: (_ctx, index) =>
-                                              ProductComponentAll(
+                                              ProduitComponentAll(
                                                   produit:
                                                       prods.produitList[index],
                                                   index: index),
@@ -234,7 +234,7 @@ class HomeView extends StatelessWidget {
                                         //       itemCount:
                                         //           prods.produitList.length,
                                         //       itemBuilder: (_ctx, index) =>
-                                        //           ProductComponentAll(
+                                        //           ProduitComponentAll(
                                         //               produit:
                                         //                   prods.produitList[
                                         //                       index],

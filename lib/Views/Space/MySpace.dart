@@ -9,7 +9,7 @@ import 'package:EMIY/components/Widget/InputMessaage.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/app_tab_component.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/components/Widget/productComponent0.dart';
+import 'package:EMIY/components/Widget/produitComponent0.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/ServiceClientController.dart';

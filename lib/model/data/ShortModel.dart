@@ -8,33 +8,37 @@ import 'dart:convert';
 
 import 'package:video_player/video_player.dart';
 
+import 'ProduitModel.dart';
+
 ShortModel shortModelFromJson(String str) =>
     ShortModel.fromJson(json.decode(str));
 
 String shortModelToJson(ShortModel data) => json.encode(data.toJson());
 
 class ShortModel {
-  ShortModel(
-      {required this.id,
-      required this.titre,
-      required this.src,
-      required this.preview,
-      required this.boutique,
-      required this.description,
-      required this.date,
-      required this.codeShort,
-      this.codeShortInit = '',
-      required this.nbre_commentaire,
-      required this.nbre_like,
-      required this.status,
-      required this.is_like,
-      required this.controller});
+  ShortModel({
+    required this.id,
+    required this.titre,
+    required this.src,
+    required this.preview,
+    required this.boutique,
+    required this.produits,
+    required this.description,
+    required this.date,
+    required this.codeShort,
+    this.codeShortInit = '',
+    required this.nbre_commentaire,
+    required this.nbre_like,
+    required this.status,
+    required this.is_like,
+  });
 
   final int id;
   final String titre;
   final String preview;
   final String src;
-  final BoutiqueModel boutique;
+  final List<ProduitModel> produits;
+  final BoutiqueModel0 boutique;
   final String description;
   int nbre_like;
   int nbre_commentaire;
@@ -43,24 +47,26 @@ class ShortModel {
   final String codeShortInit;
   bool is_like;
   final bool status;
-  var controller;
+  VideoPlayerController? controller;
 
   factory ShortModel.fromJson(Map<String, dynamic> json) => ShortModel(
-      id: json["id"] == null ? null : json["id"],
-      nbre_like: json["nbre_like"] == null ? null : json["nbre_like"],
-      nbre_commentaire:
-          json["nbre_commentaire"] == null ? null : json["nbre_commentaire"],
-      titre: json["titre"] == null ? null : json["titre"],
-      src: json["src"] == null ? null : json["src"],
-      preview: json["preview"] == null ? null : json["preview"],
-      boutique: BoutiqueModel.fromJson(json["boutique"]),
-      description: json["description"] == null ? null : json["description"],
-      date: json["date"] == null ? null : json["date"],
-      codeShortInit: json["codeShort"],
-      codeShort: ApiUrl.external_link + 'shorts/' + json["codeShort"],
-      status: json["status"] == null ? null : json["status"],
-      is_like: json["is_like"] == null ? null : json["is_like"],
-      controller: VideoPlayerController.network(json["preview"]));
+        id: json["id"] == null ? null : json["id"],
+        nbre_like: json["nbre_like"] == null ? null : json["nbre_like"],
+        nbre_commentaire:
+            json["nbre_commentaire"] == null ? null : json["nbre_commentaire"],
+        titre: json["titre"] == null ? null : json["titre"],
+        src: json["src"] == null ? null : json["src"],
+        produits: List<ProduitModel>.from(
+            json["produits"].map((x) => ProduitModel.fromJson(x))),
+        preview: json["preview"] == null ? null : json["preview"],
+        boutique: BoutiqueModel0.fromJson(json["boutique"]),
+        description: json["description"] == null ? null : json["description"],
+        date: json["date"] == null ? null : json["date"],
+        codeShortInit: json["codeShort"],
+        codeShort: ApiUrl.external_link + 'shorts/' + json["codeShort"],
+        status: json["status"] == null ? null : json["status"],
+        is_like: json["is_like"] == null ? null : json["is_like"],
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
@@ -68,6 +74,7 @@ class ShortModel {
         "nbre_commentaire": nbre_commentaire == null ? null : nbre_commentaire,
         "nbre_like": nbre_like == null ? null : nbre_like,
         "src": src == null ? null : src,
+        "produits": List<dynamic>.from(produits.map((x) => x.toJson())),
         "localisation": boutique.toJson(),
         "titre": titre == null ? null : titre,
         "description": description == null ? null : description,
@@ -81,17 +88,28 @@ class ShortModel {
     print('**************${ApiUrl.stream_serveurUrl + "/short?video=" + src}');
     controller = VideoPlayerController.network(
         ApiUrl.stream_serveurUrl + "/short?video=" + src);
-    await controller.initialize().then((_) {
+    await controller?.initialize().then((_) {
       print('**************lectyre');
 
       // controller.play();
     });
-    controller.setLooping(true);
+
+    VideoPlayerController.network(
+        ApiUrl.stream_serveurUrl + "/short?video=" + src)
+      ..initialize().then((_) {
+        print('**************lectyre');
+
+        // controller.play();
+      }, onError: (error) {
+        print('**************erreeeeeeeeeeee    ------  ${error}');
+      });
+
+    controller?.setLooping(true);
   }
 }
 
-class BoutiqueModel {
-  BoutiqueModel({
+class BoutiqueModel0 {
+  BoutiqueModel0({
     required this.codeBoutique,
     required this.user,
     required this.description,
@@ -115,7 +133,7 @@ class BoutiqueModel {
   List<Image> images;
   Localisation localisation;
 
-  factory BoutiqueModel.fromJson(Map<String, dynamic> json) => BoutiqueModel(
+  factory BoutiqueModel0.fromJson(Map<String, dynamic> json) => BoutiqueModel0(
         codeBoutique: json["codeBoutique"],
         user: json["user"],
         description: json["description"],

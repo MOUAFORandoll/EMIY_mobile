@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -46,12 +47,7 @@ class CategoryComponent2 extends StatelessWidget {
                         ));
                   },
                   placeholder: (context, url) {
-                    return Container(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: ColorsApp.skyBlue,
-                      )),
-                    );
+                    return ShimmerBox();
                   },
                   errorWidget: (context, url, error) {
                     return Container(
@@ -68,7 +64,7 @@ class CategoryComponent2 extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: ColorsApp.marron,
+                            color: ColorsApp.primaryBlue,
                             fontWeight: FontWeight.bold,
                             fontSize: 12))),
               ],

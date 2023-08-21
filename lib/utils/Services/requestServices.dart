@@ -111,7 +111,7 @@ class ApiService extends GetConnect {
     }
   }
 
-  Future getListProductForCategory(id) async {
+  Future getListProduitForCategory(id) async {
     // try {
     //   var response = await postData(ApiRoutes.PRODUCT_FOR_CATEGORY, {
     //     'id': id, /* 'keySecret': keySecret */
@@ -136,7 +136,7 @@ class ApiService extends GetConnect {
     // }
   }
 
-  Future getListProductPopular() async {
+  Future getListProduitPopular() async {
     // try {
     //   var response = await getData(ApiRoutes.POPULAR_PRODUCT);
     //   //print(response.statusCode);

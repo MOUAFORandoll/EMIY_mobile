@@ -124,7 +124,7 @@ class ViewFunctions {
                       //   child: Text('Ajouter'),
                       //   onPressed: () async {
                       //     // await _controller.addShort();
-                      //     // _controller.chageState(!_controller.addProduct);
+                      //     // _controller.chageState(!_controller.addProduit);
                       //   },
                       // )
                     ]),
@@ -166,7 +166,7 @@ class ViewFunctions {
               vertical: kHeight * .43, horizontal: kWidth * .40),
           child: Container(
             child: Shimmer.fromColors(
-                baseColor: ColorsApp.bleuLight,
+                baseColor: ColorsApp.secondBlue,
                 highlightColor: ColorsApp.grey,
                 child: SvgPicture.asset(
                   Assets.logoSvg,

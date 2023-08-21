@@ -1,4 +1,4 @@
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/CartModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/ProduitCategoryModel.dart';
@@ -25,8 +25,8 @@ class CartController extends GetxController {
 
   var fn = new ViewFunctions();
 
-  void updateQuantityProduct(int idProduit, bool state) {
-    // if (quantity <= product.quantite) {
+  void updateQuantityProduit(int idProduit, bool state) {
+    // if (quantity <= produit.quantite) {
     var idCart = 0;
     if (_items.containsKey(idProduit)) {
       var total = 0;
@@ -75,7 +75,7 @@ class CartController extends GetxController {
       });
       //print(total);
       totalItems;
-      Get.find<ProductController>().getD0(idCart);
+      Get.find<ProduitController>().getD0(idCart);
       update();
     }
   }
@@ -119,8 +119,8 @@ class CartController extends GetxController {
   //   }
   // }
 
-  bool existInCart(ProduitModel product) {
-    if (_items.containsKey(product.id)) {
+  bool existInCart(ProduitModel produit) {
+    if (_items.containsKey(produit.id)) {
       return true;
     }
     return false;
@@ -145,12 +145,12 @@ class CartController extends GetxController {
     update();
   }
 
-  getQuantity(ProduitModel product) {
+  getQuantity(ProduitModel produit) {
     var quantity = 0;
-    print('--${product}');
-    if (existInCart(product)) {
+    print('--${produit}');
+    if (existInCart(produit)) {
       _items.forEach((key, value) {
-        if (key == product.id) {
+        if (key == produit.id) {
           quantity = value.quantity;
         }
       });
@@ -158,13 +158,13 @@ class CartController extends GetxController {
     return quantity;
   }
 
-  void addItem(ProduitModel product, int quantity, index, type) {
+  void addItem(ProduitModel produit, int quantity, index, type) {
     //print(quantity);
-    if (quantity <= product.quantite) {
+    if (quantity <= produit.quantite) {
       //print('taillen');
-      if (_items.containsKey(product.id)) {
+      if (_items.containsKey(produit.id)) {
         var total = 0;
-        _items.update(product.id, (value) {
+        _items.update(produit.id, (value) {
           total = value.quantity + quantity;
 
           return CartModel(
@@ -174,29 +174,29 @@ class CartController extends GetxController {
               type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
-              qtdispo: product.quantite,
+              qtdispo: produit.quantite,
               quantity: value.quantity + quantity,
               isExist: true,
               time: DateTime.now().toString());
         });
 
         if (total <= 0) {
-          _items.remove(product.id);
+          _items.remove(produit.id);
         }
       } else {
         if (quantity > 0) {
           //print(index);
           //print(type);
           _items.putIfAbsent(
-              product.id,
+              produit.id,
               () => CartModel(
-                  id: product.id,
-                  name: product.titre,
+                  id: produit.id,
+                  name: produit.titre,
                   index: index,
                   type: type,
-                  prix: double.parse(product.prix.toString()),
-                  img: product.images[0].src,
-                  qtdispo: product.quantite,
+                  prix: double.parse(produit.prix.toString()),
+                  img: produit.images[0].src,
+                  qtdispo: produit.quantite,
                   quantity: quantity,
                   isExist: true,
                   time: DateTime.now().toString()));

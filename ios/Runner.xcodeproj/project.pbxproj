@@ -71,16 +71,16 @@
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
-				97C146EF1CF9000F007C117D /* Products */,
+				97C146EF1CF9000F007C117D /* Produits */,
 			);
 			sourceTree = "<group>";
 		};
-		97C146EF1CF9000F007C117D /* Products */ = {
+		97C146EF1CF9000F007C117D /* Produits */ = {
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
 			);
-			name = Products;
+			name = Produits;
 			sourceTree = "<group>";
 		};
 		97C146F01CF9000F007C117D /* Runner */ = {
@@ -117,9 +117,9 @@
 			dependencies = (
 			);
 			name = Runner;
-			productName = Runner;
-			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
-			productType = "com.apple.product-type.application";
+			produitName = Runner;
+			produitReference = 97C146EE1CF9000F007C117D /* Runner.app */;
+			produitType = "com.apple.produit-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -145,7 +145,7 @@
 				Base,
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
-			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
+			produitRefGroup = 97C146EF1CF9000F007C117D /* Produits */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

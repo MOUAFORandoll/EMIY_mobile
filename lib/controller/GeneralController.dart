@@ -1,6 +1,6 @@
 import 'package:EMIY/Views/CategoryBoutique/CategoryView.dart';
 import 'package:EMIY/Views/Home/HomeView.dart';
-import 'package:EMIY/Views/Short/ShortView.dart';
+import 'package:EMIY/Views/Short/ShortView_save210823.dart';
 import 'package:EMIY/Views/Space/MySpace.dart';
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Space/Notifications/NotificationView.dart';
@@ -9,7 +9,7 @@ import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/CartModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
@@ -62,6 +62,12 @@ class GeneralController extends GetxController {
   final GeneralRepo generalRepo;
   GeneralController({required this.generalRepo});
   final dababase = Get.find<DataBaseController>();
+  // final GlobalKey _scaffoldKey = new GlobalKey();
+  // GlobalKey get scaffoldKey => _scaffoldKey;
+  openDrawer(context) {
+    // _scaffoldKey.currentState!.openDrawer();
+    Scaffold.of(context).openDrawer();
+  }
 
   ScrollController _scrollcontroller = new ScrollController();
   ScrollController get scrollcontroller => _scrollcontroller;
@@ -194,7 +200,7 @@ class GeneralController extends GetxController {
     update();
   }
 
-  likeProduit(/* note, */ codeProduit , source) async {
+  likeProduit(/* note, */ codeProduit, source) async {
     var getU = await dababase.getKey();
     if (getU == null) {
       fn.snackBar('Note', 'Veuillez vous connecter', true);
@@ -208,11 +214,11 @@ class GeneralController extends GetxController {
 
     //liste produit populaire
     if (source == 0) {
-      Get.find<ProductController>().likeProductInPopular(codeProduit);
+      Get.find<ProduitController>().likeProduitInPopular(codeProduit);
     }
     //liste produit supplementaire
     if (source == 1) {
-      Get.find<ProductController>().likeProductInSupp(codeProduit);
+      Get.find<ProduitController>().likeProduitInSupp(codeProduit);
     }
     //print(data);
 
@@ -227,15 +233,15 @@ class GeneralController extends GetxController {
       if (response.statusCode == 200) {
         // fn.snackBar('Like', 'Effectue', true);
         ProduitModel produit = ProduitModel.fromJson(response.body['produit']);
-        Get.find<ProductController>().updateProductInPopular(produit);
-        Get.find<ProductController>().getListProduitPreference();
+        Get.find<ProduitController>().updateProduitInPopular(produit);
+        Get.find<ProduitController>().getListProduitPreference();
       } else {
-        Get.find<ProductController>().likeProductInPopular(codeProduit);
+        Get.find<ProduitController>().likeProduitInPopular(codeProduit);
         fn.snackBar('Like', 'Erreur', false);
       }
     } catch (e) {
       fn.closeSnack();
-      Get.find<ProductController>().likeProductInPopular(codeProduit);
+      Get.find<ProduitController>().likeProduitInPopular(codeProduit);
       fn.snackBar('Like', 'Erreur', false);
 
       //print(e);
@@ -319,7 +325,7 @@ class GeneralController extends GetxController {
   }
 
   Widget buildBorderRadiusDesign() {
-    return /*GetBuilder<ProductController>(builder: (_controller) {
+    return /*GetBuilder<ProduitController>(builder: (_controller) {
       return  Offstage(
           offstage: _controller.isBottomBarVisible,
           child: */
@@ -505,7 +511,7 @@ class GeneralController extends GetxController {
 
         if (index == 0) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Get.find<ProductController>().restoreScrollPosition();
+            Get.find<ProduitController>().restoreScrollPosition();
           });
         }
       },
@@ -636,7 +642,7 @@ class GeneralController extends GetxController {
 
   int _isLoadedHome = 0;
   int get isLoadedHome => _isLoadedHome;
-  ProductController _prodController = Get.find();
+  ProduitController _prodController = Get.find();
   CategoryBoutiqueController _categoryBoutiqueController = Get.find();
   Future<void> getHome() async {
     print('----${_loaddata}-------aaaaaaaaa---');
@@ -664,7 +670,7 @@ class GeneralController extends GetxController {
           var produits = ((response.body['Produit'] as List)
               .map((e) => ProduitModel.fromJson(e))
               .toList());
-          _prodController.getHomeProduct(produits);
+          _prodController.getHomeProduit(produits);
           var categorie = ((response.body['Categorie'] as List)
               .map((e) => CategoryModel.fromJson(e))
               .toList());

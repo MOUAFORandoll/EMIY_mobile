@@ -18,15 +18,12 @@ class SearchRepo extends GetxService {
   //   return response;
   // }
 
-  Future searchData(type, search) async {
-    // try {
-    // //print(
-    //     'response------------------${type}-----${search}----${ApiRoutes.SEARCH}--');
-
-    Response response = await apiClient.postData(ApiRoutes.SEARCH, {
-      'type': type,
-      'search': search,
-    });
+  Future searchData(type, search, index, keySecret) async {
+     
+    Response response = await apiClient.getData(
+      ApiRoutes.SEARCH +
+          "?type=$type&search=$search&page=${index.toString()}&keySecret=${keySecret.toString()}",
+    );
     // //print('response.body');
     // //print(response.body);
     return response;

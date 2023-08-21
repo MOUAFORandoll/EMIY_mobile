@@ -20,7 +20,7 @@ import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/controller/categoryController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
 import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/repository/TransactionRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';

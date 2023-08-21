@@ -8,7 +8,7 @@
 // import 'package:EMIY/components/Widget/BoutiqueComponent.dart';
 // import 'package:EMIY/components/Widget/categoryComponent.dart';
 // import 'package:EMIY/components/Widget/categoryComponent2.dart';
-// import 'package:EMIY/components/Widget/productComponent.dart';
+// import 'package:EMIY/components/Widget/produitComponent.dart';
 // import 'package:EMIY/components/Text/smallText.dart';
 // import 'package:EMIY/components/Text/titleText.dart';
 // import 'package:EMIY/controller/boutiqueController.dart';

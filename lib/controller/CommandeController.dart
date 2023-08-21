@@ -69,7 +69,7 @@ class CommandeController extends GetxController {
       _isLoadedP = false;
       _produitList.clear();
       findComBuyId(id);
-      Response response = await commandeRepo.getListProductForComm(id);
+      Response response = await commandeRepo.getListProduitForComm(id);
       //print('*------response');
       //print(response.body);
       if (response.body != null) {

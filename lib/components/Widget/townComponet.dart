@@ -22,6 +22,7 @@ class _TownComponentState extends State<TownComponent> {
         decoration: BoxDecoration(
             gradient: GradientApp.blueG,
             borderRadius: BorderRadius.circular(15)),
-        child: Text(widget.ville, style: TextStyle(color: ColorsApp.textBlue)));
+        child:
+            Text(widget.ville, style: TextStyle(color: ColorsApp.secondBlue)));
   }
 }

@@ -1,24 +1,9 @@
 import 'dart:io';
-
-import 'package:EMIY/components/Button/AppIconButton.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/commentForm.dart';
-import 'package:EMIY/components/Form/formComponent.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/components/Form/text_field.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Widget/app_bar_custom.dart';
-import 'package:EMIY/components/Widget/app_empty.dart';
-import 'package:EMIY/components/Widget/app_input.dart';
+ 
+import 'package:EMIY/components/Widget/app_bar_custom.dart'; 
 import 'package:EMIY/components/Widget/app_input_new.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/components/Widget/app_short_add.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Widget/imageComp.dart';
-import 'package:EMIY/components/Widget/productBoutiqueComponent.dart';
-import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
+import 'package:EMIY/components/Widget/app_short_add.dart'; 
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/controller/categoryController.dart';
@@ -87,7 +72,7 @@ class ShortBoutiqueView extends StatelessWidget {
                                   child: Text('Ajouter'),
                                   onPressed: () async {
                                     await _controller.addShort();
-                                    // _controller.chageState(!_controller.addProduct);
+                                    // _controller.chageState(!_controller.addProduit);
                                   },
                                 )
                               ]),
@@ -219,7 +204,7 @@ class ShortBoutiqueView extends StatelessWidget {
                     itemCount: _controller.listShortBoutique.length,
                     itemBuilder: (_ctx, index) {
                       return Text(_controller.listShortBoutique[index].titre);
-                      /* ProductBoutiqueComponent(
+                      /* ProduitBoutiqueComponent(
                                   produit:
                                       _controller.listShortBoutique[index]); */
                     },

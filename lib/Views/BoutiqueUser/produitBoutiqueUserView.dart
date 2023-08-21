@@ -17,8 +17,7 @@ import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Widget/imageComp.dart';
-import 'package:EMIY/components/Widget/productBoutiqueComponent.dart';
-import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
+import 'package:EMIY/components/Widget/produitBoutiqueComponent.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/controller/categoryController.dart';
@@ -81,12 +80,12 @@ class ProduitBoutiqueUserView extends StatelessWidget {
         Container(
             margin: EdgeInsets.symmetric(horizontal: kMarginX),
             child: AppBarCustom(
-              title: !_controller.addProduct
+              title: !_controller.addProduit
                   ? 'Liste de vos produits'
                   : 'Ajouter un produit',
-              titleBtn: !_controller.addProduct ? 'Ajouter' : 'Liste',
+              titleBtn: !_controller.addProduit ? 'Ajouter' : 'Liste',
               onTap: () {
-                // _controller.chageState(!_controller.addProduct);
+                // _controller.chageState(!_controller.addProduit);
 
                 Get.bottomSheet(
                   Container(
@@ -121,8 +120,8 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                                   TextButton(
                                     child: Text('Enregistrer'),
                                     onPressed: () async {
-                                      await _controller.addProduit();
-                                      // _controller.chageState(!_controller.addProduct);
+                                      await _controller.ajouterProduit();
+                                      // _controller.chageState(!_controller.addProduit);
                                     },
                                   )
                                 ]),
@@ -337,8 +336,8 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                                         //   color: ColorsApp.greenLight,
                                         //   title: 'Ajouter Produit',
                                         //   onTap: () async {
-                                        //     await _controller.addProduit();
-                                        //     // _controller.chageState(!_controller.addProduct);
+                                        //     await _controller.ajouterProduit();
+                                        //     // _controller.chageState(!_controller.addProduit);
                                         //   },
                                         // )
                                       ])),
@@ -351,7 +350,7 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                 );
               },
             )),
-        /*   !_controller.addProduct
+        /*   !_controller.addProduit
             ? */
         _controller.isLoadedPB == 0
             ? AppLoading()
@@ -364,7 +363,7 @@ class ProduitBoutiqueUserView extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: _controller.produitBoutiqueList.length,
                     itemBuilder: (_ctx, index) {
-                      return ProductBoutiqueComponent(
+                      return ProduitBoutiqueComponent(
                           produit: _controller.produitBoutiqueList[index]);
                     },
                   )) /*  :  */

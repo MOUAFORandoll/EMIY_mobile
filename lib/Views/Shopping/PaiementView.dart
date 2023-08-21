@@ -1,14 +1,4 @@
-import 'package:EMIY/components/Button/AppIconButton.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/FormPaiement.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText.dart';
-import 'package:EMIY/components/Text/bigtitleText0.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
-import 'package:EMIY/controller/GeneralController.dart';
+import 'package:EMIY/components/Button/AppIconButton.dart'; 
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/styles/colorApp.dart';

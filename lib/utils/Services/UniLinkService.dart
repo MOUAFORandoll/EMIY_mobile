@@ -167,7 +167,7 @@ class UniLinkService extends GetxService {
                           //   child: Text('Ajouter'),
                           //   onPressed: () async {
                           //     // await _controller.addShort();
-                          //     // _controller.chageState(!_controller.addProduct);
+                          //     // _controller.chageState(!_controller.addProduit);
                           //   },
                           // )
                         ]),

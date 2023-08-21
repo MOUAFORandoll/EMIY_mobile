@@ -7,7 +7,7 @@ import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
+import 'package:EMIY/components/Widget/shoppingproduitComponent.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -67,7 +67,7 @@ class ShoppingViewNext extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: _controller.getItems.length,
                       // controller: _controller,
-                      itemBuilder: (_, index) => ShoppingproductComponent(
+                      itemBuilder: (_, index) => ShoppingproduitComponent(
                         cartM: _controller.getItems[index],
                       ),
                     )),

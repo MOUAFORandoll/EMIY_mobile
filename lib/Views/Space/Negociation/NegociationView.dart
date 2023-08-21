@@ -4,6 +4,7 @@ import 'package:EMIY/components/Button/button.dart';
 import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Widget/BoxInputMessaage.dart';
 import 'package:EMIY/components/Widget/CommandeComponent.dart';
 import 'package:EMIY/components/Widget/OwnMessgaeCrad.dart';
 import 'package:EMIY/components/Widget/ReplyCard.dart';
@@ -13,7 +14,7 @@ import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
 import 'package:EMIY/components/Widget/categoryComponent2.dart';
-import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Widget/produitComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Text/titleText.dart';
 import 'package:EMIY/controller/CommandeController.dart';
@@ -94,33 +95,46 @@ class NegociationView extends StatelessWidget {
                 },
               ),
             ),
+            // Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: Row(
+            //     children: [
+            //       (Get.find<BoutiqueController>().Boutique != null)
+            //           ? IconButton(
+            //               icon: Icon(Icons.quora),
+            //               onPressed: () {
+            //                 _negociation.newMessageNegociation();
+            //               },
+            //             )
+            //           : Container(),
+            //       Expanded(
+            //         child: TextField(
+            //           controller: _negociation.textEditingController,
+            //           decoration: InputDecoration(
+            //             hintText: 'Entrez votre message...',
+            //           ),
+            //         ),
+            //       ),
+            //       IconButton(
+            //         icon: Icon(Icons.send),
+            //         onPressed: () {
+            //           _negociation.newMessageNegociation();
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  (Get.find<BoutiqueController>().Boutique != null)
-                      ? IconButton(
-                          icon: Icon(Icons.quora),
-                          onPressed: () {
-                            _negociation.newMessageNegociation();
-                          },
-                        )
-                      : Container(),
-                  Expanded(
-                    child: TextField(
-                      controller: _negociation.textEditingController,
-                      decoration: InputDecoration(
-                        hintText: 'Entrez votre message...',
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.send),
-                    onPressed: () {
-                      _negociation.newMessageNegociation();
-                    },
-                  ),
-                ],
+              padding: EdgeInsets.all(0.0),
+              child: Container(
+                // height: 170,
+                // margin: EdgeInsets.symmetric(horizontal: 2),
+                decoration: BoxDecoration(color: ColorsApp.white),
+                child: BoxInputMessaage(
+                  controller: _negociation.textEditingController,
+                  sending: _negociation.sending,
+                  onTap: () => _negociation.newMessageNegociation(),
+                ),
               ),
             ),
           ],

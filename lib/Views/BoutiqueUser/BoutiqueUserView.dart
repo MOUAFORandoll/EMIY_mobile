@@ -1,30 +1,11 @@
 import 'dart:io';
-
-import 'package:EMIY/components/Button/AppIconButton.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/commentForm.dart';
-import 'package:EMIY/components/Form/formComponent.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText.dart';
-import 'package:EMIY/components/Text/bigtitleText0.dart';
+ 
 import 'package:EMIY/components/Widget/app_back_button.dart';
-import 'package:EMIY/components/Widget/app_boutique_options.dart';
-import 'package:EMIY/components/Widget/cardBoutiqueComponent.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Widget/imageComp.dart';
-import 'package:EMIY/components/Widget/productBoutiqueComponent.dart';
-import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
-import 'package:EMIY/controller/boutiqueController.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/components/Widget/app_boutique_options.dart'; 
+import 'package:EMIY/controller/boutiqueController.dart'; 
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart'; 
 
 import '../../components/Widget/app_title_right.dart';
 

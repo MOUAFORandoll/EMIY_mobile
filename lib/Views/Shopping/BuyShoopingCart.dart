@@ -13,7 +13,7 @@ import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_input.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/icon_svg.dart';
-import 'package:EMIY/components/Widget/productBuyComponent.dart';
+import 'package:EMIY/components/Widget/produitBuyComponent.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/cartController.dart';
@@ -280,7 +280,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                                             margin: EdgeInsets.only(
                                                                               top: kMarginY,
                                                                             ),
-                                                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: ColorsApp.bleuLight),
+                                                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: ColorsApp.secondBlue),
                                                                             child: Row(
                                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: <Widget>[
@@ -507,7 +507,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                     children: [
                                                       Container(
                                                           child: Text(
-                                                        'product'.tr,
+                                                        'produit'.tr,
                                                         style: TextStyle(
                                                           fontFamily:
                                                               'Montserrat',

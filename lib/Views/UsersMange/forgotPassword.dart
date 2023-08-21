@@ -85,7 +85,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
       height: isActive ? 14.0 : 10,
       width: isActive ? 14.0 : 10.0,
       decoration: BoxDecoration(
-        color: isActive ? Colors.cyan : ColorsApp.blue,
+        color: isActive ? Colors.cyan : ColorsApp.primaryBlue,
         borderRadius: BorderRadius.all(
           Radius.circular(12),
         ),

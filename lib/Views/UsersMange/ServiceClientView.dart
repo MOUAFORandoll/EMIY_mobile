@@ -52,7 +52,7 @@
 //                   automaticallyImplyLeading: false,
 //                   flexibleSpace: Container(
 //                     decoration: BoxDecoration(
-//                       color: ColorsApp.bleuLight,
+//                       color: ColorsApp.secondBlue,
 //                     ),
 //                     child: Column(
 //                       mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +78,7 @@
 //                               ),
 //                               Container(
 //                                 decoration: BoxDecoration(
-//                                   color: ColorsApp.textBlue,
+//                                   color: ColorsApp.secondBlue,
 //                                   borderRadius: BorderRadius.circular(20),
 //                                 ),
 //                                 alignment: Alignment.center,

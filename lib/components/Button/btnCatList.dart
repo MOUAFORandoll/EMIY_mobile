@@ -22,7 +22,7 @@ class BtnCatList extends StatelessWidget {
           margin: EdgeInsets.all(this.pVal ?? 10),
           decoration: new BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: (active) ? ColorsApp.bleuLight : Color(0x71755050),
+            color: (active) ? ColorsApp.secondBlue : Color(0x71755050),
           ),
           child: Text(
             title,

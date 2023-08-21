@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class ColorsApp {
-  static const Color blue = Color(0xFF021040);
+  static const Color primaryBlue = Color(0xFF0C356A);
+  static const Color secondBlue = Color(0xFF279EFF);
+  static const Color mint = Color(0xFF40F8FF);
+  static const Color greenLight = Color(0xFFD5FFD0);
+
   static const Color bg = Color.fromRGBO(243, 243, 243, 1);
   static const Color bgColor = Color(0xFFE5E5E5);
 
   static const Color skyBlue = Color(0xFF459FD6);
-  static const Color textBlue = Color(0xFF1137FF);
   static const Color marron = Color.fromARGB(255, 26, 24, 25);
-  static const Color primaryText = Color(0xFFE7C76D);
+  static const Color primaryText = primaryBlue; // Color(0xFFE7C76D);
 
-  static const Color bleuLight = Color(0xFF4E9DD9);
-  static const Color black = Color(0xFF343333); // ColorsApp.black;
-  static const Color blackSecond = Color(0xFF343333); // ColorsApp.black;
+  static const Color black =
+      primaryBlue; // Color(0xFF343333); // ColorsApp.black;
+  static const Color blackSecond =
+      primaryBlue; // Color(0xFF343333); // ColorsApp.black;
   static const Color grey = Color(0xffD9D9D9);
   static const Color white = Color(0xFFFFFFFF);
   static const Color greySecond = Color(0xFFD8E9F6);
@@ -22,8 +26,8 @@ abstract class ColorsApp {
   static const Color greyTi = Color(0XFFC4C4C4);
   static const Color greyFirst = Color(0XFF505050);
 
-  static const Color bgCont = Color(0xFF0FAE74);
-  static const Color greenLight = Color(0xFF45EFB1);
+  static const Color bgCont = mint; //Color(0xFF0FAE74);
+  // static const Color greenLight = Color(0xFF45EFB1);
   static const Color red = Color(0xffB40001);
   static const Color orange = Color(0xffF29F05);
   static Color textColor =

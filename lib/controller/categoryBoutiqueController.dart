@@ -67,14 +67,14 @@ class CategoryBoutiqueController extends GetxController {
   int get isLoaded => _isLoaded;
   bool _isExist = false;
   bool get isExist => _isExist;
-  bool _addProduct = false;
-  bool get addProduct => _addProduct;
+  bool _addProduit = false;
+  bool get addProduit => _addProduit;
   List<File> _listImgProduits = [];
 
   List<File> get listImgProduits => _listImgProduits;
 
   chageState(bool i) {
-    _addProduct = i;
+    _addProduit = i;
     update();
   }
 

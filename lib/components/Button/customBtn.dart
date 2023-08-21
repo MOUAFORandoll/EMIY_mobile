@@ -20,7 +20,7 @@ class CustomBtn extends StatelessWidget {
             margin: EdgeInsets.all(10),
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: (color == null) ? ColorsApp.blue : color,
+              color: (color == null) ? ColorsApp.primaryBlue : color,
             ),
             child: ((validator == null) ? false : validator)
                 ? Center(

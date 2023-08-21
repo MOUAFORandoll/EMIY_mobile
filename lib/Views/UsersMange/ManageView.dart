@@ -147,7 +147,7 @@ class ManageView extends StatelessWidget {
                                                       //   child: Text('Ajouter'),
                                                       //   onPressed: () async {
                                                       //     // await _controller.addShort();
-                                                      //     // _controller.chageState(!_controller.addProduct);
+                                                      //     // _controller.chageState(!_controller.addProduit);
                                                       //   },
                                                       // )
                                                     ]),
@@ -273,7 +273,7 @@ class ManageView extends StatelessWidget {
                                                   //   child: Text('Ajouter'),
                                                   //   onPressed: () async {
                                                   //     // await _controller.addShort();
-                                                  //     // _controller.chageState(!_controller.addProduct);
+                                                  //     // _controller.chageState(!_controller.addProduit);
                                                   //   },
                                                   // )
                                                 ]),
@@ -426,7 +426,7 @@ class ManageView extends StatelessWidget {
                           //                           //   child: Text('Ajouter'),
                           //                           //   onPressed: () async {
                           //                           //     // await _controller.addShort();
-                          //                           //     // _controller.chageState(!_controller.addProduct);
+                          //                           //     // _controller.chageState(!_controller.addProduit);
                           //                           //   },
                           //                           // )
                           //                         ]),
@@ -497,7 +497,7 @@ class ManageView extends StatelessWidget {
                           //                           //   child: Text('Ajouter'),
                           //                           //   onPressed: () async {
                           //                           //     // await _controller.addShort();
-                          //                           //     // _controller.chageState(!_controller.addProduct);
+                          //                           //     // _controller.chageState(!_controller.addProduit);
                           //                           //   },
                           //                           // )
                           //                         ]),
@@ -568,6 +568,16 @@ class ManageView extends StatelessWidget {
                                 onTap: () {
                                   // ViewFunctions().showIndisponible();
                                   Get.toNamed(AppLinks.PREFERENCE_CLIENT);
+                                  // Share.share('check out my website https://example.com',
+                                  //     subject: 'Look what I made!');
+                                }),
+                          if (_manager.User != null)
+                            AppSettingComp(
+                                title: 'Mes interrets',
+                                icon: Assets.bagmoney,
+                                onTap: () {
+                                  // ViewFunctions().showIndisponible();
+                                  Get.toNamed(AppLinks.INTERET);
                                   // Share.share('check out my website https://example.com',
                                   //     subject: 'Look what I made!');
                                 }),

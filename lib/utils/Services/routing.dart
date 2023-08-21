@@ -4,15 +4,17 @@ import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:EMIY/Views/CategoryBoutique/UserAbonnementView.dart';
+import 'package:EMIY/Views/Search/SearchView.dart';
 import 'package:EMIY/Views/Link/BoutiqueViewForLink.dart';
 import 'package:EMIY/Views/Space/MySpace.dart';
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Space/Negociation/NegociationView.dart';
-import 'package:EMIY/Views/Link/ProductViewForLink.dart';
+import 'package:EMIY/Views/Link/ProduitViewForLink.dart';
 import 'package:EMIY/Views/Parrainnage/ParrainnageView.dart';
-import 'package:EMIY/Views/Product/PreferenceView.dart';
+import 'package:EMIY/Views/Produit/PreferenceView.dart';
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
-import 'package:EMIY/Views/Short/ShortView.dart';
+import 'package:EMIY/Views/Short/ShortView_save210823.dart';
+import 'package:EMIY/Views/UsersMange/InteretsView.dart';
 import 'package:EMIY/Views/UsersMange/ServiceClientView.dart';
 import 'package:EMIY/Views/UsersMange/WalletView.dart';
 import 'package:EMIY/Views/BoutiqueUser/HistroriqueCBUView.dart';
@@ -28,7 +30,7 @@ import 'package:EMIY/Views/ComplementView/SplashScreen.dart';
 import 'package:EMIY/Views/Home/HomeView.dart';
 import 'package:EMIY/Views/Home/ListBoutiquesView.dart';
 import 'package:EMIY/Views/Home/ListProduitsView.dart';
-import 'package:EMIY/Views/Product/ProductView.dart';
+import 'package:EMIY/Views/Produit/ProduitView.dart';
 import 'package:EMIY/Views/Shopping/BuyShoopingCart.dart';
 import 'package:EMIY/Views/Shopping/ShoppingView.dart';
 import 'package:EMIY/Views/Shopping/ShoppingViewNext.dart';
@@ -48,7 +50,7 @@ import 'package:get/get.dart';
 
 import '../../test.dart';
 
-var transitionX = Transition.zoom;
+var transitionX = Transition.leftToRight;
 
 class AppRoutes {
   static final pages = [
@@ -100,7 +102,7 @@ class AppRoutes {
         // ignore: top_level_function_literal_block
         page: () {
           var index = Get.parameters['index'];
-          return ProductView(index: int.parse(index!));
+          return ProduitView(index: int.parse(index!));
         },
         transition: transitionX),
     GetPage(
@@ -224,7 +226,7 @@ class AppRoutes {
     //     transition: transitionX),
     GetPage(
         name: AppLinks.PRODUCT_FOR_LINK,
-        page: () => ProductViewForLink(),
+        page: () => ProduitViewForLink(),
         transition: transitionX),
     GetPage(
         name: AppLinks.BOUTIQUE_FOR_LINK,
@@ -246,6 +248,14 @@ class AppRoutes {
         name: AppLinks.NOTIFICATION,
         page: () => MySpace(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.SEARCH,
+        page: () => SearchView(),
+        transition: transitionX),
+    GetPage(
+        name: AppLinks.INTERET,
+        page: () => InteretsView(),
+        transition: transitionX),
   ];
 }
 
@@ -254,6 +264,7 @@ class AppLinks {
   static const String SERVICE_CLIENT = "/service_client";
   static const String ABONNEMENT = "/abonnement";
   static const String SHORT = "/short";
+  static const String INTERET = "/interet";
   static const String SHORT_BOUTIQUE = "/shortboutique";
   static const String PRODUCT_FOR_COMMANDE = "/pfc";
   static const String PRODUCT_FOR_LINK = "/pflink";
@@ -263,6 +274,7 @@ class AppLinks {
   static const String BOUTIQUE_LOYER = "/boutique/loyer";
   static const String POLITIQUE = "/politique";
   static const String HELP = "/help";
+  static const String SEARCH = "/search";
   static const String MANAGE_FOR_BOUTIQUE = "/mfb";
   static const String WALLET = "/cb";
   static const String SETTING = "/setting";
@@ -282,7 +294,7 @@ class AppLinks {
   static const String CART = "/cart";
   static const String SPLASHSCREEN = "/splashscreen";
   static const String ONBOARDING = "/onboarding";
-  static const String PRODUCT = "/product";
+  static const String PRODUCT = "/produit";
   static const String BOUTIQUE_FOR_CATEGORY = "/bfc";
   static const String BOUTIQUE_READ_ALL = "/bra";
   static const String PRODUCT_READ_ALL = "/pra";

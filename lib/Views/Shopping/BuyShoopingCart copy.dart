@@ -3,7 +3,7 @@
 // import 'package:EMIY/components/Form/formComponent.dart';
 // import 'package:EMIY/components/Text/smallText.dart';
 // import 'package:EMIY/components/Widget/LivreurComponent.dart';
-// import 'package:EMIY/components/Widget/productBuyComponent.dart';
+// import 'package:EMIY/components/Widget/produitBuyComponent.dart';
 // import 'package:EMIY/controller/BuyShopController.dart';
 // import 'package:EMIY/controller/cartController.dart';
 // import 'package:EMIY/styles/textStyle.dart';
@@ -259,7 +259,7 @@
 //                                         shrinkWrap: true,
 //                                         itemCount: _controller.getItems.length,
 //                                         itemBuilder: (_ctx, index) =>
-//                                             ProductBuyComponent(
+//                                             ProduitBuyComponent(
 //                                                 cartModel: _controller
 //                                                     .getItems[index])))
 //                               ],
@@ -288,7 +288,7 @@
 //                                                     livreur: _Bcontroller
 //                                                         .livreurList[index])))
 //                                     : CircularProgressIndicator(
-//                                         color: ColorsApp.bleuLight)
+//                                         color: ColorsApp.secondBlue)
 //                               ],
 //                             )),
 //                         Step(

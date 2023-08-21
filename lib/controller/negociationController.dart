@@ -27,6 +27,8 @@ class NegociationController extends GetxController {
 
   newNegociation(codeProduit) async {
     textEditingController.text = '';
+    _codeNegociation = '';
+    _sending = false;
     update();
     var key = await dababase.getKey();
 
@@ -48,16 +50,15 @@ class NegociationController extends GetxController {
             _codeNegociation = response.body['data']['canal'];
             _listMessageNegociation = [];
             textEditingController.text = '';
-            _codeNegociation = '';
             _titreNegociation = '';
 
+            fn.closeLoader();
             update();
             _listMessageNegociation
                 .add(MessageNegociationModel.fromJson(response.body['data']));
             Get.toNamed(AppLinks.NEGOCIATION_NEW);
             await getListNegociation();
             update();
-            fn.closeLoader();
           }
         }
       }
@@ -152,55 +153,62 @@ class NegociationController extends GetxController {
     }
   }
 
+  bool _sending = false;
+  bool get sending => _sending;
   var _codeNegociation = '';
   get codeNegociation => _codeNegociation;
   TextEditingController _textEditingController = TextEditingController();
   get textEditingController => _textEditingController;
   newMessageNegociation() async {
-    update();
-    var key = await dababase.getKey();
-
-    // fn.loading('Boutique', 'Creation de la negociation en cours');
-    var token = await dababase.getKeyKen();
-    _idUser = Jwt.parseJwt(token['token'])['id'];
-
-    try {
-      var data = {
-        'codeNegociation': codeNegociation,
-        'keySecret': key,
-        "message": textEditingController.text
-      };
-      print(data);
-      textEditingController.text = '';
+    if (textEditingController.text.length != 0) {
+      _sending = true;
       update();
-      Response response = await negociationRepo.negociationMessageNew(data);
+      var key = await dababase.getKey();
 
-      if (response.statusCode == 200) {
+      // fn.loading('Boutique', 'Creation de la negociation en cours');
+      var token = await dababase.getKeyKen();
+      _idUser = Jwt.parseJwt(token['token'])['id'];
+
+      try {
+        var data = {
+          'codeNegociation': codeNegociation,
+          'keySecret': key,
+          "message": textEditingController.text
+        };
+        print(data);
         textEditingController.text = '';
         update();
-        if (response.body != null) {
-          if (response.body['status'] == true) {
-            print(response.body['data']);
-            // new SocketService().negociation(
-            //     response.body['data']['canal'], socketMessageNegociation);
-            print('-------------------------');
-            // _listMessageNegociation.add(response.body['data']);
-            // Get.toNamed(AppLinks.NEGOCIATION_NEW);
-            // fn.snackBar('Message', 'ok', true);
+        Response response = await negociationRepo.negociationMessageNew(data);
 
-            textEditingController.text = '';
-            update();
-            // update();
-            // fn.closeLoader();
+        if (response.statusCode == 200) {
+          textEditingController.text = '';
+          update();
+          if (response.body != null) {
+            if (response.body['status'] == true) {
+              print(response.body['data']);
+              // new SocketService().negociation(
+              //     response.body['data']['canal'], socketMessageNegociation);
+              print('-------------------------');
+              // _listMessageNegociation.add(response.body['data']);
+              // Get.toNamed(AppLinks.NEGOCIATION_NEW);
+              // fn.snackBar('Message', 'ok', true);
+              _sending = false;
+
+              textEditingController.text = '';
+              update();
+              // update();
+              // fn.closeLoader();
+            }
           }
         }
-      }
-    } catch (e) {
-      fn.closeLoader();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      } catch (e) {
+        fn.closeLoader();
+        fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+        _sending = false;
 
-      update();
-      //print(e);
+        update();
+        //print(e);
+      }
     }
   }
 

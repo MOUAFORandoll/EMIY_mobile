@@ -1,5 +1,5 @@
 import 'package:EMIY/controller/DataBaseController.dart';
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/BoutiqueModelLink.dart';
 import 'package:EMIY/repository/linkRepo.dart';
@@ -10,8 +10,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
 import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
-import 'package:EMIY/repository/ProductRepo.dart';
+import 'package:EMIY/model/data/ProduitModel.dart'; 
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
@@ -59,7 +58,6 @@ class LinkController extends GetxController {
 
     try {
       Response response = await linkRepo.getUniLinkProduit(codeProduit, key);
-      
 
       if (response.body != null) {
         if (response.body['data'] != null) {
@@ -83,7 +81,7 @@ class LinkController extends GetxController {
   }
 
   CartController _cart = Get.find();
-  ProductController _prodCont = Get.find();
+  ProduitController _prodCont = Get.find();
   int _quantity = 0;
   int get quantity => _quantity;
 
@@ -123,7 +121,7 @@ class LinkController extends GetxController {
   }
 
   void addItem() {
-    var index = _prodCont.addProductInPopular(produit);
+    var index = _prodCont.addProduitInPopular(produit);
     _cart.addItem(produit, _quantity, index, '0');
     _quantity = 0;
     _inCartItems = _cart.getQuantity(produit);
@@ -149,10 +147,10 @@ class LinkController extends GetxController {
 
           _isLoaded = 1;
 
-          update(); 
+          update();
         } else {
           // _isLoaded = 2;
-          // update(); 
+          // update();
         }
       }
     } catch (e) {

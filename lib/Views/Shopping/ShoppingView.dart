@@ -1,14 +1,9 @@
-import 'package:EMIY/components/Button/AppIconButton.dart';
+ 
 import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/app_button.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Button/app_button.dart'; 
+import 'package:EMIY/components/Text/bigText.dart'; 
 import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Widget/shoppingproductComponent.dart';
-import 'package:EMIY/controller/GeneralController.dart';
+import 'package:EMIY/components/Widget/shoppingproduitComponent.dart'; 
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -28,8 +23,10 @@ class ShoppingView extends StatelessWidget {
 
     return GetBuilder<CartController>(builder: (_controller) {
       return Scaffold(
-          body: CustomScrollView(controller: _scrollController, slivers: [
+          body: SafeArea(
+              child: CustomScrollView(controller: _scrollController, slivers: [
             SliverAppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
               elevation: 0,
               // Provide a standard title.
@@ -42,7 +39,7 @@ class ShoppingView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(children: [
                     Container(
-                        margin: EdgeInsets.only(top: Get.height * .020),
+                        margin: EdgeInsets.only(top: Get.height * .010),
                         padding: EdgeInsets.only(
                             left: Get.width * .030, right: Get.width * .030),
                         child: Row(
@@ -95,12 +92,12 @@ class ShoppingView extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: _controller.getItems.length,
                           // controller: _controller,
-                          itemBuilder: (_, index) => ShoppingproductComponent(
+                          itemBuilder: (_, index) => ShoppingproduitComponent(
                                 cartM: _controller.getItems[index],
                               ))),
               childCount: 1,
             ))
-          ]),
+          ])),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: ColorsApp.greySearch,

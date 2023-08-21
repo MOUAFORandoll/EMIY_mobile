@@ -219,7 +219,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
       vsync: this,
     )..repeat(reverse: true);
     _colorAnimation = ColorTween(
-      begin: ColorsApp.textBlue,
+      begin: ColorsApp.secondBlue,
       end: ColorsApp.orange,
     ).animate(_controller as Animation<double>) as Animation<Color>?;
     initUniLinks();

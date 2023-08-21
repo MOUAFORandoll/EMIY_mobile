@@ -221,7 +221,7 @@ class ManageBoutiqueUserView extends StatelessWidget {
                                     padding: EdgeInsets.all(Get.height * .02),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
-                                        color: ColorsApp.bleuLight),
+                                        color: ColorsApp.secondBlue),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,

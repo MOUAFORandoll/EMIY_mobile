@@ -2,7 +2,7 @@ import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Text/titleText.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/components/Widget/productComponent0.dart';
+import 'package:EMIY/components/Widget/produitComponent0.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/model/data/CommandeModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -82,7 +82,7 @@ class ProduitForCommande extends StatelessWidget {
                   // scrollDirection: Axis.horizontal,
                   itemCount: _commande.produitList.length,
                   itemBuilder: (_ctx, x) =>
-                      ProductComponent(produit: _commande.produitList[x])));
+                      ProduitComponent(produit: _commande.produitList[x])));
 
       // Builds 1000 ListTiles
     });

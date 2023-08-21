@@ -91,52 +91,54 @@ class ServiceClientController extends GetxController {
   TextEditingController _textEditingController = TextEditingController();
   get textEditingController => _textEditingController;
   newMessageMessageEchange() async {
-    _sending = true;
-    update();
-    var key = await dababase.getKey();
-
-    var keys = await dababase.getKeyKen();
-    var codeCommunication = keys['codeCommunication'];
-    print('codeCommunication-----------------${codeCommunication}');
-
-    try {
-      var data = {
-        'codeCommunication': codeCommunication,
-        'keySecret': key,
-        "message": textEditingController.text
-      };
-      print(data);
-      textEditingController.text = '';
+    if (textEditingController.text.length != 0) {
+      _sending = true;
       update();
-      Response response = await serviceClientRepo.echangeMessageNew(data);
+      var key = await dababase.getKey();
 
-      if (response.statusCode == 200) {
+      var keys = await dababase.getKeyKen();
+      var codeCommunication = keys['codeCommunication'];
+      print('codeCommunication-----------------${codeCommunication}');
+
+      try {
+        var data = {
+          'codeCommunication': codeCommunication,
+          'keySecret': key,
+          "message": textEditingController.text
+        };
+        print(data);
         textEditingController.text = '';
         update();
-        if (response.body != null) {
-          if (response.body['status'] == true) {
-            print(response.body);
-            print('-------------------------');
-            // _listMessageEchange.addAll((response.body['message'] as List)
-            //     .map((e) =>
-            //         MessageEchangeModel.fromJson(response.body['message']))
-            //     .toList());
-            _sending = false;
+        Response response = await serviceClientRepo.echangeMessageNew(data);
 
-            textEditingController.text = '';
-            update();
+        if (response.statusCode == 200) {
+          textEditingController.text = '';
+          update();
+          if (response.body != null) {
+            if (response.body['status'] == true) {
+              print(response.body);
+              print('-------------------------');
+              // _listMessageEchange.addAll((response.body['message'] as List)
+              //     .map((e) =>
+              //         MessageEchangeModel.fromJson(response.body['message']))
+              //     .toList());
+              _sending = false;
 
-            // fn.closeSnack();
+              textEditingController.text = '';
+              update();
+
+              // fn.closeSnack();
+            }
           }
         }
-      }
-    } catch (e) {
-      fn.closeSnack();
-      fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      _sending = false;
+      } catch (e) {
+        fn.closeSnack();
+        fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+        _sending = false;
 
-      update();
-      //print(e);
+        update();
+        //print(e);
+      }
     }
   }
 
@@ -179,7 +181,7 @@ class ServiceClientController extends GetxController {
   }
 
   noContain(message) {
-    return !_listMessageEchange.contains(message);
+    return !_listMessageEchange.any((elt) => elt.id == message.id);
   }
 
   connectSockey() async {

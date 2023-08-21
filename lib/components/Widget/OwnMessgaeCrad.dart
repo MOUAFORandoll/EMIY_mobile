@@ -40,7 +40,7 @@ class OwnMessageCard extends StatelessWidget {
                         elevation: 1,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
-                        color: Color(0xffdcf8c6),
+                        color: ColorsApp.secondBlue, // Color(0xffdcf8c6),
                         margin:
                             EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                         child: Stack(
@@ -64,7 +64,7 @@ class OwnMessageCard extends StatelessWidget {
                                         fontFamily: 'Montserrat',
                                         fontSize: 16,
                                         overflow: TextOverflow.fade,
-                                        color: ColorsApp.black,
+                                        color: ColorsApp.white,
                                       ))),
                             ),
                             Positioned(

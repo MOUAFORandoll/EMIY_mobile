@@ -26,9 +26,9 @@ class AppBoutiqueOption extends StatelessWidget {
               vertical: kMarginY / 50, horizontal: kMarginX * 2),
           margin: EdgeInsets.only(right: kMarginX),
           decoration: BoxDecoration(
-              color: select ? ColorsApp.bleuLight : null,
+              color: select ? ColorsApp.secondBlue : null,
               border: Border.all(
-                color: select ? ColorsApp.bleuLight : ColorsApp.grey,
+                color: select ? ColorsApp.secondBlue : ColorsApp.grey,
               ),
               borderRadius: BorderRadius.circular(10)),
           child: Text(title,

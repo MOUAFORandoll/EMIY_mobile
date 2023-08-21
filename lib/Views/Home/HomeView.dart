@@ -10,13 +10,13 @@ import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Widget/produitComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Text/titleText.dart';
-import 'package:EMIY/components/Widget/productComponentAll.dart';
+import 'package:EMIY/components/Widget/produitComponentAll.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
 import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -54,7 +54,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
     }
     if (_scrollController.offset + Get.height * 1.5 >=
         _scrollController.position.maxScrollExtent) {
-      Get.find<ProductController>().getPopularProduit();
+      Get.find<ProduitController>().getPopularProduit();
     }
   }
 
@@ -80,7 +80,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
     return GetBuilder<GeneralController>(
         builder: (generalController) =>
-            GetBuilder<ProductController>(builder: (prods) {
+            GetBuilder<ProduitController>(builder: (prods) {
               return RefreshIndicator(
                   color: ColorsApp.skyBlue,
                   onRefresh: () async {
@@ -107,8 +107,16 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                               .controllerT, // controller: Get.find<GeneralController>().scrollcontroller,
                       slivers: [
                         SliverAppBar(
-                          // backgroundColor: Colors.white,
+                          backgroundColor: ColorsApp.white,
                           elevation: 0,
+                          // leading: Builder(builder: (context) {
+                          //   return InkWell(
+                          //       child: Icon(
+                          //         Icons.menu,
+                          //         color: Colors.blue,
+                          //       ),
+                          //       onTap: () => Scaffold.of(context).openDrawer());
+                          // }),
                           floating: true,
                           flexibleSpace: Container(
                               margin: EdgeInsets.only(
@@ -532,10 +540,42 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        KHomeSearchField(
-                                          controllerField: controllerField,
-                                          prefix: null,
-                                        ),
+                                        InkWell(
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: ColorsApp.greySecond,
+                                                ),
+                                                height: kToolbarHeight / 1.7,
+                                                // width: kWidth * .75,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 4),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                        child: Text(
+                                                      "Rechercher",
+                                                      style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 14,
+                                                      ),
+                                                    )),
+                                                    InkWell(
+                                                        child: Icon(
+                                                          Icons.search,
+                                                          color: Colors.blue,
+                                                        ),
+                                                        onTap: () {}),
+                                                  ],
+                                                )),
+                                            onTap: () {
+                                              Get.toNamed(AppLinks.SEARCH);
+                                            }),
                                         Container(
                                           margin: EdgeInsets.symmetric(
                                               vertical: kMarginY * .7),
@@ -615,7 +655,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                         //     ),
                                         //     itemCount: prods.produitList.length,
                                         //     itemBuilder: (_ctx, index) =>
-                                        //         ProductComponentAll(
+                                        //         ProduitComponentAll(
                                         //           key: ValueKey<int>(prods
                                         //               .produitList[index].id),
                                         //           produit:
@@ -645,7 +685,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                           ),
                           // itemCount: prods.produitList.length,
                           // itemBuilder: (_ctx, index) =>
-                          //     ProductComponentAll(
+                          //     ProduitComponentAll(
                           //       key: ValueKey<int>(prods
                           //           .produitList[index].id),
                           //       produit:
@@ -665,7 +705,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                           // ),
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) =>
-                                ProductComponentAll(
+                                ProduitComponentAll(
                               key: ValueKey<int>(prods.produitList[index].id),
                               produit: prods.produitList[index],
                               index: index,

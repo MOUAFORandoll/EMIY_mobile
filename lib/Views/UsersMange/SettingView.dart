@@ -225,7 +225,7 @@ class SettingView extends StatelessWidget {
                                                     onPressed: () async {
                                                       await _controller
                                                           .newBoutique();
-                                                      // _controller.chageState(!_controller.addProduct);
+                                                      // _controller.chageState(!_controller.addProduit);
                                                     },
                                                   )
                                                 ]),
@@ -263,7 +263,7 @@ class SettingView extends StatelessWidget {
                                                 child: Text('Categorie',
                                                     style: TextStyle(
                                                       color:
-                                                          ColorsApp.bleuLight,
+                                                          ColorsApp.secondBlue,
                                                     )),
                                               ),
                                               _controller.isLoadedC == 0
@@ -324,7 +324,7 @@ class SettingView extends StatelessWidget {
                                                     'Localisation : Ou se trouve votre boutique ?',
                                                     style: TextStyle(
                                                       color:
-                                                          ColorsApp.bleuLight,
+                                                          ColorsApp.secondBlue,
                                                     )),
                                               ),
                                               InkWell(
@@ -493,8 +493,8 @@ class SettingView extends StatelessWidget {
                                                         //   color: ColorsApp.greenLight,
                                                         //   title: 'Ajouter Produit',
                                                         //   onTap: () async {
-                                                        //     await _controller.addProduit();
-                                                        //     // _controller.chageState(!_controller.addProduct);
+                                                        //     await _controller.ajouterProduit();
+                                                        //     // _controller.chageState(!_controller.addProduit);
                                                         //   },
                                                         // )
                                                       ])),

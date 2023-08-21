@@ -1,6 +1,7 @@
 class ApiRoutes {
   static const POPULAR_ALL = '/produit/read/client';
   static const POPULAR_PRODUCT = '/produit/read/popular';
+  static const INTEREST_PRODUCT = '/produit/read/interest';
   static const LINK_PRODUCT = '/link/produit/read';
   static const LINK_BOUTIQUE = '/link/boutique/read';
   static const CATEGORY_PRODUCT = '/category/read';

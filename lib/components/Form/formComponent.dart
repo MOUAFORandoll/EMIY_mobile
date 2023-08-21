@@ -55,7 +55,7 @@ class _FormComponentState extends State<FormComponent> {
         //     ),
         //     child: Text(widget.hint.toString(),
         //         style: TextStyle(
-        //           color: ColorsApp.bleuLight,
+        //           color: ColorsApp.secondBlue,
         //         ))),
         Container(
             margin: EdgeInsets.only(

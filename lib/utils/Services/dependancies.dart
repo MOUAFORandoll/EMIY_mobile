@@ -8,7 +8,7 @@
 // import 'package:EMIY/controller/categoryController.dart';
 // import 'package:EMIY/controller/categoryBoutiqueController.dart';
 // import 'package:EMIY/controller/managerController.dart';
-// import 'package:EMIY/controller/productController.dart';
+// import 'package:EMIY/controller/produitController.dart';
 // import 'package:EMIY/controller/searchController.dart';
 // import 'package:EMIY/repository/GeneralRepo.dart';
 // import 'package:EMIY/repository/BoutiqueRepo.dart';
@@ -21,7 +21,7 @@
 // import 'package:EMIY/repository/LivreurRepo.dart';
 // import 'package:EMIY/repository/ManageRepo.dart';
 // import 'package:EMIY/repository/categoryRepo.dart';
-// import 'package:EMIY/repository/popularProductRepo.dart';
+// import 'package:EMIY/repository/popularProduitRepo.dart';
 // import 'package:EMIY/utils/Services/ApiClient.dart';
 // import 'package:EMIY/utils/Services/storageService2.dart';
 // import 'package:EMIY/utils/database/DataBase.dart';
@@ -50,13 +50,13 @@
 //     Get.lazyPut(() => CommandeController(commandeRepo: Get.find()),
 //         fenix: true);
 //     Get.lazyPut(() => CategoryBoutiqueRepo(apiClient: Get.find()), fenix: true);
-//     Get.lazyPut(() => ProductRepo(apiClient: Get.find()), fenix: true);
+//     Get.lazyPut(() => ProduitRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => CategoryBoutiqueRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => BuyShoopingCartRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => TransgeneralRepo(apiClient: Get.find()), fenix: true);
 
-//     Get.lazyPut(() => ProductController(productRepo: Get.find()), fenix: true);
+//     Get.lazyPut(() => ProduitController(produitRepo: Get.find()), fenix: true);
 //     Get.lazyPut(() => CartController(), fenix: true);
 //     Get.lazyPut(() => BuyShopController(buySoppingCartRepo: Get.find()),
 //         fenix: true);
@@ -90,7 +90,7 @@
 
 //     Get.find<ManagerController>().newLocalisation();
 
-//     Get.find<ProductController>().getPopularProduit();
+//     Get.find<ProduitController>().getPopularProduit();
 
 //     Get.find<CartController>();
 
@@ -126,11 +126,11 @@
 
 //     Get.lazyPut(() => ManagerController(manageRepo: Get.find()));
 
-//     Get.lazyPut(() => ProductRepo(apiClient: Get.find()));
+//     Get.lazyPut(() => ProduitRepo(apiClient: Get.find()));
 //     Get.lazyPut(() => BoutiqueRepo(apiClient: Get.find()));
 //     Get.lazyPut(() => BuyShoopingCartRepo(apiClient: Get.find()));
 //     Get.lazyPut(() => TransgeneralRepo(apiClient: Get.find()));
-//     Get.lazyPut(() => ProductController(productRepo: Get.find()));
+//     Get.lazyPut(() => ProduitController(produitRepo: Get.find()));
 //     Get.lazyPut(() => CartController());
 //     Get.lazyPut(() => CommandeController(commandeRepo: Get.find()));
 
@@ -153,7 +153,7 @@
 //     Get.find<CommandeController>().getListCommandes();
 //     Get.find<ManagerController>().getUser();
 
-//     Get.find<ProductController>().getPopularProduit();
+//     Get.find<ProduitController>().getPopularProduit();
 //     Get.find<BoutiqueController>().getCategory();
 //     Get.find<CategoryBoutiqueController>().getCategory();
 //     Get.find<CategoryBoutiqueController>().getListBoutiques();

@@ -21,7 +21,7 @@ class btnCatListPV extends StatelessWidget {
           decoration: new BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: /* (active) ?  */
-                ColorsApp.bleuLight /* : Color(0x71755050) */,
+                ColorsApp.secondBlue /* : Color(0x71755050) */,
           ),
           child: Text(
             title,

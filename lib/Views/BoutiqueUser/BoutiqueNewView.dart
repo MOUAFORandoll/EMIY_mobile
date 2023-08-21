@@ -166,7 +166,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                                     margin: EdgeInsets.symmetric(vertical: 5),
                                     child: Text('Categorie',
                                         style: TextStyle(
-                                          color: ColorsApp.bleuLight,
+                                          color: ColorsApp.secondBlue,
                                         )),
                                   ),
                                   _controller.isLoadedC == 0
@@ -218,7 +218,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                                     margin: EdgeInsets.symmetric(vertical: 5),
                                     child: Text('Description',
                                         style: TextStyle(
-                                          color: ColorsApp.bleuLight,
+                                          color: ColorsApp.secondBlue,
                                         )),
                                   ),
                                   TextFormField(
@@ -268,7 +268,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                                     margin: EdgeInsets.symmetric(vertical: 5),
                                     child: Text('Localisation',
                                         style: TextStyle(
-                                          color: ColorsApp.bleuLight,
+                                          color: ColorsApp.secondBlue,
                                         )),
                                   ),
                                   InkWell(
@@ -300,7 +300,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
                             margin: EdgeInsets.symmetric(vertical: 5),
                             child: Text('Couverture',
                                 style: TextStyle(
-                                  color: ColorsApp.bleuLight,
+                                  color: ColorsApp.secondBlue,
                                 )),
                           ),
                           InkWell(

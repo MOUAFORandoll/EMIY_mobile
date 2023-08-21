@@ -233,11 +233,11 @@ import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Widget/produitComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Text/titleText.dart';
 import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/controller/popularproductController.dart';
+import 'package:EMIY/controller/popularproduitController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
@@ -299,7 +299,7 @@ class HomeView extends StatelessWidget {
                       return categorys.isLoaded == 0
                           ? Center(
                               child: CircularProgressIndicator(
-                                color: ColorsApp.bleuLight,
+                                color: ColorsApp.secondBlue,
                               ),
                             )
                           : categorys.isLoaded == 1
@@ -334,11 +334,11 @@ class HomeView extends StatelessWidget {
                             )),
                       ],
                     ),
-                    GetBuilder<ProductController>(builder: (prods) {
+                    GetBuilder<ProduitController>(builder: (prods) {
                       return prods.isLoadedP == 0
                           ? Center(
                               child: CircularProgressIndicator(
-                                color: ColorsApp.bleuLight,
+                                color: ColorsApp.secondBlue,
                               ),
                             )
                           : prods.isLoadedP == 1
@@ -350,7 +350,7 @@ class HomeView extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     itemCount: prods.produitList.length,
                                     itemBuilder: (_ctx, index) =>
-                                        ProductComponent(
+                                        ProduitComponent(
                                             produit: prods.produitList[index],
                                             index: index),
                                   ),

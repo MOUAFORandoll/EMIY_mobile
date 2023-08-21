@@ -49,7 +49,7 @@ class BoutiqueController extends GetxController {
   onInitData() {
     _listImgProduits = [];
     _listImgProduits.clear();
-    _addProduct = false;
+    _addProduit = false;
     // update();
   }
 
@@ -678,7 +678,7 @@ class BoutiqueController extends GetxController {
     return val < 0 ? '0' : val.toString();
   }
 
-  addProduit() async {
+  ajouterProduit() async {
     try {
       fn.loading('Produit', 'Ajout d\'un nouveau produit en cours');
       var key = await dababase.getKey();
@@ -971,13 +971,13 @@ class BoutiqueController extends GetxController {
     update();
   }
 
-  bool _addProduct = false;
-  bool get addProduct => _addProduct;
+  bool _addProduit = false;
+  bool get addProduit => _addProduit;
   chageState(i) {
-    _addProduct = i;
+    _addProduit = i;
     update();
-    //print(_addProduct);
-    //print(!_addProduct);
+    //print(_addProduit);
+    //print(!_addProduit);
   }
 
   List<ShortModel> _listShortBoutique = [];
@@ -1013,7 +1013,6 @@ class BoutiqueController extends GetxController {
     }
   }
 
-
   VideoPlayerController? controller;
 
   bool _initialise = false;
@@ -1044,7 +1043,7 @@ class BoutiqueController extends GetxController {
   onInitDataShort() {
     _videoShort = [];
     _videoShort.clear();
-    _addProduct = false;
+    _addProduit = false;
     // update();
   }
 
@@ -1317,6 +1316,4 @@ class BoutiqueController extends GetxController {
         return ProduitBoutiqueUserView();
     }
   }
-
-
 }

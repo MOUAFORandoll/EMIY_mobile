@@ -18,14 +18,14 @@ import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Text/bigtitleText0.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/productComponent.dart';
+import 'package:EMIY/components/Widget/produitComponent.dart';
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/components/Text/titleText.dart';
-import 'package:EMIY/components/Widget/productForBoutiqueComponent.dart';
-import 'package:EMIY/components/Widget/productForCatComponent.dart';
+import 'package:EMIY/components/Widget/produitForBoutiqueComponent.dart';
+import 'package:EMIY/components/Widget/produitForCatComponent.dart';
 import 'package:EMIY/controller/categoryController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -309,7 +309,7 @@ class BoutiqueView extends StatelessWidget {
                                           itemCount: _bscontroler
                                               .produitBoutiqueList.length,
                                           itemBuilder: (_ctx, index) =>
-                                              ProductForBoutiqueComponent(
+                                              ProduitForBoutiqueComponent(
                                                   produit: _bscontroler
                                                           .produitBoutiqueList[
                                                       index],
@@ -432,7 +432,7 @@ class BoutiqueView extends StatelessWidget {
       //                             itemCount:
       //                                 _bscontroler.produitBoutiqueList.length,
       //                             itemBuilder: (_ctx, index) =>
-      //                                 ProductForBoutiqueComponent(
+      //                                 ProduitForBoutiqueComponent(
       //                                     produit: _bscontroler
       //                                         .produitBoutiqueList[index],
       //                                     index: index)),
@@ -575,7 +575,7 @@ class BoutiqueView extends StatelessWidget {
                                   itemCount:
                                       _bscontroler.produitBoutiqueList.length,
                                   itemBuilder: (_ctx, index) =>
-                                      ProductForBoutiqueComponent(
+                                      ProduitForBoutiqueComponent(
                                           produit: _bscontroler
                                               .produitBoutiqueList[index],
                                           index: index)),

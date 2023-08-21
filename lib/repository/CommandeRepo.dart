@@ -18,7 +18,7 @@ class CommandeRepo extends GetxService {
   //   return response;
   // }
 
-  Future getListProductForComm(id) async {
+  Future getListProduitForComm(id) async {
     // try {
     Response response =
         await await apiClient.postData(ApiRoutes.USER_READ_COMMANDE_PRODUIT, {

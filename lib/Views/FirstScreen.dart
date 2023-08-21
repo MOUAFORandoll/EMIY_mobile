@@ -1,10 +1,10 @@
-import 'package:EMIY/Views/Home/SearchView.dart';
+import 'package:EMIY/Views/Search/SearchView.dart';
 import 'package:EMIY/Views/UsersMange/RegisterScreen.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/controller/productController.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/UniLinkService.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -89,470 +89,162 @@ class _FirstScreenState extends State<FirstScreen> {
   //   }
   // }
 
-  uniLink() async {
-    /**
-     * 
-     le lien de parainage est sous cette forme :
-     * https://emiy-shop.000webhostapp.com/{type}/trgg
-     *
-     * type : 
-     *    - produits => pour afficher un produit precis 
-     *    - subscribes => pour inscrire avec un parain
-     * 
+  // uniLink() async {
+  //   /**
+  //    *
+  //    le lien de parainage est sous cette forme :
+  //    * https://emiy-shop.000webhostapp.com/{type}/trgg
+  //    *
+  //    * type :
+  //    *    - produits => pour afficher un produit precis
+  //    *    - subscribes => pour inscrire avec un parain
+  //    *
 
-     */
-    try {
-      final uri = await getInitialUri();
-      if (uri == null) {
-        print('no initial uri');
-      } else {
-        var direction = uri.path.split('/');
-        var type = direction[1];
-        print('--${uri}---00-lien----------ici----------------------');
-        if (type == 'produits') {
-          var codeProduit = direction[2];
+  //    */
+  //   try {
+  //     final uri = await getInitialUri();
+  //     if (uri == null) {
+  //       print('no initial uri');
+  //     } else {
+  //       var direction = uri.path.split('/');
+  //       var type = direction[1];
+  //       print('--${uri}---00-lien----------ici----------------------');
+  //       if (type == 'produits') {
+  //         var codeProduit = direction[2];
 
-          print('----------codeProduit--------${codeProduit}------');
-          Get.find<LinkController>().getUniLinkProduit(codeProduit);
-          Get.toNamed(AppLinks.PRODUCT_FOR_LINK);
-        }
-        if (type == 'boutiques') {
-          var codeBoutique = direction[2];
+  //         print('----------codeProduit--------${codeProduit}------');
+  //         Get.find<LinkController>().getUniLinkProduit(codeProduit);
+  //         Get.toNamed(AppLinks.PRODUCT_FOR_LINK);
+  //       }
+  //       if (type == 'boutiques') {
+  //         var codeBoutique = direction[2];
 
-          print('----------codeBoutique--------${codeBoutique}------');
-          Get.find<LinkController>().getUniLinkBoutique(codeBoutique);
-          Get.toNamed(AppLinks.BOUTIQUE_FOR_LINK);
-        }
+  //         print('----------codeBoutique--------${codeBoutique}------');
+  //         Get.find<LinkController>().getUniLinkBoutique(codeBoutique);
+  //         Get.toNamed(AppLinks.BOUTIQUE_FOR_LINK);
+  //       }
 
-        if (type == 'subscribes') {
-          var codeParrain = direction[2];
-          print('----------codeParrain--------${codeParrain}------');
-          Get.find<ManagerController>().setCodeParrain(codeParrain);
-          Get.bottomSheet(
-            Container(
-                margin: EdgeInsets.only(
-                  top: kMarginY * 8,
-                ),
-                decoration: BoxDecoration(
-                    color: ColorsApp.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15))),
-                height: 800,
-                padding: EdgeInsets.symmetric(horizontal: kMarginX),
-                child: Column(children: [
-                  Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                            child: Text('Annuler'),
-                            onPressed: () {
-                              Get.back();
-                            },
-                          ),
-                          // TextButton(
-                          //   child: Text('Ajouter'),
-                          //   onPressed: () async {
-                          //     // await _controller.addShort();
-                          //     // _controller.chageState(!_controller.addProduct);
-                          //   },
-                          // )
-                        ]),
-                  ),
-                  Expanded(
-                      child: SingleChildScrollView(
-                          child: Column(children: [
-                    // _controller.listImgProduits.length != 0
-                    //     ? smallText(
-                    //         text: 'Listes images',
-                    //       )
-                    //     : Container(),
+  //       if (type == 'subscribes') {
+  //         var codeParrain = direction[2];
+  //         print('----------codeParrain--------${codeParrain}------');
+  //         Get.find<ManagerController>().setCodeParrain(codeParrain);
+  //         Get.bottomSheet(
+  //           Container(
+  //               margin: EdgeInsets.only(
+  //                 top: kMarginY * 8,
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   color: ColorsApp.white,
+  //                   borderRadius: BorderRadius.only(
+  //                       topLeft: Radius.circular(15),
+  //                       topRight: Radius.circular(15))),
+  //               height: 800,
+  //               padding: EdgeInsets.symmetric(horizontal: kMarginX),
+  //               child: Column(children: [
+  //                 Container(
+  //                   child: Row(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                       children: [
+  //                         TextButton(
+  //                           child: Text('Annuler'),
+  //                           onPressed: () {
+  //                             Get.back();
+  //                           },
+  //                         ),
+  //                         // TextButton(
+  //                         //   child: Text('Ajouter'),
+  //                         //   onPressed: () async {
+  //                         //     // await _controller.addShort();
+  //                         //     // _controller.chageState(!_controller.addProduit);
+  //                         //   },
+  //                         // )
+  //                       ]),
+  //                 ),
+  //                 Expanded(
+  //                     child: SingleChildScrollView(
+  //                         child: Column(children: [
+  //                   // _controller.listImgProduits.length != 0
+  //                   //     ? smallText(
+  //                   //         text: 'Listes images',
+  //                   //       )
+  //                   //     : Container(),
 
-                    Container(
-                        margin: EdgeInsets.only(
-                          top: 50,
-                        ),
-                        child: RegisterScreen())
-                  ])))
-                ])),
-            isScrollControlled: true,
-          );
-        }
-        print('got initial uri: $uri');
-      }
-      // var direction = uri!.path!
-    } on PlatformException {
-      // Platform messages may fail but we ignore the exception
-      print('falied to get initial uri');
-    } on FormatException catch (err) {
-      print('malformed initial uri');
-    }
-  }
+  //                   Container(
+  //                       margin: EdgeInsets.only(
+  //                         top: 50,
+  //                       ),
+  //                       child: RegisterScreen())
+  //                 ])))
+  //               ])),
+  //           isScrollControlled: true,
+  //         );
+  //       }
+  //       print('got initial uri: $uri');
+  //     }
+  //     // var direction = uri!.path!
+  //   } on PlatformException {
+  //     // Platform messages may fail but we ignore the exception
+  //     print('falied to get initial uri');
+  //   } on FormatException catch (err) {
+  //     print('malformed initial uri');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     // uniLink();
     return GetBuilder<GeneralController>(
         builder: (_controller) => Scaffold(
-              // extendBody for floating bar get better perfomance
-              // extendBody: true,
               backgroundColor: Colors.white,
-
+              // drawer: CustomDrawer(),
               body: SafeArea(child: _controller.buildContent()),
-
               bottomNavigationBar: _controller.buildBorderRadiusDesign(),
             ));
   }
-/* 
-  Widget _buildContent(index) {
-    switch (index) {
-      case 0:
-        return HomeView();
-      // case 1:
-      //   return SearchView();
-      case 1:
-        //   return ListBoutiqueView();
-        // case 2:
-        return CategoryView();
-
-      // case 2:
-      //   return SearchView();
-      case 2:
-        return ShoppingView();
-
-      case 3:
-        return ManageView();
-
-      // case 4:
-      //   return ProfileUserView();
-
-      default:
-        return HomeView();
-    }
-  }
-
-  Widget _buildBorderRadiusDesign() {
-    return GetBuilder<CartController>(builder: (_controller) {
-      return CustomNavigationBar(
-        iconSize: 30.0,
-        // elevation: 0.0,
-        scaleFactor: 0.4,
-        selectedColor: Color(0xff0c18fb),
-        strokeColor: Color(0x300c18fb),
-        unSelectedColor: Colors.grey[600],
-        backgroundColor: ColorsApp.greySearch,
-        // borderRadius: Radius.circular(15.0),
-        // isFloating: true,
-        // blurEffect: true,
-        items: [
-          CustomNavigationBarItem(
-              icon: Container(
-                height: kSmHeight / 1.7,
-                width: kSmWidth / 4.2,
-                child: SvgPicture.asset(
-                  Assets.home,
-                  width: 90,
-                  height: 90,
-                  color:
-                      _currentIndex == 0 ? ColorsApp.skyBlue : ColorsApp.grey,
-                ),
-              ),
-              title: Container(
-                  padding: EdgeInsets.only(bottom: 3),
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: _currentIndex == 0
-                              ? BorderSide(color: ColorsApp.skyBlue, width: 2)
-                              : BorderSide.none,
-                          top: BorderSide.none)),
-                  child: Text('home'.tr,
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                        color: _currentIndex == 0
-                            ? ColorsApp.skyBlue
-                            : ColorsApp.grey,
-                      )))), // CustomNavigationBarItem(
-
-          CustomNavigationBarItem(
-            icon: Container(
-              height: kSmHeight / 1.7,
-              width: kSmWidth / 4.2,
-              child: SvgPicture.asset(
-                Assets.grid1,
-                width: 80,
-                height: 80,
-                color: _currentIndex == 1 ? ColorsApp.skyBlue : ColorsApp.grey,
-              ),
-            ),
-            title: Container(
-                padding: EdgeInsets.only(bottom: 3),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: _currentIndex == 1
-                            ? BorderSide(color: ColorsApp.skyBlue, width: 2)
-                            : BorderSide.none,
-                        top: BorderSide.none)),
-                child: Text('categories'.tr,
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      color: _currentIndex == 1
-                          ? ColorsApp.skyBlue
-                          : ColorsApp.grey,
-                    ))),
-          ),
-
-          CustomNavigationBarItem(
-            icon: Container(
-              height: kSmHeight / 1.7,
-              width: kSmWidth / 4.2,
-              child: SvgPicture.asset(
-                Assets.shoppingCart,
-                width: 90,
-                height: 90,
-                color: _currentIndex == 2 ? ColorsApp.skyBlue : ColorsApp.grey,
-              ),
-            ),
-            title: Container(
-                padding: EdgeInsets.only(bottom: 3),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: _currentIndex == 2
-                            ? BorderSide(color: ColorsApp.skyBlue, width: 2)
-                            : BorderSide.none,
-                        top: BorderSide.none)),
-                child: Text('Shop',
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      color: _currentIndex == 2
-                          ? ColorsApp.skyBlue
-                          : ColorsApp.grey,
-                    ))),
-          ),
-
-          CustomNavigationBarItem(
-            icon: Container(
-              height: kSmHeight / 1.7,
-              width: kSmWidth / 4.2,
-              child: Icon(
-                Icons.settings,
-                size: 25,
-                color: _currentIndex == 3 ? ColorsApp.skyBlue : ColorsApp.grey,
-              ),
-            ),
-            title: Container(
-                padding: EdgeInsets.only(bottom: 3),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: _currentIndex == 3
-                            ? BorderSide(color: ColorsApp.skyBlue, width: 2)
-                            : BorderSide.none,
-                        top: BorderSide.none)),
-                child: Text('setting'.tr,
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      color: _currentIndex == 3
-                          ? ColorsApp.skyBlue
-                          : ColorsApp.grey,
-                    ))),
-
-            // badgeCount: _badgeCounts[4],
-            // showBadge: _badgeShows[4],
-          ),
-          // CustomNavigationBarItem(
-          //   icon: Icon(Icons.hourglass_disabled),
-          //   badgeCount: _badgeCounts[4],
-          //   showBadge: _badgeShows[4],
-          // ),
-        ],
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          if (index == 0) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Get.find<ProductController>().restoreScrollPosition();
-            });
-          }
-        },
-      );
-    });
-  }
- */
 }
 
-/**
- * import 'package:EMIY/components/Button/btnCatList.dart';
-import 'package:EMIY/components/Button/btnCatListPV.dart';
-import 'package:EMIY/components/Button/button.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/productComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Text/titleText.dart';
-import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/controller/popularproductController.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/functions/viewFunctions.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-class HomeView extends StatelessWidget {
-  HomeView({Key? key}) : super(key: key);
-  ScrollController _scrollController = new ScrollController();
-
+class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(controller: _scrollController, slivers: [
-     
-      SliverAppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        // Provide a standard title.
-        // title: Text('title'),
-        // Allows the user to reveal the app bar if they begin scrolling
-        // back up the list of items.
-        floating: true,
-        // Display a placeholder widget to visualize the shrinking size.
-        flexibleSpace: Container(
-          margin: EdgeInsets.only(top: Get.height * .030, left: 0),
-          padding:
-              EdgeInsets.only(left: Get.width * .030, right: Get.width * .030),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            BigtitleText(text: 'Home', bolder: true),
-            Container(
-                child: InkWell(
-                    child: Icon(Icons.search),
-                    onTap: () => Scaffold.of(context).openDrawer())
-                // padding: EdgeInsets.only(right: 10),
-                ),
-          ]),
-
-          /*   onTap: () => filterDest() */
-        ),
-        // Make the initial height of the SliverAppBar larger than normal.
-        expandedHeight: 60,
+    return Drawer(
+      width: kWidth / 1.35,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text('John Doe'),
+            accountEmail: Text('john.doe@example.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Icon(Icons.person),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              // Navigate to the home page or perform an action
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () {
+              // Navigate to the settings page or perform an action
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            onTap: () {
+              // Perform logout logic
+              Navigator.pop(context);
+            },
+          ),
+        ],
       ),
-
-      SliverList(
-       
-        delegate: SliverChildBuilderDelegate(
-          // The builder function returns a ListTile with a title that
-          // displays the index of the current item.
-          (context, index) => Container(
-              margin: EdgeInsets.symmetric(horizontal: kMarginX),
-              child: SingleChildScrollView(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    titleText(text: 'Categorie'),
-                    GetBuilder<CategoryController>(builder: (categorys) {
-                      return categorys.isLoaded == 0
-                          ? Center(
-                              child: CircularProgressIndicator(
-                                color: ColorsApp.bleuLight,
-                              ),
-                            )
-                          : categorys.isLoaded == 1
-                              ? Container(
-                                  height: kSmHeight,
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: kMarginY * .2),
-                                  child: ListView.builder(
-                                    itemCount: categorys.categoryList.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (_ctx, index) =>
-                                        CategoryComponent(
-                                      category: categorys.categoryList[index],
-                                    ),
-                                  ),
-                                )
-                              : Center(
-                                  child: smallText(
-                                  text: 'error',
-                                ));
-                    }),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        titleText(text: 'Populaire(s)'),
-                        Container(
-                            margin: EdgeInsets.only(
-                                top: Get.height * .005, left: Get.width * .008),
-                            child: Icon(
-                              Icons.arrow_forward_ios_outlined,
-                              // color: Colors.white,
-                            )),
-                      ],
-                    ),
-                    GetBuilder<ProductController>(builder: (prods) {
-                      return prods.isLoadedP == 0
-                          ? Center(
-                              child: CircularProgressIndicator(
-                                color: ColorsApp.bleuLight,
-                              ),
-                            )
-                          : prods.isLoadedP == 1
-                              ? Container(
-                                  height: kMdHeight * .25,
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: kMarginY * .2),
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: prods.produitList.length,
-                                    itemBuilder: (_ctx, index) =>
-                                        ProductComponent(
-                                            produit: prods.produitList[index],
-                                            index: index),
-                                  ),
-                                )
-                              : Center(
-                                  child: smallText(
-                                  text: 'error',
-                                ));
-                    }),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        titleText(text: 'All'),
-                        Container(
-                            margin: EdgeInsets.only(
-                                top: Get.height * .005, left: Get.width * .008),
-                            child: Icon(
-                              Icons.arrow_forward_ios_outlined,
-                              // color: Colors.white,
-                            )),
-                      ],
-                    ),
-                    SingleChildScrollView(
-                        child: GridView.builder(
-                            // physics: NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 30.0,
-                                    mainAxisSpacing: 1.0),
-                            itemCount: 200,
-                            itemBuilder: (_ctx, index) =>
-                                Text(index.toString())))
-                  ]))),
-
-          // Builds 1000 ListTiles
-          childCount: 1,
-        ),
-      )
-    ]);
+    );
   }
 }
-
- */

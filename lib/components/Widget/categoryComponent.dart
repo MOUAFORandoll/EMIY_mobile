@@ -1,4 +1,5 @@
 // ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
@@ -36,7 +37,8 @@ class CategoryComponent extends StatelessWidget {
                 padding: EdgeInsets.all(kMarginX),
                 child: Text(category.libelle,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: ColorsApp.greyFirst, fontSize: 12)),
+                    style:
+                        TextStyle(color: ColorsApp.primaryBlue, fontSize: 12)),
               ),
               Container(
                 child: CachedNetworkImage(
@@ -62,12 +64,7 @@ class CategoryComponent extends StatelessWidget {
                         ));
                   },
                   placeholder: (context, url) {
-                    return Container(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: ColorsApp.skyBlue,
-                      )),
-                    );
+                    return ShimmerBox();
                   },
                   errorWidget: (context, url, error) {
                     return Container(

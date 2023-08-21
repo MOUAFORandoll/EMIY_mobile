@@ -9,7 +9,7 @@ class ThemeButtonWidget extends StatefulWidget {
 }
 
 class _ThemeButtonWidgetState extends State<ThemeButtonWidget> {
-  Color icon = ColorsApp.blue;
+  Color icon = ColorsApp.primaryBlue;
   @override
   Widget build(BuildContext context) {
     return IconButton(

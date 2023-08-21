@@ -5,7 +5,7 @@ import 'package:EMIY/components/Widget/Conversation.dart';
 import 'package:EMIY/components/Widget/NotificationComponent.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/components/Widget/productComponent0.dart';
+import 'package:EMIY/components/Widget/produitComponent0.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/model/data/CommandeModel.dart';

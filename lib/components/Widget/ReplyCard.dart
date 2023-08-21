@@ -49,7 +49,7 @@ class ReplyCard extends StatelessWidget {
                     elevation: 1,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
-                    color: Colors.blueAccent,
+                    color: ColorsApp.greyTi,
                     margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     child: Stack(
                       children: [
@@ -72,7 +72,7 @@ class ReplyCard extends StatelessWidget {
                                     fontFamily: 'Montserrat',
                                     fontSize: 16,
                                     overflow: TextOverflow.fade,
-                                    color: ColorsApp.black,
+                                    color: ColorsApp.secondBlue,
                                   ))),
                         ),
                         Positioned(

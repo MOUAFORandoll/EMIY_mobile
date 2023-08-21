@@ -1,5 +1,6 @@
 import 'package:EMIY/components/Button/AppIconSendButton.dart';
 import 'package:EMIY/components/Widget/InputMessaage.dart';
+import 'package:EMIY/components/Widget/BoxInputMessaage.dart';
 import 'package:EMIY/components/Widget/OwnMessgaeCrad.dart';
 import 'package:EMIY/components/Widget/ReplyCard.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
@@ -53,17 +54,10 @@ class ServiceClientView extends StatelessWidget {
                     // height: 170,
                     margin: EdgeInsets.symmetric(horizontal: 2),
                     decoration: BoxDecoration(color: ColorsApp.white),
-                    child: Row(
-                      children: [
-                        InputMessaage(
-                          controller: _sc.textEditingController,
-                        ),
-                        AppIconSendButton(
-                          icon: Icons.send,
-                          sending: _sc.sending,
-                          onTap: () => _sc.newMessageMessageEchange(),
-                        ),
-                      ],
+                    child: BoxInputMessaage(
+                      controller: _sc.textEditingController,
+                      sending: _sc.sending,
+                      onTap: () => _sc.newMessageMessageEchange(),
                     ),
                   ),
                 )

@@ -8,7 +8,7 @@ class ContactUsButton extends StatefulWidget {
 }
 
 class _ContactUsButtonState extends State<ContactUsButton> {
-  Color icon = ColorsApp.blue;
+  Color icon = ColorsApp.secondBlue;
   @override
   Widget build(BuildContext context) {
     return IconButton(

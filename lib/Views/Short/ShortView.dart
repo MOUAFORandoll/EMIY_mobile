@@ -1,10 +1,15 @@
+import 'package:EMIY/Views/Produit/ProduitViewShort.dart';
 import 'package:EMIY/components/Button/IconButtonF.dart';
 import 'package:EMIY/components/ShortComponent/shortAction.dart';
+import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/components/Widget/app_empty.dart';
 import 'package:EMIY/controller/ShortController.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -94,7 +99,7 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
           children: [
             _ShortController.listShort.length == 0 ||
                     _ShortController.controller == null
-                ? Container(child: AppLoading())
+                ? AppLoading()
                 : PageView.builder(
                     itemCount: _ShortController.listShort.length,
                     scrollDirection: Axis.vertical,
@@ -102,6 +107,7 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                     onPageChanged: (index) {
                       index = index % (_ShortController.listShort.length);
                       _ShortController.controller.pause();
+                      print('-------------------00000000000000000000000000');
                       _ShortController.changeVideo(index);
                       _ShortController.setCurrent(index);
                     },
@@ -142,52 +148,110 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                       );
                     },
                   ),
-            _ShortController.initialise
-                ? Positioned(
-                    bottom: 2,
-                    child: Container(
-                        height: 8,
-                        width: kWidth,
-                        child: VideoProgressIndicator(
-                            _ShortController.controller!,
-                            colors: VideoProgressColors(
-                                playedColor: Color.fromARGB(255, 31, 59, 151)),
-                            allowScrubbing: true)))
-                : Container(),
-            _ShortController.initialise
-                ? Positioned(
-                    top: _heartPosition.dy - 40,
-                    left: _heartPosition.dx - 40,
-                    child: _showHeart
-                        ? ScaleTransition(
-                            scale: _heartAnimation,
-                            child: Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                              size: 80,
-                            ),
-                          )
-                        : Container(),
-                  )
-                : Container(),
-            _ShortController.initialise
-                ? Positioned(
-                    top: kHeight / 3,
-                    left: kWidth / 1.3,
-                    child: Container(
-                        child: InkWell(
-                      child: ShortAction(
-                        short: _ShortController
-                            .listShort[_ShortController.currentShort],
-                      ),
-                      onTap: () {
-                        _ShortController.controller!.pause();
+            if (_ShortController.initialise)
+              Positioned(
+                bottom: 15,
+                left: 10,
+                child: Container(
+                    alignment: Alignment.center,
+                    width: kWidth,
+                    height: kHeight * .1,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _ShortController
+                            .listShort[_ShortController.currentShort]
+                            .produits
+                            .length,
+                        itemBuilder: (ctx, i) => InkWell(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  color: ColorsApp.greySecond,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                child: CachedNetworkImage(
+                                  height: kHeight * .09,
+                                  width: kWidth * .17,
+                                  fit: BoxFit.cover,
+                                  imageUrl: _ShortController
+                                      .listShort[_ShortController.currentShort]
+                                      .produits[i]
+                                      .images[0]
+                                      .src,
+                                  imageBuilder: (context, imageProvider) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        color: ColorsApp.greySecond,
+                                        borderRadius: BorderRadius.circular(8),
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  placeholder: (context, url) {
+                                    return ShimmerBox(height: kHeight * .09);
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return CircleAvatar(
+                                        backgroundColor: ColorsApp.skyBlue,
+                                        radius: 50,
+                                        backgroundImage: AssetImage(
+                                            "assets/images/error.gif"));
+                                  },
+                                )),
+                            onTap: () async {
+                              Get.to(ProduitViewShort(
+                                produit: _ShortController
+                                    .listShort[_ShortController.currentShort]
+                                    .produits[i],
+                              ));
+                            }))),
+              ),
+            if (_ShortController.initialise)
+              Positioned(
+                  bottom: 2,
+                  child: Container(
+                      height: 8,
+                      width: kWidth,
+                      child: VideoProgressIndicator(
+                          _ShortController.controller!,
+                          colors: VideoProgressColors(
+                              playedColor: Color.fromARGB(255, 31, 59, 151)),
+                          allowScrubbing: true))),
+            if (_ShortController.initialise)
+              Positioned(
+                top: _heartPosition.dy - 40,
+                left: _heartPosition.dx - 40,
+                child: _showHeart
+                    ? ScaleTransition(
+                        scale: _heartAnimation,
+                        child: Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: 80,
+                        ),
+                      )
+                    : Container(),
+              ),
+            if (_ShortController.initialise)
+              Positioned(
+                  top: kHeight / 4,
+                  left: kWidth / 1.3,
+                  child: Container(
+                      child: InkWell(
+                    child: ShortAction(
+                      short: _ShortController
+                          .listShort[_ShortController.currentShort],
+                    ),
+                    onTap: () {
+                      _ShortController.controller!.pause();
 
-                        Get.toNamed(AppLinks.BOUTIQUE +
-                            '?lienBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.lienBoutique.toString()}note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
-                      },
-                    )))
-                : Container(),
+                      Get.toNamed(AppLinks.BOUTIQUE +
+                          '?lienBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.lienBoutique.toString()}note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
+                    },
+                  ))),
           ],
         ),
       );
