@@ -75,7 +75,7 @@ dependencies:
   socket_io_client: any
   web_socket_channel: any
   animated_text_kit: ^4.2.1 
-  cached_video_player: ^2.0.4
+  # cached_video_player: ^2.0.4
 
 dev_dependencies:
   flutter_launcher_icons: ^0.8.0

@@ -14,7 +14,7 @@ class BoutiqueUserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BoutiqueController>(builder: (_bcontroller) {
-      return Scaffold(
+      return /* Scaffold(
           appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -38,7 +38,7 @@ class BoutiqueUserView extends StatelessWidget {
                           ),
                         ])),
               ]),
-          body: CustomScrollView(controller: _scrollController, slivers: [
+          body:  */CustomScrollView(controller: _scrollController, slivers: [
             SliverAppBar(
               backgroundColor: Colors.white,
               leading: Container(),
@@ -88,7 +88,7 @@ class BoutiqueUserView extends StatelessWidget {
               // displays the index of the current item.
               (context, index) => _bcontroller.boutiqueContent(), childCount: 1,
             ))
-          ]));
+          ]);
     });
   }
 }

@@ -197,6 +197,7 @@ class _FirstScreenState extends State<FirstScreen> {
         builder: (_controller) => Scaffold(
               backgroundColor: Colors.white,
               // drawer: CustomDrawer(),
+              floatingActionButton: _controller.floatingActionButton(),
               body: SafeArea(child: _controller.buildContent()),
               bottomNavigationBar: _controller.buildBorderRadiusDesign(),
             ));

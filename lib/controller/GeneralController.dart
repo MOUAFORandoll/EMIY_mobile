@@ -5,10 +5,17 @@ import 'package:EMIY/Views/Space/MySpace.dart';
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Space/Notifications/NotificationView.dart';
 import 'package:EMIY/Views/Space/ServiceClient/ServiceClientView.dart';
+import 'package:EMIY/components/Button/IconButtonF.dart';
+import 'package:EMIY/components/Button/button.dart';
+import 'package:EMIY/components/Button/customBtn.dart';
+import 'package:EMIY/components/Form/formComponent2.dart';
+import 'package:EMIY/components/Widget/SelectComponent.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
+import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/CartModel.dart';
@@ -57,6 +64,7 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 
 class GeneralController extends GetxController {
   final GeneralRepo generalRepo;
@@ -322,6 +330,232 @@ class GeneralController extends GetxController {
       default:
         return HomeView();
     }
+  }
+
+  Widget floatingActionButton() {
+    return GetBuilder<ManagerController>(
+        builder: (manage) => GetBuilder<TransactionController>(
+            builder: (transaction) => manage.current == 4
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: ColorsApp.grey,
+                    ),
+                    padding: EdgeInsets.only(
+                        left: kMdWidth / 6,
+                        right: kMdWidth / 6,
+                        top: 10,
+                        bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Button(
+                            borderRadius: 15.0,
+                            width: Get.size.width * .4,
+                            margin: EdgeInsets.only(
+                                top: Get.size.height * .025, bottom: 0),
+                            height: Get.size.height * .08,
+                            loaderColor: Colors.white,
+                            title: "Depot",
+                            textColor: Colors.white,
+                            itemColor: Colors.grey,
+                            borderColor: Colors.transparent,
+                            state: false,
+                            enabled: true,
+                            onTap: () async {
+                              Get.bottomSheet(
+                                Container(
+                                  height: kHeight * .7,
+                                  decoration: BoxDecoration(
+                                      color: ColorsApp.grey,
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15))),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: kSmWidth * .07,
+                                      vertical: kSmHeight * .09),
+                                  // height: 800,
+
+                                  child: SingleChildScrollView(
+                                      child: Column(
+                                    // mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      FormComponent2(
+                                          icon: Icons.money,
+                                          type: 0,
+                                          // controller: .montant,
+                                          enabled: true,
+                                          kType: TextInputType.number,
+                                          titre: 'Montant',
+                                          hint: ""),
+                                      FormComponent2(
+                                          icon: Icons.phone,
+                                          type: 0,
+                                          // controller: phone,
+                                          kType: TextInputType.number,
+                                          enabled: true,
+                                          titre: 'phone',
+                                          hint: " "),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 5),
+                                        child: Text('Moyen de recharge'),
+                                      ),
+                                      GetBuilder<GeneralController>(
+                                          builder: (_Acontroller) => Container(
+                                              margin: EdgeInsets.only(
+                                                  // top: Get.size.height * .015,
+                                                  bottom:
+                                                      Get.size.height * .025),
+                                              // decoration: BoxDecoration(
+                                              //     borderRadius: BorderRadius.circular(15),
+                                              //     color: Colors.white),
+                                              // padding: EdgeInsets.only(
+                                              //   top: 25,
+                                              // ),
+                                              child: Column(
+                                                children: [
+                                                  SingleChildScrollView(
+                                                      child: ListView.builder(
+                                                          physics:
+                                                              NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount:
+                                                              _Acontroller
+                                                                  .lmodePaiement
+                                                                  .length,
+                                                          itemBuilder: (_ctx,
+                                                                  index) =>
+                                                              SelectComponent(
+                                                                  select: index +
+                                                                          1 ==
+                                                                      selected,
+                                                                  mode: lmodePaiement[
+                                                                      index])))
+                                                ],
+                                              ))),
+                                      CustomBtn(
+                                          color: ColorsApp.greenLight,
+                                          title: 'Valider',
+                                          onTap: () async {
+                                            var _manager =
+                                                Get.find<ManagerController>();
+                                            var name = _manager.User.nom;
+                                            var prenom =
+                                                _manager.User.prenom.toString();
+
+                                            var mode =
+                                                Get.find<GeneralController>()
+                                                    .selected;
+                                            var keySecret = await _manager
+                                                .dababase
+                                                .getKey();
+                                            // var data = {
+                                            //   'keySecret': keySecret,
+                                            //   'montant': montant.text,
+                                            //   'numeroClient': phone.text,
+                                            //   'nom': name,
+                                            //   'prenom': prenom,
+                                            //   'idModePaiement': mode
+                                            // };
+                                            // //print(data);
+                                            // await transControll.depot(data);
+                                          })
+                                    ],
+                                  )),
+                                ),
+                              );
+                            }),
+                        Button(
+                            borderRadius: 15.0,
+                            width: Get.size.width * .4,
+                            margin: EdgeInsets.only(
+                                top: Get.size.height * .025, bottom: 0),
+                            height: Get.size.height * .08,
+                            loaderColor: Colors.white,
+                            title: "Retirer",
+                            textColor: Colors.white,
+                            itemColor: Colors.grey,
+                            borderColor: Colors.transparent,
+                            state: false,
+                            enabled: true,
+                            onTap: () async {
+                              Get.bottomSheet(
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: ColorsApp.grey,
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15))),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: kSmWidth * .07,
+                                      vertical: kSmHeight * .09),
+                                  // height: 800,
+
+                                  child: SingleChildScrollView(
+                                      child: Column(
+                                    // mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      FormComponent2(
+                                          icon: Icons.money,
+                                          type: 0,
+                                          // controller: montant,
+                                          enabled: true,
+                                          kType: TextInputType.number,
+                                          titre: 'Montant',
+                                          hint: ""),
+                                      FormComponent2(
+                                          icon: Icons.phone,
+                                          type: 0,
+                                          // controller: phone,
+                                          kType: TextInputType.number,
+                                          enabled: true,
+                                          titre: 'phone',
+                                          hint: " "),
+                                      FormComponent2(
+                                          icon: Icons.lock,
+                                          type: 0,
+                                          // controller: password,
+                                          enabled: true,
+                                          titre: 'password',
+                                          hint: " "),
+                                      CustomBtn(
+                                          color: ColorsApp.greenLight,
+                                          title: 'Retirer',
+                                          onTap: () async {
+                                            // var data = {
+                                            //   'keySecret': new GetStorage()
+                                            //       .read('keySecret'),
+                                            //   'montant': montant.text,
+                                            //   'phone': phone.text,
+                                            // };
+                                            //print(data);
+                                            // await transControll.retrait(data);
+                                          })
+                                    ],
+                                  )),
+                                ),
+                              );
+                            }),
+                      ],
+                    ),
+                  )
+                : manage.current == 3
+                    ? FloatingActionButton(
+                        onPressed: () {
+                          Share.share(
+                              'Inscris-toi avec mon lien et rejoins emiy : ' +
+                                  manage.lienParrainnage,
+                              subject: 'Look what I made!');
+                        },
+                        child: Container(
+                            child: IconButtonF(
+                          color: ColorsApp.black,
+                          icon: Icons.share,
+                        )),
+                      )
+                    : Container()));
   }
 
   Widget buildBorderRadiusDesign() {

@@ -29,45 +29,22 @@ class CommandeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CommandeController>(builder: (_commande) {
-      return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: AppBackButton(),
-            actions: [
-              Container(
-                  margin: EdgeInsets.only(top: Get.height * .020),
-                  padding: EdgeInsets.only(
-                      left: Get.width * .030, right: Get.width * .030),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: AppTitleRight(
-                              title: 'ycom'.tr,
-                              description: 'yscom'.tr,
-                              icon: null),
-                          margin: EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width * .005),
-                        ),
-                      ])),
-            ]),
-        body: _commande.isLoaded == 0
-            ? AppLoading()
-            : _commande.commandeList.length == 0
-                ? Container(
-                    height: kHeight, child: AppEmpty(title: 'Aucune Commande'))
-                : ListView.builder(
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: _commande.commandeList.length,
-                    itemBuilder: (_ctx, index) =>
-                        _commande.commandeList[index].id != null
-                            ? CommandeComponent(
-                                commande: _commande.commandeList[index],
-                              )
-                            : Text(''),
-                  ),
-      );
+      return _commande.isLoaded == 0
+          ? AppLoading()
+          : _commande.commandeList.length == 0
+              ? Container(
+                  height: kHeight / 2,
+                  child: AppEmpty(title: 'Aucune Commande'))
+              : ListView.builder(
+                  // scrollDirection: Axis.horizontal,
+                  itemCount: _commande.commandeList.length,
+                  itemBuilder: (_ctx, index) =>
+                      _commande.commandeList[index].id != null
+                          ? CommandeComponent(
+                              commande: _commande.commandeList[index],
+                            )
+                          : Text(''),
+                );
     });
   }
 }

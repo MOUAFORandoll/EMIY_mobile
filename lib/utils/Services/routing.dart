@@ -3,7 +3,7 @@ import 'package:EMIY/Views/BoutiqueUser/BoutiqueNewView.dart';
 import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
-import 'package:EMIY/Views/CategoryBoutique/UserAbonnementView.dart';
+import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
 import 'package:EMIY/Views/Search/SearchView.dart';
 import 'package:EMIY/Views/Link/BoutiqueViewForLink.dart';
 import 'package:EMIY/Views/Space/MySpace.dart';

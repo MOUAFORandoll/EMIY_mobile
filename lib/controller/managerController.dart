@@ -1,5 +1,10 @@
 import 'dart:async';
 
+import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
+import 'package:EMIY/Views/UsersMange/InteretsView.dart';
+import 'package:EMIY/Views/UsersMange/ParrainnageView.dart';
+import 'package:EMIY/Views/UsersMange/PreferenceView.dart';
+import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/CompteModel.dart';
 import 'package:EMIY/model/data/ProduitCategoryModel.dart';
@@ -20,6 +25,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../Views/Commandes/CommandeView.dart';
 import 'boutiqueController.dart';
 
 class ManagerController extends GetxController {
@@ -574,6 +580,53 @@ class ManagerController extends GetxController {
       _fieulListSave = _fieulList;
     } catch (e) {
       //print(e);
+    }
+  }
+
+  int _current = 0;
+  int get current => _current;
+  List title = [
+    'Profile',
+    'Commandes',
+    'Abonnement',
+    'Affilies',
+    'Transactions',
+    'Centre d\'iteret',
+    'Preferences',
+    'Ma boutique',
+  ];
+
+  setContain(i) {
+    _current = i;
+    update();
+  }
+
+  Widget buildContent() {
+    switch (_current) {
+      case 0:
+        return Container();
+
+      case 1:
+        return CommandeView();
+
+      case 2:
+        return UserAbonnementView();
+
+      case 3:
+        return ParrainnageView();
+
+      case 5:
+        return InteretsView();
+      case 6:
+        return PreferenceView();
+      case 7:
+        return BoutiqueUserView();
+
+      // case 4:
+      //   return ProfileUserView();
+
+      default:
+        return Container();
     }
   }
 }

@@ -28,54 +28,7 @@ class InteretsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProduitController>(
         builder: (produit) =>
-            GetBuilder<CategoryBoutiqueController>(builder: (categorys) {
-              return Scaffold(
-                  body: SafeArea(
-                      child: CustomScrollView(slivers: [
-                SliverAppBar(
-                  backgroundColor: Colors.white,
-                  elevation: 0,
-                  centerTitle: false,
-                  leading: IconButtonF(
-                    icon: Icons.arrow_back_ios_new,
-                    color: ColorsApp.black,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  actions: [
-                    Container(
-                        margin: EdgeInsets.only(left: 0, top: 20)
-                            .add(EdgeInsets.symmetric(horizontal: kMarginX)),
-                        padding: EdgeInsets.only(
-                            left: Get.width * .030, right: Get.width * .030),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                  child: Text('Interets',
-                                      style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: ColorsApp.black,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16))),
-                              // Container(
-                              //     child: Text('Vous avez 5 notifications',
-                              //         style: TextStyle(
-                              //             fontFamily: 'Montserrat',
-                              //             color: ColorsApp.greyFirst,
-                              //             fontWeight: FontWeight.w500,
-                              //             fontSize: 12))),
-                            ])),
-                  ],
-                  // expandedHeight: 40,
-                  floating: false,
-                  pinned: true,
-                ),
-                SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        (context, index) => Container(
+            GetBuilder<CategoryBoutiqueController>(builder: (categorys)=> Container(
                               child: SingleChildScrollView(
                                   child: Column(
                                 children: [
@@ -164,9 +117,7 @@ class InteretsView extends StatelessWidget {
                                   ),
                                 ],
                               )),
-                            ),
-                        childCount: 1)),
-              ])));
-            }));
+            ))
+          );
   }
 }
