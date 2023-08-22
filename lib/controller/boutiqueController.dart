@@ -1205,8 +1205,9 @@ class BoutiqueController extends GetxController {
   int _isAbUseLoad = 0;
   int get isAbUseLoad => _isAbUseLoad;
   Future<void> getListAbonnementForUser() async {
-    _isAbUseLoad = 0;
-    update(); // //print('***short******************response**********');
+    //_isAbUseLoad = 0;
+    //update(); //print('***short******************response**********');
+
     var key = await dababase.getKey();
 
     try {
@@ -1225,6 +1226,8 @@ class BoutiqueController extends GetxController {
                 .toList());
             _isAbUserPage++;
             _isAbUseLoad = 1;
+            print(
+                '***_listAbonnememtUser******************${_listAbonnememtUser.length}**********');
             update();
           }
         }

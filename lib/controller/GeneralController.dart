@@ -1,5 +1,6 @@
 import 'package:EMIY/Views/CategoryBoutique/CategoryView.dart';
 import 'package:EMIY/Views/Home/HomeView.dart';
+import 'package:EMIY/Views/Short/ShortView.dart';
 import 'package:EMIY/Views/Short/ShortView_save210823.dart';
 import 'package:EMIY/Views/Space/MySpace.dart';
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
@@ -340,11 +341,11 @@ class GeneralController extends GetxController {
                     decoration: BoxDecoration(
                       color: ColorsApp.grey,
                     ),
-                    padding: EdgeInsets.only(
-                        left: kMdWidth / 6,
-                        right: kMdWidth / 6,
-                        top: 10,
-                        bottom: 10),
+                    margin: EdgeInsets.only(
+                      left: kMdWidth / 4,
+                      // right: kMdWidth / 6,
+                      top: 10,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -726,6 +727,7 @@ class GeneralController extends GetxController {
       currentIndex: _currentIndex,
       onTap: (index) {
         _currentIndex = index;
+        Get.find<ManagerController>().setContain(0);
         update();
         if (index != 2) {
           Get.find<ShortController>().disposePLayer();

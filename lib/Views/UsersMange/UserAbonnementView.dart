@@ -5,6 +5,7 @@ import 'package:EMIY/components/Button/button.dart';
 import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Widget/BoutiqueCircleComponent.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponent.dart';
 import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_empty.dart';
@@ -31,8 +32,6 @@ class UserAbonnementView extends StatelessWidget {
   ScrollController _scrollController = new ScrollController();
   @override
   Widget build(BuildContext context) {
-    Get.find<BoutiqueController>().getListAbonnementForUser();
-
     return GetBuilder<BoutiqueController>(
       builder: (_bcontroller) => _bcontroller.isAbUseLoad == 0
           ? AppLoading()
@@ -43,12 +42,12 @@ class UserAbonnementView extends StatelessWidget {
                       shrinkWrap: true,
                       padding: EdgeInsets.symmetric(horizontal: kMarginX),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 20.0,
-                          childAspectRatio: 0.8,
-                          mainAxisSpacing: 20.0),
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          childAspectRatio: 0.70,
+                          mainAxisSpacing: 10.0),
                       itemCount: _bcontroller.listAbonnememtUser.length,
-                      itemBuilder: (_ctx, index) => BoutiqueComponent(
+                      itemBuilder: (_ctx, index) => BoutiqueCircleComponent(
                             boutique: _bcontroller.listAbonnememtUser[index],
                           )))
               : AppEmpty(title: 'Aucun Abonnement'),

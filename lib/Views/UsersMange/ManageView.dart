@@ -44,18 +44,80 @@ class ManageView extends StatelessWidget {
     return GetBuilder<ManagerController>(
         builder: (_manager) =>
             CustomScrollView(controller: _scrollController, slivers: [
+              SliverPersistentHeader(
+                delegate: _SliverAppBarDelegate(
+                  TabBar(
+                    controller: DefaultTabController.of(context),
+                    // onTap: (index) => searchCont.setType(index),
+                    tabs: [
+                      Tab(text: 'Produits'),
+                      Tab(text: 'Boutiques'),
+                      Tab(text: 'Categories'),
+                      Tab(text: 'Short'),
+                    ],
+                  ),
+                ),
+                pinned: true,
+              ),
               SliverAppBar(
                 backgroundColor: Colors.white,
                 elevation: 0,
                 floating: false,
-                pinned: false,
+                pinned: true,
+
+                // snap: true,
+                expandedHeight: kHeight * .29,
+
+                bottom: PreferredSize(
+                    preferredSize: Size(double.infinity, 5),
+                    child: Container(
+                        decoration: BoxDecoration(color: ColorsApp.white),
+                        width: kWidth,
+                        height: kHeight * .1,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _manager.title.length,
+                            itemBuilder: (ctx, i) => InkWell(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          child: Text(
+                                        _manager.title[i].toString(),
+                                        style: TextStyle(
+                                            fontSize:
+                                                _manager.current == i ? 15 : 12,
+                                            fontWeight: _manager.current == i
+                                                ? FontWeight.bold
+                                                : FontWeight.normal,
+                                            color: _manager.current == i
+                                                ? ColorsApp.secondBlue
+                                                : ColorsApp.greyTh),
+                                      )),
+                                      if (_manager.current == i)
+                                        Container(
+                                            height: 6,
+                                            width: 20,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: ColorsApp.secondBlue)),
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  _manager.setContain(i);
+                                })))),
                 flexibleSpace: InkWell(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Stack(children: [
                           Container(
-                            height: kHeight * .20,
+                            height: kHeight * .17,
                             decoration: BoxDecoration(
                               color: ColorsApp.secondBlue,
                               // borderRadius: BorderRadius.circular(30),
@@ -66,7 +128,7 @@ class ManageView extends StatelessWidget {
                                 right: Get.width * .030),
                           ),
                           Positioned(
-                            top: kHeight * .09,
+                            top: 0,
                             left: kWidth * .05,
                             child: Container(
                                 // decoration: BoxDecoration(
@@ -143,8 +205,8 @@ class ManageView extends StatelessWidget {
                                             );
                                     },
                                     child: Row(
-                                        // mainAxisAlignment:
-                                        //     MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           if (_manager.User != null)
                                             InkWell(
@@ -205,69 +267,51 @@ class ManageView extends StatelessWidget {
                                                   ),
                                                 ),
                                           Container(
+                                              height: kHeight * .15,
+                                              width: 2,
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: kMarginY,
+                                                  horizontal: kMarginX),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: ColorsApp.greyTh)),
+                                          Container(
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  'Solde : ${_manager.Compte.solde} XAF',
+                                                  'Solde',
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.center,
+                                                  textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
-                                                Container(
-                                                    child: Icon(Icons
-                                                        .keyboard_double_arrow_up)),
-                                                Container(
-                                                    child: Icon(Icons
-                                                        .keyboard_double_arrow_down)),
+                                                Text(
+                                                  '${_manager.Compte.solde} XAF',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.end,
+                                                ),
                                               ],
                                             ),
                                           )
                                         ]))),
                           )
                         ]),
-                        Container(
-                            alignment: Alignment.center,
-                            width: kWidth,
-                            height: kHeight * .1,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: _manager.title.length,
-                                itemBuilder: (ctx, i) => InkWell(
-                                    child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 5),
-                                        child: Text(
-                                          _manager.title[i].toString(),
-                                          style: TextStyle(
-                                              fontSize: _manager.current == i
-                                                  ? 15
-                                                  : 12,
-                                              fontWeight: _manager.current == i
-                                                  ? FontWeight.bold
-                                                  : FontWeight.normal,
-                                              color: _manager.current == i
-                                                  ? ColorsApp.black
-                                                  : ColorsApp.greyTh),
-                                        )),
-                                    onTap: () async {
-                                      _manager.setContain(i);
-                                    })))
                       ],
                     ),
                   ),
                 ),
-                expandedHeight: kHeight * .25,
               ),
               SliverList(
                   delegate: SliverChildBuilderDelegate(
-                // The builder function returns a ListTile with a title that
-                // displays the index of the current item.
                 (context, index) => Container(
                     constraints: BoxConstraints(minHeight: kHeight * .7),
                     // height: kHeight * .7,
@@ -280,10 +324,33 @@ class ManageView extends StatelessWidget {
                     // margin: EdgeInsets.symmetric(
                     //     vertical: kMarginY, horizontal: kMarginX),
                     child: _manager.buildContent()),
-
                 childCount: 1,
               ))
             ]));
   }
-  // Builds 1000 ListTiles
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.black,
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
+  }
 }

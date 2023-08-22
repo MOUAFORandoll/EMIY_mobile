@@ -128,36 +128,17 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            child: AppTitleRight(
-                                                title: 'Hi Boy!',
-                                                description: 'Welcome dear',
-                                                icon: Assets.home),
-                                            margin: EdgeInsets.only(
-                                                right: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .005),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                              left: Get.width * .030,
-                                            ),
-                                            child: AppTitleRight(
-                                                title: 'Abonnement',
-                                                description: 'Vos Abonnements',
-                                                center: true,
-                                                onTap: () {
-                                                  Get.toNamed(
-                                                      AppLinks.ABONNEMENT);
-                                                },
-                                                icon: null),
-                                          )
-                                        ]),
+                                    Container(
+                                      child: AppTitleRight(
+                                          title: 'Hi Boy!',
+                                          description: 'Welcome dear',
+                                          icon: Assets.home),
+                                      margin: EdgeInsets.only(
+                                          right: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .005),
+                                    ),
                                     InkWell(
                                         child: Container(
                                             margin: EdgeInsets.only(bottom: 15),

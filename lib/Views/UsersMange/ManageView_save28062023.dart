@@ -69,8 +69,6 @@ class ManageView extends StatelessWidget {
               ),
               SliverList(
                   delegate: SliverChildBuilderDelegate(
-                // The builder function returns a ListTile with a title that
-                // displays the index of the current item.
                 (context, index) => Container(
                   constraints: BoxConstraints(minHeight: kHeight * .7),
                   height: kHeight * .7,
@@ -260,7 +258,6 @@ class ManageView extends StatelessWidget {
                     ],
                   )),
                 ),
-
                 childCount: 1,
               ))
             ]));

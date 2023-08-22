@@ -13,12 +13,12 @@ import 'package:video_player/video_player.dart';
 
 import '../../components/Widget/app_loading.dart';
 
-class ShortView extends StatefulWidget {
+class ShortView0 extends StatefulWidget {
   @override
-  _ShortViewState createState() => _ShortViewState();
+  _ShortView0State createState() => _ShortView0State();
 }
 
-class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
+class _ShortView0State extends State<ShortView0> with TickerProviderStateMixin {
   late VideoPlayerController _videoPlayerController;
 
   int _currentIndex = 0;
@@ -193,12 +193,12 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
   }
 }
 /* 
-class ShortViewF extends StatefulWidget {
+class ShortView0F extends StatefulWidget {
   @override
-  State<ShortViewF> createState() => _ShortViewFState();
+  State<ShortView0F> createState() => _ShortView0FState();
 }
 
-class _ShortViewFState extends State<ShortViewF> with TickerProviderStateMixin {
+class _ShortView0FState extends State<ShortView0F> with TickerProviderStateMixin {
   // PageController _pageController = PageController(initialPage: 0);
 
   late VideoPlayerController _videoPlayerController;
@@ -400,12 +400,12 @@ class _ShortViewFState extends State<ShortViewF> with TickerProviderStateMixin {
 
 /**
  * 
-class ShortViewF extends StatefulWidget {
+class ShortView0F extends StatefulWidget {
   // final List<String> videoUrls;
   final bool autoPlay;
   final bool loop;
 
-  ShortViewF({
+  ShortView0F({
     // @required this.videoUrls,
     this.autoPlay = true,
     this.loop = false,

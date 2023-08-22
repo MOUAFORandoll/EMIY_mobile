@@ -37,6 +37,12 @@ class SearchController extends GetxController {
     _categoryList = [];
     _listBoutique = [];
     _listShort = [];
+
+    indexP = 1;
+    indexB = 1;
+    indexC = 1;
+    indexS = 1;
+    index = 1;
     _tsearch = 0;
     isType = null;
     update();
@@ -48,6 +54,11 @@ class SearchController extends GetxController {
     _listBoutique = [];
     _listShort = [];
     _search = 0;
+    indexP = 1;
+    indexB = 1;
+    indexC = 1;
+    indexS = 1;
+    index = 1;
     isType = null;
     update();
   }
@@ -80,13 +91,14 @@ class SearchController extends GetxController {
     // index = 0;
     _isLoaded = false;
     update();
+    print(isType);
   }
 
-  int indexP = 0;
-  int indexB = 0;
-  int indexC = 0;
-  int indexS = 0;
-  int index = 0;
+  int indexP = 1;
+  int indexB = 1;
+  int indexC = 1;
+  int indexS = 1;
+  int index = 1;
   setIndex() {
     if (isType == 0) {
       indexP++;
@@ -144,7 +156,7 @@ class SearchController extends GetxController {
           await searchRepo.searchData(isType, controllerField.text, index, key);
 
       if (response.body != null) {
-        //print('**********search');
+        print('**********${_search}');
         //print(response.body['data']);
         if (isType == null || isType == 0) {
           _listProduit.addAll((response.body['produit'] as List)
@@ -170,6 +182,8 @@ class SearchController extends GetxController {
         isType = 0;
         _isLoaded = false;
         setIndex();
+        print('**********${_search}');
+
         update();
       }
     } catch (e) {

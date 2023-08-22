@@ -70,8 +70,7 @@ class ListNegociationView extends StatelessWidget {
         ),
         SliverList(
             delegate: SliverChildBuilderDelegate(
-          // The builder function returns a ListTile with a title that
-          // displays the index of the current item.
+          
           (context, index) => */
           SingleChildScrollView(
               child: ListView.builder(

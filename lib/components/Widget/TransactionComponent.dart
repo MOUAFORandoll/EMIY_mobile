@@ -30,24 +30,20 @@ class TransactionComponent extends StatelessWidget {
         height: kMdHeight * .13,
         width: kMdWidth,
         // padding: EdgeInsets.all(kMarginX),
-        margin: EdgeInsets.symmetric(horizontal: kMarginX, vertical: kMarginY),
+        margin: EdgeInsets.symmetric(
+            horizontal: kMarginX / 2, vertical: kMarginY / 2),
         decoration: BoxDecoration(
             color: ColorsApp.grey, borderRadius: BorderRadius.circular(8)),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        alignment: Alignment.center,
-                        // margin: EdgeInsets.only(left: Get.width * .008),
-                        child: Icon(transaction.typeTransactionId == 1
-                            ? Icons.transit_enterexit
-                            : Icons.transfer_within_a_station))
-                  ]),
+              Container(
+                  alignment: Alignment.center,
+                  // margin: EdgeInsets.only(left: Get.width * .008),
+                  child: Icon(transaction.typeTransactionId == 1
+                      ? Icons.transit_enterexit
+                      : Icons.transfer_within_a_station)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -56,7 +52,8 @@ class TransactionComponent extends StatelessWidget {
                       margin: EdgeInsets.only(
                           top: Get.height * .005, left: Get.width * .008),
                       child: BigtitleText0(
-                        text: 'Transaction : ' + transaction.typeTransaction,
+                        text: /* 'Transaction : ' +  */
+                            transaction.typeTransaction,
                         bolder: true,
                       )),
                   Container(

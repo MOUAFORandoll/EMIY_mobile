@@ -97,8 +97,7 @@ class BuyShoopingCart extends StatelessWidget {
                   slivers: [
                     SliverList(
                         delegate: SliverChildBuilderDelegate(
-                            // The builder function returns a ListTile with a title that
-                            // displays the index of the current item.
+                           
                             (context, index) => Container(
                                 margin:
                                     EdgeInsets.symmetric(horizontal: kMarginX),

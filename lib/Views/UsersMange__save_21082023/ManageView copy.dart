@@ -229,9 +229,7 @@
 //         ),
 //         SliverList(
 //            
-//             delegate: SliverChildBuilderDelegate(
-//           // The builder function returns a ListTile with a title that
-//           // displays the index of the current item.
+//             delegate: SliverChildBuilderDelegate( 
 //           (context, index) => _manager.isLoaded == 0
 //               ? Shimmer.fromColors(
 //                   baseColor: Colors.blueGrey,

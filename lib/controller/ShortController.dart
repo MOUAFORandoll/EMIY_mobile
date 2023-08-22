@@ -26,6 +26,13 @@ class ShortController extends GetxController {
   final dababase = Get.find<DataBaseController>();
   var fn = new ViewFunctions();
 
+  bool _forYou = true;
+  bool get forYou => _forYou;
+  setForYou(val) {
+    _forYou = val;
+    update();
+  }
+
   // ChewieController? chewieController;
   final ShortRepo shortRepo;
   ShortController({required this.shortRepo});

@@ -62,8 +62,6 @@ class UserManageView extends StatelessWidget {
           body: CustomScrollView(controller: _scrollController, slivers: [
             SliverList(
                 delegate: SliverChildBuilderDelegate(
-              // The builder function returns a ListTile with a title that
-              // displays the index of the current item.
               (context, index) => Container(
                 constraints: BoxConstraints(minHeight: kHeight * .7),
                 height: kHeight * .7,
@@ -303,7 +301,6 @@ class UserManageView extends StatelessWidget {
                   ],
                 )),
               ),
-
               childCount: 1,
             ))
           ]));

@@ -90,8 +90,6 @@ class ListBoutiquesView extends StatelessWidget {
             // ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                // The builder function returns a ListTile with a title that
-                // displays the index of the current item.
                 (context, index) => GetBuilder<CategoryBoutiqueController>(
                   builder: (_lbcontroller) => _lbcontroller.gA == 0
                       ? AppLoading()

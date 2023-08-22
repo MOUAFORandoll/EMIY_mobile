@@ -5,6 +5,7 @@ import 'package:EMIY/Views/UsersMange/InteretsView.dart';
 import 'package:EMIY/Views/UsersMange/ParrainnageView.dart';
 import 'package:EMIY/Views/UsersMange/PreferenceView.dart';
 import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
+import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/CompteModel.dart';
 import 'package:EMIY/model/data/ProduitCategoryModel.dart';
@@ -26,6 +27,7 @@ import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../Views/Commandes/CommandeView.dart';
+import '../Views/UsersMange/WalletView.dart';
 import 'boutiqueController.dart';
 
 class ManagerController extends GetxController {
@@ -595,12 +597,30 @@ class ManagerController extends GetxController {
     'Preferences',
     'Ma boutique',
   ];
-
+  List _saveIndex = [];
   setContain(i) {
+    print('-------------------------${i}');
+
     _current = i;
+    print(i);
+
     update();
+    print(_saveIndex);
+    print(_saveIndex.contains(i));
+    if (!_saveIndex.contains(i)) {
+      if (i == 2) {
+        print('----------------*');
+        Get.find<BoutiqueController>().getListAbonnementForUser();
+      }
+      if (i == 4) {
+        print('-------------TransactionController---*');
+        Get.find<TransactionController>().getTransactions();
+      }
+    }
+    _saveIndex.add(i);
   }
 
+//                                         .getTransactions();
   Widget buildContent() {
     switch (_current) {
       case 0:
@@ -614,6 +634,8 @@ class ManagerController extends GetxController {
 
       case 3:
         return ParrainnageView();
+      case 4:
+        return WalletView();
 
       case 5:
         return InteretsView();

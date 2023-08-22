@@ -32,6 +32,7 @@ class KSearchField extends StatelessWidget {
           onChanged: (String value) {
             // if (onChange != null) onChange!(value);
             searchCont.clearSearch();
+            
           },
           focusNode: _focusNode,
           // cursorHeight: 30.0,

@@ -109,8 +109,7 @@ class HomeView extends StatelessWidget {
                 ),
                 SliverList(
                     delegate: SliverChildBuilderDelegate(
-                  // The builder function returns a ListTile with a title that
-                  // displays the index of the current item.
+                
                   (context, index) => GetBuilder<CategoryBoutiqueController>(
                       builder: (categorys) {
                     return categorys.isLoadedCat == 0 || prods.isLoadedP == 0

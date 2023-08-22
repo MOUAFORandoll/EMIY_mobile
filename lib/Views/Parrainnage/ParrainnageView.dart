@@ -107,13 +107,11 @@ class ParrainnageView extends StatelessWidget {
                             ]),
                           ),
                         ),
-                        // Make the initial height of the SliverAppBar larger than normal.
-                        expandedHeight: 60,
+                          expandedHeight: 60,
                       ),
                       SliverList(
                           delegate: SliverChildBuilderDelegate(
-                        // The builder function returns a ListTile with a title that
-                        // displays the index of the current item.
+                        
                         (context, index) => Container(
                           margin: EdgeInsets.symmetric(horizontal: kMarginX),
                           child: ListView.builder(

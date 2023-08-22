@@ -40,17 +40,18 @@ class TransactionController extends GetxController {
   getTransactions() async {
     if (managerController.User != null) {
       try {
-        _transactionList.clear();
-        _transactionList = [];
-
-        _isLoadedTrans = 0;
-        update();
+      
         //print(".............");
 
         Response response =
             await transactionRepo.getListTransaction(managerController.User.id);
         if (response.body != null) {
           if (response.body['data'].length != 0) {
+              _transactionList.clear();
+            _transactionList = [];
+
+            // _isLoadedTrans = 0;
+            update();
             _transactionList.addAll((response.body['data'] as List)
                 .map((e) => TransactionModel.fromJson(e))
                 .toList());

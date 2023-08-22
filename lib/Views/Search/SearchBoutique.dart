@@ -1,8 +1,10 @@
 import 'package:EMIY/components/Form/home_search_field.dart';
 import 'package:EMIY/components/Form/search_field.dart';
+import 'package:EMIY/components/Widget/BoutiqueCircleComponent.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponent.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponentHomeN.dart';
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
+import 'package:EMIY/components/Widget/ShimmerBoxBoutique.dart';
 import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/icon_svg.dart';
@@ -54,12 +56,12 @@ class SearchBoutique extends StatelessWidget {
                   // Ratio largeur/hauteur pour chaque élément
                   // controller: search.controllerT,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20.0,
-                      childAspectRatio: 0.8,
-                      mainAxisSpacing: 20.0),
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10.0,
+                      childAspectRatio: 0.70,
+                      mainAxisSpacing: 10.0),
                   itemCount: search.listBoutique.length,
-                  itemBuilder: (_ctx, index) => BoutiqueComponent(
+                  itemBuilder: (_ctx, index) => BoutiqueCircleComponent(
                         boutique: search.listBoutique[index],
                       )),
               Container(
@@ -72,12 +74,12 @@ class SearchBoutique extends StatelessWidget {
                           // controller: search.controllerT,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 20.0,
-                                  childAspectRatio: 0.8,
-                                  mainAxisSpacing: 20.0),
-                          itemCount: 4,
-                          itemBuilder: (_ctx, index) => ShimmerBox())
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 10.0,
+                                  childAspectRatio: 0.70,
+                                  mainAxisSpacing: 10.0),
+                          itemCount: 9,
+                          itemBuilder: (_ctx, index) => ShimmerBoxBoutique())
                       : Container())
             ],
           ),
