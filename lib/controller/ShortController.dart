@@ -21,87 +21,132 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:video_player/video_player.dart';
 
 class ShortController extends GetxController {
+  final ShortRepo shortRepo;
+  ShortController({required this.shortRepo});
   final service = new ApiService();
-  /* VideoPlayerController? */ var controller;
+  var controller;
+
   final dababase = Get.find<DataBaseController>();
   var fn = new ViewFunctions();
 
-  bool _forYou = true;
-  bool get forYou => _forYou;
-  setForYou(val) {
-    _forYou = val;
-    update();
+  void onInit() async {
+    super.onInit();
+    _pageController = PageController(initialPage: 0);
+    _pageController = PageController()..addListener(_scrollListener);
   }
+
+  bool _loadSuivis = true;
+  bool get loadSuivis => _loadSuivis;
+
+  // bool forYou = true;
+  // bool _firstget = true;
+  int _stateShortPage = 0;
+  int get stateShortPage => _stateShortPage;
+
+  setStateShortPage(index) async {
+    _stateShortPage = index;
+
+    update();
+    print('-----------------------${index}----');
+    if (index == 0) {
+      print('----------------------hh-');
+      if (listSuivisShort.isNotEmpty) {
+        listSuivisShort[indexSuivis].controller.pause();
+      }
+    }
+    if (index == 1) {
+      print('----------------------hh111---');
+      if (listForYouShort.isNotEmpty) {
+        listForYouShort[indexForYou].controller.pause();
+      }
+    }
+    var key = await dababase.getKey();
+    print(key);
+    if (key != null && _stateShortPage == 1) {
+      print('-----------------------00sss----');
+      await getListSuivisShort();
+    }
+  }
+
+  // onChangeList() {
+  //   if (forYou) {
+  //     _listShort = _listForYouShort;
+  //     update();
+  //   } else {
+  //     _listShort = _listSuivisShort;
+  //     update();
+  //   }
+  // }
 
   // ChewieController? chewieController;
-  final ShortRepo shortRepo;
-  ShortController({required this.shortRepo});
-  List<ShortModel> _listShort = [];
+  // List<ShortModel> _listShort = [];
+
+  // List<ShortModel> get listShort => _listShort;
   bool _initialise = false;
   bool get initialise => _initialise;
-  double _progressValue = 0;
-  double get progressValue => _progressValue;
 
-  changeVideoSlide(index) async {
-    _progressValue = controller!.value.position.inSeconds.toDouble() /
-        controller!.value.duration.inSeconds.toDouble();
-    update();
-    controller!.seekTo(Duration(seconds: index.toInt()));
+  int _indexForYou = 0;
+  int get indexForYou => _indexForYou;
+  init() {
+    stateShortPage == 0
+        ? listForYouShort[indexForYou].controller.play()
+        : stateShortPage == 1
+            ? listSuivisShort[indexSuivis].controller.play()
+            : listBoutiqueShort[indexShortBoutique].controller.play();
   }
 
-  changeVideoSlide0() async {
-    _progressValue = controller!.value.position.inSeconds.toDouble() /
-        controller!.value.duration.inSeconds.toDouble();
-    update();
-  }
-
-  changeVideo(index) async {
-    if (listShort.isNotEmpty) {
-      //  }else{}
+  changeVideoForYou(index) async {
+    if (listForYouShort.isNotEmpty) {
+     
+      _indexForYou = index;
       print(
-          '-debut lecture short -----------${index}---------------------------' +
-              listShort[index].src);
+          '-debut lecture listForYouShort -----------${index}----${listForYouShort[index].src}-----------------------' +
+              listForYouShort[index].src);
       _initialise = false;
+      setCurrent(index);
 
-      listShort[index].loadController();
-      controller = listShort[index].controller;
+      listForYouShort[index].controller.seekTo(Duration.zero);
+      listForYouShort[index].controller.play();
+      update(); 
 
-      update();
-      controller.play();
       _initialise = true;
 
-      controller!.addListener(() async {
-        //print('0000');
-
-        _progressValue = Get.find<ShortController>()
-                    .controller!
-                    .value
-                    .duration
-                    .inSeconds
-                    .toDouble() ==
-                0
-            ? 0
-            : Get.find<ShortController>()
-                    .controller!
-                    .value
-                    .position
-                    .inSeconds
-                    .toDouble() /
-                Get.find<ShortController>()
-                    .controller!
-                    .value
-                    .duration
-                    .inSeconds
-                    .toDouble();
-
-        update();
-      });
-      bool getNext =
-          listShort.length < 2 ? true : index + 2 == listShort.length;
+      bool getNext = listForYouShort.length < 2
+          ? true
+          : index + 2 == listForYouShort.length;
       if (getNext) {
-        await getListShort();
+        await getListForYouShort();
       }
-      await readShort(listShort[index].codeShortInit);
+      await readShort(listForYouShort[index].codeShortInit);
+
+      return 0;
+    }
+  }
+
+  int _indexSuivis = 0;
+  int get indexSuivis => _indexSuivis;
+
+  changeVideoSuivis(index) async {
+    if (listSuivisShort.isNotEmpty) {
+      _indexSuivis = index;
+
+      print(
+          '-debut lecture short -----------${index}----${listSuivisShort[index].src}-----------------------' +
+              listSuivisShort[index].src);
+      _initialise = false;
+      setCurrent(index);
+      listSuivisShort[index].controller.seekTo(Duration.zero);
+      listSuivisShort[index].controller.play();
+      update(); 
+      _initialise = true;
+ 
+      bool getNext = listSuivisShort.length < 2
+          ? true
+          : index + 2 == listSuivisShort.length;
+      if (getNext) {
+        await getListSuivisShort();
+      }
+      await readShort(listSuivisShort[index].codeShortInit);
 
       return 0;
     }
@@ -131,8 +176,8 @@ class ShortController extends GetxController {
 
   dispose() {
     super.dispose();
-    // listShort[_currentShort].controller?.dispose();
-    listShort[_currentShort].controller?.pause();
+    // listSuivisShort[_indexCurrentShort].controller?.dispose();
+    // listShort[_indexCurrentShort].controller?.pause();
 
     controller!.pause();
     // controller!.dispose();
@@ -150,42 +195,31 @@ class ShortController extends GetxController {
 
   disposePLayerAll() {
     print('------------------------is dispose');
-    // listShort[_currentShort].controller.dispose();
+    // listShort[_indexCurrentShort].controller.dispose();
     if (controller != null) {
-      listShort[_currentShort].controller?.dispose(); // controller!.dispose();
+      // listShort[_indexCurrentShort]
+      //     .controller
+      //     ?.dispose(); // controller!.dispose();
 
       update();
     }
   }
 
-  List<ShortModel> get listShort => _listShort;
   int _isLoadedP = 0;
   int get isLoadedP => _isLoadedP;
   int _isCurrent = 0;
   int get isCurrent => _isCurrent;
-  setCOurrent(indexC) {
-    _isCurrent = indexC;
-    update();
-  }
 
   late PageController _pageController;
   get pageController => _pageController;
   @override
-  void onInit() {
-    print('-----------init--------------');
-
-    super.onInit();
-    _pageController = PageController(initialPage: 0);
-    _pageController = PageController()..addListener(_scrollListener);
-  }
-
   void _scrollListener() {
     print('-----------uuuuuuuu---');
 
-    if (isCurrent + 3 >= _listShort.length) {
+    if (isCurrent + 3 >= _listForYouShort.length) {
       print('-----------00000000---');
 
-      // getListShort();
+      getListForYouShort();
     }
   }
 
@@ -197,10 +231,13 @@ class ShortController extends GetxController {
     update();
   }
 
-  List<ShortModel> _listShortSave = [];
-  int indexC = 1;
-  Future<void> getListShort() async {
-    // //print('***short******************response**********');
+  List<ShortModel> _listForYouShort = [];
+
+  List<ShortModel> get listForYouShort => _listForYouShort;
+  List<ShortModel> _listForYouShortSave = [];
+  int indexIncrementForYou = 1;
+
+  Future<void> getListForYouShort() async {
     var key = await dababase.getKey();
 
     if (_loaddata == false) {
@@ -209,7 +246,8 @@ class ShortController extends GetxController {
       _loaddata = true;
       update();
       try {
-        Response response = await shortRepo.getListShort(indexC, key);
+        Response response =
+            await shortRepo.getListForYouShort(indexIncrementForYou, key);
 
         // _listShort = [];
         // _listShort.clear();
@@ -220,25 +258,32 @@ class ShortController extends GetxController {
             if (response.body['data'].length != 0) {
               print('short**************************');
 
-              _listShort.addAll((response.body['data'] as List)
+              _listForYouShort.addAll((response.body['data'] as List)
                   .map((e) => ShortModel.fromJson(e))
                   .toList());
-              _listShortSave.addAll((response.body['data'] as List)
+              _listForYouShortSave.addAll((response.body['data'] as List)
                   .map((e) => ShortModel.fromJson(e))
                   .toList());
-              indexC++;
-              print(_listShort.length);
-              currentShortData = _listShort.first;
+              indexIncrementForYou++;
+              // if (_firstget) {
+              //   print('***first get******************response**********');
+
+              //   // _listShort = _listForYouShort;
+              //   _firstget = false;
+              //   update();
+              // }
+              _checkGetting();
+              // print(_listShort.length);
               print(
                   '_listShort=+++}+++++++++++++++++++++++++++}-=======================================================');
               _loaddata = false;
               _isLoadedP = 1;
               update();
               print(_isLoadedP);
-              if (indexC - 1 == 1 && intoShortView) {
+              if (indexIncrementForYou - 1 == 1 && intoShortView) {
                 print(
-                    '----------------------------------- ${_listShort.length}');
-                changeVideo(0);
+                    '----------------------------------- ${_listForYouShort.length}');
+                changeVideoForYou(0);
               }
             }
           }
@@ -253,27 +298,166 @@ class ShortController extends GetxController {
     }
   }
 
+  List<ShortModel> _listSuivisShort = [];
+
+  List<ShortModel> get listSuivisShort => _listSuivisShort;
+  List<ShortModel> _listSuivisShortSave = [];
+  int indexIncrementSuivis = 1;
+  bool _loadedFirstSuivisShort = false;
+  get loadedFirstSuivisShort => _loadedFirstSuivisShort;
+  Future<void> getListSuivisShort() async {
+    var key = await dababase.getKey();
+    print('getListSuivisShort**************************');
+
+    // if (_loaddata == false) {
+    // print('-----------get---');
+    // _isLoadedP = 0;
+    // _loaddata = true;
+    // update();
+    try {
+      Response response =
+          await shortRepo.getListSuivisShort(indexIncrementSuivis, key);
+
+      // _listShort = [];
+      // _listShort.clear();
+      // update();
+
+      if (response.body != null) {
+        if (response.body['data'] != null) {
+          if (response.body['data'].length != 0) {
+            print('short**************************');
+
+            _listSuivisShort.addAll((response.body['data'] as List)
+                .map((e) => ShortModel.fromJson(e))
+                .toList());
+            _listSuivisShortSave.addAll((response.body['data'] as List)
+                .map((e) => ShortModel.fromJson(e))
+                .toList());
+            indexIncrementSuivis++;
+            _loadedFirstSuivisShort = true;
+            // if (_firstget) {
+            //   print('***first get******************response**********');
+
+            //   // _listShort = _listSuivisShort;
+            //   _firstget = false;
+            //   update();
+            // }
+
+            print(_listSuivisShort.length);
+            print(
+                '_listSuivisShort=+++}+++++++++++++++++++++++++++}-=======================================================');
+            _loaddata = false;
+            _isLoadedP = 1;
+            update();
+            if (indexIncrementSuivis - 1 == 1 && intoShortView) {
+              print(
+                  '----------------------------------- ${_listSuivisShort.length}');
+              changeVideoSuivis(0);
+            }
+          }
+        }
+      }
+    } catch (e) {
+      _loaddata = false;
+      update();
+      //print(e);
+    }
+    // } else {
+    //   print('***pppppp bouriqe******************response**********');
+    // }
+  }
+
+  _checkGetting() {
+    _currentReadShortData = stateShortPage == 0
+        ? listForYouShort.first
+        : stateShortPage == 1
+            ? listSuivisShort.first
+            : listBoutiqueShort.first;
+  }
+
   cleanListShort() {
-    _listShort = [];
-    _listShort.clear();
+    _listForYouShort = [];
+    _listForYouShort.clear();
     // controller = null;
-    currentShortData = null;
-    indexC = 1;
+    _currentReadShortData = null;
+    indexIncrementForYou = 1;
     indexC2 = 1;
-    _listShort = _listShortSave;
+    _listForYouShort = _listForYouShortSave;
     update();
   }
 
+  List<ShortModel> _listBoutiqueShort = [];
+
+  List<ShortModel> get listBoutiqueShort => _listBoutiqueShort;
   int indexC2 = 1;
   int _isLoadedForBoutiqueShort = 0;
   int get isLoadedForBoutiqueShort => _isLoadedForBoutiqueShort;
+
+  int _indexShortBoutique = 0;
+  int get indexShortBoutique => _indexShortBoutique;
+  changeVideoForBoutique(index) async {
+    if (listBoutiqueShort.isNotEmpty) {
+      //  }else{}
+      _indexForYou = index;
+      print(
+          '-debut lecture short -----------${index}----${listBoutiqueShort[index].src}-----------------------' +
+              listBoutiqueShort[index].src);
+      _initialise = false;
+      setCurrent(index);
+      //  await   listBoutiqueShort[index].loadController();
+      controller = listBoutiqueShort[index].controller;
+      controller.seekTo(Duration.zero);
+      update();
+      // controller.;
+      controller.play();
+      _initialise = true;
+
+      // controller!.addListener(() async {
+      //   //print('0000');
+
+      //   _progressValue = Get.find<ShortController>()
+      //               .controller!
+      //               .value
+      //               .duration
+      //               .inSeconds
+      //               .toDouble() ==
+      //           0
+      //       ? 0
+      //       : Get.find<ShortController>()
+      //               .controller!
+      //               .value
+      //               .position
+      //               .inSeconds
+      //               .toDouble() /
+      //           Get.find<ShortController>()
+      //               .controller!
+      //               .value
+      //               .duration
+      //               .inSeconds
+      //               .toDouble();
+
+      //   update();
+      // });
+      bool getNext = listForYouShort.length < 2
+          ? true
+          : index + 2 == listForYouShort.length;
+      if (getNext) {
+        await getListShortForBoutique(_saveCodeBoutique);
+      }
+      await readShort(listForYouShort[index].codeShortInit);
+
+      return 0;
+    }
+  }
+
+  var _saveCodeBoutique = '';
   Future<void> getListShortForBoutique(codeBoutique) async {
     print('***short bouriqe******************response**********');
-
+    _saveCodeBoutique = codeBoutique;
     _isLoadedForBoutiqueShort = 0;
 
-    _listShort = [];
-    _listShort.clear();
+    _listBoutiqueShort = [];
+    _listBoutiqueShort.clear();
     update();
     var key = await dababase.getKey();
     try {
@@ -283,16 +467,16 @@ class ShortController extends GetxController {
       if (response.body != null) {
         if (response.body['data'] != null) {
           if (response.body['data'].length != 0) {
-            _listShort.addAll((response.body['data'] as List)
+            _listBoutiqueShort.addAll((response.body['data'] as List)
                 .map((e) => ShortModel.fromJson(e))
                 .toList());
             indexC2++;
             print('***short bouriqe*********ok*********response**********');
 
-            print(_listShort.length);
-            currentShortData = _listShort.first;
+            print(_listBoutiqueShort.length);
+            _currentReadShortData = _listBoutiqueShort.first;
           }
-          changeVideo(0);
+          // changeVideo(0);
           setCurrent(0);
           _isLoadedForBoutiqueShort = 1;
           update();
@@ -316,26 +500,33 @@ class ShortController extends GetxController {
     }
   }
 
-  int _currentShort = 0;
-  int get currentShort => _currentShort;
-  var currentShortData;
-  get currentShortData0 => currentShortData;
+  int _indexCurrentShort = 0;
+  int get indexCurrentShort => _indexCurrentShort;
+  ShortModel? _currentReadShortData;
+  get currentReadShortData => _currentReadShortData;
   setCurrent(index) {
-    _currentShort = index;
-    currentShortData = _listShort[_currentShort];
+    _indexCurrentShort = index;
+    print(listSuivisShort.length);
+    _currentReadShortData = _stateShortPage == 0
+        ? _listForYouShort[_indexCurrentShort]
+        : _stateShortPage == 1
+            ? _listSuivisShort[_indexCurrentShort]
+            : _listBoutiqueShort[_indexCurrentShort];
     update();
   }
 
   newLikeShort() async {
-    currentShortData.nbre_like = currentShortData.is_like
-        ? currentShortData.nbre_like - 1
-        : currentShortData.nbre_like + 1;
-    currentShortData.is_like = !currentShortData.is_like;
+    currentReadShortData.nbre_like = currentReadShortData.is_like
+        ? (currentReadShortData.nbre_like - 1) < 0
+            ? 0
+            : (currentReadShortData.nbre_like - 1)
+        : currentReadShortData.nbre_like + 1;
+    currentReadShortData.is_like = !currentReadShortData.is_like;
     update();
     var key = await dababase.getKey();
 
     try {
-      var data = {'id': currentShortData.id, 'keySecret': key};
+      var data = {'id': currentReadShortData.id, 'keySecret': key};
       print(data);
       Response response = await shortRepo.newLike(data);
 
@@ -345,10 +536,21 @@ class ShortController extends GetxController {
             print(response.body['short']);
             var newShort = ShortModel.fromJson(response.body['short']);
 
-            int index =
-                _listShort.indexWhere((short) => short.id == newShort.id);
+            int index = stateShortPage == 0
+                ? listForYouShort.indexWhere((short) => short.id == newShort.id)
+                : stateShortPage == 1
+                    ? listSuivisShort
+                        .indexWhere((short) => short.id == newShort.id)
+                    : listBoutiqueShort
+                        .indexWhere((short) => short.id == newShort.id);
+
+            // int index =   _listShort.indexWhere((short) => short.id == newShort.id);
             if (index >= 0) {
-              _listShort[index] = newShort;
+              stateShortPage == 0
+                  ? listForYouShort[index]
+                  : stateShortPage == 1
+                      ? listSuivisShort[index]
+                      : listBoutiqueShort[index] = newShort;
 
               update();
             }
@@ -356,18 +558,18 @@ class ShortController extends GetxController {
           }
         }
       } else {
-        currentShortData.nbre_like = !currentShortData.is_like
-            ? currentShortData.nbre_like - 1
-            : currentShortData.nbre_like + 1;
+        currentReadShortData.nbre_like = !currentReadShortData.is_like
+            ? currentReadShortData.nbre_like - 1
+            : currentReadShortData.nbre_like + 1;
         update();
       }
     } catch (e) {
       // fn.closeSnack();
       // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      currentShortData.nbre_like = !currentShortData.is_like
-          ? currentShortData.nbre_like - 1
-          : currentShortData.nbre_like + 1;
-      currentShortData.is_like = !currentShortData.is_like;
+      currentReadShortData.nbre_like = !currentReadShortData.is_like
+          ? currentReadShortData.nbre_like - 1
+          : currentReadShortData.nbre_like + 1;
+      currentReadShortData.is_like = !currentReadShortData.is_like;
       update();
       //print(e);
     }
@@ -398,7 +600,7 @@ class ShortController extends GetxController {
     var key = await dababase.getKey();
     var data = refCom == null
         ? {
-            'id': currentShortData.id,
+            'id': currentReadShortData.id,
             'keySecret': key,
             'comment': textEditingController.text
           }
@@ -421,10 +623,26 @@ class ShortController extends GetxController {
             if (refCom == null) {
               _listCommentShort.insert(
                   0, CommentShortModel.fromJson(response.body['commentaire']));
-              int index = _listShort
-                  .indexWhere((short) => short.id == currentShortData.id);
+              // int index = _listShort
+              //     .indexWhere((short) => short.id == currentReadShortData.id);
+
+              int index = stateShortPage == 0
+                  ? listForYouShort.indexWhere(
+                      (short) => short.id == currentReadShortData.id)
+                  : stateShortPage == 1
+                      ? listSuivisShort.indexWhere(
+                          (short) => short.id == currentReadShortData.id)
+                      : listBoutiqueShort.indexWhere(
+                          (short) => short.id == currentReadShortData.id);
               if (index >= 0) {
-                _listShort[index].nbre_commentaire = _listCommentShort.length;
+                stateShortPage == 0
+                    ? listForYouShort[index].nbre_commentaire =
+                        _listCommentShort.length
+                    : stateShortPage == 1
+                        ? listSuivisShort[index].nbre_commentaire =
+                            _listCommentShort.length
+                        : listBoutiqueShort[index].nbre_commentaire =
+                            _listCommentShort.length;
 
                 update();
               }
@@ -479,7 +697,7 @@ class ShortController extends GetxController {
 
       try {
         Response response =
-            await shortRepo.getListComment(currentShortData.id, key);
+            await shortRepo.getListComment(currentReadShortData.id, key);
 
         if (response.statusCode == 200) {
           if (response.body != null) {
@@ -550,16 +768,18 @@ class ShortController extends GetxController {
     if (type == 0) {
       com = _listCommentShort[
           _listCommentShort.indexWhere((short) => short.id == comselect.id)];
-      com.nbre_like_com =
-          com.is_like_com ? com.nbre_like_com - 1 : com.nbre_like_com + 1;
+      com.nbre_like_com = com.is_like_com
+          ? (com.nbre_like_com - 1 < 0 ? 0 : com.nbre_like_com - 1)
+          : com.nbre_like_com + 1;
       com.is_like_com = !com.is_like_com;
       update();
     }
 
     if (type == 1) {
       com = comselect;
-      com.nbre_like_com =
-          com.is_like_com ? com.nbre_like_com - 1 : com.nbre_like_com + 1;
+      com.nbre_like_com = com.is_like_com
+          ? (com.nbre_like_com - 1 < 0 ? 0 : com.nbre_like_com - 1)
+          : com.nbre_like_com + 1;
       com.is_like_com = !com.is_like_com;
       update();
     }
@@ -637,13 +857,18 @@ class ShortController extends GetxController {
             print('--short----------***************************');
             print(response.body['data']);
 
-            currentShortData = ShortModel.fromJson(response.body['data']);
+            _currentReadShortData = ShortModel.fromJson(response.body['data']);
             _isUnique = 1;
 
-            currentShortData.loadController();
-            _isUniqueVideoPlayer = currentShortData.controller;
+            currentReadShortData.loadController();
+            _isUniqueVideoPlayer = currentReadShortData.controller;
+
+            _isUniqueVideoPlayer.seekTo(Duration.zero);
             update();
-            print("-----short+++++++---------------$currentShortData0.id");
+            // controller.;
+            _isUniqueVideoPlayer.play();
+            update();
+            print("-----short+++++++---------------$_currentReadShortData.id");
           }
         }
       }
@@ -659,7 +884,7 @@ class ShortController extends GetxController {
     var key = await dababase.getKey();
 
     try {
-      var data = {'id': currentShortData.id, 'keySecret': key};
+      var data = {'id': currentReadShortData.id, 'keySecret': key};
       print(data);
       Response response = await shortRepo.newLikeComment(data);
 
@@ -670,31 +895,31 @@ class ShortController extends GetxController {
             var newShortComm =
                 CommentShortModel.fromJson(response.body['short']);
 
-            currentShortData = newShortComm;
+            // _currentReadShortData = newShortComm;
 
             update();
           }
         }
       } else {
-        currentShortData.nbre_like_com = !currentShortData.is_like_com
-            ? currentShortData.nbre_like_com - 1
-            : currentShortData.nbre_like_com + 1;
+        currentReadShortData.nbre_like_com = !currentReadShortData.is_like_com
+            ? currentReadShortData.nbre_like_com - 1
+            : currentReadShortData.nbre_like_com + 1;
         update();
       }
     } catch (e) {
       // fn.closeSnack();
       // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
-      currentShortData.nbre_like_com = !currentShortData.is_like_com
-          ? currentShortData.nbre_like_com - 1
-          : currentShortData.nbre_like_com + 1;
-      currentShortData.is_like_com = !currentShortData.is_like_com;
+      currentReadShortData.nbre_like_com = !currentReadShortData.is_like_com
+          ? currentReadShortData.nbre_like_com - 1
+          : currentReadShortData.nbre_like_com + 1;
+      currentReadShortData.is_like_com = !currentReadShortData.is_like_com;
       update();
       //print(e);
     }
   }
 
   disposeUniquePLayer() {
-    // currentShortData.controller.dispose();
+    // currentReadShortData.controller.dispose();
     if (_isUniqueVideoPlayer != null) {
       _isUniqueVideoPlayer!.dispose();
 

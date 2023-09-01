@@ -2,6 +2,7 @@
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
@@ -63,10 +64,7 @@ class CategoryComponent2 extends StatelessWidget {
                     child: Text(category.libelle,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                            color: ColorsApp.primaryBlue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12))),
+                        style: TexteStyle().secondaryTextStyle)),
               ],
             )));
   }

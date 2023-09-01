@@ -15,12 +15,11 @@ class CustomBtn extends StatelessWidget {
         onTap: onTap,
         child: Container(
             width: Get.size.width * 0.35,
-            alignment: Alignment.center,
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.all(10),
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: (color == null) ? ColorsApp.primaryBlue : color,
+              color: (color == null) ? ColorsApp.secondBlue : color,
             ),
             child: ((validator == null) ? false : validator)
                 ? Center(

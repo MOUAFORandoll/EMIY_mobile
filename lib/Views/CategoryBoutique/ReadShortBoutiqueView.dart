@@ -127,19 +127,20 @@ class _ReadShortBoutiqueViewState extends State<ReadShortBoutiqueView>
                 alignment: AlignmentDirectional.center,
                 children: [
                   _ShortController.isLoadedForBoutiqueShort == 0 ||
-                          _ShortController.listShort.length == 0 ||
+                          _ShortController.listBoutiqueShort.length == 0 ||
                           _ShortController.controller == null
                       ? Container(
                           child: AppLoading(),
                         )
                       : PageView.builder(
-                          itemCount: _ShortController.listShort.length,
+                          itemCount: _ShortController.listBoutiqueShort.length,
                           scrollDirection: Axis.vertical,
                           controller: _ShortController.pageController,
                           onPageChanged: (index) {
-                            index = index % (_ShortController.listShort.length);
+                            index = index %
+                                (_ShortController.listBoutiqueShort.length);
 
-                            _ShortController.changeVideo(index);
+                            _ShortController.changeVideoForBoutique(index);
                             _ShortController.setCurrent(index);
                           },
                           itemBuilder: (BuildContext context, int index) {
@@ -188,28 +189,35 @@ class _ReadShortBoutiqueViewState extends State<ReadShortBoutiqueView>
                         icon: Icons.arrow_back_ios_new,
                         onTap: () {
                           if (_ShortController.controller != null) {
-                            _ShortController.controller!.pause();
-                            _ShortController.cleanListShort();
+                            _ShortController
+                                .listBoutiqueShort[
+                                    _ShortController.indexShortBoutique]
+                                .controller
+                                .pause();
+                            // _ShortController.cleanlistBoutiqueShort();
                           }
                           Get.back();
                         },
                       ))),
                   _ShortController.initialise &&
-                          _ShortController.listShort.isNotEmpty
+                          _ShortController.listBoutiqueShort.isNotEmpty
                       ? Positioned(
                           bottom: 2,
                           child: Container(
                               height: 8,
                               width: kWidth,
                               child: VideoProgressIndicator(
-                                  _ShortController.controller!,
+                                  _ShortController
+                                      .listBoutiqueShort[
+                                          _ShortController.indexShortBoutique]
+                                      .controller,
                                   colors: VideoProgressColors(
                                       playedColor:
                                           Color.fromARGB(255, 31, 59, 151)),
                                   allowScrubbing: true)))
                       : Container(),
                   _ShortController.initialise &&
-                          _ShortController.listShort.isNotEmpty
+                          _ShortController.listBoutiqueShort.isNotEmpty
                       ? Positioned(
                           top: _heartPosition.dy - 40,
                           left: _heartPosition.dx - 40,
@@ -226,21 +234,21 @@ class _ReadShortBoutiqueViewState extends State<ReadShortBoutiqueView>
                         )
                       : Container(),
                   _ShortController.initialise &&
-                          _ShortController.listShort.isNotEmpty
+                          _ShortController.listBoutiqueShort.isNotEmpty
                       ? Positioned(
                           top: kHeight / 3,
                           left: kWidth / 1.3,
                           child: Container(
                               child: InkWell(
                             child: ShortAction(
-                              short: _ShortController
-                                  .listShort[_ShortController.currentShort],
+                              short: _ShortController.listBoutiqueShort[
+                                  _ShortController.indexShortBoutique],
                             ),
                             onTap: () {
                               _ShortController.controller!.pause();
 
                               Get.toNamed(AppLinks.BOUTIQUE +
-                                  '?lienBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.lienBoutique.toString()}note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
+                                  '?lienBoutique=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.lienBoutique.toString()}note=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.note}&codeBoutique=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.codeBoutique}&note=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.note}&nomBoutique=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.titre}&description=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.description}&ville=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.localisation.ville}&image=${_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.images[_ShortController.listBoutiqueShort[_ShortController.indexShortBoutique].boutique.images.length - 1].src}');
                             },
                           )))
                       : Container(),
@@ -283,9 +291,9 @@ class _ShortViewFState extends State<ShortViewF> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
-    //print('**********************short.listShort');
-    // //print(short.listShort);
-    _initializeVideoPlayer(short.listShort[0].src);
+    //print('**********************short.listBoutiqueShort');
+    // //print(short.listBoutiqueShort);
+    _initializeVideoPlayer(short.listBoutiqueShort[0].src);
   }
 
   @override
@@ -321,17 +329,17 @@ class _ShortViewFState extends State<ShortViewF> {
       return Container(
           height: 200.0,
           child: PageView.builder(
-            itemCount: _ShortController.listShort.length,
+            itemCount: _ShortController.listBoutiqueShort.length,
             scrollDirection: Axis.vertical,
             controller: _pageController,
             onPageChanged: (index) {
               //print(index);
-              //print(_ShortController.listShort[index].src);
+              //print(_ShortController.listBoutiqueShort[index].src);
 
               // _videoPlayerController.pause();
               // _videoPlayerController.seekTo(Duration.zero);
 
-              _initializeVideoPlayer(_ShortController.listShort[index].src);
+              _initializeVideoPlayer(_ShortController.listBoutiqueShort[index].src);
               _ShortController.setCurrent(index);
             },
             itemBuilder: (BuildContext context, int index) {

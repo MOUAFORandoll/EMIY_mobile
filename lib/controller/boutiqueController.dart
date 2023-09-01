@@ -18,6 +18,7 @@ import 'package:EMIY/repository/BoutiqueRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
+import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/Services/storageService2.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
@@ -44,6 +45,12 @@ class BoutiqueController extends GetxController {
   List<File> _listImgProduits = [];
 
   final dababase = Get.find<DataBaseController>();
+  void onInit() async {
+    // TODO: implement initState
+
+    super.onInit();
+    _quantite.text = '0';
+  }
 
   List<File> get listImgProduits => _listImgProduits;
   onInitData() {
@@ -239,7 +246,7 @@ class BoutiqueController extends GetxController {
           _isOk = false;
           update();
 
-          await getBoutique();
+          await getListBoutique();
           fn.closeLoader();
 
           fn.snackBar('Mise a jour', response.body['message'], true);
@@ -303,7 +310,7 @@ class BoutiqueController extends GetxController {
           Response response = await boutiqueRepo.updateImageBoutique(formData);
           //print(response.body);
           if (response.statusCode == 200) {
-            await getBoutique();
+            await getListBoutique();
           }
 
           fn.closeLoader();
@@ -327,8 +334,23 @@ class BoutiqueController extends GetxController {
     }
   }
 
+  List<BoutiqueUserModel> _listBoutiques = [];
+
+  List<BoutiqueUserModel> get listBoutiques => _listBoutiques;
+  selectBoutique(_boutique) {
+    _Boutique = _boutique;
+    titre.text = _Boutique.titre;
+    description.text = _Boutique.description;
+    new SocketService().boutique(_Boutique.codeBoutique, socketBoutique);
+    update();
+    Get.toNamed(AppLinks.BOUTIQUE_USER);
+
+    getListShortBoutique();
+    getEltBoutique();
+  }
+
   // BoutiqueController({required this.service});
-  getBoutique() async {
+  getListBoutique() async {
     try {
       //print('---0000--------boutiqr************************');
 
@@ -343,22 +365,19 @@ class BoutiqueController extends GetxController {
             response.body['data'].length != 0) {
           // print('-----------boutiqr************************');
           // print(response.body['data']);
-          _Boutique = BoutiqueUserModel.fromJson(response.body['data']);
+
+          _listBoutiques.addAll((response.body['data'] as List)
+              .map((e) => BoutiqueUserModel.fromJson(e))
+              .toList());
           update();
           _isExist = response.body['exist'];
-          titre.text = Boutique.titre;
-          description.text = Boutique.description;
-          new SocketService().boutique(_Boutique.codeBoutique, socketBoutique);
+
           _isLoaded = 1;
           update();
-
-          getEltBoutique();
 
           // //print(_Boutique);
         }
       }
-
-      getListShort();
     } catch (e) {
       _isExist = false;
       //print('---error--------boutiqr************************');
@@ -463,7 +482,7 @@ class BoutiqueController extends GetxController {
   getListProduitForBoutique() async {
     // _produitBoutiqueList = [];
     _isLoadedPB = 0;
-    update();
+    // update();
 
     _searchProB = false;
     //print('getProduit---------');
@@ -631,7 +650,7 @@ class BoutiqueController extends GetxController {
       Response response = await boutiqueRepo.updateProduitFB(data);
       //print(response.body);
       if (response.statusCode == 200) {
-        await getBoutique();
+        await getListBoutique();
         fn.snackBar('Mise a jour', response.body['message'], true);
       }
       fn.closeLoader();
@@ -649,11 +668,6 @@ class BoutiqueController extends GetxController {
       update();
       //print(e);
     }
-  }
-
-  onInit() {
-    super.onInit();
-    _quantite.text = '0';
   }
 
   TextEditingController _name = TextEditingController();
@@ -683,9 +697,10 @@ class BoutiqueController extends GetxController {
       fn.loading('Produit', 'Ajout d\'un nouveau produit en cours');
       var key = await dababase.getKey();
       if (Boutique == null) {
-        await getBoutique();
+        await getListBoutique();
       }
-      Map<String, Object> dataS = {
+
+      var dataS = {
         'keySecret': key,
         'titre': name.text,
         'description': descriptionP.text,
@@ -714,7 +729,7 @@ class BoutiqueController extends GetxController {
       Response response = await boutiqueRepo.newProduit(data);
       //print(response.body);
       if (response.statusCode == 200) {
-        await getBoutique();
+        await getListBoutique();
       }
 
       fn.closeLoader();
@@ -745,7 +760,7 @@ class BoutiqueController extends GetxController {
       //print(response.body);
 
       if (response.statusCode == 200) {
-        await getBoutique();
+        await getListBoutique();
       }
       fn.closeLoader();
 
@@ -792,7 +807,7 @@ class BoutiqueController extends GetxController {
       //print(response.body);
 
       if (response.statusCode == 200) {
-        await getBoutique();
+        await getListBoutique();
       }
 
       fn.closeLoader();
@@ -826,7 +841,7 @@ class BoutiqueController extends GetxController {
     var data = await dababase.getLonLat();
     //print('*****************data');
     //print(data);
-    if (data.isNotEmpty) {
+    if (data != null) {
       _ville = data['ville'];
       _longitude = data['long'];
       _latitude = data['lat'];
@@ -856,7 +871,7 @@ class BoutiqueController extends GetxController {
       //print(response.body);
 
       if (response.statusCode == 200) {
-        await getBoutique();
+        await getListBoutique();
       }
 
       fn.closeLoader();
@@ -984,7 +999,7 @@ class BoutiqueController extends GetxController {
   List<ShortModel> get listShortBoutique => _listShortBoutique;
   int _isLoadedShort = 0;
   int get isLoadedShort => _isLoadedShort;
-  Future<void> getListShort() async {
+  Future<void> getListShortBoutique() async {
     // //print('***short******************response**********');
     if (Boutique != null) {
       _isLoadedShort = 0;
@@ -1024,7 +1039,7 @@ class BoutiqueController extends GetxController {
     if (_listShortBoutique[index].controller == null) {
       await _listShortBoutique[index].loadController();
     }
-    controller = _listShortBoutique[index].controller!;
+    controller = _listShortBoutique[index].controller;
     controller!.play();
     _initialise = true;
     update();
@@ -1114,26 +1129,30 @@ class BoutiqueController extends GetxController {
     _isUpdating = true;
     update();
     fn.loading('Short', 'Ajout d\'un short en cours');
-    Map<String, Object> dataS = {
+
+    var data = {
       'titre': titreShort.text,
       'description': descriptionShort.text,
       'codeBoutique': Boutique.codeBoutique,
     };
 
-    videoShort.forEach((e) {
-      dataS.addAll({
-        "file": MultipartFile(
-          e.path,
+    var formData = FormData(data);
+
+    for (var file in videoShort) {
+      formData.files.add(MapEntry(
+        "file",
+        MultipartFile(
+          file.path,
           filename: "video.mp4",
-        )
-      });
-    });
-    FormData data = new FormData(dataS);
+        ),
+      ));
+    }
+
     try {
       Response response = await boutiqueRepo.newShort(data);
       //print(response.body);
       if (response.statusCode == 200) {
-        await getBoutique();
+        await getListBoutique();
       }
 
       fn.closeLoader();
@@ -1172,7 +1191,7 @@ class BoutiqueController extends GetxController {
         if (response.statusCode == 200) {
           await getListAbonnementForUser();
 
-          // await getBoutique();
+          // await getListBoutique();
           print('*-------------------------data');
         }
         fn.closeLoader();
@@ -1286,10 +1305,10 @@ class BoutiqueController extends GetxController {
     // } else if (index == 2) {
     //   await getListHCommandeForBoutique();
     // } else if (index == 3) {
-    //   await getListShort();
+    //   await getListForYouShort();
     // } else if (index == 4) {
     //   //print('*************${isLoaded}');
-    //   await getBoutique();
+    //   await getListBoutique();
     // }
   }
 
@@ -1299,7 +1318,7 @@ class BoutiqueController extends GetxController {
     getListCommandeForBoutique();
 
     getListHCommandeForBoutique();
-    getListShort();
+    getListShortBoutique();
     //print('*************${isLoaded}');
   }
 

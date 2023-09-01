@@ -42,7 +42,8 @@ class ApiRoutes {
   static const TRANSACTION_DEPOT = '/compte/credit';
   static const VERIFY_DEPOT = '/compte/credit/verify';
 
-  static const SHORT_READ = '/short/read';
+  static const SHORT_READ_FORYOU = '/short/foryou/read';
+  static const SHORT_READ_SUIVIS = '/short/suivis/read';
   static const SAVE_SHORT_USER_READ = '/short/user/read';
   static const SHORT_READ_UNIQUE = '/short/read/unique';
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';

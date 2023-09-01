@@ -6,6 +6,7 @@ import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:EMIY/utils/Services/NotificationService.dart';
 import 'package:EMIY/utils/Services/UniLinkService.dart';
 import 'package:EMIY/utils/Services/core.dart';
@@ -56,115 +57,6 @@ Future<void> main() async {
 // await init();
 }
  
-
-final _darkTheme = ThemeData(
-  primarySwatch: Colors.grey,
-  primaryColor: ColorsApp.primaryText,
-  brightness: Brightness.dark,
-  backgroundColor: const Color(0xFF212121),
-  accentColor: Colors.white,
-  accentIconTheme: IconThemeData(color: ColorsApp.black),
-  dividerColor: ColorsApp.greyTh,
-  textTheme: TextTheme(
-    bodyText2:
-        TextStyle(fontFamily: 'Montserrat', color: ColorsApp.primaryText),
-  ),
-);
-
-final _lightTheme = ThemeData(
-  primaryColor: Colors.white,
-  brightness: Brightness.light,
-  // Couleur du texte principal
-  backgroundColor: ColorsApp.bgColor,
-
-  primaryTextTheme: TextTheme(
-    headline6: TextStyle(
-      color: ColorsApp.primaryText,
-    ),
-  ),
-  // Couleur du bouton pour autoriser la localisation
-  buttonColor: ColorsApp.skyBlue,
-  // Couleur du bouton pour refuser la localisation
-  disabledColor: ColorsApp.greySearch,
-  dividerColor: Colors.white54,
-  textTheme: TextTheme(
-    bodyLarge: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 12,
-      color: ColorsApp.primaryText,
-    ),
-    displayLarge: TextStyle(
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.bold,
-      fontSize: 12,
-      color: ColorsApp.primaryText,
-    ),
-    displayMedium: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 12,
-      color: ColorsApp.primaryText,
-    ),
-    displaySmall: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 12,
-      color: ColorsApp.primaryText,
-    ),
-    headlineMedium: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 12,
-      color: ColorsApp.primaryText,
-    ),
-    headlineSmall: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 12,
-      color: ColorsApp.primaryText,
-    ),
-    titleLarge: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 16,
-      color: ColorsApp.primaryText,
-    ),
-    titleMedium: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 16,
-      color: ColorsApp.primaryText,
-    ),
-    titleSmall: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 16,
-      color: ColorsApp.primaryText,
-    ),
-    bodyMedium: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 14,
-      color: ColorsApp.primaryText,
-    ),
-    bodySmall: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 14,
-      color: ColorsApp.primaryText,
-    ),
-    labelLarge: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 14,
-      color: ColorsApp.primaryText,
-    ),
-    labelSmall: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 14,
-      color: ColorsApp.primaryText,
-    ),
-  ),
-  appBarTheme: const AppBarTheme(
-      foregroundColor: ColorsApp.bgColor, backgroundColor: ColorsApp.bgColor),
-
-  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
-      .copyWith(background: ColorsApp.bgColor)
-      .copyWith(
-        secondary: ColorsApp.primaryText,
-      ),
-);
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -179,8 +71,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       translations: Transalations(),
       locale: Get.find<GeneralController>().lan,
-      theme: _lightTheme,
-      darkTheme: _darkTheme,
+      theme: ThemeStyle().lightTheme,
+      darkTheme:  ThemeStyle(). darkTheme,
       themeMode: ThemeMode.light, //ThemeMode.system,
       debugShowCheckedModeBanner: false,
       // initialBinding: MyBinding(),

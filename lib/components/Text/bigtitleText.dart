@@ -1,3 +1,4 @@
+import 'package:EMIY/styles/theme.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +19,13 @@ class BigtitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: BoxConstraints(maxWidth: kWidth / 1.5),
+        constraints: BoxConstraints(maxWidth: kWidth),
         child: Text(text,
             overflow: TextOverflow.ellipsis,
             // textAlign: TextAlign.left,
-            style: TextStyle(
-                color: color,
-                fontWeight: bolder ? FontWeight.bold : FontWeight.normal,
-                fontSize: size)));
+            style: bolder
+                ? TexteStyle().blargeTextStyle
+                : TexteStyle().largeTextStyle));
   }
 }
 /*

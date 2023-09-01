@@ -95,14 +95,14 @@
 //     Get.find<CartController>();
 
 //     Get.find<BuyShopController>();
-//     Get.find<BoutiqueController>().getBoutique();
+//     Get.find<BoutiqueController>().getListBoutique();
 //     Get.find<CategoryBoutiqueController>().getCategory();
 //     Get.find<CommandeController>().getListCommandes();
 //     Get.find<CategoryBoutiqueController>().getListBoutiques();
-//     Get.find<ShortController>().getListShort();
+//     Get.find<ShortController>().getListForYouShort();
 
 //     Get.find<GeneralController>().getListModePaiement();
-//     Get.find<BoutiqueController>().getBoutique();
+//     Get.find<BoutiqueController>().getListBoutique();
 
 //     // Get.find<BuyShopController>().getListLivreur();
 //   }
@@ -169,9 +169,9 @@
 //     Get.lazyPut(() => SearchRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
 //     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
-//     Get.find<BoutiqueController>().getBoutique();
+//     Get.find<BoutiqueController>().getListBoutique();
 
-//     Get.find<ShortController>().getListShort();
+//     Get.find<ShortController>().getListForYouShort();
 
 //     // Get.find<CommandeController>().insertAll();
 //   }
@@ -184,9 +184,9 @@
 //     Get.find<ManagerController>().getKeyU();
 
 //     Get.find<CommandeController>().getListCommandes();
-//     Get.find<BoutiqueController>().getBoutique();
+//     Get.find<BoutiqueController>().getListBoutique();
 //     Get.find<ManagerController>().getUser();
-//     Get.find<ShortController>().getListShort();
+//     Get.find<ShortController>().getListForYouShort();
 //   }
 
 //   requestPermission() async {

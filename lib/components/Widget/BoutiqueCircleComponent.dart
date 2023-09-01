@@ -1,5 +1,6 @@
 // ignore: must_be_immutable
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
@@ -13,8 +14,9 @@ import 'package:shimmer/shimmer.dart';
 // ignore: must_be_immutable
 class BoutiqueCircleComponent extends StatelessWidget {
   BoutiqueModel boutique;
+  var type = 0;
 
-  BoutiqueCircleComponent({required this.boutique});
+  BoutiqueCircleComponent({required this.boutique, this.type = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class BoutiqueCircleComponent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
+              margin: EdgeInsets.symmetric(vertical: kMarginY),
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: boutique.images[boutique.images.length - 1].src,
@@ -73,20 +76,17 @@ class BoutiqueCircleComponent extends StatelessWidget {
                 child: Text(boutique.titre,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: ColorsApp.secondBlue,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12))),
-            Container(
-                child: Text(boutique.localisation.ville,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        // color: ColorsApp.secondBlue,
-                        fontFamily: 'Montserrat',
-                        // fontWeight: FontWeight.bold,
-                        fontSize: 12))),
+                    style: TexteStyle().bsecondaryTextStyle)),
+            if (type == 0)
+              Container(
+                  child: Text(boutique.localisation.ville,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          // color: ColorsApp.secondBlue,
+                          fontFamily: 'Montserrat',
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 12))),
             // Container(
             //     child: Row(
             //   children: [

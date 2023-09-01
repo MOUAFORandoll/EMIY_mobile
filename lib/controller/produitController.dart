@@ -23,7 +23,20 @@ class ProduitController extends GetxController {
     update();
   }
 
-  final dababase = Get.find<DataBaseController>();
+   final dababase = Get.find<DataBaseController>();
+
+
+  void onInit() async {
+    // TODO: implement initState
+     
+
+    _controllerT = ScrollController(initialScrollOffset: savedPosition)
+      ..addListener(_scrollListener);
+
+    // _savedPosition = _controllerT.position.pixels;
+    update();
+    super.onInit();
+  }
 
   bool _conf = false;
   bool get conf => _conf;
@@ -147,17 +160,6 @@ class ProduitController extends GetxController {
   get savedPosition => _savedPosition;
   late ScrollController _controllerT;
   get controllerT => _controllerT;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    _controllerT = ScrollController(initialScrollOffset: savedPosition)
-      ..addListener(_scrollListener);
-
-    // _savedPosition = _controllerT.position.pixels;
-    update();
-  }
 
   void _scrollListener() {
     _savedPosition = _controllerT.position.pixels;

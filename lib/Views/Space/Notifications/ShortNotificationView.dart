@@ -115,14 +115,17 @@ class _ShortNotificationViewState extends State<ShortNotificationView>
                                           // } else {
                                           //   _ShortController.listShort[index].controller!.play();
                                           // }
-                                          if (_ShortController.currentShortData0
-                                              .controller.value.isPlaying) {
+                                          if (_ShortController
+                                              .currentReadShortData
+                                              .controller
+                                              .value
+                                              .isPlaying) {
                                             _ShortController
-                                                .currentShortData0.controller
+                                                .currentReadShortData.controller
                                                 .pause();
                                           } else {
                                             _ShortController
-                                                .currentShortData0.controller
+                                                .currentReadShortData.controller
                                                 .play();
                                           }
                                         });
@@ -139,7 +142,7 @@ class _ShortNotificationViewState extends State<ShortNotificationView>
                                                       .width /
                                                   Get.height,
                                           child: VideoPlayer(_ShortController
-                                              .currentShortData0.controller),
+                                              .currentReadShortData.controller),
                                         ),
                                         Positioned(
                                           top: kHeight * .5,
@@ -152,15 +155,15 @@ class _ShortNotificationViewState extends State<ShortNotificationView>
                                             width: 230,
                                             child: Stack(
                                               children: [
-                                                CircularProgressIndicator(
-                                                  value: _ShortController
-                                                      .progressValue,
-                                                  strokeWidth: 5,
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                              Color>(
-                                                          ColorsApp.skyBlue),
-                                                ),
+                                                // CircularProgressIndicator(
+                                                //   value: _ShortController
+                                                //       .progressValue,
+                                                //   strokeWidth: 5,
+                                                //   valueColor:
+                                                //       AlwaysStoppedAnimation<
+                                                //               Color>(
+                                                //           ColorsApp.skyBlue),
+                                                // ),
                                                 Positioned.fill(
                                                   child: GestureDetector(
                                                     behavior: HitTestBehavior
@@ -171,12 +174,12 @@ class _ShortNotificationViewState extends State<ShortNotificationView>
                                                           .value
                                                           .isPlaying) {
                                                         _ShortController
-                                                            .currentShortData0
+                                                            .currentReadShortData
                                                             .controller
                                                             .pause();
                                                       } else {
                                                         _ShortController
-                                                            .currentShortData0
+                                                            .currentReadShortData
                                                             .controller
                                                             .play();
                                                       }
@@ -194,7 +197,7 @@ class _ShortNotificationViewState extends State<ShortNotificationView>
                                                 width: kWidth,
                                                 child: VideoProgressIndicator(
                                                     _ShortController
-                                                        .currentShortData0
+                                                        .currentReadShortData
                                                         .controller,
                                                     colors: VideoProgressColors(
                                                         playedColor:
@@ -239,21 +242,22 @@ class _ShortNotificationViewState extends State<ShortNotificationView>
                           ),
                         )
                       : */
-                  if (_ShortController.currentShortData0 != null)
-                    if (_ShortController.currentShortData0.controller != null)
+                  if (_ShortController.currentReadShortData != null)
+                    if (_ShortController.currentReadShortData.controller !=
+                        null)
                       Positioned(
                           top: kHeight / 2,
                           left: kWidth / 1.3,
                           child: Container(
                               child: InkWell(
                             child: ShortAction(
-                              short: _ShortController.currentShortData0,
+                              short: _ShortController.currentReadShortData,
                             ),
                             onTap: () {
                               _ShortController.disposeUniquePLayer();
 
                               Get.toNamed(AppLinks.BOUTIQUE +
-                                  '?lienBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.lienBoutique.toString()}note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&codeBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.codeBoutique}&note=${_ShortController.listShort[_ShortController.currentShort].boutique.note}&nomBoutique=${_ShortController.listShort[_ShortController.currentShort].boutique.titre}&description=${_ShortController.listShort[_ShortController.currentShort].boutique.description}&ville=${_ShortController.listShort[_ShortController.currentShort].boutique.localisation.ville}&image=${_ShortController.listShort[_ShortController.currentShort].boutique.images[_ShortController.listShort[_ShortController.currentShort].boutique.images.length - 1].src}');
+                                  '?lienBoutique=${_ShortController.currentReadShortData.boutique.lienBoutique.toString()}note=${_ShortController.currentReadShortData.boutique.note}&codeBoutique=${_ShortController.currentReadShortData.boutique.codeBoutique}&note=${_ShortController.currentReadShortData.boutique.note}&nomBoutique=${_ShortController.currentReadShortData.boutique.titre}&description=${_ShortController.currentReadShortData.boutique.description}&ville=${_ShortController.currentReadShortData.boutique.localisation.ville}&image=${_ShortController.currentReadShortData.boutique.images[_ShortController.currentReadShortData.boutique.images.length - 1].src}');
                             },
                           ))),
                 ],

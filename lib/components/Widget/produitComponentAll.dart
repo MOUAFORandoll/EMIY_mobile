@@ -2,6 +2,7 @@
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/controller/produitController.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -30,7 +31,7 @@ class ProduitComponentAll extends StatelessWidget {
     return InkWell(
       child: Container(
           height: kHeight / 2.7,
-          margin: EdgeInsets.symmetric(horizontal: 5),
+          // margin: EdgeInsets.symmetric(horizontal: 5),
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
             color: ColorsApp.greyTi,
@@ -106,18 +107,12 @@ class ProduitComponentAll extends StatelessWidget {
                   child: Text(produit.titre,
                       overflow: TextOverflow.fade,
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                          color: ColorsApp.marron,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12))),
+                      style: TexteStyle().secondaryTextStyle)),
               Container(
                   width: kWidth / 2,
                   child: Text('XAF ' + produit.prix.toString(),
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: ColorsApp.skyBlue,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold))),
+                      style: TexteStyle().bprimaryTextStyle)),
             ],
           )),
       onTap: () {

@@ -1,6 +1,7 @@
 // ignore: must_be_immutable
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/controller/negociationController.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
@@ -77,24 +78,16 @@ class ProduitForBoutiqueComponent extends StatelessWidget {
                     : Container()
               ]),
               Container(
-                width: kWidth / 2,
-                child: Text(produit.titre,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: ColorsApp.marron,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12)),
-              ),
+                  width: kWidth / 2,
+                  child: Text(produit.titre,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: TexteStyle().secondaryTextStyle)),
               Container(
-                width: kWidth / 2,
-                child: Text('XAF ' + produit.prix.toString(),
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: ColorsApp.skyBlue,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold)),
-              ),
+                  width: kWidth / 2,
+                  child: Text('XAF ' + produit.prix.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: TexteStyle().bprimaryTextStyle)),
             ]),
       ),
       onTap: () {

@@ -3,7 +3,6 @@
 //     final shortModel = shortModelFromJson(jsonString);
 
 import 'package:EMIY/utils/Services/apiUrl.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:video_player/video_player.dart';
@@ -31,6 +30,7 @@ class ShortModel {
     required this.nbre_like,
     required this.status,
     required this.is_like,
+    required this.controller,
   });
 
   final int id;
@@ -47,7 +47,7 @@ class ShortModel {
   final String codeShortInit;
   bool is_like;
   final bool status;
-  VideoPlayerController? controller;
+  final VideoPlayerController controller;
 
   factory ShortModel.fromJson(Map<String, dynamic> json) => ShortModel(
         id: json["id"] == null ? null : json["id"],
@@ -66,6 +66,9 @@ class ShortModel {
         codeShort: ApiUrl.external_link + 'shorts/' + json["codeShort"],
         status: json["status"] == null ? null : json["status"],
         is_like: json["is_like"] == null ? null : json["is_like"],
+        controller: VideoPlayerController.network(
+            ApiUrl.stream_serveurUrl + "/short?video=" + json["src"])
+          ..initialize(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -86,14 +89,14 @@ class ShortModel {
 
   loadController() async {
     print('**************${ApiUrl.stream_serveurUrl + "/short?video=" + src}');
-    controller = VideoPlayerController.network(
-        ApiUrl.stream_serveurUrl + "/short?video=" + src);
+    // controller = VideoPlayerController.network(
+    //     ApiUrl.stream_serveurUrl + "/short?video=" + src);
     await controller?.initialize().then((_) {
       print('**************lectyre');
 
       // controller.play();
     });
-
+    
     VideoPlayerController.network(
         ApiUrl.stream_serveurUrl + "/short?video=" + src)
       ..initialize().then((_) {

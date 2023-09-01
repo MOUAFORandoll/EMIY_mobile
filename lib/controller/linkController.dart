@@ -10,7 +10,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
 import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/model/data/ProduitModel.dart'; 
+import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
@@ -45,6 +45,7 @@ class LinkController extends GetxController {
   }
 
   final dababase = Get.find<DataBaseController>();
+
   int _isLoaded = 0;
   int get isLoaded => _isLoaded;
   var _produit;

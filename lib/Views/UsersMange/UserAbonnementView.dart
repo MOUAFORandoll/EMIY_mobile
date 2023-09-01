@@ -43,7 +43,7 @@ class UserAbonnementView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: kMarginX),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          crossAxisSpacing: 10.0,
+                          crossAxisSpacing: 5.0,
                           childAspectRatio: 0.70,
                           mainAxisSpacing: 10.0),
                       itemCount: _bcontroller.listAbonnememtUser.length,

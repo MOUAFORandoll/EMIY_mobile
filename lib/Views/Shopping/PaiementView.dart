@@ -30,16 +30,17 @@ class PaiementView extends StatelessWidget {
               ),
             ),
             body: Stack(children: [
-              WebView(
-                initialUrl: _Bcontroller.paiementUrl,
-                javascriptMode: JavascriptMode.unrestricted,
-                onPageStarted: (String url) {
-                  _Bcontroller.setLoadTransaction(true);
-                },
-                onPageFinished: (String url) {
-                  _Bcontroller.setLoadTransaction(false);
-                },
-              ),
+              // WebView(
+              //   initialUrl: _Bcontroller.paiementUrl,
+              //   javascriptMode: JavascriptMode.unrestricted,
+              //   onPageStarted: (String url) {
+              //     _Bcontroller.setLoadTransaction(true);
+              //   },
+              //   onPageFinished: (String url) {
+              //     _Bcontroller.setLoadTransaction(false);
+              //   },
+              // ),
+                    WebViewWidget(controller: _Bcontroller.controller),
               if (_Bcontroller.isLoad)
                 Center(
                   child: CircularProgressIndicator(),

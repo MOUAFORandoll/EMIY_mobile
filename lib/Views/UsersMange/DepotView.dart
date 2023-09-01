@@ -40,16 +40,7 @@ class DepotView extends StatelessWidget {
               ),
             ),
             body: Stack(children: [
-              WebView(
-                initialUrl: _Tcontroller.paiementUrl,
-                javascriptMode: JavascriptMode.unrestricted,
-                onPageStarted: (String url) {
-                  _Tcontroller.setLoadTransaction(true);
-                },
-                onPageFinished: (String url) {
-                  _Tcontroller.setLoadTransaction(false);
-                },
-              ),
+                WebViewWidget(controller: _Tcontroller.controller),
               if (_Tcontroller.isLoad)
                 Center(
                   child: CircularProgressIndicator(),

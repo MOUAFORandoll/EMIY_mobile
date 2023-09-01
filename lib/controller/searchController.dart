@@ -83,6 +83,17 @@ class SearchController extends GetxController {
 
   final dababase = Get.find<DataBaseController>();
 
+  void onInit() async {
+    // TODO: implement initState
+   
+    super.onInit();
+
+    _controllerT = ScrollController()..addListener(_scrollListener);
+
+    // _savedPosition = _controllerT.position.pixels;
+    update();
+  }
+
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
   var isType = null;
@@ -196,16 +207,6 @@ class SearchController extends GetxController {
   ScrollController _controllerT = new ScrollController();
 
   ScrollController get controllerT => _controllerT;
-  @override
-  void onInit() {
-    super.onInit();
-
-    _controllerT = ScrollController()..addListener(_scrollListener);
-
-    // _savedPosition = _controllerT.position.pixels;
-    update();
-  }
-
   void _scrollListener() {
     print('.......');
     print(_controllerT.offset + Get.height / 2.5);

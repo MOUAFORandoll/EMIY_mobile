@@ -47,6 +47,7 @@ class _AppInputState extends State<AppInput> {
         ),
         onChanged: widget.onChanged,
         decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(10),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorsApp.skyBlue, width: 2),
               borderRadius: BorderRadius.circular(8),
@@ -67,9 +68,8 @@ class _AppInputState extends State<AppInput> {
               fontSize: 12,
             ),
             hintText: widget.placeholder,
-            suffixIcon: widget.icon),
+            prefixIcon: widget.icon),
         validator: widget.validator,
-        obscureText: isVisible,
         keyboardType: widget.textInputType,
       ),
     );
@@ -108,7 +108,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: kHeight / 10,
+      // height: kHeight / 10,
       child: TextFormField(
         autofocus: false,
         controller: widget.controller,
@@ -119,6 +119,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
         ),
         onChanged: widget.onChanged,
         decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(10),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorsApp.skyBlue, width: 2),
               borderRadius: BorderRadius.circular(10),

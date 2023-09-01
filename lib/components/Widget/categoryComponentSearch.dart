@@ -2,6 +2,7 @@
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
@@ -40,8 +41,7 @@ class CategoryComponentSearch extends StatelessWidget {
                 padding: EdgeInsets.all(kMarginX),
                 child: Text(category.libelle,
                     overflow: TextOverflow.ellipsis,
-                    style:
-                        TextStyle(color: ColorsApp.primaryBlue, fontSize: 12)),
+                    style: TexteStyle().secondaryTextStyle),
               ),
               Container(
                 height: kHeight / 8,

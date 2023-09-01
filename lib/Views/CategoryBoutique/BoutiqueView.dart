@@ -6,6 +6,7 @@ import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -199,10 +200,7 @@ class BoutiqueView extends StatelessWidget {
                                           Text(
                                             Get.parameters['nomBoutique']
                                                 .toString(),
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            style: TexteStyle().blargeTextStyle,
                                           ),
                                           Container(
                                               margin: EdgeInsets.only(
@@ -261,10 +259,7 @@ class BoutiqueView extends StatelessWidget {
                                 Text(
                                   'Situe a ' +
                                       Get.parameters['ville'].toString(),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: TexteStyle().largeTextStyle,
                                 ),
                               ]),
                           ShareButton(

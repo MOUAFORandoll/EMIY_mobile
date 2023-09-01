@@ -4,6 +4,7 @@ import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/produitComponentAll.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/searchController.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:EMIY/components/Button/AppIconButton.dart';
@@ -560,10 +561,7 @@ class ProduitView extends StatelessWidget {
                                         vertical: kMarginY),
                                     child: Text("Produits Similaires",
                                         // overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: ColorsApp.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600)),
+                                        style: TexteStyle().blargeTextStyle),
                                   ),
                                   prodController.isLoadedSupp == 0
                                       ? ShimmerProduit()

@@ -37,6 +37,8 @@ class BuyShopController extends GetxController {
   String _paiementUrl = '';
   get paiementUrl => _paiementUrl;
 
+  var _controller;
+  get controller => _controller;
   bool _isLoad = false;
   bool get isLoad => _isLoad;
   setLoadTransaction(val) {
@@ -201,6 +203,30 @@ class BuyShopController extends GetxController {
             _codeCommande = response.body['codeCommande'];
             print('aa----------------');
 
+_controller = WebViewController()
+              ..setJavaScriptMode(JavaScriptMode.unrestricted)
+              ..setBackgroundColor(const Color(0x00000000))
+              ..setNavigationDelegate(
+                NavigationDelegate(
+                  onProgress: (int progress) {
+                    // Update loading bar.
+                  },
+                  onPageStarted: (String url) {
+                    setLoadTransaction(true);
+                  },
+                  onPageFinished: (String url) {
+                    setLoadTransaction(false);
+                  },
+                  onWebResourceError: (WebResourceError error) {},
+                  onNavigationRequest: (NavigationRequest request) {
+                    if (request.url.startsWith('https://www.google.com/')) {
+                      return NavigationDecision.prevent;
+                    }
+                    return NavigationDecision.navigate;
+                  },
+                ),
+              )
+              ..loadRequest(Uri.parse(_paiementUrl));
             update();
             print(_paiementUrl);
             fn.closeLoader();
@@ -391,12 +417,12 @@ class BuyShopController extends GetxController {
   var manager = Get.find<ManagerController>();
   setUserInfo() {
     print('--setinfo');
-    if (manager.User != null &&
+    if (manager.Userget != null &&
         _nameController.text.length == 0 &&
         _phoneController.text.length == 0) {
-      _nameController.text = manager.User.nom;
-      _prenameController.text = manager.User.prenom;
-      _phoneController.text = manager.User.phone;
+      _nameController.text = manager.Userget.nom;
+      _prenameController.text = manager.Userget.prenom;
+      _phoneController.text = manager.Userget.phone;
       update();
       print('--setinfo---update');
     }

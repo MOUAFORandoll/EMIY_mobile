@@ -10,8 +10,15 @@ class ShortRepo extends GetxService {
   final ApiClient apiClient;
   ShortRepo({required this.apiClient});
 
-  Future getListShort(indexC, keySecret) async {
-    Response a = await apiClient.getData(ApiRoutes.SHORT_READ +
+  Future getListForYouShort(indexC, keySecret) async {
+    Response a = await apiClient.getData(ApiRoutes.SHORT_READ_FORYOU +
+        "?page=${indexC.toString()}&keySecret=${keySecret.toString()}");
+
+    return a;
+  }
+
+  Future getListSuivisShort(indexC, keySecret) async {
+    Response a = await apiClient.getData(ApiRoutes.SHORT_READ_SUIVIS +
         "?page=${indexC.toString()}&keySecret=${keySecret.toString()}");
 
     return a;
@@ -23,6 +30,7 @@ class ShortRepo extends GetxService {
 
     return a;
   }
+
   Future newLike(data) async {
     //print('************oc');
     Response a = await apiClient.postData(ApiRoutes.SHORT_LIKE, data);

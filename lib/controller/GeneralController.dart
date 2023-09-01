@@ -71,6 +71,18 @@ class GeneralController extends GetxController {
   final GeneralRepo generalRepo;
   GeneralController({required this.generalRepo});
   final dababase = Get.find<DataBaseController>();
+
+  void onInit() async {
+    // TODO: implement initState
+    // dababase = await DataBaseController.getInstance();
+    // ;
+
+    fn.verifiedConnection();
+    _controllerScrollNotification = ScrollController()
+      ..addListener(_scrollListenerNotification);
+    update();
+  }
+
   // final GlobalKey _scaffoldKey = new GlobalKey();
   // GlobalKey get scaffoldKey => _scaffoldKey;
   openDrawer(context) {
@@ -294,14 +306,6 @@ class GeneralController extends GetxController {
 
   late ScrollController _controllerScrollNotification;
   get controllerScrollNotification => _controllerScrollNotification;
-  @override
-  void onInit() {
-    fn.verifiedConnection();
-    _controllerScrollNotification = ScrollController()
-      ..addListener(_scrollListenerNotification);
-    update();
-  }
-
   int _currentIndex = 0;
   Widget buildContent() {
     switch (_currentIndex) {
@@ -442,9 +446,9 @@ class GeneralController extends GetxController {
                                           onTap: () async {
                                             var _manager =
                                                 Get.find<ManagerController>();
-                                            var name = _manager.User.nom;
-                                            var prenom =
-                                                _manager.User.prenom.toString();
+                                            var name = _manager.Userget.nom;
+                                            var prenom = _manager.Userget.prenom
+                                                .toString();
 
                                             var mode =
                                                 Get.find<GeneralController>()

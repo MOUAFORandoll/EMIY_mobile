@@ -20,7 +20,6 @@ import 'package:jwt_decode/jwt_decode.dart';
 class NegociationController extends GetxController {
   final NegociationRepo negociationRepo;
   NegociationController({required this.negociationRepo});
-
   final dababase = Get.find<DataBaseController>();
 
   var fn = new ViewFunctions();
@@ -34,7 +33,7 @@ class NegociationController extends GetxController {
 
     fn.loading('Boutique', 'Creation de la negociation en cours');
     var token = await dababase.getKeyKen();
-    _idUser = Jwt.parseJwt(token['token'])['id'];
+    _idUser = Jwt.parseJwt(token!['token'])['id'];
 
     try {
       var data = {'codeProduit': codeProduit, 'keySecret': key};
@@ -167,7 +166,7 @@ class NegociationController extends GetxController {
 
       // fn.loading('Boutique', 'Creation de la negociation en cours');
       var token = await dababase.getKeyKen();
-      _idUser = Jwt.parseJwt(token['token'])['id'];
+      _idUser = Jwt.parseJwt(token!['token'])['id'];
 
       try {
         var data = {

@@ -139,7 +139,7 @@ class OnBoardingView extends StatelessWidget {
                                         onTap: () {
                                           Get.offAndToNamed(
                                             Get.find<ManagerController>()
-                                                        .User ==
+                                                        .Userget ==
                                                     null
                                                 ? AppLinks.LOGIN
                                                 : AppLinks.FIRST,

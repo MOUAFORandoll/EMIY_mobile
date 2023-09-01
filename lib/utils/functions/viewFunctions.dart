@@ -95,6 +95,7 @@ class ViewFunctions {
   isConnected() async {
     final dababase = Get.find<DataBaseController>();
 
+   
     var key = await dababase.getKey();
     if (key == null || key == 'null') {
       Get.bottomSheet(

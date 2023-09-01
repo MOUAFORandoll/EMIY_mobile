@@ -36,8 +36,8 @@ class ServiceClientController extends GetxController {
 
   final ServiceClientRepo serviceClientRepo;
   ServiceClientController({required this.serviceClientRepo});
-
   final dababase = Get.find<DataBaseController>();
+
   var fn = new ViewFunctions();
   int _isLoadEchange = 0;
   int get isLoadEchange => _isLoadEchange;
@@ -54,7 +54,7 @@ class ServiceClientController extends GetxController {
       update();
 
       var token = await dababase.getKeyKen();
-      if (token.length != 0) {
+      if (token != null) {
         try {
           Response response =
               await serviceClientRepo.getEchange(codeCommunication);
@@ -97,7 +97,7 @@ class ServiceClientController extends GetxController {
       var key = await dababase.getKey();
 
       var keys = await dababase.getKeyKen();
-      var codeCommunication = keys['codeCommunication'];
+      var codeCommunication = keys!['codeCommunication'];
       print('codeCommunication-----------------${codeCommunication}');
 
       try {

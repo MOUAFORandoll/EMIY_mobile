@@ -23,6 +23,26 @@ class SettingView extends StatelessWidget {
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
 
+  var controller = WebViewController()
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(const Color(0x00000000))
+    ..setNavigationDelegate(
+      NavigationDelegate(
+        onProgress: (int progress) {
+          // Update loading bar.
+        },
+        onPageStarted: (String url) {},
+        onPageFinished: (String url) {},
+        onWebResourceError: (WebResourceError error) {},
+        onNavigationRequest: (NavigationRequest request) {
+          if (request.url.startsWith('https://www.google.com/')) {
+            return NavigationDecision.prevent;
+          }
+          return NavigationDecision.navigate;
+        },
+      ),
+    )
+    ..loadRequest(Uri.parse('https://www.google.com/'));
   // final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
@@ -535,12 +555,13 @@ class SettingView extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: kMarginX, vertical: kMarginY),
                                 child: Stack(children: [
-                                  WebView(
-                                    initialUrl: 'www.google.cm',
-                                    javascriptMode: JavascriptMode.unrestricted,
-                                    onPageStarted: (String url) {},
-                                    onPageFinished: (String url) {},
-                                  ),
+                                  // WebView(
+                                  //   initialUrl: 'www.google.cm',
+                                  //   javascriptMode: JavascriptMode.unrestricted,
+                                  //   onPageStarted: (String url) {},
+                                  //   onPageFinished: (String url) {},
+                                  // ),
+                                    WebViewWidget(controller: controller),
                                 ])),
                             isScrollControlled: true,
                           );

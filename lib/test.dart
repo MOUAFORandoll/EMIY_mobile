@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:EMIY/components/Button/app_button.dart';
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -9,6 +10,7 @@ import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'package:video_player/video_player.dart';
@@ -32,6 +34,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uni_links/uni_links.dart';
+
+import 'package:objectbox/objectbox.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+// import 'objectbox.g.dart';
+import 'entity.dart';
 
 bool _initialUriIsHandled = false;
 // class Test extends StatefulWidget {
@@ -139,32 +147,116 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> with TickerProviderStateMixin {
   bool _showHeart = false;
+  // late ObjectBoxManager _objectBoxManager;
 
-  var fn = new ViewFunctions();
+  // @override
+  // void initState() {
+  //   init();
+  // }
 
+  // @override
+  // void init() async {
+  //   // TODO: implement initState
+  //   _objectBoxManager = await ObjectBoxManager.create();
+  // }
+
+  final dababase = Get.find<DataBaseController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: InkWell(
-          onTap: () => fn.notifivation(
-            'Commente',
-          ),
           child: Text('Double-cliquez pour aimer!'),
         ),
       ),
       body: Center(
-          child: GestureDetector(
-              onTap: () => fn.notifivation(
-                    'Commente',
-                  ),
+          child: Row(
+        children: [
+          GestureDetector(
+              onTap: () => dababase.insertAllCommandes(),
               child: Center(
                 child: Icon(
-                  Icons.favorite,
+                  Icons.add,
                   color: Colors.red,
                   size: 80,
                 ),
-              ))),
+              )),
+          GestureDetector(
+              onTap: () {
+                var data = dababase.getListCommande();
+                data.forEach((e) => print(e.codeCommande));
+                // _objectBoxManager.getAllYourDataModels();
+              },
+              child: Center(
+                child: Icon(
+                  Icons.list,
+                  color: Colors.red,
+                  size: 80,
+                ),
+              )),
+          GestureDetector(
+              onTap: () {
+                // _objectBoxManager.updateYourDataModel(
+                //     new YourDataModel(name: 'hg5455555', id: 0));
+              },
+              child: Center(
+                child: Icon(
+                  Icons.add,
+                  color: Colors.red,
+                  size: 80,
+                ),
+              )),
+        ],
+      )),
     );
   }
 }
+
+// class ObjectBoxManager {
+//   /// The Store of this app.
+//   late final Store store;
+
+//   ObjectBoxManager._create(this.store) {
+//     // Add any additional setup code, e.g. build queries.
+//   }
+
+//   /// Create an instance of ObjectBoxManager to use throughout the app.
+//   static Future<ObjectBoxManager> create() async {
+//     final docsDir = await getApplicationDocumentsDirectory();
+//     // Future<Store> openStore() {...} is defined in the generated ObjectBoxManager.g.dart
+//     final store =
+//         await openStore(directory: p.join(docsDir.path, "obx-example"));
+//     return ObjectBoxManager._create(store);
+//   }
+
+//   var index = 5;
+
+//   // Create operation
+//   void createYourDataModel(YourDataModel newData) {
+//     final box = store.box<YourDataModel>();
+//     index++;
+//     box.put(newData);
+//   }
+
+//   // Read operation
+//   List<YourDataModel> getAllYourDataModels() {
+//     final box = store.box<YourDataModel>();
+//     print(box.getAll().length);
+//     box.getAll().forEach(
+//           (element) => print(element.name),
+//         );
+//     return box.getAll();
+//   }
+
+//   // Update operation
+//   void updateYourDataModel(YourDataModel updatedData) {
+//     final box = store.box<YourDataModel>();
+//     box.put(updatedData);
+//   }
+
+//   // Delete operation
+//   void deleteYourDataModel(int id) {
+//     final box = store.box<YourDataModel>();
+//     box.remove(id);
+//   }
+// }

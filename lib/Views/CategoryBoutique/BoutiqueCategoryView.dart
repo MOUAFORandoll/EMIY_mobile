@@ -5,6 +5,7 @@ import 'package:EMIY/components/Button/button.dart';
 import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
+import 'package:EMIY/components/Widget/BoutiqueCircleComponent.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponent.dart';
 import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_empty.dart';
@@ -91,25 +92,30 @@ class BoutiqueCategoryView extends StatelessWidget {
                       builder: (_lbcontroller) => _lbcontroller.isLoadedP == 0
                           ? AppLoading()
                           : (_lbcontroller.ListBoutique.length != 0)
-                              ? SingleChildScrollView(
-                                  child: GridView.builder(
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: kMarginX),
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
-                                              crossAxisSpacing: 20.0,
-                                              childAspectRatio: 0.8,
-                                              mainAxisSpacing: 20.0),
-                                      itemCount:
-                                          _lbcontroller.ListBoutique.length,
-                                      itemBuilder: (_ctx, index) =>
-                                          BoutiqueComponent(
-                                            boutique: _lbcontroller
-                                                .ListBoutique[index],
-                                          )))
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10),
+                                  child: SingleChildScrollView(
+                                      child: GridView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const BouncingScrollPhysics(),
+
+                                          // Ratio largeur/hauteur pour chaque élément
+                                          // controller: search.controllerT,
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 3,
+                                                  crossAxisSpacing: 10.0,
+                                                  childAspectRatio: 0.70,
+                                                  mainAxisSpacing: 10.0),
+                                          itemCount:
+                                              _lbcontroller.ListBoutique.length,
+                                          itemBuilder: (_ctx, index) =>
+                                              BoutiqueCircleComponent(
+                                                boutique: _lbcontroller
+                                                    .ListBoutique[index],
+                                              ))))
                               : AppEmpty(title: 'Aucune boutique'),
                     ),
 

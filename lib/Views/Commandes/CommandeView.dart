@@ -37,13 +37,13 @@ class CommandeView extends StatelessWidget {
                   child: AppEmpty(title: 'Aucune Commande'))
               : ListView.builder(
                   // scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  // controller: scrollController,
                   itemCount: _commande.commandeList.length,
-                  itemBuilder: (_ctx, index) =>
-                      _commande.commandeList[index].id != null
-                          ? CommandeComponent(
-                              commande: _commande.commandeList[index],
-                            )
-                          : Text(''),
+                  itemBuilder: (_ctx, index) => CommandeComponent(
+                    commande: _commande.commandeList[index],
+                  ),
                 );
     });
   }

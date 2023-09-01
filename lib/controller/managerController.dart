@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
+import 'package:EMIY/Views/BoutiqueUser/MesBoutiquesView.dart';
 import 'package:EMIY/Views/UsersMange/InteretsView.dart';
 import 'package:EMIY/Views/UsersMange/ParrainnageView.dart';
 import 'package:EMIY/Views/UsersMange/PreferenceView.dart';
 import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
+import 'package:EMIY/Views/UsersMange/UserManageView.dart';
 import 'package:EMIY/controller/TransactionController.dart';
+import 'package:EMIY/controller/entity.dart';
+import 'package:EMIY/entity.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/CompteModel.dart';
 import 'package:EMIY/model/data/ProduitCategoryModel.dart';
@@ -38,7 +42,6 @@ class ManagerController extends GetxController {
   //   update();
   //   // //print('curent ${_current}');
   // }
-
   final dababase = Get.find<DataBaseController>();
 
   // setCurrent(int i) {
@@ -180,7 +183,7 @@ class ManagerController extends GetxController {
   }
 
   var _User;
-  UserModel get User => _User;
+  UserModel get Userget => _User;
 
   CompteModel _Compte = new CompteModel(solde: 0, id: 0);
   CompteModel get Compte => _Compte;
@@ -200,17 +203,19 @@ class ManagerController extends GetxController {
 
           _Compte = CompteModel.fromJson(response.body['compte']);
           update();
+          var _UserSave = User.fromJson(response.body['data']);
 
-          await dababase.saveUser(User);
+          await dababase.saveUser(_UserSave);
           if (_User != null) {
-            nameU.text = User.nom;
-            surnameU.text = User.prenom.toString();
-            phoneU.text = User.phone.toString();
-            emailU.text = User.email;
+            // nameU.text = Userget.nom;
+            // surnameU.text = Userget.prenom.toString();
+            // phoneU.text = Userget.phone.toString();
+            // emailU.text = Userget.email;
+            initInfoUser();
           }
           getKeyU();
 
-          Get.find<BoutiqueController>().getBoutique();
+          Get.find<BoutiqueController>().getListBoutique();
         }
 
         _isLoaded = 1;
@@ -224,9 +229,9 @@ class ManagerController extends GetxController {
   }
 
   getUserDB() async {
-    var data = await dababase.getUserDB();
+    var data = await dababase.getUser();
     if (data != null) {
-      _User = UserModel.fromJson(data);
+      _User = UserModel.fromJson(data.toMap());
       update();
     }
   }
@@ -270,6 +275,14 @@ class ManagerController extends GetxController {
     // dababase.deleteAll();
   }
 
+  initInfoUser() {
+    _nameU.text = Userget.nom;
+    _surnameU.text = Userget.prenom;
+    _phoneU.text = Userget.phone;
+    _emailU.text = Userget.email;
+    update();
+  }
+
   TextEditingController _nameU = TextEditingController();
   get nameU => _nameU;
   TextEditingController _surnameU = TextEditingController();
@@ -294,13 +307,16 @@ class ManagerController extends GetxController {
   get rnewpwdU => _rnewpwdU;
   final _formKeyUpdateU = new GlobalKey<FormState>();
   get formKeyUpdateU => _formKeyUpdateU;
+  final _formKeyUpdatePassU = new GlobalKey<FormState>();
+  get formKeyUpdatePassU => _formKeyUpdatePassU;
   bool _isUpdating = false;
   bool get isUpdating => _isUpdating;
   updateUser() async {
     _isUpdating = true;
     update();
+    var key = await dababase.getKey();
     var data = {
-      'keySecret': new GetStorage().read('keySecret'),
+      'keySecret': key,
       'nom': nameU.text,
       'prenom': surnameU.text,
       'phone': phoneU.text,
@@ -561,7 +577,7 @@ class ManagerController extends GetxController {
   int _isLoadedPB = 0;
   int get isLoadedPB => _isLoadedPB;
   getListFieul() async {
-    var key = 12341; //await dababase.getKey();
+    var key = await dababase.getKey();
     _isLoadedPB = 0;
 
     try {
@@ -624,7 +640,7 @@ class ManagerController extends GetxController {
   Widget buildContent() {
     switch (_current) {
       case 0:
-        return Container();
+        return UserManageView();
 
       case 1:
         return CommandeView();
@@ -642,7 +658,7 @@ class ManagerController extends GetxController {
       case 6:
         return PreferenceView();
       case 7:
-        return BoutiqueUserView();
+        return MesBoutiquesView();
 
       // case 4:
       //   return ProfileUserView();

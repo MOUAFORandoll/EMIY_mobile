@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TransactionController extends GetxController {
   final service = new ApiService();
@@ -38,13 +39,13 @@ class TransactionController extends GetxController {
 
   // CategoryController({required this.service});
   getTransactions() async {
-    if (managerController.User != null) {
+    if (managerController.Userget != null) {
       try {
       
         //print(".............");
 
         Response response =
-            await transactionRepo.getListTransaction(managerController.User.id);
+            await transactionRepo.getListTransaction(managerController.Userget.id);
         if (response.body != null) {
           if (response.body['data'].length != 0) {
               _transactionList.clear();
@@ -114,7 +115,9 @@ class TransactionController extends GetxController {
 
   String _paiementUrl = '';
   get paiementUrl => _paiementUrl;
-
+  
+  var _controller  ;
+  get controller => _controller;
   bool _isLoad = false;
   bool get isLoad => _isLoad;
   setLoadTransaction(val) {
@@ -135,6 +138,31 @@ class TransactionController extends GetxController {
       //print(_isCounter);
       if (response.statusCode == 201) {
         _paiementUrl = response.body['url'];
+        
+_controller = WebViewController()
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          ..setBackgroundColor(const Color(0x00000000))
+          ..setNavigationDelegate(
+            NavigationDelegate(
+              onProgress: (int progress) {
+                // Update loading bar.
+              },
+              onPageStarted: (String url) {
+                setLoadTransaction(true);
+              },
+              onPageFinished: (String url) {
+                setLoadTransaction(false);
+              },
+              onWebResourceError: (WebResourceError error) {},
+              onNavigationRequest: (NavigationRequest request) {
+                if (request.url.startsWith('https://www.google.com/')) {
+                  return NavigationDecision.prevent;
+                }
+                return NavigationDecision.navigate;
+              },
+            ),
+          )
+          ..loadRequest(Uri.parse(_paiementUrl));
         _token = response.body['token'];
         update();
         //print(_paiementUrl);

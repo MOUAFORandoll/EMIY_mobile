@@ -31,7 +31,8 @@ class CommandeComponent extends StatelessWidget {
     // quantite.text = commande.quantite.toString();
     // prix.text = commande.prix.toString();
     // description.text = commande.description;
-    return Stack(
+    return Container(
+        child: Stack(
       children: [
         InkWell(
           child: Container(
@@ -146,6 +147,6 @@ class CommandeComponent extends StatelessWidget {
           },
         ),
       ],
-    );
+    ));
   }
 }

@@ -10,7 +10,9 @@ class TextBackSpace extends StatelessWidget {
   bool bolder;
   Color color;
   TextBackSpace(
-      {this.text = '', this.color = ColorsApp.white, this.bolder = false});
+      {this.text = '',
+      this.color = ColorsApp.primaryText,
+      this.bolder = false});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +21,8 @@ class TextBackSpace extends StatelessWidget {
           text,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              fontSize: 14,
+              fontFamily: 'Montserrat',
+              fontSize: 12,
               color: color,
               fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
         ));

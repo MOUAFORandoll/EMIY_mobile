@@ -1,3 +1,4 @@
+import 'package:EMIY/controller/entity.dart';
 import 'package:EMIY/model/data/CartModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/CommandeModel.dart';
@@ -18,7 +19,6 @@ class CommandeController extends GetxController {
   List<CommandeModel> get commandeList => _commandeList;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-
   final dababase = Get.find<DataBaseController>();
 
   getListCommandes() async {
@@ -29,8 +29,9 @@ class CommandeController extends GetxController {
       var response = await dababase.getListCommande();
       //print('DB *************response ');
       //print(response);
-      _commandeList.addAll(
-          (response as List).map((e) => CommandeModel.fromJson(e)).toList());
+      _commandeList.addAll((response as List<Commande>)
+          .map((e) => CommandeModel.fromJson(e.toMap()))
+          .toList());
       // //print(_categoryList);
       _isLoaded = true;
       update();
@@ -40,7 +41,7 @@ class CommandeController extends GetxController {
   }
 
   saveCommande(id, codeCommande, codeClient, date) {
-    dababase.insert(id, codeCommande, codeClient, date);
+    dababase.insertCommande(id, codeCommande, codeClient, date);
   }
 
   List<Produit> _produitList = [];

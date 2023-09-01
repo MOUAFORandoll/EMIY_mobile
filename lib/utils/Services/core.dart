@@ -55,14 +55,9 @@ Future<void> initApp() async {
   Get.find<ManagerController>().chageN(true);
   await GetStorage.init();
 
-  await Get.find<DataBaseController>().init();
 //  await Get.find<ManagerController>().getUserDB();
 // await  Get.find<ManagerController>().getKeyU();
 //  await Get.find<ManagerController>().getUser();
-
-
-
-
 
   await Get.find<GeneralController>().generalSocket();
   await Get.find<GeneralController>().NotificationSocket();
@@ -76,16 +71,16 @@ Future<void> initApp() async {
 
 Future<void> secondInit() async {
   Get.find<CommandeController>().getListCommandes();
-  // Get.find<ProduitController>().getPopularProduit();
-  // Get.find<CategoryBoutiqueController>().getCategory();
-  // Get.find<CategoryBoutiqueController>().getListBoutiques();
+  Get.find<ProduitController>().getPopularProduit();
+  Get.find<CategoryBoutiqueController>().getCategory();
+  Get.find<CategoryBoutiqueController>().getListBoutiques();
   Get.find<GeneralController>().getHome();
   Get.find<ManagerController>().newLocalisation();
   Get.find<ManagerController>().getListFieul();
   Get.find<BuyShopController>().getPointLivraisom();
-  Get.find<BoutiqueController>().getBoutique();
+  // Get.find<BoutiqueController>().getListBoutique();
   Get.find<BoutiqueController>().getListAbonnementForBoutique();
-  Get.find<ShortController>().getListShort();
+  Get.find<ShortController>().getListForYouShort();
   Get.find<NegociationController>().getListNegociation();
   Get.find<ProduitController>().getListProduitPreference();
 
@@ -103,7 +98,6 @@ Future<void> initAllApp() async {
   Get.find<ManagerController>().chageN(true);
   await GetStorage.init();
 
-  await Get.find<DataBaseController>().init();
   Get.find<ManagerController>().getKeyU();
   Get.find<ManagerController>().getUser();
   Get.find<GeneralController>().generalSocket();
@@ -118,10 +112,10 @@ Future<void> initAllApp() async {
 
   // Get.find<ProduitController>().getPopularProduit();
   Get.find<BuyShopController>().getPointLivraisom();
-  Get.find<BoutiqueController>().getBoutique();
+  Get.find<BoutiqueController>().getListBoutique();
   Get.find<BoutiqueController>().getListAbonnementForBoutique();
-  // Get.find<CategoryBoutiqueController>().getCategory();
-  Get.find<ShortController>().getListShort();
+  Get.find<CategoryBoutiqueController>().getCategory();
+  Get.find<ShortController>().getListForYouShort();
   Get.find<NegociationController>().getListNegociation();
   Get.find<ProduitController>().getListProduitPreference();
 
@@ -134,7 +128,8 @@ Future<void> initAllApp() async {
 
 Future<void> initServices() async {
   Get.put(UniLinkService(), permanent: true);
-  Get.put(DataBaseController(), permanent: true);
+
+  Get.put(await DataBaseController.getInstance(), permanent: true);
 
   Get.put(ApiClient(), permanent: true);
 
@@ -195,8 +190,6 @@ getData() async {
   //print("voici le statut ,  $status");
 
   if (status.isGranted) {
-    var database = Get.find<DataBaseController>();
-    await database.init();
     await Get.find<GeneralController>().getLanguageInit();
 
     Get.find<ManagerController>().getKeyU();

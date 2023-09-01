@@ -89,7 +89,8 @@ class BoutiqueViewForLink extends StatelessWidget {
                                         color: Colors.red,
                                       )),
                                   onTap: () {
-                                    Get.find<ShortController>().getListShort();
+                                    Get.find<ShortController>()
+                                        .getListForYouShort();
 
                                     Get.toNamed(AppLinks.SHORT);
                                   })

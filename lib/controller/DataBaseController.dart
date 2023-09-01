@@ -1,3 +1,4 @@
+/* 
 import 'dart:io';
 import 'dart:async';
 
@@ -104,13 +105,7 @@ class DataBaseController extends GetxController {
 
   insert(id, codeCommande, codeClient, date) async {
     try {
-      // var databasesPath = await getApplicationDocumentsDirectory();
-      // String path = join(databasesPath.path, linkDb);
-
-      // Database _database = await openDatabase(
-      //   path,
-      //   version: 1,
-      // );
+     
       var a = await _database!.insert("COMMANDE", {
         "id": id,
         "codeCommande": codeCommande,
@@ -166,31 +161,12 @@ class DataBaseController extends GetxController {
       return false;
     }
   }
-
-  // insertTR(token, refresh, date) async {
-  //   try {
-  //     var a = await _database!.insert("User", {
-  //       "id": id,
-  //       "codeCommande": codeCommande,
-  //       "date": date,
-  //     });
-  //     return true;
-  //   } catch (e) {
-  //     return false;
-  //   }
-  // }
+ 
 
   getListCommande() async {
-    // var databasesPath = await getApplicationDocumentsDirectory();
-    // String path = join(databasesPath.path, linkDb);
-
-    // Database _database = await openDatabase(
-    //   path,
-    //   version: 1,
-    // );
+  
     var data = await _database!.rawQuery('SELECT * FROM COMMANDE');
-    //print('com*****ta');
-    //print(data);
+    
     return data;
   }
 
@@ -204,27 +180,15 @@ class DataBaseController extends GetxController {
     );
     databaseFactory.deleteDatabase(path);
     init();
-    //print("fin delette");
+   
   }
-
-  // updateUser(data) async {
-  //   var user = select();
-  //   await _database!.update("User", data, where: 'id = ${user['id']}');
-  //   var data1 = await _database!.rawQuery('SELECT * FROM User');
-  //   //print("*---------------------------up date user $data1");
-  // }
+ 
 
   saveKeyKen(key) async {
     try {
-      // var databasesPath = await getApplicationDocumentsDirectory();
-      // String path = join(databasesPath.path, linkDb);
-
-      // Database _database = await openDatabase(
-      //   path,
-      //   version: 1,
-      // );
+     
       var data = await _database!.rawQuery('SELECT * FROM KEYUSER');
-      //print(data);
+     
       if (data.isNotEmpty) {
         var a = await _database!.update(
             "KEYUSER",
@@ -258,15 +222,9 @@ class DataBaseController extends GetxController {
 
   saveLonLat(key) async {
     try {
-      // var databasesPath = await getApplicationDocumentsDirectory();
-      // String path = join(databasesPath.path, linkDb);
-
-      // Database _database = await openDatabase(
-      //   path,
-      //   version: 1,
-      // );
+    
       var data = await _database!.rawQuery('SELECT * FROM LOCALISATION');
-      //print(data);
+     
       if (data.isNotEmpty) {
         var a = await _database!.update(
             "LOCALISATION",
@@ -296,16 +254,9 @@ class DataBaseController extends GetxController {
   }
 
   getLonLat() async {
-    // var databasesPath = await getApplicationDocumentsDirectory();
-    // String path = join(databasesPath.path, linkDb);
-
-    // Database _database = await openDatabase(
-    //   path,
-    //   version: 1,
-    // );
+   
     var data = await _database!.rawQuery('SELECT * FROM LOCALISATION');
-    //print('***************data[0]');
-    //print(data);
+   
     if (data.isNotEmpty) {
       return {
         "id": 0,
@@ -321,13 +272,7 @@ class DataBaseController extends GetxController {
   }
 
   getKeyKen() async {
-    // var databasesPath = await getApplicationDocumentsDirectory();
-    // String path = join(databasesPath.path, linkDb);
-
-    // Database _database = await openDatabase(
-    //   path,
-    //   version: 1,
-    // );
+   
     var data = await _database!.rawQuery('SELECT * FROM KEYUSER');
     if (data.isNotEmpty) {
       print({
@@ -350,15 +295,9 @@ class DataBaseController extends GetxController {
   }
 
   getKey() async {
-    // var databasesPath = await getApplicationDocumentsDirectory();
-    // String path = join(databasesPath.path, linkDb);
-
-    // Database _database = await openDatabase(
-    //   path,
-    //   version: 1,
-    // );
+  
     var data = await _database!.rawQuery('SELECT * FROM KEYUSER');
-    // //print(data);
+    
     if (data.isNotEmpty) {
       return /* {'keySecret':  */ data[0]['keySecret'] /* } */;
     } else {
@@ -368,17 +307,9 @@ class DataBaseController extends GetxController {
 
   saveLan(String name) async {
     try {
-      // var databasesPath = await getApplicationDocumentsDirectory();
-      // String path = join(databasesPath.path, linkDb);
-
-      // Database _database = await openDatabase(
-      //   path,
-      //   version: 1,
-      // );
+    
       var data = await _database!.rawQuery('SELECT * FROM LANG');
-      //print(
-      // ' ${data}lan----------------------------****************************************');
-
+      
       if (data.isNotEmpty) {
         var a = await _database!.update(
             "LANG",
@@ -405,13 +336,7 @@ class DataBaseController extends GetxController {
   }
 
   getLan() async {
-    // var databasesPath = await getApplicationDocumentsDirectory();
-    // String path = join(await getDatabasesPath(), linkDb);
-
-    // Database _database = await openDatabase(
-    //   path,
-    //   version: 1,
-    // );
+    
     try {
       var data = await _database!.rawQuery('SELECT * FROM LANG');
 
@@ -429,18 +354,10 @@ class DataBaseController extends GetxController {
   }
 
   getLanIs() async {
-    // var databasesPath = await getApplicationDocumentsDirectory();
-    // String path = join(await getDatabasesPath(), linkDb);
-
-    // Database _database = await openDatabase(
-    //   path,
-    //   version: 1,
-    // );
+    
     try {
       var data = await _database!.rawQuery('SELECT * FROM LANG');
-      //print(
-      // 'lan----------------------------****************************************');
-      // print(data);
+     
       return data.isNotEmpty;
     } catch (e) {
       //print(e);
@@ -457,9 +374,7 @@ class DataBaseController extends GetxController {
         version: 1,
       );
       var data = await _database.rawQuery('SELECT * FROM THEME');
-      //print(
-      // ' ${data}lan----------------------------****************************************');
-
+      
       if (data.isNotEmpty) {
         var a = await _database.update(
             "THEME",
@@ -476,9 +391,7 @@ class DataBaseController extends GetxController {
         });
       }
       var data0 = await _database.rawQuery('SELECT * FROM THEME');
-      //print(
-      // ' ${data0}lan----------------------------****************************************');
-
+    
       return true;
     } catch (e) {
       return false;
@@ -486,13 +399,7 @@ class DataBaseController extends GetxController {
   }
 
   getTheme() async {
-    // var databasesPath = await getApplicationDocumentsDirectory();
-    // String path = join(await getDatabasesPath(), linkDb);
-
-    // Database _database = await openDatabase(
-    //   path,
-    //   version: 1,
-    // );
+    
     try {
       if (_database != null) {
         var data = await _database!.rawQuery('SELECT * FROM THEME');
@@ -501,13 +408,182 @@ class DataBaseController extends GetxController {
         if (data.isNotEmpty) {
           var value = data[0]['value'].toString();
           return value;
-          // Get.find<GeneralController>().getLanguage0(name);
+        
         } else {
           return null;
         }
       }
     } catch (e) {
-      //print(e);
+     
     }
+  }
+}
+ */
+
+import 'dart:io';
+import 'dart:async';
+
+import 'package:EMIY/controller/GeneralController.dart';
+import 'package:EMIY/controller/GeneralController.dart';
+import 'package:EMIY/controller/entity.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/entity.dart';
+import 'package:EMIY/model/data/UserModel.dart';
+import 'package:EMIY/objectbox.g.dart';
+import 'package:EMIY/utils/Services/dependancies.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
+import 'package:jwt_decode/jwt_decode.dart';
+import 'package:objectbox/objectbox.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' as p;
+
+import 'package:path/path.dart';
+
+String linkDb = 'FahKap0';
+
+GetStorage box = GetStorage();
+
+class DataBaseController extends GetxController {
+  late final Store store;
+
+  // Le constructeur est privé pour empêcher l'instanciation directe
+  DataBaseController._create(this.store);
+
+  // Instance unique du DataBaseController
+  static DataBaseController? _instance;
+
+  // Méthode pour obtenir l'instance unique du DataBaseController
+  static Future<DataBaseController> getInstance() async {
+    if (_instance == null) {
+      _instance = await _createInstance();
+    }
+    return _instance!;
+  }
+
+  // Méthode interne pour créer l'instance du DataBaseController
+  static Future<DataBaseController> _createInstance() async {
+    final docsDir = await getApplicationDocumentsDirectory();
+
+    // Vérifier si le store existe déjà dans GetStorage
+    // if (box.read('store') != 1) {
+    //   box.write('store', 1);
+    final store = await openStore(directory: p.join(docsDir.path, linkDb));
+    return DataBaseController._create(store);
+    //  }s
+  }
+
+  // Insert operation
+  insertCommande(int id, String codeCommande, String codeClient, String date) {
+    final commandeBox = store.box<Commande>();
+    store.box<Commande>().put(Commande(
+        id: commandeBox.query().build().find().length + 1,
+        codeCommande: codeCommande,
+        codeClient: codeClient,
+        date: date));
+    return true;
+  }
+
+  saveUser(User user) async {
+    store.box<User>().put(user);
+    return true;
+  }
+
+  // Get operations
+  User? getUser() {
+    final userBox = store.box<User>();
+    final users = userBox.getAll();
+    return users.isNotEmpty ? users.first : null;
+  }
+
+  List<Commande> getListCommande() {
+    final commandeBox = store.box<Commande>();
+    // commandeBox.query().build().find().forEach((e) => print(e.codeCommande));
+    return commandeBox.query().build().find();
+  }
+
+  Future<Map<String, dynamic>?> getLonLat() async {
+    final localisationBox = store.box<Localisation>();
+    final localisations = localisationBox.getAll();
+    return localisations.isNotEmpty ? localisations.first.toMap() : null;
+  }
+
+  saveLonLat(value) async {
+    store.box<Localisation>().put(Localisation.fromJson(value));
+    return true;
+  }
+
+  Future<Map<String, dynamic>?> getKeyKen() async {
+    final keyUserBox = store.box<KeyUser>();
+    final keyUsers = keyUserBox.getAll();
+    return keyUsers.isNotEmpty ? keyUsers.first.toMap() : null;
+  }
+
+  saveKeyKen(value) async {
+    store.box<KeyUser>().put(KeyUser.fromJson(value));
+    return true;
+  }
+
+  Future<String?> getKey() async {
+    final keyUserBox = store.box<KeyUser>();
+    final keyUsers = keyUserBox.getAll();
+    return keyUsers.isNotEmpty ? keyUsers.first.keySecret : null;
+  }
+
+  Future<String?> getLan() async {
+    final langBox = store.box<Lang>();
+    final langs = langBox.getAll();
+    return langs.isNotEmpty ? langs.first.name : null;
+  }
+
+  getLanIs() async {
+    final langBox = store.box<Lang>();
+    return langBox.count() > 0;
+  }
+
+  saveLan(value) async {
+    store.box<Lang>().put(Lang(
+          name: value,
+        ));
+    return true;
+  }
+
+  Future<String?> getTheme() async {
+    final themeBox = store.box<Theme>();
+    final themes = themeBox.getAll();
+    return themes.isNotEmpty ? themes.first.value.toString() : null;
+  }
+
+  saveTheme(value) async {
+    store.box<Theme>().put(Theme(
+          value: value,
+        ));
+    return true;
+  }
+  // ... autres méthodes
+
+  // InsertAll operation
+  insertAllCommandes() {
+    var j = 8;
+    for (var i = 10; i < 100; i++) {
+      // final commandeBox =;
+      print('-------ii--${i}');
+      store.box<Commande>().put(Commande(
+          codeCommande: 'codeCommande$i', codeClient: '', date: 'date$i'));
+      j = i;
+      update();
+    }
+    return true;
+  }
+
+  // Delete operation
+  Future<void> deleteAll() async {
+    final databasesPath = await getApplicationDocumentsDirectory();
+    final path = join(databasesPath.path, "obx-example");
+    await databaseFactory.deleteDatabase(path);
+    store.close();
+    store = await openStore(directory: path);
   }
 }

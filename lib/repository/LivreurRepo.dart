@@ -9,7 +9,6 @@ import 'package:get/get_connect/http/src/response/response.dart';
 class LivreurRepo extends GetxService {
   final ApiClient apiClient;
   LivreurRepo({required this.apiClient});
-
   final dababase = Get.find<DataBaseController>();
 
   Future getLivreur() async {
@@ -18,7 +17,7 @@ class LivreurRepo extends GetxService {
 
     var longlat = await dababase.getLonLat();
     Response a = await apiClient.postData(ApiRoutes.LIVREUR,
-        {'longitude': longlat['long'], 'latitude': longlat['lat']});
+        {'longitude': longlat!['long'], 'latitude': longlat!['lat']});
     ;
     //print(a.body);
     return a;

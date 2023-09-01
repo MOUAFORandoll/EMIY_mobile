@@ -1,0 +1,240 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:8577921925962329132",
+      "lastPropertyId": "2:5232191579991675560",
+      "name": "Second",
+      "properties": [
+        {
+          "id": "1:6967007675200439425",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5232191579991675560",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6647434058635969284",
+      "lastPropertyId": "2:1273037566979219464",
+      "name": "YourDataModel",
+      "properties": [
+        {
+          "id": "1:7887713066555158294",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1273037566979219464",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4605572453813487812",
+      "lastPropertyId": "4:804397109421292826",
+      "name": "Commande",
+      "properties": [
+        {
+          "id": "1:6427219783082250625",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4449592748689679866",
+          "name": "codeCommande",
+          "type": 9
+        },
+        {
+          "id": "3:3908534320619472909",
+          "name": "codeClient",
+          "type": 9
+        },
+        {
+          "id": "4:804397109421292826",
+          "name": "date",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:6229965148453259615",
+      "lastPropertyId": "6:862274313206509805",
+      "name": "KeyUser",
+      "properties": [
+        {
+          "id": "1:5019319506708664959",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:307082937894865070",
+          "name": "keySecret",
+          "type": 9
+        },
+        {
+          "id": "3:9196018691887138555",
+          "name": "codeCommunication",
+          "type": 9
+        },
+        {
+          "id": "4:1782358477161603803",
+          "name": "token",
+          "type": 9
+        },
+        {
+          "id": "5:6992175809345500904",
+          "name": "codeParrainnage",
+          "type": 9
+        },
+        {
+          "id": "6:862274313206509805",
+          "name": "refreshToken",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:5966727748498028111",
+      "lastPropertyId": "2:4310959239022998272",
+      "name": "Lang",
+      "properties": [
+        {
+          "id": "1:2089802773210397883",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4310959239022998272",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:5834183656708337881",
+      "lastPropertyId": "5:7165721117595635223",
+      "name": "Localisation",
+      "properties": [
+        {
+          "id": "1:3555417633660237357",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2345811167816583375",
+          "name": "ville",
+          "type": 9
+        },
+        {
+          "id": "3:5986609547917399797",
+          "name": "long",
+          "type": 9
+        },
+        {
+          "id": "4:9135511340752186278",
+          "name": "lat",
+          "type": 9
+        },
+        {
+          "id": "5:7165721117595635223",
+          "name": "ip",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:3264819094062484586",
+      "lastPropertyId": "2:8796203273447964540",
+      "name": "Theme",
+      "properties": [
+        {
+          "id": "1:2425594449038964183",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8796203273447964540",
+          "name": "value",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:8051142099205652548",
+      "lastPropertyId": "7:3804022484162881727",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:3217663169177255350",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2636140180940211833",
+          "name": "nom",
+          "type": 9
+        },
+        {
+          "id": "3:8601597815636045740",
+          "name": "prenom",
+          "type": 9
+        },
+        {
+          "id": "4:4543912782425174632",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "5:3135015824533000993",
+          "name": "profile",
+          "type": 9
+        },
+        {
+          "id": "6:1439098870373134709",
+          "name": "phone",
+          "type": 9
+        },
+        {
+          "id": "7:3804022484162881727",
+          "name": "dateCreated",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "8:8051142099205652548",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

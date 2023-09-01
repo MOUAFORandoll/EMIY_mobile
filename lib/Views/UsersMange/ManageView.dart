@@ -44,21 +44,21 @@ class ManageView extends StatelessWidget {
     return GetBuilder<ManagerController>(
         builder: (_manager) =>
             CustomScrollView(controller: _scrollController, slivers: [
-              SliverPersistentHeader(
-                delegate: _SliverAppBarDelegate(
-                  TabBar(
-                    controller: DefaultTabController.of(context),
-                    // onTap: (index) => searchCont.setType(index),
-                    tabs: [
-                      Tab(text: 'Produits'),
-                      Tab(text: 'Boutiques'),
-                      Tab(text: 'Categories'),
-                      Tab(text: 'Short'),
-                    ],
-                  ),
-                ),
-                pinned: true,
-              ),
+              // SliverPersistentHeader(
+              //   delegate: _SliverAppBarDelegate(
+              //     TabBar(
+              //       // controller: DefaultTabController.of(context),
+              //       // onTap: (index) => searchCont.setType(index),
+              //       tabs: [
+              //         Tab(text: 'Produits'),
+              //         Tab(text: 'Boutiques'),
+              //         Tab(text: 'Categories'),
+              //         Tab(text: 'Short'),
+              //       ],
+              //     ),
+              //   ),
+              //   pinned: true,
+              // ),
               SliverAppBar(
                 backgroundColor: Colors.white,
                 elevation: 0,
@@ -128,155 +128,156 @@ class ManageView extends StatelessWidget {
                                 right: Get.width * .030),
                           ),
                           Positioned(
-                            top: 0,
-                            left: kWidth * .05,
-                            child: Container(
-                                // decoration: BoxDecoration(
-                                //   color: ColorsApp.greySecond,
-                                //   borderRadius: BorderRadius.circular(10),
-                                // ),
-                                // padding: EdgeInsets.symmetric(
-                                //     vertical: kMarginY, horizontal: kMarginX),
-                                child: InkWell(
-                                    onTap: () {
-                                      (_manager.User != null)
-                                          ? Get.toNamed(AppLinks.USERVIEW)
-                                          : Get.bottomSheet(
-                                              Container(
-                                                  margin: EdgeInsets.only(
-                                                    top: kMarginY * 8,
+                              top: 0,
+                              left: kWidth * .05,
+                              child: Container(
+                                  // decoration: BoxDecoration(
+                                  //   color: ColorsApp.greySecond,
+                                  //   borderRadius: BorderRadius.circular(10),
+                                  // ),
+                                  // padding: EdgeInsets.symmetric(
+                                  //     vertical: kMarginY, horizontal: kMarginX),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                    if (_manager.Userget != null)
+                                      InkWell(
+                                        onTap: () => _manager.updateImageUser(),
+                                        child: CircleImage(
+                                            imageUrl: _manager.Userget.profile),
+                                      ),
+                                    (_manager.Userget != null)
+                                        ? Container(
+                                            margin: EdgeInsets.only(
+                                                left: kWidth * .030),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  child: TextBackSpace(
+                                                    text: _manager
+                                                            .Userget.prenom +
+                                                        ' ' +
+                                                        _manager.Userget.nom,
+                                                    bolder: true,
                                                   ),
-                                                  decoration: BoxDecoration(
-                                                      color: ColorsApp.white,
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topLeft: Radius
-                                                                  .circular(15),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      15))),
-                                                  height: 800,
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: kMarginX),
-                                                  child: Column(children: [
-                                                    Container(
-                                                      child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            TextButton(
-                                                              child: Text(
-                                                                  'Annuler'),
-                                                              onPressed: () {
-                                                                Get.back();
-                                                              },
-                                                            ),
-                                                            // TextButton(
-                                                            //   child: Text('Ajouter'),
-                                                            //   onPressed: () async {
-                                                            //     // await _controller.addShort();
-                                                            //     // _controller.chageState(!_controller.addProduit);
-                                                            //   },
-                                                            // )
-                                                          ]),
-                                                    ),
-                                                    Expanded(
-                                                        child:
-                                                            SingleChildScrollView(
-                                                                child: Column(
-                                                                    children: [
-                                                          // _controller.listImgProduits.length != 0
-                                                          //     ? smallText(
-                                                          //         text: 'Listes images',
-                                                          //       )
-                                                          //     : Container(),
-
-                                                          Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                top: 50,
-                                                              ),
-                                                              child:
-                                                                  LoginScreen())
-                                                        ])))
-                                                  ])),
-                                              isScrollControlled: true,
-                                            );
-                                    },
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          if (_manager.User != null)
-                                            InkWell(
-                                              onTap: () =>
-                                                  _manager.updateImageUser(),
-                                              child: CircleImage(
-                                                  imageUrl:
-                                                      _manager.User.profile),
-                                            ),
-                                          (_manager.User != null)
-                                              ? Container(
-                                                  margin: EdgeInsets.only(
-                                                      left: kWidth * .030),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                ),
+                                                Container(
+                                                  child: Row(
                                                     children: [
+                                                      Icon(Icons.phone,
+                                                          size: 14,
+                                                          color:
+                                                              ColorsApp.white),
                                                       Container(
+                                                        margin: EdgeInsets.only(
+                                                            left:
+                                                                kWidth * .010),
                                                         child: TextBackSpace(
                                                           text: _manager
-                                                                  .User.prenom +
-                                                              ' ' +
-                                                              _manager.User.nom,
-                                                          bolder: true,
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        child: Row(
-                                                          children: [
-                                                            Icon(Icons.phone,
-                                                                size: 14,
-                                                                color: ColorsApp
-                                                                    .white),
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      left: kWidth *
-                                                                          .010),
-                                                              child:
-                                                                  TextBackSpace(
-                                                                text: _manager
-                                                                    .User.phone,
-                                                                // bolder: true,
-                                                              ),
-                                                            ),
-                                                          ],
+                                                              .Userget.phone,
+                                                          // bolder: true,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                )
-                                              : Container(
-                                                  padding: EdgeInsets.all(5),
-                                                  child: TextBackSpace(
-                                                    text: 'Se connecter',
-                                                    bolder: true,
-                                                  ),
                                                 ),
-                                          Container(
-                                              height: kHeight * .15,
-                                              width: 2,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: kMarginY,
-                                                  horizontal: kMarginX),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: ColorsApp.greyTh)),
-                                          Container(
+                                              ],
+                                            ),
+                                          )
+                                        : InkWell(
+                                            onTap: () {
+                                              (_manager.Userget != null)
+                                                  ? Get.toNamed(
+                                                      AppLinks.USERVIEW)
+                                                  : Get.bottomSheet(
+                                                      Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                            top: kMarginY * 8,
+                                                          ),
+                                                          decoration: BoxDecoration(
+                                                              color: ColorsApp
+                                                                  .white,
+                                                              borderRadius: BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          15),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          15))),
+                                                          height: 800,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      kMarginX),
+                                                          child: Column(
+                                                              children: [
+                                                                Container(
+                                                                  child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        TextButton(
+                                                                          child:
+                                                                              Text('Annuler'),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Get.back();
+                                                                          },
+                                                                        ),
+                                                                        // TextButton(
+                                                                        //   child: Text('Ajouter'),
+                                                                        //   onPressed: () async {
+                                                                        //     // await _controller.addShort();
+                                                                        //     // _controller.chageState(!_controller.addProduit);
+                                                                        //   },
+                                                                        // )
+                                                                      ]),
+                                                                ),
+                                                                Expanded(
+                                                                    child: SingleChildScrollView(
+                                                                        child: Column(children: [
+                                                                  // _controller.listImgProduits.length != 0
+                                                                  //     ? smallText(
+                                                                  //         text: 'Listes images',
+                                                                  //       )
+                                                                  //     : Container(),
+
+                                                                  Container(
+                                                                      margin: EdgeInsets
+                                                                          .only(
+                                                                        top: 50,
+                                                                      ),
+                                                                      child:
+                                                                          LoginScreen())
+                                                                ])))
+                                                              ])),
+                                                      isScrollControlled: true,
+                                                    );
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(5),
+                                              child: TextBackSpace(
+                                                text: 'Se connecter',
+                                                bolder: true,
+                                              ),
+                                            )),
+                                    Container(
+                                        height: kHeight * .15,
+                                        width: 2,
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: kMarginY,
+                                            horizontal: kMarginX),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: ColorsApp.greyTh)),
+                                    (_manager.Userget != null)
+                                        ? Container(
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
@@ -302,8 +303,86 @@ class ManageView extends StatelessWidget {
                                               ],
                                             ),
                                           )
-                                        ]))),
-                          )
+                                        : InkWell(
+                                            onTap: () {
+                                              (_manager.Userget != null)
+                                                  ? Get.toNamed(
+                                                      AppLinks.USERVIEW)
+                                                  : Get.bottomSheet(
+                                                      Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                            top: kMarginY * 8,
+                                                          ),
+                                                          decoration: BoxDecoration(
+                                                              color: ColorsApp
+                                                                  .white,
+                                                              borderRadius: BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          15),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          15))),
+                                                          height: 800,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      kMarginX),
+                                                          child: Column(
+                                                              children: [
+                                                                Container(
+                                                                  child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        TextButton(
+                                                                          child:
+                                                                              Text('Annuler'),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Get.back();
+                                                                          },
+                                                                        ),
+                                                                        // TextButton(
+                                                                        //   child: Text('Ajouter'),
+                                                                        //   onPressed: () async {
+                                                                        //     // await _controller.addShort();
+                                                                        //     // _controller.chageState(!_controller.addProduit);
+                                                                        //   },
+                                                                        // )
+                                                                      ]),
+                                                                ),
+                                                                Expanded(
+                                                                    child: SingleChildScrollView(
+                                                                        child: Column(children: [
+                                                                  // _controller.listImgProduits.length != 0
+                                                                  //     ? smallText(
+                                                                  //         text: 'Listes images',
+                                                                  //       )
+                                                                  //     : Container(),
+
+                                                                  Container(
+                                                                      margin: EdgeInsets
+                                                                          .only(
+                                                                        top: 0,
+                                                                      ),
+                                                                      child:
+                                                                          RegisterScreen())
+                                                                ])))
+                                                              ])),
+                                                      isScrollControlled: true,
+                                                    );
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(5),
+                                              child: TextBackSpace(
+                                                text: 'S\'inscrire',
+                                                bolder: true,
+                                              ),
+                                            )),
+                                  ]))),
                         ]),
                       ],
                     ),
@@ -319,8 +398,7 @@ class ManageView extends StatelessWidget {
                     //   color: ColorsApp.greySecond,
                     //   borderRadius: BorderRadius.circular(10),
                     // ),
-                    padding: EdgeInsets.symmetric(
-                        vertical: kMarginY, horizontal: kMarginX),
+                    padding: EdgeInsets.symmetric(horizontal: kMarginX),
                     // margin: EdgeInsets.symmetric(
                     //     vertical: kMarginY, horizontal: kMarginX),
                     child: _manager.buildContent()),
