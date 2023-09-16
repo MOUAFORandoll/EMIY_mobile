@@ -1,42 +1,16 @@
-import 'package:EMIY/components/Button/AppIconButton.dart';
+ 
 import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/components/Widget/produitForBoutiqueLinkComponent.dart';
-import 'package:EMIY/controller/GeneralController.dart';
+import 'package:EMIY/components/Widget/produitForBoutiqueLinkComponent.dart'; 
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/utils/Services/routing.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/btnCatList.dart';
-import 'package:EMIY/components/Button/btnCatListPV.dart';
-import 'package:EMIY/components/Button/button.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText.dart';
-import 'package:EMIY/components/Text/bigtitleText0.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/produitComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Text/titleText.dart';
-import 'package:EMIY/components/Widget/produitForBoutiqueComponent.dart';
-import 'package:EMIY/components/Widget/produitForCatComponent.dart';
-import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/controller/categoryBoutiqueController.dart';
-import 'package:EMIY/controller/produitController.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:cached_network_image/cached_network_image.dart'; 
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/functions/viewFunctions.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:rating_bar/rating_bar.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
-
+import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:flutter/material.dart'; 
+import 'package:get/get.dart';  
 // ignore: must_be_immutable
 class BoutiqueViewForLink extends StatelessWidget {
   BoutiqueViewForLink({Key? key}) : super(key: key);
@@ -135,7 +109,7 @@ class BoutiqueViewForLink extends StatelessWidget {
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                           image: AssetImage(
-                                              'assets/logo/logo.png'),
+                                              'assets/logo/logoNew.png'),
                                         )));
                                   },
                                 ),
@@ -156,7 +130,7 @@ class BoutiqueViewForLink extends StatelessWidget {
                                                   BorderRadius.circular(30)),
                                           child: Icon(
                                             manageLink.boutique
-                                                        .statusabonnement ==
+                                                        .status_abonnement ==
                                                     'true'
                                                 ? Icons.remove
                                                 : Icons.add,
@@ -225,38 +199,38 @@ class BoutiqueViewForLink extends StatelessWidget {
                                                             child: Container()),
                                                       ],
                                                     ),
-                                                    RatingBar(
-                                                      initialRating:
-                                                          double.parse(
-                                                        manageLink.boutique.note
-                                                            .toString(),
-                                                      ),
-                                                      filledIcon: Icons.star,
-                                                      emptyIcon:
-                                                          Icons.star_border,
-                                                      halfFilledIcon:
-                                                          Icons.star_half,
-                                                      isHalfAllowed: true,
-                                                      filledColor:
-                                                          Colors.yellow,
-                                                      emptyColor: Colors.yellow,
-                                                      halfFilledColor:
-                                                          Colors.yellow,
-                                                      size: 19,
-                                                      onRatingChanged:
-                                                          (double rating) {
-                                                        //print(rating);
-                                                        //print(Get.parameters['codeBoutique']
-                                                        // .toString());
-                                                        Get.find<
-                                                                GeneralController>()
-                                                            .notationBoutique(
-                                                          rating,
-                                                          manageLink.boutique
-                                                              .codeBoutique,
-                                                        );
-                                                      },
-                                                    )
+                                                    // RatingBar(
+                                                    //   initialRating:
+                                                    //       double.parse(
+                                                    //     manageLink.boutique.note
+                                                    //         .toString(),
+                                                    //   ),
+                                                    //   filledIcon: Icons.star,
+                                                    //   emptyIcon:
+                                                    //       Icons.star_border,
+                                                    //   halfFilledIcon:
+                                                    //       Icons.star_half,
+                                                    //   isHalfAllowed: true,
+                                                    //   filledColor:
+                                                    //       Colors.yellow,
+                                                    //   emptyColor: Colors.yellow,
+                                                    //   halfFilledColor:
+                                                    //       Colors.yellow,
+                                                    //   size: 19,
+                                                    //   onRatingChanged:
+                                                    //       (double rating) {
+                                                    //     //print(rating);
+                                                    //     //print(Get.parameters['codeBoutique']
+                                                    //     // .toString());
+                                                    //     Get.find<
+                                                    //             GeneralController>()
+                                                    //         .notationBoutique(
+                                                    //       rating,
+                                                    //       manageLink.boutique
+                                                    //           .codeBoutique,
+                                                    //     );
+                                                    //   },
+                                                    // )
                                                   ]),
                                               onTap: () {})
                                         ]),
@@ -392,7 +366,7 @@ class BoutiqueViewForLink extends StatelessWidget {
               //                                     decoration: BoxDecoration(
               //                                         image: DecorationImage(
               //                                       image:
-              //                                           AssetImage('assets/logo/logo.png'),
+              //                                           AssetImage('assets/logo/logoNew.png'),
               //                                     ))),
               //                                 Container(
               //                                   width: kSmWidth * .6,
@@ -502,8 +476,8 @@ class BoutiqueView extends StatelessWidget {
           child: GetBuilder<CategoryBoutiqueController>(
               builder: (_bscontroler) => _bscontroler.isLoadedPB == 0
                   ? Shimmer.fromColors(
-                      baseColor: Colors.blueGrey,
-                      highlightColor: Colors.greenAccent,
+                   baseColor: ColorsApp.grey,
+                                            highlightColor: Colors.blueGrey,
                       child: SizedBox(
                         height: kMdHeight,
                         child: Stack(
@@ -535,7 +509,7 @@ class BoutiqueView extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
                                             image:
-                                                AssetImage('assets/logo/logo.png'),
+                                                AssetImage('assets/logo/logoNew.png'),
                                           ))),
                                       Container(
                                         width: kSmWidth * .6,

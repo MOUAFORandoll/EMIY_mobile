@@ -1,9 +1,8 @@
-import 'package:EMIY/controller/searchController.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/string_extensions.dart';
+import 'package:get/get.dart'; 
 
 class KFieldType {
   static String password = 'password';
@@ -51,7 +50,7 @@ class KTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(builder: (searchCont) {
+    return GetBuilder<MySearchController>(builder: (searchCont) {
       return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),

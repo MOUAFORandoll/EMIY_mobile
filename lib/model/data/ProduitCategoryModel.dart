@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import '../../utils/Services/apiUrl.dart';
+import 'ImageModel.dart';
 
 ProduitCategoryModel produitCategoryModelFromJson(String str) =>
     ProduitCategoryModel.fromJson(json.decode(str));
@@ -40,7 +41,7 @@ class ProduitCategoryModel {
   final int like;
   final bool islike;
   final bool status;
-  final List<ImageU> images;
+  final List<ImageModel> images;
 
   factory ProduitCategoryModel.fromJson(Map<String, dynamic> json) =>
       ProduitCategoryModel(
@@ -58,7 +59,7 @@ class ProduitCategoryModel {
         status: json["status"] == null ? null : json["status"],
         images: json["images"] == null
             ? []
-            : List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
+            : List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,23 +78,4 @@ class ProduitCategoryModel {
             : List<dynamic>.from(images.map((x) => x.toJson())),
       };
 }
-
-class ImageU {
-  ImageU({
-    required this.id,
-    required this.src,
-  });
-
-  final int id;
-  final String src;
-
-  factory ImageU.fromJson(Map<String, dynamic> json) => ImageU(
-        id: json["id"] == null ? null : json["id"],
-        src: json["src"] == null ? null : json["src"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "src": src == null ? null : src,
-      };
-}
+ 

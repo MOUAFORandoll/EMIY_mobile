@@ -32,7 +32,6 @@ class HistroriqueCBUView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController controllerField = TextEditingController();
 
-    Get.find<BoutiqueController>().getListHCommandeForBoutique();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
       return SingleChildScrollView(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -46,11 +45,11 @@ class HistroriqueCBUView extends StatelessWidget {
                 },
                 search: _controller.searchCom,
                 onChange: _controller.searchCommande)),
-        _controller.isLoadedPH == 0
+        _controller.loadFinishCommande == 0
             ? AppLoading()
             : _controller.HcommandeBoutiqueList.length == 0
                 ? Container(
-                    height: kHeight, child: AppEmpty(title: 'Aucune Commande'))
+                    height: kHeight, child: AppEmpty(title: 'Aucune Vente'))
                 : SingleChildScrollView(
                     child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),

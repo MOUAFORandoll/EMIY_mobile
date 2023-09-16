@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 
+// ignore: must_be_immutable
 class OptionComponent extends StatelessWidget {
   OptionComponent({this.title, this.selected = false, this.onTap});
-  var title, onTap;
+  final title, onTap;
 
   bool selected = false;
   @override

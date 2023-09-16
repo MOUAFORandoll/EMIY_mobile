@@ -1,20 +1,11 @@
 import 'package:EMIY/components/Button/app_button.dart';
-import 'package:EMIY/components/Button/button.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/formComponent.dart';
-import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_input.dart';
-import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/validators.dart';
 import 'package:EMIY/utils/constants/assets.dart';
-import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 
-import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -66,6 +57,12 @@ class RegisterScreen extends StatelessWidget {
                                 key: _manager.formKeyReg,
                                 child: Column(
                                   children: [
+                                    new Hero(
+                                      tag: "login screen",
+                                      child: new Container(
+                                          child: Image.asset(Assets.logImg,
+                                              height: kHeight / 3.5)),
+                                    ),
                                     Container(
                                       margin:
                                           EdgeInsets.only(bottom: kMarginY * 3),
@@ -75,7 +72,7 @@ class RegisterScreen extends StatelessWidget {
                                         children: [
                                           Text('regText'.tr,
                                               style: TextStyle(
-                                                  fontFamily: 'Montserrat',
+                                                  fontFamily: 'Lato',
                                                   fontWeight: FontWeight.bold)),
                                         ],
                                       ),
@@ -106,18 +103,18 @@ class RegisterScreen extends StatelessWidget {
                                         },
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        top: kMarginY,
-                                      ),
-                                      child: AppInput(
-                                        controller: _manager.email,
-                                        label: 'labelemail'.tr,
-                                        validator: (value) {
-                                          return Validators.isValidEmail(value);
-                                        },
-                                      ),
-                                    ),
+                                    // Padding(
+                                    //   padding: EdgeInsets.only(
+                                    //     top: kMarginY,
+                                    //   ),
+                                    //   child: AppInput(
+                                    //     controller: _manager.email,
+                                    //     label: 'labelemail'.tr,
+                                    //     validator: (value) {
+                                    //       return Validators.isValidEmail(value);
+                                    //     },
+                                    //   ),
+                                    // ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                         top: kMarginY,

@@ -1,9 +1,7 @@
 // ignore: must_be_immutable
-import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/styles/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
@@ -23,22 +21,23 @@ class BoutiqueCircleComponent extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(AppLinks.BOUTIQUE +
-            '?lienBoutique=${boutique.lienBoutique.toString()}&status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note}&codeBoutique=${boutique.codeBoutique}&note=${boutique.note}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
+            '?lienBoutique=${boutique.lienBoutique.toString()}&status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note}&codeBoutique=${boutique.codeBoutique}&note=${boutique.note}&nomBoutique=${boutique.titre}&nombre_produit=${boutique.nombre_produit}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
       },
       child: Container(
-        height: kHeight / 4,
+        // height: kHeight / 4,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: kMarginY),
+              margin: EdgeInsets.symmetric(vertical: kMarginY / 2),
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: boutique.images[boutique.images.length - 1].src,
                 imageBuilder: (context, imageProvider) {
                   return Container(
-                    height: kHeight * .15,
+                    height: kHeight * .1,
+                    width: kHeight * .1,
                     decoration: BoxDecoration(
                       color: ColorsApp.greySecond,
                       borderRadius: BorderRadius.circular(50),
@@ -52,8 +51,8 @@ class BoutiqueCircleComponent extends StatelessWidget {
                 },
                 placeholder: (context, url) {
                   return Shimmer.fromColors(
-                      baseColor: Colors.blueGrey,
-                      highlightColor: Colors.greenAccent,
+                      baseColor: ColorsApp.grey,
+                      highlightColor: Colors.blueGrey,
                       child: Container(
                           height: kHeight * .15,
                           decoration: BoxDecoration(
@@ -63,10 +62,11 @@ class BoutiqueCircleComponent extends StatelessWidget {
                 },
                 errorWidget: (context, url, error) {
                   return Container(
-                      height: kHeight / 4,
+                      height: kHeight * .1,
+                      width: kHeight * .1,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        image: AssetImage('assets/logo/logo.png'),
+                        image: AssetImage('assets/logo/logoNew.png'),
                       )));
                 },
               ),
@@ -84,9 +84,9 @@ class BoutiqueCircleComponent extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           // color: ColorsApp.secondBlue,
-                          fontFamily: 'Montserrat',
+                          fontFamily: 'Lato',
                           // fontWeight: FontWeight.bold,
-                          fontSize: 12))),
+                          fontSize: 10))),
             // Container(
             //     child: Row(
             //   children: [
@@ -99,7 +99,7 @@ class BoutiqueCircleComponent extends StatelessWidget {
             //         textAlign: TextAlign.center,
             //         style: TextStyle(
             //             color: ColorsApp.red,
-            //             fontFamily: 'Montserrat',
+            //             fontFamily: 'Lato',
             //             // fontWeight: FontWeight.bold,
             //             fontSize: 10)),
             //   ],

@@ -61,7 +61,7 @@ class OwnMessageCard extends StatelessWidget {
                                   child: Text(message,
                                       softWrap: true,
                                       style: TextStyle(
-                                        fontFamily: 'Montserrat',
+                                        fontFamily: 'Lato',
                                         fontSize: 16,
                                         overflow: TextOverflow.fade,
                                         color: ColorsApp.white,

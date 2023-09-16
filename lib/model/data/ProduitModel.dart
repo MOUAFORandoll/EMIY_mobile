@@ -6,6 +6,8 @@ import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
+import 'ImageModel.dart';
+
 ProduitModel produitModelFromJson(String str) =>
     ProduitModel.fromJson(json.decode(str));
 
@@ -40,7 +42,7 @@ class ProduitModel {
   bool islike;
   final bool status;
   final bool negociable;
-  final List<ImageU> images;
+  final List<ImageModel> images;
 
   factory ProduitModel.fromJson(Map<String, dynamic> json) => ProduitModel(
         id: json["id"] == null ? null : json["id"],
@@ -58,7 +60,7 @@ class ProduitModel {
         negociable: json["negociable"] == null ? null : json["negociable"],
         images: json["images"] == null
             ? []
-            : List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
+            : List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,23 +80,4 @@ class ProduitModel {
             : List<dynamic>.from(images.map((x) => x.toJson())),
       };
 }
-
-class ImageU {
-  ImageU({
-    required this.id,
-    required this.src,
-  });
-
-  final int id;
-  final String src;
-
-  factory ImageU.fromJson(Map<String, dynamic> json) => ImageU(
-        id: json["id"] == null ? null : json["id"],
-        src: json["src"] == null ? null : json["src"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "src": src == null ? null : src,
-      };
-}
+ 

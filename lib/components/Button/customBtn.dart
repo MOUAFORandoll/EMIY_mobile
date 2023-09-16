@@ -1,11 +1,11 @@
 // ignore: must_be_immutable
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:flutter/material.dart'; 
 
 class CustomBtn extends StatelessWidget {
-  var title, onTap, color, validator;
+final     title, onTap, color, validator;
 
   CustomBtn({this.validator, this.title, this.color, this.onTap});
 
@@ -14,9 +14,9 @@ class CustomBtn extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            width: Get.size.width * 0.35,
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.all(10),
+            width: kWidth * .95,
+            padding: EdgeInsets.all(13),
+            // margin: EdgeInsets.all(10),
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: (color == null) ? ColorsApp.secondBlue : color,

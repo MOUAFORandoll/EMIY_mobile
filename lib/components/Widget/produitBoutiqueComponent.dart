@@ -1,19 +1,11 @@
 // ignore: must_be_immutable
-import 'package:EMIY/components/Widget/app_input.dart';
-import 'package:EMIY/components/Widget/imageComp.dart';
+import 'package:EMIY/components/Widget/app_input_new.dart';
 import 'package:EMIY/components/Widget/imageCompAdd.dart';
 import 'package:EMIY/components/Widget/imageCompUpdate.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/commentForm.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
-import 'package:EMIY/model/data/BoutiqueUserModel.dart';
 import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -154,205 +146,249 @@ class ProduitBoutiqueComponent extends StatelessWidget {
             onTap: () {
               Get.bottomSheet(
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: kSmWidth * .07),
-                  // height: 800,
-                  decoration: BoxDecoration(
-                      color: ColorsApp.grey,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))),
-                  child: SingleChildScrollView(
-                      child: Column(
-                    // mainAxisSize: MainAxisSize.min,
-                    children: [
-                      produit.images.length != 0
-                          ? Container(
-                              height: kSmHeight * 2,
-                              margin:
-                                  EdgeInsets.symmetric(vertical: kMarginY * .1),
-                              child: ListView.builder(
-                                itemCount: produit.images.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (_ctx, index) {
-                                  return Row(
-                                    children: [
-                                      produit.images[index] != null
-                                          ? imageCompUpdate(
-                                              image: produit.images[index],
-                                            )
-                                          : Container(),
-                                      index == produit.images.length - 1
-                                          ? ImageCompAdd(id: produit.id)
-                                          : Container()
-                                    ],
-                                  );
+                    margin: EdgeInsets.only(
+                      top: kMarginY * 8,
+                    ),
+                    decoration: BoxDecoration(
+                        color: ColorsApp.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                    height: 800,
+                    padding: EdgeInsets.symmetric(horizontal: kMarginX),
+                    child: Column(
+                      children: [
+                        // _controller.listImgProduits.length != 0
+                        //     ? smallText(
+                        //         text: 'Listes images',
+                        //       )
+                        //     : Container(),
+                        Container(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  child: Text('Annuler'),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text('Enregistrer'),
+                                  onPressed: () async {
+                                    var data = {
+                                      'idProduit': produit.id,
+                                      'titre': titre.text,
+                                      'quantite': quantite.text,
+                                      'prixUnitaire': prix.text,
+                                      'description': description.text
+                                    };
+                                    //print(data);
+                                    await _controller.updateProduit(data);
+                                    Get.back(closeOverlays: true);
+                                  },
+                                )
+                              ]),
+                        ),
+                        Expanded(
+                            child: SingleChildScrollView(
+                                child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                top: kMarginY * 1.5,
+                              ),
+                              child: AppInputNew(
+                                icon: Icon(Icons.label),
+                                controller: titre,
+                                label: 'lbnameprod'.tr,
+                                validator: (value) {
+                                  return Validators.isValidUsername(value!);
                                 },
                               ),
-                            )
-                          : Container(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: kMarginY,
-                        ),
-                        child: AppInput(
-                          controller: titre,
-                          label: 'lbnameprod'.tr,
-                          validator: (value) {
-                            return Validators.isValidUsername(value!);
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: kMarginY,
-                        ),
-                        child: AppInput(
-                          controller: quantite,
-                          label: 'lbnqteprod'.tr,
-                          validator: (value) {
-                            return Validators.usNumeriqValid(value!);
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: kMarginY,
-                        ),
-                        child: AppInput(
-                          controller: prix,
-                          label: 'lbprixprod'.tr,
-                          validator: (value) {
-                            return Validators.usNumeriqValid(value!);
-                          },
-                        ),
-                      ),
-
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: kMarginY,
-                        ),
-                        child: TextFormField(
-                          onChanged: (String value) {
-                            // if (onChange != null) onChange!(value);
-                          },
-                          controller: description,
-                          validator: (value) {
-                            return value!.isEmpty
-                                ? "veillez remplir se champs"
-                                : null;
-                          },
-                          // keyboardType: type,
-                          // obscureText: obscureText!,
-
-                          maxLines: 10,
-                          decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: ColorsApp.orange, width: 2),
-                              borderRadius: BorderRadius.circular(8),
                             ),
-                            border: OutlineInputBorder(
-                              //  borderSide : BorderSide(color:Colors.blue,width: 3),
-                              borderRadius: BorderRadius.circular(8),
+                            Container(
+                              margin: EdgeInsets.only(
+                                top: kMarginY,
+                              ),
+                              child: AppInputNew(
+                                textInputType: TextInputType.number,
+                                controller: prix,
+                                icon: Icon(Icons.monetization_on),
+                                label: 'lbprixprod'.tr,
+                                validator: (value) {
+                                  return Validators.usNumeriqValid(value!);
+                                },
+                              ),
                             ),
-                            errorStyle: TextStyle(
-                              fontSize: 8,
-                              fontFamily: 'Montserrat',
+                            Container(
+                                padding: EdgeInsets.only(
+                                  top: kMarginY,
+                                ),
+                                alignment: Alignment.centerLeft,
+                                child: Text('Stock')),
+                            Container(
+                                margin: EdgeInsets.only(
+                                  top: kMarginY,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: kMarginY, horizontal: kMarginX),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: ColorsApp.greySearch),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Disponible'),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                            child: Icon(Icons.remove),
+                                            onTap: () {
+                                              quantite.text =
+                                                  (int.parse(quantite.text) - 1)
+                                                      .toString();
+                                            }),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              color: ColorsApp.greySecond),
+                                          width: kMdWidth / 2,
+                                          height: 35,
+                                          alignment: Alignment.center,
+                                          child: AppInputNew(
+                                            controller: quantite,
+                                            label: '',
+                                            // border: true,
+                                            alignStart: false,
+                                            textInputType: TextInputType.number,
+                                            validator: (value) {
+                                              return Validators.usNumeriqValid(
+                                                  value!);
+                                            },
+                                          ),
+                                        ),
+                                        InkWell(
+                                            child: Icon(Icons.add),
+                                            onTap: () {
+                                              quantite.text =
+                                                  (int.parse(quantite.text) + 1)
+                                                      .toString();
+                                            })
+                                      ],
+                                    )
+                                  ],
+                                )),
+                            produit.images.length != 0
+                                ? Container(
+                                    height: kSmHeight * 2,
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: kMarginY * .1),
+                                    child: ListView.builder(
+                                      itemCount: produit.images.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (_ctx, index) {
+                                        return Row(
+                                          children: [
+                                            produit.images[index] != null
+                                                ? imageCompUpdate(
+                                                    image:
+                                                        produit.images[index],
+                                                  )
+                                                : Container(),
+                                            index == produit.images.length - 1
+                                                ? ImageCompAdd(id: produit.id)
+                                                : Container()
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : Container(),
+                            Container(
+                              margin: EdgeInsets.only(
+                                top: kMarginY,
+                              ),
+                              decoration: new BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border:
+                                      Border.all(color: ColorsApp.greySecond)
+                                  // color: (color == null) ? ColorsApp.blue : color,
+                                  ),
+                              child: TextFormField(
+                                controller: description,
+                                onChanged: (String value) {},
+                                validator: (value) {
+                                  return Validators.isValidUsername(value!);
+                                },
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  fontFamily: 'Lato',
+                                ),
+                                maxLines: 10,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: ColorsApp.skyBlue, width: 2),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: ColorsApp.greySearch),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorStyle: TextStyle(
+                                    fontSize: 8,
+                                    fontFamily: 'Lato',
+                                  ),
+                                  labelStyle: TextStyle(
+                                    color: ColorsApp.black,
+                                    fontFamily: 'Lato',
+                                    // fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                  ),
+                                  labelText: 'lbdescprod'.tr,
+                                  fillColor: ColorsApp.skyBlue,
+                                  counter: Offstage(),
+                                  hintText: 'lbdescprod'.tr,
+                                  alignLabelWithHint: true,
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
                             ),
-                            labelStyle: TextStyle(
-                              color: ColorsApp.orange, fontFamily: 'Montserrat',
-                              // fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                            ),
-                            labelText: 'lbdescprod'.tr,
-                            fillColor: ColorsApp.skyBlue,
-                            counter: Offstage(),
-                            hintText: 'lbdescprod'.tr,
-                            alignLabelWithHint: true,
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      // _controller.listImgProduits.length != 0
-                      //     ? smallText(
-                      //         text: 'Listes images',
-                      //       )
-                      //     : Container(),
-                      // _controller.listImgProduits.length != 0
-                      //     ? Container(
-                      //         height: kSmHeight,
-                      //         margin:
-                      //             EdgeInsets.symmetric(vertical: kMarginY * .1),
-                      //         child: ListView.builder(
-                      //           itemCount: _controller.listImgProduits.length,
-                      //           scrollDirection: Axis.horizontal,
-                      //           itemBuilder: (_ctx, index) => ImageComp(
-                      //               file: _controller.listImgProduits[index],
-                      //               index: index),
-                      //         ),
-                      //       )
-                      //     : Container(),
-                      // Container(
-                      //     decoration: BoxDecoration(color: ColorsApp.grey),
-                      //     child: CustomBtn(
-                      //       color: ColorsApp.greenLight,
-                      //       title: 'Selectionner image',
-                      //       onTap: () {
-                      //         _controller.getImage();
-                      //       },
-                      //     )),
-                      // Container(
-                      //     decoration: BoxDecoration(color: ColorsApp.grey),
-                      //     child: Row(
-                      //         mainAxisAlignment: MainAxisAlignment.end,
-                      //         children: [
-                      //           // smallText(
-                      //           //   text: _controller.Boutique.titre,
-                      //           // ),
-                      //           CustomBtn(
-                      //             color: ColorsApp.greenLight,
-                      //             title: _controller.addProduit
-                      //                 ? 'Retour'
-                      //                 : 'Ajouter Produit',
-                      //             onTap: () {
-                      //               _controller
-                      //                   .chageState(!_controller.addProduit);
-                      //             },
-                      //           )
-                      //         ])),
-                      CustomBtn(
-                        color: ColorsApp.greenLight,
-                        title: 'Mettre a jour',
-                        onTap: () async {
-                          var data = {
-                            'idProduit': produit.id,
-                            'titre': titre.text,
-                            'quantite': quantite.text,
-                            'prixUnitaire': prix.text,
-                            'description': description.text
-                          };
-                          //print(data);
-                          await _controller.updateProduit(data);
-                          // _controller.chageState(!_controller.addProduit);
-                        },
-                      )
-                    ],
-                  )),
-                ),
-                // isScrollControlled: true,
-
-                // barrierColor: Colors.red[50],
-                // shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.only(
-                //         topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                //     side: BorderSide(
-                //       width: 1, /*  color: ColorsApp.greySecond */
-                //     )),
-                // enableDrag: false,
+                            Container(
+                                decoration:
+                                    BoxDecoration(color: ColorsApp.grey),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      // smallText(
+                                      //   text: _controller.Boutique.titre,
+                                      // ),
+                                      // CustomBtn(
+                                      //   color: ColorsApp.greenLight,
+                                      //   title: 'Ajouter Produit',
+                                      //   onTap: () async {
+                                      //     await _controller.ajouterProduit();
+                                      //     // _controller.chageState(!_controller.addProduit);
+                                      //   },
+                                      // )
+                                    ])),
+                          ],
+                        )))
+                      ],
+                    )),
+                isScrollControlled: true,
+                // isDismissible: true,
               );
+
               // Get.toNamed(AppLinks.PRODUCT +
               //     '?index=${index}&type=0&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
             },

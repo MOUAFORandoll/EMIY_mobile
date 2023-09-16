@@ -3,6 +3,7 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class btnCatListPV extends StatelessWidget {
   var title, onTap, active, pVal;
 

@@ -56,7 +56,7 @@ class Conversation extends StatelessWidget {
                       height: kHeight / 4,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        image: AssetImage('assets/logo/logo.png'),
+                        image: AssetImage('assets/logo/logoNew.png'),
                       )));
                 },
               ),
@@ -94,7 +94,7 @@ class Conversation extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   // softWrap: true,
                                   style: TextStyle(
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Lato',
                                     fontSize: 12,
                                     color: ColorsApp.black,
                                   ),
@@ -107,7 +107,7 @@ class Conversation extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         // softWrap: true,
                         style: TextStyle(
-                          fontFamily: 'Montserrat',
+                          fontFamily: 'Lato',
                           fontSize: 12,
                           color: ColorsApp.black,
                         ),
@@ -148,7 +148,7 @@ class Conversation extends StatelessWidget {
       //                 height: kHeight / 4,
       //                 decoration: BoxDecoration(
       //                     image: DecorationImage(
-      //                   image: AssetImage('assets/logo/logo.png'),
+      //                   image: AssetImage('assets/logo/logoNew.png'),
       //                 )));
       //           },
       //         ),
@@ -175,7 +175,7 @@ class Conversation extends StatelessWidget {
       //                 overflow: TextOverflow.ellipsis,
       //                 softWrap: true,
       //                 style: TextStyle(
-      //                     fontFamily: 'Montserrat',
+      //                     fontFamily: 'Lato',
       //                     fontSize: 12,
       //                     color: ColorsApp.black,
       //                     fontWeight: FontWeight.bold),

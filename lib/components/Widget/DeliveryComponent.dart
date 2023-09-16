@@ -1,10 +1,5 @@
 // ignore: must_be_immutable
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/model/data/BoutiqueModel.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
-import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,7 +29,7 @@ class DeliveryComponent extends StatelessWidget {
                 child: Text(
                   text,
                   style: TextStyle(
-                      fontFamily: 'Montserrat',
+                      fontFamily: 'Lato',
                       fontSize: 12,
                       color: ColorsApp.black,
                       fontWeight: bold ? FontWeight.bold : FontWeight.normal),

@@ -7,7 +7,7 @@ import 'package:EMIY/components/Widget/BoutiqueComponentHome.dart';
 import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/categoryComponent2.dart';
 import 'package:EMIY/components/Widget/seacrhIngCompo.dart';
-import 'package:EMIY/controller/searchController.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/components/Button/btnCatList.dart';
 import 'package:EMIY/components/Button/btnCatListPV.dart';
@@ -40,7 +40,7 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(builder: (searchCont) {
+    return GetBuilder<MySearchController>(builder: (searchCont) {
       return DefaultTabController(
           length: 4,
           child: Scaffold(

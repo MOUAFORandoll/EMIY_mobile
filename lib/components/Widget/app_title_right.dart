@@ -31,7 +31,7 @@ class AppTitleRight extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         softWrap: true,
                         style: TextStyle(
-                            fontFamily: 'Montserrat',
+                            fontFamily: 'Lato',
                             fontSize: 14,
                             color: ColorsApp.black,
                             fontWeight: FontWeight.bold),
@@ -56,7 +56,7 @@ class AppTitleRight extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       color: ColorsApp.black,
-                      fontFamily: 'Montserrat',
+                      fontFamily: 'Lato',
                     ),
                   ))
                 ]),

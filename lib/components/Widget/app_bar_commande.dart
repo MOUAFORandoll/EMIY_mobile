@@ -1,9 +1,6 @@
-// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/components/Button/app_button.dart';
-import 'package:EMIY/components/Form/text_field.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+ 
+import 'package:EMIY/components/Form/text_field.dart'; 
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +25,8 @@ class AppBarCommande extends StatelessWidget {
         ? Container(
             decoration: BoxDecoration(
                 color: ColorsApp.grey, borderRadius: BorderRadius.circular(9)),
-            padding: EdgeInsets.only(left: kMdWidth / 10, top: 2, bottom: 2),
+            padding: EdgeInsets.only(left: kMdWidth / 10)
+                .add(EdgeInsets.symmetric(vertical: 12)),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

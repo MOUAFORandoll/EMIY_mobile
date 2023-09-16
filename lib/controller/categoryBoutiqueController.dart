@@ -1,22 +1,13 @@
 import 'dart:io';
 
 import 'package:EMIY/model/data/BoutiqueModel.dart';
-import 'package:EMIY/model/data/BoutiqueUserModel.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/model/data/CommandeBoutiqueModel.dart';
-import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
+import 'package:EMIY/model/data/CategoryModel.dart'; 
 import 'package:EMIY/model/data/ProduitModel.dart';
-import 'package:EMIY/repository/BoutiqueRepo.dart';
-import 'package:EMIY/repository/categoryBoutiqueRepo.dart';
-import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/repository/categoryBoutiqueRepo.dart'; 
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
-import 'package:EMIY/utils/functions/viewFunctions.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
-
+import 'package:EMIY/utils/functions/viewFunctions.dart'; 
+import 'package:get/get.dart'; 
 class CategoryBoutiqueController extends GetxController {
   final service = new ApiService();
 

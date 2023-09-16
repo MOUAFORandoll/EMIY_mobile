@@ -3,48 +3,10 @@
 Map<String, dynamic> map = jsonDecode(<myJSONString>);
 var myBoutiqueModelLinkNode = BoutiqueModelLink.fromJson(map);
 */
+import 'package:EMIY/model/data/ImageModel.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
 
-class Image {
-  int? id;
-  String? src;
-
-  Image({this.id, this.src});
-
-  Image.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    src = json['src'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = id;
-    data['src'] = src;
-    return data;
-  }
-}
-
-class Localisation {
-  String? ville;
-  double? longitude;
-  double? latitude;
-
-  Localisation({this.ville, this.longitude, this.latitude});
-
-  Localisation.fromJson(Map<String, dynamic> json) {
-    ville = json['ville'];
-    longitude = json['longitude'];
-    latitude = json['latitude'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['ville'] = ville;
-    data['longitude'] = longitude;
-    data['latitude'] = latitude;
-    return data;
-  }
-}
+import 'LocalisationModel.dart';
 
 class Produit {
   int? id;
@@ -56,7 +18,7 @@ class Produit {
   bool? status;
   String? date;
   String? description;
-  List<Image?>? images;
+  List<ImageModel?>? images;
 
   Produit(
       {this.id,
@@ -81,9 +43,9 @@ class Produit {
     date = json['date '];
     description = json['description'];
     if (json['images'] != null) {
-      images = <Image>[];
+      images = <ImageModel>[];
       json['images'].forEach((v) {
-        images!.add(Image.fromJson(v));
+        images!.add(ImageModel.fromJson(v));
       });
     }
   }
@@ -112,11 +74,12 @@ class BoutiqueModelLink {
   String? titre;
   bool? status;
   int? note;
-  bool? statusabonnement;
+  bool? status_abonnement;
   String? lienBoutique;
   String? dateCreated;
-  List<Image?>? images;
-  Localisation? localisation;
+  List<ImageModel?>? images;
+  LocalisationModel? localisation;
+  int? nombre_produit;
   List<Produit?>? produits;
 
   BoutiqueModelLink(
@@ -127,7 +90,8 @@ class BoutiqueModelLink {
       this.status,
       this.note,
       this.lienBoutique,
-      this.statusabonnement,
+      this.status_abonnement,
+      this.nombre_produit,
       this.dateCreated,
       this.images,
       this.localisation,
@@ -135,22 +99,23 @@ class BoutiqueModelLink {
 
   BoutiqueModelLink.fromJson(Map<String, dynamic> json) {
     codeBoutique = json['codeBoutique'];
+    nombre_produit = json["nombre_produit"];
     user = json['user'];
     description = json['description'];
     lienBoutique = ApiUrl.external_link + 'boutiques/' + json["codeBoutique"];
     titre = json['titre'];
     status = json['status'];
     note = json['note'];
-    statusabonnement = json['status_abonnement'];
+    status_abonnement = json['status_abonnement'];
     dateCreated = json['dateCreated'];
     if (json['images'] != null) {
-      images = <Image>[];
+      images = <ImageModel>[];
       json['images'].forEach((v) {
-        images!.add(Image.fromJson(v));
+        images!.add(ImageModel.fromJson(v));
       });
     }
     localisation = json['localisation'] != null
-        ? Localisation?.fromJson(json['localisation'])
+        ? LocalisationModel?.fromJson(json['localisation'])
         : null;
     if (json['produits'] != null) {
       produits = <Produit>[];
@@ -166,9 +131,11 @@ class BoutiqueModelLink {
     data['user'] = user;
     data['description'] = description;
     data['titre'] = titre;
+    data['nombre_produit'] = nombre_produit;
+
     data['status'] = status;
     data['note'] = note;
-    data['status_abonnement'] = statusabonnement;
+    data['status_abonnement'] = status_abonnement;
     data['dateCreated'] = dateCreated;
     data['images'] =
         images != null ? images!.map((v) => v?.toJson()).toList() : null;

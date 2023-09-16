@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:EMIY/styles/colorApp.dart';
 
+// ignore: must_be_immutable
 class Button extends StatelessWidget {
   Button(
       {this.title,
@@ -87,6 +88,7 @@ class Button extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Button2 extends StatelessWidget {
   Button2(
       {this.icon,

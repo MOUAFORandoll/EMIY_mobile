@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+ 
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -31,7 +31,7 @@ class smallText extends StatelessWidget {
           style: TextStyle(
               fontSize: size,
               color: color,
-              fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
+              fontWeight: bolder ? FontWeight.w700 : FontWeight.normal),
         ));
   }
 }

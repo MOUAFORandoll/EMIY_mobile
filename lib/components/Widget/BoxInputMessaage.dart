@@ -1,9 +1,9 @@
-import 'package:EMIY/controller/ShortController.dart';
+ 
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart'; 
 
+// ignore: must_be_immutable
 class BoxInputMessaage extends StatelessWidget {
   BoxInputMessaage(
       {this.controller, this.hint, this.sending = false, this.onTap});

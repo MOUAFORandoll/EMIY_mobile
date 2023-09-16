@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/textStyle.dart';

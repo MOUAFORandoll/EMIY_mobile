@@ -1,6 +1,6 @@
 class Assets {
   Assets._();
-  static const logo = 'assets/logo/logo.png';
+  static const logo = 'assets/logo/logoNew.png';
   static const shop1 = 'assets/images/shop1.png';
   static const shop2 = 'assets/images/shop2.png';
   static const onb1 = 'assets/svg_icones/onbo1.png';
@@ -25,4 +25,9 @@ class Assets {
   static const play = 'assets/svg_icones/play.svg';
   static const like = 'assets/svg_icones/like.svg';
   static const story_boutique = 'assets/svg_icones/story_boutique.svg';
+  static const logo_esq = 'assets/svg_icones/logo_esq.svg';
+  static const hand = 'assets/svg_icones/hand.svg';
+  static const share = 'assets/svg_icones/share.svg';
+  static const location = 'assets/svg_icones/location.svg';
+  static const nmreproduit = 'assets/svg_icones/nmreproduit.svg';
 }

@@ -1,15 +1,8 @@
 import 'package:EMIY/components/Widget/CircleImage.dart';
-import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/model/data/UserModel.dart';
-import 'package:EMIY/model/socket/NegociationModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/constants/assets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
 class Fieul extends StatelessWidget {
   Fieul({required this.fieul});
@@ -59,7 +52,7 @@ class Fieul extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   // softWrap: true,
                                   style: TextStyle(
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Lato',
                                     fontSize: 12,
                                     color: ColorsApp.black,
                                   ),
@@ -72,7 +65,7 @@ class Fieul extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   // softWrap: true,
                                   style: TextStyle(
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Lato',
                                     fontSize: 12,
                                     color: ColorsApp.black,
                                   ),

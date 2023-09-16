@@ -6,13 +6,12 @@ import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/categoryController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/controller/produitController.dart';
-import 'package:EMIY/controller/searchController.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/repository/GeneralRepo.dart';
 import 'package:EMIY/repository/BoutiqueRepo.dart';
 import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
@@ -24,25 +23,15 @@ import 'package:EMIY/repository/TransactionRepo.dart';
 import 'package:EMIY/repository/categoryBoutiqueRepo.dart';
 import 'package:EMIY/repository/LivreurRepo.dart';
 import 'package:EMIY/repository/ManageRepo.dart';
-import 'package:EMIY/repository/categoryRepo.dart';
 import 'package:EMIY/repository/negociationRepo.dart';
 import 'package:EMIY/repository/ProduitRepo.dart';
 import 'package:EMIY/utils/Services/ApiClient.dart';
-import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/UniLinkService.dart';
-import 'package:EMIY/utils/Services/storageService2.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
-import 'package:EMIY/controller/DataBaseController.dart';
-import 'package:EMIY/utils/constants/apiRoute.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sqflite/sqlite_api.dart';
-import 'package:flutter/material.dart';
 import 'package:uni_links/uni_links.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:uni_links/uni_links.dart' as uni_links;
 
 import 'dart:async';
 import 'dart:io';
@@ -64,7 +53,6 @@ Future<void> initApp() async {
   await Get.find<GeneralController>().getListNotifications();
 
   await Get.find<ShortController>().disposePLayerAll();
-  await Get.find<ShortController>().disposeUniquePLayer();
 
   await Get.find<ServiceClientController>().connectSockey();
 }
@@ -73,14 +61,15 @@ Future<void> secondInit() async {
   Get.find<CommandeController>().getListCommandes();
   Get.find<ProduitController>().getPopularProduit();
   Get.find<CategoryBoutiqueController>().getCategory();
-  Get.find<CategoryBoutiqueController>().getListBoutiques();
+  // Get.find<CategoryBoutiqueController>().getListBoutiques();
   Get.find<GeneralController>().getHome();
   Get.find<ManagerController>().newLocalisation();
   Get.find<ManagerController>().getListFieul();
   Get.find<BuyShopController>().getPointLivraisom();
   // Get.find<BoutiqueController>().getListBoutique();
-  Get.find<BoutiqueController>().getListAbonnementForBoutique();
+  // Get.find<BoutiqueController>().getListAbonnementForBoutique();
   Get.find<ShortController>().getListForYouShort();
+  Get.find<ShortController>().getListSuivisShort();
   Get.find<NegociationController>().getListNegociation();
   Get.find<ProduitController>().getListProduitPreference();
 
@@ -112,8 +101,8 @@ Future<void> initAllApp() async {
 
   // Get.find<ProduitController>().getPopularProduit();
   Get.find<BuyShopController>().getPointLivraisom();
-  Get.find<BoutiqueController>().getListBoutique();
-  Get.find<BoutiqueController>().getListAbonnementForBoutique();
+  // Get.find<BoutiqueController>().getListBoutique();
+  // Get.find<BoutiqueController>().getListAbonnementForBoutique();
   Get.find<CategoryBoutiqueController>().getCategory();
   Get.find<ShortController>().getListForYouShort();
   Get.find<NegociationController>().getListNegociation();
@@ -161,7 +150,7 @@ Future<void> initServices() async {
   Get.put(NegociationRepo(apiClient: Get.find()), permanent: true);
   Get.put(NegociationController(negociationRepo: Get.find()), permanent: true);
   Get.put(SearchRepo(apiClient: Get.find()), permanent: true);
-  Get.put(SearchController(searchRepo: Get.find()), permanent: true);
+  Get.put(MySearchController(searchRepo: Get.find()), permanent: true);
   Get.put(ShortRepo(apiClient: Get.find()), permanent: true);
   Get.put(ShortController(shortRepo: Get.find()), permanent: true);
   Get.put(ServiceClientRepo(apiClient: Get.find()), permanent: true);

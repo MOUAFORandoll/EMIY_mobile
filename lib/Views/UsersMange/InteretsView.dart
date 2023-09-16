@@ -72,7 +72,7 @@ class InteretsView extends StatelessWidget {
                                             categorys
                                                 .categoryList[index].libelle,
                                             style: TextStyle(
-                                              // fontFamily: 'Montserrat',
+                                              // fontFamily: 'Lato',
                                               fontSize: 12,
                                               color: produit.select(
                                                 categorys

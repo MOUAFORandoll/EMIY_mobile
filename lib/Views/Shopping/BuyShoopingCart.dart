@@ -97,10 +97,9 @@ class BuyShoopingCart extends StatelessWidget {
                   slivers: [
                     SliverList(
                         delegate: SliverChildBuilderDelegate(
-                           
                             (context, index) => Container(
-                                margin:
-                                    EdgeInsets.symmetric(horizontal: kMarginX),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: kMarginX, vertical: kMarginY),
                                 child: SingleChildScrollView(
                                     child: Column(
                                         mainAxisAlignment:
@@ -109,7 +108,7 @@ class BuyShoopingCart extends StatelessWidget {
                                         children: [
                                       Container(
                                           margin: EdgeInsets.symmetric(
-                                              vertical: kMarginY / 3),
+                                              vertical: kMarginY / 2),
                                           child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -121,11 +120,11 @@ class BuyShoopingCart extends StatelessWidget {
                                                     child: Text(
                                                   'adL'.tr,
                                                   style: TextStyle(
-                                                      fontFamily: 'Montserrat',
+                                                      fontFamily: 'Lato',
                                                       fontSize: 12,
                                                       color: ColorsApp.black,
                                                       fontWeight:
-                                                          FontWeight.bold),
+                                                          FontWeight.w600),
                                                 )),
                                                 Container(
                                                     child: InkWell(
@@ -133,13 +132,13 @@ class BuyShoopingCart extends StatelessWidget {
                                                           'Change',
                                                           style: TextStyle(
                                                               fontFamily:
-                                                                  'Montserrat',
+                                                                  'Lato',
                                                               fontSize: 14,
                                                               color: ColorsApp
                                                                   .black,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .bold),
+                                                                      .w600),
                                                         ),
                                                         onTap: () {
                                                           Get.bottomSheet(
@@ -460,7 +459,7 @@ class BuyShoopingCart extends StatelessWidget {
                                               ]))),
                                       Container(
                                         margin: EdgeInsets.symmetric(
-                                            vertical: kMarginY / 3),
+                                            vertical: kMarginY / 2),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -471,10 +470,10 @@ class BuyShoopingCart extends StatelessWidget {
                                                 child: Text(
                                               'adL'.tr,
                                               style: TextStyle(
-                                                  fontFamily: 'Montserrat',
+                                                  fontFamily: 'Lato',
                                                   fontSize: 12,
                                                   color: ColorsApp.black,
-                                                  fontWeight: FontWeight.bold),
+                                                  fontWeight: FontWeight.w600),
                                             )),
                                           ],
                                         ),
@@ -508,8 +507,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                           child: Text(
                                                         'produit'.tr,
                                                         style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat',
+                                                          fontFamily: 'Lato',
                                                           fontSize: 12,
                                                           color:
                                                               ColorsApp.black,
@@ -522,14 +520,14 @@ class BuyShoopingCart extends StatelessWidget {
                                                                   .toString(),
                                                               style: TextStyle(
                                                                   fontFamily:
-                                                                      'Montserrat',
+                                                                      'Lato',
                                                                   fontSize: 12,
                                                                   color:
                                                                       ColorsApp
                                                                           .black,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .bold))),
+                                                                          .w600))),
                                                     ],
                                                   ),
                                                 ),
@@ -548,8 +546,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                           child: Text(
                                                         'monT'.tr,
                                                         style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat',
+                                                          fontFamily: 'Lato',
                                                           fontSize: 12,
                                                           color:
                                                               ColorsApp.black,
@@ -563,21 +560,21 @@ class BuyShoopingCart extends StatelessWidget {
                                                                       .toString(),
                                                               style: TextStyle(
                                                                   fontFamily:
-                                                                      'Montserrat',
+                                                                      'Lato',
                                                                   fontSize: 12,
                                                                   color:
                                                                       ColorsApp
                                                                           .black,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .bold))),
+                                                                          .w600))),
                                                     ],
                                                   ),
                                                 ),
                                               ]))),
                                       Container(
                                         margin: EdgeInsets.symmetric(
-                                            vertical: kMarginY / 3),
+                                            vertical: kMarginY / 2),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -588,10 +585,10 @@ class BuyShoopingCart extends StatelessWidget {
                                                 child: Text(
                                               'paymentM'.tr,
                                               style: TextStyle(
-                                                  fontFamily: 'Montserrat',
+                                                  fontFamily: 'Lato',
                                                   fontSize: 12,
                                                   color: ColorsApp.black,
-                                                  fontWeight: FontWeight.bold),
+                                                  fontWeight: FontWeight.w600),
                                             )),
                                             GetBuilder<GeneralController>(
                                                 builder: (_Acontroller) =>
@@ -652,7 +649,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                     ],
                                                   ))),
                                       CustomBtn(
-                                        color: ColorsApp.greenLight,
+                                        color: ColorsApp.secondBlue,
                                         title: 'Terminer',
                                         onTap: () async {
                                           await _Bcontroller.buyCart();

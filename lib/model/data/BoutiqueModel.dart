@@ -6,6 +6,9 @@ import 'dart:convert';
 
 import 'package:EMIY/utils/Services/apiUrl.dart';
 
+import 'ImageModel.dart';
+import 'LocalisationModel.dart';
+
 BoutiqueModel boutiqueModelFromJson(String str) =>
     BoutiqueModel.fromJson(json.decode(str));
 
@@ -24,6 +27,7 @@ class BoutiqueModel {
     required this.images,
     required this.lienBoutique,
     required this.localisation,
+    required this.nombre_produit,
   });
 
   String codeBoutique;
@@ -35,28 +39,33 @@ class BoutiqueModel {
   final String lienBoutique;
   final note;
   String dateCreated;
-  List<Image> images;
-  Localisation localisation;
+  int nombre_produit;
+  List<ImageModel> images;
+  LocalisationModel localisation;
 
   factory BoutiqueModel.fromJson(Map<String, dynamic> json) => BoutiqueModel(
         codeBoutique: json["codeBoutique"],
         user: json["user"],
         description: json["description"],
+        nombre_produit: json["nombre_produit"],
         titre: json["titre"],
         status: json["status"],
-        lienBoutique: ApiUrl.external_link + 'boutiques/' + json["codeBoutique"],
+        lienBoutique:
+            ApiUrl.external_link + 'boutiques/' + json["codeBoutique"],
         status_abonnement: json["status_abonnement"],
         dateCreated: json["dateCreated"],
         note: double.parse(
             (json["note"] == null ? null : json["note"]).toString()),
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-        localisation: Localisation.fromJson(json["localisation"]),
+        images: List<ImageModel>.from(
+            json["images"].map((x) => ImageModel.fromJson(x))),
+        localisation: LocalisationModel.fromJson(json["localisation"]),
       );
 
   Map<String, dynamic> toJson() => {
         "codeBoutique": codeBoutique,
         "user": user,
         "description": description,
+        "nombre_produit": nombre_produit,
         "titre": titre,
         "status_abonnement": status_abonnement,
         "status": status,
@@ -64,49 +73,5 @@ class BoutiqueModel {
         "dateCreated": dateCreated,
         "images": List<dynamic>.from(images.map((x) => x.toJson())),
         "localisation": localisation.toJson(),
-      };
-}
-
-class Image {
-  Image({
-    required this.id,
-    required this.src,
-  });
-
-  int id;
-  String src;
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        id: json["id"],
-        src: json["src"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "src": src,
-      };
-}
-
-class Localisation {
-  Localisation({
-    required this.ville,
-    required this.longitude,
-    required this.latitude,
-  });
-
-  String ville;
-  double longitude;
-  double latitude;
-
-  factory Localisation.fromJson(Map<String, dynamic> json) => Localisation(
-        ville: json["ville"],
-        longitude: json["longitude"]?.toDouble(),
-        latitude: json["latitude"]?.toDouble(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "ville": ville,
-        "longitude": longitude,
-        "latitude": latitude,
       };
 }

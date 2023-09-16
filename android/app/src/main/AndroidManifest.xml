@@ -9,7 +9,7 @@
 
   <application
     android:label="EMIY"
-    android:exported="false"
+    android:exported="true"
     android:grantUriPermissions="true"
     android:icon="@mipmap/launcher_icon"
     android:networkSecurityConfig="@xml/network_security_config"
@@ -79,7 +79,7 @@
 
     <receiver
       android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
-      android:exported="true">
+      android:exported="false">
       <intent-filter>
         <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
       </intent-filter>

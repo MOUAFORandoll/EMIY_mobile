@@ -7,6 +7,7 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -40,6 +41,8 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 // import 'objectbox.g.dart';
 import 'entity.dart';
+
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 bool _initialUriIsHandled = false;
 // class Test extends StatefulWidget {
@@ -146,69 +149,101 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> with TickerProviderStateMixin {
-  bool _showHeart = false;
-  // late ObjectBoxManager _objectBoxManager;
+  List<Widget> images = [];
 
-  // @override
-  // void initState() {
-  //   init();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _getImages();
+  }
 
-  // @override
-  // void init() async {
-  //   // TODO: implement initState
-  //   _objectBoxManager = await ObjectBoxManager.create();
-  // }
+  void _getImages() async {
+    // Récupère une liste d'URL d'images au hasard
 
-  final dababase = Get.find<DataBaseController>();
+    final imagesData = [
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    ];
+
+    // Itère sur la liste d'URL et charge les images
+    for (int i = 0; i < imagesData.length; i++) {
+      var imageData = imagesData[i];
+      var p = (i % 2 == 1); // Check if i is odd (equivalent to p == 1)
+      final image = CachedNetworkImage(
+        // height: p ? 400.0 : 200.0,
+        width: Get.width * .5,
+        imageUrl: imageData,
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            height: p ? 300.0 : 200.0,
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(
+                      Colors.transparent, BlendMode.colorBurn)),
+            ),
+          );
+        },
+        placeholder: (context, url) {
+          return Container(
+            child: Center(
+                child: CircularProgressIndicator(
+              color: ColorsApp.skyBlue,
+            )),
+          );
+        },
+        errorWidget: (context, url, error) {
+          return CircleAvatar(
+              backgroundColor: ColorsApp.skyBlue,
+              radius: 50,
+              backgroundImage: AssetImage("assets/images/error.gif"));
+        },
+      );
+      images.add(image);
+    }
+
+    // Met à jour l'état de la liste d'images
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: InkWell(
-          child: Text('Double-cliquez pour aimer!'),
-        ),
-      ),
-      body: Center(
-          child: Row(
-        children: [
-          GestureDetector(
-              onTap: () => dababase.insertAllCommandes(),
-              child: Center(
-                child: Icon(
-                  Icons.add,
-                  color: Colors.red,
-                  size: 80,
-                ),
-              )),
-          GestureDetector(
-              onTap: () {
-                var data = dababase.getListCommande();
-                data.forEach((e) => print(e.codeCommande));
-                // _objectBoxManager.getAllYourDataModels();
-              },
-              child: Center(
-                child: Icon(
-                  Icons.list,
-                  color: Colors.red,
-                  size: 80,
-                ),
-              )),
-          GestureDetector(
-              onTap: () {
-                // _objectBoxManager.updateYourDataModel(
-                //     new YourDataModel(name: 'hg5455555', id: 0));
-              },
-              child: Center(
-                child: Icon(
-                  Icons.add,
-                  color: Colors.red,
-                  size: 80,
-                ),
-              )),
-        ],
-      )),
-    );
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text('Pinterest'),
+            ),
+            body: SingleChildScrollView(
+              child: StaggeredGrid.count(
+                crossAxisCount: 2,
+                children: images, // Configurez les hauteurs des tuiles
+                mainAxisSpacing: 4.0, // Espace vertical entre les tuiles
+                crossAxisSpacing: 4.0, // Espace horizontal entre les tuiles
+              ),
+            )));
   }
 }
 

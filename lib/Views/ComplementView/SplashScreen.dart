@@ -32,6 +32,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   GetStorage box = GetStorage();
 
   start() {
+    // box.write('first', 0);
     Get.find<ManagerController>().startTimer();
 
     Future.delayed(Duration(seconds: 8), () async {
@@ -58,64 +59,126 @@ class _SplashScreenPageState extends State<SplashScreenPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: ColorsApp.white,
-        body: Container(
-            alignment: Alignment.center,
-            child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  new Container(
-                      margin: EdgeInsets.symmetric(horizontal: kWidth / 7),
-                      child: new Row(
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: ColorsApp.white,
+          body: Container(
+              alignment: Alignment.center,
+              child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        margin: EdgeInsets.symmetric(vertical: kHeight / 3),
+                        child: /*  Text(
+                          'Emiy',
+                          style: TextStyle(
+                              fontSize: 34.0,
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.bold),
+                        ) */
+                            SvgPicture.asset(
+                          Assets.logoSvg,
+                          width: kHeight / 10,
+                          height: kHeight / 10,
+                        )),
+                    Container(
+                        // margin: EdgeInsets.only(top: 250),
+                        child: Text(
+                      'from',
+                      style: TextStyle(
+                        // fontSize: 34.0,
+                        fontFamily: 'Lato', color: Colors.grey,
+                      ),
+                    )),
+                    Container(
+                      margin: EdgeInsets.only(top: 5),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
+                        children: [
                           Container(
-                              width: kWidth / 5.8,
-                              height: kHeight / 1.2,
                               child: SvgPicture.asset(
-                                Assets.logo_without,
-                                width: kWidth / 2,
-                                height: kHeight / 1.2,
-                              )),
+                            Assets.logo_esq,
+                            width: kHeight / 20,
+                            height: kHeight / 20,
+                          )),
                           Container(
-                            // alignment: Alignment.centerLeft,
-                            margin: EdgeInsets.only(left: 10),
-                            width: kWidth / 2.5,
-                            child: AnimatedTextKit(
-                              animatedTexts: [
-                                TypewriterAnimatedText(
-                                  'Emiy',
-                                  textStyle: TextStyle(
-                                      fontSize: 34.0,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.bold),
-                                  cursor: '_',
-                                  speed: const Duration(
-                                      milliseconds:
-                                          180), // Ajustez la vitesse d'animation
-                                ),
-                              ],
-                              repeatForever:
-                                  true, // Répéter l'animation en boucle
-                            ),
-                          ),
-
-                          // Container(
-                          //   margin: EdgeInsets.only(top: kMdHeight / 15),
-                          //   child: SpinKitRing(
-                          //     lineWidth: 4,
-                          //     color: ColorsApp.skyBlue,
-                          //     size: 25,
-                          //   ),
-                          // ),
+                              margin: EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Edge Square',
+                                style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.bold),
+                              )),
                         ],
-                      ))
-                ])));
+                      ),
+                    ),
+                  ]))),
+    );
   }
 }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         backgroundColor: ColorsApp.white,
+//         body: Container(
+//             alignment: Alignment.center,
+//             child: new Column(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: <Widget>[
+//                   new Container(
+//                       margin: EdgeInsets.symmetric(horizontal: kWidth / 7),
+//                       child: new Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         crossAxisAlignment: CrossAxisAlignment.center,
+//                         children: <Widget>[
+//                           Container(
+//                               width: kWidth / 5.8,
+//                               height: kHeight / 1.2,
+//                               child: SvgPicture.asset(
+//                                 Assets.logo_without,
+//                                 width: kWidth / 2,
+//                                 height: kHeight / 1.2,
+//                               )),
+//                           Container(
+//                             // alignment: Alignment.centerLeft,
+//                             margin: EdgeInsets.only(left: 10),
+//                             width: kWidth / 2.5,
+//                             child: AnimatedTextKit(
+//                               animatedTexts: [
+//                                 TypewriterAnimatedText(
+//                                   'Emiy',
+//                                   textStyle: TextStyle(
+//                                       fontSize: 34.0,
+//                                       fontFamily: 'Lato',
+//                                       fontWeight: FontWeight.bold),
+//                                   cursor: '_',
+//                                   speed: const Duration(
+//                                       milliseconds:
+//                                           180), // Ajustez la vitesse d'animation
+//                                 ),
+//                               ],
+//                               repeatForever:
+//                                   true, // Répéter l'animation en boucle
+//                             ),
+//                           ),
+
+//                           // Container(
+//                           //   margin: EdgeInsets.only(top: kMdHeight / 15),
+//                           //   child: SpinKitRing(
+//                           //     lineWidth: 4,
+//                           //     color: ColorsApp.skyBlue,
+//                           //     size: 25,
+//                           //   ),
+//                           // ),
+//                         ],
+//                       ))
+//                 ])));
+//   }
+// }
 
 // class AnimatedText extends StatefulWidget {
 //   final String text;

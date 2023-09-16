@@ -1,12 +1,8 @@
 // ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/components/Button/app_button.dart';
-import 'package:EMIY/components/Form/text_field.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+ 
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:EMIY/utils/constants/assets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart'; 
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -20,8 +16,8 @@ class AppLoading extends StatelessWidget {
 
       // color: Colors.white,
       child: Shimmer.fromColors(
-          baseColor: ColorsApp.secondBlue,
-          highlightColor: ColorsApp.grey,
+          baseColor: ColorsApp.grey,
+          highlightColor: Colors.blueGrey,
           child: SvgPicture.asset(
             Assets.logoSvg,
             width: kWidth,

@@ -1,15 +1,7 @@
-// ignore: must_be_immutable
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/commentForm.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/controller/CommandeController.dart';
-import 'package:EMIY/model/data/BoutiqueUserModel.dart';
-import 'package:EMIY/model/data/CommandeModel.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
+// ignore: must_be_immutable 
+import 'package:EMIY/model/data/CommandeModel.dart'; 
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/Services/apiUrl.dart';
+import 'package:EMIY/utils/Services/routing.dart'; 
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +13,7 @@ class CommandeComponent extends StatelessWidget {
   CommandeComponent({required this.commande});
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController titre = TextEditingController();
-    TextEditingController quantite = TextEditingController();
-    TextEditingController prix = TextEditingController();
-    TextEditingController description = TextEditingController();
+  Widget build(BuildContext context) { 
 
     // titre.text = commande.titre;
     // quantite.text = commande.quantite.toString();

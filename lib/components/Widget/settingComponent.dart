@@ -1,7 +1,5 @@
-// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+// ignore: must_be_immutable  
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';

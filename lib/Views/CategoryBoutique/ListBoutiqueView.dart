@@ -111,7 +111,7 @@
 //                                             decoration: BoxDecoration(
 //                                                 image: DecorationImage(
 //                                               image:
-//                                                   AssetImage('assets/logo/logo.png'),
+//                                                   AssetImage('assets/logo/logoNew.png'),
 //                                             ))),
 //                                         Container(
 //                                           width: kSmWidth * .6,

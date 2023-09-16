@@ -1,6 +1,5 @@
 import 'dart:async';
-
-import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
+ 
 import 'package:EMIY/Views/BoutiqueUser/MesBoutiquesView.dart';
 import 'package:EMIY/Views/UsersMange/InteretsView.dart';
 import 'package:EMIY/Views/UsersMange/ParrainnageView.dart';
@@ -9,24 +8,16 @@ import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
 import 'package:EMIY/Views/UsersMange/UserManageView.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/entity.dart';
-import 'package:EMIY/entity.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/model/data/CompteModel.dart';
-import 'package:EMIY/model/data/ProduitCategoryModel.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/model/data/CompteModel.dart'; 
 import 'package:EMIY/model/data/UserModel.dart';
-import 'package:EMIY/repository/ManageRepo.dart';
-import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/repository/ManageRepo.dart'; 
 import 'package:EMIY/utils/Services/apiUrl.dart';
-import 'package:EMIY/utils/Services/core.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
-import 'package:EMIY/utils/Services/requestServices.dart';
-import 'package:EMIY/utils/Services/storageService2.dart';
+import 'package:EMIY/utils/Services/core.dart'; 
+import 'package:EMIY/utils/Services/requestServices.dart'; 
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';  
 import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -183,7 +174,7 @@ class ManagerController extends GetxController {
   }
 
   var _User;
-  UserModel get Userget => _User;
+  get Userget => _User;
 
   CompteModel _Compte = new CompteModel(solde: 0, id: 0);
   CompteModel get Compte => _Compte;
@@ -192,47 +183,78 @@ class ManagerController extends GetxController {
   //
   // CategoryController({required this.service});
   getUser() async {
-    var getU = await dababase.getKey();
+    print('------------------debut get user');
 
-    try {
-      Response response = await manageRepo.getUser();
-      if (response.body != null) {
-        if (response.body['data'].length != 0) {
-          _User = UserModel.fromJson(response.body['data']);
-          update();
-
-          _Compte = CompteModel.fromJson(response.body['compte']);
-          update();
-          var _UserSave = User.fromJson(response.body['data']);
-
-          await dababase.saveUser(_UserSave);
-          if (_User != null) {
-            // nameU.text = Userget.nom;
-            // surnameU.text = Userget.prenom.toString();
-            // phoneU.text = Userget.phone.toString();
-            // emailU.text = Userget.email;
-            initInfoUser();
-          }
-          getKeyU();
-
-          Get.find<BoutiqueController>().getListBoutique();
-        }
-
-        _isLoaded = 1;
+    await manageRepo.getUser().then((value) async {
+      print('------------------value----------${value.body}-');
+      if (value.body['data'].length != 0) {
+        _User = UserModel.fromJson(value.body['data']);
         update();
+
+        _Compte = CompteModel.fromJson(value.body['compte']);
+        update();
+        var _UserSave = User.fromJson(value.body['data']);
+
+        await dababase.saveUser(_UserSave);
+        if (_User != null) {
+          // nameU.text = Userget.nom;
+          // surnameU.text = Userget.prenom.toString();
+          // phoneU.text = Userget.phone.toString();
+          // emailU.text = Userget.email;
+          initInfoUser();
+          // Get.find<BoutiqueController>().getListBoutique();
+        }
+        getKeyU();
       }
-    } catch (e) {
+    }).catchError((error) {
       _isLoaded = 1;
       update();
-      //print(e);
-    }
+      print(error);
+    });
+    // try {
+    //   Response response = await manageRepo.getUser();
+    //   if (response.body != null) {
+    //     if (response.body['data'].length != 0) {
+    //       _User = UserModel.fromJson(response.body['data']);
+    //       update();
+
+    //       _Compte = CompteModel.fromJson(response.body['compte']);
+    //       update();
+    //       var _UserSave = User.fromJson(response.body['data']);
+
+    //       await dababase.saveUser(_UserSave);
+    //       if (_User != null) {
+    //         // nameU.text = Userget.nom;
+    //         // surnameU.text = Userget.prenom.toString();
+    //         // phoneU.text = Userget.phone.toString();
+    //         // emailU.text = Userget.email;
+    //         initInfoUser();
+    //         // Get.find<BoutiqueController>().getListBoutique();
+    //       }
+    //       getKeyU();
+    //     }
+
+    //     _isLoaded = 1;
+    //     update();
+    //   }
+    // } catch (e) {
+    //   _isLoaded = 1;
+    //   update();
+    //   //print(e);
+    // }
   }
 
   getUserDB() async {
     var data = await dababase.getUser();
-    if (data != null) {
-      _User = UserModel.fromJson(data.toMap());
-      update();
+    print('-----------------------data-------${data!.id}-------------${data}');
+    // ignore: unnecessary_null_comparison
+    if (data!.id != null) {
+    print(
+          '-----------------------data-------${data.toMap()}-------------${data}');
+
+      // _User = UserModel.fromJson(data.toMap());
+      // update();
+      // initInfoUserDB();
     }
   }
 
@@ -280,6 +302,14 @@ class ManagerController extends GetxController {
     _surnameU.text = Userget.prenom;
     _phoneU.text = Userget.phone;
     _emailU.text = Userget.email;
+    update();
+  }
+
+  initInfoUserDB() {
+    _nameU.text = _User.nom;
+    _surnameU.text = _User.prenom;
+    _phoneU.text = _User.phone;
+    _emailU.text = _User.email;
     update();
   }
 
@@ -511,7 +541,7 @@ class ManagerController extends GetxController {
       "codeParrainage": codeParrain,
       "nom": name.text,
       "prenom": surname.text,
-      "email": email.text,
+      // "email": email.text,
     };
     print(data);
     fn.loading('Inscription', 'Creatoin de votre compte en cours');
@@ -631,6 +661,10 @@ class ManagerController extends GetxController {
       if (i == 4) {
         print('-------------TransactionController---*');
         Get.find<TransactionController>().getTransactions();
+      }
+      if (i == 7) {
+        print('----------------*');
+        Get.find<BoutiqueController>().getListBoutique();
       }
     }
     _saveIndex.add(i);

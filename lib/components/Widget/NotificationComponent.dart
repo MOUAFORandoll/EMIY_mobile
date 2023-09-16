@@ -1,4 +1,4 @@
-import 'package:EMIY/Views/Space/Notifications/ShortNotificationView.dart';
+import 'package:EMIY/Views/Short/SingleShortView.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/model/socket/NotificationModel.dart';
@@ -23,7 +23,7 @@ class NotificationComponent extends StatelessWidget {
         onTap: () async {
           Get.to(goTo(notification.type_notification));
           await Get.find<GeneralController>().readNotification(notification.id);
-          await Get.find<ShortController>().disposeUniquePLayer();
+          await Get.find<ShortController>().disposePLayerAll();
         },
         child: Container(
             margin: EdgeInsets.all(kMarginY)
@@ -77,7 +77,7 @@ class NotificationComponent extends StatelessWidget {
                                   color: ColorsApp.greySecond,
                                 ),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/logo/logo.png'),
+                                  image: AssetImage('assets/logo/logoNew.png'),
                                 )));
                       },
                     ),
@@ -165,7 +165,7 @@ class NotificationComponent extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     // softWrap: true,
                                     style: TextStyle(
-                                      fontFamily: 'Montserrat',
+                                      fontFamily: 'Lato',
                                       fontSize: 12,
                                       color: ColorsApp.black,
                                     ),
@@ -177,7 +177,7 @@ class NotificationComponent extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 // softWrap: true,
                                 style: TextStyle(
-                                  fontFamily: 'Montserrat',
+                                  fontFamily: 'Lato',
                                   fontSize: 12,
                                   color: ColorsApp.black,
                                 ),
@@ -231,16 +231,16 @@ class NotificationComponent extends StatelessWidget {
   goTo(type) {
     switch (type) {
       case 2:
-        return ShortNotificationView(
+        return SingleShortView(
           idShort: notification.short,
         );
       case 3:
-        return ShortNotificationView(
+        return SingleShortView(
           idShort: notification.short,
         );
 
       case 4:
-        return ShortNotificationView(
+        return SingleShortView(
           idShort: notification.short,
         );
 

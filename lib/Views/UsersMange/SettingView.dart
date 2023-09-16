@@ -1,13 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:EMIY/components/Button/uploadImage.dart';
 import 'package:EMIY/components/Widget/app_input_new.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:EMIY/components/Widget/settingComponent.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -15,13 +15,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../utils/Services/validators.dart';
 
 class SettingView extends StatelessWidget {
-  SettingView({
-    Key? key,
-  }) : super(key: key);
   ScrollController _scrollController = new ScrollController();
-  TextEditingController montant = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController password = TextEditingController();
 
   var controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -451,7 +445,7 @@ class SettingView extends StatelessWidget {
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 14,
-                                                    fontFamily: 'Montserrat',
+                                                    fontFamily: 'Lato',
                                                   ),
                                                   maxLines: 10,
                                                   decoration: InputDecoration(
@@ -475,11 +469,11 @@ class SettingView extends StatelessWidget {
                                                     ),
                                                     errorStyle: TextStyle(
                                                       fontSize: 8,
-                                                      fontFamily: 'Montserrat',
+                                                      fontFamily: 'Lato',
                                                     ),
                                                     labelStyle: TextStyle(
                                                       color: ColorsApp.black,
-                                                      fontFamily: 'Montserrat',
+                                                      fontFamily: 'Lato',
                                                       // fontWeight: FontWeight.w500,
                                                       fontSize: 12,
                                                     ),
@@ -561,7 +555,7 @@ class SettingView extends StatelessWidget {
                                   //   onPageStarted: (String url) {},
                                   //   onPageFinished: (String url) {},
                                   // ),
-                                    WebViewWidget(controller: controller),
+                                  WebViewWidget(controller: controller),
                                 ])),
                             isScrollControlled: true,
                           );

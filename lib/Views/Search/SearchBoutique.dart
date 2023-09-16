@@ -12,7 +12,7 @@ import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/controller/searchController.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
 import 'package:EMIY/components/Widget/produitComponent.dart';
@@ -39,7 +39,7 @@ import '../../components/Button/app_button.dart';
 class SearchBoutique extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(builder: (search) {
+    return GetBuilder<MySearchController>(builder: (search) {
       return Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: SingleChildScrollView(

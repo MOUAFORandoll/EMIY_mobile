@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:EMIY/controller/boutiqueController.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:EMIY/controller/boutiqueController.dart'; 
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:get/get.dart';
-import 'package:EMIY/styles/colorApp.dart';
+import 'package:get/get.dart'; 
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

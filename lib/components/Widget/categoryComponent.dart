@@ -77,7 +77,7 @@ class CategoryComponent extends StatelessWidget {
                                 topRight: Radius.circular(8),
                                 bottomRight: Radius.circular(8)),
                             image: DecorationImage(
-                              image: AssetImage('assets/logo/logo.png'),
+                              image: AssetImage('assets/logo/logoNew.png'),
                             )));
                   },
                 ),

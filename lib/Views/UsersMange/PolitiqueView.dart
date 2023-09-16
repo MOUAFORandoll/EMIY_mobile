@@ -1,14 +1,9 @@
-import 'package:EMIY/components/Button/button.dart';
-import 'package:EMIY/components/Form/formComponent.dart';
-import 'package:EMIY/components/Button/themeButton.dart';
-import 'package:EMIY/controller/boutiqueController.dart';
-import 'package:EMIY/controller/managerController.dart';
+ 
+import 'package:EMIY/controller/boutiqueController.dart'; 
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:flutter/material.dart';
-
-import 'package:EMIY/utils/Services/routing.dart';
+ 
 import 'package:get/get.dart';
 
 class PolitiqueView extends StatefulWidget {
@@ -24,8 +19,7 @@ class _PolitiqueViewState extends State<PolitiqueView> {
   TextEditingController description = TextEditingController();
 
   TextEditingController email = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
+ 
 
   bool validator = false;
 

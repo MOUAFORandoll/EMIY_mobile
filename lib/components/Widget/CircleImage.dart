@@ -1,14 +1,10 @@
-import 'package:EMIY/controller/negociationController.dart';
-import 'package:EMIY/model/data/UserModel.dart';
-import 'package:EMIY/model/socket/NegociationModel.dart';
+ 
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart'; 
 
 class CircleImage extends StatelessWidget {
   CircleImage({required this.imageUrl, this.radius = 25});

@@ -1,8 +1,5 @@
-import 'package:EMIY/controller/ShortController.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
+ 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class InputMessaage extends StatelessWidget {
   InputMessaage(

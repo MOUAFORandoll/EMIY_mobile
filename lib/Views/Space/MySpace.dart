@@ -60,14 +60,14 @@ class MySpace extends StatelessWidget {
           //         Container(
           //             child: Text('Notifications',
           //                 style: TextStyle(
-          //                     fontFamily: 'Montserrat',
+          //                     fontFamily: 'Lato',
           //                     color: ColorsApp.black,
           //                     fontWeight: FontWeight.w700,
           //                     fontSize: 16))),
           //         Container(
           //             child: Text('Vous avez 5 notifications',
           //                 style: TextStyle(
-          //                     fontFamily: 'Montserrat',
+          //                     fontFamily: 'Lato',
           //                     color: ColorsApp.greyFirst,
           //                     fontWeight: FontWeight.w500,
           //                     fontSize: 12))),
@@ -91,14 +91,14 @@ class MySpace extends StatelessWidget {
                       Container(
                           child: Text('Notifications',
                               style: TextStyle(
-                                  fontFamily: 'Montserrat',
+                                  fontFamily: 'Lato',
                                   color: ColorsApp.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16))),
                       Container(
                           child: Text('Vous avez 5 notifications',
                               style: TextStyle(
-                                  fontFamily: 'Montserrat',
+                                  fontFamily: 'Lato',
                                   color: ColorsApp.greyFirst,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12))),

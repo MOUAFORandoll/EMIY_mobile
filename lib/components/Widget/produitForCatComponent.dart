@@ -63,7 +63,7 @@ class ProduitForCatComponent extends StatelessWidget {
                         width: Get.width * .5,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/logo/logo.png'),
+                          image: AssetImage('assets/logo/logoNew.png'),
                         )));
                   },
                 ),

@@ -1,5 +1,5 @@
 import 'package:EMIY/components/Button/app_button.dart';
-import 'package:EMIY/components/Button/button.dart';
+
 import 'package:EMIY/components/Widget/app_carroussel_item.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/managerController.dart';
@@ -9,7 +9,6 @@ import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class OnBoardingView extends StatelessWidget {
@@ -41,7 +40,7 @@ class OnBoardingView extends StatelessWidget {
                       AppCarrousselItem(
                         title: 'ctitle3'.tr,
                         description: 'cdescription3'.tr,
-                        image: Assets.onb3,
+                        image: Assets.onb2,
                       )
                     ],
                     options: CarouselOptions(
@@ -86,26 +85,25 @@ class OnBoardingView extends StatelessWidget {
                                               entry.key,
                                               duration:
                                                   Duration(milliseconds: 500),
-                                              curve: Curves.easeInOut,
+                                              curve: Curves.linearToEaseOut,
                                             );
                                           },
                                           child: Container(
-                                            width: 8.0,
+                                            width: action.index == entry.key
+                                                ? 30.0
+                                                : 8.0,
                                             height: 8.0,
                                             margin: EdgeInsets.symmetric(
-                                                vertical: 10.0,
-                                                horizontal: 4.0),
+                                                vertical: 5.0, horizontal: 4.0),
                                             decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: (Theme.of(context)
-                                                                .brightness ==
-                                                            Brightness.dark
-                                                        ? Colors.white
-                                                        : ColorsApp.skyBlue)
-                                                    .withOpacity(action.index ==
-                                                            entry.key
-                                                        ? 0.9
-                                                        : 0.2)),
+                                                borderRadius: action.index ==
+                                                        entry.key
+                                                    ? BorderRadius.circular(10)
+                                                    : BorderRadius.circular(30),
+                                                color: action.index == entry.key
+                                                    ? Colors.white
+                                                    : ColorsApp.primaryBlue
+                                                        .withOpacity(0.2)),
                                           ));
                                     }).toList(),
                                   ),
@@ -131,15 +129,16 @@ class OnBoardingView extends StatelessWidget {
                                 children: [
                                   Container(
                                       margin: (EdgeInsets.only(bottom: 15)),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: (Colors.white).withOpacity(0.5),
-                                      ),
+                                      // decoration: BoxDecoration(
+                                      //   shape: BoxShape.circle,
+                                      //   color: (Colors.white).withOpacity(0.5),
+                                      // ),
                                       child: InkWell(
                                         onTap: () {
                                           Get.offAndToNamed(
-                                            Get.find<ManagerController>()
-                                                        .Userget ==
+                                             Get.find<ManagerController>()
+                                                  // ignore: unnecessary_null_comparison
+                                                 .Userget ==
                                                     null
                                                 ? AppLinks.LOGIN
                                                 : AppLinks.FIRST,
@@ -151,16 +150,14 @@ class OnBoardingView extends StatelessWidget {
                                             children: [
                                               Text('Skip',
                                                   style: TextStyle(
-                                                      color: action.index == 0
-                                                          ? Colors.white
-                                                          : ColorsApp.black,
+                                                      color: Colors.white,
                                                       fontWeight:
                                                           FontWeight.bold))
                                             ]),
                                       )),
                                   Container(
                                     margin: EdgeInsets.all(kMarginX)
-                                        .add(EdgeInsets.only(bottom: 15)),
+                                        .add(EdgeInsets.only(bottom: 25)),
                                     padding: EdgeInsets.all(kMarginX / 3.2),
                                     child: Row(
                                       mainAxisAlignment:
@@ -173,39 +170,40 @@ class OnBoardingView extends StatelessWidget {
                                             onTap: () {
                                               action.controller.animateToPage(
                                                 entry.key,
-                                                duration:
-                                                    Duration(milliseconds: 500),
-                                                curve: Curves.easeInOut,
+                                                duration: Duration(seconds: 10),
+                                                curve: Curves.linearToEaseOut,
                                               );
                                             },
                                             child: Container(
-                                              width: 8.0,
+                                              width: action.index == entry.key
+                                                  ? 30.0
+                                                  : 8.0,
                                               height: 8.0,
                                               margin: EdgeInsets.symmetric(
                                                   vertical: 10.0,
                                                   horizontal: 4.0),
                                               decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: (Theme.of(context)
-                                                                  .brightness ==
-                                                              Brightness.dark
-                                                          ? Colors.white
-                                                          : ColorsApp.skyBlue)
-                                                      .withOpacity(
-                                                          action.index ==
-                                                                  entry.key
-                                                              ? 0.9
-                                                              : 0.2)),
+                                                  borderRadius: action.index ==
+                                                          entry.key
+                                                      ? BorderRadius.circular(
+                                                          10)
+                                                      : BorderRadius.circular(
+                                                          30),
+                                                  color: action.index ==
+                                                          entry.key
+                                                      ? Colors.white
+                                                      : ColorsApp.primaryBlue
+                                                          .withOpacity(0.2)),
                                             ));
                                       }).toList(),
                                     ),
                                   ),
                                   Container(
                                       margin: (EdgeInsets.only(bottom: 15)),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                      ),
+                                      // decoration: BoxDecoration(
+                                      //   color: Colors.white,
+                                      //   shape: BoxShape.circle,
+                                      // ),
                                       child: InkWell(
                                         onTap: () {
                                           action.index == 2
@@ -227,13 +225,15 @@ class OnBoardingView extends StatelessWidget {
                                                       bottom: 3)),
                                                   child: Text('Next',
                                                       style: TextStyle(
+                                                          color:
+                                                              ColorsApp.white,
                                                           fontWeight: FontWeight
                                                               .bold))),
                                               Icon(
                                                 Icons
                                                     .keyboard_arrow_right_outlined,
                                                 size: 25,
-                                                color: ColorsApp.black,
+                                                color: ColorsApp.white,
                                               ),
                                             ]),
                                       )),

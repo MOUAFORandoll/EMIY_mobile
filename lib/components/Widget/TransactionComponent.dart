@@ -1,18 +1,9 @@
 // ignore: must_be_immutable
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Text/QteText.dart';
-import 'package:EMIY/components/Text/SimpleText.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText0.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Text/titleText.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/produitController.dart';
-import 'package:EMIY/model/data/CartModel.dart';
+ 
+import 'package:EMIY/components/Text/SimpleText.dart'; 
+import 'package:EMIY/components/Text/bigtitleText0.dart'; 
 import 'package:EMIY/model/data/TransactionModel.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';

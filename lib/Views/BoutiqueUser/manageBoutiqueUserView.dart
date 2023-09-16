@@ -15,12 +15,11 @@ import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
-
-import 'package:EMIY/utils/Services/routing.dart';
+ 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:get_storage/get_storage.dart'; 
 
+// ignore: must_be_immutable
 class ManageBoutiqueUserView extends StatelessWidget {
   bool ok = false;
   GetStorage box = GetStorage();
@@ -41,7 +40,7 @@ class ManageBoutiqueUserView extends StatelessWidget {
       //   titre.text = _controller.Boutique.titre;
       //   description.text = _controller.Boutique.description.toString();
       // }
-      return _controller.isLoaded == 0
+      return _controller.loadBoutique == 0
           ? AppLoading()
           : Container(
               padding: EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -82,7 +81,7 @@ class ManageBoutiqueUserView extends StatelessWidget {
                               width: Get.width * .5,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                image: AssetImage('assets/logo/logo.png'),
+                                image: AssetImage('assets/logo/logoNew.png'),
                               )));
                         },
                       ),

@@ -200,7 +200,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(8, 8051142099205652548),
       name: 'User',
-      lastPropertyId: const IdUid(7, 3804022484162881727),
+      lastPropertyId: const IdUid(8, 2559476096599094924),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -237,6 +237,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 3804022484162881727),
             name: 'dateCreated',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 2559476096599094924),
+            name: 'userId',
+            type: 6,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -533,7 +538,7 @@ ModelDefinition getObjectBoxModel() {
           final profileOffset = fbb.writeString(object.profile);
           final phoneOffset = fbb.writeString(object.phone);
           final dateCreatedOffset = fbb.writeString(object.dateCreated);
-          fbb.startTable(8);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nomOffset);
           fbb.addOffset(2, prenomOffset);
@@ -541,12 +546,15 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(4, profileOffset);
           fbb.addOffset(5, phoneOffset);
           fbb.addOffset(6, dateCreatedOffset);
+          fbb.addInt64(7, object.userId);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
+          final userIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
           final nomParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final prenomParam = const fb.StringReader(asciiOptimization: true)
@@ -561,6 +569,7 @@ ModelDefinition getObjectBoxModel() {
               const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 16, '');
           final object = User(
+              userId: userIdParam,
               nom: nomParam,
               prenom: prenomParam,
               email: emailParam,
@@ -702,4 +711,7 @@ class User_ {
   /// see [User.dateCreated]
   static final dateCreated =
       QueryStringProperty<User>(_entities[7].properties[6]);
+
+  /// see [User.userId]
+  static final userId = QueryIntegerProperty<User>(_entities[7].properties[7]);
 }

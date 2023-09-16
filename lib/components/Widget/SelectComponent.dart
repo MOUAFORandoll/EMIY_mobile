@@ -1,16 +1,15 @@
-import 'dart:async';
+ 
 
-import 'package:EMIY/controller/GeneralController.dart';
-import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/controller/GeneralController.dart'; 
 import 'package:EMIY/model/data/ModePaiementModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:get/get.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart'; 
 
+// ignore: must_be_immutable
 class SelectComponent extends StatelessWidget {
   SelectComponent({required this.select, required this.mode});
   bool select = false;

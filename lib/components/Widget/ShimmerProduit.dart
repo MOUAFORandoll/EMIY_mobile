@@ -1,6 +1,5 @@
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter/material.dart'; 
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:shimmer/shimmer.dart';
@@ -11,8 +10,8 @@ class ShimmerProduit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.blueGrey,
-      highlightColor: Colors.greenAccent,
+      baseColor: ColorsApp.grey,
+      highlightColor: Colors.blueGrey,
       child: Container(
           margin: EdgeInsets.symmetric(horizontal: kMarginX),
           child: SingleChildScrollView(
@@ -46,7 +45,8 @@ class ShimmerProduit extends StatelessWidget {
                                     width: Get.width * .5,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                      image: AssetImage('assets/logo/logo.png'),
+                                      image:
+                                          AssetImage('assets/logo/logoNew.png'),
                                     ))),
                                 Container(
                                   width: kSmWidth * .6,

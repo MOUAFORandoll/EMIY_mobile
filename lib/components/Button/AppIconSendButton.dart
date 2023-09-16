@@ -6,7 +6,7 @@ class AppIconSendButton extends StatelessWidget {
   var icon, color, onTap, inconSize, backgroundColor, sending;
   AppIconSendButton(
       {this.icon,
-      this.backgroundColor = ColorsApp.greenLight,
+      this.backgroundColor = ColorsApp.secondBlue,
       this.color = Colors.white,
       this.inconSize = 22.0,
       this.sending = false,

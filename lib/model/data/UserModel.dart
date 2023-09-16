@@ -32,12 +32,12 @@ class UserModel {
   String profile;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json["id"],
+        id: json["id"] ?? json['userId'],
         nom: json["nom"],
         prenom: json["prenom"],
         email: json["email"],
         phone: json["phone"].toString(),
-        status: json["status"],
+        // status: json["status"],
         profile: json["profile"],
         dateCreated: json["dateCreated"],
       );

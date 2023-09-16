@@ -1,5 +1,4 @@
 import 'package:EMIY/components/Widget/icon_svg.dart';
-import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -31,21 +30,21 @@ class AppSettingComp extends StatelessWidget {
           // alignment: Alignment.topLeft,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-           Container(
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(6.5),
-                  ),
-                  padding: EdgeInsets.all(3),
-                  margin: EdgeInsets.only(right: kMarginX * 2),
-                  child: SvgIcon(icon: icon)),
-         
+            Container(
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(6.5),
+                ),
+                padding: EdgeInsets.all(3),
+                margin: EdgeInsets.only(right: kMarginX * 2),
+                child: SvgIcon(icon: icon)),
+
             /*  Expanded(
                 child: */
             Container(
                 child: Text(title,
                     style: TextStyle(
-                        fontFamily: 'Montserrat',
+                        fontFamily: 'Lato',
                         fontWeight: FontWeight.w600)) /* ) */),
             // Container(
             //     child: Icon(

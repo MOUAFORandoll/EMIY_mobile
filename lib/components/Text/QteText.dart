@@ -1,7 +1,6 @@
-import 'package:get/get.dart';
+ 
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/material.dart';
-import 'package:EMIY/styles/textStyle.dart';
+import 'package:flutter/material.dart'; 
 
 // ignore: must_be_immutable
 class QteText extends StatelessWidget {

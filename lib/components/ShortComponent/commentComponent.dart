@@ -1,16 +1,12 @@
 import 'package:EMIY/components/Widget/CircleImage.dart';
 import 'package:EMIY/controller/ShortController.dart';
-import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/model/data/CommentShortModel.dart';
-import 'package:EMIY/model/socket/NegociationModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CommentComponent extends StatelessWidget {
   CommentComponent({required this.comment, this.type = 0});
 
@@ -82,7 +78,7 @@ class CommentComponent extends StatelessWidget {
                           child: Text(comment.commentaire_text,
                               softWrap: true,
                               style: TextStyle(
-                                fontFamily: 'Montserrat',
+                                fontFamily: 'Lato',
                                 fontSize: 12,
                                 overflow: TextOverflow.fade,
                                 color: ColorsApp.black,
@@ -97,7 +93,7 @@ class CommentComponent extends StatelessWidget {
 
                               // softWrap: true,
                               style: TextStyle(
-                                fontFamily: 'Montserrat',
+                                fontFamily: 'Lato',
                                 fontSize: 10,
                                 color: ColorsApp.black,
                               ),
@@ -109,7 +105,7 @@ class CommentComponent extends StatelessWidget {
 
                                       // softWrap: true,
                                       style: TextStyle(
-                                          fontFamily: 'Montserrat',
+                                          fontFamily: 'Lato',
                                           fontSize: 10,
                                           color: ColorsApp.black,
                                           fontWeight: FontWeight.w700)),
@@ -147,7 +143,7 @@ class CommentComponent extends StatelessWidget {
 
                                             // softWrap: true,
                                             style: TextStyle(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Lato',
                                               fontSize: 10,
                                               fontWeight: FontWeight.w700,
                                               color: ColorsApp.black,
@@ -215,7 +211,7 @@ class CommentComponent extends StatelessWidget {
                         child: Text(comment.nbre_like_com.toString(),
                             softWrap: true,
                             style: TextStyle(
-                              fontFamily: 'Montserrat',
+                              fontFamily: 'Lato',
                               fontSize: 12,
                               overflow: TextOverflow.fade,
                               color: ColorsApp.black,

@@ -1,8 +1,6 @@
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/string_extensions.dart';
+import 'package:flutter/material.dart'; 
 
 // ignore: must_be_immutable
 class SeacrhIngCompo extends StatelessWidget {

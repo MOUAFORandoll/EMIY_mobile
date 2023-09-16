@@ -9,7 +9,7 @@
             "request": "launch",
             "type": "dart",
             "args": [
-                "--no-sound-null-safety" // Ajout de l'option "no sound null safety"
+                // "--no-sound-null-safety" // Ajout de l'option "no sound null safety"
             ],
             "program": "lib/main.dart"
         },
@@ -25,7 +25,7 @@
             "request": "launch",
             "type": "dart",
             "args": [
-                "--no-sound-null-safety" // Ajout de l'option "no sound null safety"
+                // "--no-sound-null-safety" // Ajout de l'option "no sound null safety"
             ],
             "program": "lib/main.dart"
         }

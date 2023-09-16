@@ -22,7 +22,7 @@ class AppTextTitle extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       softWrap: true,
       style: TextStyle(
-          fontFamily: 'Montserrat',
+          fontFamily: 'Lato',
           fontWeight: bolder ? FontWeight.bold : FontWeight.normal,
           // fontSize: big ? kXlText / this.percent : kLgText / this.percent,
           color: color),

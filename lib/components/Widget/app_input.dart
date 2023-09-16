@@ -1,5 +1,4 @@
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -43,7 +42,7 @@ class _AppInputState extends State<AppInput> {
         style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 14,
-          fontFamily: 'Montserrat',
+          fontFamily: 'Lato',
         ),
         onChanged: widget.onChanged,
         decoration: InputDecoration(
@@ -59,11 +58,11 @@ class _AppInputState extends State<AppInput> {
             errorText: widget.errorText,
             errorStyle: TextStyle(
               fontSize: 8,
-              fontFamily: 'Montserrat',
+              fontFamily: 'Lato',
             ),
             labelText: widget.label,
             labelStyle: TextStyle(
-              color: ColorsApp.black, fontFamily: 'Montserrat',
+              color: ColorsApp.black, fontFamily: 'Lato',
               // fontWeight: FontWeight.w500,
               fontSize: 12,
             ),
@@ -114,7 +113,7 @@ class _AppInputPasswordState extends State<AppInputPassword> {
         controller: widget.controller,
         style: const TextStyle(
           fontWeight: FontWeight.w500,
-          fontFamily: 'Montserrat',
+          fontFamily: 'Lato',
           fontSize: 14,
         ),
         onChanged: widget.onChanged,
@@ -131,11 +130,11 @@ class _AppInputPasswordState extends State<AppInputPassword> {
             errorText: widget.errorText,
             errorStyle: TextStyle(
               fontSize: 8,
-              fontFamily: 'Montserrat',
+              fontFamily: 'Lato',
             ),
             labelText: widget.label,
             labelStyle: TextStyle(
-              color: ColorsApp.black, fontFamily: 'Montserrat',
+              color: ColorsApp.black, fontFamily: 'Lato',
               // fontWeight: FontWeight.w500,
               fontSize: 12,
             ),

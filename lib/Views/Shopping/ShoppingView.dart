@@ -1,9 +1,8 @@
- 
 import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/app_button.dart'; 
-import 'package:EMIY/components/Text/bigText.dart'; 
+import 'package:EMIY/components/Button/app_button.dart';
+import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/components/Widget/shoppingproduitComponent.dart'; 
+import 'package:EMIY/components/Widget/shoppingproduitComponent.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -45,15 +44,26 @@ class ShoppingView extends StatelessWidget {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              // Container(
+                              //   child: AppTitleRight(
+                              //       title: 'Panier',
+                              //       description: 'Votre panier',
+                              //       icon: Assets.shoppingCart),
+                              //   margin: EdgeInsets.only(
+                              //       right: MediaQuery.of(context).size.width *
+                              //           .005),
+                              // ),
                               Container(
-                                child: AppTitleRight(
-                                    title: 'Panier',
-                                    description: 'Votre panier',
-                                    icon: Assets.shoppingCart),
-                                margin: EdgeInsets.only(
-                                    right: MediaQuery.of(context).size.width *
-                                        .005),
-                              ),
+                                  // margin: EdgeInsets.only(left: kMarginX),
+                                  child: Text(
+                                'My Shopping Bag',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: kMdText,
+                                    fontFamily: 'Lato',
+                                    // color: ColorsApp.white,
+                                    fontWeight: FontWeight.w700),
+                              )),
                               IconButtonF(
                                   icon: Icons.delete_forever,
                                   color: Colors.red,
@@ -86,15 +96,21 @@ class ShoppingView extends StatelessWidget {
                         bolder: true,
                       ),
                     )
-                  : SingleChildScrollView(
-                      child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: _controller.getItems.length,
-                          // controller: _controller,
-                          itemBuilder: (_, index) => ShoppingproduitComponent(
-                                cartM: _controller.getItems[index],
-                              ))),
+                  : Container(
+                      decoration: BoxDecoration(
+                        color: ColorsApp.white,
+                      ),
+                      child: SingleChildScrollView(
+                          child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: _controller.getItems.length,
+                              // controller: _controller,
+                              itemBuilder: (_, index) =>
+                                  ShoppingproduitComponent(
+                                    cartM: _controller.getItems[index],
+                                  ))),
+                    ),
               childCount: 1,
             ))
           ])),

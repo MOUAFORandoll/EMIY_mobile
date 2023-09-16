@@ -1,44 +1,20 @@
 import 'package:EMIY/Views/CategoryBoutique/ReadShortBoutiqueView.dart';
-import 'package:EMIY/components/Button/AppIconButton.dart';
 import 'package:EMIY/components/Button/ShareButton.dart';
+import 'package:EMIY/components/Widget/BoutiqueHeadComponent.dart';
 import 'package:EMIY/components/Widget/ShimmerProduit.dart';
-import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/controller/GeneralController.dart';
-import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/styles/theme.dart';
-import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/btnCatList.dart';
-import 'package:EMIY/components/Button/btnCatListPV.dart';
-import 'package:EMIY/components/Button/button.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText.dart';
-import 'package:EMIY/components/Text/bigtitleText0.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/produitComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Text/titleText.dart';
 import 'package:EMIY/components/Widget/produitForBoutiqueComponent.dart';
-import 'package:EMIY/components/Widget/produitForCatComponent.dart';
-import 'package:EMIY/controller/categoryController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
-import 'package:EMIY/controller/produitController.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:rating_bar/rating_bar.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
+// ignore: import_of_legacy_library_into_null_safe
 
 import '../../components/Widget/app_empty.dart';
 
@@ -112,7 +88,6 @@ class BoutiqueView extends StatelessWidget {
               child: Stack(
                 children: [
                   CachedNetworkImage(
-                    height: kMdHeight * .30,
                     width: kWidth,
                     fit: BoxFit.cover,
                     imageUrl: Get.parameters['image'].toString(),
@@ -120,7 +95,7 @@ class BoutiqueView extends StatelessWidget {
                       return Container(
                         decoration: BoxDecoration(
                           color: ColorsApp.greySecond,
-                          borderRadius: BorderRadius.circular(8),
+                          // borderRadius: BorderRadius.circular(8),
                           image: DecorationImage(
                               image: imageProvider,
                               fit: BoxFit.cover,
@@ -143,138 +118,27 @@ class BoutiqueView extends StatelessWidget {
                           width: Get.width * .5,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                            image: AssetImage('assets/logo/logo.png'),
+                            image: AssetImage('assets/logo/logoNew.png'),
                           )));
                     },
                   ),
                   Positioned(
                     // top: kMdHeight * .30 / 2.7,
-                    bottom: kHeight / 6,
-                    // left: kWidth / 2.2,
-                    right: kWidth / 17 /* kWidth / 2.2 */,
-                    child: InkWell(
-                        child: Container(
-                            // margin: EdgeInsets.only(right: 10),
-                            // padding: EdgeInsets.all(kMarginX / 3),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: ColorsApp.white, width: 3),
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Icon(
-                              status_abonnement == 'true'
-                                  ? Icons.remove
-                                  : Icons.add,
-                              color: Colors.red,
-                            )),
-                        onTap: () async {
-                          print('---------------------');
-                          await Get.find<BoutiqueController>()
-                              .abonnementAdd(Get.parameters['codeBoutique']);
-                        }),
+                    top: 20,
+                    left: kWidth / 20,
+                    right: kWidth / 20,
+                    child: BoutiqueHeadComponent(
+                        titre: Get.parameters['nomBoutique'],
+                        description: Get.parameters['description'],
+                        ville: Get.parameters['ville'],
+                        note: Get.parameters['note'],
+                        nombre_produit: Get.parameters['nombre_produit'] ?? '0',
+                        lienBoutique: Get.parameters['lienBoutique'],
+                        status_abonnement: Get.parameters['status_abonnement']),
                   )
                 ],
               ),
             )),
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(35),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        topLeft: Radius.circular(30))),
-                child: Center(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                      Column(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                            Get.parameters['nomBoutique']
-                                                .toString(),
-                                            style: TexteStyle().blargeTextStyle,
-                                          ),
-                                          Container(
-                                              margin: EdgeInsets.only(
-                                                  top: 2, bottom: 3),
-                                              height: 3,
-                                              width: kMdWidth * .5,
-                                              decoration: BoxDecoration(
-                                                  // gradient: GradientApp.blueG,
-                                                  color: ColorsApp.skyBlue,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30)),
-                                              child: Container()),
-                                        ],
-                                      ),
-                                      RatingBar(
-                                        initialRating: double.parse(
-                                          Get.parameters['note'].toString(),
-                                        ),
-                                        filledIcon: Icons.star,
-                                        emptyIcon: Icons.star_border,
-                                        halfFilledIcon: Icons.star_half,
-                                        isHalfAllowed: true,
-                                        filledColor: Colors.yellow,
-                                        emptyColor: Colors.yellow,
-                                        halfFilledColor: Colors.yellow,
-                                        size: 19,
-                                        onRatingChanged: (double rating) {
-                                          //print(rating);
-                                          //print(Get.parameters['codeBoutique']
-                                          // .toString());
-                                          Get.find<GeneralController>()
-                                              .notationBoutique(
-                                            rating,
-                                            Get.parameters['codeBoutique']
-                                                .toString(),
-                                          );
-                                        },
-                                      )
-                                    ]),
-                                onTap: () {})
-                          ]),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Text(
-                                //   Get.parameters['description'].toString(),
-                                //   style: TextStyle(
-                                //     fontSize: 14,
-                                //     fontWeight: FontWeight.bold,
-                                //   ),
-                                // ),
-                                Text(
-                                  'Situe a ' +
-                                      Get.parameters['ville'].toString(),
-                                  style: TexteStyle().largeTextStyle,
-                                ),
-                              ]),
-                          ShareButton(
-                            libelle:
-                                'Suivez ce lien pour consulter cette boutique : ' +
-                                    Get.parameters['lienBoutique'].toString(),
-                          )
-                        ],
-                      )
-                    ])),
-                padding: EdgeInsets.only(top: 15, bottom: 10)
-                    .add(EdgeInsets.symmetric(horizontal: kMarginX)),
-                width: double.maxFinite,
-              ),
-            ),
             expandedHeight: 250,
             pinned: true,
           ),
@@ -282,33 +146,55 @@ class BoutiqueView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) => GetBuilder<CategoryBoutiqueController>(
                   builder: (_bscontroler) => _bscontroler.isLoadedPB == 0
-                      ? ShimmerProduit()
+                      ? Container(
+                          alignment: Alignment.topLeft,
+                          margin: EdgeInsets.symmetric(vertical: kMarginY),
+                          child: ShimmerProduit())
                       : Container(
                           // height: double.maxFinite,
                           margin: EdgeInsets.symmetric(vertical: kMarginY * .2),
                           child: _bscontroler.isLoadedPB == 1
                               ? (_bscontroler.produitBoutiqueList.length != 0)
-                                  ? SingleChildScrollView(
-                                      child: GridView.builder(
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: kMarginX),
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 20.0,
-                                                  childAspectRatio: 0.7,
-                                                  mainAxisSpacing: 20.0),
-                                          itemCount: _bscontroler
-                                              .produitBoutiqueList.length,
-                                          itemBuilder: (_ctx, index) =>
-                                              ProduitForBoutiqueComponent(
-                                                  produit: _bscontroler
-                                                          .produitBoutiqueList[
-                                                      index],
-                                                  index: index)))
+                                  ? Column(
+                                      children: [
+                                        Container(
+                                            alignment: Alignment.topLeft,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: kMarginY * 2,
+                                                horizontal: kMarginX),
+                                            child: Text(
+                                              'Produits Disponibles',
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  fontSize: kMdText,
+                                                  fontFamily: 'Lato',
+
+                                                  // color: ColorsApp.white,
+                                                  fontWeight: FontWeight.w600),
+                                            )),
+                                        SingleChildScrollView(
+                                            child: GridView.builder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: kMarginX),
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 2,
+                                                        crossAxisSpacing: 20.0,
+                                                        childAspectRatio: 0.7,
+                                                        mainAxisSpacing: 20.0),
+                                                itemCount: _bscontroler
+                                                    .produitBoutiqueList.length,
+                                                itemBuilder: (_ctx, index) =>
+                                                    ProduitForBoutiqueComponent(
+                                                        produit: _bscontroler
+                                                                .produitBoutiqueList[
+                                                            index],
+                                                        index: index)))
+                                      ],
+                                    )
                                   : Container(
                                       height: kHeight,
                                       child: AppEmpty(title: 'Aucun Produit'))
@@ -381,7 +267,7 @@ class BoutiqueView extends StatelessWidget {
       //                                     decoration: BoxDecoration(
       //                                         image: DecorationImage(
       //                                       image:
-      //                                           AssetImage('assets/logo/logo.png'),
+      //                                           AssetImage('assets/logo/logoNew.png'),
       //                                     ))),
       //                                 Container(
       //                                   width: kSmWidth * .6,
@@ -524,7 +410,7 @@ class BoutiqueView extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
                                             image:
-                                                AssetImage('assets/logo/logo.png'),
+                                                AssetImage('assets/logo/logoNew.png'),
                                           ))),
                                       Container(
                                         width: kSmWidth * .6,

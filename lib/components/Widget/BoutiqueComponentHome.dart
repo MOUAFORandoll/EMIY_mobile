@@ -1,7 +1,6 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/model/data/BoutiqueModel.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/model/data/BoutiqueModel.dart'; 
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
@@ -19,7 +18,7 @@ class BoutiqueComponentHome extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(AppLinks.BOUTIQUE +
-            '?lienBoutique=${boutique.lienBoutique.toString()}status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
+            '?lienBoutique=${boutique.lienBoutique.toString()}status_abonnement=${boutique.status_abonnement.toString()}&note=${boutique.note}&codeBoutique=${boutique.codeBoutique}&nomBoutique=${boutique.titre}&nombre_produit=${boutique.nombre_produit}&description=${boutique.description}&ville=${boutique.localisation.ville}&image=${boutique.images[boutique.images.length - 1].src}');
       },
       child: Container(
           height: kMdHeight * .30,
@@ -65,7 +64,7 @@ class BoutiqueComponentHome extends StatelessWidget {
                         width: Get.width * .5,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/logo/logo.png'),
+                          image: AssetImage('assets/logo/logoNew.png'),
                         )));
                   },
                 ),

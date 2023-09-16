@@ -1,14 +1,10 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Text/QteText.dart';
-import 'package:EMIY/components/Text/bigText.dart';
+import 'package:EMIY/components/Button/IconButtonF.dart'; 
 import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/produitController.dart';
+import 'package:EMIY/controller/cartController.dart'; 
 import 'package:EMIY/model/data/CartModel.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +19,14 @@ class ShoppingproduitComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-          height: kMdHeight * .1,
+          height: kMdHeight * .115,
           width: kMdWidth,
-          // padding: EdgeInsets.all(kMarginX),
+          padding: EdgeInsets.only(bottom: kMarginY * 2),
           margin:
               EdgeInsets.symmetric(horizontal: kMarginX, vertical: kMarginY),
           decoration: BoxDecoration(
-              color: ColorsApp.grey, borderRadius: BorderRadius.circular(8)),
+              /*  color: ColorsApp.grey, */ border:
+                  Border(bottom: BorderSide(color: ColorsApp.grey))),
           child: GetBuilder<CartController>(builder: (cart) {
             return Dismissible(
               direction: DismissDirection.endToStart,
@@ -112,14 +109,16 @@ class ShoppingproduitComponent extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                      width: kWidth * .4,
+                                      width: kWidth * .5,
                                       margin: EdgeInsets.only(
                                           top: Get.height * .005,
                                           left: kWidth * .05),
                                       child: smallText(
                                           text: cartM.name,
+                                          bolder: true,
                                           al: true,
-                                          size: 15)),
+                                          color: ColorsApp.primaryText,
+                                          size: kSmText)),
                                   Container(
                                       width: kWidth * .4,
                                       margin: EdgeInsets.only(
@@ -127,52 +126,74 @@ class ShoppingproduitComponent extends StatelessWidget {
                                           left: kWidth * .05),
                                       child: smallText(
                                           text: 'XAF ' + cartM.prix.toString(),
-                                          bolder: true,
                                           al: true,
-                                          size: 12)),
+                                          color: ColorsApp.primaryText,
+                                          size: kSmText)),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: kHeight * .035,
+                                        left: kWidth * .025),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        IconButtonF1(
+                                          icon: Icons.remove,
+                                          inconSize: 15.0,
+                                          onTap: () {
+                                            cart.updateQuantityProduit(
+                                                cartM.id, false);
+                                          },
+                                        ),
+                                        Container(
+                                            width: kSmWidth * .2,
+                                            // margin:
+                                            //     EdgeInsets.only(top: Get.height * .005),
+                                            child: smallText(
+                                                text: cartM.quantity.toString(),
+                                                color: ColorsApp.primaryText,
+                                                bolder: true,
+                                                size: 15)),
+                                        IconButtonF1(
+                                          icon: Icons.add,
+                                          inconSize: 15.0,
+                                          onTap: () {
+                                            cart.updateQuantityProduit(
+                                                cartM.id, true);
+                                            //print(
+                                            // "****************${prod.inCartItems}");
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
                             ]),
                         GetBuilder<CartController>(builder: (cart) {
                           return Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: ColorsApp.skyBlue),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButtonF(
-                                    backgroundColor: Colors.transparent,
-                                    icon: Icons.add,
-                                    inconSize: 12.0,
-                                    semanticLabel: "Ajouter",
-                                    onTap: () {
-                                      print(cartM.id);
-                                      cart.updateQuantityProduit(
-                                          cartM.id, true); // Get.back();
-                                    },
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () => cart.removeItem(cartM.id),
+                                child: Container(
+                                  margin: EdgeInsets.zero,
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: ColorsApp.orange),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                  Container(
-                                    width: kSmWidth * .2,
-                                    // margin:
-                                    //     EdgeInsets.only(top: Get.height * .005),
-                                    child: smallText(
-                                        text: cartM.quantity.toString(),
-                                        bolder: true,
-                                        size: 15),
+                                  child: Icon(
+                                    Icons.close,
+                                    color: ColorsApp.orange,
+                                    size: 12,
+                                    semanticLabel: 'Close',
                                   ),
-                                  IconButtonF(
-                                    backgroundColor: Colors.transparent,
-                                    icon: Icons.remove,
-                                    semanticLabel: "Reduire",
-                                    inconSize: 12.0,
-                                    onTap: () {
-                                      cart.updateQuantityProduit(
-                                          cartM.id, false); // Get.back();
-                                    },
-                                  ),
-                                ],
-                              ));
+                                ),
+                              ),
+                            ],
+                          ));
                         }),
                       ]),
                 ],

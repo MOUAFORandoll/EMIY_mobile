@@ -1,27 +1,23 @@
 import 'dart:io';
- 
-import 'package:EMIY/components/Widget/app_bar_custom.dart'; 
+
+import 'package:EMIY/components/Button/customBtn.dart';
+import 'package:EMIY/components/Widget/app_bar_custom.dart';
 import 'package:EMIY/components/Widget/app_input_new.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/components/Widget/app_short_add.dart'; 
+import 'package:EMIY/components/Widget/app_short_add.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/validators.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
-import 'package:flutter_mobx/flutter_mobx.dart';
-
+// ignore: must_be_immutable
 class ShortBoutiqueView extends StatelessWidget {
   ShortBoutiqueView({Key? key}) : super(key: key);
-  ScrollController _scrollController = new ScrollController();
 
   // Initial Selected Value
   // String dropdownvalue = 'Item 1';
@@ -29,14 +25,13 @@ class ShortBoutiqueView extends StatelessWidget {
   // List of items in our dropdown menu
   @override
   Widget build(BuildContext context) {
-    TextEditingController controllerField = TextEditingController();
-
     return GetBuilder<BoutiqueController>(builder: (_controller) {
-      return SingleChildScrollView(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: kMarginX),
-            child: AppBarCustom(
+      return Container(
+          margin: EdgeInsets.symmetric(horizontal: kMarginX),
+          child: SingleChildScrollView(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            AppBarCustom(
               title: 'Vos shorts',
               titleBtn: !_controller.addShoort ? 'Ajouter' : 'Retour',
               onTap: () {
@@ -129,6 +124,18 @@ class ShortBoutiqueView extends StatelessWidget {
                                       },
                                     ),
                             ),
+                            GetBuilder<BoutiqueController>(
+                                builder: (_ccontroller) => Container(
+                                      child: Text(
+                                        '${_ccontroller.listProduitSelect.length} Produits selectionnees',
+                                      ),
+                                    )),
+                            CustomBtn(
+                                color: ColorsApp.secondBlue,
+                                title: 'Selectionner Produit',
+                                onTap: () async {
+                                  selectProduit();
+                                }),
                             Container(
                               margin: EdgeInsets.only(
                                 top: kMarginY,
@@ -148,7 +155,7 @@ class ShortBoutiqueView extends StatelessWidget {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
-                                  fontFamily: 'Montserrat',
+                                  fontFamily: 'Lato',
                                 ),
                                 maxLines: 10,
                                 decoration: InputDecoration(
@@ -164,11 +171,11 @@ class ShortBoutiqueView extends StatelessWidget {
                                   ),
                                   errorStyle: TextStyle(
                                     fontSize: 8,
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Lato',
                                   ),
                                   labelStyle: TextStyle(
                                     color: ColorsApp.black,
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Lato',
                                     // fontWeight: FontWeight.w500,
                                     fontSize: 12,
                                   ),
@@ -192,13 +199,13 @@ class ShortBoutiqueView extends StatelessWidget {
 
                 // _controller.chageStateShort(!_controller.addShoort);
               },
-            )),
-        _controller.isLoadedShort == 0
-            ? AppLoading()
-            : _controller.listShortBoutique.length == 0
-                ? Center(child: Text('Aucun Produit'))
-                : SingleChildScrollView(
-                    child: ListView.builder(
+            ),
+            _controller.isLoadedShort == 0
+                ? AppLoading()
+                : _controller.listShortBoutique.length == 0
+                    ? Center(child: Text('Aucun Produit'))
+                    : SingleChildScrollView(
+                        child: /* ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: _controller.listShortBoutique.length,
@@ -208,8 +215,203 @@ class ShortBoutiqueView extends StatelessWidget {
                                   produit:
                                       _controller.listShortBoutique[index]); */
                     },
-                  ))
-      ]));
+                  ) */
+
+                            Container(
+                        margin: EdgeInsets.only(top: kMarginY),
+                        child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing: 1.0,
+                                    mainAxisSpacing: 10.0),
+                            itemCount: 40,
+                            itemBuilder: (_ctx, index) => ShortComponent()),
+                      ))
+          ])));
     });
+  }
+}
+
+selectProduit() {
+  Get.bottomSheet(
+    GetBuilder<BoutiqueController>(
+        builder: (_controller) => Container(
+            margin: EdgeInsets.only(
+              top: kMarginY * 8,
+            ),
+            decoration: BoxDecoration(
+                color: ColorsApp.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15))),
+            height: 800,
+            padding: EdgeInsets.symmetric(horizontal: kMarginX),
+            child: SingleChildScrollView(
+                child: Column(children: [
+              Container(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        child: Text('Annuler'),
+                        onPressed: () {
+                          Get.back(closeOverlays: true);
+                        },
+                      ),
+                      TextButton(
+                        child: Text('Terminer'),
+                        onPressed: () {
+                          Get.back();
+
+                          // _controller.chageState(!_controller.addProduit);
+                        },
+                      )
+                    ]),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: kMarginY),
+                child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 2.0,
+                            mainAxisSpacing: 7.0),
+                    itemCount: _controller.produitBoutiqueList.length,
+                    itemBuilder: (_ctx, index) => InkWell(
+                        onTap: () => _controller.selectProduit(
+                            _controller.produitBoutiqueList[index]),
+                        child: SelectProduitForShortComponent(
+                            selected: _controller.isSelected(
+                                _controller.produitBoutiqueList[index]),
+                            produit: _controller.produitBoutiqueList[index]))),
+              )
+            ])))),
+    isScrollControlled: true,
+    // isDismissible: true,
+  );
+
+  // _controller.chageStateShort(!_controller.addShoort);
+}
+
+class ShortComponent extends StatelessWidget {
+  const ShortComponent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: kMdHeight / 4,
+        // width: kMdWidth * 1.1,
+        alignment: Alignment.center,
+        // padding: EdgeInsets.all(kMarginX),
+        margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
+        decoration: BoxDecoration(
+            color: ColorsApp.greySecond,
+            borderRadius: BorderRadius.circular(8)),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                image: AssetImage('assets/logo/logoNew.png'),
+              ))),
+            ]));
+  }
+}
+
+class SelectProduitForShortComponent extends StatelessWidget {
+  ProduitBoutiqueModel produit;
+  bool selected;
+  SelectProduitForShortComponent(
+      {required this.produit, this.selected = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        // height: kMdHeight * 2,
+
+        // padding: EdgeInsets.all(kMarginX),
+        margin: EdgeInsets.only(right: kMarginX),
+        decoration: BoxDecoration(
+            color: ColorsApp.greySecond,
+            borderRadius: BorderRadius.circular(8)),
+        child: /* SingleChildScrollView(
+              child: */
+            Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+              Stack(
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                        color: ColorsApp.greySecond,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: CachedNetworkImage(
+                        height: kHeight * .12,
+                        // width: Get.width * .5,
+                        fit: BoxFit.cover,
+                        imageUrl: produit.images[0].src,
+                        imageBuilder: (context, imageProvider) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                      Colors.transparent, BlendMode.colorBurn)),
+                            ),
+                          );
+                        },
+                        placeholder: (context, url) {
+                          return Container(
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: ColorsApp.skyBlue,
+                            )),
+                          );
+                        },
+                        errorWidget: (context, url, error) {
+                          return CircleAvatar(
+                              backgroundColor: ColorsApp.skyBlue,
+                              radius: 50,
+                              backgroundImage:
+                                  AssetImage("assets/images/error.gif"));
+                        },
+                      )),
+                  if (selected)
+                    Positioned(
+                        top: 3,
+                        left: 5,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorsApp.red,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          height: 50,
+                          width: 50,
+                        )),
+                ],
+              ),
+              Container(
+                width: kSmWidth * .6,
+                margin: EdgeInsets.only(
+                    top: Get.height * .005, left: Get.width * .008),
+                child: Text(produit.titre,
+                    overflow: TextOverflow.ellipsis,
+                    style:
+                        TextStyle(color: ColorsApp.secondBlue, fontSize: 12)),
+              ),
+            ]));
   }
 }

@@ -20,6 +20,8 @@ class Second {
 @Entity()
 class User {
   int id = 0;
+  @Property()
+  int userId = 0;
 
   @Property()
   String nom;
@@ -40,6 +42,7 @@ class User {
   String dateCreated;
 
   User({
+    required this.userId,
     required this.nom,
     required this.prenom,
     required this.email,
@@ -49,6 +52,7 @@ class User {
   });
   Map<String, dynamic> toMap() {
     return {
+      'userId': userId,
       'nom': nom,
       'prenom': prenom,
       'email': email,
@@ -60,6 +64,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
+      userId: json['userId'],
       nom: json['nom'],
       prenom: json['prenom'],
       email: json['email'],

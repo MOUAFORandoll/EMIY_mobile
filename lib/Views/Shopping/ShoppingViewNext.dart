@@ -41,14 +41,16 @@ class ShoppingViewNext extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            child: AppTitleRight(
-                                title: 'Panier',
-                                description: 'Votre panier',
-                                icon: Assets.shoppingCart),
-                            margin: EdgeInsets.only(
-                                right:
-                                    MediaQuery.of(context).size.width * .005),
-                          ),
+                              // margin: EdgeInsets.only(left: kMarginX),
+                              child: Text(
+                            'My Shopping Bag',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: kMdText,
+                                fontFamily: 'Lato',
+                                color: ColorsApp.primaryText,
+                                fontWeight: FontWeight.w700),
+                          )),
                         ])),
               ]),
           body: CustomScrollView(controller: _scrollController, slivers: [

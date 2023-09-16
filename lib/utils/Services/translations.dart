@@ -125,7 +125,7 @@ class Transalations extends Translations {
           'account': 'Compte',
           'ctitle1': 'Bienvenu',
           'cdescription1':
-              'Besoin de matériels électroniques ? Vous avez un petit creux ? Vous êtes au bon endroit',
+              'Négociez et mettez vous a l’aise',
           'ctitle2': 'Livraison',
           'cdescription2':
               'Commandez et faites vous livrer en moins d’une heure',

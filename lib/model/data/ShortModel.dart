@@ -30,7 +30,7 @@ class ShortModel {
     required this.nbre_like,
     required this.status,
     required this.is_like,
-    required this.controller,
+    // required this.controller,
   });
 
   final int id;
@@ -47,7 +47,7 @@ class ShortModel {
   final String codeShortInit;
   bool is_like;
   final bool status;
-  final VideoPlayerController controller;
+  // late final VideoPlayerController controller;
 
   factory ShortModel.fromJson(Map<String, dynamic> json) => ShortModel(
         id: json["id"] == null ? null : json["id"],
@@ -66,9 +66,8 @@ class ShortModel {
         codeShort: ApiUrl.external_link + 'shorts/' + json["codeShort"],
         status: json["status"] == null ? null : json["status"],
         is_like: json["is_like"] == null ? null : json["is_like"],
-        controller: VideoPlayerController.network(
-            ApiUrl.stream_serveurUrl + "/short?video=" + json["src"])
-          ..initialize(),
+        // controller: VideoPlayerController.network(
+        //     ApiUrl.stream_serveurUrl + "/short?video=" + json["src"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -86,29 +85,33 @@ class ShortModel {
         "is_like": is_like == null ? null : is_like,
         "status": status == null ? null : status,
       };
+  // resetPlayer() {
+  //   controller = VideoPlayerController.network(
+  //       ApiUrl.stream_serveurUrl + "/short?video=" + src);
+  // }
 
-  loadController() async {
-    print('**************${ApiUrl.stream_serveurUrl + "/short?video=" + src}');
-    // controller = VideoPlayerController.network(
-    //     ApiUrl.stream_serveurUrl + "/short?video=" + src);
-    await controller?.initialize().then((_) {
-      print('**************lectyre');
+  // loadController() async {
+  //   print('**************${ApiUrl.stream_serveurUrl + "/short?video=" + src}');
+  //   // controller = VideoPlayerController.network(
+  //   //     ApiUrl.stream_serveurUrl + "/short?video=" + src);
+  //   await controller.initialize().then((_) {
+  //     print('**************lectyre');
 
-      // controller.play();
-    });
-    
-    VideoPlayerController.network(
-        ApiUrl.stream_serveurUrl + "/short?video=" + src)
-      ..initialize().then((_) {
-        print('**************lectyre');
+  //     // controller.play();
+  //   });
 
-        // controller.play();
-      }, onError: (error) {
-        print('**************erreeeeeeeeeeee    ------  ${error}');
-      });
+  //   VideoPlayerController.network(
+  //       ApiUrl.stream_serveurUrl + "/short?video=" + src)
+  //     ..initialize().then((_) {
+  //       print('**************lectyre');
 
-    controller?.setLooping(true);
-  }
+  //       // controller.play();
+  //     }, onError: (error) {
+  //       print('**************erreeeeeeeeeeee    ------  ${error}');
+  //     });
+
+  //   controller.setLooping(true);
+  // }
 }
 
 class BoutiqueModel0 {
@@ -133,7 +136,7 @@ class BoutiqueModel0 {
   final String lienBoutique;
   final note;
   String dateCreated;
-  List<Image> images;
+  List<ImageSecond> images;
   Localisation localisation;
 
   factory BoutiqueModel0.fromJson(Map<String, dynamic> json) => BoutiqueModel0(
@@ -147,7 +150,7 @@ class BoutiqueModel0 {
         dateCreated: json["dateCreated"],
         note: double.parse(
             (json["note"] == null ? null : json["note"]).toString()),
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        images: List<ImageSecond>.from(json["images"].map((x) => ImageSecond.fromJson(x))),
         localisation: Localisation.fromJson(json["localisation"]),
       );
 
@@ -164,8 +167,8 @@ class BoutiqueModel0 {
       };
 }
 
-class Image {
-  Image({
+class ImageSecond {
+  ImageSecond({
     required this.id,
     required this.src,
   });
@@ -173,7 +176,7 @@ class Image {
   int id;
   String src;
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory ImageSecond.fromJson(Map<String, dynamic> json) => ImageSecond(
         id: json["id"],
         src: json["src"],
       );

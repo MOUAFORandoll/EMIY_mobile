@@ -126,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                               },
                               child: Text('forgotpass'.tr,
                                   style: TextStyle(
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Lato',
                                     color: ColorsApp.black,
                                   )),
                             )
@@ -164,7 +164,7 @@ class LoginScreen extends StatelessWidget {
                       //         },
                       //         child: Text('regbtn'.tr,
                       //             style: TextStyle(
-                      //               fontFamily: 'Montserrat',
+                      //               fontFamily: 'Lato',
                       //               color: ColorsApp.black,
                       //             )),
                       //       )

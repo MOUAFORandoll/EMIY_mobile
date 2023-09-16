@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -16,8 +15,9 @@ class SimpleText extends StatelessWidget {
       text,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-          fontSize: 14,
-          color: ColorsApp.black,
+          fontSize: kSmText,
+          fontFamily: 'Lato',
+          color: ColorsApp.primaryText,
           fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
     ));
   }

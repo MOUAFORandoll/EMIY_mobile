@@ -69,7 +69,7 @@
 //     Get.lazyPut(() => TransactionController(transgeneralRepo: Get.find()),
 //         fenix: true);
 //     Get.lazyPut(() => SearchRepo(apiClient: Get.find()), fenix: true);
-//     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
+//     Get.lazyPut(() => MySearchController(searchRepo: Get.find()), fenix: true);
 //     Get.lazyPut(() => ShortRepo(apiClient: Get.find()), fenix: true);
 //     Get.lazyPut(() => ShortController(shortRepo: Get.find()), fenix: true);
 
@@ -167,8 +167,8 @@
 //     Get.find<TransactionController>().getTransactions();
 
 //     Get.lazyPut(() => SearchRepo(apiClient: Get.find()), fenix: true);
-//     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
-//     Get.lazyPut(() => SearchController(searchRepo: Get.find()), fenix: true);
+//     Get.lazyPut(() => MySearchController(searchRepo: Get.find()), fenix: true);
+//     Get.lazyPut(() => MySearchController(searchRepo: Get.find()), fenix: true);
 //     Get.find<BoutiqueController>().getListBoutique();
 
 //     Get.find<ShortController>().getListForYouShort();

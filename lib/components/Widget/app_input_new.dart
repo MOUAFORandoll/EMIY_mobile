@@ -1,8 +1,5 @@
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/cupertino.dart';
 
 class AppInputNew extends StatefulWidget {
   final TextEditingController controller;
@@ -46,7 +43,7 @@ class _AppInputNewState extends State<AppInputNew> {
         style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 14,
-          fontFamily: 'Montserrat',
+          fontFamily: 'Lato',
         ),
         onChanged: widget.onChanged,
         decoration: InputDecoration(
@@ -67,11 +64,11 @@ class _AppInputNewState extends State<AppInputNew> {
             errorText: widget.errorText,
             errorStyle: TextStyle(
               fontSize: 8,
-              fontFamily: 'Montserrat',
+              fontFamily: 'Lato',
             ),
             labelText: widget.label,
             labelStyle: TextStyle(
-              color: ColorsApp.black, fontFamily: 'Montserrat',
+              color: ColorsApp.black, fontFamily: 'Lato',
               // fontWeight: FontWeight.w500,
               fontSize: 12,
             ),

@@ -1,8 +1,6 @@
 import 'package:EMIY/Views/CategoryBoutique/CategoryView.dart';
 import 'package:EMIY/Views/Home/HomeView.dart';
 import 'package:EMIY/Views/Short/ShortView.dart';
-import 'package:EMIY/Views/Short/ShortView_save210823.dart';
-import 'package:EMIY/Views/Space/MySpace.dart';
 import 'package:EMIY/Views/Space/Negociation/ListNegociationView.dart';
 import 'package:EMIY/Views/Space/Notifications/NotificationView.dart';
 import 'package:EMIY/Views/Space/ServiceClient/ServiceClientView.dart';
@@ -11,60 +9,36 @@ import 'package:EMIY/components/Button/button.dart';
 import 'package:EMIY/components/Button/customBtn.dart';
 import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/components/Widget/SelectComponent.dart';
-import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
-import 'package:EMIY/model/data/CartModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/model/data/LivreurModel.dart';
 import 'package:EMIY/model/data/ModePaiementModel.dart';
-import 'package:EMIY/model/data/ProduitCategoryModel.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/model/socket/NotificationModel.dart';
 import 'package:EMIY/repository/GeneralRepo.dart';
-import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
-import 'package:EMIY/repository/LivreurRepo.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/utils/Services/NotificationService.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
-import 'package:EMIY/utils/Services/requestServices.dart';
-import 'package:EMIY/utils/Services/storageService2.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/Views/Shopping/ShoppingView.dart';
 import 'package:EMIY/Views/UsersMange/ManageView.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:EMIY/controller/cartController.dart';
-
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
-import 'package:EMIY/Views/Shopping/ShoppingView.dart';
-import 'package:EMIY/Views/UsersMange/ManageView.dart';
-import 'package:EMIY/components/Widget/optionComponent.dart';
-// import 'package:antdesign_icons/antdesign_icons.dart';
 
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
-import 'package:flutter/material.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
 class GeneralController extends GetxController {
@@ -73,6 +47,7 @@ class GeneralController extends GetxController {
   final dababase = Get.find<DataBaseController>();
 
   void onInit() async {
+    super.onInit();
     // TODO: implement initState
     // dababase = await DataBaseController.getInstance();
     // ;
@@ -104,6 +79,59 @@ class GeneralController extends GetxController {
   selectMode(mode) {
     _selected = mode;
     update();
+  }
+
+  updateBoutiqueAll(codeBoutique) {
+    int index = Get.find<BoutiqueController>()
+        .listAbonnememtUser
+        .indexWhere((boutique) => boutique.codeBoutique == codeBoutique);
+    print('-${index}');
+    if (index > 0) {
+      Get.find<BoutiqueController>()
+              .listAbonnememtUser[index]
+              .status_abonnement =
+          !Get.find<BoutiqueController>()
+              .listAbonnememtUser[index]
+              .status_abonnement;
+      update();
+    }
+
+    int index0 = Get.find<CategoryBoutiqueController>()
+        .ListBoutiqueF
+        .indexWhere((boutique) => boutique.codeBoutique == codeBoutique);
+    print('-${index}');
+    if (index0 > 0) {
+      Get.find<CategoryBoutiqueController>()
+              .ListBoutiqueF[index0]
+              .status_abonnement =
+          !Get.find<CategoryBoutiqueController>()
+              .ListBoutiqueF[index0]
+              .status_abonnement;
+      update();
+    }
+
+    int index1 = Get.find<CategoryBoutiqueController>()
+        .ListBoutique
+        .indexWhere((boutique) => boutique.codeBoutique == codeBoutique);
+    if (index1 > 0) {
+      Get.find<CategoryBoutiqueController>()
+              .ListBoutique[index1]
+              .status_abonnement =
+          !Get.find<CategoryBoutiqueController>()
+              .ListBoutique[index1]
+              .status_abonnement;
+      update();
+    }
+    if (Get.find<LinkController>().boutique != null) {
+      var exist =
+          Get.find<LinkController>().boutique.codeBoutique == codeBoutique;
+      print('-${index}');
+      if (exist) {
+        Get.find<LinkController>().boutique.status_abonnement =
+            !Get.find<LinkController>().boutique.status_abonnement!;
+        update();
+      }
+    }
   }
 
   getListModePaiement() async {
@@ -734,19 +762,19 @@ class GeneralController extends GetxController {
         Get.find<ManagerController>().setContain(0);
         update();
         if (index != 2) {
-          Get.find<ShortController>().disposePLayer();
+          // Get.find<ShortController>().disposePLayer();
           Get.find<ShortController>().setIntoShortView(false);
         }
         if (index == 2) {
           Get.find<ShortController>().setIntoShortView(true);
 
-          if (Get.find<ShortController>().controller != null) {
-            if (Get.find<ShortController>().controller!.value.isPlaying) {
-              Get.find<ShortController>().controller!.pause();
-            } else {
-              Get.find<ShortController>().controller!.play();
-            }
-          }
+          // if (Get.find<ShortController>().controller != null) {
+          //   if (Get.find<ShortController>().controller!.value.isPlaying) {
+          //     Get.find<ShortController>().controller!.pause();
+          //   } else {
+          //     Get.find<ShortController>().controller!.play();
+          //   }
+          // }
         }
 
         if (index == 0) {

@@ -1,9 +1,7 @@
-import 'package:EMIY/Views/Shopping/BuyShoopingCart.dart';
-import 'package:EMIY/controller/BuyShopController.dart';
-import 'package:EMIY/model/data/LivreurModel.dart';
+ 
+import 'package:EMIY/controller/BuyShopController.dart'; 
 import 'package:EMIY/model/data/PointLivraisonModel.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart'; 
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 

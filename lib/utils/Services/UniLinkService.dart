@@ -1,49 +1,19 @@
 import 'dart:async';
 
-import 'package:EMIY/Views/Space/Notifications/ShortNotificationView.dart';
+import 'package:EMIY/Views/Short/SingleShortView.dart';
 import 'package:EMIY/Views/UsersMange/RegisterScreen.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/NotificationService.dart';
-import 'package:EMIY/utils/Services/core.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/Services/storageService2.dart';
-import 'package:EMIY/utils/Services/translations.dart';
-import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-// import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-import 'package:uni_links/uni_links.dart' as UniLink;
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
-import 'package:flutter/material.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:uni_links/uni_links.dart';
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:uni_links/uni_links.dart';
 
 bool _initialURILinkHandled = false;
 
@@ -64,7 +34,7 @@ class UniLinkService extends GetxService {
         // but keep in mind it could be `null`.
         if (initialURI != null) {
           debugPrint("Initial URI received $initialURI");
-
+        
           _initialURI = initialURI;
         } else {
           debugPrint("Null Initial URI received");
@@ -74,7 +44,7 @@ class UniLinkService extends GetxService {
         // Handle exception by warning the user their action did not succeed
         debugPrint("Failed to receive initial uri");
       } on FormatException catch (err) {
-        debugPrint('Malformed Initial URI received');
+        debugPrint('Malformed Initial URI received  ${err}');
       }
     }
   }
@@ -124,7 +94,7 @@ class UniLinkService extends GetxService {
           var codeShort = direction[2];
 
           print('----------codeShort--------${codeShort}------');
-          Get.to(ShortNotificationView(
+          Get.to(SingleShortView(
             codeShort: codeShort,
           ));
         }
@@ -198,7 +168,7 @@ class UniLinkService extends GetxService {
       // Platform messages may fail but we ignore the exception
       print('falied to get initial uri');
     } on FormatException catch (err) {
-      print('malformed initial uri');
+      print('malformed initial uri  ${err}');
     }
   }
 }

@@ -1,37 +1,17 @@
-import 'dart:io';
-import 'package:EMIY/components/Widget/BtnManageView.dart';
-import 'package:EMIY/components/Widget/CircleImage.dart';
-import 'package:EMIY/components/Widget/app_back_button.dart';
-import 'package:EMIY/components/Widget/app_input.dart';
-import 'package:EMIY/components/Widget/app_setting_comp.dart';
+ 
+import 'package:EMIY/components/Widget/app_input.dart'; 
 import 'package:EMIY/components/Widget/app_text_divider.dart';
-import 'package:EMIY/components/Widget/app_title_right.dart';
-import 'package:EMIY/controller/CommandeController.dart';
-import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/TransactionController.dart';
-import 'package:EMIY/controller/boutiqueController.dart';
-import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/Services/validators.dart';
-import 'package:EMIY/utils/constants/assets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import "package:flutter/material.dart";
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:EMIY/components/Widget/infoComponent.dart';
-// import 'package:EMIY/components/informationComponent.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:shimmer/shimmer.dart';
 
+import 'package:EMIY/components/Button/customBtn.dart'; 
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/utils/Services/validators.dart'; 
+import "package:flutter/material.dart"; 
+import 'package:get/get.dart'; 
+// import 'package:EMIY/components/informationComponent.dart';
+import 'package:EMIY/styles/colorApp.dart'; 
 // ignore: must_be_immutable
-class UserManageView extends StatelessWidget {
-  ScrollController _scrollController = new ScrollController();
+class UserManageView extends StatelessWidget { 
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +23,17 @@ class UserManageView extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                  Container(
-                    child: Text('Solde '),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Text('Solde '),
+                      ),
+                      Container(
+                          child: InkWell(
+                              child: Icon(Icons.location_searching_outlined),
+                              onTap: () => _manager.deconnectUser())),
+                    ],
                   ),
                   Container(
                     child: Text(
@@ -53,7 +42,6 @@ class UserManageView extends StatelessWidget {
                       textAlign: TextAlign.end,
                     ),
                   ),
-                  
                   AppTextDivider(
                     texte: 'Informations personnels  ',
                   ),

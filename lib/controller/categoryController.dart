@@ -1,9 +1,4 @@
-import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/model/data/ProduitCategoryModel.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
-import 'package:EMIY/repository/categoryRepo.dart';
-import 'package:EMIY/utils/Services/requestServices.dart';
-import 'package:get/get.dart';
+ 
 
 // class CategoryController extends GetxController {
 //   final CategoryRepo categoryRepo;

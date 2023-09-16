@@ -25,7 +25,7 @@
 // import 'package:EMIY/utils/Services/routing.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:rating_bar/rating_bar.dart';
+// 
 // import 'package:share_plus/share_plus.dart';
 
 // class ProduitView extends StatelessWidget {
@@ -50,7 +50,7 @@
 //         : Get.parameters['type'] == 'supplementaire'
 //             ? Get.find<ProduitController>().produitSupplementaire[index]
 //             : Get.parameters['type'] == 'search'
-//                 ? Get.find<SearchController>().listProduit[index]
+//                 ? Get.find<MySearchController>().listProduit[index]
 //                 /*  : Get.parameters['type'] == '1'
 //                 ? Get.find<ProduitController>().produitListAll[index]
 //                 */

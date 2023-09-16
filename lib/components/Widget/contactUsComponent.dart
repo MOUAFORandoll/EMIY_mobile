@@ -1,4 +1,4 @@
-import 'package:EMIY/utils/functions/viewFunctions.dart';
+ 
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 

@@ -7,36 +7,11 @@ import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/UniLinkService.dart';
-import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/constants/apiRoute.dart';
-import 'package:EMIY/utils/constants/assets.dart';
-import 'package:EMIY/controller/DataBaseController.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
-import 'package:EMIY/Views/Home/HomeView.dart';
-import 'package:EMIY/Views/Shopping/ShoppingView.dart';
-import 'package:EMIY/Views/UsersMange/ManageView.dart';
-import 'package:EMIY/components/Widget/optionComponent.dart';
-// import 'package:antdesign_icons/antdesign_icons.dart';
+//
 
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
 import 'package:flutter/material.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:uni_links/uni_links.dart';
-
-import 'CategoryBoutique/CategoryView.dart';
-import 'UsersMange/LoginScreen.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -55,7 +30,7 @@ class _FirstScreenState extends State<FirstScreen> {
     super.initState();
     Get.find<UniLinkService>().initURIHandler();
     Get.find<UniLinkService>().incomingLinkHandler();
-    // Get.find<UniLinkService>().uniLink();
+    Get.find<UniLinkService>().uniLink();
   }
 
   // iniit() async {

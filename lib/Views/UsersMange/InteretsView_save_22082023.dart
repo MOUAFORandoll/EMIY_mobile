@@ -56,14 +56,14 @@ class InteretsView extends StatelessWidget {
                               Container(
                                   child: Text('Interets',
                                       style: TextStyle(
-                                          fontFamily: 'Montserrat',
+                                          fontFamily: 'Lato',
                                           color: ColorsApp.black,
                                           fontWeight: FontWeight.w700,
                                           fontSize: 16))),
                               // Container(
                               //     child: Text('Vous avez 5 notifications',
                               //         style: TextStyle(
-                              //             fontFamily: 'Montserrat',
+                              //             fontFamily: 'Lato',
                               //             color: ColorsApp.greyFirst,
                               //             fontWeight: FontWeight.w500,
                               //             fontSize: 12))),
@@ -127,7 +127,7 @@ class InteretsView extends StatelessWidget {
                                                             .categoryList[index]
                                                             .libelle,
                                                         style: TextStyle(
-                                                          // fontFamily: 'Montserrat',
+                                                          // fontFamily: 'Lato',
                                                           fontSize: 12,
                                                           color: produit.select(
                                                             categorys

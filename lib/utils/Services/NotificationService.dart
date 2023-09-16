@@ -1,15 +1,25 @@
-import 'dart:io';
-import 'dart:ui';
+import 'dart:async'; 
 
 import 'package:EMIY/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:rxdart/subjects.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
-
+import 'package:rxdart/subjects.dart'; 
 import '../../model/socket/NotificationModel.dart';
 import 'routing.dart';
+
+class ReceivedNotification {
+  ReceivedNotification({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.payload,
+  });
+
+  final int id;
+  final String? title;
+  final String? body;
+  final String? payload;
+}
 
 class NotificationService {
   NotificationService();
@@ -20,15 +30,33 @@ class NotificationService {
   Future<void> initializePlatformNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('launcher_icon');
-
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
+    final StreamController<ReceivedNotification>
+        didReceiveLocalNotificationStream =
+        StreamController<ReceivedNotification>.broadcast();
+    // final IOSInitializationSettings initializationSettingsIOS =
+    //     IOSInitializationSettings(
+    //         requestSoundPermission: true,
+    //         requestBadgePermission: true,
+    //         requestAlertPermission: true,
+    //         onDidReceiveLocalNotification:
+    //             (int? id, String? title, String? body, String? payload) async {
+    //           print('............');
+    //         });
+    DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
             requestSoundPermission: true,
             requestBadgePermission: true,
             requestAlertPermission: true,
             onDidReceiveLocalNotification:
-                (int? id, String? title, String? body, String? payload) async {
-              print('............');
+                (int id, String? title, String? body, String? payload) async {
+              didReceiveLocalNotificationStream.add(
+                ReceivedNotification(
+                  id: id,
+                  title: title,
+                  body: body,
+                  payload: payload,
+                ),
+              );
             });
 
     final InitializationSettings initializationSettings =
@@ -38,7 +66,10 @@ class NotificationService {
     );
 
     await _localNotifications.initialize(initializationSettings,
-        onSelectNotification: (String? payload) async {
+        onDidReceiveNotificationResponse:
+            (NotificationResponse notificationResponse) async {
+      final String? payload = notificationResponse.payload;
+
       print('p----------------------ayload');
       if (payload != null) {
         // Gérer l'action selon la valeur du payload
@@ -56,7 +87,7 @@ class NotificationService {
         AndroidNotificationDetails(
       'emiy_general_1', // Channel ID
       'emiy Negociation', // Channel name
-      'Information Negociation', // Channel description
+      channelDescription: 'Information Negociation', // Channel description
       importance: Importance.max,
       priority: Priority.high,
       // autoCancel: false,
@@ -73,8 +104,8 @@ class NotificationService {
       largeIcon: DrawableResourceAndroidBitmap(
           'launcher_icon'), // Replace with the name of your custom large icon file
     );
-    const IOSNotificationDetails iOSPlatformChannelSpecifics =
-        IOSNotificationDetails();
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
+        DarwinNotificationDetails(threadIdentifier: 'thread_id');
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,
@@ -94,7 +125,7 @@ class NotificationService {
         AndroidNotificationDetails(
       'emiy_general_1', // Channel ID
       'emiy Service client', // Channel name
-      'Information Service client', // Channel description
+      channelDescription: 'Information Service client', // Channel description
       importance: Importance.max,
       priority: Priority.high,
       // autoCancel: false,
@@ -111,8 +142,8 @@ class NotificationService {
       largeIcon: DrawableResourceAndroidBitmap(
           'launcher_icon'), // Replace with the name of your custom large icon file
     );
-    const IOSNotificationDetails iOSPlatformChannelSpecifics =
-        IOSNotificationDetails();
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
+        DarwinNotificationDetails(threadIdentifier: 'thread_id');
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,
@@ -132,7 +163,7 @@ class NotificationService {
         AndroidNotificationDetails(
       'emiy_general_1', // Channel ID
       'emiy general', // Channel name
-      'Information general', // Channel description
+      channelDescription: 'Information general', // Channel description
       importance: Importance.max,
       priority: Priority.high,
       autoCancel: false,
@@ -148,8 +179,8 @@ class NotificationService {
       largeIcon: DrawableResourceAndroidBitmap(
           'launcher_icon'), // Replace with the name of your custom large icon file
     );
-    const IOSNotificationDetails iOSPlatformChannelSpecifics =
-        IOSNotificationDetails();
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
+        DarwinNotificationDetails(threadIdentifier: 'thread_id');
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,
@@ -169,7 +200,7 @@ class NotificationService {
         AndroidNotificationDetails(
       'emiy_general_1', // Channel ID
       'emiy general', // Channel name
-      'Notifications', // Channel description
+      channelDescription: 'Notifications', // Channel description
       importance: Importance.max,
       priority: Priority.high,
       autoCancel: false,
@@ -185,8 +216,8 @@ class NotificationService {
       largeIcon: DrawableResourceAndroidBitmap(
           'launcher_icon'), // Replace with the name of your custom large icon file
     );
-    const IOSNotificationDetails iOSPlatformChannelSpecifics =
-        IOSNotificationDetails();
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
+        DarwinNotificationDetails(threadIdentifier: 'thread_id');
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,

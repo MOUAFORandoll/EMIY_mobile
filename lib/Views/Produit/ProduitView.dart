@@ -3,7 +3,7 @@ import 'package:EMIY/components/Button/app_button.dart';
 import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/produitComponentAll.dart';
 import 'package:EMIY/controller/GeneralController.dart';
-import 'package:EMIY/controller/searchController.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/styles/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -27,7 +27,7 @@ import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rating_bar/rating_bar.dart';
+
 import 'package:share_plus/share_plus.dart';
 
 class ProduitView extends StatelessWidget {
@@ -52,7 +52,7 @@ class ProduitView extends StatelessWidget {
         : Get.parameters['type'] == 'supplementaire'
             ? Get.find<ProduitController>().produitSupplementaire[index]
             : Get.parameters['type'] == 'search'
-                ? Get.find<SearchController>().listProduit[index]
+                ? Get.find<MySearchController>().listProduit[index]
                 /*  : Get.parameters['type'] == '1'
                 ? Get.find<ProduitController>().produitListAll[index]
                 */

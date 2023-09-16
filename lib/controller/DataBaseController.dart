@@ -419,23 +419,13 @@ class DataBaseController extends GetxController {
   }
 }
  */
-
-import 'dart:io';
+ 
 import 'dart:async';
-
-import 'package:EMIY/controller/GeneralController.dart';
-import 'package:EMIY/controller/GeneralController.dart';
-import 'package:EMIY/controller/entity.dart';
-import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/entity.dart';
-import 'package:EMIY/model/data/UserModel.dart';
-import 'package:EMIY/objectbox.g.dart';
-import 'package:EMIY/utils/Services/dependancies.dart';
+ 
+import 'package:EMIY/controller/entity.dart'; 
+import 'package:EMIY/objectbox.g.dart'; 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
-import 'package:jwt_decode/jwt_decode.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:get_storage/get_storage.dart'; 
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
@@ -487,6 +477,7 @@ class DataBaseController extends GetxController {
   }
 
   saveUser(User user) async {
+    print('----------------saveeeeeee');
     store.box<User>().put(user);
     return true;
   }
@@ -495,6 +486,7 @@ class DataBaseController extends GetxController {
   User? getUser() {
     final userBox = store.box<User>();
     final users = userBox.getAll();
+    print(users.length);
     return users.isNotEmpty ? users.first : null;
   }
 
@@ -580,10 +572,13 @@ class DataBaseController extends GetxController {
 
   // Delete operation
   Future<void> deleteAll() async {
+    await Box<User>(store).removeAll();
+    await Box<KeyUser>(store).removeAll();
     final databasesPath = await getApplicationDocumentsDirectory();
     final path = join(databasesPath.path, "obx-example");
     await databaseFactory.deleteDatabase(path);
     store.close();
+
     store = await openStore(directory: path);
   }
 }

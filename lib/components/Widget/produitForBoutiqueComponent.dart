@@ -2,11 +2,7 @@
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/styles/theme.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/model/data/BoutiqueModel.dart';
-import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
-import 'package:EMIY/model/data/ProduitCategoryModel.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:cached_network_image/cached_network_image.dart'; 
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
@@ -60,7 +56,7 @@ class ProduitForBoutiqueComponent extends StatelessWidget {
                         height: kHeight / 4,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/logo/logo.png'),
+                          image: AssetImage('assets/logo/logoNew.png'),
                         )));
                   },
                 ),

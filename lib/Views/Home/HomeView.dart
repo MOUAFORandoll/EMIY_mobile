@@ -1,7 +1,4 @@
-import 'package:EMIY/components/Form/home_search_field.dart';
-import 'package:EMIY/components/Form/search_field.dart';
 import 'package:EMIY/components/Widget/BoutiqueCircleComponent.dart';
-import 'package:EMIY/components/Widget/BoutiqueComponentHomeN.dart';
 import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/icon_svg.dart';
@@ -11,26 +8,17 @@ import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Widget/produitComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/components/Text/titleText.dart';
 import 'package:EMIY/components/Widget/produitComponentAll.dart';
 import 'package:EMIY/controller/categoryBoutiqueController.dart';
-import 'package:EMIY/controller/categoryController.dart';
 import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
-import 'package:EMIY/utils/functions/viewFunctions.dart';
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../components/Button/app_button.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key? key}) : super(key: key);
@@ -46,6 +34,81 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
     WidgetsBinding.instance.addObserver(this);
     _scrollController = ScrollController()..addListener(handleScrolling);
+    _getImages();
+  }
+
+  List<Widget> images = [];
+
+  void _getImages() async {
+    // Récupère une liste d'URL d'images au hasard
+
+    final imagesData = [
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    ];
+
+    // Itère sur la liste d'URL et charge les images
+    for (int i = 0; i < imagesData.length; i++) {
+      var imageData = imagesData[i];
+      var p = (i % 2 == 1); // Check if i is odd (equivalent to p == 1)
+      final image = CachedNetworkImage(
+        // height: p ? 400.0 : 200.0,
+        width: Get.width * .5,
+        imageUrl: imageData,
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            height: p ? 300.0 : 200.0,
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(
+                      Colors.transparent, BlendMode.colorBurn)),
+            ),
+          );
+        },
+        placeholder: (context, url) {
+          return Container(
+            child: Center(
+                child: CircularProgressIndicator(
+              color: ColorsApp.skyBlue,
+            )),
+          );
+        },
+        errorWidget: (context, url, error) {
+          return CircleAvatar(
+              backgroundColor: ColorsApp.skyBlue,
+              radius: 50,
+              backgroundImage: AssetImage("assets/images/error.gif"));
+        },
+      );
+      images.add(image);
+    }
+
+    // Met à jour l'état de la liste d'images
+    setState(() {});
   }
 
   void handleScrolling() {
@@ -63,7 +126,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
     print("state*************************");
     print(AppLifecycleState.resumed);
     if (state == AppLifecycleState.paused) {
-      Get.find<ShortController>().disposePLayer();
+      Get.find<ShortController>().pausePlay();
       // Perform actions when the app is resumed
     }
     // You can also handle other lifecycle states if needed
@@ -77,8 +140,6 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controllerField = TextEditingController();
-
     return GetBuilder<GeneralController>(
         builder:
             (generalController) =>
@@ -175,8 +236,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                           builder: (categorys) {
                                     return generalController.isLoadedHome == 0
                                         ? Shimmer.fromColors(
-                                            baseColor: Colors.blueGrey,
-                                            highlightColor: Colors.greenAccent,
+                                            baseColor: ColorsApp.grey,
+                                            highlightColor: Colors.blueGrey,
                                             child: Container(
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: kMarginX),
@@ -187,8 +248,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    titleText(
-                                                        text: 'Categorie'),
+                                                    // titleText(
+                                                    //     text: 'Categorie'),
                                                     Container(
                                                       height: kSmHeight,
                                                       margin:
@@ -256,29 +317,29 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                                     ])),
                                                       ),
                                                     ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        titleText(
-                                                            text:
-                                                                'Boutique Populaire(s)'),
-                                                        Container(
-                                                            margin: EdgeInsets.only(
-                                                                top:
-                                                                    Get.height *
-                                                                        .005,
-                                                                left:
-                                                                    Get.width *
-                                                                        .008),
-                                                            child: Icon(
-                                                              Icons
-                                                                  .arrow_forward_ios_outlined,
-                                                              // color: Colors.white,
-                                                            )),
-                                                      ],
-                                                    ),
+                                                    // Row(
+                                                    //   mainAxisAlignment:
+                                                    //       MainAxisAlignment
+                                                    //           .spaceBetween,
+                                                    //   children: [
+                                                    //     titleText(
+                                                    //         text:
+                                                    //             'Boutique Populaire(s)'),
+                                                    //     Container(
+                                                    //         margin: EdgeInsets.only(
+                                                    //             top:
+                                                    //                 Get.height *
+                                                    //                     .005,
+                                                    //             left:
+                                                    //                 Get.width *
+                                                    //                     .008),
+                                                    //         child: Icon(
+                                                    //           Icons
+                                                    //               .arrow_forward_ios_outlined,
+                                                    //           // color: Colors.white,
+                                                    //         )),
+                                                    //   ],
+                                                    // ),
                                                     Container(
                                                         height: kMdHeight * .25,
                                                         margin: EdgeInsets
@@ -368,28 +429,28 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                                         ),
                                                                       ])),
                                                         )),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        titleText(
-                                                            text:
-                                                                'Best Selling'),
-                                                        Container(
-                                                            margin: EdgeInsets.only(
-                                                                top:
-                                                                    Get.height *
-                                                                        .005,
-                                                                left:
-                                                                    Get.width *
-                                                                        .008),
-                                                            child: Icon(
-                                                              Icons
-                                                                  .arrow_forward_ios_outlined,
-                                                            )),
-                                                      ],
-                                                    ),
+                                                    // Row(
+                                                    //   mainAxisAlignment:
+                                                    //       MainAxisAlignment
+                                                    //           .spaceBetween,
+                                                    //   children: [
+                                                    //     titleText(
+                                                    //         text:
+                                                    //             'Best Selling'),
+                                                    //     Container(
+                                                    //         margin: EdgeInsets.only(
+                                                    //             top:
+                                                    //                 Get.height *
+                                                    //                     .005,
+                                                    //             left:
+                                                    //                 Get.width *
+                                                    //                     .008),
+                                                    //         child: Icon(
+                                                    //           Icons
+                                                    //               .arrow_forward_ios_outlined,
+                                                    //         )),
+                                                    //   ],
+                                                    // ),
                                                     SizedBox(
                                                         height: kMdHeight,
                                                         child: Stack(
@@ -435,7 +496,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                                                   width: Get.width * .5,
                                                                                   decoration: BoxDecoration(
                                                                                       image: DecorationImage(
-                                                                                    image: AssetImage('assets/logo/logo.png'),
+                                                                                    image: AssetImage('assets/logo/logoNew.png'),
                                                                                   ))),
                                                                               Container(
                                                                                 width: kSmWidth * .6,
@@ -528,13 +589,12 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                     }),
                                                 Container(
                                                   margin: EdgeInsets.symmetric(
-                                                      vertical: kMarginY * .7),
+                                                      vertical: kMarginY * .4),
                                                   child: Text("Categories",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat',
+                                                          fontFamily: 'Lato',
                                                           fontSize: kMdText,
                                                           color: ColorsApp
                                                               .primaryText,
@@ -560,13 +620,12 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                 ),
                                                 Container(
                                                   margin: EdgeInsets.symmetric(
-                                                      vertical: kMarginY * .7),
+                                                      vertical: kMarginY * .4),
                                                   child: Text("Boutiques",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat',
+                                                          fontFamily: 'Lato',
                                                           fontSize: kMdText,
                                                           color: ColorsApp
                                                               .primaryText,
@@ -574,7 +633,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                               FontWeight.w600)),
                                                 ),
                                                 Container(
-                                                  height: kHeight / 5,
+                                                  height: kHeight / 6.5,
                                                   // margin: EdgeInsets.symmetric(
                                                   //     vertical: kMarginY),
                                                   child: ListView.builder(
@@ -585,10 +644,10 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                     itemBuilder:
                                                         (_ctx, index) =>
                                                             Container(
-                                                      width: kWidth / 3.5,
-                                                      height: kWidth / 3,
+                                                      width: kWidth / 4,
+                                                      // height: kWidth / 3,
                                                       margin: EdgeInsets.only(
-                                                          right: kMarginX),
+                                                          right: kMarginX / 2),
                                                       child: BoutiqueCircleComponent(
                                                           boutique: categorys
                                                                   .ListBoutiqueF[
@@ -637,20 +696,21 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                               .spaceBetween,
                                                       children: [
                                                         Container(
-                                                            child: Text("Populaire",
+                                                            child: Text(
+                                                                "Populaire",
                                                                 overflow:
                                                                     TextOverflow
                                                                         .ellipsis,
                                                                 style: TextStyle(
                                                                     fontFamily:
-                                                                        'Montserrat',
+                                                                        'Lato',
                                                                     fontSize:
                                                                         kMdText,
                                                                     color: ColorsApp
                                                                         .primaryText,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w600))),
+                                                                            .w700))),
                                                         Container(
                                                             child: Row(
                                                                 mainAxisAlignment:
@@ -738,6 +798,18 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                         .length, // Nombre total de cellules dans la grille
                                   ),
                                 ),
+                                //    SliverToBoxAdapter(
+                                //     child: SingleChildScrollView(
+                                //   child: StaggeredGrid.count(
+                                //     crossAxisCount: 2,
+                                //     children:
+                                //         images, // Configurez les hauteurs des tuiles
+                                //     mainAxisSpacing:
+                                //         4.0, // Espace vertical entre les tuiles
+                                //     crossAxisSpacing:
+                                //         4.0, // Espace horizontal entre les tuiles
+                                //   ),
+                                // )),
                                 SliverToBoxAdapter(
                                     child: prods.loaddata == true
                                         ? ShimmerProduit() /*   Container(

@@ -26,7 +26,7 @@ class ReplyCard extends StatelessWidget {
                 CircleAvatar(
                     // backgroundColor: ColorsApp.skyBlue,
                     radius: 10,
-                    backgroundImage: AssetImage("assets/logo/logo.png")),
+                    backgroundImage: AssetImage("assets/logo/logoNew.png")),
               ])),
           Container(
             margin: EdgeInsets.only(
@@ -69,7 +69,7 @@ class ReplyCard extends StatelessWidget {
                               child: Text(message,
                                   softWrap: true,
                                   style: TextStyle(
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Lato',
                                     fontSize: 16,
                                     overflow: TextOverflow.fade,
                                     color: ColorsApp.secondBlue,

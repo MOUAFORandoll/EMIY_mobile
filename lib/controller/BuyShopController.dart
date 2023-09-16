@@ -1,35 +1,25 @@
-import 'dart:convert';
+ 
 import 'dart:io';
-
-import 'package:EMIY/Views/Shopping/PaiementView.dart';
+ 
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/model/data/CartModel.dart';
-import 'package:EMIY/model/data/PointLivraisonModel.dart';
-import 'package:EMIY/model/data/LivreurModel.dart';
-import 'package:EMIY/model/data/ProduitCategoryModel.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
+import 'package:EMIY/controller/managerController.dart'; 
+import 'package:EMIY/model/data/PointLivraisonModel.dart'; 
 import 'package:EMIY/model/socket/SocketCommandModel.dart';
 import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
-import 'package:EMIY/repository/LivreurRepo.dart';
-import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/repository/LivreurRepo.dart'; 
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:dio/dio.dart' hide Response;
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
-import 'dart:async';
+import 'package:flutter/material.dart'; 
+import 'package:get/get.dart'; 
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
-import '../Views/Shopping/PaiementBuyCarteView.dart';
+ 
 
 class BuyShopController extends GetxController {
   final BuyShoopingCartRepo buySoppingCartRepo;

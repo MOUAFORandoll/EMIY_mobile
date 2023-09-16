@@ -6,15 +6,13 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/core.dart';
 import 'package:EMIY/utils/constants/assets.dart';
-import 'package:connectivity/connectivity.dart';
-import 'package:cron/cron.dart';
+import 'package:connectivity/connectivity.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:get_storage/get_storage.dart'; 
 import 'package:shimmer/shimmer.dart';
 
 class ViewFunctions {
@@ -95,7 +93,6 @@ class ViewFunctions {
   isConnected() async {
     final dababase = Get.find<DataBaseController>();
 
-   
     var key = await dababase.getKey();
     if (key == null || key == 'null') {
       Get.bottomSheet(
@@ -167,10 +164,10 @@ class ViewFunctions {
               vertical: kHeight * .43, horizontal: kWidth * .40),
           child: Container(
             child: Shimmer.fromColors(
-                baseColor: ColorsApp.secondBlue,
-                highlightColor: ColorsApp.grey,
+                baseColor: ColorsApp.grey,
+                highlightColor: Colors.blueGrey,
                 child: SvgPicture.asset(
-                  Assets.logoSvg,
+                  Assets.logo_esq,
                   height: 20,
                   width: 20,
                   fit: BoxFit.cover,
@@ -268,16 +265,7 @@ class ViewFunctions {
   }
   /*
    leftBarIndicatorColor,   Gradient? backgroundGradient, TextButton? mainButton, void Function(GetSnackBar)? onTap, bool? isDismissible, bool? showProgressIndicator, DismissDirection? dismissDirection, AnimationController? progressIndicatorController, Color? progressIndicatorBackgroundColor, Animation<Color>? progressIndicatorValueColor, SnackStyle? snackStyle, Curve? forwardAnimationCurve, Curve? reverseAnimationCurve, Duration? animationDuration, double? barBlur, double? overlayBlur, void Function(SnackbarStatus?)? snackbarStatus, Color? overlayColor, Form? userInputForm*/
-
-  cronFunction(timer) {
-    var i = 0;
-    var cron = Cron();
-    cron.schedule(Schedule.parse('*/$timer * * * * *'), () {
-      verifiedConnection();
-      //print(i);
-      i++;
-    });
-  }
+ 
   /* 
 Future<void> _checkInternetConnection() async {
     try {
@@ -339,34 +327,34 @@ Future<void> _checkInternetConnection() async {
   bool connexion = true;
   verifiedConnection() {
     //print("debut check connexion");
-    DataConnectionChecker().onStatusChange.listen((status) async {
-      var req = await checkIsOnline();
-      switch (status) {
-        case DataConnectionStatus.connected:
-          //print("connecte $connexion");
-          if (connexion == false) {
-            // Get.back();
+    // DataConnectionChecker().onStatusChange.listen((status) async {
+    //   var req = await checkIsOnline();
+    //   switch (status) {
+    //     case DataConnectionStatus.connected:
+    //       //print("connecte $connexion");
+    //       if (connexion == false) {
+    //         // Get.back();
 
-            showToast(req);
-            initApp();
-            connexion = true;
-          } else {
-            //print(" deja connextio $connexion");
-          }
-          break;
-        case DataConnectionStatus.disconnected:
-          //print("pas de connextio $connexion");
+    //         showToast(req);
+    //         initApp();
+    //         connexion = true;
+    //       } else {
+    //         //print(" deja connextio $connexion");
+    //       }
+    //       break;
+    //     case DataConnectionStatus.disconnected:
+    //       //print("pas de connextio $connexion");
 
-          if (connexion == true) {
-            showToast(req);
-            connexion = false;
-          } else {
-            // Get.back();
-            //print("attente de connextio $connexion");
-          }
-          break;
-      }
-    });
+    //       if (connexion == true) {
+    //         showToast(req);
+    //         connexion = false;
+    //       } else {
+    //         // Get.back();
+    //         //print("attente de connextio $connexion");
+    //       }
+    //       break;
+    //   }
+    // });
 
     //   var cron = Cron();
     //   cron.schedule(Schedule.parse('*/2 * * * * *'), () async {

@@ -1,51 +1,17 @@
-import 'package:EMIY/components/Widget/SelectComponent.dart';
-import 'package:EMIY/controller/GeneralController.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:EMIY/components/Button/AppIconButton.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart';
-import 'package:EMIY/components/Button/button.dart';
-import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/formComponent2.dart';
-import 'package:EMIY/components/Form/text_field.dart';
-import 'package:EMIY/components/Form/textform.dart';
-import 'package:EMIY/components/Text/SimpleText.dart';
-import 'package:EMIY/components/Text/bigText.dart';
-import 'package:EMIY/components/Text/bigtitleText0.dart';
-import 'package:EMIY/components/Widget/TransactionComponent.dart';
-import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/TransactionController.dart';
-import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/categoryController.dart';
-import 'package:EMIY/controller/categoryBoutiqueController.dart';
-import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/controller/produitController.dart';
-import 'package:EMIY/model/data/ProduitModel.dart';
-import 'package:EMIY/repository/TransactionRepo.dart';
-import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart';
+ 
+ 
+import 'package:EMIY/components/Widget/TransactionComponent.dart'; 
+import 'package:EMIY/controller/TransactionController.dart';  
+import 'package:EMIY/styles/textStyle.dart'; 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart'; 
+import 'package:get/get.dart'; 
 
 class WalletView extends StatelessWidget {
-  WalletView({
-    Key? key,
-  }) : super(key: key);
-  ScrollController _scrollController = new ScrollController();
-  TextEditingController montant = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController password = TextEditingController();
-
-  final CarouselController _controller = CarouselController();
+  
+ 
   @override
-  Widget build(BuildContext context) {
-    var _manager = Get.find<ManagerController>();
+  Widget build(BuildContext context) { 
 
     return GetBuilder<TransactionController>(
       builder: (transControll) => transControll.isLoadedTrans == 0

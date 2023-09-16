@@ -2,6 +2,8 @@
 //
 //     final AbonnementUserModel = AbonnementUserModelFromJson(jsonString);
 
+import 'package:EMIY/model/data/ImageModel.dart';
+import 'package:EMIY/model/data/LocalisationModel.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -25,8 +27,8 @@ class AbonnementUserModel {
   bool status;
   final note;
   String dateCreated;
-  List<Image> images;
-  Localisation localisation;
+  List<ImageModel> images;
+  LocalisationModel localisation;
 
   factory AbonnementUserModel.fromJson(Map<String, dynamic> json) => AbonnementUserModel(
         codeBoutique: json["codeBoutique"],
@@ -37,8 +39,8 @@ class AbonnementUserModel {
         dateCreated: json["dateCreated"],
         note: double.parse(
             (json["note"] == null ? null : json["note"]).toString()),
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-        localisation: Localisation.fromJson(json["localisation"]),
+        images: List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))),
+        localisation: LocalisationModel.fromJson(json["localisation"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,47 +55,4 @@ class AbonnementUserModel {
         "localisation": localisation.toJson(),
       };
 }
-
-class Image {
-  Image({
-    required this.id,
-    required this.src,
-  });
-
-  int id;
-  String src;
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        id: json["id"],
-        src: json["src"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "src": src,
-      };
-}
-
-class Localisation {
-  Localisation({
-    required this.ville,
-    required this.longitude,
-    required this.latitude,
-  });
-
-  String ville;
-  double longitude;
-  double latitude;
-
-  factory Localisation.fromJson(Map<String, dynamic> json) => Localisation(
-        ville: json["ville"],
-        longitude: json["longitude"]?.toDouble(),
-        latitude: json["latitude"]?.toDouble(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "ville": ville,
-        "longitude": longitude,
-        "latitude": latitude,
-      };
-}
+  

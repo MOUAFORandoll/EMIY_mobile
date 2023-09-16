@@ -66,7 +66,7 @@ class ProduitForCommande extends StatelessWidget {
                           child: Column(
                               // mainAxisSize: MainAxisSize.min,
                               children: [
-                            QrImage(
+                            QrImageView(
                               data: _commande.commandeSelect.codeClient,
                               version: QrVersions.auto,
                               size: 200.0,

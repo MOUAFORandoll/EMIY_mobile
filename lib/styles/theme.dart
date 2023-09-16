@@ -4,43 +4,41 @@ import 'package:flutter/material.dart';
 
 class TexteStyle {
   final errorStyle = TextStyle(
-    fontFamily: 'Montserrat',
+    fontFamily: 'Lato',
     fontSize: kSmText,
     color: ColorsApp.red,
   );
 
   final primaryTextStyle = TextStyle(
-    fontFamily: 'Montserrat',
+    fontFamily: 'Lato',
     color: ColorsApp.primaryText,
     fontSize: kSmText,
   );
   final bprimaryTextStyle = TextStyle(
-      fontFamily: 'Montserrat',
+      fontFamily: 'Lato',
       color: ColorsApp.primaryText,
       fontSize: kSmText,
       fontWeight: FontWeight.w600);
   final secondaryTextStyle = TextStyle(
-    fontFamily: 'Montserrat',
+    fontFamily: 'Lato',
     color: ColorsApp.primaryText,
-    fontSize: kMdText,
+    fontSize: kSmText,
   );
   final bsecondaryTextStyle = TextStyle(
-    fontFamily: 'Montserrat',
-    color: ColorsApp.primaryText,
-    fontSize: kMdText,
-      fontWeight: FontWeight.w600
-  );
+      fontFamily: 'Lato',
+      color: ColorsApp.primaryText,
+      fontSize: kSmText,
+      fontWeight: FontWeight.w600);
   final largeTextStyle = TextStyle(
-    fontFamily: 'Montserrat',
+    fontFamily: 'Lato',
     color: ColorsApp.primaryText,
     fontSize: kLgText,
   );
   final blargeTextStyle = TextStyle(
-    fontFamily: 'Montserrat',
-    color: ColorsApp.primaryText,
-    fontSize: kLgText,
-      fontWeight: FontWeight.w600
-  );
+      fontFamily: 'Lato',
+      color: ColorsApp.primaryText,
+      fontSize: kLgText,
+      fontWeight: FontWeight.w600);
 }
 
 class ThemeStyle {
@@ -49,12 +47,9 @@ class ThemeStyle {
     primaryColor: ColorsApp.primaryText,
     brightness: Brightness.dark,
     backgroundColor: const Color(0xFF212121),
-    accentColor: Colors.white,
-    accentIconTheme: IconThemeData(color: ColorsApp.black),
     dividerColor: ColorsApp.greyTh,
     textTheme: TextTheme(
-      bodyText2:
-          TextStyle(fontFamily: 'Montserrat', color: ColorsApp.primaryText),
+      bodyText2: TextStyle(fontFamily: 'Lato', color: ColorsApp.primaryText),
     ),
   );
 
@@ -67,7 +62,6 @@ class ThemeStyle {
     primaryTextTheme: TextTheme(headline6: TexteStyle().primaryTextStyle),
 
     // Couleur du bouton pour autoriser la localisation
-    buttonColor: ColorsApp.skyBlue,
     // Couleur du bouton pour refuser la localisation
     disabledColor: ColorsApp.greySearch,
     dividerColor: Colors.white54,

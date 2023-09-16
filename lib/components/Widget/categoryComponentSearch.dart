@@ -1,5 +1,4 @@
-// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart';
-import 'package:EMIY/components/Widget/ShimmerBox.dart';
+// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart'; 
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/styles/theme.dart';
@@ -70,8 +69,8 @@ class CategoryComponentSearch extends StatelessWidget {
                   },
                   placeholder: (context, url) {
                     return Shimmer.fromColors(
-                        baseColor: Colors.blueGrey,
-                        highlightColor: Colors.greenAccent,
+                        baseColor: ColorsApp.grey,
+                        highlightColor: Colors.blueGrey,
                         child: Container(
                           height: kHeight / 8,
 
@@ -95,7 +94,7 @@ class CategoryComponentSearch extends StatelessWidget {
                                 topRight: Radius.circular(8),
                                 bottomRight: Radius.circular(8)),
                             image: DecorationImage(
-                              image: AssetImage('assets/logo/logo.png'),
+                              image: AssetImage('assets/logo/logoNew.png'),
                             )));
                   },
                 ),
