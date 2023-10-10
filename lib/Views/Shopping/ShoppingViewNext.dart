@@ -46,7 +46,7 @@ class ShoppingViewNext extends StatelessWidget {
                             'My Shopping Bag',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                fontSize: kMdText,
+                                fontSize: kBasics,
                                 fontFamily: 'Lato',
                                 color: ColorsApp.primaryText,
                                 fontWeight: FontWeight.w700),

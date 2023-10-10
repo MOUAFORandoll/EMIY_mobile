@@ -71,122 +71,125 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                     _ShortController.stateShortPage == 0
                         ? buildForYouPage(context)
                         : buildSuivisPage(context)),
-            Positioned(
-                top: 2,
-                left: kWidth / 3,
-                child: Container(
-                    height: kHeight * .05,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: 5,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    child: Text(
-                                      'Pour toi',
-                                      style: TextStyle(
-                                        fontFamily: 'Lato',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color:
-                                            _ShortController.stateShortPage == 0
-                                                ? ColorsApp.white
-                                                : ColorsApp.greyTh,
+            if (!_ShortController.comment)
+              Positioned(
+                  top: 2,
+                  left: kWidth / 3,
+                  child: Container(
+                      height: kHeight * .05,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        'Pour toi',
+                                        style: TextStyle(
+                                          fontFamily: 'Lato',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color:
+                                              _ShortController.stateShortPage ==
+                                                      0
+                                                  ? ColorsApp.white
+                                                  : ColorsApp.greyTh,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  if (_ShortController.stateShortPage == 0)
+                                    if (_ShortController.stateShortPage == 0)
+                                      Container(
+                                          height: 4,
+                                          width: 30,
+                                          margin: EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: ColorsApp.white)),
+                                  ],
+                                ),
+                              ),
+                              onTap: () {
+                                _ShortController.setStateShortPage(0);
+                              }),
+                          InkWell(
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
                                     Container(
-                                        height: 4,
-                                        width: 30,
-                                        margin: EdgeInsets.symmetric(
-                                          vertical: 2,
+                                      child: Text(
+                                        'Suivis',
+                                        style: TextStyle(
+                                          fontFamily: 'Lato',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color:
+                                              _ShortController.stateShortPage ==
+                                                      1
+                                                  ? ColorsApp.white
+                                                  : ColorsApp.greyTh,
                                         ),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: ColorsApp.white)),
-                                ],
-                              ),
-                            ),
-                            onTap: () {
-                              _ShortController.setStateShortPage(0);
-                            }),
-                        InkWell(
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: 5,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    child: Text(
-                                      'Suivis',
-                                      style: TextStyle(
-                                        fontFamily: 'Lato',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color:
-                                            _ShortController.stateShortPage == 1
-                                                ? ColorsApp.white
-                                                : ColorsApp.greyTh,
                                       ),
                                     ),
-                                  ),
-                                  if (_ShortController.stateShortPage == 1)
-                                    Container(
-                                        height: 4,
-                                        width: 30,
-                                        margin: EdgeInsets.symmetric(
-                                          vertical: 2,
-                                        ),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: ColorsApp.white)),
-                                ],
+                                    if (_ShortController.stateShortPage == 1)
+                                      Container(
+                                          height: 4,
+                                          width: 30,
+                                          margin: EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: ColorsApp.white)),
+                                  ],
+                                ),
                               ),
-                            ),
-                            onTap: () {
-                              _ShortController.setStateShortPage(1);
-                            }),
-                        // InkWell(
-                        //     child: Container(
-                        //       margin: EdgeInsets.symmetric(
-                        //         horizontal: 5,
-                        //       ),
-                        //       child: Column(
-                        //         crossAxisAlignment: CrossAxisAlignment.center,
-                        //         children: [
-                        //           Container(
-                        //             child: Text(
-                        //               /*    _ShortController.listShort.length
-                        //                   .toString() */
-                        //               _ShortController
-                        //                   .currentReadShortData.titre,
-                        //               style: TextStyle(
-                        //                 fontFamily: 'Lato',
-                        //                 fontWeight: FontWeight.bold,
-                        //                 fontSize: 15,
+                              onTap: () {
+                                _ShortController.setStateShortPage(1);
+                              }),
+                          // InkWell(
+                          //     child: Container(
+                          //       margin: EdgeInsets.symmetric(
+                          //         horizontal: 5,
+                          //       ),
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.center,
+                          //         children: [
+                          //           Container(
+                          //             child: Text(
+                          //               /*    _ShortController.listShort.length
+                          //                   .toString() */
+                          //               _ShortController
+                          //                   .currentReadShortData.titre,
+                          //               style: TextStyle(
+                          //                 fontFamily: 'Lato',
+                          //                 fontWeight: FontWeight.bold,
+                          //                 fontSize: 15,
 
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //     onTap: () {
-                        //       // _ShortController.setStateShortPage();
-                        //     }),
-                      ],
-                    ))),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //     onTap: () {
+                          //       // _ShortController.setStateShortPage();
+                          //     }),
+                        ],
+                      ))),
           ]));
     });
   }
@@ -280,12 +283,12 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                                   },
                                 )),
                             onTap: () async {
-                              Get.to(ProduitViewShort(
-                                produit: _ShortController
-                                    .listForYouShort[
-                                        _ShortController.indexForYou]
-                                    .produits[i],
-                              ));
+                              Get.to(() => ProduitViewShort(
+                                    produit: _ShortController
+                                        .listForYouShort[
+                                            _ShortController.indexForYou]
+                                        .produits[i],
+                                  ));
                             }))),
               ),
             if (_ShortController.controllerForYou != null &&
@@ -405,11 +408,12 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                                 },
                               )),
                           onTap: () async {
-                            Get.to(ProduitViewShort(
-                              produit: _ShortController
-                                  .listSuivisShort[_ShortController.indexSuivis]
-                                  .produits[i],
-                            ));
+                            Get.to(() => ProduitViewShort(
+                                  produit: _ShortController
+                                      .listSuivisShort[
+                                          _ShortController.indexSuivis]
+                                      .produits[i],
+                                ));
                           }))),
             ),
           // if (_ShortController.controllerSuivis != null &&

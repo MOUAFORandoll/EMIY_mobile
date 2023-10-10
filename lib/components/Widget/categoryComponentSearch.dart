@@ -1,4 +1,4 @@
-// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart'; 
+// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/styles/theme.dart';
@@ -20,7 +20,7 @@ class CategoryComponentSearch extends StatelessWidget {
     return InkWell(
         onTap: () {
           Get.toNamed(AppLinks.BOUTIQUE_FOR_CATEGORY +
-              '?id=${category.id}&libelle=${category.libelle}');
+              '?id=${category.id}&libelle=${category.libelle}&description=${category.description}&nombreBoutique=${category.nombreBoutique}');
         },
         child: Container(
           // height: kSmHeight,

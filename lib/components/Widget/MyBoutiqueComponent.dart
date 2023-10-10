@@ -35,7 +35,7 @@ class MyBoutiqueComponent extends StatelessWidget {
                         child: Text(
                       boutique.titre,
                       style: TextStyle(
-                        fontSize: kMdText,
+                        fontSize: kBasics,
                         fontFamily: 'Lato',
                         fontWeight: FontWeight.w500,
                         // color: ColorsApp.whitecolor,
@@ -46,7 +46,7 @@ class MyBoutiqueComponent extends StatelessWidget {
                         child: Text(
                           "20 produits",
                           style: TextStyle(
-                            fontSize: kMdText,
+                            fontSize: kBasics,
                             fontFamily: 'Lato',
                             fontWeight: FontWeight.w500,
                             // color: ColorsApp.whitecolor,

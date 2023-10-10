@@ -205,7 +205,7 @@
 //                     ),
 //                     Positioned(
 //                       top: kHeight * .5,
-//                       left: kWidth * .8,
+//                       left: kWidth ,
 //                       child: Container(
 //                         height: 200,
 //                         margin: EdgeInsets.symmetric(

@@ -130,7 +130,7 @@
     },
     {
       "id": "6:5834183656708337881",
-      "lastPropertyId": "5:7165721117595635223",
+      "lastPropertyId": "7:4060489677760590929",
       "name": "Localisation",
       "properties": [
         {
@@ -145,18 +145,18 @@
           "type": 9
         },
         {
-          "id": "3:5986609547917399797",
-          "name": "long",
-          "type": 9
-        },
-        {
-          "id": "4:9135511340752186278",
-          "name": "lat",
-          "type": 9
-        },
-        {
           "id": "5:7165721117595635223",
           "name": "ip",
+          "type": 9
+        },
+        {
+          "id": "6:6481026158616911854",
+          "name": "longitude",
+          "type": 9
+        },
+        {
+          "id": "7:4060489677760590929",
+          "name": "latitude",
           "type": 9
         }
       ],
@@ -239,7 +239,10 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    5986609547917399797,
+    9135511340752186278
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

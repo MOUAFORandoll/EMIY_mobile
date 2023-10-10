@@ -1,6 +1,6 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/model/data/BoutiqueModel.dart'; 
+import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
@@ -77,7 +77,7 @@ class BoutiqueComponentHome extends StatelessWidget {
                       width: kSmWidth * 1.25,
                       height: kMdHeight * .09,
 
-                      // width: kSmWidth * .8,
+                      // width: kSmWidth ,
                       decoration: BoxDecoration(
                           color: ColorsApp.greySecond,
                           borderRadius: BorderRadius.circular(10)),

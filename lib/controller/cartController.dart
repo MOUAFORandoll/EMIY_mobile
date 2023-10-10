@@ -1,8 +1,8 @@
 import 'package:EMIY/controller/produitController.dart';
-import 'package:EMIY/model/data/CartModel.dart'; 
-import 'package:EMIY/model/data/ProduitModel.dart'; 
+import 'package:EMIY/model/data/CartModel.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
-import 'package:EMIY/utils/functions/viewFunctions.dart'; 
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
@@ -34,8 +34,8 @@ class CartController extends GetxController {
               id: value.id,
               name: value.name,
               qtdispo: value.qtdispo,
-              index: value.index,
-              type: value.type,
+              // index: value.index,
+              // type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
               quantity: total,
@@ -46,9 +46,9 @@ class CartController extends GetxController {
           return CartModel(
               id: value.id,
               name: value.name,
-              index: value.index,
+              // index: value.index,
               qtdispo: value.qtdispo,
-              type: value.type,
+              // type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
               quantity: value.quantity,
@@ -59,9 +59,9 @@ class CartController extends GetxController {
           return CartModel(
               id: value.id,
               name: value.name,
-              index: value.index,
+              // index: value.index,
               qtdispo: value.qtdispo,
-              type: value.type,
+              // type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
               quantity: value.quantity,
@@ -154,7 +154,7 @@ class CartController extends GetxController {
     return quantity;
   }
 
-  void addItem(ProduitModel produit, int quantity, index, type) {
+  void addItem(ProduitModel produit, int quantity ) {
     //print(quantity);
     if (quantity <= produit.quantite) {
       //print('taillen');
@@ -166,8 +166,8 @@ class CartController extends GetxController {
           return CartModel(
               id: value.id,
               name: value.name,
-              index: value.index,
-              type: value.type,
+              // index: value.index,
+              // type: value.type,
               prix: double.parse(value.prix.toString()),
               img: value.img,
               qtdispo: produit.quantite,
@@ -188,8 +188,8 @@ class CartController extends GetxController {
               () => CartModel(
                   id: produit.id,
                   name: produit.titre,
-                  index: index,
-                  type: type,
+                  // index: index,
+                  // type: type,
                   prix: double.parse(produit.prix.toString()),
                   img: produit.images[0].src,
                   qtdispo: produit.quantite,

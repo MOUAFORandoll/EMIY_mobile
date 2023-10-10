@@ -359,7 +359,7 @@ class BoutiqueController extends GetxController {
         if (response.body['data'] != null &&
             response.body['data'].length != 0) {
           // print('-----------boutiqr************************');
-          // print(response.body['data']);
+          print(response.body['data']);
 
           _listBoutiques.addAll((response.body['data'] as List)
               .map((e) => BoutiqueUserModel.fromJson(e))
@@ -1189,7 +1189,7 @@ class BoutiqueController extends GetxController {
         };
         print(data);
         Response response = await boutiqueRepo.abonnementAdd(data);
-        print(response.body);
+        print(response.statusCode == 200);
 
         if (response.statusCode == 200) {
           await getListAbonnementForUser();

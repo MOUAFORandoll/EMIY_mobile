@@ -1,102 +1,101 @@
-// import 'package:EMIY/components/Button/IconButtonF.dart';
-// import 'package:EMIY/components/Button/btnCatList.dart';
-// import 'package:EMIY/components/Button/btnCatListPV.dart';
-// import 'package:EMIY/components/Button/button.dart';
-// import 'package:EMIY/components/Form/formComponent2.dart';
-// import 'package:EMIY/components/Text/bigText.dart';
-// import 'package:EMIY/components/Text/bigtitleText0.dart';
-// import 'package:EMIY/components/Widget/BoutiqueComponent.dart';
-// import 'package:EMIY/components/Widget/app_empty.dart';
-// import 'package:EMIY/components/Widget/app_loading.dart';
-// import 'package:EMIY/components/Widget/categoryComponent.dart';
-// import 'package:EMIY/components/Widget/produitComponent.dart';
-// import 'package:EMIY/components/Text/smallText.dart';
-// import 'package:EMIY/components/Text/titleText.dart';
-// import 'package:EMIY/components/Widget/produitComponentAll.dart';
-// import 'package:EMIY/components/Widget/produitForCatComponent.dart';
-// import 'package:EMIY/controller/boutiqueController.dart';
-// import 'package:EMIY/controller/categoryController.dart';
-// import 'package:EMIY/controller/categoryBoutiqueController.dart';
-// import 'package:EMIY/controller/produitController.dart';
-// import 'package:EMIY/styles/colorApp.dart';
-// import 'package:EMIY/styles/textStyle.dart';
-// import 'package:EMIY/utils/functions/viewFunctions.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-// import 'package:get/get.dart';
-// import 'package:shimmer/shimmer.dart';
+import 'package:EMIY/components/Button/IconButtonF.dart';
+import 'package:EMIY/components/Button/btnCatList.dart';
+import 'package:EMIY/components/Button/btnCatListPV.dart';
+import 'package:EMIY/components/Button/button.dart';
+import 'package:EMIY/components/Form/formComponent2.dart';
+import 'package:EMIY/components/Text/bigText.dart';
+import 'package:EMIY/components/Text/bigtitleText0.dart';
+import 'package:EMIY/components/Widget/BoutiqueComponent.dart';
+import 'package:EMIY/components/Widget/ShimmerProduit.dart';
+import 'package:EMIY/components/Widget/app_empty.dart';
+import 'package:EMIY/components/Widget/app_loading.dart';
+import 'package:EMIY/components/Widget/categoryComponent.dart';
+import 'package:EMIY/components/Widget/produitComponent.dart';
+import 'package:EMIY/components/Text/smallText.dart';
+import 'package:EMIY/components/Text/titleText.dart';
+import 'package:EMIY/components/Widget/produitComponentAll.dart';
+import 'package:EMIY/components/Widget/produitForCatComponent.dart';
+import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/controller/categoryController.dart';
+import 'package:EMIY/controller/categoryBoutiqueController.dart';
+import 'package:EMIY/controller/produitController.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
-// class ListProduitsView0 extends StatelessWidget {
-//   ListProduitsView0({Key? key}) : super(key: key);
-//   ScrollController _scrollController = new ScrollController();
-//   @override
-//   Widget build(BuildContext context) {
-//     //print(Get.parameters);
-//     Get.find<ProduitController>().getProduitAll();
+class ListProduitsView extends StatelessWidget {
+  ListProduitsView({Key? key}) : super(key: key);
+  ScrollController _scrollController = new ScrollController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: InkWell(
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: ColorsApp.black,
+            ),
+            onTap: () {
+              Get.back();
+            },
+          ),
+          title: BigtitleText0(text: 'Liste des produits', bolder: true),
+        ),
+        body: GetBuilder<ProduitController>(builder: (prods) {
+          return RefreshIndicator(
+            color: ColorsApp.skyBlue,
+            onRefresh: () async {
+              //  prods .getListProduitBuyHomeSelect(homeComponentModel.type);
+            },
+            child: prods.isLoadedFromHome == 0
+                ? ShimmerProduit()
+                : SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 5.0,
+                      childAspectRatio: kMarginX / 12,
+                      mainAxisSpacing: 10.0,
+                    ),
+                    // itemCount: prods.produitList.length,
+                    // itemBuilder: (_ctx, index) =>
+                    //     ProduitComponentAll(
+                    //       key: ValueKey<int>(prods
+                    //           .produitList[index].id),
+                    //       produit:
+                    //           prods.produitList[index],
+                    //       index: index,
+                    //     )),
+                    // gridDelegate:
+                    //     SliverGridDelegateWithMaxCrossAxisExtent(
+                    //   maxCrossAxisExtent:
+                    //       200.0, // Largeur maximale de chaque cellule
+                    //   mainAxisSpacing:
+                    //       10.0, // Espace vertical entre les cellules
+                    //   crossAxisSpacing:
+                    //       10.0, // Espace horizontal entre les cellules
+                    //   childAspectRatio:
+                    //       1.0, // Ratio largeur/hauteur des cellules
+                    // ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) => ProduitComponentAll(
+                        key: ValueKey<int>(prods.produitListFromHome [index].id),
+                        produit: prods.produitListFromHome [index],
+                        index: index,
+                      ),
 
-//     return Scaffold(
-//         appBar: AppBar(
-//           backgroundColor: Colors.transparent,
-//           elevation: 0,
-//           leading: InkWell(
-//             child: Icon(
-//               Icons.arrow_back_ios,
-//               color: ColorsApp.black,
-//             ),
-//             onTap: () {
-//               Get.back();
-//             },
-//           ),
-//           title: BigtitleText0(text: 'Liste des produits', bolder: true),
-//         ),
-//         body: GetBuilder<ProduitController>(builder: (prods) {
-//           return RefreshIndicator(
-//             color: ColorsApp.skyBlue,
-//             onRefresh: () async {
-//               await Get.find<ProduitController>().getProduitAll();
-//               ;
-//             },
-//             child: prods.isLoadedPAll == 0
-//                 ? AppLoading()
-//                 : (prods.produitListAll.length != 0)
-//                     ? StaggeredGridView.countBuilder(
-//                         physics: ScrollPhysics(),
-//                         crossAxisCount: 4,
-//                         itemCount: prods.produitListAll.length,
-//                         itemBuilder: (_ctx, index) => ProduitComponentAll(
-//                             type: 1,
-//                             produit: prods.produitListAll[index],
-//                             index: index),
-//                         staggeredTileBuilder: (int index) =>
-//                             new StaggeredTile.count(2, index.isEven ? 3 : 2),
-//                         mainAxisSpacing: 2.0,
-//                         crossAxisSpacing: 4.0,
+                      childCount: prods.produitListFromHome 
+                          .length, // Nombre total de cellules dans la grille
+                    ),
+                  ),
 
-//                         //   GridView.builder(
-//                         //       physics:
-//                         //           NeverScrollableScrollPhysics(),
-//                         //       gridDelegate:
-//                         //           const SliverGridDelegateWithFixedCrossAxisCount(
-//                         //               crossAxisCount: 2,
-//                         //               crossAxisSpacing:
-//                         //                   10.0,
-//                         //               mainAxisSpacing:
-//                         //                   50.0),
-//                         //       itemCount:
-//                         //           prods.produitList.length,
-//                         //       itemBuilder: (_ctx, index) =>
-//                         //           ProduitComponentAll(
-//                         //               produit:
-//                         //                   prods.produitList[
-//                         //                       index],
-//                         //               index: index)),
-//                       )
-//                     : Container(
-//                         height: kHeight,
-//                         child: AppEmpty(title: 'Aucun Produit')),
-
-//             // Builds 1000 ListTiles
-//           );
-//         }));
-//   }
-// }
+            // Builds 1000 ListTiles
+          );
+        }));
+  }
+}

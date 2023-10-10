@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:EMIY/Views/Produit/ProduitView.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/controller/produitController.dart';
@@ -30,13 +31,22 @@ class ProduitComponentAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-          height: kHeight / 2.7,
+          // height: kHeight / 2.7,
           // margin: EdgeInsets.symmetric(horizontal: 5),
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
-            color: ColorsApp.greyTi,
-            borderRadius: BorderRadius.circular(8),
-          ),
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffDDDDDD),
+                  blurRadius: 0, // Soften the shaodw
+                  spreadRadius: 0,
+                  offset: Offset(-2.0, 3),
+                )
+              ]),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +57,7 @@ class ProduitComponentAll extends StatelessWidget {
                   imageUrl: produit.images[0].src,
                   imageBuilder: (context, imageProvider) {
                     return Container(
-                        height: kHeight / 4,
+                        height: kHeight / 4.8,
                         decoration: BoxDecoration(
                           color: ColorsApp.greySecond,
                           borderRadius: BorderRadius.circular(8),
@@ -70,7 +80,7 @@ class ProduitComponentAll extends StatelessWidget {
                   },
                   errorWidget: (context, url, error) {
                     return Container(
-                        height: kHeight / 4,
+                        height: kHeight / 5,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                           image: AssetImage('assets/logo/logoNew.png'),
@@ -104,21 +114,31 @@ class ProduitComponentAll extends StatelessWidget {
               ]),
               Container(
                   width: kWidth / 2,
+
+                  margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                   child: Text(produit.titre,
                       overflow: TextOverflow.fade,
                       textAlign: TextAlign.left,
                       style: TexteStyle().secondaryTextStyle)),
               Container(
                   width: kWidth / 2,
+
+                  margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                   child: Text('XAF ' + produit.prix.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: TexteStyle().bprimaryTextStyle)),
             ],
           )),
       onTap: () {
+        Get.back();
+
+        Get.to(
+          () => ProduitView(produit: produit, index: index),
+        );
+
         Get.find<ProduitController>().resetIndexSup();
-        Get.toNamed(AppLinks.PRODUCT +
-            '?index=${index}&type=${type}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
+        // Get.toNamed(AppLinks.PRODUCT +
+        //     '?index=${index}&type=${type}&codeProduit=${produit.codeProduit}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
       },
     );
   }

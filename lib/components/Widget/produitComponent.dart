@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:EMIY/Views/Produit/ProduitView.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -23,9 +24,19 @@ class ProduitComponent extends StatelessWidget {
           width: kMdWidth * 1.1,
           // padding: EdgeInsets.all(kMarginX),
           margin: EdgeInsets.only(right: kMarginX),
-          decoration: BoxDecoration(
-              color: ColorsApp.greySecond,
-              borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffDDDDDD),
+                  blurRadius: 0, // Soften the shaodw
+                  spreadRadius: 0,
+                  offset: Offset(-2.0, 3),
+                )
+              ]),
           child: /* SingleChildScrollView(
               child: */
               Column(
@@ -125,8 +136,9 @@ class ProduitComponent extends StatelessWidget {
                 ),
               ]) /* ) */),
       onTap: () {
-        Get.toNamed(AppLinks.PRODUCT +
-            '?index=${index}&type=home&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
+        Get.to(() => ProduitView(produit: produit, index: index));
+        // Get.toNamed(AppLinks.PRODUCT +
+        //     '?index=${index}&type=home&codeProduit=${produit.codeProduit}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
       },
     );
   }

@@ -20,7 +20,7 @@ class CategoryComponent extends StatelessWidget {
     return InkWell(
         onTap: () {
           Get.toNamed(AppLinks.BOUTIQUE_FOR_CATEGORY +
-              '?id=${category.id}&libelle=${category.libelle}');
+              '?id=${category.id}&libelle=${category.libelle}&description=${category.description}&nombreBoutique=${category.nombreBoutique}');
         },
         child: Container(
           // height: kSmHeight,

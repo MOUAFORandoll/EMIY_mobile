@@ -29,7 +29,7 @@ class MesBoutiquesView extends StatelessWidget {
                           margin: EdgeInsets.symmetric(vertical: 5),
                           constraints: BoxConstraints(
                               minHeight: kHeight / 10, minWidth: kWidth / 2.4),
-                          width: kWidth * .8,
+                          width: kWidth,
                           decoration: BoxDecoration(
                               color: ColorsApp.greySecond,
                               borderRadius: BorderRadius.circular(8)),
@@ -63,7 +63,6 @@ class MesBoutiquesView extends StatelessWidget {
                         onTap: () => _bcontroller
                             .selectBoutique(_bcontroller.listBoutiques[index]),
                       )));
-      
     });
   }
 }

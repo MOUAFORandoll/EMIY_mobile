@@ -1,11 +1,11 @@
-import 'package:EMIY/controller/DataBaseController.dart'; 
+import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart'; 
+import 'package:flutter/rendering.dart';
 
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
-import 'package:EMIY/repository/ProduitRepo.dart'; 
+import 'package:EMIY/repository/ProduitRepo.dart';
 import 'package:get/get.dart';
 
 class ProduitController extends GetxController {
@@ -19,12 +19,10 @@ class ProduitController extends GetxController {
     update();
   }
 
-   final dababase = Get.find<DataBaseController>();
-
+  final dababase = Get.find<DataBaseController>();
 
   void onInit() async {
     // TODO: implement initState
-     
 
     _controllerT = ScrollController(initialScrollOffset: savedPosition)
       ..addListener(_scrollListener);
@@ -134,10 +132,10 @@ class ProduitController extends GetxController {
     }
   }
 
-  void addItem(ProduitModel produit, index, type) {
+  void addItem(ProduitModel produit,   ) {
     //print('quantitte : ${_quantity} total : ${_inCartItems}');
 
-    _cart.addItem(produit, _quantity, index, type);
+    _cart.addItem(produit, _quantity,);
     _quantity = 0;
     _inCartItems = _cart.getQuantity(produit);
 
@@ -421,37 +419,6 @@ class ProduitController extends GetxController {
     }
   }
 
-  // List<ProduitModel> _produitListAll = [];
-  // List<ProduitModel> _produitListAllSave = [];
-  // List<ProduitModel> get produitListAll => _produitListAll;
-  // int _isLoadedPAll = 0;
-  // int get isLoadedPAll => _isLoadedPAll;
-  // Future<void> getProduitAll() async {
-  //   //print('response**********');
-
-  //   _isLoadedPAll = 0;
-  //   try {
-  //     Response response = await produitRepo.getListProduitAll();
-
-  //     //print(response.body);
-
-  //     _produitListAll.clear();
-  //     if (response.body != null) {
-  //       if (response.body['data'].length != 0) {
-  //         _produitListAll.addAll((response.body['data'] as List)
-  //             .map((e) => ProduitModel.fromJson(e))
-  //             .toList());
-  //         _produitListAllSave.addAll((response.body['data'] as List)
-  //             .map((e) => ProduitModel.fromJson(e))
-  //             .toList());
-  //       }
-  //       _isLoadedPAll = 1;
-  //       update();
-  //     }
-  //   } catch (e) {
-  //     //print(e);
-  //   }
-  // }
   int indexP = 1;
 
   List<ProduitModel> _preferenceList = [];
@@ -539,5 +506,48 @@ class ProduitController extends GetxController {
     }
 
     update();
+  }
+
+  /**
+   * 
+   * recuperation des produit en fonction du choix au home Screenr
+   * 
+   */
+
+  List<ProduitModel> _produitListFromHome = [];
+  List<ProduitModel> _produitListFromHomeSave = [];
+  List<ProduitModel> get produitListFromHome => _produitListFromHome;
+  int _isLoadedFromHome = 0;
+  int get isLoadedFromHome => _isLoadedFromHome;
+  int indexProductLoadForHome = 1;
+  Future<void> getListProduitBuyHomeSelect(type) async {
+    //print('response**********');
+    var key = await dababase.getKey();
+
+    _isLoadedFromHome = 0;
+    update();
+    try {
+      Response response =
+          await produitRepo.getListProduitBuyHomeSelect(type, indexP, key);
+
+      //print(response.body);
+
+      _produitListFromHome.clear();
+      if (response.body != null) {
+        if (response.body['data'].length != 0) {
+          _produitListFromHome.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+          _produitListFromHomeSave.addAll((response.body['data'] as List)
+              .map((e) => ProduitModel.fromJson(e))
+              .toList());
+          indexProductLoadForHome++;
+        }
+        _isLoadedFromHome = 1;
+        update();
+      }
+    } catch (e) {
+      //print(e);
+    }
   }
 }

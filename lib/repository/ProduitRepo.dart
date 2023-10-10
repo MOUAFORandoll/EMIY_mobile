@@ -19,6 +19,17 @@ class ProduitRepo extends GetxService {
     return response;
   }
 
+  Future<Response> getListProduitBuyHomeSelect(indexC, type, keySecret) async {
+    //print('get----------------');
+    // try {
+    Response response = await apiClient.getData(
+      ApiRoutes.POPULAR_PRODUCT +
+          "?page=${indexC.toString()}&keySecret=${keySecret.toString()}&type=${type.toString()}",
+    );
+
+    return response;
+  }
+
   Future<Response> getListProduitInterest(indexC, keySecret, interest) async {
     print('get---------${interest}-------');
     // try {

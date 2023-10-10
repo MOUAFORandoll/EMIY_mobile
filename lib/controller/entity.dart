@@ -64,7 +64,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      userId: json['userId'],
+      userId: json['id'],
       nom: json['nom'],
       prenom: json['prenom'],
       email: json['email'],
@@ -103,26 +103,26 @@ class Localisation {
   String ville;
 
   @Property()
-  String long;
+  String longitude;
 
   @Property()
-  String lat;
+  String latitude;
 
   @Property()
   String ip;
 
   Localisation({
     required this.ville,
-    required this.long,
-    required this.lat,
+    required this.longitude,
+    required this.latitude,
     required this.ip,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'ville': ville,
-      'long': long,
-      'lat': lat,
+      'longitude': longitude.toString(),
+      'latitude': latitude.toString(),
       'ip': ip,
     };
   }
@@ -130,8 +130,8 @@ class Localisation {
   factory Localisation.fromJson(Map<String, dynamic> json) {
     return Localisation(
       ville: json['ville'],
-      long: json['long'],
-      lat: json['lat'],
+      longitude: json['longitude'].toString(),
+      latitude: json['latitude'].toString(),
       ip: json['ip'],
     );
   }

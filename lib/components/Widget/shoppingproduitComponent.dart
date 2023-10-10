@@ -1,10 +1,10 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart'; 
+import 'package:EMIY/components/Button/IconButtonF.dart';
 import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/cartController.dart'; 
+import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/model/data/CartModel.dart';
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +118,7 @@ class ShoppingproduitComponent extends StatelessWidget {
                                           bolder: true,
                                           al: true,
                                           color: ColorsApp.primaryText,
-                                          size: kSmText)),
+                                          size: kBasics)),
                                   Container(
                                       width: kWidth * .4,
                                       margin: EdgeInsets.only(
@@ -128,7 +128,7 @@ class ShoppingproduitComponent extends StatelessWidget {
                                           text: 'XAF ' + cartM.prix.toString(),
                                           al: true,
                                           color: ColorsApp.primaryText,
-                                          size: kSmText)),
+                                          size: kBasics)),
                                   Container(
                                     margin: EdgeInsets.only(
                                         top: kHeight * .035,

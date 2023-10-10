@@ -1,6 +1,6 @@
 // ignore: must_be_immutable
- 
-import 'package:EMIY/styles/textStyle.dart'; 
+
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +35,7 @@ class BtnManageView extends StatelessWidget {
                 //         topRight: Radius.circular(10),
                 //         topLeft: Radius.circular(10)),
                 //     child: Image.asset('assets/om.png',
-                //         height: kSmHeight * .8,
+                //         height: kSmHeight ,
                 //         width: Get.width * .5,
                 //         fit: BoxFit.cover),
                 //   ),

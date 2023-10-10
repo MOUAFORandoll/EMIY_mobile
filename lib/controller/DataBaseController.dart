@@ -419,13 +419,13 @@ class DataBaseController extends GetxController {
   }
 }
  */
- 
+
 import 'dart:async';
- 
-import 'package:EMIY/controller/entity.dart'; 
-import 'package:EMIY/objectbox.g.dart'; 
+
+import 'package:EMIY/controller/entity.dart';
+import 'package:EMIY/objectbox.g.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart'; 
+import 'package:get_storage/get_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
@@ -455,12 +455,13 @@ class DataBaseController extends GetxController {
 
   // Méthode interne pour créer l'instance du DataBaseController
   static Future<DataBaseController> _createInstance() async {
-    final docsDir = await getApplicationDocumentsDirectory();
+    final databasesPath = await getApplicationDocumentsDirectory();
 
     // Vérifier si le store existe déjà dans GetStorage
     // if (box.read('store') != 1) {
     //   box.write('store', 1);
-    final store = await openStore(directory: p.join(docsDir.path, linkDb));
+    final store =
+        await openStore(directory: p.join(databasesPath.path, linkDb));
     return DataBaseController._create(store);
     //  }s
   }
@@ -575,10 +576,10 @@ class DataBaseController extends GetxController {
     await Box<User>(store).removeAll();
     await Box<KeyUser>(store).removeAll();
     final databasesPath = await getApplicationDocumentsDirectory();
-    final path = join(databasesPath.path, "obx-example");
+    final path = join(databasesPath.path, linkDb);
     await databaseFactory.deleteDatabase(path);
-    store.close();
-
-    store = await openStore(directory: path);
+    // store.close();
+    store = await openStore(directory: p.join(databasesPath.path, linkDb));
+    DataBaseController._create(store);
   }
 }

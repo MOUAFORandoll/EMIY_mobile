@@ -12,7 +12,7 @@ class BigText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: kSmWidth * .8,
+        width: kSmWidth ,
         alignment: Alignment.center,
         child: Text(
           text,

@@ -1,11 +1,10 @@
- 
 import 'package:EMIY/repository/ServiceClientRepo.dart';
 import 'package:EMIY/model/socket/MessageEchangeModel.dart';
-import 'package:EMIY/utils/Services/NotificationService.dart'; 
+import 'package:EMIY/utils/Services/NotificationService.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decode/jwt_decode.dart';
@@ -34,31 +33,25 @@ class ServiceClientController extends GetxController {
 
       var token = await dababase.getKeyKen();
       if (token != null) {
-        try {
-          Response response =
-              await serviceClientRepo.getEchange(codeCommunication);
-
-          if (response.statusCode == 200) {
-            if (response.body != null) {
-              if (response.body['data'] != null) {
-                print(response.body['data']);
-                _listMessageEchange.clear();
-                // update();
-                _listMessageEchange.addAll((response.body['data'] as List)
-                    .map((e) => MessageEchangeModel.fromJson(e))
-                    .toList());
-                _isLoadEchange = 1;
-                update();
-              }
-            }
-          }
-        } catch (e) {
-          // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+        await serviceClientRepo
+            .getEchange(codeCommunication)
+            .then((response) async {
+          print('------------------value----------${response.body}-');
+          print(
+              '-------*******************comuniction*****************--------------');
+          print(response.body['data']);
+          _listMessageEchange.clear();
+          // update();
+          _listMessageEchange.addAll((response.body['data'] as List)
+              .map((e) => MessageEchangeModel.fromJson(e))
+              .toList());
+          _isLoadEchange = 1;
+          update();
+        }).catchError((error) {
           _isLoadEchange = 2;
 
           update();
-          //print(e);
-        }
+        });
       }
     }
   }

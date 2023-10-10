@@ -76,9 +76,9 @@ class ManageRepo extends GetxService {
         var data = {
           'ip': loca.data['ip'],
           'ville': loca.data['city'],
-          'latitude': loca.data['latitude'],
+          'latitude': loca.data['latitude'].toString(),
           'keySecret': getU,
-          'longitude': loca.data['longitude']
+          'longitude': loca.data['longitude'].toString()
         };
         await dababase.saveLonLat(data);
 

@@ -1,5 +1,5 @@
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -13,7 +13,7 @@ class ShimmerBox extends StatelessWidget {
         baseColor: ColorsApp.grey,
         highlightColor: Colors.blueGrey,
         child: Container(
-            height: kHeight / 4,
+            height: kHeight / 4.8,
             // width: kMdWidth * 1.1,
             alignment: Alignment.center,
             // padding: EdgeInsets.all(kMarginX),

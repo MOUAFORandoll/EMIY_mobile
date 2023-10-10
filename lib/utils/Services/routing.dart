@@ -13,7 +13,7 @@ import 'package:EMIY/Views/Space/Negociation/NegociationView.dart';
 import 'package:EMIY/Views/Link/ProduitViewForLink.dart';
 import 'package:EMIY/Views/Parrainnage/ParrainnageView.dart';
 import 'package:EMIY/Views/Produit/PreferenceView.dart';
-import 'package:EMIY/Views/Shopping/PaiementView.dart'; 
+import 'package:EMIY/Views/Shopping/PaiementView.dart';
 import 'package:EMIY/Views/UsersMange/InteretsView.dart';
 import 'package:EMIY/Views/UsersMange/ServiceClientView.dart';
 import 'package:EMIY/Views/UsersMange/WalletView.dart';
@@ -40,7 +40,9 @@ import 'package:EMIY/Views/UsersMange/RegisterScreen.dart';
 import 'package:EMIY/Views/UsersMange/SettingView.dart';
 import 'package:EMIY/Views/UsersMange/UserManageView.dart';
 import 'package:EMIY/Views/UsersMange/forgotPassword.dart';
+import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/utils/Services/core.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/Views/UsersMange/LoginScreen.dart';
@@ -102,7 +104,10 @@ class AppRoutes {
         // ignore: top_level_function_literal_block
         page: () {
           var index = Get.parameters['index'];
-          return ProduitView(index: int.parse(index!));
+          ProduitModel produit = Get.find<GeneralController>()
+              .getProduit(Get.parameters['codeProduit']);
+
+          return ProduitView(index: int.parse(index!), produit: produit);
         },
         transition: transitionX),
     GetPage(
@@ -166,10 +171,10 @@ class AppRoutes {
         name: AppLinks.WALLET,
         page: () => WalletView(),
         transition: transitionX),
-    // GetPage(
-    //     name: AppLinks.PRODUCT_READ_ALL,
-    //     page: () => ListProduitsView(),
-    //     transition: transitionX),
+    GetPage(
+        name: AppLinks.PRODUCT_VIEW_BY_HOME,
+        page: () => ListProduitsView(),
+        transition: transitionX),
     GetPage(
         name: AppLinks.SETTING,
         page: () => SettingView(),
@@ -268,6 +273,7 @@ class AppLinks {
   static const String SHORT_BOUTIQUE = "/shortboutique";
   static const String PRODUCT_FOR_COMMANDE = "/pfc";
   static const String PRODUCT_FOR_LINK = "/pflink";
+  static const String PRODUCT_VIEW_BY_HOME = "/pvbh";
   static const String BOUTIQUE_FOR_LINK = "/bflink";
   static const String BOUTIQUE = "/boutique";
   static const String BOUTIQUE_NEW = "/boutique/new";

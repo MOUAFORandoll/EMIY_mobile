@@ -9,6 +9,7 @@ import 'package:EMIY/components/Button/button.dart';
 import 'package:EMIY/components/Button/customBtn.dart';
 import 'package:EMIY/components/Form/formComponent2.dart';
 import 'package:EMIY/components/Widget/SelectComponent.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
@@ -18,6 +19,7 @@ import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:EMIY/model/data/HomeComponentModel.dart';
 import 'package:EMIY/model/data/ModePaiementModel.dart';
 import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:EMIY/model/socket/NotificationModel.dart';
@@ -630,7 +632,7 @@ class GeneralController extends GetxController {
                         top: BorderSide.none)),
                 child: Text('home'.tr,
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: kMin,
                       fontWeight: FontWeight.bold,
                       color: _currentIndex == 0
                           ? ColorsApp.skyBlue
@@ -658,7 +660,7 @@ class GeneralController extends GetxController {
                       top: BorderSide.none)),
               child: Text('categories'.tr,
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: kMin,
                     fontWeight: FontWeight.bold,
                     color:
                         _currentIndex == 1 ? ColorsApp.skyBlue : ColorsApp.grey,
@@ -686,7 +688,7 @@ class GeneralController extends GetxController {
                       top: BorderSide.none)),
               child: Text('Short',
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: kMin,
                     fontWeight: FontWeight.bold,
                     color:
                         _currentIndex == 2 ? ColorsApp.skyBlue : ColorsApp.grey,
@@ -714,7 +716,7 @@ class GeneralController extends GetxController {
                       top: BorderSide.none)),
               child: Text('Shop',
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: kMin,
                     fontWeight: FontWeight.bold,
                     color:
                         _currentIndex == 3 ? ColorsApp.skyBlue : ColorsApp.grey,
@@ -741,7 +743,7 @@ class GeneralController extends GetxController {
                       top: BorderSide.none)),
               child: Text('setting'.tr,
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: kMin,
                     fontWeight: FontWeight.bold,
                     color:
                         _currentIndex == 4 ? ColorsApp.skyBlue : ColorsApp.grey,
@@ -912,6 +914,8 @@ class GeneralController extends GetxController {
   int get isLoadedHome => _isLoadedHome;
   ProduitController _prodController = Get.find();
   CategoryBoutiqueController _categoryBoutiqueController = Get.find();
+  List<HomeComponentModel> _homeComponent = [];
+  List<HomeComponentModel> get homeComponent => _homeComponent;
   Future<void> getHome() async {
     print('----${_loaddata}-------aaaaaaaaa---');
     var key = await dababase.getKey();
@@ -935,6 +939,12 @@ class GeneralController extends GetxController {
           print(response.body);
           _isLoadedHome = 1;
           update();
+          _homeComponent.clear();
+
+          _homeComponent.clear();
+          _homeComponent.addAll((response.body['homeComponent'] as List)
+              .map((e) => HomeComponentModel.fromJson(e))
+              .toList());
           var produits = ((response.body['Produit'] as List)
               .map((e) => ProduitModel.fromJson(e))
               .toList());
@@ -959,5 +969,63 @@ class GeneralController extends GetxController {
       //print(e);
     }
     // }
+  }
+
+  getProduit(codeProduit) {
+    var produit;
+    var produit0 = Get.find<ProduitController>()
+        .produitList
+        .where((element) => element.codeProduit == codeProduit);
+    var produit1 = Get.find<ProduitController>()
+        .produitList
+        .where((element) => element.codeProduit == codeProduit);
+    var produit2 = Get.find<ProduitController>()
+        .produitSupplementaire
+        .where((element) => element.codeProduit == codeProduit);
+    var produit3 = Get.find<MySearchController>()
+        .listProduit
+        .where((element) => element.codeProduit == codeProduit);
+    var produit4 = Get.find<ProduitController>()
+        .preferenceList
+        .where((element) => element.codeProduit == codeProduit);
+    var produit5 = Get.find<CategoryBoutiqueController>()
+        .produitBoutiqueList
+        .where((element) => element.codeProduit == codeProduit);
+    _homeComponent.forEach((hcp) => hcp.produits.forEach((prod) {
+          if (prod.codeProduit == codeProduit) {
+            print('--------------ic');
+            produit = prod;
+          }
+        }));
+    // for (var i = 0; i < _homeComponent.length; i++) {
+    //   var hcp = _homeComponent[i];
+    //   for (var j = 0; j < hcp.produits.length; j++) {
+    //     var prod = hcp.produits[j];
+
+    //     if (prod.codeProduit == codeProduit) {
+    //       print('--------------ic');
+    //       produit = prod;
+    //     }
+    //   }
+    // }
+    if (produit0.isNotEmpty) {
+      produit = produit0.first;
+    }
+    if (produit1.isNotEmpty) {
+      produit = produit1;
+    }
+    if (produit2.isNotEmpty) {
+      produit = produit2.first;
+    }
+    if (produit3.isNotEmpty) {
+      produit = produit3.first;
+    }
+    if (produit4.isNotEmpty) {
+      produit = produit4.first;
+    }
+    if (produit5.isNotEmpty) {
+      produit = produit5.first;
+    }
+    return produit;
   }
 }

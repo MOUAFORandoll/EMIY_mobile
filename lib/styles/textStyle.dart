@@ -32,21 +32,14 @@ final kMdWidth = screenSize.width * .4;
 final kHeight = screenSize.height;
 final kWidth = screenSize.width;
 
-final kSSmText = 8 /* * proportion */;
-final kSmText = 10.0 /* * proportion */;
-final kMdText = 12.0 /* * proportion */;
-final kLgText = 14.0 /* * proportion */;
-
-// final kSSmText = kMediumText;
-// final kSmText = kMediumText;
-// final kMdText = kMediumText;
-
-final kLg1Text = 20.0 /* * proportion */;
-// final kLgText = 21.0 /* * proportion */;
-final kLg0Text = 25.0 /* * proportion */;
-final kXlText = 31.0 /* * proportion */;
+final kTitle = 14.0 /* * proportion */;
+final kDescription = 9.0 /* * proportion */;
+final kBasics = 10.0 /* * proportion */;
+final kMin = 7.0;
+final kLgText = kTitle;
 
 final kSmIcon = 28.0;
 final kMdIcon = 30.0;
 final kLgIcon = 32.0;
 final kXlIcon = 34.0;
+ 

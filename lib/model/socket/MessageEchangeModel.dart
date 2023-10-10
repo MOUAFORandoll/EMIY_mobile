@@ -11,7 +11,6 @@ import 'dart:convert';
 // String socketCommandModelToJson(SocketCommandModel data) =>
 //     json.encode(data.toJson());
 
-
 // class SocketCommandModel {
 //   int canal;
 //   Data data;
@@ -50,7 +49,7 @@ class MessageEchangeModel {
 
   factory MessageEchangeModel.fromJson(Map<String, dynamic> json) =>
       MessageEchangeModel(
-        id: json["id"] == null ? null : json["id"],
+        id: json["id"],
         emetteurId: json["emetteurId"] == null ? null : json["emetteurId"],
         heure: json["heure"] == null ? null : json["heure"],
         message: json["message"] == null ? null : json["message"],

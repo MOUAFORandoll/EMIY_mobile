@@ -1,4 +1,3 @@
- 
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -23,7 +22,7 @@ class smallText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: width == 0 ? kSmWidth * .8 : width,
+        width: width == 0 ? kSmWidth : width,
         alignment: al ? null : Alignment.center,
         child: Text(
           text,

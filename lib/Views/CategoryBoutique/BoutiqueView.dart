@@ -166,7 +166,7 @@ class BoutiqueView extends StatelessWidget {
                                               'Produits Disponibles',
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontSize: kMdText,
+                                                  fontSize: kBasics,
                                                   fontFamily: 'Lato',
 
                                                   // color: ColorsApp.white,

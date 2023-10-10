@@ -13,6 +13,20 @@ class ShortController extends GetxController {
   ShortController({required this.shortRepo});
   final dababase = Get.find<DataBaseController>();
   var fn = new ViewFunctions();
+
+  bool _comment = false;
+  bool get comment => _comment;
+
+  setComment() {
+    _comment = true;
+    update();
+  }
+
+  unSetComment() {
+    _comment = false;
+    update();
+  }
+
   bool _loadSuivis = true;
   bool get loadSuivis => _loadSuivis;
   onReady() {
@@ -294,24 +308,27 @@ class ShortController extends GetxController {
         .then((response) async {
       print('short**************************');
 
-      _listSuivisShort.addAll((response.body['data'] as List)
-          .map((e) => ShortModel.fromJson(e))
-          .toList());
-      _listSuivisShortSave.addAll((response.body['data'] as List)
-          .map((e) => ShortModel.fromJson(e))
-          .toList());
-      indexIncrementSuivis++;
-      _loadedFirstSuivisShort = true;
+      if (response.body != null) {
+        _listSuivisShort.addAll((response.body['data'] as List)
+            .map((e) => ShortModel.fromJson(e))
+            .toList());
+        _listSuivisShortSave.addAll((response.body['data'] as List)
+            .map((e) => ShortModel.fromJson(e))
+            .toList());
+        indexIncrementSuivis++;
+        _loadedFirstSuivisShort = true;
 
-      print(_listSuivisShort.length);
-      print(
-          '_listSuivisShort=+++}+++++++++++++++++++++++++++}-=======================================================');
-      _loaddata = false;
-      _isLoadedP = 1;
-      update();
-      if (indexIncrementSuivis - 1 == 1 && intoShortView) {
-        print('----------------------------------- ${_listSuivisShort.length}');
-        changeVideoSuivis(0);
+        print(_listSuivisShort.length);
+        print(
+            '_listSuivisShort=+++}+++++++++++++++++++++++++++}-=======================================================');
+        _loaddata = false;
+        _isLoadedP = 1;
+        update();
+        if (indexIncrementSuivis - 1 == 1 && intoShortView) {
+          print(
+              '----------------------------------- ${_listSuivisShort.length}');
+          changeVideoSuivis(0);
+        }
       }
     }).catchError((error) {
       _loaddata = false;
@@ -322,7 +339,9 @@ class ShortController extends GetxController {
 
   _checkGetting() {
     _currentReadShortData = stateShortPage == 0
-        ? listForYouShort.first
+        ? listForYouShort.isNotEmpty
+            ? listForYouShort.first
+            : null
         : stateShortPage == 1
             ? listSuivisShort.first
             : listBoutiqueShort.first;
@@ -423,6 +442,7 @@ class ShortController extends GetxController {
   int _isUnique = 0;
   get isUnique => _isUnique;
   getUniqueShort(idShort, code) async {
+    _isUniqueVideoPlayer = null;
     update();
     _isUnique = 0;
 
@@ -438,13 +458,15 @@ class ShortController extends GetxController {
             print('--short----------***************************');
             print(response.body['data']);
 
+            // _isUniqueVideoPlayer = ShortModel.fromJson(response.body['data']);
             _currentReadShortData = ShortModel.fromJson(response.body['data']);
             _isUnique = 1;
 
             update();
             // controller.;
             update();
-            print("-----short+++++++---------------$_currentReadShortData.id");
+            print(
+                "-----short+++++++---------------${_currentReadShortData!.id}");
           }
         }
       }
@@ -841,6 +863,7 @@ class ShortController extends GetxController {
     }
     if (_isUniqueVideoPlayer != null) {
       _isUniqueVideoPlayer.dispose();
+      print('---');
       _isUniqueVideoPlayer = null;
       update();
     }

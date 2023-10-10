@@ -1,8 +1,8 @@
 // ignore: must_be_immutable
-import 'package:cached_network_image/cached_network_image.dart'; 
-import 'package:EMIY/controller/boutiqueController.dart'; 
-import 'package:EMIY/model/data/CommandeBoutiqueModel.dart'; 
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:EMIY/controller/boutiqueController.dart';
+import 'package:EMIY/model/data/CommandeBoutiqueModel.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +16,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
   CommandeBoutiqueComponent({required this.commande, this.height});
 
   @override
-  Widget build(BuildContext context) { 
-
+  Widget build(BuildContext context) {
     // titre.text = commande.titre;
     // quantite.text = commande.quantite.toString();
     // prix.text = commande.prix.toString();
@@ -184,7 +183,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
             },
           ),
           // Positioned(
-          //     left: Get.width * .88,
+          //     left: Get.width 8,
           //     top: Get.height * .02,
           //     child: InkWell(
           //         child: Icon(Icons.close, color: Colors.white),

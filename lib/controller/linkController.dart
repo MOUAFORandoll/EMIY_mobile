@@ -1,10 +1,10 @@
 import 'package:EMIY/controller/DataBaseController.dart';
-import 'package:EMIY/controller/produitController.dart'; 
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/BoutiqueModelLink.dart';
-import 'package:EMIY/repository/linkRepo.dart';  
+import 'package:EMIY/repository/linkRepo.dart';
 
 import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/model/data/ProduitModel.dart'; 
+import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:get/get.dart';
 
 class LinkController extends GetxController {
@@ -114,8 +114,11 @@ class LinkController extends GetxController {
   }
 
   void addItem() {
-    var index = _prodCont.addProduitInPopular(produit);
-    _cart.addItem(produit, _quantity, index, '0');
+    // var index = _prodCont.addProduitInPopular(produit);
+    _cart.addItem(
+      produit,
+      _quantity,
+    );
     _quantity = 0;
     _inCartItems = _cart.getQuantity(produit);
 
@@ -124,7 +127,7 @@ class LinkController extends GetxController {
   }
 
   var _boutique;
-  BoutiqueModelLink get boutique => _boutique;
+  get boutique => _boutique;
   Future<void> getUniLinkBoutique(codeProduit) async {
     _isLoaded = 0;
     update();

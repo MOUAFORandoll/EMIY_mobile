@@ -331,7 +331,7 @@ class _BoutiqueNewViewState extends State<BoutiqueNewView> {
 
                           Button(
                               borderRadius: 15.0,
-                              width: Get.size.height * .8,
+                              width: Get.size.height,
                               margin: EdgeInsets.only(
                                 top: Get.size.height * .025,
                                 bottom: Get.size.height * .025,

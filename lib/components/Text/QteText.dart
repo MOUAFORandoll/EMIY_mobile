@@ -1,6 +1,5 @@
- 
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class QteText extends StatelessWidget {
@@ -11,7 +10,7 @@ class QteText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        // width: kSmWidth * .8,
+        
         alignment: Alignment.center,
         child: Text(
           text,

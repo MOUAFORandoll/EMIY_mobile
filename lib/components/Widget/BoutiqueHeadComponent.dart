@@ -5,6 +5,7 @@ import 'package:EMIY/utils/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../Text/SimpleText.dart';
 import 'icon_svg.dart';
@@ -39,10 +40,19 @@ class BoutiqueHeadComponent extends StatelessWidget {
               margin: EdgeInsets.only(top: 50),
               height: 165,
               // width: kWidth * .78,
-              decoration: BoxDecoration(
-                  color: ColorsApp.white,
-                  borderRadius: BorderRadius.circular(8)),
 
+              decoration: new BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  // color: ColorsApp.grey,
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xffDDDDDD),
+                      blurRadius: 0, // Soften the shaodw
+                      spreadRadius: 0,
+                      offset: Offset(-1.2, 1.8),
+                    )
+                  ]),
               padding: EdgeInsets.symmetric(
                   horizontal: kMarginX, vertical: kMarginY),
               child: Column(
@@ -57,7 +67,7 @@ class BoutiqueHeadComponent extends StatelessWidget {
                       description!,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: kSSmText * 1.4,
+                        fontSize: kDescription,
                         fontFamily: 'Lato',
                         color: ColorsApp.grey,
                       ),
@@ -111,7 +121,7 @@ class BoutiqueHeadComponent extends StatelessWidget {
                                                 'Ne plus suivre',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                    fontSize: kSSmText * 1.5,
+                                                    fontSize: kDescription,
                                                     fontFamily: 'Lato',
                                                     color: ColorsApp.white,
                                                     fontWeight:
@@ -146,7 +156,7 @@ class BoutiqueHeadComponent extends StatelessWidget {
                                                 'Suivre',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                    fontSize: kSSmText * 1.5,
+                                                    fontSize: kDescription,
                                                     fontFamily: 'Lato',
                                                     color: ColorsApp.secondBlue,
                                                     fontWeight:
@@ -159,32 +169,38 @@ class BoutiqueHeadComponent extends StatelessWidget {
                                       await _Boutiquecontroller.abonnementAdd(
                                           Get.parameters['codeBoutique']);
                                     }),
-                            Container(
-                                padding: EdgeInsets.all(5)
-                                    .add(EdgeInsets.only(right: 10)),
-                                decoration: BoxDecoration(
-                                    color: ColorsApp.secondBlue,
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Row(children: [
-                                  Container(
-                                    child: Icon(
-                                      Icons.share,
-                                      color: ColorsApp.white,
+                            InkWell(
+                                onTap: () => Share.share(
+                                    'Suivez ce lien pour consulter cette boutique  : ' +
+                                        lienBoutique.toString(),
+                                    subject: 'Look what I made!'),
+                                child: Container(
+                                  padding: EdgeInsets.all(5)
+                                      .add(EdgeInsets.only(right: 10)),
+                                  decoration: BoxDecoration(
+                                      color: ColorsApp.secondBlue,
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Row(children: [
+                                    Container(
+                                      child: Icon(
+                                        Icons.share,
+                                        color: ColorsApp.white,
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                      margin:
-                                          EdgeInsets.only(left: kMarginX * 4.5),
-                                      child: Text(
-                                        'Partager',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: kSSmText * 1.5,
-                                            fontFamily: 'Lato',
-                                            color: ColorsApp.white,
-                                            fontWeight: FontWeight.w700),
-                                      )),
-                                ])),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            left: kMarginX * 4.5),
+                                        child: Text(
+                                          'Partager',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: kDescription,
+                                              fontFamily: 'Lato',
+                                              color: ColorsApp.white,
+                                              fontWeight: FontWeight.w700),
+                                        )),
+                                  ]),
+                                )),
                           ]),
                     ),
                   ]),
@@ -249,7 +265,7 @@ class BoutiqueHeadComponent extends StatelessWidget {
                             note!,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                fontSize: kSSmText * 1.5,
+                                fontSize: kDescription,
                                 fontFamily: 'Lato',
                                 color: ColorsApp.white,
                                 fontWeight: FontWeight.w700),
@@ -286,7 +302,7 @@ class InfoComponent extends StatelessWidget {
               text!,
               style: TextStyle(
                 overflow: TextOverflow.ellipsis,
-                fontSize: kSSmText * 1.3,
+                fontSize: kDescription,
                 fontFamily: 'Lato',
                 color: ColorsApp.grey,
               ),

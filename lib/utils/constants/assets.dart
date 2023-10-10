@@ -19,6 +19,7 @@ class Assets {
   static const key = 'assets/svg_icones/key.svg';
   static const grid1 = 'assets/svg_icones/grid1.svg';
   static const grid2 = 'assets/svg_icones/grid2.svg';
+  static const list0 = 'assets/svg_icones/list0.svg';
   static const logoSvg = 'assets/svg_icones/logo.svg';
   static const logo_without = 'assets/svg_icones/logo_without.svg';
   static const bell = 'assets/svg_icones/bell.svg';

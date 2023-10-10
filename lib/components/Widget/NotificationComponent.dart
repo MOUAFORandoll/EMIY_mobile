@@ -5,6 +5,7 @@ import 'package:EMIY/model/socket/NotificationModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
+import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +22,8 @@ class NotificationComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () async {
-          Get.to(goTo(notification.type_notification));
+          // Get.to(goTo(notification.type_notification));
+          open();
           await Get.find<GeneralController>().readNotification(notification.id);
           await Get.find<ShortController>().disposePLayerAll();
         },
@@ -226,6 +228,17 @@ class NotificationComponent extends StatelessWidget {
     }
 
     return resultat;
+  }
+
+  var fn = new ViewFunctions();
+  open() async {
+    fn.loading('', '');
+    await Get.find<ShortController>().getUniqueShort(notification.short, null);
+
+    Get.back();
+    Get.to(SingleShortView(
+      idShort: notification.short,
+    ));
   }
 
   goTo(type) {

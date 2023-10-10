@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'package:EMIY/Views/Produit/ProduitView.dart';
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/model/data/ProduitCategoryModel.dart';
@@ -91,9 +92,9 @@ class ProduitForCatComponent extends StatelessWidget {
       ),
       onTap: () {
         // //print(AppLinks.PRODUCT);
-
-        Get.toNamed(AppLinks.PRODUCT +
-            '?index=${index}&type=1&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
+        Get.to(() => ProduitView(produit: produit, index: index));
+        // Get.toNamed(AppLinks.PRODUCT +
+        //     '?index=${index}&type=1&codeProduit=${produit.codeProduit}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
       },
     );
   }

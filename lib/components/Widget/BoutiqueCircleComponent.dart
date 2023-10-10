@@ -30,7 +30,7 @@ class BoutiqueCircleComponent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: kMarginY / 2),
+              margin: EdgeInsets.symmetric(vertical: kMarginY / 4),
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: boutique.images[boutique.images.length - 1].src,
@@ -54,7 +54,7 @@ class BoutiqueCircleComponent extends StatelessWidget {
                       baseColor: ColorsApp.grey,
                       highlightColor: Colors.blueGrey,
                       child: Container(
-                          height: kHeight * .15,
+                          height: kHeight * .1,
                           decoration: BoxDecoration(
                             color: ColorsApp.greySecond,
                             borderRadius: BorderRadius.circular(50),
@@ -87,23 +87,7 @@ class BoutiqueCircleComponent extends StatelessWidget {
                           fontFamily: 'Lato',
                           // fontWeight: FontWeight.bold,
                           fontSize: 10))),
-            // Container(
-            //     child: Row(
-            //   children: [
-            //     Icon(
-            //       Icons.cancel,
-            //       color: ColorsApp.red,
-            //     ),
-            //     Text('Ne plus suivre',
-            //         overflow: TextOverflow.ellipsis,
-            //         textAlign: TextAlign.center,
-            //         style: TextStyle(
-            //             color: ColorsApp.red,
-            //             fontFamily: 'Lato',
-            //             // fontWeight: FontWeight.bold,
-            //             fontSize: 10)),
-            //   ],
-            // )),
+           
           ],
         ),
       ),

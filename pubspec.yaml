@@ -152,6 +152,7 @@ flutter:
     - assets/svg_icones/key.svg
     - assets/svg_icones/grid1.svg
     - assets/svg_icones/grid2.svg
+    - assets/svg_icones/list0.svg
     - assets/svg_icones/logo.svg
     - assets/svg_icones/logo_without.svg
     - assets/svg_icones/logo_esq.svg

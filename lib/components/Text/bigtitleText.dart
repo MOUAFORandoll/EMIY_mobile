@@ -1,4 +1,4 @@
-import 'package:EMIY/styles/theme.dart'; 
+import 'package:EMIY/styles/theme.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -23,8 +23,12 @@ class BigtitleText extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             // textAlign: TextAlign.left,
             style: bolder
-                ? TexteStyle().blargeTextStyle
-                : TexteStyle().largeTextStyle));
+                ? TexteStyle()
+                    .blargeTextStyle
+                    .copyWith(color: color, fontSize: size)
+                : TexteStyle()
+                    .largeTextStyle
+                    .copyWith(color: color, fontSize: size)));
   }
 }
 /*

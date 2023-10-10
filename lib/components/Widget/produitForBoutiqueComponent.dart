@@ -1,8 +1,9 @@
 // ignore: must_be_immutable
+import 'package:EMIY/Views/Produit/ProduitView.dart';
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/styles/theme.dart';
-import 'package:cached_network_image/cached_network_image.dart'; 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
@@ -25,7 +26,21 @@ class ProduitForBoutiqueComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: kHeight / 4,
+        width: kWidth / 2.65,
+        height: kHeight * .31,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xffDDDDDD),
+                blurRadius: 0, // Soften the shaodw
+                spreadRadius: 0,
+                offset: Offset(-2.0, 3),
+              )
+            ]),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,10 +51,15 @@ class ProduitForBoutiqueComponent extends StatelessWidget {
                   imageUrl: produit.images[0].src,
                   imageBuilder: (context, imageProvider) {
                     return Container(
-                      height: kHeight / 4,
+                      height: kHeight / 5,
+                      // width: kWidth / 2.65,
+
                       decoration: BoxDecoration(
                         color: ColorsApp.greySecond,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8),
+                        ),
                         image: DecorationImage(
                             image: imageProvider,
                             fit: BoxFit.cover,
@@ -75,12 +95,14 @@ class ProduitForBoutiqueComponent extends StatelessWidget {
               ]),
               Container(
                   width: kWidth / 2,
+                  margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                   child: Text(produit.titre,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style: TexteStyle().secondaryTextStyle)),
               Container(
                   width: kWidth / 2,
+                  margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                   child: Text('XAF ' + produit.prix.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: TexteStyle().bprimaryTextStyle)),
@@ -88,9 +110,10 @@ class ProduitForBoutiqueComponent extends StatelessWidget {
       ),
       onTap: () {
         // //print(AppLinks.PRODUCT);
+        Get.to(() => ProduitView(produit: produit, index: index));
 
-        Get.toNamed(AppLinks.PRODUCT +
-            '?index=${index}&type=${type}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
+        // Get.toNamed(AppLinks.PRODUCT +
+        //     '?index=${index}&type=${type}&codeProduit=${produit.codeProduit}&id=${produit.id}&titre=${produit.titre}&description=${produit.description}&image=${ApiUrl.baseUrl}/images/produits/${produit.images[0].src}');
       },
     );
   }

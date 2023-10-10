@@ -5,6 +5,7 @@ import 'package:EMIY/components/Button/IconButtonF.dart';
 import 'package:EMIY/components/ShortComponent/shortAction.dart';
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/components/Widget/app_empty.dart';
+import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -40,9 +41,11 @@ class _SingleShortViewState extends State<SingleShortView>
 
   @override
   void initState() {
+    Get.find<ShortController>().disposePLayerAll();
+
     super.initState();
-    Get.find<ShortController>()
-        .getUniqueShort(widget.idShort, widget.codeShort);
+    // Get.find<ShortController>()
+    //     .getUniqueShort(widget.idShort, widget.codeShort);
     _heartAnimationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000),
@@ -66,6 +69,7 @@ class _SingleShortViewState extends State<SingleShortView>
       ..initialize().then((_) {
         setState(() {
           Get.find<ShortController>().setControllerUniquePlayer(_controller);
+          print('444---');
 
           Get.find<ShortController>().isUniqueVideoPlayer.play();
         });
@@ -108,162 +112,175 @@ class _SingleShortViewState extends State<SingleShortView>
           },
           child: Scaffold(
               backgroundColor: ColorsApp.black,
-              body: Stack(
-                children: [
-                  GetBuilder<ShortController>(
-                    builder: (_ShortController) => _ShortController
-                                .isUniqueVideoPlayer !=
-                            null
-                        ? _ShortController
-                                .isUniqueVideoPlayer.value.isInitialized
-                            ? Center(
-                                child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        if (_ShortController.isUniqueVideoPlayer
-                                            .value.isPlaying) {
-                                          _ShortController.isUniqueVideoPlayer
-                                              .pause();
-                                        } else {
-                                          _ShortController.isUniqueVideoPlayer
-                                              .play();
-                                        }
-                                      });
-                                    },
-                                    // onDoubleTapDown: _handleDoubleTap,
-                                    onDoubleTap: () {
-                                      _ShortController.newLikeShort();
-                                    },
-                                    child: AspectRatio(
+              body: _ShortController.isUnique == 0
+                  ? AppLoading()
+                  : Stack(
+                      children: [
+                        GetBuilder<ShortController>(
+                          builder: (_ShortController) => _ShortController
+                                      .isUniqueVideoPlayer !=
+                                  null
+                              ? _ShortController
+                                      .isUniqueVideoPlayer.value.isInitialized
+                                  ? Center(
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              if (_ShortController
+                                                  .isUniqueVideoPlayer
+                                                  .value
+                                                  .isPlaying) {
+                                                _ShortController
+                                                    .isUniqueVideoPlayer
+                                                    .pause();
+                                              } else {
+                                                _ShortController
+                                                    .isUniqueVideoPlayer
+                                                    .play();
+                                              }
+                                            });
+                                          },
+                                          // onDoubleTapDown: _handleDoubleTap,
+                                          onDoubleTap: () {
+                                            _ShortController.newLikeShort();
+                                          },
+                                          child: AspectRatio(
+                                            aspectRatio: 9.7 / 17.7,
+                                            child: VideoPlayer(_ShortController
+                                                .isUniqueVideoPlayer),
+                                          )))
+                                  : AspectRatio(
                                       aspectRatio: 9.7 / 17.7,
-                                      child: VideoPlayer(
-                                          _ShortController.isUniqueVideoPlayer),
-                                    )))
-                            : AspectRatio(
-                                aspectRatio: 9.7 / 17.7,
-                                child: Image.network(
-                                  _ShortController.isUniqueVideoPlayer.preview,
+                                      child: Image.network(
+                                        _ShortController
+                                            .isUniqueVideoPlayer.preview,
 
-                                  fit: BoxFit
-                                      .cover, // Spécifie comment l'image doit s'adapter au conteneur
-                                ))
-                        : AspectRatio(
-                            aspectRatio: 9.7 / 17.7,
-                            child: Image.network(
-                              _ShortController.isUniqueVideoPlayer.preview,
+                                        fit: BoxFit
+                                            .cover, // Spécifie comment l'image doit s'adapter au conteneur
+                                      ))
+                              : AspectRatio(
+                                  aspectRatio: 9.7 / 17.7,
+                                  child: Image.network(
+                                    _ShortController
+                                        .currentReadShortData.preview,
 
-                              fit: BoxFit
-                                  .cover, // Spécifie comment l'image doit s'adapter au conteneur
-                            )),
-                  ),
-                  if (_ShortController.isUniqueVideoPlayer != null)
-                    Positioned(
-                      bottom: 15,
-                      left: 5,
-                      right: 5,
-                      child: Container(
-                          alignment: Alignment.center,
-                          width: kWidth,
-                          height: kHeight * .1,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: _ShortController
-                                  .isUniqueVideoPlayer.produits.length,
-                              itemBuilder: (ctx, i) => InkWell(
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                        color: ColorsApp.greySecond,
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5),
-                                      child: CachedNetworkImage(
-                                        height: kHeight * .09,
-                                        width: kWidth * .17,
-                                        fit: BoxFit.cover,
-                                        imageUrl: _ShortController
-                                            .isUniqueVideoPlayer
-                                            .produits[i]
-                                            .images[0]
-                                            .src,
-                                        imageBuilder: (context, imageProvider) {
-                                          return Container(
+                                    fit: BoxFit
+                                        .cover, // Spécifie comment l'image doit s'adapter au conteneur
+                                  )),
+                        ),
+                        if (_ShortController.isUniqueVideoPlayer != null)
+                          Positioned(
+                            bottom: 15,
+                            left: 5,
+                            right: 5,
+                            child: Container(
+                                alignment: Alignment.center,
+                                width: kWidth,
+                                height: kHeight * .1,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: _ShortController
+                                        .currentReadShortData.produits.length,
+                                    itemBuilder: (ctx, i) => InkWell(
+                                        child: Container(
                                             decoration: BoxDecoration(
                                               color: ColorsApp.greySecond,
                                               borderRadius:
                                                   BorderRadius.circular(8),
-                                              image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover,
-                                              ),
                                             ),
-                                          );
-                                        },
-                                        placeholder: (context, url) {
-                                          return ShimmerBox(
-                                              height: kHeight * .09);
-                                        },
-                                        errorWidget: (context, url, error) {
-                                          return CircleAvatar(
-                                              backgroundColor:
-                                                  ColorsApp.skyBlue,
-                                              radius: 50,
-                                              backgroundImage: AssetImage(
-                                                  "assets/images/error.gif"));
-                                        },
-                                      )),
-                                  onTap: () async {
-                                    Get.to(ProduitViewShort(
-                                      produit: _ShortController
-                                          .isUniqueVideoPlayer.produits[i],
-                                    ));
-                                  }))),
-                    ),
-                  // if (_ShortController.isUniqueVideoPlayer != null &&
-                  //     _ShortController.isUniqueVideoPlayer.value.isInitialized)
-                  //   Positioned(
-                  //       bottom: 2,
-                  //       child: Container(
-                  //           height: 8,
-                  //           width: kWidth,
-                  //           child: VideoProgressIndicator(
-                  //               _ShortController.isUniqueVideoPlayer,
-                  //               colors: VideoProgressColors(
-                  //                   playedColor: Color.fromARGB(255, 31, 59, 151)),
-                  //               allowScrubbing: true))),
-                  if (_ShortController.isUniqueVideoPlayer != null)
-                    Positioned(
-                      top: _heartPosition.dy - 40,
-                      left: _heartPosition.dx - 40,
-                      child: _showHeart
-                          ? ScaleTransition(
-                              scale: _heartAnimation,
-                              child: Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                                size: 80,
-                              ),
-                            )
-                          : Container(),
-                    ),
-                  if (_ShortController.isUniqueVideoPlayer != null)
-                    Positioned(
-                        top: kHeight / 2,
-                        left: kWidth / 1.3,
-                        child: Container(
-                            child: InkWell(
-                          child: ShortAction(
-                            short: _ShortController.currentReadShortData,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            child: CachedNetworkImage(
+                                              height: kHeight * .09,
+                                              width: kWidth * .17,
+                                              fit: BoxFit.cover,
+                                              imageUrl: _ShortController
+                                                  .currentReadShortData
+                                                  .produits[i]
+                                                  .images[0]
+                                                  .src,
+                                              imageBuilder:
+                                                  (context, imageProvider) {
+                                                return Container(
+                                                  decoration: BoxDecoration(
+                                                    color: ColorsApp.greySecond,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              placeholder: (context, url) {
+                                                return ShimmerBox(
+                                                    height: kHeight * .09);
+                                              },
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return CircleAvatar(
+                                                    backgroundColor:
+                                                        ColorsApp.skyBlue,
+                                                    radius: 50,
+                                                    backgroundImage: AssetImage(
+                                                        "assets/images/error.gif"));
+                                              },
+                                            )),
+                                        onTap: () async {
+                                          Get.to(() => ProduitViewShort(
+                                                produit: _ShortController
+                                                    .currentReadShortData
+                                                    .produits[i],
+                                              ));
+                                        }))),
                           ),
-                          onTap: () {
-                            _ShortController.disposePLayerAll();
+                        // if (_ShortController.isUniqueVideoPlayer != null &&
+                        //     _ShortController.isUniqueVideoPlayer.value.isInitialized)
+                        //   Positioned(
+                        //       bottom: 2,
+                        //       child: Container(
+                        //           height: 8,
+                        //           width: kWidth,
+                        //           child: VideoProgressIndicator(
+                        //               _ShortController.isUniqueVideoPlayer,
+                        //               colors: VideoProgressColors(
+                        //                   playedColor: Color.fromARGB(255, 31, 59, 151)),
+                        //               allowScrubbing: true))),
+                        if (_ShortController.isUniqueVideoPlayer != null)
+                          Positioned(
+                            top: _heartPosition.dy - 40,
+                            left: _heartPosition.dx - 40,
+                            child: _showHeart
+                                ? ScaleTransition(
+                                    scale: _heartAnimation,
+                                    child: Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                      size: 80,
+                                    ),
+                                  )
+                                : Container(),
+                          ),
+                        if (_ShortController.isUniqueVideoPlayer != null)
+                          Positioned(
+                              top: kHeight / 2,
+                              left: kWidth / 1.3,
+                              child: Container(
+                                  child: InkWell(
+                                child: ShortAction(
+                                  short: _ShortController.currentReadShortData,
+                                ),
+                                onTap: () {
+                                  _ShortController.disposePLayerAll();
 
-                            Get.toNamed(AppLinks.BOUTIQUE +
-                                '?lienBoutique=${_ShortController.currentReadShortData.boutique.lienBoutique.toString()}note=${_ShortController.currentReadShortData.boutique.note}&codeBoutique=${_ShortController.currentReadShortData.boutique.codeBoutique}&note=${_ShortController.currentReadShortData.boutique.note}&nomBoutique=${_ShortController.currentReadShortData.boutique.titre}&description=${_ShortController.currentReadShortData.boutique.description}&ville=${_ShortController.currentReadShortData.boutique.localisation.ville}&image=${_ShortController.currentReadShortData.boutique.images[_ShortController.currentReadShortData.boutique.images.length - 1].src}');
-                          },
-                        ))),
-                ],
-              )));
+                                  Get.toNamed(AppLinks.BOUTIQUE +
+                                      '?lienBoutique=${_ShortController.currentReadShortData.boutique.lienBoutique.toString()}note=${_ShortController.currentReadShortData.boutique.note}&codeBoutique=${_ShortController.currentReadShortData.boutique.codeBoutique}&note=${_ShortController.currentReadShortData.boutique.note}&nomBoutique=${_ShortController.currentReadShortData.boutique.titre}&description=${_ShortController.currentReadShortData.boutique.description}&ville=${_ShortController.currentReadShortData.boutique.localisation.ville}&image=${_ShortController.currentReadShortData.boutique.images[_ShortController.currentReadShortData.boutique.images.length - 1].src}');
+                                },
+                              ))),
+                      ],
+                    )));
     });
   }
 }

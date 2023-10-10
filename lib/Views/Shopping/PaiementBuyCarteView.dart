@@ -1,7 +1,6 @@
- 
 import 'package:EMIY/components/Button/customBtn.dart';
-import 'package:EMIY/components/Form/FormPaiement.dart'; 
-import 'package:EMIY/components/Text/bigtitleText0.dart'; 
+import 'package:EMIY/components/Form/FormPaiement.dart';
+import 'package:EMIY/components/Text/bigtitleText0.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/cartController.dart';
@@ -47,7 +46,7 @@ class _PaiementBuyCarteViewState extends State<PaiementBuyCarteView> {
                 ),
               ),
               body: Container(
-                  height: kHeight * .8,
+                  height: kHeight,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,

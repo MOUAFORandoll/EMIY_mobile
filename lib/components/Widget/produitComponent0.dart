@@ -23,8 +23,18 @@ class ProduitComponent extends StatelessWidget {
           margin:
               EdgeInsets.only(right: kMarginX, left: kMarginX, top: kMarginY),
           decoration: BoxDecoration(
-              color: ColorsApp.greyFirst,
-              borderRadius: BorderRadius.circular(8)),
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffDDDDDD),
+                  blurRadius: 0, // Soften the shaodw
+                  spreadRadius: 0,
+                  offset: Offset(-2.0, 3),
+                )
+              ]),
           child: /* SingleChildScrollView(
               child: */
               Row(

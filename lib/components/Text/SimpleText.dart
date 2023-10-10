@@ -15,7 +15,7 @@ class SimpleText extends StatelessWidget {
       text,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-          fontSize: kSmText,
+          fontSize: kBasics,
           fontFamily: 'Lato',
           color: ColorsApp.primaryText,
           fontWeight: bolder ? FontWeight.bold : FontWeight.normal),

@@ -12,8 +12,8 @@ String cartModelToJson(CartModel data) => json.encode(data.toJson());
 class CartModel {
   CartModel({
     required this.id,
-    required this.index,
-    required this.type,
+    // required this.index,
+    // required this.type,
     required this.name,
     required this.time,
     required this.img,
@@ -25,8 +25,8 @@ class CartModel {
 
   final int id;
   final String name;
-  final int index;
-  final String type;
+  // final int index;
+  // final String type;
   final String img;
   final int quantity;
   final int qtdispo;
@@ -34,8 +34,8 @@ class CartModel {
   final String time;
   final bool isExist;
   factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
-        index: json["index"] == null ? null : json["index"],
-        type: json["type"] == null ? null : json["type"],
+        // index: json["index"] == null ? null : json["index"],
+        // type: json["type"] == null ? null : json["type"],
         id: json["id"] == null ? null : json["id"],
         name: json["name"] == null ? null : json["name"],
         img: json["img"] == null ? null : json["img"],
@@ -47,8 +47,8 @@ class CartModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "index": index == null ? null : index,
-        "type": type == null ? null : type,
+        // "index": index == null ? null : index,
+        // "type": type == null ? null : type,
         "id": id == null ? null : id,
         "img": img == null ? null : img,
         "quantity": quantity == null ? null : quantity,

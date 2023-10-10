@@ -2,9 +2,9 @@
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/controller/negociationController.dart';
-import 'package:cached_network_image/cached_network_image.dart'; 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart'; 
+import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +22,19 @@ class ProduitForBoutiqueLinkComponent extends StatelessWidget {
     return InkWell(
       child: Container(
         height: kHeight / 4,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xffDDDDDD),
+                blurRadius: 0, // Soften the shaodw
+                spreadRadius: 0,
+                offset: Offset(-2.0, 3),
+              )
+            ]),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,6 +84,7 @@ class ProduitForBoutiqueLinkComponent extends StatelessWidget {
               ]),
               Container(
                 width: kWidth / 2,
+                margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                 child: Text(produit.titre,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.left,
@@ -81,6 +95,7 @@ class ProduitForBoutiqueLinkComponent extends StatelessWidget {
               ),
               Container(
                 width: kWidth / 2,
+                margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                 child: Text('XAF ' + produit.prix.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

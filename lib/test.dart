@@ -5,6 +5,7 @@ import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:EMIY/utils/constants/assets.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -237,61 +238,100 @@ class _TestState extends State<Test> with TickerProviderStateMixin {
               title: Text('Pinterest'),
             ),
             body: SingleChildScrollView(
-              child: StaggeredGrid.count(
-                crossAxisCount: 2,
-                children: images, // Configurez les hauteurs des tuiles
-                mainAxisSpacing: 4.0, // Espace vertical entre les tuiles
-                crossAxisSpacing: 4.0, // Espace horizontal entre les tuiles
+                child: Container(
+                    child: Column(children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: kMarginX * 2),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Text('Bets seller'),
+                      ),
+                      Container(
+                        child: Icon(Icons.arrow_forward),
+                      )
+                    ]),
               ),
-            )));
+              Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: kMarginX * 2, vertical: kMarginY),
+                  height: kHeight * .4,
+                  child: ListView.builder(
+                      itemCount: 5,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (_ctx, index) => index == 4
+                          ? Container(
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 30,
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                // color: ColorsApp.greyTi,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Container(
+                                  // height: kHeight / 2.7,
+                                  // margin: EdgeInsets.symmetric(horizontal: 5),
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    // color: ColorsApp.greyTi,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Stack(children: [
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: kMarginX * 2),
+                                          height: kHeight * .25,
+                                          width: kHeight * .1,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                            image: AssetImage(Assets.shop2),
+                                          )),
+                                        ),
+                                        Positioned(
+                                          top: 2,
+                                          right: 2,
+                                          child: InkWell(
+                                              child: Icon(Icons.handshake),
+                                              onTap: () {
+                                                Get.find<
+                                                        NegociationController>()
+                                                    .newNegociation(
+                                                        "produit.codeProduit");
+                                              }),
+                                        ),
+                                        Positioned(
+                                          bottom: 2,
+                                          right: 2,
+                                          child: InkWell(
+                                              child: Icon(Icons.favorite,
+                                                  color: ColorsApp.red),
+                                              onTap: () {}),
+                                        )
+                                      ]),
+                                      Container(
+                                          width: kWidth / 2,
+                                          child: Text("produit.titre",
+                                              overflow: TextOverflow.fade,
+                                              textAlign: TextAlign.left,
+                                              style: TexteStyle()
+                                                  .secondaryTextStyle)),
+                                      Container(
+                                          width: kWidth / 2,
+                                          child: Text('XAF ' + '5005',
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TexteStyle()
+                                                  .bprimaryTextStyle)),
+                                    ],
+                                  )))))
+            ])))));
   }
 }
-
-// class ObjectBoxManager {
-//   /// The Store of this app.
-//   late final Store store;
-
-//   ObjectBoxManager._create(this.store) {
-//     // Add any additional setup code, e.g. build queries.
-//   }
-
-//   /// Create an instance of ObjectBoxManager to use throughout the app.
-//   static Future<ObjectBoxManager> create() async {
-//     final docsDir = await getApplicationDocumentsDirectory();
-//     // Future<Store> openStore() {...} is defined in the generated ObjectBoxManager.g.dart
-//     final store =
-//         await openStore(directory: p.join(docsDir.path, "obx-example"));
-//     return ObjectBoxManager._create(store);
-//   }
-
-//   var index = 5;
-
-//   // Create operation
-//   void createYourDataModel(YourDataModel newData) {
-//     final box = store.box<YourDataModel>();
-//     index++;
-//     box.put(newData);
-//   }
-
-//   // Read operation
-//   List<YourDataModel> getAllYourDataModels() {
-//     final box = store.box<YourDataModel>();
-//     print(box.getAll().length);
-//     box.getAll().forEach(
-//           (element) => print(element.name),
-//         );
-//     return box.getAll();
-//   }
-
-//   // Update operation
-//   void updateYourDataModel(YourDataModel updatedData) {
-//     final box = store.box<YourDataModel>();
-//     box.put(updatedData);
-//   }
-
-//   // Delete operation
-//   void deleteYourDataModel(int id) {
-//     final box = store.box<YourDataModel>();
-//     box.remove(id);
-//   }
-// }

@@ -5,39 +5,49 @@ import 'package:flutter/material.dart';
 class TexteStyle {
   final errorStyle = TextStyle(
     fontFamily: 'Lato',
-    fontSize: kSmText,
+    fontSize: kBasics,
     color: ColorsApp.red,
   );
 
   final primaryTextStyle = TextStyle(
     fontFamily: 'Lato',
     color: ColorsApp.primaryText,
-    fontSize: kSmText,
+    fontSize: kBasics,
   );
+  final primaryBigTextStyle = TextStyle(
+    fontFamily: 'Lato',
+    color: ColorsApp.primaryText,
+    fontSize: kBasics,
+  );
+  final bprimaryBigTextStyle = TextStyle(
+      fontFamily: 'Lato',
+      color: ColorsApp.primaryText,
+      fontSize: kBasics,
+      fontWeight: FontWeight.w600);
   final bprimaryTextStyle = TextStyle(
       fontFamily: 'Lato',
       color: ColorsApp.primaryText,
-      fontSize: kSmText,
+      fontSize: kBasics,
       fontWeight: FontWeight.w600);
   final secondaryTextStyle = TextStyle(
     fontFamily: 'Lato',
     color: ColorsApp.primaryText,
-    fontSize: kSmText,
+    fontSize: kBasics,
   );
   final bsecondaryTextStyle = TextStyle(
       fontFamily: 'Lato',
       color: ColorsApp.primaryText,
-      fontSize: kSmText,
+      fontSize: kBasics,
       fontWeight: FontWeight.w600);
   final largeTextStyle = TextStyle(
     fontFamily: 'Lato',
     color: ColorsApp.primaryText,
-    fontSize: kLgText,
+    fontSize: kTitle,
   );
   final blargeTextStyle = TextStyle(
       fontFamily: 'Lato',
       color: ColorsApp.primaryText,
-      fontSize: kLgText,
+      fontSize: kTitle,
       fontWeight: FontWeight.w600);
 }
 
@@ -82,7 +92,7 @@ class ThemeStyle {
       titleSmall: TexteStyle().largeTextStyle,
     ),
     appBarTheme: const AppBarTheme(
-        foregroundColor: ColorsApp.bgColor, backgroundColor: ColorsApp.bgColor),
+        foregroundColor: ColorsApp.bgColor, backgroundColor: ColorsApp.red),
 
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
         .copyWith(background: ColorsApp.bgColor)

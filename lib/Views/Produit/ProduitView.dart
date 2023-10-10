@@ -32,7 +32,8 @@ import 'package:share_plus/share_plus.dart';
 
 class ProduitView extends StatelessWidget {
   final int index;
-  ProduitView({Key? key, required this.index}) : super(key: key);
+  final ProduitModel produit;
+  ProduitView({required this.index, required this.produit});
 
   ScrollController _scrollController = new ScrollController();
 
@@ -46,21 +47,24 @@ class ProduitView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print(index);
-    Object produ = Get.parameters['type'] == 'home'
-        ? Get.find<ProduitController>().produitList[index]
-        : Get.parameters['type'] == 'supplementaire'
-            ? Get.find<ProduitController>().produitSupplementaire[index]
-            : Get.parameters['type'] == 'search'
-                ? Get.find<MySearchController>().listProduit[index]
-                /*  : Get.parameters['type'] == '1'
-                ? Get.find<ProduitController>().produitListAll[index]
-                */
-                : Get.parameters['type'] == 'favorite'
-                    ? Get.find<ProduitController>().preferenceList[index]
-                    : Get.find<CategoryBoutiqueController>()
-                        .produitBoutiqueList[index];
-    var produit = produ as ProduitModel;
+    print(index);
+    // Object produ = Get.parameters['type'] == 'home'
+    //     ? Get.find<ProduitController>().produitList[index]
+    //     : Get.parameters['type'] == 'supplementaire'
+    //         ? Get.find<ProduitController>().produitSupplementaire[index]
+    //         : Get.parameters['type'] == 'search'
+    //             ? Get.find<MySearchController>().listProduit[index]
+    //             /*  : Get.parameters['type'] == '1'
+    //             ? Get.find<ProduitController>().produitListAll[index]
+    //             */
+    //             : Get.parameters['type'] == 'favorite'
+    //                 ? Get.find<ProduitController>().preferenceList[index]
+    //                 : Get.find<CategoryBoutiqueController>()
+    //                     .produitBoutiqueList[index];
+
+    // ProduitModel produit =
+    //     Get.find<GeneralController>().getProduit(Get.parameters['codeProduit']);
+    // var produit = produ as ProduitModel;
     Get.find<ProduitController>()
         .initProduit(Get.find<CartController>(), produit);
     Get.find<ProduitController>()
@@ -292,9 +296,10 @@ class ProduitView extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           BigtitleText(
+                                              size: kBasics,
                                               text: 'XAF ' +
                                                   produit.prix.toString(),
-                                              color: ColorsApp.black,
+                                              color: ColorsApp.secondBlue,
                                               bolder: true),
                                           Container(
                                             child: Row(
@@ -312,10 +317,8 @@ class ProduitView extends StatelessWidget {
                                                         prodController
                                                             .setQuantity(false);
                                                         prodController.addItem(
-                                                            produit,
-                                                            index,
-                                                            Get.parameters[
-                                                                'type']);
+                                                          produit,
+                                                        );
                                                       },
                                                     ),
                                                     SimpleText(
@@ -330,10 +333,8 @@ class ProduitView extends StatelessWidget {
                                                         prodController
                                                             .setQuantity(true);
                                                         prodController.addItem(
-                                                            produit,
-                                                            index,
-                                                            Get.parameters[
-                                                                'type']);
+                                                          produit,
+                                                        );
                                                         //print(
                                                         // "****************${prod.inCartItems}");
                                                       },
@@ -375,7 +376,7 @@ class ProduitView extends StatelessWidget {
                                                     color: ColorsApp.orange,
                                                   ),
                                                   BigtitleText(
-                                                      size: 12,
+                                                      size: kBasics,
                                                       color: ColorsApp.black,
                                                       text: produit.quantite
                                                               .toString() +
@@ -389,7 +390,7 @@ class ProduitView extends StatelessWidget {
                                                     color: ColorsApp.red,
                                                   ),
                                                   BigtitleText(
-                                                      size: 12,
+                                                      size: kBasics,
                                                       color: ColorsApp.black,
                                                       text: produit.like
                                                               .toString() +
@@ -545,7 +546,7 @@ class ProduitView extends StatelessWidget {
                                               textAlign: TextAlign.justify,
                                               style: TextStyle(
                                                   color: ColorsApp.blackSecond,
-                                                  fontSize: 13)))
+                                                  fontSize: kDescription)))
                                       : Container(
                                           margin: EdgeInsets.only(
                                               top: 20, bottom: 10),
@@ -555,7 +556,7 @@ class ProduitView extends StatelessWidget {
                                               textAlign: TextAlign.justify,
                                               style: TextStyle(
                                                   color: ColorsApp.blackSecond,
-                                                  fontSize: 13))),
+                                                  fontSize: kDescription))),
                                   Container(
                                     margin: EdgeInsets.symmetric(
                                         vertical: kMarginY),
@@ -684,9 +685,8 @@ class ProduitView extends StatelessWidget {
                                                     prodController
                                                         .setQuantity(false);
                                                     prodController.addItem(
-                                                        produit,
-                                                        index,
-                                                        Get.parameters['type']);
+                                                      produit,
+                                                    );
                                                   },
                                                 ),
                                                 SimpleText(
@@ -701,9 +701,8 @@ class ProduitView extends StatelessWidget {
                                                     prodController
                                                         .setQuantity(true);
                                                     prodController.addItem(
-                                                        produit,
-                                                        index,
-                                                        Get.parameters['type']);
+                                                      produit,
+                                                    );
                                                     //print(
                                                     // "****************${prod.inCartItems}");
                                                   },

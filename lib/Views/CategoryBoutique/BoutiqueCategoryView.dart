@@ -22,9 +22,11 @@ import 'package:EMIY/controller/categoryBoutiqueController.dart';
 import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/styles/theme.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:EMIY/components/Widget/ShimmerBoxBoutique.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BoutiqueCategoryView extends StatelessWidget {
@@ -86,11 +88,78 @@ class BoutiqueCategoryView extends StatelessWidget {
                   // Make the initial height of the SliverAppBar larger than normal.
                   expandedHeight: 60,
                 ),
+                SliverToBoxAdapter(
+                    child: Container(
+                        decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            // color: ColorsApp.grey,
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xffDDDDDD),
+                                blurRadius: 0, // Soften the shaodw
+                                spreadRadius: 0,
+                                offset: Offset(-1.2, 1.8),
+                              )
+                            ]),
+                        margin: EdgeInsets.symmetric(
+                            vertical: kMarginY, horizontal: kMarginX),
+                        padding: EdgeInsets.symmetric(
+                            vertical: kMarginY, horizontal: kMarginX),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                child: Text(Get.parameters['libelle']!,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TexteStyle()
+                                        .bprimaryBigTextStyle
+                                        .apply(color: Colors.white))),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                    vertical: kMarginY,
+                                  ),
+                                  child: Text(Get.parameters['description']!,
+                                      style: TexteStyle().secondaryTextStyle),
+                                )),
+                              ],
+                            ),
+                            Container(
+                                alignment: Alignment.bottomRight,
+                                child: Text(
+                                    Get.parameters['nombreBoutique']! +
+                                        ' Boutique(s)',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TexteStyle().secondaryTextStyle)),
+                          ],
+                        ))),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) => GetBuilder<CategoryBoutiqueController>(
                       builder: (_lbcontroller) => _lbcontroller.isLoadedP == 0
-                          ? AppLoading()
+                          ? Container(
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: SingleChildScrollView(
+                                  child: GridView.builder(
+                                      shrinkWrap: true,
+                                      physics: const BouncingScrollPhysics(),
+
+                                      // Ratio largeur/hauteur pour chaque élément
+                                      // controller: search.controllerT,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 3,
+                                              crossAxisSpacing: 20.0,
+                                              // childAspectRatio: 2.70,
+                                              mainAxisSpacing: 10.0),
+                                      itemCount: 9,
+                                      itemBuilder: (_ctx, index) =>
+                                          ShimmerBoxBoutique())))
                           : (_lbcontroller.ListBoutique.length != 0)
                               ? Container(
                                   margin: EdgeInsets.symmetric(

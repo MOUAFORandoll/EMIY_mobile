@@ -300,10 +300,8 @@ class ProduitViewShort extends StatelessWidget {
                                                             .setQuantity(false);
 
                                                         prodController.addItem(
-                                                            produit,
-                                                            0,
-                                                            Get.parameters[
-                                                                'type']);
+                                                          produit,
+                                                        );
                                                       },
                                                     ),
                                                     SimpleText(
@@ -321,10 +319,8 @@ class ProduitViewShort extends StatelessWidget {
                                                         prodController
                                                             .setQuantity(true);
                                                         prodController.addItem(
-                                                            produit,
-                                                            0,
-                                                            Get.parameters[
-                                                                'type']);
+                                                          produit,
+                                                        );
                                                         //print(
                                                         // "****************${prod.inCartItems}");
                                                       },
@@ -681,9 +677,8 @@ class ProduitViewShort extends StatelessWidget {
                                                     prodController
                                                         .setQuantity(false);
                                                     prodController.addItem(
-                                                        produit,
-                                                        0,
-                                                        'short_produit');
+                                                      produit,
+                                                    );
                                                   },
                                                 ),
                                                 SimpleText(
@@ -701,9 +696,8 @@ class ProduitViewShort extends StatelessWidget {
                                                     prodController
                                                         .setQuantity(true);
                                                     prodController.addItem(
-                                                        produit,
-                                                        0,
-                                                        'short_produit');
+                                                      produit,
+                                                    );
                                                     //print(
                                                     // "****************${prod.inCartItems}");
                                                   },

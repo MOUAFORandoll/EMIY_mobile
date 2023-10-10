@@ -147,7 +147,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 5834183656708337881),
       name: 'Localisation',
-      lastPropertyId: const IdUid(5, 7165721117595635223),
+      lastPropertyId: const IdUid(7, 4060489677760590929),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -161,18 +161,18 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 5986609547917399797),
-            name: 'long',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 9135511340752186278),
-            name: 'lat',
-            type: 9,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(5, 7165721117595635223),
             name: 'ip',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 6481026158616911854),
+            name: 'longitude',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 4060489677760590929),
+            name: 'latitude',
             type: 9,
             flags: 0)
       ],
@@ -281,7 +281,7 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [5986609547917399797, 9135511340752186278],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -469,15 +469,15 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Localisation object, fb.Builder fbb) {
           final villeOffset = fbb.writeString(object.ville);
-          final longOffset = fbb.writeString(object.long);
-          final latOffset = fbb.writeString(object.lat);
           final ipOffset = fbb.writeString(object.ip);
-          fbb.startTable(6);
+          final longitudeOffset = fbb.writeString(object.longitude);
+          final latitudeOffset = fbb.writeString(object.latitude);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, villeOffset);
-          fbb.addOffset(2, longOffset);
-          fbb.addOffset(3, latOffset);
           fbb.addOffset(4, ipOffset);
+          fbb.addOffset(5, longitudeOffset);
+          fbb.addOffset(6, latitudeOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -486,14 +486,17 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final villeParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
-          final longParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final latParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 10, '');
+          final longitudeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
+          final latitudeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 16, '');
           final ipParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 12, '');
           final object = Localisation(
-              ville: villeParam, long: longParam, lat: latParam, ip: ipParam)
+              ville: villeParam,
+              longitude: longitudeParam,
+              latitude: latitudeParam,
+              ip: ipParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -666,16 +669,16 @@ class Localisation_ {
   static final ville =
       QueryStringProperty<Localisation>(_entities[5].properties[1]);
 
-  /// see [Localisation.long]
-  static final long =
-      QueryStringProperty<Localisation>(_entities[5].properties[2]);
-
-  /// see [Localisation.lat]
-  static final lat =
-      QueryStringProperty<Localisation>(_entities[5].properties[3]);
-
   /// see [Localisation.ip]
   static final ip =
+      QueryStringProperty<Localisation>(_entities[5].properties[2]);
+
+  /// see [Localisation.longitude]
+  static final longitude =
+      QueryStringProperty<Localisation>(_entities[5].properties[3]);
+
+  /// see [Localisation.latitude]
+  static final latitude =
       QueryStringProperty<Localisation>(_entities[5].properties[4]);
 }
 

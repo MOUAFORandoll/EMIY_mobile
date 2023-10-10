@@ -1,5 +1,5 @@
 import 'dart:async';
- 
+
 import 'package:EMIY/Views/BoutiqueUser/MesBoutiquesView.dart';
 import 'package:EMIY/Views/UsersMange/InteretsView.dart';
 import 'package:EMIY/Views/UsersMange/ParrainnageView.dart';
@@ -8,16 +8,16 @@ import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
 import 'package:EMIY/Views/UsersMange/UserManageView.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/entity.dart';
-import 'package:EMIY/model/data/CompteModel.dart'; 
+import 'package:EMIY/model/data/CompteModel.dart';
 import 'package:EMIY/model/data/UserModel.dart';
-import 'package:EMIY/repository/ManageRepo.dart'; 
+import 'package:EMIY/repository/ManageRepo.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
-import 'package:EMIY/utils/Services/core.dart'; 
-import 'package:EMIY/utils/Services/requestServices.dart'; 
+import 'package:EMIY/utils/Services/core.dart';
+import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';  
+import 'package:get/get.dart';
 import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -187,7 +187,7 @@ class ManagerController extends GetxController {
 
     await manageRepo.getUser().then((value) async {
       print('------------------value----------${value.body}-');
-      if (value.body['data'].length != 0) {
+      if (value.body['data']  != null) {
         _User = UserModel.fromJson(value.body['data']);
         update();
 
@@ -245,17 +245,17 @@ class ManagerController extends GetxController {
   }
 
   getUserDB() async {
-    var data = await dababase.getUser();
-    print('-----------------------data-------${data!.id}-------------${data}');
+    // var data = await dababase.getUser();
+    // print('-----------------------data-------${data!.id}-------------${data}');
     // ignore: unnecessary_null_comparison
-    if (data!.id != null) {
-    print(
-          '-----------------------data-------${data.toMap()}-------------${data}');
+    // if (data!.id != null) {
+      // print(
+      //     '-----------------------data-------${data.toMap()}-------------${data}');
 
       // _User = UserModel.fromJson(data.toMap());
       // update();
       // initInfoUserDB();
-    }
+    // }
   }
 
   // CategoryController({required this.service});
