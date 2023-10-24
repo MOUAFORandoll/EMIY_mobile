@@ -60,7 +60,8 @@ class ProduitModel {
         negociable: json["negociable"] == null ? null : json["negociable"],
         images: json["images"] == null
             ? []
-            : List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))),
+            : List<ImageModel>.from(
+                json["images"].map((x) => ImageModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -80,4 +81,3 @@ class ProduitModel {
             : List<dynamic>.from(images.map((x) => x.toJson())),
       };
 }
- 

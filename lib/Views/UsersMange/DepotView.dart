@@ -6,7 +6,7 @@ import 'package:EMIY/components/Text/bigText.dart';
 import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Text/bigtitleText0.dart';
 import 'package:EMIY/components/Widget/categoryComponent.dart';
-import 'package:EMIY/components/Text/smallText.dart'; 
+import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
@@ -40,7 +40,7 @@ class DepotView extends StatelessWidget {
               ),
             ),
             body: Stack(children: [
-                WebViewWidget(controller: _Tcontroller.controller),
+              WebViewWidget(controller: _Tcontroller.controller),
               if (_Tcontroller.isLoad)
                 Center(
                   child: CircularProgressIndicator(),

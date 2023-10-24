@@ -35,7 +35,7 @@ class NewSplashScreen extends StatelessWidget {
                   ),
                   Text(this.title,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.bold))
+                      style: TextStyle(fontWeight: FontWeight.w600))
                 ],
               )),
             ),

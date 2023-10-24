@@ -75,7 +75,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                           style: TextStyle(
                               fontSize: 34.0,
                               fontFamily: 'Lato',
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w600),
                         ) */
                             SvgPicture.asset(
                           Assets.logoSvg,
@@ -110,7 +110,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     fontFamily: 'Lato',
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.w600),
                               )),
                         ],
                       ),
@@ -154,7 +154,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
 //                                   textStyle: TextStyle(
 //                                       fontSize: 34.0,
 //                                       fontFamily: 'Lato',
-//                                       fontWeight: FontWeight.bold),
+//                                       fontWeight: FontWeight.w600),
 //                                   cursor: '_',
 //                                   speed: const Duration(
 //                                       milliseconds:

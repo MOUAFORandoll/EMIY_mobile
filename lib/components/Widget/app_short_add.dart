@@ -1,6 +1,4 @@
- 
-
-import 'package:EMIY/controller/boutiqueController.dart'; 
+import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';

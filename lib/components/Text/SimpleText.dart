@@ -15,10 +15,10 @@ class SimpleText extends StatelessWidget {
       text,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-          fontSize: kBasics,
+          fontSize: kTitle,
           fontFamily: 'Lato',
           color: ColorsApp.primaryText,
-          fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
+          fontWeight: bolder ? FontWeight.w600 : FontWeight.normal),
     ));
   }
 }

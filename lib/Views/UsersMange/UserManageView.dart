@@ -1,18 +1,17 @@
- 
-import 'package:EMIY/components/Widget/app_input.dart'; 
+import 'package:EMIY/components/Widget/app_input.dart';
 import 'package:EMIY/components/Widget/app_text_divider.dart';
 
-import 'package:EMIY/components/Button/customBtn.dart'; 
+import 'package:EMIY/components/Button/customBtn.dart';
 import 'package:EMIY/controller/managerController.dart';
-import 'package:EMIY/styles/textStyle.dart'; 
-import 'package:EMIY/utils/Services/validators.dart'; 
-import "package:flutter/material.dart"; 
-import 'package:get/get.dart'; 
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:EMIY/utils/Services/validators.dart';
+import "package:flutter/material.dart";
+import 'package:get/get.dart';
 // import 'package:EMIY/components/informationComponent.dart';
-import 'package:EMIY/styles/colorApp.dart'; 
-// ignore: must_be_immutable
-class UserManageView extends StatelessWidget { 
+import 'package:EMIY/styles/colorApp.dart';
 
+// ignore: must_be_immutable
+class UserManageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ManagerController>(
@@ -92,8 +91,8 @@ class UserManageView extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
-                                top: kMarginY * 2,
+                              padding: EdgeInsets.symmetric(
+                                vertical: kMarginY * 2,
                               ),
                               child: AppInput(
                                 controller: _manager.phoneU,
@@ -104,7 +103,11 @@ class UserManageView extends StatelessWidget {
                                 },
                               ),
                             ),
-                            CustomBtn(
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: kMarginY * 2,
+                                ),
+                              child:  CustomBtn(
                                 color: ColorsApp.secondBlue,
                                 title: 'Mettre a jour',
                                 onTap: () async {
@@ -112,7 +115,7 @@ class UserManageView extends StatelessWidget {
                                       .validate()) {
                                     await _manager.updateUser();
                                   }
-                                })
+                                }))
                           ])),
                   AppTextDivider(
                     texte: 'Mot de passe ',

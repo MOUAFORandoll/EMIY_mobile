@@ -1,5 +1,3 @@
- 
-
 // class CategoryController extends GetxController {
 //   final CategoryRepo categoryRepo;
 //   CategoryController({required this.categoryRepo});
@@ -24,7 +22,7 @@
 //         update();
 //       }
 //       // //print(_categoryList);
-     
+
 //     } catch (e) {
 //       //print(e);
 //     }

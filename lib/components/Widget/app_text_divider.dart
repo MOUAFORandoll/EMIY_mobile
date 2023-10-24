@@ -1,4 +1,4 @@
-import 'package:EMIY/styles/colorApp.dart'; 
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -10,7 +10,7 @@ class AppTextDivider extends StatelessWidget {
     Key? key,
     required this.texte,
   }) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return Container(

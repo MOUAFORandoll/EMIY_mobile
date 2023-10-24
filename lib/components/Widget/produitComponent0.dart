@@ -118,7 +118,7 @@ class ProduitComponent extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.red,
                               fontSize: 12,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.w600)),
                     ),
                     Container(
                       width: kSmWidth * .6,
@@ -129,7 +129,7 @@ class ProduitComponent extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.red,
                               fontSize: 12,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.w600)),
                     ),
                     Container(
                       width: kSmWidth * .6,
@@ -143,7 +143,7 @@ class ProduitComponent extends StatelessWidget {
                               decorationThickness: 2.85,
                               color: ColorsApp.black,
                               fontSize: 12,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.w600)),
                     ),
                   ],
                 )

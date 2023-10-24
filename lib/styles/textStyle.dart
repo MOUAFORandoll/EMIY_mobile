@@ -42,4 +42,3 @@ final kSmIcon = 28.0;
 final kMdIcon = 30.0;
 final kLgIcon = 32.0;
 final kXlIcon = 34.0;
- 

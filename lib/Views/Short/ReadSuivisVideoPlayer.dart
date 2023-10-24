@@ -1,11 +1,9 @@
-
 import 'package:EMIY/controller/ShortController.dart';
-import 'package:EMIY/model/data/ShortModel.dart'; 
+import 'package:EMIY/model/data/ShortModel.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
- 
 
 class ReadSuivisVideoPlayer extends StatefulWidget {
   final ShortModel short;
@@ -15,10 +13,8 @@ class ReadSuivisVideoPlayer extends StatefulWidget {
   State<ReadSuivisVideoPlayer> createState() => _ReadSuivisVideoPlayerState();
 }
 
-class _ReadSuivisVideoPlayerState extends State<ReadSuivisVideoPlayer>
-     {
+class _ReadSuivisVideoPlayerState extends State<ReadSuivisVideoPlayer> {
   late VideoPlayerController _controller;
- 
 
   @override
   void initState() {
@@ -32,13 +28,12 @@ class _ReadSuivisVideoPlayerState extends State<ReadSuivisVideoPlayer>
           Get.find<ShortController>().controllerSuivis.play();
         });
       });
-  
   }
 
   @override
   void dispose() {
     _controller.dispose();
-   
+
     super.dispose();
     print('dispose');
 
@@ -51,7 +46,6 @@ class _ReadSuivisVideoPlayerState extends State<ReadSuivisVideoPlayer>
     // }
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ShortController>(

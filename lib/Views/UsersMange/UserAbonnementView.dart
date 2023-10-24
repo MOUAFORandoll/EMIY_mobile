@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserAbonnementView extends StatelessWidget {
-  UserAbonnementView({Key? key}) : super(key: key); 
+  UserAbonnementView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BoutiqueController>(

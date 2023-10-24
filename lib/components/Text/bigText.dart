@@ -1,4 +1,3 @@
-
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/textStyle.dart';
@@ -12,7 +11,7 @@ class BigText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: kSmWidth ,
+        width: kSmWidth,
         alignment: Alignment.center,
         child: Text(
           text,
@@ -20,7 +19,7 @@ class BigText extends StatelessWidget {
           style: TextStyle(
               fontSize: 20,
               color: ColorsApp.black,
-              fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
+              fontWeight: bolder ? FontWeight.w600 : FontWeight.normal),
         ));
   }
 }

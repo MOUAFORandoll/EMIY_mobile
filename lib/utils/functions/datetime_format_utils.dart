@@ -22,6 +22,4 @@ class FormatDateTime {
     final clockString = format.format(dateTime);
     return clockString;
   }
-
-   
 }

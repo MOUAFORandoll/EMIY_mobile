@@ -1,11 +1,10 @@
- 
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/model/data/CategoryModel.dart';
 import 'package:EMIY/model/data/ShortModel.dart';
 import 'package:EMIY/repository/SearchRepo.dart';
-import 'package:flutter/material.dart'; 
-import 'package:EMIY/model/data/ProduitModel.dart'; 
+import 'package:flutter/material.dart';
+import 'package:EMIY/model/data/ProduitModel.dart';
 import 'package:get/get.dart';
 
 class MySearchController extends GetxController {

@@ -24,6 +24,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:EMIY/components/Button/IconButtonF.dart';
 
+import '../../components/exportcomponent.dart';
+
 class MySpace extends StatelessWidget {
   ScrollController _scrollController = new ScrollController();
 
@@ -33,52 +35,49 @@ class MySpace extends StatelessWidget {
       return Scaffold(
           body: SafeArea(
               child: CustomScrollView(controller: _scrollController, slivers: [
-        SliverAppBar(
-          backgroundColor: Colors.white,
-
-          elevation: 0,
-          centerTitle: false,
-          leading: IconButtonF(
-            icon: Icons.arrow_back_ios_new,
-            color: ColorsApp.black,
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-          ),
-
-          // flexibleSpace: PreferredSize(
-          //   preferredSize: Size.fromHeight(100), // Set the fixed height here
-          //   child: Container(
-          //     margin: EdgeInsets.only(top: 53, left: 0)
-          //         .add(EdgeInsets.symmetric(horizontal: kMarginX)),
-          //     padding: EdgeInsets.only(
-          //         left: Get.width * .030, right: Get.width * .030),
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.start,
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Container(
-          //             child: Text('Notifications',
-          //                 style: TextStyle(
-          //                     fontFamily: 'Lato',
-          //                     color: ColorsApp.black,
-          //                     fontWeight: FontWeight.w700,
-          //                     fontSize: 16))),
-          //         Container(
-          //             child: Text('Vous avez 5 notifications',
-          //                 style: TextStyle(
-          //                     fontFamily: 'Lato',
-          //                     color: ColorsApp.greyFirst,
-          //                     fontWeight: FontWeight.w500,
-          //                     fontSize: 12))),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
-          // Make the initial height of the SliverAppBar larger than normal.
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
+       SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  // Provide a standard title.
+                  // title: Text('title'),
+                  // Allows the user to reveal the app bar if they begin scrolling
+                  // back up the list of items.
+                  floating: true,
+                  // Display a placeholder widget to visualize the shrinking size.
+                  flexibleSpace: InkWell(
+                    child: SingleChildScrollView(
+                      child: Column(children: [
+                        Container(
+                             margin: EdgeInsets.symmetric(vertical: Get.height * .030),
+                            padding: EdgeInsets.only(
+                                left: Get.width * .030,
+                                right: Get.width * .030),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  AppBackButton(color:ColorsApp.black),
+                                  Container(
+                                    child: AppTitleRight(
+                                        title: 'Notifications',
+                                        description:"Vous avez 5 notifications",
+                                        icon: null),
+                                    margin: EdgeInsets.only(
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                .005),
+                     
+                                  ),
+                                ])),
+                 
+                      ]),
+                    ),
+                  ),
+                  // Make the initial height of the SliverAppBar larger than normal.
+                  expandedHeight: 85,
+                    bottom: PreferredSize(
+            preferredSize: Size.fromHeight(125),
             child: Container(
                 margin: EdgeInsets.only(left: 0)
                     .add(EdgeInsets.symmetric(horizontal: kMarginX)),
@@ -88,20 +87,6 @@ class MySpace extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                          child: Text('Notifications',
-                              style: TextStyle(
-                                  fontFamily: 'Lato',
-                                  color: ColorsApp.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16))),
-                      Container(
-                          child: Text('Vous avez 5 notifications',
-                              style: TextStyle(
-                                  fontFamily: 'Lato',
-                                  color: ColorsApp.greyFirst,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12))),
                       Container(
                         height: kSmHeight / 1.2,
                         margin: EdgeInsets.symmetric(
@@ -136,8 +121,7 @@ class MySpace extends StatelessWidget {
                       )
                     ])),
           ),
-          expandedHeight: 70,
-          floating: false,
+         
           pinned: true,
         ),
         SliverList(

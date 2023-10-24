@@ -1,6 +1,7 @@
 import 'package:EMIY/components/Button/AppIconSendButton.dart';
 import 'package:EMIY/components/ShortComponent/iconShortComponent.dart';
 import 'package:EMIY/components/ShortComponent/commentComponent.dart';
+import 'package:EMIY/components/Widget/CircleImage.dart';
 import 'package:EMIY/components/Widget/InputMessaage.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/model/data/ShortModel.dart';
@@ -12,6 +13,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../controller/managerController.dart';
+
 // ignore: must_be_immutable
 class ShortAction extends StatelessWidget {
   ShortAction({required this.short});
@@ -21,14 +24,7 @@ class ShortAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ShortController>(
         builder: (_ShortController) => Container(
-                // alignment: Alignment.center,
-                // padding: EdgeInsets.all(7),
-                // decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(50),
-                //     border: Border.all(
-                //       color: Colors.white,
-                //     )),
-                // color: Colors.red,
+                 
                 child: Column(
               children: [
                 Container(
@@ -135,7 +131,7 @@ class ShortAction extends StatelessWidget {
                                   height: 22,
                                   margin: EdgeInsets.symmetric(
                                       vertical: kHeight / 4.7),
-                                  child: CircularProgressIndicator())
+                                  child: CircularProgressIndicator(color:ColorsApp.secondBlue))
                               : Expanded(
                                   child: Container(
                                     margin: EdgeInsets.symmetric(
@@ -194,9 +190,11 @@ class ShortAction extends StatelessWidget {
                                             : Text('')),
                                 Row(
                                   children: [
-                                    /*    Container(
-                      margin: EdgeInsets.symmetric(horizontal: kMarginX),
-                      child:  */
+                                GetBuilder<ManagerController>(
+        builder: (_UController) =>   CircleImage(
+                                        imageUrl: _UController.Userget.profile,
+                                        radius:  20)),
+             
                                     InputMessaage(
                                       controller: _ShortController
                                           .textEditingController,

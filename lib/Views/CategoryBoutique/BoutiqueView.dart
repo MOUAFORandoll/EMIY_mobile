@@ -160,17 +160,12 @@ class BoutiqueView extends StatelessWidget {
                                         Container(
                                             alignment: Alignment.topLeft,
                                             margin: EdgeInsets.symmetric(
-                                                vertical: kMarginY * 2,
+                                                vertical: kMarginY * 4,
                                                 horizontal: kMarginX),
                                             child: Text(
                                               'Produits Disponibles',
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  fontSize: kBasics,
-                                                  fontFamily: 'Lato',
-
-                                                  // color: ColorsApp.white,
-                                                  fontWeight: FontWeight.w600),
+                                         style: TexteStyle().blargeTextStyle ,
                                             )),
                                         SingleChildScrollView(
                                             child: GridView.builder(
@@ -290,7 +285,7 @@ class BoutiqueView extends StatelessWidget {
       //                                 //       style: TextStyle(
       //                                 //           color: Colors.red,
       //                                 //           fontSize: 12,
-      //                                 //           fontWeight: FontWeight.bold)),
+      //                                 //           fontWeight: FontWeight.w600)),
       //                                 // ),
       //                               ]),
       //                         ),
@@ -335,10 +330,6 @@ class BoutiqueView extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 /**
  * 
@@ -433,7 +424,7 @@ class BoutiqueView extends StatelessWidget {
                                       //       style: TextStyle(
                                       //           color: Colors.red,
                                       //           fontSize: 12,
-                                      //           fontWeight: FontWeight.bold)),
+                                      //           fontWeight: FontWeight.w600)),
                                       // ),
                                     ]),
                               ),

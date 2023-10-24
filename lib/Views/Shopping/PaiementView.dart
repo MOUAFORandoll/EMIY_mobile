@@ -1,4 +1,4 @@
-import 'package:EMIY/components/Button/AppIconButton.dart'; 
+import 'package:EMIY/components/Button/AppIconButton.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -16,7 +16,7 @@ class PaiementView extends StatelessWidget {
     return GetBuilder<BuyShopController>(
         builder: (_Bcontroller) => Scaffold(
             appBar: AppBar(
-              title: Text("Valider Paiement",
+              title: Text("Valider Votre Paiement",
                   style: TextStyle(color: ColorsApp.black)),
               centerTitle: true,
               elevation: 0,
@@ -40,7 +40,7 @@ class PaiementView extends StatelessWidget {
               //     _Bcontroller.setLoadTransaction(false);
               //   },
               // ),
-                    WebViewWidget(controller: _Bcontroller.controller),
+              WebViewWidget(controller: _Bcontroller.controller),
               if (_Bcontroller.isLoad)
                 Center(
                   child: CircularProgressIndicator(),

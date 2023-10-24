@@ -86,7 +86,7 @@ class ProduitForCatComponent extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.red,
                         fontSize: 12,
-                        fontWeight: FontWeight.bold)),
+                        fontWeight: FontWeight.w600)),
               ),
             ]),
       ),

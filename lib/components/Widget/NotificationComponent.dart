@@ -28,13 +28,12 @@ class NotificationComponent extends StatelessWidget {
           await Get.find<ShortController>().disposePLayerAll();
         },
         child: Container(
-            margin: EdgeInsets.all(kMarginY)
-                .add(EdgeInsets.symmetric(horizontal: kMarginX)),
+            margin: EdgeInsets.symmetric (vertical: kMarginY/2, horizontal: kMarginX*2),
             decoration: !notification.read
                 ? BoxDecoration(
-                    color: ColorsApp.greySecond,
+                    color: ColorsApp.greySearch,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: ColorsApp.greySecond),
+                    border: Border.all(color: ColorsApp.greySearch),
                   )
                 : null,
             child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -139,7 +138,7 @@ class NotificationComponent extends StatelessWidget {
                 ),
               ),
               Container(
-                  margin: EdgeInsets.symmetric(vertical: kMarginY)
+                  margin: EdgeInsets.symmetric(vertical: kMarginY/4)
                       .add(EdgeInsets.only(left: kMarginX)),
                   padding:
                       EdgeInsets.only(top: kMarginY / 2, bottom: kMarginY * 3),
@@ -154,8 +153,8 @@ class NotificationComponent extends StatelessWidget {
                                   notification.title,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
@@ -169,7 +168,7 @@ class NotificationComponent extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'Lato',
                                       fontSize: 12,
-                                      color: ColorsApp.black,
+                                      color: ColorsApp.greyTi,
                                     ),
                                   )),
                               Container(
@@ -181,7 +180,7 @@ class NotificationComponent extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Lato',
                                   fontSize: 12,
-                                  color: ColorsApp.black,
+                                  color: ColorsApp.greyTi,
                                 ),
                               )),
                             ]),

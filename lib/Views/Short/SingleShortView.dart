@@ -284,8 +284,6 @@ class _SingleShortViewState extends State<SingleShortView>
     });
   }
 }
- 
-
 
 /**
  * 
@@ -404,4 +402,3 @@ class _ShortViewFState extends State<ShortViewF> {
 }
 
  */
-

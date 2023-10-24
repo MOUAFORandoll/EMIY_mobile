@@ -1,7 +1,7 @@
-// ignore: must_be_immutable 
-import 'package:EMIY/model/data/CommandeModel.dart'; 
+// ignore: must_be_immutable
+import 'package:EMIY/model/data/CommandeModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:EMIY/utils/Services/routing.dart'; 
+import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +13,7 @@ class CommandeComponent extends StatelessWidget {
   CommandeComponent({required this.commande});
 
   @override
-  Widget build(BuildContext context) { 
-
+  Widget build(BuildContext context) {
     // titre.text = commande.titre;
     // quantite.text = commande.quantite.toString();
     // prix.text = commande.prix.toString();
@@ -79,7 +78,7 @@ class CommandeComponent extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       color: Colors.red,
-                                      fontWeight: FontWeight.bold)),
+                                      fontWeight: FontWeight.w600)),
                             ),
                             // Container(
                             //   child: Text(
@@ -89,7 +88,7 @@ class CommandeComponent extends StatelessWidget {
                             //       overflow: TextOverflow.ellipsis,
                             //       style: TextStyle(
                             //           color: Colors.red,
-                            //           fontWeight: FontWeight.bold)),
+                            //           fontWeight: FontWeight.w600)),
                             // ),
                             // Container(
                             //   child: Text(
@@ -98,21 +97,21 @@ class CommandeComponent extends StatelessWidget {
                             //       overflow: TextOverflow.ellipsis,
                             //       style: TextStyle(
                             //           color: Colors.red,
-                            //           fontWeight: FontWeight.bold)),
+                            //           fontWeight: FontWeight.w600)),
                             // ),
                             // Container(
                             //   child: Text('Code : ' + commande.codeCommande,
                             //       overflow: TextOverflow.ellipsis,
                             //       style: TextStyle(
                             //           color: Colors.red,
-                            //           fontWeight: FontWeight.bold)),
+                            //           fontWeight: FontWeight.w600)),
                             // ),
                             // Container(
                             //   child: Text('Date : ' + commande.date,
                             //       overflow: TextOverflow.ellipsis,
                             //       style: TextStyle(
                             //           color: Colors.red,
-                            //           fontWeight: FontWeight.bold)),
+                            //           fontWeight: FontWeight.w600)),
                             // ),
                             // // Container(
                             //   // width: kSmWidth * .6,
@@ -124,7 +123,7 @@ class CommandeComponent extends StatelessWidget {
                             //           decorationThickness: 2.85,
                             //           color:  ColorsApp.black,
                             //           fontSize: 12,
-                            //           fontWeight: FontWeight.bold)),
+                            //           fontWeight: FontWeight.w600)),
                             // )
                           ],
                         )),

@@ -26,6 +26,8 @@ abstract class ColorsApp {
   static const Color greyTh = Color.fromARGB(255, 214, 218, 223);
   static const Color greyTi = Color(0XFFC4C4C4);
   static const Color greyFirst = Color(0XFF505050);
+  // static const Color greyX = Color.fromARGB(255, 131, 130, 130);
+  static const Color grey1 = Color(0xFF8D9091);
 
   static const Color bgCont = mint; //Color(0xFF0FAE74);
   // static const Color greenLight = Color(0xFF45EFB1);

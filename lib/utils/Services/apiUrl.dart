@@ -3,8 +3,7 @@ class ApiUrl {
   //  static final String socketUrl = "http://socketemiy.chickenkiller.com";
   //   static final String stream_serveurUrl = "http://streamemiy.chickenkiller.com";
 
-
-  static final String backUrl = "http://192.168.43.187";
+  static final String backUrl = "http://192.168.43.134";
   // static final String backUrl = "http://192.168.43.187";
   static final String baseUrl = backUrl + ":8000";
   static final String socketUrl = backUrl + ":3000";

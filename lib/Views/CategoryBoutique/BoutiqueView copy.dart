@@ -14,7 +14,7 @@
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:get/get.dart';
 // // ignore: import_of_legacy_library_into_null_safe
-// 
+//
 
 // import '../../components/Widget/app_empty.dart';
 
@@ -229,7 +229,7 @@
 //                                 //   Get.parameters['description'].toString(),
 //                                 //   style: TextStyle(
 //                                 //     fontSize: 14,
-//                                 //     fontWeight: FontWeight.bold,
+//                                 //     fontWeight: FontWeight.w600,
 //                                 //   ),
 //                                 // ),
 //                                 Text(
@@ -337,7 +337,7 @@
 //       //                                 //       style: TextStyle(
 //       //                                 //           color: Colors.red,
 //       //                                 //           fontSize: 12,
-//       //                                 //           fontWeight: FontWeight.bold)),
+//       //                                 //           fontWeight: FontWeight.w600)),
 //       //                                 // ),
 //       //                               ]),
 //       //                         ),
@@ -383,12 +383,8 @@
 //   }
 // }
 
-
-
-
-
 // /**
-//  * 
+//  *
 // class BoutiqueView extends StatelessWidget {
 //   BoutiqueView({Key? key}) : super(key: key);
 //   ScrollController _scrollController = new ScrollController();
@@ -480,7 +476,7 @@
 //                                       //       style: TextStyle(
 //                                       //           color: Colors.red,
 //                                       //           fontSize: 12,
-//                                       //           fontWeight: FontWeight.bold)),
+//                                       //           fontWeight: FontWeight.w600)),
 //                                       // ),
 //                                     ]),
 //                               ),

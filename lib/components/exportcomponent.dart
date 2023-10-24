@@ -1,5 +1,5 @@
 export 'package:EMIY/components/Text/smallText.dart';
- export 'package:EMIY/components/Button/IconButtonF.dart';
+export 'package:EMIY/components/Button/IconButtonF.dart';
 export 'package:EMIY/components/Button/btnCatList.dart';
 export 'package:EMIY/components/Button/btnCatListPV.dart';
 export 'package:EMIY/components/Button/button.dart';
@@ -13,7 +13,7 @@ export 'package:EMIY/components/Widget/app_empty.dart';
 export 'package:EMIY/components/Widget/app_loading.dart';
 export 'package:EMIY/components/Widget/app_title_right.dart';
 export 'package:EMIY/components/Widget/categoryComponent.dart';
-export 'package:EMIY/components/Widget/produitComponent.dart'; 
+export 'package:EMIY/components/Widget/produitComponent.dart';
 export 'package:EMIY/components/Text/titleText.dart';
 export 'package:EMIY/components/Widget/produitForCatComponent.dart';
 export 'package:EMIY/controller/boutiqueController.dart';

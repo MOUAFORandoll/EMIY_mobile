@@ -154,7 +154,7 @@ class CartController extends GetxController {
     return quantity;
   }
 
-  void addItem(ProduitModel produit, int quantity ) {
+  void addItem(ProduitModel produit, int quantity) {
     //print(quantity);
     if (quantity <= produit.quantite) {
       //print('taillen');

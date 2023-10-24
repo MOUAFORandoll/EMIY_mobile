@@ -95,7 +95,7 @@ class BoutiqueComponentHome extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 18,
                                 color: ColorsApp.black,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                             // textAlign: TextAlign.start,
                           )),
                           Container(
@@ -107,7 +107,7 @@ class BoutiqueComponentHome extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: ColorsApp.black,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.w600),
                                 // textAlign: TextAlign.start,
                               )),
                           Container(
@@ -119,7 +119,7 @@ class BoutiqueComponentHome extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: ColorsApp.black,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.w600),
                                 // textAlign: TextAlign.start,
                               ))
                         ],

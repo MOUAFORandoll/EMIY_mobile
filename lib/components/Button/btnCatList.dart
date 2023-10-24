@@ -1,4 +1,3 @@
- 
 // ignore_for_file: must_be_immutable
 
 import 'package:EMIY/styles/colorApp.dart';
@@ -26,7 +25,7 @@ class BtnCatList extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
         ));
   }

@@ -284,7 +284,7 @@ class ShortController extends GetxController {
     try {
       Response response =
           await shortRepo.getListSuivisShort(indexIncrementSuivis, key);
-      
+
       if (response.body != null) {
         if (response.body['data'] != null) {
           if (response.body['data'].length != 0) {

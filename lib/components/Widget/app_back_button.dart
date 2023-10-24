@@ -1,4 +1,3 @@
- 
 import 'package:flutter/material.dart';
 import 'package:EMIY/styles/colorApp.dart';
 
@@ -12,7 +11,7 @@ class AppBackButton extends StatelessWidget {
   ///
   /// Defaults to the [IconThemeData.color] specified in the ambient [IconTheme],
   /// which usually matches the ambient [Theme]'s [ThemeData.iconTheme].
-  final Color? color;
+    Color? color = Colors.white;
   var backEvent;
 
   /// An override callback to perform instead of the default behavior which is
@@ -26,14 +25,19 @@ class AppBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // assert(debugCheckHasMaterialLocalizations(context));
-    return IconButton(
-        icon: Icon(Icons.keyboard_arrow_left_outlined),
-        color: ColorsApp.black,
-        // tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-        onPressed: () {
-          backEvent;
+    return InkWell(
+      child: Container(
+        margin: EdgeInsets.zero,
+        // padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
 
-          Navigator.of(context).pop();
-        });
+            // borderRadius: BorderRadius.circular(20),
+            ),
+        child: Icon(Icons.arrow_back_ios_new, color: color, size: 25.0),
+      ),
+      onTap: () {
+        Navigator.of(context).pop();
+      },
+    );
   }
 }

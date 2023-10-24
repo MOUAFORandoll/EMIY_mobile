@@ -119,7 +119,7 @@
 //                                       textAlign: TextAlign.center,
 //                                       style: TextStyle(
 //                                         fontSize: 16,
-//                                         fontWeight: FontWeight.bold,
+//                                         fontWeight: FontWeight.w600,
 //                                       ),
 //                                     )),
 //                               ]))),
@@ -142,7 +142,7 @@
 //                                     'HISTORIQUE DE TRANSACTIONS',
 //                                     style: TextStyle(
 //                                       fontSize: 14,
-//                                       fontWeight: FontWeight.bold,
+//                                       fontWeight: FontWeight.w600,
 //                                     ),
 //                                   ),
 //                                   Container(
@@ -243,7 +243,7 @@
 //                                             //           decorationThickness: 2.85,
 //                                             //           color:  ColorsApp.black,
 //                                             //           fontSize: 12,
-//                                             //           fontWeight: FontWeight.bold)),
+//                                             //           fontWeight: FontWeight.w600)),
 //                                             // ),
 //                                           ],
 //                                         ),

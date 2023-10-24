@@ -132,10 +132,15 @@ class ProduitController extends GetxController {
     }
   }
 
-  void addItem(ProduitModel produit,   ) {
+  void addItem(
+    ProduitModel produit,
+  ) {
     //print('quantitte : ${_quantity} total : ${_inCartItems}');
 
-    _cart.addItem(produit, _quantity,);
+    _cart.addItem(
+      produit,
+      _quantity,
+    );
     _quantity = 0;
     _inCartItems = _cart.getQuantity(produit);
 

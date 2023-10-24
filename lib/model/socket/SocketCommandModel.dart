@@ -51,7 +51,8 @@ class SocketCommandModel {
     required this.status,
   });
 
-  factory SocketCommandModel.fromJson(Map<String, dynamic> json) => SocketCommandModel(
+  factory SocketCommandModel.fromJson(Map<String, dynamic> json) =>
+      SocketCommandModel(
         id: json["id"] == null ? null : json["id"],
         pdf: json["pdf"] == null ? null : json["pdf"],
         codeClient: json["codeClient"] == null ? null : json["codeClient"],

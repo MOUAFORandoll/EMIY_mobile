@@ -6,13 +6,13 @@ import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/core.dart';
 import 'package:EMIY/utils/constants/assets.dart';
-import 'package:connectivity/connectivity.dart'; 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart'; 
+import 'package:get_storage/get_storage.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ViewFunctions {
@@ -265,7 +265,7 @@ class ViewFunctions {
   }
   /*
    leftBarIndicatorColor,   Gradient? backgroundGradient, TextButton? mainButton, void Function(GetSnackBar)? onTap, bool? isDismissible, bool? showProgressIndicator, DismissDirection? dismissDirection, AnimationController? progressIndicatorController, Color? progressIndicatorBackgroundColor, Animation<Color>? progressIndicatorValueColor, SnackStyle? snackStyle, Curve? forwardAnimationCurve, Curve? reverseAnimationCurve, Duration? animationDuration, double? barBlur, double? overlayBlur, void Function(SnackbarStatus?)? snackbarStatus, Color? overlayColor, Form? userInputForm*/
- 
+
   /* 
 Future<void> _checkInternetConnection() async {
     try {

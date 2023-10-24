@@ -1,7 +1,6 @@
- 
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class BoxInputMessaage extends StatelessWidget {
@@ -53,7 +52,7 @@ class BoxInputMessaage extends StatelessWidget {
                   labelText: hint,
                   labelStyle: TextStyle(
                     color: Colors.blue,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     fontSize: 12,
                   ),
                   counterText: "",

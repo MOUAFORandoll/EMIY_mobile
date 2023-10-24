@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 
 class ParticularBtn extends StatelessWidget {
- final  String? subtitle;
-final  IconData? icon;
- final  Function? onTap;
-final   Color? color;
+  final String? subtitle;
+  final IconData? icon;
+  final Function? onTap;
+  final Color? color;
 
   ParticularBtn({this.icon, this.color, this.subtitle, this.onTap});
 

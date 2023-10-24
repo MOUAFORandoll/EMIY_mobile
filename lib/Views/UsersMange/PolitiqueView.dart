@@ -1,9 +1,8 @@
- 
-import 'package:EMIY/controller/boutiqueController.dart'; 
+import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
- 
+
 import 'package:get/get.dart';
 
 class PolitiqueView extends StatefulWidget {
@@ -19,7 +18,6 @@ class _PolitiqueViewState extends State<PolitiqueView> {
   TextEditingController description = TextEditingController();
 
   TextEditingController email = TextEditingController();
- 
 
   bool validator = false;
 
@@ -81,7 +79,7 @@ class _PolitiqueViewState extends State<PolitiqueView> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 )),
                           ]))),
@@ -137,7 +135,7 @@ class _PolitiqueViewState extends State<PolitiqueView> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
 

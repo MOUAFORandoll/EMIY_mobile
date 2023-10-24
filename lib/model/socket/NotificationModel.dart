@@ -13,7 +13,7 @@ class NotificationModel {
   final String date;
   final String profile;
   final int type_notification;
-  final int short;
+    int short;
 
   NotificationModel({
     required this.id,
@@ -34,7 +34,7 @@ class NotificationModel {
         description: json["description"] == null ? null : json["description"],
         profile: json["profile"] == null ? null : json["profile"],
         date: json["date"] == null ? null : json["date"],
-        short: json["short"] == null ? null : json["short"],
+        short: json["short"] == null ? 0 : json["short"],
         type_notification: json["type_notification"],
       );
 

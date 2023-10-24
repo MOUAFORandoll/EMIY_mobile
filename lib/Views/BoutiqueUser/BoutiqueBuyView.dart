@@ -87,7 +87,7 @@ class _BoutiqueBuyViewState extends State<BoutiqueBuyView> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 )),
                           ]))),
@@ -143,7 +143,7 @@ class _BoutiqueBuyViewState extends State<BoutiqueBuyView> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
 

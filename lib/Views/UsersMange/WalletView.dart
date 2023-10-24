@@ -1,18 +1,13 @@
- 
- 
-import 'package:EMIY/components/Widget/TransactionComponent.dart'; 
-import 'package:EMIY/controller/TransactionController.dart';  
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/components/Widget/TransactionComponent.dart';
+import 'package:EMIY/controller/TransactionController.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart'; 
-import 'package:get/get.dart'; 
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 class WalletView extends StatelessWidget {
-  
- 
   @override
-  Widget build(BuildContext context) { 
-
+  Widget build(BuildContext context) {
     return GetBuilder<TransactionController>(
       builder: (transControll) => transControll.isLoadedTrans == 0
           ? /* Shimmer.fromColors(
@@ -91,7 +86,7 @@ class WalletView extends StatelessWidget {
                                             //           decorationThickness: 2.85,
                                             //           color:  ColorsApp.black,
                                             //           fontSize: 12,
-                                            //           fontWeight: FontWeight.bold)),
+                                            //           fontWeight: FontWeight.w600)),
                                             // ),
                                           ],
                                         ),

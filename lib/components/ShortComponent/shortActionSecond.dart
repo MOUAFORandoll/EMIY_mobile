@@ -5,12 +5,13 @@ import 'package:EMIY/components/Widget/InputMessaage.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/model/data/ShortModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
+
 // ignore: must_be_immutable
 class ShortActionSecond extends StatelessWidget {
   ShortActionSecond({required this.short});

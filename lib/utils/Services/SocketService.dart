@@ -162,10 +162,12 @@ class SocketService {
       print(recepteur);
       print('------notifications----********************************-------');
 
+      if (msg  != null && msg != 'null') {
       if (jsonDecode(msg)['recepteur'].toString() == recepteur.toString()) {
         print('-----------------');
         print(jsonDecode(msg));
         action(NotificationModel.fromJson(jsonDecode(msg)));
+      }
       }
       // socket.close();
       // setMessage("destination", msg["message"]);

@@ -76,7 +76,7 @@ class FormPaiement extends StatelessWidget {
               color: Colors.grey, fontStyle: FontStyle.italic, fontSize: 12),
           labelText: hintText,
           labelStyle: TextStyle(
-              color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 12),
+              color: Colors.blue, fontWeight: FontWeight.w600, fontSize: 12),
           suffixIcon: InkWell(
             onTap: () => onTap,
             child: icon

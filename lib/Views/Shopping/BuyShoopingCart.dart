@@ -209,7 +209,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                                           EdgeInsets
                                                                               .only(
                                                                         top:
-                                                                            kMarginY,
+                                                                            kMarginY*2,
                                                                       ),
                                                                       child:
                                                                           AppInput(
@@ -235,7 +235,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                                           EdgeInsets
                                                                               .only(
                                                                         top:
-                                                                            kMarginY,
+                                                                            kMarginY*2,
                                                                       ),
                                                                       child:
                                                                           AppInput(
@@ -272,32 +272,52 @@ class BuyShoopingCart extends StatelessWidget {
                                                                     //     validator: (value) {},
                                                                     //   ),
                                                                     // ),
+ GetBuilder<BuyShopController>(
+                                                                                builder: (_BsCcontroller) =>
                                                                     InkWell(
-                                                                        child: Container(
-                                                                            padding: EdgeInsets.all(Get.height * .02),
-                                                                            margin: EdgeInsets.only(
-                                                                              top: kMarginY,
-                                                                            ),
-                                                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: ColorsApp.secondBlue),
-                                                                            child: Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: <Widget>[
-                                                                                Text(
-                                                                                  'livrP'.tr,
-                                                                                  style: TextStyle(
-                                                                                    fontSize: 12,
+                                                                        child: _BsCcontroller.selected_livraison_point.id !=
+                                                                                0
+                                                                            ? Container(
+                                                                                  width: kWidth,
+                                                                                  padding: EdgeInsets.all(Get.height * .02),
+                                                                                  margin: EdgeInsets.only(
+                                                                                    top: kMarginY*2,
                                                                                   ),
-                                                                                  overflow: TextOverflow.ellipsis,
+                                                                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: ColorsApp.secondBlue),
+                                                                                  child: Text(
+                                                                                    _BsCcontroller.selected_livraison_point.libelle,
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 12,
+                                                                                    ),
+                                                                                    overflow: TextOverflow.ellipsis,
+                                                                                  ),
+                                                                                )
+                                                                              
+                                                                            : Container(
+                                                                                padding: EdgeInsets.all(Get.height * .02),
+                                                                                margin: EdgeInsets.only(
+                                                                                  top: kMarginY*2,
                                                                                 ),
-                                                                                Container(
-                                                                                    child: SvgPicture.asset(
-                                                                                  Assets.localisation,
-                                                                                  width: 18,
-                                                                                  height: 18,
-                                                                                  color: ColorsApp.orange,
+                                                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: ColorsApp.secondBlue),
+                                                                                child: Row(
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  children: <Widget>[
+                                                                                    Text(
+                                                                                      'livrP'.tr,
+                                                                                      style: TextStyle(
+                                                                                        fontSize: 12,
+                                                                                      ),
+                                                                                      overflow: TextOverflow.ellipsis,
+                                                                                    ),
+                                                                                    Container(
+                                                                                        child: SvgPicture.asset(
+                                                                                      Assets.localisation,
+                                                                                      width: 18,
+                                                                                      height: 18,
+                                                                                      color: ColorsApp.orange,
+                                                                                    )),
+                                                                                  ],
                                                                                 )),
-                                                                              ],
-                                                                            )),
                                                                         onTap: () {
                                                                           Get.bottomSheet(
                                                                             GetBuilder<BuyShopController>(
@@ -310,8 +330,7 @@ class BuyShoopingCart extends StatelessWidget {
                                                                                       top: kMarginY * 8,
                                                                                     ),
                                                                                     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15))),
-                                                                                    child: SingleChildScrollView(
-                                                                                        child: Column(children: [
+                                                                                    child: Column(children: [
                                                                                       Padding(
                                                                                           padding: EdgeInsets.only(
                                                                                             top: kMarginY,
@@ -334,28 +353,27 @@ class BuyShoopingCart extends StatelessWidget {
                                                                                             ],
                                                                                           )),
                                                                                       Padding(
-                                                                                        padding: EdgeInsets.symmetric(
-                                                                                          vertical: kMarginY * 2,
-                                                                                        ),
-                                                                                        child: AppInput(
-                                                                                          controller: _BCcontroller.searchController,
-                                                                                          label: 'Rechercher'.tr,
-                                                                                          onChanged: (value) {
-                                                                                            return _BCcontroller.searchPointLivraison();
-                                                                                          },
-                                                                                        ),
-                                                                                      ),
-                                                                                      _BCcontroller.searchController.text.length == 0 ? ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.livraison_point[index])) : ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.search_livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.search_livraison_point[index]))
-                                                                                    ])))),
+                                                                                          padding: EdgeInsets.symmetric(
+                                                                                            vertical: kMarginY * 2,
+                                                                                          ),
+                                                                                          child: AppInput(
+                                                                                            controller: _BCcontroller.searchController,
+                                                                                            label: 'Rechercher'.tr,
+                                                                                            onChanged: (value) {
+                                                                                              return _BCcontroller.searchPointLivraison();
+                                                                                            },
+                                                                                          )),
+                                                                                      Expanded(child: SingleChildScrollView(child: _BCcontroller.searchController.text.length == 0 ? ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.livraison_point[index])) : ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.search_livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.search_livraison_point[index]))))
+                                                                                    ]))),
                                                                             isScrollControlled:
                                                                                 true,
                                                                           );
-                                                                        }),
+                                                                        })),
                                                                     Container(
                                                                       margin: EdgeInsets
                                                                           .only(
                                                                         top:
-                                                                            kMarginY,
+                                                                            kMarginY*2,
                                                                       ),
                                                                       child:
                                                                           TextFormField(
@@ -428,6 +446,7 @@ class BuyShoopingCart extends StatelessWidget {
                                       Container(
                                           decoration: BoxDecoration(
                                             color: ColorsApp.greySearch,
+                                            borderRadius: BorderRadius.circular(5)
                                           ),
                                           margin: EdgeInsets.symmetric(
                                               vertical: kMarginY),
@@ -481,6 +500,7 @@ class BuyShoopingCart extends StatelessWidget {
                                       Container(
                                           decoration: BoxDecoration(
                                             color: ColorsApp.greySearch,
+                                             borderRadius: BorderRadius.circular(5)
                                           ),
                                           margin: EdgeInsets.symmetric(
                                               vertical: kMarginY),

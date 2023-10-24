@@ -15,9 +15,9 @@ import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
- 
+
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart'; 
+import 'package:get_storage/get_storage.dart';
 
 // ignore: must_be_immutable
 class ManageBoutiqueUserView extends StatelessWidget {

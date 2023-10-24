@@ -103,7 +103,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Text('N',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                             // fontFamily:  ,
                             fontSize: 120 + _controller.tailleAdd,
                             color: Colors.white))

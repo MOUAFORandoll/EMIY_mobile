@@ -381,11 +381,11 @@ class AppLinks {
 //      * @throws ServerExceptionInterface
 //      * @throws TransportExceptionInterface
 //      * @throws \Exception
-//      * 
-//      * 
+//      *
+//      *
 //      * @param array $data doit contenir la  la keySecret du
-//      * 
-//      * 
+//      *
+//      *
 //      */
 //     public function ShortRead(Request $request)
 //     {
@@ -401,9 +401,6 @@ class AppLinks {
 //         $lShort = $this->em->getRepository(Short::class)->findAll();
 //         foreach ($lShort as $short) {
 
-
-
-
 //             $shortF =  [
 
 //                 'id' => $short->getId(),
@@ -414,8 +411,6 @@ class AppLinks {
 //                 'date' =>
 //                 date_format($short->getDateCreated(), 'Y-m-d H:i'),
 
-
-
 //             ];
 //             array_push($lShortF, $shortF);
 //         }
@@ -425,7 +420,6 @@ class AppLinks {
 //                 [
 //                     'data'
 //                     =>  $lShortF,
-
 
 //                 ],
 //                 200
@@ -442,22 +436,20 @@ class AppLinks {
 //      * @throws ServerExceptionInterface
 //      * @throws TransportExceptionInterface
 //      * @throws \Exception
-//      * 
-//      * 
+//      *
+//      *
 //      * @param array $data doit contenir la  la keySecret du
-//      * 
-//      * 
+//      *
+//      *
 //      */
 //     public function ShortNew(Request $request, SluggerInterface $slugger)
 //     {
-
 
 //         // $typeCompte = $AccountEntityManager->getRepository(TypeCompte::class)->findOneBy(['id' => 1]);
 
 //         $possible = false;
 
 //         $serializer = $this->get('serializer');
-
 
 //         $data = [
 
@@ -469,7 +461,6 @@ class AppLinks {
 
 //         if (
 //             empty($data['titre']) || empty($data['description'])
-
 
 //             || empty($data['codeBoutique'])
 //         ) {
@@ -484,12 +475,9 @@ class AppLinks {
 //         $titre = $data['titre'];
 //         $description = $data['description'];
 
-
 //         $boutique = $this->em->getRepository(Boutique::class)->findOneBy(['codeBoutique' => $data['codeBoutique']]);
 
 //         $file = $request->files->get('file');
-
-
 
 //         if ($file) {
 //             $originalFilenameData = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -547,4 +535,3 @@ class AppLinks {
 //             );
 //     }
 // }
- 

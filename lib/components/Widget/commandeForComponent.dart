@@ -109,7 +109,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.red,
-                                        fontWeight: FontWeight.bold)),
+                                        fontWeight: FontWeight.w600)),
                               ),
                               Container(
                                 child: Text(
@@ -118,27 +118,27 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.red,
-                                        fontWeight: FontWeight.bold)),
+                                        fontWeight: FontWeight.w600)),
                               ),
                               Container(
                                 child: Text('Code : ' + commande.codeCommande,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.red,
-                                        fontWeight: FontWeight.bold)),
+                                        fontWeight: FontWeight.w600)),
                               ),
                               Container(
                                   child: Text('Date : ' + commande.date,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           color: Colors.red,
-                                          fontWeight: FontWeight.bold))),
+                                          fontWeight: FontWeight.w600))),
                               Container(
                                 child: Text('Status : ' + commande.status,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.red,
-                                        fontWeight: FontWeight.bold)),
+                                        fontWeight: FontWeight.w600)),
                               ),
                               // Container(
                               //   // width: kSmWidth * .6,
@@ -150,7 +150,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                               //           decorationThickness: 2.85,
                               //           color:  ColorsApp.black,
                               //           fontSize: 12,
-                              //           fontWeight: FontWeight.bold)),
+                              //           fontWeight: FontWeight.w600)),
                               // )
                             ],
                           )),

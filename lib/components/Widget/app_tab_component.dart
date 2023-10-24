@@ -18,12 +18,12 @@ class AppTabComponent extends StatelessWidget {
           height: 5,
           // width: kSmWidth,
           alignment: Alignment.center,
-          padding: EdgeInsets.all(3),
+          padding: EdgeInsets.all(5),
           margin: EdgeInsets.only(right: kMarginX),
           decoration: BoxDecoration(
               color: selected ? ColorsApp.secondBlue : Colors.transparent,
               border: Border.all(
-                  color: selected ? ColorsApp.secondBlue : ColorsApp.greyFirst),
+                  color: selected ? ColorsApp.secondBlue : ColorsApp.greyTh),
               borderRadius: BorderRadius.circular(12)),
           child: Text(libelle,
               overflow: TextOverflow.ellipsis,

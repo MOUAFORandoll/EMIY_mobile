@@ -1,6 +1,5 @@
- 
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class titleText extends StatelessWidget {
@@ -15,7 +14,7 @@ class titleText extends StatelessWidget {
         text,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-            fontSize: 15, color: ColorsApp.black, fontWeight: FontWeight.bold),
+            fontSize: 15, color: ColorsApp.black, fontWeight: FontWeight.w600),
       ),
     );
   }

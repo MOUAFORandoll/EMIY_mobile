@@ -107,13 +107,14 @@ class ManagerController extends GetxController {
 
   getLocalU() async {
     var data = await dababase.getLonLat();
-    // //print('******************data');
-    // //print(data);
+     print('******************${data}');
     if (data != null) {
+    print(data);
       if (data.length != 0) {
+    print(data);
         _ville = data['ville'];
-        _longitude = data['long'];
-        _latitude = data['lat'];
+        _longitude = double.parse( data['longitude']);
+        _latitude =  double.parse( data['latitude']);
         update();
       }
     }
@@ -187,7 +188,7 @@ class ManagerController extends GetxController {
 
     await manageRepo.getUser().then((value) async {
       print('------------------value----------${value.body}-');
-      if (value.body['data']  != null) {
+      if (value.body['data'] != null) {
         _User = UserModel.fromJson(value.body['data']);
         update();
 
@@ -249,12 +250,12 @@ class ManagerController extends GetxController {
     // print('-----------------------data-------${data!.id}-------------${data}');
     // ignore: unnecessary_null_comparison
     // if (data!.id != null) {
-      // print(
-      //     '-----------------------data-------${data.toMap()}-------------${data}');
+    // print(
+    //     '-----------------------data-------${data.toMap()}-------------${data}');
 
-      // _User = UserModel.fromJson(data.toMap());
-      // update();
-      // initInfoUserDB();
+    // _User = UserModel.fromJson(data.toMap());
+    // update();
+    // initInfoUserDB();
     // }
   }
 

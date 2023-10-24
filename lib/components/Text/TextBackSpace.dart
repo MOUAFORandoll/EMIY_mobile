@@ -23,7 +23,7 @@ class TextBackSpace extends StatelessWidget {
               fontFamily: 'Lato',
               fontSize: 12,
               color: color,
-              fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
+              fontWeight: bolder ? FontWeight.w600 : FontWeight.normal),
         ));
   }
 }

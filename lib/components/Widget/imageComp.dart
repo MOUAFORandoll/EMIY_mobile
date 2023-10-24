@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:EMIY/controller/boutiqueController.dart'; 
+import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

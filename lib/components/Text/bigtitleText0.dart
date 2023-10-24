@@ -1,6 +1,5 @@
- 
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class BigtitleText0 extends StatelessWidget {
@@ -17,7 +16,7 @@ class BigtitleText0 extends StatelessWidget {
       style: TextStyle(
           fontSize: 20,
           color: ColorsApp.black,
-          fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
+          fontWeight: bolder ? FontWeight.w600 : FontWeight.normal),
     ));
   }
 }

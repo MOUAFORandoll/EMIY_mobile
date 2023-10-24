@@ -34,7 +34,7 @@ class UniLinkService extends GetxService {
         // but keep in mind it could be `null`.
         if (initialURI != null) {
           debugPrint("Initial URI received $initialURI");
-        
+
           _initialURI = initialURI;
         } else {
           debugPrint("Null Initial URI received");

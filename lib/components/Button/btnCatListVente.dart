@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BtnCatListVente extends StatelessWidget {
-  final  title, onTap, active, pVal;
+  final title, onTap, active, pVal;
 
   BtnCatListVente({this.active = false, this.title, this.onTap, this.pVal});
 
@@ -25,7 +25,7 @@ class BtnCatListVente extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
         ));
   }

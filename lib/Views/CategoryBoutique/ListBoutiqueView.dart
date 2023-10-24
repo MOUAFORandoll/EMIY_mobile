@@ -26,8 +26,8 @@
 //   ScrollController _scrollController = new ScrollController();
 
 //   @override
-//   Widget build(BuildContext context) { 
-    
+//   Widget build(BuildContext context) {
+
 //     Get.find<CategoryBoutiqueController>().getCategoryBoutique(Get.parameters['id']);
 //     return Scaffold(
 //         body: RefreshIndicator(
@@ -37,7 +37,7 @@
 //             .getCategoryBoutique(Get.parameters['id']);
 //       },
 //       child: CustomScrollView(controller: _scrollController, slivers: [
-//        
+//
 //         SliverAppBar(
 //           backgroundColor: Colors.white,
 //           elevation: 0,
@@ -73,8 +73,8 @@
 //           expandedHeight: 60,
 //         ),
 //         SliverList(
-//          
-//           delegate: SliverChildBuilderDelegate( 
+//
+//           delegate: SliverChildBuilderDelegate(
 //             (context, index) => GetBuilder<CategoryBoutiqueController>(
 //                 builder: (_lbcontroller) => _lbcontroller.isLoaded == 0
 //                     ? Shimmer.fromColors(
@@ -134,7 +134,7 @@
 //                                         //       style: TextStyle(
 //                                         //           color: Colors.red,
 //                                         //           fontSize: 12,
-//                                         //           fontWeight: FontWeight.bold)),
+//                                         //           fontWeight: FontWeight.w600)),
 //                                         // ),
 //                                       ]),
 //                                 ),

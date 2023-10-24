@@ -27,16 +27,17 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CategoryBoutiqueController>(builder: (categorys) {
-      return Scaffold(
-          body: RefreshIndicator(
-              color: ColorsApp.skyBlue,
-              onRefresh: () async {
-                //print('****debut');
-                await Get.find<CategoryBoutiqueController>().getCategory();
-                //print('****mid');
+      return RefreshIndicator(
+          color: ColorsApp.skyBlue,
+          onRefresh: () async {
+            //print('****debut');
+            await Get.find<CategoryBoutiqueController>().getCategory();
+            //print('****mid');
 
-                //print('****fin');
-              },
+            //print('****fin');
+          },
+          child: Container(
+              margin: EdgeInsets.symmetric(horizontal: kMarginX),
               child: CustomScrollView(controller: _scrollController, slivers: [
                 SliverAppBar(
                   backgroundColor: Colors.white,
@@ -56,19 +57,19 @@ class CategoryView extends StatelessWidget {
                                 left: Get.width * .030,
                                 right: Get.width * .030),
                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // BigtitleText(text: 'Category', bolder: true),
-                                  Container(
-                                    child: AppTitleRight(
-                                        title: 'Category',
-                                        description: 'liste des categories',
-                                        icon: null),
-                                    margin: EdgeInsets.only(
-                                        right:
-                                            MediaQuery.of(context).size.width *
-                                                .005),
-                                  ),
+                                  BigtitleText(text: 'Category', bolder: true),
+                                  // Container(
+                                  //   child: AppTitleRight(
+                                  //       title: 'Category',
+                                  //       description: 'liste des categories',
+                                  //       icon: null),
+                                  //   margin: EdgeInsets.only(
+                                  //       right:
+                                  //           MediaQuery.of(context).size.width *
+                                  //               .005),
+                                  // ),
                                   // Container(
                                   //     child: InkWell(
                                   //         child: Icon(Icons.search),
@@ -89,22 +90,65 @@ class CategoryView extends StatelessWidget {
                   // displays the index of the current item.
                   (context, index) => categorys.isLoadedCat == 0
                       ? AppLoading()
-                      : SingleChildScrollView(
-                          child: GridView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: kMarginX),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 20.0,
-                                      childAspectRatio: 0.8,
-                                      mainAxisSpacing: 20.0),
-                              itemCount: categorys.categoryList.length,
-                              itemBuilder: (_ctx, index) => CategoryComponent2(
-                                    category: categorys.categoryList[index],
-                                  ))),
+                      : Container(
+                          child: Column(
+                            children: [
+                              InkWell(
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: ColorsApp.greySecond,
+                                      ),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: kMarginY * 3),
+                                      height: kToolbarHeight / 1.7,
+                                      // width: kWidth * .75,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 5),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                              child: Text(
+                                            "Rechercher",
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: kBasics,
+                                            ),
+                                          )),
+                                          InkWell(
+                                              child: Icon(
+                                                Icons.search,
+                                                color: Colors.blue,
+                                              ),
+                                              onTap: () {}),
+                                        ],
+                                      )),
+                                  onTap: () {
+                                    // Get.toNamed(AppLinks.SEARCH);
+                                  }),
+                              SingleChildScrollView(
+                                  child: GridView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: kMarginX),
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 20.0,
+                                              childAspectRatio: 0.8,
+                                              mainAxisSpacing: 20.0),
+                                      itemCount: categorys.categoryList.length,
+                                      itemBuilder: (_ctx, index) =>
+                                          CategoryComponent2(
+                                            category:
+                                                categorys.categoryList[index],
+                                          ))),
+                            ],
+                          ),
+                        ),
 
                   childCount: 1,
                 ))

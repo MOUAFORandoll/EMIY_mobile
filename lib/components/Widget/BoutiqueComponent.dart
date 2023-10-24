@@ -1,7 +1,7 @@
 // ignore: must_be_immutable
 import 'package:EMIY/components/Widget/ShimmerBox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/model/data/BoutiqueModel.dart'; 
+import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';
@@ -65,7 +65,7 @@ class BoutiqueComponent extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         color: ColorsApp.marron,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         fontSize: 12))),
           ],
         ),

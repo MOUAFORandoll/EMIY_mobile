@@ -1,6 +1,5 @@
-
-import 'package:EMIY/styles/textStyle.dart'; 
-import 'package:flutter/material.dart'; 
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:flutter/material.dart';
 
 class IconShortComponent extends StatelessWidget {
   IconShortComponent(
@@ -16,7 +15,7 @@ class IconShortComponent extends StatelessWidget {
     return InkWell(
         child: Container(
           margin: EdgeInsets.symmetric(
-              vertical: kMarginY * 2, horizontal: kMarginX),
+              vertical: kMarginY , horizontal: kMarginX),
           child: Column(
             children: [
               Icon(

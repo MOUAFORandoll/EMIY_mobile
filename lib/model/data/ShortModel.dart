@@ -150,7 +150,8 @@ class BoutiqueModel0 {
         dateCreated: json["dateCreated"],
         note: double.parse(
             (json["note"] == null ? null : json["note"]).toString()),
-        images: List<ImageSecond>.from(json["images"].map((x) => ImageSecond.fromJson(x))),
+        images: List<ImageSecond>.from(
+            json["images"].map((x) => ImageSecond.fromJson(x))),
         localisation: Localisation.fromJson(json["localisation"]),
       );
 

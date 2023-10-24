@@ -1,9 +1,9 @@
 // ignore: must_be_immutable
- 
-import 'package:EMIY/components/Text/SimpleText.dart'; 
-import 'package:EMIY/components/Text/bigtitleText0.dart'; 
+
+import 'package:EMIY/components/Text/SimpleText.dart';
+import 'package:EMIY/components/Text/bigtitleText0.dart';
 import 'package:EMIY/model/data/TransactionModel.dart';
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class TransactionComponent extends StatelessWidget {
                   //           decorationThickness: 2.85,
                   //           color:  ColorsApp.black,
                   //           fontSize: 12,
-                  //           fontWeight: FontWeight.bold)),
+                  //           fontWeight: FontWeight.w600)),
                   // ),
                 ],
               ),

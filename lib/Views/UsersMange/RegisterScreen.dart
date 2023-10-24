@@ -73,7 +73,7 @@ class RegisterScreen extends StatelessWidget {
                                           Text('regText'.tr,
                                               style: TextStyle(
                                                   fontFamily: 'Lato',
-                                                  fontWeight: FontWeight.bold)),
+                                                  fontWeight: FontWeight.w600)),
                                         ],
                                       ),
                                     ),

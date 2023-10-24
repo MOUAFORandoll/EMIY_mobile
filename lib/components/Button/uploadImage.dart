@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UploadImage extends StatelessWidget {
-  final  title, onTap, color, icon;
+  final title, onTap, color, icon;
 
   UploadImage({this.icon, this.title, this.color, this.onTap});
 

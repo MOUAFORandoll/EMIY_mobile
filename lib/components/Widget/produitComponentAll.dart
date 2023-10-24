@@ -114,7 +114,6 @@ class ProduitComponentAll extends StatelessWidget {
               ]),
               Container(
                   width: kWidth / 2,
-
                   margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                   child: Text(produit.titre,
                       overflow: TextOverflow.fade,
@@ -122,7 +121,6 @@ class ProduitComponentAll extends StatelessWidget {
                       style: TexteStyle().secondaryTextStyle)),
               Container(
                   width: kWidth / 2,
-
                   margin: EdgeInsets.symmetric(horizontal: kMarginX / 2),
                   child: Text('XAF ' + produit.prix.toString(),
                       overflow: TextOverflow.ellipsis,

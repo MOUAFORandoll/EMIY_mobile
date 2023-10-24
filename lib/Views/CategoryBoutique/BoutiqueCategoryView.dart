@@ -49,7 +49,7 @@ class BoutiqueCategoryView extends StatelessWidget {
               child: CustomScrollView(controller: _scrollController, slivers: [
                 SliverAppBar(
                   automaticallyImplyLeading: false,
-                  backgroundColor: Colors.white,
+                  backgroundColor: ColorsApp.white,
                   elevation: 0,
                   // Provide a standard title.
                   // title: Text('title'),
@@ -61,7 +61,7 @@ class BoutiqueCategoryView extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(children: [
                         Container(
-                            // margin: EdgeInsets.only(top: Get.height * .030),
+                             margin: EdgeInsets.symmetric(vertical: Get.height * .030),
                             padding: EdgeInsets.only(
                                 left: Get.width * .030,
                                 right: Get.width * .030),
@@ -69,7 +69,7 @@ class BoutiqueCategoryView extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  AppBackButton(),
+                                  AppBackButton(color:ColorsApp.black),
                                   Container(
                                     child: AppTitleRight(
                                         title: 'Categorie',
@@ -86,7 +86,7 @@ class BoutiqueCategoryView extends StatelessWidget {
                     ),
                   ),
                   // Make the initial height of the SliverAppBar larger than normal.
-                  expandedHeight: 60,
+                  expandedHeight: 85,
                 ),
                 SliverToBoxAdapter(
                     child: Container(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class SocialLogBtn extends StatelessWidget {
   SocialLogBtn({this.validate = false, this.icon, this.onTap, this.title});
-  final  validate, icon, onTap, title;
+  final validate, icon, onTap, title;
 
   @override
   Widget build(BuildContext context) {

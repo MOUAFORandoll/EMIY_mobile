@@ -24,7 +24,7 @@ class ProduitComponent extends StatelessWidget {
           width: kMdWidth * 1.1,
           // padding: EdgeInsets.all(kMarginX),
           margin: EdgeInsets.only(right: kMarginX),
-            decoration: BoxDecoration(
+          decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
@@ -118,7 +118,7 @@ class ProduitComponent extends StatelessWidget {
                       style: TextStyle(
                           color: ColorsApp.marron,
                           fontSize: 12,
-                          fontWeight: FontWeight.bold)),
+                          fontWeight: FontWeight.w600)),
                 ),
                 Container(
                   width: kSmWidth * .6,
@@ -132,7 +132,7 @@ class ProduitComponent extends StatelessWidget {
                           decorationThickness: 2.85,
                           color: ColorsApp.black,
                           fontSize: 12,
-                          fontWeight: FontWeight.bold)),
+                          fontWeight: FontWeight.w600)),
                 ),
               ]) /* ) */),
       onTap: () {

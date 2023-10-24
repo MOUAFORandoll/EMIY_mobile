@@ -40,24 +40,28 @@ class ShoppingViewNext extends StatelessWidget {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                              // margin: EdgeInsets.only(left: kMarginX),
-                              child: Text(
-                            'My Shopping Bag',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: kBasics,
-                                fontFamily: 'Lato',
-                                color: ColorsApp.primaryText,
-                                fontWeight: FontWeight.w700),
-                          )),
+                          // Container(
+                          //     // margin: EdgeInsets.only(left: kMarginX),
+                          //     child: Text(
+                          //   'My Shopping Bag',
+                          //   overflow: TextOverflow.ellipsis,
+                          //   style: TextStyle(
+                          //       fontSize: kBasics,
+                          //       fontFamily: 'Lato',
+                          //       color: ColorsApp.primaryText,
+                          //       fontWeight: FontWeight.w700),
+                          // )),
+                          BigtitleText(text: 'My Shopping Bag', bolder: true),
                         ])),
               ]),
           body: CustomScrollView(controller: _scrollController, slivers: [
             SliverList(
                 delegate: SliverChildBuilderDelegate(
               (context, index) => _controller.getItems.length == 0
-                  ? Center(
+                  ? Container(
+                      margin: EdgeInsets.symmetric(
+                        vertical: kHeight / 3,
+                      ),
                       child: BigText(
                         text: 'Vide',
                         bolder: true,

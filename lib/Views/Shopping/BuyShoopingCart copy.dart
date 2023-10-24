@@ -131,7 +131,7 @@
 //             elevation: 0,
 //           ),
 //           body: GetBuilder<CartController>(builder: (_controller) {
-//             return  
+//             return
 //             Stack(children: [
 //               _controller.getItems.length != 0
 //                   ? Stepper(

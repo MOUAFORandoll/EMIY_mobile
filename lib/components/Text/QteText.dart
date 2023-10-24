@@ -10,7 +10,6 @@ class QteText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        
         alignment: Alignment.center,
         child: Text(
           text,
@@ -18,7 +17,7 @@ class QteText extends StatelessWidget {
           style: TextStyle(
               fontSize: 20,
               color: ColorsApp.black,
-              fontWeight: bolder ? FontWeight.bold : FontWeight.normal),
+              fontWeight: bolder ? FontWeight.w600 : FontWeight.normal),
         ));
   }
 }

@@ -90,7 +90,7 @@ class ProduitForBoutiqueLinkComponent extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         color: ColorsApp.marron,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         fontSize: 12)),
               ),
               Container(
@@ -101,7 +101,7 @@ class ProduitForBoutiqueLinkComponent extends StatelessWidget {
                     style: TextStyle(
                         color: ColorsApp.skyBlue,
                         fontSize: 10,
-                        fontWeight: FontWeight.bold)),
+                        fontWeight: FontWeight.w600)),
               ),
             ]),
       ),

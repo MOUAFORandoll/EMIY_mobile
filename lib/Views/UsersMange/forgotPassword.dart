@@ -132,7 +132,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     // Text(
@@ -140,7 +140,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                     //   textAlign: TextAlign.center,
                     //   style: TextStyle(
                     //     fontSize: 20,
-                    //     fontWeight: FontWeight.bold,
+                    //     fontWeight: FontWeight.w600,
                     //   ),
                     // ),
                     Container(
@@ -225,7 +225,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 14,
-                            // fontWeight: FontWeight.bold,
+                            // fontWeight: FontWeight.w600,
                           ),
                         )),
                     Row(
@@ -236,7 +236,7 @@ class _ForgotPassordScreenState extends State<ForgotPassordScreen>
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 15,
-                              // fontWeight: FontWeight.bold,
+                              // fontWeight: FontWeight.w600,
                             ),
                           ),
                           /*  Text(

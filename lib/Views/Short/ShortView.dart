@@ -93,7 +93,7 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                                         'Pour toi',
                                         style: TextStyle(
                                           fontFamily: 'Lato',
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 15,
                                           color:
                                               _ShortController.stateShortPage ==
@@ -133,7 +133,7 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                                         'Suivis',
                                         style: TextStyle(
                                           fontFamily: 'Lato',
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 15,
                                           color:
                                               _ShortController.stateShortPage ==
@@ -176,7 +176,7 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                           //                   .currentReadShortData.titre,
                           //               style: TextStyle(
                           //                 fontFamily: 'Lato',
-                          //                 fontWeight: FontWeight.bold,
+                          //                 fontWeight: FontWeight.w600,
                           //                 fontSize: 15,
 
                           //               ),
@@ -305,8 +305,8 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
               //             allowScrubbing: true))),
               if (_ShortController.controllerForYou != null)
                 Positioned(
-                    top: kHeight / 4,
-                    left: kWidth / 1.3,
+                    top: kHeight / 3,
+                    left: kWidth / 1.22,
                     child: Container(
                         child: InkWell(
                       child: ShortAction(

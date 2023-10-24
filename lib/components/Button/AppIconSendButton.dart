@@ -24,7 +24,7 @@ class AppIconSendButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10), color: backgroundColor),
         child: sending
             ? Container(
-                width: 22, height: 22, child: CircularProgressIndicator())
+                width: 22, height: 22, child: CircularProgressIndicator(color: Colors.white))
             : Icon(icon, color: color, size: inconSize),
       ),
       onTap: onTap,

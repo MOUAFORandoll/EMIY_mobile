@@ -1,9 +1,9 @@
-import 'dart:async'; 
+import 'dart:async';
 
 import 'package:EMIY/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:rxdart/subjects.dart'; 
+import 'package:rxdart/subjects.dart';
 import '../../model/socket/NotificationModel.dart';
 import 'routing.dart';
 

@@ -6,7 +6,7 @@ import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/controller/DataBaseController.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 

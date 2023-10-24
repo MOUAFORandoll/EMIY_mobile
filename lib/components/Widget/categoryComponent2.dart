@@ -34,7 +34,7 @@ class CategoryComponent2 extends StatelessWidget {
                       category.logo /* 'https://placehold.co/600x400@2x.png' */,
                   imageBuilder: (context, imageProvider) {
                     return Container(
-                        height: kHeight / 4,
+                        height: kHeight / 4.5,
                         // margin: EdgeInsets.only(bottom: 10),
                         // padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
                         decoration: BoxDecoration(

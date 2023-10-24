@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -73,7 +73,7 @@ class LoginScreen extends StatelessWidget {
               //   textAlign: TextAlign.center,
               //   style: TextStyle(
               //     fontSize: 20,
-              //     fontWeight: FontWeight.bold,
+              //     fontWeight: FontWeight.w600,
               //   ),
               // ),
               Container(

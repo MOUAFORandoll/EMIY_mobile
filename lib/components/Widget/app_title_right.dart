@@ -34,7 +34,7 @@ class AppTitleRight extends StatelessWidget {
                             fontFamily: 'Lato',
                             fontSize: 14,
                             color: ColorsApp.black,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.w600),
                       )),
                       Container(
                           child: icon != null

@@ -25,7 +25,7 @@
 // import 'package:EMIY/utils/Services/routing.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// 
+//
 // import 'package:share_plus/share_plus.dart';
 
 // class ProduitView extends StatelessWidget {
@@ -363,7 +363,7 @@
 //                                                       //     Get.find<
 //                                                       //             GeneralController>()
 //                                                       //         .likeProduit(
-                                                                
+
 //                                                       //             produit
 //                                                       //                 .codeProduit);
 //                                                       //   },

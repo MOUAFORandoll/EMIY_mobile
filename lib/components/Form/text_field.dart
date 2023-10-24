@@ -2,7 +2,7 @@ import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 
 class KFieldType {
   static String password = 'password';

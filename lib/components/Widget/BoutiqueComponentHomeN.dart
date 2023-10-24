@@ -1,6 +1,6 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/model/data/BoutiqueModel.dart'; 
+import 'package:EMIY/model/data/BoutiqueModel.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:get/get.dart';

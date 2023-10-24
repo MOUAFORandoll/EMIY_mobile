@@ -109,7 +109,7 @@
 //                 ),
 //                 SliverList(
 //                     delegate: SliverChildBuilderDelegate(
-                
+
 //                   (context, index) => GetBuilder<CategoryBoutiqueController>(
 //                       builder: (categorys) {
 //                     return categorys.isLoadedCat == 0 || prods.isLoadedP == 0

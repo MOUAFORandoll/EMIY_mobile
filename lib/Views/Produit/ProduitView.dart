@@ -490,7 +490,7 @@ class ProduitView extends StatelessWidget {
                                                 size: 14,
                                                 text: 'Description',
                                                 color: prodController.choix == 0
-                                                    ? ColorsApp.orange
+                                                    ? ColorsApp.secondBlue
                                                     : ColorsApp.grey,
                                               )),
                                         ),
@@ -518,7 +518,7 @@ class ProduitView extends StatelessWidget {
                                                   text: 'Boutique',
                                                   color:
                                                       prodController.choix == 1
-                                                          ? ColorsApp.orange
+                                                          ? ColorsApp.secondBlue
                                                           : ColorsApp.grey,
                                                 ))),
                                         // Container(

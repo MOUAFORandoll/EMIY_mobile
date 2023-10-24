@@ -9,7 +9,7 @@ import 'dart:convert';
 
 class AbonnementUserModel {
   AbonnementUserModel({
-   required this.codeBoutique,
+    required this.codeBoutique,
     required this.user,
     required this.description,
     required this.titre,
@@ -30,7 +30,8 @@ class AbonnementUserModel {
   List<ImageModel> images;
   LocalisationModel localisation;
 
-  factory AbonnementUserModel.fromJson(Map<String, dynamic> json) => AbonnementUserModel(
+  factory AbonnementUserModel.fromJson(Map<String, dynamic> json) =>
+      AbonnementUserModel(
         codeBoutique: json["codeBoutique"],
         user: json["user"],
         description: json["description"],
@@ -39,7 +40,8 @@ class AbonnementUserModel {
         dateCreated: json["dateCreated"],
         note: double.parse(
             (json["note"] == null ? null : json["note"]).toString()),
-        images: List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))),
+        images: List<ImageModel>.from(
+            json["images"].map((x) => ImageModel.fromJson(x))),
         localisation: LocalisationModel.fromJson(json["localisation"]),
       );
 
@@ -55,4 +57,3 @@ class AbonnementUserModel {
         "localisation": localisation.toJson(),
       };
 }
-  

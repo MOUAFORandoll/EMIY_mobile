@@ -267,13 +267,9 @@
 //     });
 //   }
 // }
- 
-
-
-
 
 // /**
-//  * 
+//  *
 // class ShortViewF extends StatefulWidget {
 //   // final List<String> videoUrls;
 //   final bool autoPlay;
@@ -389,4 +385,3 @@
 // }
 
 //  */
-

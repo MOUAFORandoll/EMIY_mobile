@@ -55,6 +55,7 @@ class BoutiqueCircleComponent extends StatelessWidget {
                       highlightColor: Colors.blueGrey,
                       child: Container(
                           height: kHeight * .1,
+                             width: kHeight * .1,
                           decoration: BoxDecoration(
                             color: ColorsApp.greySecond,
                             borderRadius: BorderRadius.circular(50),
@@ -85,9 +86,8 @@ class BoutiqueCircleComponent extends StatelessWidget {
                       style: TextStyle(
                           // color: ColorsApp.secondBlue,
                           fontFamily: 'Lato',
-                          // fontWeight: FontWeight.bold,
+                          // fontWeight: FontWeight.w600,
                           fontSize: 10))),
-           
           ],
         ),
       ),

@@ -19,7 +19,6 @@ class SearchRepo extends GetxService {
   // }
 
   Future searchData(type, search, index, keySecret) async {
-     
     Response response = await apiClient.getData(
       ApiRoutes.SEARCH +
           "?type=$type&search=$search&page=${index.toString()}&keySecret=${keySecret.toString()}",

@@ -59,7 +59,7 @@ class SearchCategory extends StatelessWidget {
                           : Container() */
     });
   }
-}/* 
+} /* 
    Container(
                                           height: kSmHeight * 1.3,
                                           margin: EdgeInsets.symmetric(

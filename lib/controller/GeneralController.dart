@@ -633,7 +633,7 @@ class GeneralController extends GetxController {
                 child: Text('home'.tr,
                     style: TextStyle(
                       fontSize: kMin,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       color: _currentIndex == 0
                           ? ColorsApp.skyBlue
                           : ColorsApp.grey,
@@ -661,7 +661,7 @@ class GeneralController extends GetxController {
               child: Text('categories'.tr,
                   style: TextStyle(
                     fontSize: kMin,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     color:
                         _currentIndex == 1 ? ColorsApp.skyBlue : ColorsApp.grey,
                   ))),
@@ -689,7 +689,7 @@ class GeneralController extends GetxController {
               child: Text('Short',
                   style: TextStyle(
                     fontSize: kMin,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     color:
                         _currentIndex == 2 ? ColorsApp.skyBlue : ColorsApp.grey,
                   ))),
@@ -717,7 +717,7 @@ class GeneralController extends GetxController {
               child: Text('Shop',
                   style: TextStyle(
                     fontSize: kMin,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     color:
                         _currentIndex == 3 ? ColorsApp.skyBlue : ColorsApp.grey,
                   ))),
@@ -744,7 +744,7 @@ class GeneralController extends GetxController {
               child: Text('setting'.tr,
                   style: TextStyle(
                     fontSize: kMin,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     color:
                         _currentIndex == 4 ? ColorsApp.skyBlue : ColorsApp.grey,
                   ))),
@@ -837,32 +837,35 @@ class GeneralController extends GetxController {
   getListNotifications() async {
     var getU = await dababase.getKey();
     if (getU != null) {
-      // _notificationList = [];
 
-      // _isLoadNotification = 0;
-      _loaddata = true;
-      update();
-      try {
-        Response response =
-            await generalRepo.getListNotifications(indexNotification, getU);
-        _notificationList.clear();
-        if (response.body != null) {
-          if (response.body['data'].length != 0) {
-            _notificationList.addAll((response.body['data'] as List)
+       await    await generalRepo.getListNotifications(indexNotification, getU)
+    .then((value) async {
+        print('----_isLoadNotification--------------value----------${value.body}-');
+         _notificationList.clear();
+        if (value.body != null) {
+          if (value.body['data'].length != null) {
+          if (value.body['data'].length != 0) {
+            _notificationList.addAll((value.body['data'] as List)
                 .map((e) => NotificationModel.fromJson(e))
                 .toList());
           }
+          }
           indexNotification++;
           _isLoadNotification = 1;
+          print(
+              '_isLoadNotification-----------------------${_isLoadNotification}');
           _loaddata = false;
 
           update();
         }
-      } catch (e) {
+      }).catchError((error) {
         _loaddata = false;
+        _isLoadNotification = 2;
         update();
         //print(e);
-      }
+        print(error);
+      });
+      
     }
   }
 

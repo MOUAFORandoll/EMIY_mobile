@@ -1,10 +1,8 @@
- 
-import 'package:EMIY/components/Widget/Fieul.dart'; 
-import 'package:EMIY/controller/managerController.dart'; 
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/components/Widget/Fieul.dart';
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
- 
 
 // ignore: must_be_immutable
 class ParrainnageView extends StatelessWidget {

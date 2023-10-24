@@ -1,5 +1,5 @@
-// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart'; 
-import 'package:flutter/material.dart'; 
+// ignore: must_be_immutable import 'package:EMIY/model/data/CategoryModel.dart';
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class AppEmpty extends StatelessWidget {

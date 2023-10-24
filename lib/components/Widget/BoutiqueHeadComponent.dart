@@ -99,7 +99,7 @@ class BoutiqueHeadComponent extends StatelessWidget {
                             abonnement
                                 ? InkWell(
                                     child: Container(
-                                        padding: EdgeInsets.all(5)
+                                        padding: EdgeInsets.all(8)
                                             .add(EdgeInsets.only(right: 10)),
                                         decoration: BoxDecoration(
                                             color: ColorsApp.red,
@@ -136,7 +136,7 @@ class BoutiqueHeadComponent extends StatelessWidget {
                                     })
                                 : InkWell(
                                     child: Container(
-                                        padding: EdgeInsets.all(5)
+                                        padding: EdgeInsets.all(8)
                                             .add(EdgeInsets.only(right: 10)),
                                         decoration: BoxDecoration(
                                             border: Border.all(
@@ -175,7 +175,7 @@ class BoutiqueHeadComponent extends StatelessWidget {
                                         lienBoutique.toString(),
                                     subject: 'Look what I made!'),
                                 child: Container(
-                                  padding: EdgeInsets.all(5)
+                                  padding: EdgeInsets.all(8)
                                       .add(EdgeInsets.only(right: 10)),
                                   decoration: BoxDecoration(
                                       color: ColorsApp.secondBlue,

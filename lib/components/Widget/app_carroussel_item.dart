@@ -3,7 +3,7 @@
 import 'package:EMIY/components/Widget/app_text_title.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class AppCarrousselItem extends StatelessWidget {
   AppCarrousselItem(

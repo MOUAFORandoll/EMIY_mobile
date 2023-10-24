@@ -1,16 +1,16 @@
- 
 import 'package:EMIY/components/Button/ShareButton.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
-import 'package:EMIY/components/Widget/produitForBoutiqueLinkComponent.dart'; 
+import 'package:EMIY/components/Widget/produitForBoutiqueLinkComponent.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/controller/linkController.dart';
 import 'package:EMIY/utils/Services/routing.dart';
-import 'package:cached_network_image/cached_network_image.dart'; 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:EMIY/styles/colorApp.dart';
-import 'package:EMIY/styles/textStyle.dart'; 
-import 'package:flutter/material.dart'; 
-import 'package:get/get.dart';  
+import 'package:EMIY/styles/textStyle.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 // ignore: must_be_immutable
 class BoutiqueViewForLink extends StatelessWidget {
   BoutiqueViewForLink({Key? key}) : super(key: key);
@@ -177,7 +177,7 @@ class BoutiqueViewForLink extends StatelessWidget {
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             fontWeight:
-                                                                FontWeight.bold,
+                                                                FontWeight.w600,
                                                           ),
                                                         ),
                                                         Container(
@@ -246,7 +246,7 @@ class BoutiqueViewForLink extends StatelessWidget {
                                               //   Get.parameters['description'].toString(),
                                               //   style: TextStyle(
                                               //     fontSize: 14,
-                                              //     fontWeight: FontWeight.bold,
+                                              //     fontWeight: FontWeight.w600,
                                               //   ),
                                               // ),
                                               Text(
@@ -256,7 +256,7 @@ class BoutiqueViewForLink extends StatelessWidget {
                                                         .toString(),
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
                                               ),
                                             ]),
@@ -389,7 +389,7 @@ class BoutiqueViewForLink extends StatelessWidget {
               //                                 //       style: TextStyle(
               //                                 //           color: Colors.red,
               //                                 //           fontSize: 12,
-              //                                 //           fontWeight: FontWeight.bold)),
+              //                                 //           fontWeight: FontWeight.w600)),
               //                                 // ),
               //                               ]),
               //                         ),
@@ -434,10 +434,6 @@ class BoutiqueViewForLink extends StatelessWidget {
             ));
   }
 }
-
-
-
-
 
 /**
  * 
@@ -532,7 +528,7 @@ class BoutiqueView extends StatelessWidget {
                                       //       style: TextStyle(
                                       //           color: Colors.red,
                                       //           fontSize: 12,
-                                      //           fontWeight: FontWeight.bold)),
+                                      //           fontWeight: FontWeight.w600)),
                                       // ),
                                     ]),
                               ),

@@ -136,9 +136,9 @@ class OnBoardingView extends StatelessWidget {
                                       child: InkWell(
                                         onTap: () {
                                           Get.offAndToNamed(
-                                             Get.find<ManagerController>()
-                                                  // ignore: unnecessary_null_comparison
-                                                 .Userget ==
+                                            Get.find<ManagerController>()
+                                                        // ignore: unnecessary_null_comparison
+                                                        .Userget ==
                                                     null
                                                 ? AppLinks.LOGIN
                                                 : AppLinks.FIRST,
@@ -152,7 +152,7 @@ class OnBoardingView extends StatelessWidget {
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
-                                                          FontWeight.bold))
+                                                          FontWeight.w600))
                                             ]),
                                       )),
                                   Container(

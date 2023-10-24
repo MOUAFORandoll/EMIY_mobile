@@ -2,10 +2,10 @@
 import 'package:EMIY/components/Text/smallText.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class CustomBtn extends StatelessWidget {
-final     title, onTap, color, validator;
+  final title, onTap, color, validator;
 
   CustomBtn({this.validator, this.title, this.color, this.onTap});
 

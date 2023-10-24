@@ -1,14 +1,13 @@
- 
 import 'package:EMIY/Views/UsersMange/DepotView.dart';
-import 'package:EMIY/controller/managerController.dart'; 
+import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/model/data/TransactionModel.dart';
-import 'package:EMIY/model/socket/SocketDepotModel.dart'; 
-import 'package:EMIY/repository/TransactionRepo.dart'; 
+import 'package:EMIY/model/socket/SocketDepotModel.dart';
+import 'package:EMIY/repository/TransactionRepo.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TransactionController extends GetxController {
@@ -27,14 +26,13 @@ class TransactionController extends GetxController {
   getTransactions() async {
     if (managerController.Userget != null) {
       try {
-      
         //print(".............");
 
-        Response response =
-            await transactionRepo.getListTransaction(managerController.Userget.id);
+        Response response = await transactionRepo
+            .getListTransaction(managerController.Userget.id);
         if (response.body != null) {
           if (response.body['data'].length != 0) {
-              _transactionList.clear();
+            _transactionList.clear();
             _transactionList = [];
 
             // _isLoadedTrans = 0;
@@ -101,8 +99,8 @@ class TransactionController extends GetxController {
 
   String _paiementUrl = '';
   get paiementUrl => _paiementUrl;
-  
-  var _controller  ;
+
+  var _controller;
   get controller => _controller;
   bool _isLoad = false;
   bool get isLoad => _isLoad;
@@ -124,8 +122,8 @@ class TransactionController extends GetxController {
       //print(_isCounter);
       if (response.statusCode == 201) {
         _paiementUrl = response.body['url'];
-        
-_controller = WebViewController()
+
+        _controller = WebViewController()
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           ..setBackgroundColor(const Color(0x00000000))
           ..setNavigationDelegate(

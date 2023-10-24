@@ -51,15 +51,16 @@ class ProduitCategoryModel {
         lienProduit: ApiUrl.external_link + 'produits/' + json["codeProduit"],
         description: json["description"] == null ? null : json["description"],
         titre: json["titre"] == null ? null : json["titre"],
-      like:
+        like:
             int.parse((json["like"] == null ? null : json["like"]).toString()),
         islike: json["islike"] == null ? null : json["islike"],
-          quantite: json["quantite"] == null ? null : json["quantite"],
+        quantite: json["quantite"] == null ? null : json["quantite"],
         prix: json["prix"] == null ? null : json["prix"],
         status: json["status"] == null ? null : json["status"],
         images: json["images"] == null
             ? []
-            : List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))),
+            : List<ImageModel>.from(
+                json["images"].map((x) => ImageModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,4 +79,3 @@ class ProduitCategoryModel {
             : List<dynamic>.from(images.map((x) => x.toJson())),
       };
 }
- 

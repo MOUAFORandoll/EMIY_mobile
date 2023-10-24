@@ -90,7 +90,7 @@ class _FormComponentState extends State<FormComponent> {
                 labelText: widget.hint,
                 labelStyle: TextStyle(
                     color: Colors.blue,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     fontSize: 12),
                 prefixIcon: Icon(widget.icon),
                 counterText: "",

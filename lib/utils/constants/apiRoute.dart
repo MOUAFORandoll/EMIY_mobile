@@ -49,8 +49,8 @@ class ApiRoutes {
   static const SHORT_READ_BOUTIQUE = '/short/boutique/read';
   static const SHORT_NEW = '/short/new';
   static const SHORT_LIKE = '/like/short';
-  static const SHORT_COMMENT = '/comment/short'; 
-  static const SHORT_COMMENT_COMMENT = '/comment/comment/short'; 
+  static const SHORT_COMMENT = '/comment/short';
+  static const SHORT_COMMENT_COMMENT = '/comment/comment/short';
   static const SHORT_COMMENT_LIKE = '/like/comment';
   static const LIKE_PRODUIT = '/like/produit';
   static const SUPPLEMENTAIRE_PRODUIT = '/produit/from/category';
@@ -74,6 +74,4 @@ class ApiRoutes {
   static const READ_NOTIFICATIONS = '/notifications/read';
   static const READ_SHORT_FOR_BOUTIQUE = '/short/for/boutique/read';
   static const HOME = '/home';
-
- 
 }

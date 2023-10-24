@@ -41,8 +41,10 @@ class CommentComponent extends StatelessWidget {
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                color: ColorsApp.grey1 
+
                                 ),
                               ),
                             ),
@@ -81,6 +83,7 @@ class CommentComponent extends StatelessWidget {
                                 fontFamily: 'Lato',
                                 fontSize: 12,
                                 overflow: TextOverflow.fade,
+                                fontWeight: FontWeight.w600,
                                 color: ColorsApp.black,
                               ))),
                       Container(
@@ -95,7 +98,7 @@ class CommentComponent extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: 'Lato',
                                 fontSize: 10,
-                                color: ColorsApp.black,
+                                color: ColorsApp.grey1,
                               ),
                             )),
                             InkWell(
@@ -107,7 +110,7 @@ class CommentComponent extends StatelessWidget {
                                       style: TextStyle(
                                           fontFamily: 'Lato',
                                           fontSize: 10,
-                                          color: ColorsApp.black,
+                                          color: ColorsApp.grey1,
                                           fontWeight: FontWeight.w700)),
                                 ),
                                 onTap: () {
@@ -167,12 +170,12 @@ class CommentComponent extends StatelessWidget {
                             )
                           : Get.find<ShortController>().loadCommentComment == 0
                               ? Container(
-                                  width: 40,
+                                  width: 30,
                                   margin: EdgeInsets.only(right: 5, top: 2),
-                                  height: 27,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: kMarginX),
-                                  child: CircularProgressIndicator())
+                                  height: 30,
+                                  // padding: EdgeInsets.symmetric(
+                                  //     horizontal: kMarginX),
+                                  child: CircularProgressIndicator(color: ColorsApp.secondBlue,))
                               : Container(
                                   // height: 100,
                                   width: kWidth * .85,

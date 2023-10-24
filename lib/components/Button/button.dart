@@ -81,7 +81,7 @@ class Button extends StatelessWidget {
                   title,
                   style: TextStyle(
                       fontSize: 17,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       color: textColor),
                 ))),
           ));

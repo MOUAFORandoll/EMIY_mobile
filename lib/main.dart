@@ -70,7 +70,7 @@ final _lightTheme = ThemeData(
     ),
     displayLarge: TextStyle(
       fontFamily: 'Montserrat',
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w600,
       fontSize: kBasics,
       color: ColorsApp.primaryText,
     ),

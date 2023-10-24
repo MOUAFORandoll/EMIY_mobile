@@ -22,12 +22,18 @@ class Conversation extends StatelessWidget {
             .getListMessageNegociation(negociation);
       },
       child: Container(
-          margin: EdgeInsets.symmetric(vertical: kMarginY)
-              .add(EdgeInsets.only(left: kMarginX)),
-          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+         decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(color: ColorsApp.greySecond),
+                  )),
+                     padding: EdgeInsets.symmetric(vertical: kMarginY / 2 ).add(EdgeInsets.only(  bottom: kMarginY  )),
+              
+          margin: EdgeInsets.symmetric(vertical: kMarginY/2, horizontal: kMarginX),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center, children: [
             Container(
-              height: kWidth / 6,
-              width: kWidth / 6,
+              height: kWidth / 6.5,
+              width: kWidth / 6.5,
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: negociation.src_produit,
@@ -64,30 +70,28 @@ class Conversation extends StatelessWidget {
             Container(
                 margin: EdgeInsets.symmetric(vertical: kMarginY)
                     .add(EdgeInsets.only(left: kMarginX)),
-                padding:
-                    EdgeInsets.only(top: kMarginY / 2, bottom: kMarginY * 3),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(color: ColorsApp.greySecond),
-                        top: BorderSide(color: ColorsApp.greySecond))),
+              
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
+                                width: kWidth * .55,
                               child: Text(
                                 negociation.titre_produit,
+                                  overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
                             Container(
-                                width: kWidth * .6,
+                                width: kWidth * .4,
                                 child: Text(
                                   negociation.last_message,
                                   textAlign: TextAlign.start,
@@ -96,7 +100,7 @@ class Conversation extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Lato',
                                     fontSize: 12,
-                                    color: ColorsApp.black,
+                                    color: ColorsApp.greyTi,
                                   ),
                                 )),
                           ]),
@@ -158,7 +162,7 @@ class Conversation extends StatelessWidget {
       //         negociation.titre_produit,
       //         style: TextStyle(
       //           fontSize: 16,
-      //           fontWeight: FontWeight.bold,
+      //           fontWeight: FontWeight.w600,
       //         ),
       //       ),
       //       subtitle: Row(
@@ -178,7 +182,7 @@ class Conversation extends StatelessWidget {
       //                     fontFamily: 'Lato',
       //                     fontSize: 12,
       //                     color: ColorsApp.black,
-      //                     fontWeight: FontWeight.bold),
+      //                     fontWeight: FontWeight.w600),
       //               )),
       //         ],
       //       ),

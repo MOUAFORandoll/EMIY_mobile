@@ -1,6 +1,7 @@
 import 'package:EMIY/components/Button/IconButtonF.dart';
 import 'package:EMIY/components/Button/app_button.dart';
 import 'package:EMIY/components/Text/bigText.dart';
+import 'package:EMIY/components/Text/bigtitleText.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/shoppingproduitComponent.dart';
 import 'package:EMIY/controller/cartController.dart';
@@ -53,17 +54,20 @@ class ShoppingView extends StatelessWidget {
                               //       right: MediaQuery.of(context).size.width *
                               //           .005),
                               // ),
-                              Container(
-                                  // margin: EdgeInsets.only(left: kMarginX),
-                                  child: Text(
-                                'My Shopping Bag',
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: kBasics,
-                                    fontFamily: 'Lato',
-                                    // color: ColorsApp.white,
-                                    fontWeight: FontWeight.w700),
-                              )),
+                              // Container(
+                              //     // margin: EdgeInsets.only(left: kMarginX),
+                              //     child: Text(
+                              //   'My Shopping Bag',
+                              //   overflow: TextOverflow.ellipsis,
+                              //   style: TextStyle(
+                              //       fontSize: kBasics,
+                              //       fontFamily: 'Lato',
+                              //       // color: ColorsApp.white,
+                              //       fontWeight: FontWeight.w700),
+                              // )),
+                              BigtitleText(
+                                  text: 'My Shopping Bag', bolder: true),
+
                               IconButtonF(
                                   icon: Icons.delete_forever,
                                   color: Colors.red,
@@ -90,7 +94,11 @@ class ShoppingView extends StatelessWidget {
             SliverList(
                 delegate: SliverChildBuilderDelegate(
               (context, index) => _controller.getItems.length == 0
-                  ? Center(
+                  ? Container(
+                     margin: EdgeInsets.symmetric(
+                        vertical: kHeight/3,
+                    
+                      ),
                       child: BigText(
                         text: 'Vide',
                         bolder: true,

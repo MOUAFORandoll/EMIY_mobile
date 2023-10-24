@@ -1,10 +1,10 @@
 // ignore: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:EMIY/components/Button/IconButtonF.dart'; 
+import 'package:EMIY/components/Button/IconButtonF.dart';
 import 'package:EMIY/components/Text/smallText.dart';
-import 'package:EMIY/controller/cartController.dart'; 
+import 'package:EMIY/controller/cartController.dart';
 import 'package:EMIY/model/data/CartModel.dart';
-import 'package:EMIY/styles/textStyle.dart'; 
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +137,6 @@ class ShoppingproduitComponent extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-
                                   //   Row(
                                   //   mainAxisAlignment: MainAxisAlignment.start,
                                   //   children: [

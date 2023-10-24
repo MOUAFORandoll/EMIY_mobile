@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:EMIY/styles/colorApp.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'ShimmerProduit.dart';
+
 class ShimmerHome extends StatelessWidget {
   const ShimmerHome({Key? key}) : super(key: key);
 
@@ -152,6 +154,7 @@ class ShimmerHome extends StatelessWidget {
                   ),
                 ),
               ),
+              ShimmerProduit() 
             ],
           )),
         ));

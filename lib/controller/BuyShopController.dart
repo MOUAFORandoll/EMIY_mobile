@@ -1,25 +1,23 @@
- 
 import 'dart:io';
- 
+
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/cartController.dart';
-import 'package:EMIY/controller/managerController.dart'; 
-import 'package:EMIY/model/data/PointLivraisonModel.dart'; 
+import 'package:EMIY/controller/managerController.dart';
+import 'package:EMIY/model/data/PointLivraisonModel.dart';
 import 'package:EMIY/model/socket/SocketCommandModel.dart';
 import 'package:EMIY/repository/BuyShoopingCartRepo.dart';
-import 'package:EMIY/repository/LivreurRepo.dart'; 
+import 'package:EMIY/repository/LivreurRepo.dart';
 import 'package:EMIY/utils/Services/SocketService.dart';
 import 'package:EMIY/utils/Services/requestServices.dart';
 import 'package:EMIY/utils/Services/routing.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:dio/dio.dart' hide Response;
-import 'package:flutter/material.dart'; 
-import 'package:get/get.dart'; 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:webview_flutter/webview_flutter.dart';
- 
 
 class BuyShopController extends GetxController {
   final BuyShoopingCartRepo buySoppingCartRepo;
@@ -32,8 +30,9 @@ class BuyShopController extends GetxController {
   bool _isLoad = false;
   bool get isLoad => _isLoad;
   setLoadTransaction(val) {
+    print('-----------------load---****************--${val}');
     _isLoad = val;
-    // update();
+    update();
   }
 
   final service = new ApiService();
@@ -129,7 +128,7 @@ class BuyShopController extends GetxController {
   // CategoryController({required this.service});
   buyCart() async {
     var produits = Get.find<CartController>().getListPinCart();
-
+    await Get.find<ManagerController>().getLocalU();
     var mode = Get.find<GeneralController>().selected;
 
     var data = mode == 3
@@ -193,7 +192,7 @@ class BuyShopController extends GetxController {
             _codeCommande = response.body['codeCommande'];
             print('aa----------------');
 
-_controller = WebViewController()
+            _controller = WebViewController()
               ..setJavaScriptMode(JavaScriptMode.unrestricted)
               ..setBackgroundColor(const Color(0x00000000))
               ..setNavigationDelegate(
@@ -219,7 +218,8 @@ _controller = WebViewController()
               ..loadRequest(Uri.parse(_paiementUrl));
             update();
             print(_paiementUrl);
-            fn.closeLoader();
+            // fn.closeLoader();
+            Get.back(canPop: false);
             Get.toNamed(AppLinks.BUYVIEW);
             new SocketService().commande(response.body['codeCommande'],
                 ifBuyingCommande); //ici on doit lancer la verification

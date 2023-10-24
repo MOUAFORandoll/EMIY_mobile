@@ -13,11 +13,11 @@ class ShimmerProduit extends StatelessWidget {
       baseColor: ColorsApp.grey,
       highlightColor: Colors.blueGrey,
       child: Container(
+         height: kMdHeight / 1.8,
           margin: EdgeInsets.symmetric(horizontal: kMarginX),
-          child: SingleChildScrollView(
-              child: Column(children: [
+          child:  
             SizedBox(
-                height: kMdHeight,
+                height: kMdHeight/2,
                 child: Stack(children: [
                   GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -26,7 +26,7 @@ class ShimmerProduit extends StatelessWidget {
                               crossAxisCount: 2,
                               crossAxisSpacing: 0.0,
                               mainAxisSpacing: 10.0),
-                      itemCount: 4,
+                      itemCount: 6,
                       itemBuilder: (_ctx, index) => Container(
                             height: kMdHeight / 4.2,
                             width: kMdWidth * 1.1,
@@ -38,7 +38,7 @@ class ShimmerProduit extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8)),
                           ))
                 ]))
-          ]))),
+          ),
     );
   }
 }

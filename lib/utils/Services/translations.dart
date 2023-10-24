@@ -124,8 +124,7 @@ class Transalations extends Translations {
           'search': 'Rechercher',
           'account': 'Compte',
           'ctitle1': 'Bienvenu',
-          'cdescription1':
-              'Négociez et mettez vous a l’aise',
+          'cdescription1': 'Négociez et mettez vous a l’aise',
           'ctitle2': 'Livraison',
           'cdescription2':
               'Commandez et faites vous livrer en moins d’une heure',

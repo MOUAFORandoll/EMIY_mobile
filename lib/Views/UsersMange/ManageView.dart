@@ -62,18 +62,18 @@ class ManageView extends StatelessWidget {
               SliverAppBar(
                 backgroundColor: Colors.white,
                 elevation: 0,
-                floating: false,
+                // floating: false,
                 pinned: true,
 
                 // snap: true,
-                expandedHeight: kHeight * .29,
+                expandedHeight: kHeight * .25,
 
                 bottom: PreferredSize(
-                    preferredSize: Size(double.infinity, 5),
+                    preferredSize: Size(double.infinity, 11),
                     child: Container(
-                        decoration: BoxDecoration(color: ColorsApp.white),
+                        decoration: BoxDecoration(color: ColorsApp.greyFirst),
                         width: kWidth,
-                        height: kHeight * .1,
+                        height: kHeight * .09,
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: _manager.title.length,
@@ -81,6 +81,7 @@ class ManageView extends StatelessWidget {
                                 child: Container(
                                   margin: EdgeInsets.symmetric(
                                     horizontal: 5,
+                                    vertical: 15
                                   ),
                                   child: Column(
                                     children: [
@@ -91,7 +92,7 @@ class ManageView extends StatelessWidget {
                                             fontSize:
                                                 _manager.current == i ? 15 : 12,
                                             fontWeight: _manager.current == i
-                                                ? FontWeight.bold
+                                                ? FontWeight.w600
                                                 : FontWeight.normal,
                                             color: _manager.current == i
                                                 ? ColorsApp.secondBlue
@@ -291,7 +292,7 @@ class ManageView extends StatelessWidget {
                                                   textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                                 Text(

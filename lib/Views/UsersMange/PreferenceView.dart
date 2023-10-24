@@ -1,4 +1,3 @@
- 
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/produitForBoutiqueComponent.dart';
 import 'package:EMIY/controller/produitController.dart';
@@ -9,7 +8,7 @@ import 'package:get/get.dart';
 import '../../components/Widget/app_empty.dart';
 
 class PreferenceView extends StatelessWidget {
-  PreferenceView({Key? key}) : super(key: key); 
+  PreferenceView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

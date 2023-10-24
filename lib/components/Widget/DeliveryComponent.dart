@@ -32,7 +32,7 @@ class DeliveryComponent extends StatelessWidget {
                       fontFamily: 'Lato',
                       fontSize: 12,
                       color: ColorsApp.black,
-                      fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+                      fontWeight: bold ? FontWeight.w600 : FontWeight.normal),
                 ),
                 onTap: () {},
               )),

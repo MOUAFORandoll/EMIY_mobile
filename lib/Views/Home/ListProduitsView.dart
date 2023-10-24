@@ -84,12 +84,12 @@ class ListProduitsView extends StatelessWidget {
                     // ),
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) => ProduitComponentAll(
-                        key: ValueKey<int>(prods.produitListFromHome [index].id),
-                        produit: prods.produitListFromHome [index],
+                        key: ValueKey<int>(prods.produitListFromHome[index].id),
+                        produit: prods.produitListFromHome[index],
                         index: index,
                       ),
 
-                      childCount: prods.produitListFromHome 
+                      childCount: prods.produitListFromHome
                           .length, // Nombre total de cellules dans la grille
                     ),
                   ),
