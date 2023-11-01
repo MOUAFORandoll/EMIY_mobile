@@ -35,7 +35,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
     // box.write('first', 0);
     Get.find<ManagerController>().startTimer();
 
-    Future.delayed(Duration(seconds: 8), () async {
+    Future.delayed(Duration(seconds: 5), () async {
       print(box.read('first'));
       if (box.read('first') != 1) {
         box.write('first', 1);

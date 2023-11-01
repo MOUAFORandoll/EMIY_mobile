@@ -5,20 +5,24 @@ import 'package:EMIY/styles/textStyle.dart';
 // ignore: must_be_immutable
 class SimpleText extends StatelessWidget {
   String text;
-  // String content;
+  Color color;
   bool bolder;
-  SimpleText({this.text = '', this.bolder = false});
+  SimpleText(
+      {this.text = '',
+      this.color = ColorsApp.primaryText,
+      this.bolder = false});
   @override
   Widget build(BuildContext context) {
     return Container(
+        width: kWidth * .56,
         child: Text(
-      text,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-          fontSize: kTitle,
-          fontFamily: 'Lato',
-          color: ColorsApp.primaryText,
-          fontWeight: bolder ? FontWeight.w600 : FontWeight.normal),
-    ));
+          text,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              fontSize: kTitle,
+              fontFamily: 'Lato',
+              color: color,
+              fontWeight: bolder ? FontWeight.w600 : FontWeight.normal),
+        ));
   }
 }

@@ -200,7 +200,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                   GetBuilder<CategoryBoutiqueController>(
                                       builder: (categorys) {
                                 return generalController.isLoadedHome == 0
-                                    ?     ShimmerHome()
+                                    ? ShimmerHome()
                                     : Container(
                                         // margin: EdgeInsets.only(top: kMarginX/2),
                                         child: SingleChildScrollView(
@@ -259,14 +259,14 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                       fontFamily: 'Lato',
-                                                      fontSize: kBasics,
+                                                      fontSize: kLgText,
                                                       color:
                                                           ColorsApp.secondBlue,
                                                       fontWeight:
                                                           FontWeight.w600)),
                                             ),
                                             Container(
-                                              height: kSmHeight * 1.3,
+                                              height: kSmHeight * .9,
                                               margin: EdgeInsets.symmetric(
                                                   vertical: kMarginY),
                                               child: ListView.builder(
@@ -382,101 +382,99 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                               }),
                               childCount: 1,
                             )),
-if(generalController.homeComponent.length !=0)
-                            SliverToBoxAdapter(
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount:
-                                    generalController.homeComponent.length,
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (_ctx, index) =>
-                                    HomeModuleComponent(
-                                  homeComponent:
-                                      generalController.homeComponent[index],
+                            if (generalController.homeComponent.length != 0)
+                              SliverToBoxAdapter(
+                                child: ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      generalController.homeComponent.length,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (_ctx, index) =>
+                                      HomeModuleComponent(
+                                    homeComponent:
+                                        generalController.homeComponent[index],
+                                  ),
                                 ),
                               ),
-                            ),
-if (prods.produitList.length != 0)
-
-                            SliverToBoxAdapter(
-                              child: Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: kMarginY * .7),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                          child: Text("Populaire",
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  fontSize: kBasics,
-                                                  color: ColorsApp.secondBlue,
-                                                  fontWeight:
-                                                      FontWeight.w700))),
-                                      Container(
-                                          padding: EdgeInsets.all(3).add(
-                                            EdgeInsets.symmetric(
-                                                horizontal: kMarginX * 1.2),
-                                          ),
-                                          decoration: BoxDecoration(
-                                              color: ColorsApp.grey,
-                                              borderRadius:
-                                                  BorderRadius.circular(18)),
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  child: SvgIcon(
-                                                    icon: Assets.grid1,
-                                                    color: ColorsApp.skyBlue,
+                            if (prods.produitList.length != 0)
+                              SliverToBoxAdapter(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: kMarginY * .7),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            child: Text("Populaire",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    fontFamily: 'Lato',
+                                                    fontSize: kBasics,
+                                                    color: ColorsApp.secondBlue,
+                                                    fontWeight:
+                                                        FontWeight.w700))),
+                                        Container(
+                                            padding: EdgeInsets.all(3).add(
+                                              EdgeInsets.symmetric(
+                                                  horizontal: kMarginX * 1.2),
+                                            ),
+                                            decoration: BoxDecoration(
+                                                color: ColorsApp.grey,
+                                                borderRadius:
+                                                    BorderRadius.circular(18)),
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    child: SvgIcon(
+                                                      icon: Assets.grid1,
+                                                      color: ColorsApp.skyBlue,
+                                                    ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      left: kMarginX),
-                                                  child: SvgIcon(
-                                                    icon: Assets.list0,
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: kMarginX),
+                                                    child: SvgIcon(
+                                                      icon: Assets.list0,
 
-                                                    width: 25, height: 25,
-                                                    // color: _currentIndex == 1 ? ColorsApp.skyBlue : ColorsApp.grey,
+                                                      width: 25, height: 25,
+                                                      // color: _currentIndex == 1 ? ColorsApp.skyBlue : ColorsApp.grey,
+                                                    ),
                                                   ),
-                                                ),
-                                              ])),
-                                    ]),
-                              ),
-                            ),
-if(prods.produitList.length !=0)
-                            SliverGrid(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 5.0,
-                                childAspectRatio: kMarginX / 12,
-                                mainAxisSpacing: 10.0,
-                              ),
-                              
-                              delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) =>
-                                    ProduitComponentAll(
-                                  key: ValueKey<int>(
-                                      prods.produitList[index].id),
-                                  produit: prods.produitList[index],
-                                  index: index,
+                                                ])),
+                                      ]),
                                 ),
-
-                                childCount: prods.produitList
-                                    .length, // Nombre total de cellules dans la grille
                               ),
-                            ),
-                           
+                            if (prods.produitList.length != 0)
+                              SliverGrid(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 5.0,
+                                  childAspectRatio: kMarginX / 12,
+                                  mainAxisSpacing: 10.0,
+                                ),
+                                delegate: SliverChildBuilderDelegate(
+                                  (BuildContext context, int index) =>
+                                      ProduitComponentAll(
+                                    key: ValueKey<int>(
+                                        prods.produitList[index].id),
+                                    produit: prods.produitList[index],
+                                    index: index,
+                                  ),
+
+                                  childCount: prods.produitList
+                                      .length, // Nombre total de cellules dans la grille
+                                ),
+                              ),
+
                             // SliverToBoxAdapter(
                             //     child: prods.loaddata == true
-                            //         ? ShimmerProduit()  
+                            //         ? ShimmerProduit()
                             //         : Container()),
                           ])));
             }));

@@ -150,84 +150,19 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> with TickerProviderStateMixin {
-  List<Widget> images = [];
+ late VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _getImages();
-  }
 
-  void _getImages() async {
-    // Récupère une liste d'URL d'images au hasard
-
-    final imagesData = [
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      'https://fastly.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-    ];
-
-    // Itère sur la liste d'URL et charge les images
-    for (int i = 0; i < imagesData.length; i++) {
-      var imageData = imagesData[i];
-      var p = (i % 2 == 1); // Check if i is odd (equivalent to p == 1)
-      final image = CachedNetworkImage(
-        // height: p ? 400.0 : 200.0,
-        width: Get.width * .5,
-        imageUrl: imageData,
-        imageBuilder: (context, imageProvider) {
-          return Container(
-            height: p ? 300.0 : 200.0,
-            margin: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.fill,
-                  colorFilter: ColorFilter.mode(
-                      Colors.transparent, BlendMode.colorBurn)),
-            ),
-          );
-        },
-        placeholder: (context, url) {
-          return Container(
-            child: Center(
-                child: CircularProgressIndicator(
-              color: ColorsApp.skyBlue,
-            )),
-          );
-        },
-        errorWidget: (context, url, error) {
-          return CircleAvatar(
-              backgroundColor: ColorsApp.skyBlue,
-              radius: 50,
-              backgroundImage: AssetImage("assets/images/error.gif"));
-        },
-      );
-      images.add(image);
-    }
-
-    // Met à jour l'état de la liste d'images
-    setState(() {});
+    // Remplacez l'URL RTMP par l'URL de votre serveur RTMP
+    _controller = VideoPlayerController.networkUrl(
+     Uri.parse('rtmp://51.75.160.83/live/stream'),
+    )..initialize().then((_) {
+      // Assurez-vous que ce setState() est appelé, pour mettre à jour l'interface utilisateur
+      setState(() {});
+    });
   }
 
   @override
@@ -237,101 +172,28 @@ class _TestState extends State<Test> with TickerProviderStateMixin {
             appBar: AppBar(
               title: Text('Pinterest'),
             ),
-            body: SingleChildScrollView(
-                child: Container(
-                    child: Column(children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: kMarginX * 2),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Text('Bets seller'),
-                      ),
-                      Container(
-                        child: Icon(Icons.arrow_forward),
-                      )
-                    ]),
-              ),
-              Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: kMarginX * 2, vertical: kMarginY),
-                  height: kHeight * .4,
-                  child: ListView.builder(
-                      itemCount: 5,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (_ctx, index) => index == 4
-                          ? Container(
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 30,
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                // color: ColorsApp.greyTi,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Container(
-                                  // height: kHeight / 2.7,
-                                  // margin: EdgeInsets.symmetric(horizontal: 5),
-                                  padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    // color: ColorsApp.greyTi,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Stack(children: [
-                                        Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: kMarginX * 2),
-                                          height: kHeight * .25,
-                                          width: kHeight * .1,
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            image: AssetImage(Assets.shop2),
-                                          )),
-                                        ),
-                                        Positioned(
-                                          top: 2,
-                                          right: 2,
-                                          child: InkWell(
-                                              child: Icon(Icons.handshake),
-                                              onTap: () {
-                                                Get.find<
-                                                        NegociationController>()
-                                                    .newNegociation(
-                                                        "produit.codeProduit");
-                                              }),
-                                        ),
-                                        Positioned(
-                                          bottom: 2,
-                                          right: 2,
-                                          child: InkWell(
-                                              child: Icon(Icons.favorite,
-                                                  color: ColorsApp.red),
-                                              onTap: () {}),
-                                        )
-                                      ]),
-                                      Container(
-                                          width: kWidth / 2,
-                                          child: Text("produit.titre",
-                                              overflow: TextOverflow.fade,
-                                              textAlign: TextAlign.left,
-                                              style: TexteStyle()
-                                                  .secondaryTextStyle)),
-                                      Container(
-                                          width: kWidth / 2,
-                                          child: Text('XAF ' + '5005',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TexteStyle()
-                                                  .bprimaryTextStyle)),
-                                    ],
-                                  )))))
-            ])))));
+         body: Center(
+        child: _controller.value.isInitialized
+            ? AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              )
+            : CircularProgressIndicator(), // Affiche un indicateur de chargement jusqu'à ce que la vidéo soit prête
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            if (_controller.value.isPlaying) {
+              _controller.pause();
+            } else {
+              
+              _controller.play();
+            }
+          });
+        },
+        child: Icon(
+          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+        ),
+      )));
   }
 }

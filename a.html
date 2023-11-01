@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiffrement Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chiffrement Web</h1>
+        <label for="inputText">Texte à chiffrer :</label>
+        <input type="text" id="inputText" placeholder="Saisissez le texte à chiffrer">
+
+        <label for="encryptionAlgorithm">Algorithme de chiffrement :</label>
+        <select id="encryptionAlgorithm">
+            <option value="caesar">Chiffrement César</option>
+            <!-- Ajoutez d'autres options pour les algorithmes supplémentaires ici -->
+        </select>
+
+        <button onclick="encryptText()">Chiffrer</button>
+
+        <h2>Résultat :</h2>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function encryptText() {
+            const inputText = document.getElementById("inputText").value;
+            const algorithm = document.getElementById("encryptionAlgorithm").value;
+            let result = "";
+
+            // Votre code de chiffrement va ici en fonction de l'algorithme sélectionné
+            if (algorithm === "caesar") {
+                // Exemple de chiffrement César
+                const shift = 3; // Décalage de 3 caractères
+                result = caesarCipher(inputText, shift);
+            }
+
+            document.getElementById("result").textContent = result;
+        }
+
+        // Exemple de fonction de chiffrement César
+        function caesarCipher(text, shift) {
+            let result = "";
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i];
+                if (char.match(/[a-z]/i)) {
+                    const code = text.charCodeAt(i);
+                    if (code >= 65 && code <= 90) {
+                        char = String.fromCharCode(((code - 65 + shift) % 26) + 65);
+                    } else if (code >= 97 && code <= 122) {
+                        char = String.fromCharCode(((code - 97 + shift) % 26) + 97);
+                    }
+                }
+                result += char;
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>

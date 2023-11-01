@@ -326,6 +326,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_blur",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_blur-0.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "flutter_blurhash",
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_blurhash-0.7.0",
       "packageUri": "lib/",
@@ -1202,7 +1208,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-10-24T06:57:44.744550Z",
+  "generated": "2023-10-31T23:32:23.922070Z",
   "generator": "pub",
   "generatorVersion": "3.1.2"
 }

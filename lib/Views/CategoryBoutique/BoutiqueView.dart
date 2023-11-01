@@ -35,113 +35,14 @@ class BoutiqueView extends StatelessWidget {
           child: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          SliverAppBar(
-            backgroundColor: ColorsApp.greySecond,
-            foregroundColor: ColorsApp.red,
-            automaticallyImplyLeading: false,
-            title: Container(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  child: Container(
-                    margin: EdgeInsets.zero,
-                    // padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-
-                        // borderRadius: BorderRadius.circular(20),
-                        ),
-                    child: Icon(Icons.arrow_back_ios_new,
-                        color: Colors.white, size: 25.0),
-                  ),
-                  onTap: () {
-                    Get.back();
-                  },
-                ),
-                InkWell(
-                    child: Container(
-                      // margin: EdgeInsets.only(right: 10),
-                      padding: EdgeInsets.all(kMarginX / 3),
-                      height: 40,
-                      width: 40,
-                      // decoration: BoxDecoration(
-                      // border: Border.all(color: Colors.blue, width: 2),
-                      // borderRadius: BorderRadius.circular(30)),
-                      child: SvgPicture.asset(
-                        Assets.story_boutique,
-                        width: 90,
-                        height: 90,
-                        // color: ColorsApp.skyBlue,
-                      ),
-                    ),
-                    onTap: () {
-                      // Get.find<ShortController>().getListShortForBoutique(
-                      //     Get.parameters['codeBoutique']) ;
-
-                      Get.to(ReadShortBoutiqueView(
-                          codeBoutique: Get.parameters['codeBoutique']));
-                    })
-              ],
-            )),
-            flexibleSpace: FlexibleSpaceBar(
-                background: Container(
-              child: Stack(
-                children: [
-                  CachedNetworkImage(
-                    width: kWidth,
-                    fit: BoxFit.cover,
-                    imageUrl: Get.parameters['image'].toString(),
-                    imageBuilder: (context, imageProvider) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: ColorsApp.greySecond,
-                          // borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                  Colors.transparent, BlendMode.colorBurn)),
-                        ),
-                      );
-                    },
-                    placeholder: (context, url) {
-                      return Container(
-                        child: Center(
-                            child: CircularProgressIndicator(
-                          color: ColorsApp.skyBlue,
-                        )),
-                      );
-                    },
-                    errorWidget: (context, url, error) {
-                      return Container(
-                          height: kMdHeight * .15,
-                          width: Get.width * .5,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                            image: AssetImage('assets/logo/logoNew.png'),
-                          )));
-                    },
-                  ),
-                  Positioned(
-                    // top: kMdHeight * .30 / 2.7,
-                    top: 20,
-                    left: kWidth / 20,
-                    right: kWidth / 20,
-                    child: BoutiqueHeadComponent(
-                        titre: Get.parameters['nomBoutique'],
-                        description: Get.parameters['description'],
-                        ville: Get.parameters['ville'],
-                        note: Get.parameters['note'],
-                        nombre_produit: Get.parameters['nombre_produit'] ?? '0',
-                        lienBoutique: Get.parameters['lienBoutique'],
-                        status_abonnement: Get.parameters['status_abonnement']),
-                  )
-                ],
-              ),
-            )),
-            expandedHeight: 250,
-            pinned: true,
-          ),
+          BoutiqueHeadComponent(
+              titre: Get.parameters['nomBoutique'],
+              description: Get.parameters['description'],
+              ville: Get.parameters['ville'],
+              note: Get.parameters['note'],
+              nombre_produit: Get.parameters['nombre_produit'] ?? '0',
+              lienBoutique: Get.parameters['lienBoutique'],
+              status_abonnement: Get.parameters['status_abonnement']),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) => GetBuilder<CategoryBoutiqueController>(
@@ -165,7 +66,8 @@ class BoutiqueView extends StatelessWidget {
                                             child: Text(
                                               'Produits Disponibles',
                                               overflow: TextOverflow.ellipsis,
-                                         style: TexteStyle().blargeTextStyle ,
+                                              style:
+                                                  TexteStyle().blargeTextStyle,
                                             )),
                                         SingleChildScrollView(
                                             child: GridView.builder(

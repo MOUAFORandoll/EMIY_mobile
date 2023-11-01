@@ -1,0 +1,39 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecteur Vidéo RTMP</title>
+    <!-- Inclure les fichiers JavaScript et CSS de JWPlayer -->
+    <script src="https://jwplayer.key.js"></script>
+</head>
+<body>
+    <div id="player-container">Le lecteur vidéo apparaîtra ici</div>
+
+    <script>
+        // Configuration du lecteur
+        jwplayer("player-container").setup({
+            playlist: [{
+                sources: [{
+                    file: "rtmp://51.75.160.83/live/stream",
+                    label: "720p HD",
+                    type: "rtmp"
+                }]
+            }],
+            primary: "html5",
+            width: "640",
+            height: "360"
+        });
+    </script>
+</body>
+</html>
+<video controls width="250">
+  <source src="rtmp://51.75.160.83/live/stream" type="video/webm" />
+
+  <source src="/media/cc0-videos/flower.mp4" type="video/mp4" />
+
+  Download the
+  <a href="rtmp://51.75.160.83/live/stream">WEBM</a>
+  or
+  <a href="/media/cc0-videos/flower.mp4">MP4</a>
+  video.
+</video>

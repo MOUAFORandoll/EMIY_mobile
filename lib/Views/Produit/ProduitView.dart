@@ -321,11 +321,20 @@ class ProduitView extends StatelessWidget {
                                                         );
                                                       },
                                                     ),
-                                                    SimpleText(
-                                                        text: (prodController
-                                                                .inCartItems)
-                                                            .toString(),
-                                                        bolder: true),
+                                                    Text(
+                                                      (prodController
+                                                              .inCartItems)
+                                                          .toString(),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          fontSize: kTitle,
+                                                          fontFamily: 'Lato',
+                                                          color: ColorsApp
+                                                              .primaryText,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
                                                     IconButtonF1(
                                                       icon: Icons.add,
                                                       inconSize: 15.0,
