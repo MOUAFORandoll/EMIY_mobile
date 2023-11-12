@@ -1,8 +1,11 @@
+import 'package:EMIY/components/Text/TextBackSpace.dart';
+import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/app_back_button.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/produitForBoutiqueComponent.dart';
 import 'package:EMIY/controller/produitController.dart';
+import 'package:EMIY/styles/colorApp.dart';
 import 'package:EMIY/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,91 +19,113 @@ class PreferenceView extends StatelessWidget {
     ScrollController _scrollController = new ScrollController();
     return GetBuilder<ProduitController>(
       builder: (_controler) => Scaffold(
+          backgroundColor: ColorsApp.bg,
           body: SafeArea(
-        child: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              backgroundColor: Colors.white,
-              elevation: 0,
-              // Provide a standard title.
-              // title: Text('title'),
-              // Allows the user to reveal the app bar if they begin scrolling
-              // back up the list of items.
-              floating: true,
-              // Display a placeholder widget to visualize the shrinking size.
-              flexibleSpace: InkWell(
-                child: SingleChildScrollView(
-                  child: Column(children: [
-                    Container(
-                        // margin: EdgeInsets.only(top: Get.height * .030),
-                        padding: EdgeInsets.only(
-                            left: Get.width * .030, right: Get.width * .030),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AppBackButton(),
-                              Container(
-                                child: AppTitleRight(
-                                    title: 'Mes Favories',
-                                    description: ' ',
-                                    icon: null),
-                                margin: EdgeInsets.only(
-                                    right: MediaQuery.of(context).size.width *
-                                        .005),
-                              ),
-                            ])),
-                  ]),
+            child: CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: ColorsApp.bg,
+                  automaticallyImplyLeading: false,
+                  title: Text(
+                    'Mes favories',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontFamily: 'Lato', fontWeight: FontWeight.w600),
+                  ),
+                  leading: Container(
+                      child: InkWell(
+                    child: Container(
+                      margin: EdgeInsets.zero,
+                      // padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+
+                          // borderRadius: BorderRadius.circular(20),
+                          ),
+                      child: Icon(Icons.arrow_back_ios_new,
+                          color: ColorsApp.black, size: 25.0),
+                    ),
+                    onTap: () {
+                      Get.back();
+                    },
+                  )),
+                  // flexibleSpace: FlexibleSpaceBar(
+                  //     background: Container(
+                  //         decoration: BoxDecoration(
+                  //           color: ColorsApp.bg,
+                  //         ),
+                  //         child: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Container(
+                  //                 child: Row(
+                  //                   mainAxisAlignment: MainAxisAlignment.center,
+                  //                   crossAxisAlignment: CrossAxisAlignment.center,
+                  //                   children: [
+                  //                     Container(
+                  //                       margin:
+                  //                           EdgeInsets.only(left: kWidth * .010),
+                  //                       child: TextBackSpace(
+                  //                         text: 'Mes Favories',
+                  //                         // bolder: true,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //             ]))),
+
+                  pinned: true,
                 ),
-              ),
-              // Make the initial height of the SliverAppBar larger than normal.
-              expandedHeight: 60,
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => _controler.isLoadedPB == 0
-                    ? AppLoading()
-                    : Container(
-                        // height: double.maxFinite,
-                        margin: EdgeInsets.symmetric(vertical: kMarginY * .2),
-                        child: _controler.isLoadedPB == 1
-                            ? (_controler.preferenceList.length != 0)
-                                ? SingleChildScrollView(
-                                    child: GridView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: kMarginX),
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 20.0,
-                                                childAspectRatio: 0.7,
-                                                mainAxisSpacing: 20.0),
-                                        itemCount:
-                                            _controler.preferenceList.length,
-                                        itemBuilder: (_ctx, index) =>
-                                            ProduitForBoutiqueComponent(
-                                                produit: _controler
-                                                    .preferenceList[index],
-                                                type: 'favorite',
-                                                index: index)))
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => _controler.isLoadedPB == 0
+                        ? Container(
+                            // height: double.maxFinite,
+                            margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                            child: ShimmerProduit())
+                        : Container(
+                            // height: double.maxFinite,
+                            margin: EdgeInsets.symmetric(
+                                vertical: kMarginY * .2, horizontal: kMarginX),
+                            child: _controler.isLoadedPB == 1
+                                ? (_controler.preferenceList.length != 0)
+                                    ? SingleChildScrollView(
+                                        child: GridView.builder(
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: kMarginX),
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 2,
+                                                    crossAxisSpacing: 20.0,
+                                                    childAspectRatio: 0.7,
+                                                    mainAxisSpacing: 20.0),
+                                            itemCount: _controler
+                                                .preferenceList.length,
+                                            itemBuilder: (_ctx, index) =>
+                                                ProduitForBoutiqueComponent(
+                                                    produit: _controler
+                                                        .preferenceList[index],
+                                                    type: 'favorite',
+                                                    index: index)))
+                                    : Container(
+                                        height: kHeight,
+                                        child: AppEmpty(title: 'Aucun Produit'))
                                 : Container(
-                                    height: kHeight,
-                                    child: AppEmpty(title: 'Aucun Produit'))
-                            : Container(
-                                height: kMdHeight * .6,
-                                alignment: Alignment.center,
-                                child: Center(
-                                  child: Text('Error'),
-                                ))),
-                childCount: 1,
-              ),
+                                    height: kMdHeight * .6,
+                                    alignment: Alignment.center,
+                                    child: Center(
+                                      child: Text('Error'),
+                                    ))),
+                    childCount: 1,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      )),
+          )),
     );
   }
 }

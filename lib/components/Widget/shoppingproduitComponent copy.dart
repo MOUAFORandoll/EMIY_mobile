@@ -98,7 +98,7 @@ class ShoppingproduitComponent extends StatelessWidget {
                                           backgroundColor: ColorsApp.skyBlue,
                                           radius: 50,
                                           backgroundImage: AssetImage(
-                                              "assets/images/error.gif"));
+                                              "assets/logo/logoNew.png"));
                                     },
                                   )),
                                 ],

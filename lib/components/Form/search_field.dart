@@ -10,9 +10,15 @@ class KSearchField extends StatelessWidget {
   Function? onChange;
   final double? dim;
   bool isCode;
+  var width;
 
   KSearchField(
-      {Key? key, this.title, this.dim, this.isCode = false, this.onChange})
+      {Key? key,
+      this.title,
+      this.width,
+      this.dim,
+      this.isCode = false,
+      this.onChange})
       : super(key: key);
   FocusNode _focusNode = FocusNode();
   @override
@@ -25,7 +31,7 @@ class KSearchField extends StatelessWidget {
         ),
 
         height: kToolbarHeight / 1.7,
-        width: kWidth * .75,
+        width: width ?? kWidth * .75,
         // padding: EdgeInsets.symmetric(horizontal: 10),
         child: TextField(
           onChanged: (String value) {

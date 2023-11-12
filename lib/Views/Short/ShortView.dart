@@ -212,7 +212,8 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                     onPageChanged: (index) {
                       _ShortController.controllerForYou.pause();
                       _ShortController.disposePLayerAll();
-                      index = index % (_ShortController.listForYouShort.length);
+                      index =
+                          index++ /* % (_ShortController.listForYouShort.length) */;
                       print(_ShortController
                           .listForYouShort[_ShortController.indexForYou]
                           .preview);
@@ -279,7 +280,7 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                                         backgroundColor: ColorsApp.skyBlue,
                                         radius: 50,
                                         backgroundImage: AssetImage(
-                                            "assets/images/error.gif"));
+                                            "assets/logo/logoNew.png"));
                                   },
                                 )),
                             onTap: () async {
@@ -404,7 +405,7 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
                                       backgroundColor: ColorsApp.skyBlue,
                                       radius: 50,
                                       backgroundImage: AssetImage(
-                                          "assets/images/error.gif"));
+                                          "assets/logo/logoNew.png"));
                                 },
                               )),
                           onTap: () async {
@@ -445,8 +446,8 @@ class _ShortViewState extends State<ShortView> with TickerProviderStateMixin {
             ),
           if (_ShortController.controllerSuivis != null)
             Positioned(
-                top: kHeight / 4,
-                left: kWidth / 1.3,
+                top: kHeight / 3,
+                left: kWidth / 1.22,
                 child: Container(
                     child: InkWell(
                   child: ShortAction(

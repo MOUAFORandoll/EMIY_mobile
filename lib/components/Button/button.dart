@@ -1,3 +1,4 @@
+import 'package:EMIY/components/exportcomponent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -85,6 +86,102 @@ class Button extends StatelessWidget {
                       color: textColor),
                 ))),
           ));
+  }
+}
+
+// ignore: must_be_immutable
+class ButtonAction extends StatelessWidget {
+  ButtonAction({
+    this.title,
+    this.icon,
+    this.onTap,
+  });
+  var onTap;
+  var icon;
+  var title;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        child: Container(
+            padding: EdgeInsets.all(8),
+            margin: EdgeInsets.symmetric(horizontal: kMarginX / 5),
+            decoration: BoxDecoration(
+                color: ColorsApp.secondBlue,
+                borderRadius: BorderRadius.circular(8)),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              if (title != null)
+                Container(
+                    child: Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      // fontSize:
+                      //     kDescription,
+                      fontFamily: 'Lato',
+                      color: ColorsApp.white,
+                      fontWeight: FontWeight.w700),
+                )),
+              if (icon != null)
+                Container(
+                    child: Icon(
+                  icon,
+                  size: 15,
+                  color: ColorsApp.white,
+                )),
+            ])),
+        onTap: onTap);
+  }
+}
+
+// ignore: must_be_immutable
+class ButtonIcon extends StatelessWidget {
+  ButtonIcon({
+    this.title,
+    this.bgColor = Colors.white,
+    this.textColor,
+    this.onTap,
+    this.icon,
+  });
+  var onTap;
+  var bgColor;
+  var loaderColor;
+  var textColor;
+  var title;
+
+  var icon;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: kWidth * .4,
+      height: kHeight * .08,
+      alignment: Alignment.center,
+      padding: EdgeInsets.all(10),
+      decoration: new BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        // border: borderColor == null
+        //     ? Border.all(color: ColorsApp.black)
+        //     : Border.all(color: borderColor),
+        color: bgColor,
+      ),
+      child: InkWell(
+          onTap: onTap,
+          child: Center(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      color: textColor),
+                ),
+              ),
+              Icon(icon)
+            ],
+          ))),
+    );
   }
 }
 

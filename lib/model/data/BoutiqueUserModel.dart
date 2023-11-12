@@ -19,7 +19,6 @@ class BoutiqueUserModel {
     required this.status,
     required this.dateCreated,
     required this.images,
-    required this.produits,
     required this.localisation,
   });
 
@@ -30,7 +29,6 @@ class BoutiqueUserModel {
   bool status;
   String dateCreated;
   List<Image> images;
-  List<Produit> produits;
   Localisation localisation;
 
   factory BoutiqueUserModel.fromJson(Map<String, dynamic> json) =>
@@ -41,8 +39,6 @@ class BoutiqueUserModel {
         titre: json["titre"],
         status: json["status"],
         dateCreated: json["dateCreated"],
-        produits: List<Produit>.from(
-            json["produits"].map((x) => Produit.fromJson(x))),
         localisation: Localisation.fromJson(json["localisation"]),
         images: json["images"] == null
             ? []
@@ -56,7 +52,6 @@ class BoutiqueUserModel {
         "titre": titre,
         "status": status,
         "dateCreated": dateCreated,
-        "produits": List<dynamic>.from(produits.map((x) => x.toJson())),
         "images": images == null
             ? null
             : List<dynamic>.from(images.map((x) => x.toJson())),
@@ -85,53 +80,6 @@ class Localisation {
         "ville": ville,
         "longitude": longitude,
         "latitude": latitude,
-      };
-}
-
-class Produit {
-  Produit({
-    required this.id,
-    required this.codeProduit,
-    required this.titre,
-    required this.quantite,
-    required this.prix,
-    required this.status,
-    required this.date,
-    required this.description,
-    required this.images,
-  });
-
-  int id;
-  String codeProduit;
-  String titre;
-  int quantite;
-  int prix;
-  bool status;
-  String date;
-  String description;
-  List<Image> images;
-  factory Produit.fromJson(Map<String, dynamic> json) => Produit(
-        id: json["id"],
-        codeProduit: json["codeProduit"],
-        titre: json["titre"],
-        date: json["date "] == '0' ? '0' : json["date "],
-        quantite: json["quantite"],
-        prix: json["prix"],
-        status: json["status"],
-        description: json["description"],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "codeProduit": codeProduit,
-        "titre": titre,
-        "date ": date,
-        "quantite": quantite,
-        "prix": prix,
-        "status": status,
-        "description": description,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
       };
 }
 

@@ -49,7 +49,8 @@ class BoutiqueView extends StatelessWidget {
                   builder: (_bscontroler) => _bscontroler.isLoadedPB == 0
                       ? Container(
                           alignment: Alignment.topLeft,
-                          margin: EdgeInsets.symmetric(vertical: kMarginY),
+                          margin: EdgeInsets.symmetric(
+                              vertical: kMarginY * 2, horizontal: kMarginX),
                           child: ShimmerProduit())
                       : Container(
                           // height: double.maxFinite,
@@ -59,10 +60,18 @@ class BoutiqueView extends StatelessWidget {
                                   ? Column(
                                       children: [
                                         Container(
-                                            alignment: Alignment.topLeft,
+                                            alignment: Alignment.center,
                                             margin: EdgeInsets.symmetric(
-                                                vertical: kMarginY * 4,
-                                                horizontal: kMarginX),
+                                                vertical: kMarginY * 2,
+                                                horizontal: kMarginX * 5),
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: kMarginY,
+                                            ),
+                                            decoration: BoxDecoration(
+                                                border: Border(
+                                                    bottom: BorderSide(
+                                              color: ColorsApp.grey,
+                                            ))),
                                             child: Text(
                                               'Produits Disponibles',
                                               overflow: TextOverflow.ellipsis,

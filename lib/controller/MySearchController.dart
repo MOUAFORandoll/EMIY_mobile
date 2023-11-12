@@ -75,17 +75,6 @@ class MySearchController extends GetxController {
 
   final dababase = Get.find<DataBaseController>();
 
-  void onInit() async {
-    // TODO: implement initState
-
-    super.onInit();
-
-    _controllerT = ScrollController()..addListener(_scrollListener);
-
-    // _savedPosition = _controllerT.position.pixels;
-    update();
-  }
-
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
   var isType = null;
@@ -95,6 +84,7 @@ class MySearchController extends GetxController {
     _isLoaded = false;
     update();
     print(isType);
+    setIndex();
   }
 
   int indexP = 1;
@@ -102,6 +92,7 @@ class MySearchController extends GetxController {
   int indexC = 1;
   int indexS = 1;
   int index = 1;
+
   setIndex() {
     if (isType == 0) {
       indexP++;
@@ -117,6 +108,14 @@ class MySearchController extends GetxController {
     }
     if (isType == 3) {
       indexS++;
+      update();
+    }
+    if (isType == null) {
+      indexS++;
+      indexC++;
+      indexB++;
+      indexP++;
+
       update();
     }
   }
@@ -141,6 +140,23 @@ class MySearchController extends GetxController {
 
       update();
     }
+  }
+
+  resetAll() {
+    isType = null;
+
+    indexP = 1;
+    indexB = 1;
+    indexC = 1;
+    indexS = 1;
+    index = 1;
+    _search = 0;
+    controllerField.clear();
+    _listProduit = [];
+    _categoryList = [];
+    _listBoutique = [];
+    _listShort = [];
+    update();
   }
 
   searchForCont() async {
@@ -199,6 +215,18 @@ class MySearchController extends GetxController {
   ScrollController _controllerT = new ScrollController();
 
   ScrollController get controllerT => _controllerT;
+
+  void onInit() async {
+    // TODO: implement initState
+
+    super.onInit();
+
+    _controllerT = ScrollController()..addListener(_scrollListener);
+
+    // _savedPosition = _controllerT.position.pixels;
+    update();
+  }
+
   void _scrollListener() {
     print('.......');
     print(_controllerT.offset + Get.height / 2.5);

@@ -99,7 +99,7 @@ class ShoppingproduitComponent extends StatelessWidget {
                                           backgroundColor: ColorsApp.skyBlue,
                                           radius: 50,
                                           backgroundImage: AssetImage(
-                                              "assets/images/error.gif"));
+                                              "assets/logo/logoNew.png"));
                                     },
                                   )),
                                 ],
@@ -181,12 +181,15 @@ class ShoppingproduitComponent extends StatelessWidget {
                                   margin: EdgeInsets.zero,
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: ColorsApp.orange),
+                                    border: Border.all(
+                                        color: ColorsApp
+                                            .secondBlue /*  ColorsApp.orange */),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: Icon(
                                     Icons.close,
-                                    color: ColorsApp.orange,
+                                    color: ColorsApp
+                                        .secondBlue /*  ColorsApp.orange */,
                                     size: 12,
                                     semanticLabel: 'Close',
                                   ),

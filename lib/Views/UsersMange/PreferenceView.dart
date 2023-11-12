@@ -1,3 +1,4 @@
+import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/produitForBoutiqueComponent.dart';
 import 'package:EMIY/controller/produitController.dart';
@@ -14,10 +15,13 @@ class PreferenceView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProduitController>(
       builder: (_controler) => _controler.isLoadedPB == 0
-          ? AppLoading()
+          ? Container(
+              // height: double.maxFinite,
+              margin: EdgeInsets.symmetric(vertical: kMarginY * 3),
+              child: ShimmerProduit())
           : Container(
               // height: double.maxFinite,
-              margin: EdgeInsets.symmetric(vertical: kMarginY * .2),
+              margin: EdgeInsets.symmetric(vertical: kMarginY * 3),
               child: _controler.isLoadedPB == 1
                   ? (_controler.preferenceList.length != 0)
                       ? SingleChildScrollView(
@@ -29,7 +33,7 @@ class PreferenceView extends StatelessWidget {
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
-                                      crossAxisSpacing: 20.0,
+                                      crossAxisSpacing: 10.0,
                                       childAspectRatio: 0.7,
                                       mainAxisSpacing: 20.0),
                               itemCount: _controler.preferenceList.length,

@@ -15,22 +15,23 @@ class AppTabComponent extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-          height: 5,
-          // width: kSmWidth,
+          height: kSmHeight / 1.4,
+          width: kWidth / 3.7,
           alignment: Alignment.center,
           padding: EdgeInsets.all(5),
-          margin: EdgeInsets.only(right: kMarginX),
+          // margin: EdgeInsets.only(right: kMarginX),
           decoration: BoxDecoration(
               color: selected ? ColorsApp.secondBlue : Colors.transparent,
               border: Border.all(
                   color: selected ? ColorsApp.secondBlue : ColorsApp.greyTh),
-              borderRadius: BorderRadius.circular(12)),
+              borderRadius: BorderRadius.circular(8)),
           child: Text(libelle,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontFamily: 'Lato',
                   color: !selected ? ColorsApp.greyFirst : ColorsApp.white,
-                  fontSize: 12)),
+                  fontSize: kDescription,
+                  fontWeight: FontWeight.w700)),
         ));
   }
 }

@@ -69,6 +69,9 @@ dependencies:
   objectbox: ^2.2.1
   objectbox_flutter_libs: any
   flutter_blur: ^0.0.2
+  new_version_plus: ^0.0.11
+  flexible_text_editing_controller: ^1.0.0+2
+
   # better_player: ^0.0.83
   # custom_floating_action_button: ^0.0.3
   # cached_video_player: ^2.0.4
@@ -128,7 +131,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logo/logoNew.png
-    - assets/images/error.gif
+    - assets/logo/logoNew.png
     - assets/om.png
     - assets/login.png
     - assets/register.png
@@ -161,6 +164,7 @@ flutter:
     - assets/svg_icones/story_boutique.svg
     - assets/images/shop2.png
     - assets/images/shop1.png
+    - assets/images/empty_shop.png
     - assets/svg_icones/hand.svg
     - assets/svg_icones/location.svg
     - assets/svg_icones/nmreproduit.svg

@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../components/Button/app_button.dart';
+import '../../components/Widget/EmptyShopComponent.dart';
 
 class ShoppingViewNext extends StatelessWidget {
   ShoppingViewNext({Key? key}) : super(key: key);
@@ -58,15 +59,7 @@ class ShoppingViewNext extends StatelessWidget {
             SliverList(
                 delegate: SliverChildBuilderDelegate(
               (context, index) => _controller.getItems.length == 0
-                  ? Container(
-                      margin: EdgeInsets.symmetric(
-                        vertical: kHeight / 3,
-                      ),
-                      child: BigText(
-                        text: 'Vide',
-                        bolder: true,
-                      ),
-                    )
+                  ? EmptyShopComponent(type: 1)
                   : SingleChildScrollView(
                       child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -80,69 +73,73 @@ class ShoppingViewNext extends StatelessWidget {
               childCount: 1,
             ))
           ]),
-          bottomNavigationBar: Container(
-              decoration: BoxDecoration(
-                color: ColorsApp.greySearch,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: kMarginX,
-                horizontal: kMarginY,
-                // top: kMdHeight / 20,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          bottomNavigationBar: _controller.getItems.length == 0
+              ? null
+              : Container(
+                  decoration: BoxDecoration(
+                    color: ColorsApp.greySearch,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: kMarginX,
+                    horizontal: kMarginY,
+                    // top: kMdHeight / 20,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                              // width: Get.size.width * 0.1,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  // width: Get.size.width * 0.1,
 
-                              margin: EdgeInsets.only(
-                                bottom: 2,
-                              ),
-                              child: Text(
-                                'Nombre de produits : ${_controller.getItems.length}',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: ColorsApp.black,
-                                ),
-                              )),
+                                  margin: EdgeInsets.only(
+                                    bottom: 2,
+                                  ),
+                                  child: Text(
+                                    'Nombre de produits : ${_controller.getItems.length}',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: ColorsApp.black,
+                                    ),
+                                  )),
+                              Container(
+                                  width: Get.size.width * 0.65,
+                                  child: Text(
+                                    'Montant du panier :  ${_controller.totalPrix} XAF',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: ColorsApp.black,
+                                        fontSize: 11),
+                                  )),
+                            ],
+                          ),
                           Container(
-                              width: Get.size.width * 0.65,
-                              child: Text(
-                                'Montant du panier :  ${_controller.totalPrix} XAF',
-                                style: TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    color: ColorsApp.black,
-                                    fontSize: 11),
-                              )),
+                              margin: EdgeInsets.only(bottom: kMarginY),
+                              child: AppButton(
+                                size: MainAxisSize.max,
+                                bgColor: ColorsApp.skyBlue,
+                                text: 'Buy',
+                                onTap: () {
+                                  _controller.getItems.length != 0
+                                      ? Get.toNamed(AppLinks.BUYSHOP)
+                                      : functions.snackBar(
+                                          'Panier',
+                                          'Ajouter des produits au panier',
+                                          false);
+                                  ;
+                                },
+                              ))
                         ],
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(bottom: kMarginY),
-                          child: AppButton(
-                            size: MainAxisSize.max,
-                            bgColor: ColorsApp.skyBlue,
-                            text: 'Buy',
-                            onTap: () {
-                              _controller.getItems.length != 0
-                                  ? Get.toNamed(AppLinks.BUYSHOP)
-                                  : functions.snackBar('Panier',
-                                      'Ajouter des produits au panier', false);
-                              ;
-                            },
-                          ))
+                      )
                     ],
-                  )
-                ],
-              )));
+                  )));
     });
   }
 }

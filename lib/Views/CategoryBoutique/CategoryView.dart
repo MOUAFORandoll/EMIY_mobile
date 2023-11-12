@@ -132,8 +132,6 @@ class CategoryView extends StatelessWidget {
                                   child: GridView.builder(
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: kMarginX),
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,

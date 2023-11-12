@@ -78,8 +78,12 @@ class GeneralController extends GetxController {
 
   int _selected = 0;
   int get selected => _selected;
+  ModePaiementModel _smode =
+      new ModePaiementModel(id: 0, libelle: 'Selectionner', img: '');
+  ModePaiementModel get smode => _smode;
   selectMode(mode) {
-    _selected = mode;
+    _selected = mode.id;
+    _smode = mode;
     update();
   }
 
@@ -370,227 +374,21 @@ class GeneralController extends GetxController {
   Widget floatingActionButton() {
     return GetBuilder<ManagerController>(
         builder: (manage) => GetBuilder<TransactionController>(
-            builder: (transaction) => manage.current == 4
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: ColorsApp.grey,
-                    ),
-                    margin: EdgeInsets.only(
-                      left: kMdWidth / 4,
-                      // right: kMdWidth / 6,
-                      top: 10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Button(
-                            borderRadius: 15.0,
-                            width: Get.size.width * .4,
-                            margin: EdgeInsets.only(
-                                top: Get.size.height * .025, bottom: 0),
-                            height: Get.size.height * .08,
-                            loaderColor: Colors.white,
-                            title: "Depot",
-                            textColor: Colors.white,
-                            itemColor: Colors.grey,
-                            borderColor: Colors.transparent,
-                            state: false,
-                            enabled: true,
-                            onTap: () async {
-                              Get.bottomSheet(
-                                Container(
-                                  height: kHeight * .7,
-                                  decoration: BoxDecoration(
-                                      color: ColorsApp.grey,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(15),
-                                          topRight: Radius.circular(15))),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: kSmWidth * .07,
-                                      vertical: kSmHeight * .09),
-                                  // height: 800,
-
-                                  child: SingleChildScrollView(
-                                      child: Column(
-                                    // mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      FormComponent2(
-                                          icon: Icons.money,
-                                          type: 0,
-                                          // controller: .montant,
-                                          enabled: true,
-                                          kType: TextInputType.number,
-                                          titre: 'Montant',
-                                          hint: ""),
-                                      FormComponent2(
-                                          icon: Icons.phone,
-                                          type: 0,
-                                          // controller: phone,
-                                          kType: TextInputType.number,
-                                          enabled: true,
-                                          titre: 'phone',
-                                          hint: " "),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 5),
-                                        child: Text('Moyen de recharge'),
-                                      ),
-                                      GetBuilder<GeneralController>(
-                                          builder: (_Acontroller) => Container(
-                                              margin: EdgeInsets.only(
-                                                  // top: Get.size.height * .015,
-                                                  bottom:
-                                                      Get.size.height * .025),
-                                              // decoration: BoxDecoration(
-                                              //     borderRadius: BorderRadius.circular(15),
-                                              //     color: Colors.white),
-                                              // padding: EdgeInsets.only(
-                                              //   top: 25,
-                                              // ),
-                                              child: Column(
-                                                children: [
-                                                  SingleChildScrollView(
-                                                      child: ListView.builder(
-                                                          physics:
-                                                              NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount:
-                                                              _Acontroller
-                                                                  .lmodePaiement
-                                                                  .length,
-                                                          itemBuilder: (_ctx,
-                                                                  index) =>
-                                                              SelectComponent(
-                                                                  select: index +
-                                                                          1 ==
-                                                                      selected,
-                                                                  mode: lmodePaiement[
-                                                                      index])))
-                                                ],
-                                              ))),
-                                      CustomBtn(
-                                          color: ColorsApp.greenLight,
-                                          title: 'Valider',
-                                          onTap: () async {
-                                            var _manager =
-                                                Get.find<ManagerController>();
-                                            var name = _manager.Userget.nom;
-                                            var prenom = _manager.Userget.prenom
-                                                .toString();
-
-                                            var mode =
-                                                Get.find<GeneralController>()
-                                                    .selected;
-                                            var keySecret = await _manager
-                                                .dababase
-                                                .getKey();
-                                            // var data = {
-                                            //   'keySecret': keySecret,
-                                            //   'montant': montant.text,
-                                            //   'numeroClient': phone.text,
-                                            //   'nom': name,
-                                            //   'prenom': prenom,
-                                            //   'idModePaiement': mode
-                                            // };
-                                            // //print(data);
-                                            // await transControll.depot(data);
-                                          })
-                                    ],
-                                  )),
-                                ),
-                              );
-                            }),
-                        Button(
-                            borderRadius: 15.0,
-                            width: Get.size.width * .4,
-                            margin: EdgeInsets.only(
-                                top: Get.size.height * .025, bottom: 0),
-                            height: Get.size.height * .08,
-                            loaderColor: Colors.white,
-                            title: "Retirer",
-                            textColor: Colors.white,
-                            itemColor: Colors.grey,
-                            borderColor: Colors.transparent,
-                            state: false,
-                            enabled: true,
-                            onTap: () async {
-                              Get.bottomSheet(
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: ColorsApp.grey,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(15),
-                                          topRight: Radius.circular(15))),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: kSmWidth * .07,
-                                      vertical: kSmHeight * .09),
-                                  // height: 800,
-
-                                  child: SingleChildScrollView(
-                                      child: Column(
-                                    // mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      FormComponent2(
-                                          icon: Icons.money,
-                                          type: 0,
-                                          // controller: montant,
-                                          enabled: true,
-                                          kType: TextInputType.number,
-                                          titre: 'Montant',
-                                          hint: ""),
-                                      FormComponent2(
-                                          icon: Icons.phone,
-                                          type: 0,
-                                          // controller: phone,
-                                          kType: TextInputType.number,
-                                          enabled: true,
-                                          titre: 'phone',
-                                          hint: " "),
-                                      FormComponent2(
-                                          icon: Icons.lock,
-                                          type: 0,
-                                          // controller: password,
-                                          enabled: true,
-                                          titre: 'password',
-                                          hint: " "),
-                                      CustomBtn(
-                                          color: ColorsApp.greenLight,
-                                          title: 'Retirer',
-                                          onTap: () async {
-                                            // var data = {
-                                            //   'keySecret': new GetStorage()
-                                            //       .read('keySecret'),
-                                            //   'montant': montant.text,
-                                            //   'phone': phone.text,
-                                            // };
-                                            //print(data);
-                                            // await transControll.retrait(data);
-                                          })
-                                    ],
-                                  )),
-                                ),
-                              );
-                            }),
-                      ],
-                    ),
+            builder: (transaction) => manage.current == 3
+                ? FloatingActionButton(
+                    onPressed: () {
+                      Share.share(
+                          'Inscris-toi avec mon lien et rejoins emiy : ' +
+                              manage.lienParrainnage,
+                          subject: 'Look what I made!');
+                    },
+                    child: Container(
+                        child: IconButtonF(
+                      color: ColorsApp.black,
+                      icon: Icons.share,
+                    )),
                   )
-                : manage.current == 3
-                    ? FloatingActionButton(
-                        onPressed: () {
-                          Share.share(
-                              'Inscris-toi avec mon lien et rejoins emiy : ' +
-                                  manage.lienParrainnage,
-                              subject: 'Look what I made!');
-                        },
-                        child: Container(
-                            child: IconButtonF(
-                          color: ColorsApp.black,
-                          icon: Icons.share,
-                        )),
-                      )
-                    : Container()));
+                : Container()));
   }
 
   Widget buildBorderRadiusDesign() {
@@ -790,6 +588,11 @@ class GeneralController extends GetxController {
     // });
   }
 
+  setGoHome() {
+    _currentIndex = 0;
+    update();
+  }
+
   generalSocket() {
     new SocketService().general(socketGeneralNotification);
   }
@@ -837,18 +640,19 @@ class GeneralController extends GetxController {
   getListNotifications() async {
     var getU = await dababase.getKey();
     if (getU != null) {
-
-       await    await generalRepo.getListNotifications(indexNotification, getU)
-    .then((value) async {
-        print('----_isLoadNotification--------------value----------${value.body}-');
-         _notificationList.clear();
+      await await generalRepo
+          .getListNotifications(indexNotification, getU)
+          .then((value) async {
+        print(
+            '----_isLoadNotification--------------value----------${value.body}-');
+        _notificationList.clear();
         if (value.body != null) {
           if (value.body['data'].length != null) {
-          if (value.body['data'].length != 0) {
-            _notificationList.addAll((value.body['data'] as List)
-                .map((e) => NotificationModel.fromJson(e))
-                .toList());
-          }
+            if (value.body['data'].length != 0) {
+              _notificationList.addAll((value.body['data'] as List)
+                  .map((e) => NotificationModel.fromJson(e))
+                  .toList());
+            }
           }
           indexNotification++;
           _isLoadNotification = 1;
@@ -865,7 +669,6 @@ class GeneralController extends GetxController {
         //print(e);
         print(error);
       });
-      
     }
   }
 
@@ -885,12 +688,22 @@ class GeneralController extends GetxController {
     }
   }
 
+  var _titleSpace = 'Notifications';
+  get titleSpace => _titleSpace;
   //My Space
   int _spaceSelect = 0;
   int get spaceSelect => _spaceSelect;
   sectectSpace(index) {
     _spaceSelect = index;
     update();
+
+    if (index == 0) {
+      _titleSpace = 'Notifications';
+    } else if (index == 1) {
+      _titleSpace = 'Negociations';
+    } else if (index == 2) {
+      _titleSpace = 'Service Client';
+    }
   }
 
   buildSpace() {

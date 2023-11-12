@@ -118,6 +118,7 @@ class ProduitComponentAll extends StatelessWidget {
                   child: Text(produit.titre,
                       overflow: TextOverflow.fade,
                       textAlign: TextAlign.left,
+                      maxLines: 1,
                       style: TexteStyle().secondaryTextStyle)),
               Container(
                   width: kWidth / 2,

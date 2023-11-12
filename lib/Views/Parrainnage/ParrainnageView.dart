@@ -40,6 +40,7 @@ class ParrainnageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ManagerController>(
         builder: (manage) => Scaffold(
+              backgroundColor: ColorsApp.bg,
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   Share.share(
@@ -67,45 +68,31 @@ class ParrainnageView extends StatelessWidget {
                         controller: _scrollController,
                         slivers: [
                       SliverAppBar(
+                        backgroundColor: ColorsApp.bg,
                         automaticallyImplyLeading: false,
-                        backgroundColor: Colors.white,
-                        elevation: 0,
-                        // Provide a standard title.
-                        // title: Text('title'),
-                        // Allows the user to reveal the app bar if they begin scrolling
-                        // back up the list of items.
-                        floating: true,
-                        // Display a placeholder widget to visualize the shrinking size.
-                        flexibleSpace: InkWell(
-                          child: SingleChildScrollView(
-                            child: Column(children: [
-                              Container(
-                                  margin:
-                                      EdgeInsets.only(top: Get.height * .030),
-                                  padding: EdgeInsets.only(
-                                      left: Get.width * .030,
-                                      right: Get.width * .030),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        AppBackButton(),
-                                        Container(
-                                          child: AppTitleRight(
-                                              title: 'Parrainnage',
-                                              description: 'Mes fieuls',
-                                              icon: null),
-                                          margin: EdgeInsets.only(
-                                              right: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .005),
-                                        ),
-                                      ])),
-                            ]),
-                          ),
+                        title: Text(
+                          'Mes Parrainnages',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontFamily: 'Lato', fontWeight: FontWeight.w600),
                         ),
-                        expandedHeight: 60,
+                        leading: Container(
+                            child: InkWell(
+                          child: Container(
+                            margin: EdgeInsets.zero,
+                            // padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+
+                                // borderRadius: BorderRadius.circular(20),
+                                ),
+                            child: Icon(Icons.arrow_back_ios_new,
+                                color: ColorsApp.black, size: 25.0),
+                          ),
+                          onTap: () {
+                            Get.back();
+                          },
+                        )),
+                        pinned: true,
                       ),
                       SliverList(
                           delegate: SliverChildBuilderDelegate(

@@ -207,7 +207,7 @@ class ProduitView extends StatelessWidget {
                                                   ColorsApp.skyBlue,
                                               radius: 50,
                                               backgroundImage: AssetImage(
-                                                  "assets/images/error.gif"));
+                                                  "assets/logo/logoNew.png"));
                                         },
                                       ),
                                       onTap: () async {
@@ -586,7 +586,7 @@ class ProduitView extends StatelessWidget {
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
                                             crossAxisSpacing: 10.0,
-                                            childAspectRatio: kMarginX / 13,
+                                            childAspectRatio: kMarginX / 15,
                                             mainAxisSpacing: 8.0,
                                           ),
                                           itemCount: prodController
@@ -780,7 +780,7 @@ class ImageScreen extends StatelessWidget {
                 return CircleAvatar(
                     backgroundColor: ColorsApp.skyBlue,
                     radius: 50,
-                    backgroundImage: AssetImage("assets/images/error.gif"));
+                    backgroundImage: AssetImage("assets/logo/logoNew.png"));
               },
             ),
           ),

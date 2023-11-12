@@ -10,8 +10,8 @@ class TransactionRepo extends GetxService {
   TransactionRepo({required this.apiClient});
 
   Future getListTransaction(id) async {
-    Response a =
-        await apiClient.postData(ApiRoutes.TRANSACTION_READ, {'id': id});
+    Response a = await apiClient
+        .getData(ApiRoutes.TRANSACTION_READ + '?id=' + id.toString());
 
     return a;
   }

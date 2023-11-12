@@ -16,6 +16,18 @@ class FormatDateTime {
     return DateFormat("yyyy").format(dateTime);
   }
 
+  String dateToSimpleDate(value) {
+    DateTime dateTime = DateTime.parse(value);
+
+    DateFormat formatter = DateFormat("dd/MM/yyyy HH:mm");
+    String formattedDate = formatter.format(dateTime);
+    return formattedDate.toString().split(' ')[0] +
+        ' ' +
+        'a' +
+        ' ' +
+        formattedDate.toString().split(' ')[1];
+  }
+
   String formatTime(value) {
     final dateTime = DateTime.parse(value);
     final format = DateFormat('HH:mm');

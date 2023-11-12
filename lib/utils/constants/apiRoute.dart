@@ -69,6 +69,7 @@ class ApiRoutes {
   static const LIST_MESSAGE_SC = '/communication/message/list';
   static const LIST_MESSAGE_NEW = '/communication/message/new';
   static const LIST_FIEUL = '/user/fieul';
+  static const LIST_USER_BY = '/user/find';
   static const USER_IMAGE_UPDATE = '/user/image/new';
   static const LIST_NOTIFICATIONS = '/notifications';
   static const READ_NOTIFICATIONS = '/notifications/read';

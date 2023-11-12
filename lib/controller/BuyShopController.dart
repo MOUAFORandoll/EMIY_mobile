@@ -391,20 +391,24 @@ class BuyShopController extends GetxController {
   final TextEditingController _expiryYearController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
   final TextEditingController _lieuxController = TextEditingController();
-  get nameController => _nameController;
-  get cardNumberController => _cardNumberController;
-  get expiryMonthController => _expiryMonthController;
-  get expiryYearController => _expiryYearController;
-  get cvvController => _cvvController;
-  get lieuxController => _lieuxController;
+  TextEditingController get nameController => _nameController;
+  TextEditingController get cardNumberController => _cardNumberController;
+  TextEditingController get expiryMonthController => _expiryMonthController;
+  TextEditingController get expiryYearController => _expiryYearController;
+  TextEditingController get cvvController => _cvvController;
+  TextEditingController get lieuxController => _lieuxController;
 
   final TextEditingController _prenameController = TextEditingController();
+  TextEditingController get prenameController => _prenameController;
   final TextEditingController _phoneController = TextEditingController();
-  get prenameController => _prenameController;
-  get phoneController => _phoneController;
+  TextEditingController get phoneController => _phoneController;
   final TextEditingController _dateController = TextEditingController();
-  get dateController => _dateController;
+  TextEditingController get dateController => _dateController;
   var manager = Get.find<ManagerController>();
+  refresh0() {
+    refresh();
+  }
+
   setUserInfo() {
     print('--setinfo');
     if (manager.Userget != null &&

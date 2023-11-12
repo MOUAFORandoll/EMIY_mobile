@@ -16,7 +16,6 @@ class NegociationController extends GetxController {
   final dababase = Get.find<DataBaseController>();
 
   var fn = new ViewFunctions();
-
   newNegociation(codeProduit) async {
     textEditingController.text = '';
     _codeNegociation = '';
@@ -63,6 +62,28 @@ class NegociationController extends GetxController {
     }
   }
 
+  TextEditingController _searchNegoController = TextEditingController();
+  TextEditingController get searchNegoController => _searchNegoController;
+  searchNego() {
+    print('----------------****');
+
+    print(searchNegoController.text);
+    if (searchNegoController.text.isEmpty) {
+      _listNegociation = _listNegociationSave;
+    }
+    _listNegociation = _listNegociationSave
+        .where((element) => (((element.titre_produit
+                .toLowerCase()
+                .contains(searchNegoController.text.toLowerCase())) ||
+            (element.last_message
+                .toLowerCase()
+                .contains(searchNegoController.text.toLowerCase())))))
+        .toList();
+
+    update();
+  }
+
+  List<NegociationModel> _listNegociationSave = [];
   List<NegociationModel> _listNegociation = [];
   List<NegociationModel> get listNegociation => _listNegociation;
   int _isLoadNego = 0;
@@ -93,6 +114,7 @@ class NegociationController extends GetxController {
                 .toList());
             _listNegociation.forEach((elt) => new SocketService()
                 .negociation(elt.codeNegociation, socketMessageNegociation));
+            _listNegociationSave = _listNegociation;
             _isLoadNego = 1;
             update();
           }
@@ -108,13 +130,22 @@ class NegociationController extends GetxController {
     // }
   }
 
+  var _imageNegociation = '';
+  get imageNegociation => _imageNegociation;
+
+  int _loadNegociation = 0;
+  get loadNegociation => _loadNegociation;
+
   var _titreNegociation = '';
   get titreNegociation => _titreNegociation;
   getListMessageNegociation(NegociationModel negociation) async {
+    _loadNegociation = 0;
+
     _listMessageNegociation = [];
     textEditingController.text = '';
     _codeNegociation = negociation.codeNegociation;
     _titreNegociation = negociation.titre_produit;
+    _imageNegociation = negociation.src_produit;
 
     update();
     new SocketService().negociation(_codeNegociation, socketMessageNegociation);
@@ -132,17 +163,35 @@ class NegociationController extends GetxController {
             _listMessageNegociation.addAll((response.body['data'] as List)
                 .map((e) => MessageNegociationModel.fromJson(e))
                 .toList());
-
+            _loadNegociation = 1;
+            scroolToEnd();
             update();
           }
         }
       }
-    } catch (e) {
-      // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      _loadNegociation = 1;
 
       update();
-      //print(e);
+    } catch (e) {
+      // fn.snackBar('Mise a jour', 'Une erreur est survenue', false);
+      _loadNegociation = 2;
+
+      update();
     }
+  }
+
+  ScrollController _scrollcontroller = ScrollController();
+  ScrollController get scrollcontroller => _scrollcontroller;
+  scroolToEnd() {
+    print('-----scroll');
+    _scrollcontroller.animateTo(
+      99,
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+    update();
+    // _scrollcontroller
+    //     .animateTo(99, duration: Duration(milliseconds: 500));
   }
 
   bool _sending = false;
@@ -206,6 +255,10 @@ class NegociationController extends GetxController {
 
   int _idUser = 0;
   int get idUser => _idUser;
+  setUserId(id) {
+    _idUser = id;
+    update();
+  }
   // onInit() {
   //   super.onInit();
   //   var token = s.getKeyKen()['token'];

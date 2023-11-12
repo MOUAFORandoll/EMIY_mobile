@@ -84,4 +84,11 @@ class ShortRepo extends GetxService {
 
     return a;
   }
+
+  
+  Future findUserBuyTag(tag) async {
+    Response a = await apiClient.getData(ApiRoutes.LIST_USER_BY + '?tag=$tag');
+
+    return a;
+  }
 }

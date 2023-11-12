@@ -72,7 +72,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                               backgroundColor: ColorsApp.skyBlue,
                               radius: 50,
                               backgroundImage:
-                                  AssetImage("assets/images/error.gif"));
+                                  AssetImage("assets/logo/logoNew.png"));
                         },
                       )),
                       Container(

@@ -2,6 +2,7 @@ import 'package:EMIY/Views/BoutiqueUser/BoutiqueBuyView.dart';
 import 'package:EMIY/Views/BoutiqueUser/BoutiqueNewView.dart';
 import 'package:EMIY/Views/BoutiqueUser/BoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/CommadesBoutiqueUserView.dart';
+import 'package:EMIY/Views/BoutiqueUser/MesBoutiquesView.dart';
 import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:EMIY/Views/Short/ShortView.dart';
 import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
@@ -16,7 +17,7 @@ import 'package:EMIY/Views/Produit/PreferenceView.dart';
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
 import 'package:EMIY/Views/UsersMange/InteretsView.dart';
 import 'package:EMIY/Views/UsersMange/ServiceClientView.dart';
-import 'package:EMIY/Views/UsersMange/WalletView.dart';
+import 'package:EMIY/Views/UsersMange/WalletView_SAVE_02112023.dart';
 import 'package:EMIY/Views/BoutiqueUser/HistroriqueCBUView.dart';
 import 'package:EMIY/Views/BoutiqueUser/manageBoutiqueUserView.dart';
 import 'package:EMIY/Views/BoutiqueUser/produitBoutiqueUserView.dart';
@@ -51,6 +52,7 @@ import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
 import 'package:get/get.dart';
 
 import '../../test.dart';
+import 'package:EMIY/Views/UsersMange/WalletView.dart';
 
 var transitionX = Transition.leftToRight;
 
@@ -261,10 +263,15 @@ class AppRoutes {
         name: AppLinks.INTERET,
         page: () => InteretsView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.MES_BOUTIQUES,
+        page: () => MesBoutiquesView(),
+        transition: transitionX),
   ];
 }
 
 class AppLinks {
+  static const String MES_BOUTIQUES = "/mes_boutiques";
   static const String PREFERENCE_CLIENT = "/preference_client";
   static const String SERVICE_CLIENT = "/service_client";
   static const String ABONNEMENT = "/abonnement";

@@ -349,10 +349,7 @@ class BoutiqueController extends GetxController {
 
   // BoutiqueController({required this.service});
   getListBoutique() async {
-    try {
-      //print('---0000--------boutiqr************************');
-
-      Response response = await boutiqueRepo.getBoutiqueForUser();
+    await boutiqueRepo.getBoutiqueForUser().then((response) {
       if (response.body != null) {
         //print('---111--------boutiqr************************');
 
@@ -373,7 +370,7 @@ class BoutiqueController extends GetxController {
       }
       _loadBoutique = false;
       update();
-    } catch (e) {
+    }).catchError((e) {
       _isExist = false;
       //print('---error--------boutiqr************************');
 
@@ -381,7 +378,7 @@ class BoutiqueController extends GetxController {
 
       update();
       //print(e);
-    }
+    });
   }
 
   socketBoutique(data) {

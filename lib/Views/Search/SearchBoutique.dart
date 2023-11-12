@@ -41,7 +41,7 @@ class SearchBoutique extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<MySearchController>(builder: (search) {
       return Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: kMarginX),
         child: SingleChildScrollView(
           controller: search.controllerT,
           child: Column(
@@ -86,6 +86,5 @@ class SearchBoutique extends StatelessWidget {
         ),
       );
     });
-    ;
   }
 }

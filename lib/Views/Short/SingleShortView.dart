@@ -41,11 +41,10 @@ class _SingleShortViewState extends State<SingleShortView>
 
   @override
   void initState() {
+    print('----000--------******************');
+
     Get.find<ShortController>().disposePLayerAll();
 
-    super.initState();
-    // Get.find<ShortController>()
-    //     .getUniqueShort(widget.idShort, widget.codeShort);
     _heartAnimationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000),
@@ -61,7 +60,21 @@ class _SingleShortViewState extends State<SingleShortView>
         _heartAnimationController.reverse();
       }
     });
+    startRead();
     super.initState();
+  }
+
+  void startRead() async {
+    print('----000--------******************');
+
+    Get.find<ShortController>().disposePLayerAll();
+
+    await Get.find<ShortController>()
+        .getUniqueShort(widget.idShort, widget.codeShort);
+
+    print(
+        '----000-------${Get.find<ShortController>().currentReadShortData.src}-******************');
+
     _controller = VideoPlayerController.networkUrl(Uri.parse(
         ApiUrl.stream_serveurUrl +
             "/short?video=" +
@@ -122,7 +135,7 @@ class _SingleShortViewState extends State<SingleShortView>
                                   null
                               ? _ShortController
                                       .isUniqueVideoPlayer.value.isInitialized
-                                  ? Center(
+                                  ? /*  Center(
                                       child: GestureDetector(
                                           onTap: () {
                                             setState(() {
@@ -149,6 +162,55 @@ class _SingleShortViewState extends State<SingleShortView>
                                             child: VideoPlayer(_ShortController
                                                 .isUniqueVideoPlayer),
                                           )))
+                                   */
+                                  Align(
+                                      alignment: Alignment.topCenter,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              if (_ShortController
+                                                  .isUniqueVideoPlayer
+                                                  .value
+                                                  .isPlaying) {
+                                                _ShortController
+                                                    .isUniqueVideoPlayer
+                                                    .pause();
+                                              } else {
+                                                _ShortController
+                                                    .isUniqueVideoPlayer
+                                                    .play();
+                                              }
+                                            });
+                                          },
+                                          // onDoubleTapDown: _handleDoubleTap,
+                                          onDoubleTap: () {
+                                            _ShortController.newLikeShort();
+                                          },
+                                          child: AnimatedContainer(
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                              width: _ShortController.comment
+                                                  ? 0.33 *
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .width
+                                                  : MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                              height: _ShortController.comment
+                                                  ? 0.33 *
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .height
+                                                  : MediaQuery.of(context)
+                                                      .size
+                                                      .height,
+                                              child: AspectRatio(
+                                                aspectRatio: 9.7 / 17.7,
+                                                child: VideoPlayer(
+                                                    _ShortController
+                                                        .isUniqueVideoPlayer),
+                                              ))))
                                   : AspectRatio(
                                       aspectRatio: 9.7 / 17.7,
                                       child: Image.network(
@@ -225,7 +287,7 @@ class _SingleShortViewState extends State<SingleShortView>
                                                         ColorsApp.skyBlue,
                                                     radius: 50,
                                                     backgroundImage: AssetImage(
-                                                        "assets/images/error.gif"));
+                                                        "assets/logo/logoNew.png"));
                                               },
                                             )),
                                         onTap: () async {

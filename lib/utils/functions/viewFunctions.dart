@@ -162,17 +162,23 @@ class ViewFunctions {
           ),
           margin: EdgeInsets.symmetric(
               vertical: kHeight * .43, horizontal: kWidth * .40),
-          child: Container(
+          padding: EdgeInsets.all(15),
+          child: CircularProgressIndicator(
+              color: ColorsApp
+                  .secondBlue)) /*  Container(
             child: Shimmer.fromColors(
                 baseColor: ColorsApp.grey,
                 highlightColor: Colors.blueGrey,
-                child: SvgPicture.asset(
+                child:  SvgPicture.asset(
                   Assets.logo_esq,
                   height: 20,
                   width: 20,
                   fit: BoxFit.cover,
-                )),
-          )),
+                ) 
+
+                  
+          ))*/
+      ,
       barrierDismissible: false,
     );
   }
@@ -453,5 +459,12 @@ Future<void> _checkInternetConnection() async {
       Get.changeTheme(ThemeData.dark());
       box.write('isDark', true);
     }
+  }
+
+  String capitalizeFirstLetter(String text) {
+    if (text.isEmpty) {
+      return text;
+    }
+    return text[0].toUpperCase() + text.substring(1).toLowerCase();
   }
 }

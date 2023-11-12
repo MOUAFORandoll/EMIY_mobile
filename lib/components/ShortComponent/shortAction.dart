@@ -2,7 +2,9 @@ import 'package:EMIY/components/Button/AppIconSendButton.dart';
 import 'package:EMIY/components/ShortComponent/iconShortComponent.dart';
 import 'package:EMIY/components/ShortComponent/commentComponent.dart';
 import 'package:EMIY/components/Widget/CircleImage.dart';
+import 'package:EMIY/components/Widget/InputComment.dart';
 import 'package:EMIY/components/Widget/InputMessaage.dart';
+import 'package:EMIY/components/Widget/UserTagComponent.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/model/data/ShortModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -24,7 +26,6 @@ class ShortAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ShortController>(
         builder: (_ShortController) => Container(
-                 
                 child: Column(
               children: [
                 Container(
@@ -63,7 +64,7 @@ class ShortAction extends StatelessWidget {
                             backgroundColor: Colors.white,
                             radius: 50,
                             backgroundImage:
-                                AssetImage("assets/images/error.gif"));
+                                AssetImage("assets/logo/logoNew.png"));
                       },
                     )),
                 IconShortComponent(
@@ -131,27 +132,95 @@ class ShortAction extends StatelessWidget {
                                   height: 22,
                                   margin: EdgeInsets.symmetric(
                                       vertical: kHeight / 4.7),
-                                  child: CircularProgressIndicator(color:ColorsApp.secondBlue))
-                              : Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: kMarginX),
-                                    child: SingleChildScrollView(
-                                      child: ListView.builder(
-                                          itemCount: _ShortController
-                                              .listCommentShort.length,
-                                          shrinkWrap: true,
-                                          // controller: _ShortController.scrollController,
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          scrollDirection: Axis.vertical,
-                                          itemBuilder: (_ctx, index) =>
-                                              CommentComponent(
-                                                  comment: _ShortController
-                                                          .listCommentShort[
-                                                      index])),
-                                    ),
-                                  ),
+                                  child: CircularProgressIndicator(
+                                      color: ColorsApp.secondBlue))
+                              : GetBuilder<ShortController>(
+                                  builder: (_ShortController) =>
+                                      (_ShortController.openTagList)
+                                          ? _ShortController.isLoadingUsertag ==
+                                                  0
+                                              ? Container(
+                                                  width: 22,
+                                                  height: 22,
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: kHeight / 4.7),
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                          color: ColorsApp
+                                                              .secondBlue))
+                                              : Expanded(
+                                                  child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: ColorsApp.bg0,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(15),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    15)),
+                                                  ),
+                                                  height: kHeight / 1.5,
+                                                  child: SingleChildScrollView(
+                                                    child: ListView.builder(
+                                                        itemCount:
+                                                            _ShortController
+                                                                .usertagList
+                                                                .length,
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            const BouncingScrollPhysics(),
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        itemBuilder: (_ctx,
+                                                                index) =>
+                                                            UserTagComponent(
+                                                                user: _ShortController
+                                                                        .usertagList[
+                                                                    index],
+                                                                onTap: () {
+                                                                  _ShortController.selectUserTag(_ShortController
+                                                                      .usertagList[
+                                                                          index]
+                                                                      .user_tag!);
+                                                                })),
+                                                  ),
+                                                ))
+                                          : Expanded(
+                                              // margin: EdgeInsets.only(
+                                              //   top: kMarginY * 6,
+                                              // ),
+                                              // decoration: BoxDecoration(
+                                              //     // color: ColorsApp.red,
+                                              //     borderRadius:
+                                              //         BorderRadius.only(
+                                              //             topLeft:
+                                              //                 Radius.circular(
+                                              //                     15),
+                                              //             topRight:
+                                              //                 Radius.circular(
+                                              //                     15))),
+                                              // height: kHeight / 1.5,
+                                              child: SingleChildScrollView(
+                                                child: ListView.builder(
+                                                    itemCount: _ShortController
+                                                        .listCommentShort
+                                                        .length,
+                                                    shrinkWrap: true,
+                                                    // controller: _ShortController.scrollController,
+                                                    physics:
+                                                        const BouncingScrollPhysics(),
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemBuilder: (_ctx,
+                                                            index) =>
+                                                        CommentComponent(
+                                                            comment:
+                                                                _ShortController
+                                                                        .listCommentShort[
+                                                                    index])),
+                                              ),
+                                            ),
                                 ),
                           Padding(
                               padding: EdgeInsets.all(5.0),
@@ -190,14 +259,17 @@ class ShortAction extends StatelessWidget {
                                             : Text('')),
                                 Row(
                                   children: [
-                                GetBuilder<ManagerController>(
-        builder: (_UController) =>   CircleImage(
-                                        imageUrl: _UController.Userget.profile,
-                                        radius:  20)),
-             
-                                    InputMessaage(
+                                    GetBuilder<ManagerController>(
+                                        builder: (_UController) => CircleImage(
+                                            imageUrl:
+                                                _UController.Userget.profile,
+                                            radius: 20)),
+                                    InputComment(
                                       controller: _ShortController
                                           .textEditingController,
+                                      focusNode:
+                                          _ShortController.focusNodeComment,
+                                      userTag: _ShortController.userTagSelect,
                                     ),
                                     AppIconSendButton(
                                         icon: Icons.send,

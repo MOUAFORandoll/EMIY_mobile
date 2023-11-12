@@ -13,7 +13,7 @@ final kMarginTop = screenSize.height * .08;
 final kMarginBottom = screenSize.height * .08;
 final kMarginLeft = screenSize.width * .08;
 final kMarginRight = screenSize.width * .08;
-final kMarginX = 9.0;
+final kMarginX = 12.0;
 final kMarginY = Get.height * 0.01;
 
 final kPaddingTop = screenSize.height * .08;

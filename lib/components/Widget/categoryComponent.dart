@@ -26,10 +26,10 @@ class CategoryComponent extends StatelessWidget {
           // height: kSmHeight,
           // width: kSmWidth,
           alignment: Alignment.center,
-          padding: EdgeInsets.all(kMarginX * 1.5),
+          padding: EdgeInsets.all(kMarginX),
           margin: EdgeInsets.only(right: kMarginX),
           decoration: BoxDecoration(
-              color: ColorsApp.bg,
+              color: ColorsApp.bg0,
               border: Border.all(color: ColorsApp.bg),
               borderRadius: BorderRadius.circular(13)),
           child: Row(

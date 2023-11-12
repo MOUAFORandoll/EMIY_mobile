@@ -38,7 +38,7 @@ class SearchProduit extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<MySearchController>(builder: (search) {
       return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: kMarginX),
         child: SingleChildScrollView(
           controller: search.controllerT,
           child: Column(
@@ -54,8 +54,8 @@ class SearchProduit extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10.0,
-                    childAspectRatio: kMarginX / 13,
-                    mainAxisSpacing: 8.0,
+                    childAspectRatio: kMarginX / 15,
+                    mainAxisSpacing: 18.0,
                   ),
                   itemCount: search.listProduit.length,
                   itemBuilder: (_ctx, index) => ProduitComponentAll(
@@ -63,7 +63,7 @@ class SearchProduit extends StatelessWidget {
                       index: index,
                       type: 'search')),
               Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  margin: EdgeInsets.symmetric(vertical: kMarginY),
                   child: search.isLoaded == true
                       ? GridView.builder(
                           shrinkWrap: true,

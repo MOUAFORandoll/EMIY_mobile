@@ -1,11 +1,14 @@
+import 'package:EMIY/Views/BoutiqueUser/ShortBoutiqueView.dart';
 import 'package:EMIY/components/Form/home_search_field.dart';
 import 'package:EMIY/components/Form/search_field.dart';
 import 'package:EMIY/components/Widget/BoutiqueComponentHomeN.dart';
 import 'package:EMIY/components/Widget/ShimmerProduit.dart';
 import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/icon_svg.dart';
+import 'package:EMIY/components/Widget/shortComponent.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/utils/constants/assets.dart';
@@ -30,49 +33,56 @@ import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../components/Button/app_button.dart';
+import '../../components/Widget/ShimmerBoxBoutique.dart';
 
 class SearchShort extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GeneralController>(
-        builder: (generalController) =>
-            GetBuilder<ProduitController>(builder: (prods) {
-              return Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      prods.isLoadedSupp == 0
-                          ? ShimmerProduit()
-                          : GridView.builder(
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
+    return GetBuilder<MySearchController>(
+        builder: (search) => Container(
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: kMarginX),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  search.isLoaded == 0
+                      ? ShimmerProduit()
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
 // controller: search.controllerT,
 
+                          // Ratio largeur/hauteur pour chaque élément
+                          // controller: search.controllerT,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.0,
+                            childAspectRatio: kMarginX / 13,
+                            mainAxisSpacing: 8.0,
+                          ),
+                          itemCount: search.listShort.length,
+                          itemBuilder: (_ctx, index) => ShortComponentModel(
+                                short: search.listShort[index],
+                              )),
+                  Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                      child: search.isLoaded == true
+                          ? GridView.builder(
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
                               // Ratio largeur/hauteur pour chaque élément
-                              // controller: prods.controllerT,
+                              // controller: search.controllerT,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10.0,
-                                childAspectRatio: kMarginX / 13,
-                                mainAxisSpacing: 8.0,
-                              ),
-                              itemCount: prods.produitSupplementaire.length,
-                              itemBuilder: (_ctx, index) => ProduitComponentAll(
-                                  produit: prods.produitSupplementaire[index],
-                                  index: index,
-                                  type: 'supplementaire')),
-                      prods.loaddata == true
-                          ? Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.all(10),
-                              child: CircularProgressIndicator())
-                          : Container()
-                    ],
-                  ),
-                ),
-              );
-            }));
+                                      crossAxisCount: 3,
+                                      crossAxisSpacing: 10.0,
+                                      childAspectRatio: 0.70,
+                                      mainAxisSpacing: 10.0),
+                              itemCount: 9,
+                              itemBuilder: (_ctx, index) => ShimmerProduit())
+                          : Container())
+                ],
+              ),
+            )));
   }
 }

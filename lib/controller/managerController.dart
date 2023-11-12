@@ -1,15 +1,19 @@
 import 'dart:async';
 
 import 'package:EMIY/Views/BoutiqueUser/MesBoutiquesView.dart';
+import 'package:EMIY/Views/Parrainnage/ParrainnageView.dart';
 import 'package:EMIY/Views/UsersMange/InteretsView.dart';
-import 'package:EMIY/Views/UsersMange/ParrainnageView.dart';
 import 'package:EMIY/Views/UsersMange/PreferenceView.dart';
 import 'package:EMIY/Views/UsersMange/UserAbonnementView.dart';
 import 'package:EMIY/Views/UsersMange/UserManageView.dart';
+import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/negociationController.dart';
 import 'package:EMIY/controller/TransactionController.dart';
 import 'package:EMIY/controller/entity.dart';
+import 'package:EMIY/controller/produitController.dart';
 import 'package:EMIY/model/data/CompteModel.dart';
 import 'package:EMIY/model/data/UserModel.dart';
+import 'package:EMIY/model/data/UserTagModel.dart';
 import 'package:EMIY/repository/ManageRepo.dart';
 import 'package:EMIY/utils/Services/apiUrl.dart';
 import 'package:EMIY/utils/Services/core.dart';
@@ -22,7 +26,8 @@ import 'package:EMIY/utils/constants/apiRoute.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../Views/Commandes/CommandeView.dart';
-import '../Views/UsersMange/WalletView.dart';
+import '../Views/UsersMange/WalletView_SAVE_02112023.dart';
+import '../utils/Services/routing.dart';
 import 'boutiqueController.dart';
 
 class ManagerController extends GetxController {
@@ -107,14 +112,14 @@ class ManagerController extends GetxController {
 
   getLocalU() async {
     var data = await dababase.getLonLat();
-     print('******************${data}');
+    print('******************${data}');
     if (data != null) {
-    print(data);
+      print(data);
       if (data.length != 0) {
-    print(data);
+        print(data);
         _ville = data['ville'];
-        _longitude = double.parse( data['longitude']);
-        _latitude =  double.parse( data['latitude']);
+        _longitude = double.parse(data['longitude']);
+        _latitude = double.parse(data['latitude']);
         update();
       }
     }
@@ -188,7 +193,9 @@ class ManagerController extends GetxController {
 
     await manageRepo.getUser().then((value) async {
       print('------------------value----------${value.body}-');
-      if (value.body['data'] != null) {
+      if (value.body['data'] != null &&
+          value.body['data'] != [] &&
+          value.body['data'].length != 0) {
         _User = UserModel.fromJson(value.body['data']);
         update();
 
@@ -303,6 +310,8 @@ class ManagerController extends GetxController {
     _surnameU.text = Userget.prenom;
     _phoneU.text = Userget.phone;
     _emailU.text = Userget.email;
+    Get.find<NegociationController>().setUserId(_User.id);
+
     update();
   }
 
@@ -311,6 +320,7 @@ class ManagerController extends GetxController {
     _surnameU.text = _User.prenom;
     _phoneU.text = _User.phone;
     _emailU.text = _User.email;
+    Get.find<NegociationController>().setUserId(_User.id);
     update();
   }
 
@@ -671,6 +681,80 @@ class ManagerController extends GetxController {
     _saveIndex.add(i);
   }
 
+  goToItemPage(i) {
+    update();
+    print(_saveIndex);
+    print(_saveIndex.contains(i));
+    if (!_saveIndex.contains(i)) {
+      if (i == 1) {
+        print('--------getListCommandes--------*');
+        Get.find<CommandeController>().getListCommandes();
+      }
+      if (i == 2) {
+        print('----------getListAbonnementForUser------*');
+        Get.find<BoutiqueController>().getListAbonnementForUser();
+      }
+      if (i == 3) {
+        print('----------------*');
+        getListFieul();
+      }
+      if (i == 4) {
+        print('-------------getTransactions---*');
+        Get.find<TransactionController>().getTransactions();
+      }
+      if (i == 5) {
+        // print('-------------TransactionController---*');
+        // Get.find<TransactionController>().getTransactions();
+      }
+      if (i == 6) {
+        print('-------------getListProduitPreference---*');
+        Get.find<ProduitController>().getListProduitPreference();
+      }
+      if (i == 7) {
+        print('---------getListBoutique-------*');
+        Get.find<BoutiqueController>().getListBoutique();
+      }
+    }
+    _saveIndex.add(i);
+    switch (i) {
+      case 0:
+        Get.toNamed(AppLinks.USERVIEW);
+        return 0;
+
+      case 1:
+        Get.toNamed(AppLinks.COMMANDE_FOR_USER);
+        return 1;
+
+      case 2:
+        Get.toNamed(AppLinks.ABONNEMENT);
+        return 2;
+
+      case 3:
+        Get.toNamed(AppLinks.FIEU_LIST);
+        return 3;
+      case 4:
+        Get.toNamed(AppLinks.WALLET);
+        return 4;
+
+      case 5:
+        Get.toNamed(AppLinks.INTERET);
+        return 5;
+      case 6:
+        Get.toNamed(AppLinks.PREFERENCE_CLIENT);
+        return 6;
+      case 7:
+        Get.toNamed(AppLinks.MES_BOUTIQUES);
+        return 7;
+
+      // case 4:
+      //   return ProfileUserView();
+
+      default:
+        Get.toNamed(AppLinks.USERVIEW);
+        return 0;
+    }
+  }
+
 //                                         .getTransactions();
   Widget buildContent() {
     switch (_current) {
@@ -685,8 +769,8 @@ class ManagerController extends GetxController {
 
       case 3:
         return ParrainnageView();
-      case 4:
-        return WalletView();
+      // case 4:
+      //   return WalletView();
 
       case 5:
         return InteretsView();
@@ -702,4 +786,5 @@ class ManagerController extends GetxController {
         return Container();
     }
   }
+ 
 }

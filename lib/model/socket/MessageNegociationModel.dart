@@ -49,7 +49,7 @@ class MessageNegociationModel {
 
   factory MessageNegociationModel.fromJson(Map<String, dynamic> json) =>
       MessageNegociationModel(
-        id: json["id"] == null ? null : json["id"],
+        id: /* json["id"] == null ? null : json["id"] */0,
         emetteurId: json["emetteurId"] == null ? null : json["emetteurId"],
         heure: json["heure"] == null ? null : json["heure"],
         message: json["message"] == null ? null : json["message"],

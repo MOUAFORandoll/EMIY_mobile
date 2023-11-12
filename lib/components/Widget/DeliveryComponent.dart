@@ -15,14 +15,18 @@ class DeliveryComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.symmetric(vertical: kMarginY / 3),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: ColorsApp.white,
+                  borderRadius: BorderRadius.circular(5)),
               child: SvgPicture.asset(
-            icon,
-            width: 18,
-            height: 18,
-            color: ColorsApp.orange,
-          )),
+                icon,
+                width: 18,
+                height: 18,
+                color: ColorsApp.secondBlue,
+              )),
           Container(
               margin: EdgeInsets.symmetric(horizontal: kMarginX),
               child: InkWell(

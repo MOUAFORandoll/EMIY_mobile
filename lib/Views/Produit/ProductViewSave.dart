@@ -201,7 +201,7 @@
 //                                                   ColorsApp.skyBlue,
 //                                               radius: 50,
 //                                               backgroundImage: AssetImage(
-//                                                   "assets/images/error.gif"));
+//                                                   "assets/logo/logoNew.png"));
 //                                         },
 //                                       ),
 //                                       onTap: () async {
@@ -587,7 +587,7 @@
 //                 return CircleAvatar(
 //                     backgroundColor: ColorsApp.skyBlue,
 //                     radius: 50,
-//                     backgroundImage: AssetImage("assets/images/error.gif"));
+//                     backgroundImage: AssetImage("assets/logo/logoNew.png"));
 //               },
 //             ),
 //           ),

@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:EMIY/Views/Shopping/InfoUserPaiment.dart';
 import 'package:EMIY/Views/Shopping/PaiementView.dart';
+import 'package:EMIY/Views/Shopping/SelectPaiementMode.dart';
 import 'package:EMIY/components/Button/IconButtonF.dart';
 import 'package:EMIY/components/Button/customBtn.dart';
 import 'package:EMIY/components/Form/formComponent.dart';
@@ -69,15 +71,13 @@ class BuyShoopingCart extends StatelessWidget {
         return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: AppBackButton(),
-                actions: [
-                  Container(
-                      margin: EdgeInsets.only(top: Get.height * .020),
-                      padding: EdgeInsets.only(
-                          left: Get.width * .030, right: Get.width * .030),
-                      child: Row(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: AppBackButton(),
+              title: Container(child: Text('Order Details')),
+              centerTitle: true,
+              /*   actions: [
+                  Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
@@ -89,8 +89,9 @@ class BuyShoopingCart extends StatelessWidget {
                                   right:
                                       MediaQuery.of(context).size.width * .005),
                             ),
-                          ])),
-                ]),
+                          ]) ),
+                ] */
+            ),
             body: SafeArea(
               child: CustomScrollView(
                   controller: Get.find<GeneralController>().scrollcontroller,
@@ -104,577 +105,456 @@ class BuyShoopingCart extends StatelessWidget {
                                     child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
-                                        // crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                       Container(
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: kMarginY / 2),
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                    child: Text(
-                                                  'adL'.tr,
-                                                  style: TextStyle(
-                                                      fontFamily: 'Lato',
-                                                      fontSize: 12,
-                                                      color: ColorsApp.black,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                )),
-                                                Container(
-                                                    child: InkWell(
-                                                        child: Text(
-                                                          'Change',
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Lato',
-                                                              fontSize: 14,
-                                                              color: ColorsApp
-                                                                  .black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                        ),
-                                                        onTap: () {
-                                                          Get.bottomSheet(
-                                                            Container(
-                                                                height:
-                                                                    Get.height *
-                                                                        2,
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                  vertical:
-                                                                      kMarginY,
-                                                                  horizontal:
-                                                                      kMarginX,
-                                                                ),
-                                                                margin:
-                                                                    EdgeInsets
-                                                                        .only(
-                                                                  top:
-                                                                      kMarginY *
-                                                                          8,
-                                                                ),
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.only(
-                                                                        topRight:
-                                                                            Radius.circular(
-                                                                                15),
-                                                                        topLeft:
-                                                                            Radius.circular(
-                                                                                15)),
-                                                                    color: Colors
-                                                                        .white),
-                                                                // padding: EdgeInsets.only(
-                                                                //   top: 25,
-                                                                // ),
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                        child:
-                                                                            Column(
-                                                                  children: [
-                                                                    Padding(
-                                                                        padding:
-                                                                            EdgeInsets
-                                                                                .only(
-                                                                          top:
-                                                                              kMarginY,
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            Text(
-                                                                              'livrInfo'.tr,
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                              ),
-                                                                            ),
-                                                                            InkWell(
-                                                                              child: Icon(Icons.close),
-                                                                              onTap: () {
-                                                                                Get.back();
-                                                                              },
-                                                                            )
-                                                                          ],
-                                                                        )),
-                                                                    Padding(
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .only(
-                                                                        top:
-                                                                            kMarginY*2,
-                                                                      ),
-                                                                      child:
-                                                                          AppInput(
-                                                                        controller:
-                                                                            _Bcontroller.nameController,
-                                                                        icon:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .check_circle_sharp,
-                                                                        ),
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          ;
-                                                                        },
-                                                                        label: 'name'
-                                                                            .tr,
-                                                                        validator:
-                                                                            (value) {},
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .only(
-                                                                        top:
-                                                                            kMarginY*2,
-                                                                      ),
-                                                                      child:
-                                                                          AppInput(
-                                                                        controller:
-                                                                            _Bcontroller.phoneController,
-                                                                        icon:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .check_circle_sharp,
-                                                                        ),
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          ;
-                                                                        },
-                                                                        label: 'labelphone'
-                                                                            .tr,
-                                                                        validator:
-                                                                            (value) {},
-                                                                      ),
-                                                                    ),
-                                                                    // Padding(
-                                                                    //   padding: EdgeInsets.only(
-                                                                    //     top: kMarginY,
-                                                                    //   ),
-                                                                    //   child: AppInput(
-                                                                    //     controller: _Bcontroller.phoneController,
-                                                                    //     icon: Icon(
-                                                                    //       Icons.check_circle_sharp,
-                                                                    //     ),
-                                                                    //     onChanged: (value) {
-                                                                    //       ;
-                                                                    //     },
-                                                                    //     label: 'mail'.tr,
-                                                                    //     validator: (value) {},
-                                                                    //   ),
-                                                                    // ),
- GetBuilder<BuyShopController>(
-                                                                                builder: (_BsCcontroller) =>
-                                                                    InkWell(
-                                                                        child: _BsCcontroller.selected_livraison_point.id !=
-                                                                                0
-                                                                            ? Container(
-                                                                                  width: kWidth,
-                                                                                  padding: EdgeInsets.all(Get.height * .02),
-                                                                                  margin: EdgeInsets.only(
-                                                                                    top: kMarginY*2,
-                                                                                  ),
-                                                                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: ColorsApp.secondBlue),
-                                                                                  child: Text(
-                                                                                    _BsCcontroller.selected_livraison_point.libelle,
-                                                                                    style: TextStyle(
-                                                                                      fontSize: 12,
-                                                                                    ),
-                                                                                    overflow: TextOverflow.ellipsis,
-                                                                                  ),
-                                                                                )
-                                                                              
-                                                                            : Container(
-                                                                                padding: EdgeInsets.all(Get.height * .02),
-                                                                                margin: EdgeInsets.only(
-                                                                                  top: kMarginY*2,
-                                                                                ),
-                                                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: ColorsApp.secondBlue),
-                                                                                child: Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  children: <Widget>[
-                                                                                    Text(
-                                                                                      'livrP'.tr,
-                                                                                      style: TextStyle(
-                                                                                        fontSize: 12,
-                                                                                      ),
-                                                                                      overflow: TextOverflow.ellipsis,
-                                                                                    ),
-                                                                                    Container(
-                                                                                        child: SvgPicture.asset(
-                                                                                      Assets.localisation,
-                                                                                      width: 18,
-                                                                                      height: 18,
-                                                                                      color: ColorsApp.orange,
-                                                                                    )),
-                                                                                  ],
-                                                                                )),
-                                                                        onTap: () {
-                                                                          Get.bottomSheet(
-                                                                            GetBuilder<BuyShopController>(
-                                                                                builder: (_BCcontroller) => Container(
-                                                                                    padding: EdgeInsets.symmetric(
-                                                                                      vertical: kMarginY,
-                                                                                      horizontal: kMarginX,
-                                                                                    ),
-                                                                                    margin: EdgeInsets.only(
-                                                                                      top: kMarginY * 8,
-                                                                                    ),
-                                                                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15))),
-                                                                                    child: Column(children: [
-                                                                                      Padding(
-                                                                                          padding: EdgeInsets.only(
-                                                                                            top: kMarginY,
-                                                                                          ),
-                                                                                          child: Row(
-                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                            children: [
-                                                                                              Text(
-                                                                                                'livrInfo'.tr,
-                                                                                                style: TextStyle(
-                                                                                                  fontSize: 12,
-                                                                                                ),
-                                                                                              ),
-                                                                                              InkWell(
-                                                                                                child: Icon(Icons.close),
-                                                                                                onTap: () {
-                                                                                                  Get.back();
-                                                                                                },
-                                                                                              )
-                                                                                            ],
-                                                                                          )),
-                                                                                      Padding(
-                                                                                          padding: EdgeInsets.symmetric(
-                                                                                            vertical: kMarginY * 2,
-                                                                                          ),
-                                                                                          child: AppInput(
-                                                                                            controller: _BCcontroller.searchController,
-                                                                                            label: 'Rechercher'.tr,
-                                                                                            onChanged: (value) {
-                                                                                              return _BCcontroller.searchPointLivraison();
-                                                                                            },
-                                                                                          )),
-                                                                                      Expanded(child: SingleChildScrollView(child: _BCcontroller.searchController.text.length == 0 ? ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.livraison_point[index])) : ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: _BCcontroller.search_livraison_point.length, itemBuilder: (_ctx, index) => PointLivraisonComponent(point_livraison: _BCcontroller.search_livraison_point[index]))))
-                                                                                    ]))),
-                                                                            isScrollControlled:
-                                                                                true,
-                                                                          );
-                                                                        })),
-                                                                    Container(
-                                                                      margin: EdgeInsets
-                                                                          .only(
-                                                                        top:
-                                                                            kMarginY*2,
-                                                                      ),
-                                                                      child:
-                                                                          TextFormField(
-                                                                        controller:
-                                                                            _Bcontroller.lieuxController,
-
-                                                                        // keyboardType: type,
-                                                                        // obscureText: obscureText!,
-                                                                        // maxLengthEnforced: false,
-                                                                        maxLength:
-                                                                            10,
-                                                                        maxLines:
-                                                                            10,
-                                                                        decoration:
-                                                                            new InputDecoration(
-                                                                          fillColor:
-                                                                              ColorsApp.skyBlue,
-                                                                          // counter: Offstage(),
-                                                                          focusedBorder: OutlineInputBorder(
-                                                                              borderRadius: BorderRadius.circular(10.0),
-                                                                              borderSide: BorderSide(
-                                                                                color: ColorsApp.skyBlue,
-                                                                              )),
-                                                                          border:
-                                                                              OutlineInputBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(10),
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: ColorsApp.skyBlue,
-                                                                            ),
-                                                                          ),
-                                                                          contentPadding:
-                                                                              EdgeInsets.only(
-                                                                            left:
-                                                                                12,
-                                                                            bottom:
-                                                                                10,
-                                                                            top:
-                                                                                10,
-                                                                            right:
-                                                                                12,
-                                                                          ),
-                                                                          hintText:
-                                                                              'Donnez moi plus d\'indication, un petit texte sera un plus',
-                                                                          hintStyle:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Colors.grey,
-                                                                            fontFamily:
-                                                                                'orkney',
-                                                                          ),
-                                                                          // suffixIcon: InkWell(
-                                                                          //   onTap: () => onTap,
-                                                                          //   child: Icon(
-                                                                          //     icon,
-                                                                          //     color: Colors.grey,
-                                                                          //   ),
-                                                                          // ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ))),
-                                                            isScrollControlled:
-                                                                true,
-                                                          );
-                                                        }))
-                                              ])),
-                                      Container(
-                                          decoration: BoxDecoration(
-                                            color: ColorsApp.greySearch,
-                                            borderRadius: BorderRadius.circular(5)
-                                          ),
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: kMarginY),
-                                          padding:
-                                              EdgeInsets.all(Get.height * .02),
-                                          child: SingleChildScrollView(
-                                              child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                DeliveryComponent(
-                                                  icon: Assets.user,
-                                                  bold: true,
-                                                  text: _Bcontroller
-                                                      .nameController.text,
-                                                ),
-                                                DeliveryComponent(
-                                                  icon: Assets.call,
-                                                  text: _Bcontroller
-                                                      .phoneController.text,
-                                                ),
-                                                DeliveryComponent(
-                                                  icon: Assets.localisation,
-                                                  text: _Bcontroller
-                                                      .selected_livraison_point
-                                                      .libelle,
-                                                ),
-                                              ]))),
-                                      Container(
                                         margin: EdgeInsets.symmetric(
-                                            vertical: kMarginY / 2),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                            vertical: kMarginY),
+                                        child: Column(
                                           children: [
                                             Container(
-                                                child: Text(
-                                              'adL'.tr,
-                                              style: TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  fontSize: 12,
-                                                  color: ColorsApp.black,
-                                                  fontWeight: FontWeight.w600),
-                                            )),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: kMarginY / 2),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      child: Text(
+                                                    'My Cart'.tr,
+                                                    style: TextStyle(
+                                                        fontSize: kBasics * 1.3,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  )),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                                decoration: BoxDecoration(
+                                                    color: ColorsApp.greySearch,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: kMarginY),
+                                                padding: EdgeInsets.all(
+                                                    Get.height * .02),
+                                                child: SingleChildScrollView(
+                                                    child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        // crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                vertical:
+                                                                    kMarginY),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                                child: Text(
+                                                              'produit'.tr,
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'Lato',
+                                                                fontSize: 12,
+                                                                color: ColorsApp
+                                                                    .black,
+                                                              ),
+                                                            )),
+                                                            Container(
+                                                                child: Text(
+                                                                    _controller
+                                                                        .totalItems
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'Lato',
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: ColorsApp
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.w700))),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                vertical:
+                                                                    kMarginY),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                                child: Text(
+                                                              'monT'.tr,
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'Lato',
+                                                                fontSize: 12,
+                                                                color: ColorsApp
+                                                                    .black,
+                                                              ),
+                                                            )),
+                                                            Container(
+                                                                child: Text(
+                                                                    'FCFA ' +
+                                                                        _controller
+                                                                            .totalPrix
+                                                                            .toString(),
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'Lato',
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: ColorsApp
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.w700))),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ]))),
                                           ],
                                         ),
                                       ),
                                       Container(
-                                          decoration: BoxDecoration(
-                                            color: ColorsApp.greySearch,
-                                             borderRadius: BorderRadius.circular(5)
-                                          ),
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: kMarginY),
-                                          padding:
-                                              EdgeInsets.all(Get.height * .02),
-                                          child: SingleChildScrollView(
-                                              child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: kMarginY),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Container(
-                                                          child: Text(
-                                                        'produit'.tr,
-                                                        style: TextStyle(
-                                                          fontFamily: 'Lato',
-                                                          fontSize: 12,
-                                                          color:
-                                                              ColorsApp.black,
-                                                        ),
-                                                      )),
-                                                      Container(
-                                                          child: Text(
-                                                              _controller
-                                                                  .totalItems
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'Lato',
-                                                                  fontSize: 12,
-                                                                  color:
-                                                                      ColorsApp
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600))),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: kMarginY),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Container(
-                                                          child: Text(
-                                                        'monT'.tr,
-                                                        style: TextStyle(
-                                                          fontFamily: 'Lato',
-                                                          fontSize: 12,
-                                                          color:
-                                                              ColorsApp.black,
-                                                        ),
-                                                      )),
-                                                      Container(
-                                                          child: Text(
-                                                              'FCFA ' +
-                                                                  _controller
-                                                                      .totalPrix
-                                                                      .toString(),
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'Lato',
-                                                                  fontSize: 12,
-                                                                  color:
-                                                                      ColorsApp
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600))),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ]))),
-                                      Container(
                                         margin: EdgeInsets.symmetric(
-                                            vertical: kMarginY / 2),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                            vertical: kMarginY),
+                                        child: Column(
                                           children: [
                                             Container(
-                                                child: Text(
-                                              'paymentM'.tr,
-                                              style: TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  fontSize: 12,
-                                                  color: ColorsApp.black,
-                                                  fontWeight: FontWeight.w600),
-                                            )),
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: kMarginY / 2),
+                                                child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                          child: Text(
+                                                        'adL'.tr,
+                                                        textAlign:
+                                                            TextAlign.justify,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                kBasics * 1.3,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w700),
+                                                      )),
+                                                    ])),
+                                            InkWell(
+                                                child: GetBuilder<
+                                                        BuyShopController>(
+                                                    builder: (_B0controller) =>
+                                                        Container(
+                                                            decoration: BoxDecoration(
+                                                                color: ColorsApp
+                                                                    .greySearch,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5)),
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top:
+                                                                        kMarginY),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    Get.height *
+                                                                        .02),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    SingleChildScrollView(
+                                                                        child: Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                                            children: [
+                                                                          DeliveryComponent(
+                                                                            icon:
+                                                                                Assets.user,
+                                                                            bold:
+                                                                                true,
+                                                                            text:
+                                                                                _B0controller.nameController.text,
+                                                                          ),
+                                                                          DeliveryComponent(
+                                                                            icon:
+                                                                                Assets.call,
+                                                                            text:
+                                                                                _B0controller.phoneController.text,
+                                                                          ),
+                                                                          DeliveryComponent(
+                                                                            icon:
+                                                                                Assets.localisation,
+                                                                            text:
+                                                                                _B0controller.selected_livraison_point.libelle,
+                                                                          ),
+                                                                        ])),
+                                                                    Container(
+                                                                      child: Icon(
+                                                                          Icons
+                                                                              .keyboard_arrow_right),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                Container(
+                                                                    child: Text(
+                                                                  _B0controller
+                                                                      .lieuxController
+                                                                      .text,
+                                                                  maxLines: 3,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        kDescription,
+                                                                  ),
+                                                                )),
+                                                              ],
+                                                            ))),
+                                                onTap: () {
+                                                  Get.bottomSheet(
+                                                    InfoUserPaiment(),
+                                                    isScrollControlled: true,
+                                                  );
+                                                }),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: kMarginY),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: kMarginY / 2),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      child: Text(
+                                                    'paymentM'.tr,
+                                                    style: TextStyle(
+                                                        fontSize: kBasics * 1.3,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  )),
+                                                  GetBuilder<GeneralController>(
+                                                      builder: (_Acontroller) =>
+                                                          InkWell(
+                                                              child: Container(
+                                                                  child: SvgIcon(
+                                                                      icon: Assets
+                                                                          .refresh)),
+                                                              onTap: () async {
+                                                                await _Acontroller
+                                                                    .getListModePaiement();
+                                                              })),
+                                                ],
+                                              ),
+                                            ),
                                             GetBuilder<GeneralController>(
-                                                builder: (_Acontroller) =>
-                                                    InkWell(
+                                                builder: (_Acontroller) => _Acontroller
+                                                            .isLoadedMP ==
+                                                        0
+                                                    ? Container(
+                                                        child: SpinKitCircle(
+                                                          color: Colors.blue,
+                                                          size: 40,
+                                                        ),
+                                                      )
+                                                    : InkWell(
                                                         child: Container(
-                                                            child: SvgIcon(
-                                                                icon: Assets
-                                                                    .refresh)),
-                                                        onTap: () async {
-                                                          await _Acontroller
-                                                              .getListModePaiement();
+                                                            decoration: BoxDecoration(
+                                                                color: ColorsApp
+                                                                    .greySearch,
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                        5)),
+                                                            margin: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        kMarginY),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    Get.height *
+                                                                        .02),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Container(
+                                                                    decoration: BoxDecoration(
+                                                                        color: ColorsApp
+                                                                            .white,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                5)),
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .all(
+                                                                                5),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      height:
+                                                                          25,
+                                                                      width: 25,
+                                                                      // fit: BoxFit.cover,
+                                                                      imageUrl: _Acontroller
+                                                                          .smode
+                                                                          .img,
+                                                                      imageBuilder:
+                                                                          (context,
+                                                                              imageProvider) {
+                                                                        return Container(
+                                                                          height:
+                                                                              28,
+                                                                          width:
+                                                                              40,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            image:
+                                                                                DecorationImage(
+                                                                              image: imageProvider,
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                      placeholder:
+                                                                          (context,
+                                                                              url) {
+                                                                        return Container(
+                                                                          child: Center(
+                                                                              child: CircularProgressIndicator(
+                                                                            color:
+                                                                                ColorsApp.skyBlue,
+                                                                          )),
+                                                                        );
+                                                                      },
+                                                                      errorWidget:
+                                                                          (context,
+                                                                              url,
+                                                                              error) {
+                                                                        return Container(
+                                                                            decoration: BoxDecoration(
+                                                                                image: DecorationImage(
+                                                                          image:
+                                                                              AssetImage('assets/logo/logoNew.png'),
+                                                                        )));
+                                                                      },
+                                                                    )),
+                                                                Container(
+                                                                    child: Text(
+                                                                  _Acontroller
+                                                                      .smode
+                                                                      .libelle,
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          kBasics *
+                                                                              1.3,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600),
+                                                                )),
+                                                                Container(
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .keyboard_arrow_right))
+                                                              ],
+                                                            )),
+                                                        onTap: () {
+                                                          Get.bottomSheet(
+                                                            SelectPaiementMode(),
+                                                            isScrollControlled:
+                                                                true,
+                                                          );
                                                         })),
                                           ],
                                         ),
                                       ),
-                                      GetBuilder<GeneralController>(
-                                          builder: (_Acontroller) => _Acontroller
-                                                      .isLoadedMP ==
-                                                  0
-                                              ? Container(
-                                                  child: SpinKitCircle(
-                                                    color: Colors.blue,
-                                                    size: 40,
-                                                  ),
-                                                )
-                                              : Container(
-                                                  margin: EdgeInsets.only(
-                                                      // top: Get.size.height * .015,
-                                                      bottom: Get.size.height *
-                                                          .025),
-                                                  // decoration: BoxDecoration(
-                                                  //     borderRadius: BorderRadius.circular(15),
-                                                  //     color: Colors.white),
-                                                  // padding: EdgeInsets.only(
-                                                  //   top: 25,
-                                                  // ),
-                                                  child: Column(
-                                                    children: [
-                                                      SingleChildScrollView(
-                                                          child: ListView.builder(
-                                                              physics:
-                                                                  NeverScrollableScrollPhysics(),
-                                                              shrinkWrap: true,
-                                                              itemCount:
-                                                                  _Acontroller
-                                                                      .lmodePaiement
-                                                                      .length,
-                                                              itemBuilder: (_ctx,
-                                                                      index) =>
-                                                                  SelectComponent(
-                                                                      select: index +
-                                                                              1 ==
-                                                                          _Acontroller
-                                                                              .selected,
-                                                                      mode: _Acontroller
-                                                                              .lmodePaiement[
-                                                                          index])))
-                                                    ],
-                                                  ))),
-                                      CustomBtn(
-                                        color: ColorsApp.secondBlue,
-                                        title: 'Terminer',
-                                        onTap: () async {
-                                          await _Bcontroller.buyCart();
-                                        },
-                                      )
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: kMarginY),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: kMarginY / 2),
+                                              child: Text(
+                                                'Order Info'.tr,
+                                                style: TextStyle(
+                                                    fontSize: kBasics * 1.3,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            ),
+                                            Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: kMarginY),
+                                                child: Text(
+                                                  "Les frais de livraisons sont gratuits pour votre premiere livraison",
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                      // fontSize: kDescription,
+                                                      ),
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: kMarginY),
+                                          child: CustomBtn(
+                                            color: ColorsApp.secondBlue,
+                                            title: 'Terminer',
+                                            onTap: () async {
+                                              await _Bcontroller.buyCart();
+                                            },
+                                          ))
                                     ]))),
                             childCount: 1))
                   ]),

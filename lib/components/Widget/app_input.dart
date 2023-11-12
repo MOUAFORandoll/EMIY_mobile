@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
 
+import '../exportcomponent.dart';
+
 class AppInput extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String? value)? validator;
@@ -34,44 +36,72 @@ class _AppInputState extends State<AppInput> {
   bool isVisible = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: kHeight / 10,
-      child: TextFormField(
-        autofocus: false,
-        controller: widget.controller,
-        style: const TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          fontFamily: 'Lato',
+    return Padding(
+        padding: EdgeInsets.only(
+          top: kMarginY * 2,
         ),
-        onChanged: widget.onChanged,
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(10),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorsApp.skyBlue, width: 2),
+        child: Column(children: [
+          Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(bottom: kMarginY / 2),
+              child: Row(
+                children: [
+                  Text(
+                    widget.label,
+                    style: TextStyle(
+                        color: ColorsApp.grey1, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              )),
+          Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white,
               borderRadius: BorderRadius.circular(8),
             ),
-            border: OutlineInputBorder(
-              //  borderSide : BorderSide(color:Colors.blue,width: 3),
-              borderRadius: BorderRadius.circular(8),
+            height: 45,
+            child: TextFormField(
+              cursorHeight: 1, autofocus: false,
+              controller: widget.controller,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                // color: ColorsApp.secondBlue,
+                fontSize: 15,
+                fontFamily: 'Lato',
+              ),
+
+              // maxLength: widget.maxLength,
+              onChanged: widget.onChanged,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: ColorsApp.secondBlue, width: 1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  // border: OutlineInputBorder(
+                  //   borderSide:
+                  //       BorderSide(color: ColorsApp.secondBlue, width: 1),
+                  //   borderRadius: BorderRadius.circular(8),
+                  // ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: ColorsApp.grey1, width: 1),
+                    borderRadius: BorderRadius.circular(8),
+                    // borderSide:
+                    //     BorderSide(color: ColorsApp.secondBlue, width: 1),
+                  ),
+                  errorText: widget.errorText,
+                  errorStyle: TextStyle(
+                    fontFamily: 'Lato',
+                  ),
+                  hintText: widget.placeholder,
+                  suffixIcon: widget.icon),
+              validator: widget.validator,
+              obscureText: isVisible,
+              keyboardType: widget.textInputType,
             ),
-            errorText: widget.errorText,
-            errorStyle: TextStyle(
-              fontSize: 8,
-              fontFamily: 'Lato',
-            ),
-            labelText: widget.label,
-            labelStyle: TextStyle(
-              color: ColorsApp.black, fontFamily: 'Lato',
-              // fontWeight: FontWeight.w500,
-              fontSize: 12,
-            ),
-            hintText: widget.placeholder,
-            prefixIcon: widget.icon),
-        validator: widget.validator,
-        keyboardType: widget.textInputType,
-      ),
-    );
+          )
+        ]));
   }
 }
 
@@ -107,7 +137,12 @@ class _AppInputPasswordState extends State<AppInputPassword> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: kHeight / 10,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      height: 45,
       child: TextFormField(
         autofocus: false,
         controller: widget.controller,
@@ -118,14 +153,21 @@ class _AppInputPasswordState extends State<AppInputPassword> {
         ),
         onChanged: widget.onChanged,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(10),
+            contentPadding: EdgeInsets.all(15),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorsApp.skyBlue, width: 2),
-              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: ColorsApp.secondBlue, width: 1),
+              borderRadius: BorderRadius.circular(8),
             ),
-            border: OutlineInputBorder(
-              //  borderSide : BorderSide(color:Colors.blue,width: 3),
-              borderRadius: BorderRadius.circular(10),
+            // border: OutlineInputBorder(
+            //   borderSide:
+            //       BorderSide(color: ColorsApp.secondBlue, width: 1),
+            //   borderRadius: BorderRadius.circular(8),
+            // ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorsApp.grey1, width: 1),
+              borderRadius: BorderRadius.circular(8),
+              // borderSide:
+              //     BorderSide(color: ColorsApp.secondBlue, width: 1),
             ),
             errorText: widget.errorText,
             errorStyle: TextStyle(

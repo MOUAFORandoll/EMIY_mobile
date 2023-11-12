@@ -6,6 +6,7 @@ import 'package:EMIY/components/Widget/app_title_right.dart';
 import 'package:EMIY/components/Widget/icon_svg.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
+import 'package:EMIY/controller/MySearchController.dart';
 import 'package:EMIY/controller/ShortController.dart';
 import 'package:EMIY/controller/managerController.dart';
 import 'package:EMIY/utils/constants/assets.dart';
@@ -21,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key? key}) : super(key: key);
@@ -33,9 +35,27 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   ScrollController _scrollController = new ScrollController();
   void initState() {
     super.initState();
+    _checkForUpdate();
 
     WidgetsBinding.instance.addObserver(this);
     _scrollController = ScrollController()..addListener(handleScrolling);
+  }
+
+  Future<void> _checkForUpdate() async {
+    final newVersionPlus = NewVersionPlus(
+      iOSId:
+          null, // Remplacez par l'ID de votre application sur l'App Store si nécessaire
+      androidId: 'com.app.emiymobile',
+    );
+    final status = await newVersionPlus.getVersionStatus();
+
+    print('*---------***--------------------**');
+    print(status!.canUpdate);
+    print(status.localVersion);
+    print(status.storeVersion);
+    print(status.appStoreLink);
+    newVersionPlus.showAlertIfNecessary(context: context);
+    print('*---------***--------------------**');
   }
 
   void handleScrolling() {
@@ -187,6 +207,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                             size: 22),
                                                       ),
                                                       onTap: () {
+                                                     
                                                         Get.toNamed(
                                                             AppLinks.SEARCH);
                                                       })
@@ -259,7 +280,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                       fontFamily: 'Lato',
-                                                      fontSize: kLgText,
+                                                      // fontSize: kLgText,
                                                       color:
                                                           ColorsApp.secondBlue,
                                                       fontWeight:

@@ -1,12 +1,17 @@
+import 'package:EMIY/components/Widget/UserTagComponent.dart';
 import 'package:EMIY/model/data/CommentShortModel.dart';
 import 'package:EMIY/model/data/ShortModel.dart';
+import 'package:EMIY/model/data/UserTagModel.dart';
 import 'package:EMIY/repository/ShortRepo.dart';
 
 import 'package:EMIY/controller/DataBaseController.dart';
+import 'package:EMIY/styles/colorApp.dart';
+import 'package:EMIY/styles/textStyle.dart';
 import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flexible_text_editing_controller/flexible_text_editing_controller.dart';
 
 class ShortController extends GetxController {
   final ShortRepo shortRepo;
@@ -105,13 +110,6 @@ class ShortController extends GetxController {
 
   int _indexForYou = 0;
   int get indexForYou => _indexForYou;
-  init() {
-    // stateShortPage == 0
-    //     ? controllerForYou.play()
-    //     : stateShortPage == 1
-    //         ? listSuivisShort[indexSuivis].controller.play()
-    //         : listBoutiqueShort[indexShortBoutique].controller.play();
-  }
 
   changeVideoForYou(index) async {
     if (listForYouShort.isNotEmpty) {
@@ -443,10 +441,11 @@ class ShortController extends GetxController {
   get isUnique => _isUnique;
   getUniqueShort(idShort, code) async {
     _isUniqueVideoPlayer = null;
-    update();
+    _currentReadShortData = null;
     _isUnique = 0;
-
     update();
+    print('-sss-short----------***************************');
+
     var key = await dababase.getKey();
 
     try {
@@ -570,14 +569,305 @@ class ShortController extends GetxController {
 
   bool _sendComment = false;
   bool get sendComment => _sendComment;
-  TextEditingController _textEditingController = TextEditingController();
-  TextEditingController get textEditingController => _textEditingController;
+  // TextEditingController _textEditingController = TextEditingController();
+  // TextEditingController get textEditingController => _textEditingController;
 
+  // styler(String text, TextStyle? defaultStyle) {
+  //   List<TextSpan> children = [];
+  //   for (int i = 0; i < text.length; i++) {
+  //     i % 2 == 0
+  //         ? children.add(TextSpan(
+  //             text: text.substring(i, i + 1),
+
+  //             ///red for even,
+  //             style: const TextStyle(color: Colors.red)))
+  //         : children.add(TextSpan(
+  //             text: text.substring(i, i + 1),
+
+  //             ///blue for odd
+  //             style: const TextStyle(color: Colors.blue)));
+  //   }
+  //   return TextSpan(style: defaultStyle, children: children);
+  // }
+
+  TextSpan styler(String text, TextStyle? defaultStyle) {
+    List<TextSpan> children = [];
+
+    // Use a regular expression to find the pattern "@xxxxxxxxxxx"
+    RegExp regex = RegExp(r'@(\w+)');
+    Iterable<RegExpMatch> matches = regex.allMatches(text);
+
+    int currentPos = 0;
+
+    // Iterate through matches and add TextSpans accordingly
+    for (RegExpMatch match in matches) {
+      // Add regular text before the match
+      children.add(TextSpan(
+        text: text.substring(currentPos, match.start),
+        style: defaultStyle,
+      ));
+
+      // Add the match with the specified style
+      children.add(TextSpan(
+        text: match.group(0),
+        style: TextStyle(color: Colors.green), // Change the color as needed
+      ));
+
+      // Update the current position
+      currentPos = match.end;
+    }
+
+    // Add the remaining text
+    children.add(TextSpan(
+      text: text.substring(currentPos),
+      style: defaultStyle,
+    ));
+
+    return TextSpan(children: children);
+  }
+
+  late FlexibleTextEditingController _textEditingController;
+  FlexibleTextEditingController get textEditingController =>
+      _textEditingController;
+
+  int _isLoadingUsertag = 1;
+  int get isLoadingUsertag => _isLoadingUsertag;
+  List<UserTagModel> _usertagList = [];
+  List<UserTagModel> get usertagList => _usertagList;
+
+  bool _openTagList = false;
+  bool get openTagList => _openTagList;
+  // void onInit() async {
+  //   _textEditingController =
+  //       FlexibleTextEditingController(styler: (text, defaultStyle) {
+  //     return styler(text, defaultStyle);
+  //   });
+  //   print('init text------------------------------');
+  //   _textEditingController.addListener(() {
+  //     String text = _textEditingController.text;
+  //     print(
+  //         'search texte ${text}----------${text.contains('@')}--------------------');
+  //     // Vérifier si le caractère "@" a été supprimé
+  //     if (text.contains('@') && text.length > 1) {
+  //       _openTagList = true;
+  //       update();
+  //       print('Contains texte ${text}------------------------------');
+
+  //       findUserByTag(text);
+  //       // openModalUserTag();
+  //       // Le caractère "@" est toujours présent
+  //     } else {
+  //       _openTagList = false;
+  //       update();
+  //     }
+  //   });
+  //   super.onInit();
+  //   // _textEditingController.
+  // }
+  int cursorStart = 0;
+  int cursorEnd = 0;
+  void onInit() async {
+    _textEditingController =
+        FlexibleTextEditingController(styler: (text, defaultStyle) {
+      return styler(text, defaultStyle);
+    });
+
+    print('init text------------------------------');
+
+    _textEditingController.addListener(() {
+      String text = _textEditingController.text;
+
+      // Récupérer la position du curseur
+      final TextSelection cursorPosition = _textEditingController.selection;
+
+      print(
+          'search texte $text - cursor position: ${cursorPosition.start}-${cursorPosition.end} - contains @: ${text.contains('@')}');
+
+      // Vérifier si le caractère "@" a été ajouté
+      if (text.contains('@') &&
+          text.length > 1 &&
+          cursorPosition.start == cursorPosition.end) {
+        _openTagList = true;
+        update();
+        print(
+            'Contains texte $text - cursor position: ${cursorPosition.start}-${cursorPosition.end}');
+        cursorStart = cursorPosition.start;
+        cursorEnd = cursorPosition.end;
+        findUserByTag(getTagFromCursorPosition(text, cursorPosition.start));
+      }
+
+      // Vérifier si le caractère "@" a été supprimé
+      else if (!text.contains('@') && cursorPosition.start > 0) {
+        _openTagList = false;
+        update();
+        print(
+            'Does not contain @ - cursor position: ${cursorPosition.start}-${cursorPosition.end}');
+      }
+    });
+
+    super.onInit();
+  }
+
+  String getTagFromCursorPosition(String text, int cursorPosition) {
+    int start = cursorPosition - 1;
+    int end = cursorPosition;
+
+    while (start >= 0 && text[start] != ' ') {
+      start--;
+    }
+
+    while (end < text.length && text[end] != ' ') {
+      end++;
+    }
+
+    return text.substring(start + 1, end);
+  }
+
+  void openModalUserTag() {
+    // Get.bottomSheet(
+    //         GetBuilder<ShortController>(
+    //             builder: (_ShortController) => Container(
+    //                   margin: EdgeInsets.only(
+    //                     top: kMarginY * 5,
+    //                   ),
+    //                   decoration: BoxDecoration(
+    //                       color: ColorsApp.bg,
+    //                       borderRadius: BorderRadius.only(
+    //                           topLeft: Radius.circular(15),
+    //                           topRight: Radius.circular(15))),
+    //                   height: kHeight / 1.5,
+    //                   padding: EdgeInsets.symmetric(
+    //                       horizontal: kMarginX, vertical: kMarginY),
+    //                   child: SingleChildScrollView(
+    //                     child: ListView.builder(
+    //                         itemCount: _usertagList.length,
+    //                         shrinkWrap: true,
+    //                         physics: const BouncingScrollPhysics(),
+    //                         scrollDirection: Axis.vertical,
+    //                         itemBuilder: (_ctx, index) => UserTagComponent(
+    //                             text: _usertagList[index].user_tag,
+    //                             onTap: () {
+    //                               selectUserTag(_usertagList[index].user_tag);
+    //                             })),
+    //                   ),
+    //                 )),
+    //         isScrollControlled: true,
+    //         backgroundColor: Colors.transparent,
+    //         elevation: 0.0)
+    //     .whenComplete(() {
+    //   print('....');
+    //   // Get.find<ShortController>().unSetComment();
+    // });
+  }
+  List savingUserTag = [];
+  var _userTagSelect = '';
+  get userTagSelect => _userTagSelect;
+  selectUserTag(String newText) {
+    final TextSelection cursor = _textEditingController.selection;
+    String currentText = _textEditingController.text;
+
+    // Trouver la position du "@" précédent
+    int previousAtSymbolIndex = currentText.lastIndexOf('@', cursor.start - 1);
+
+    // Si aucun "@" précédent n'est trouvé, la position est 0
+    if (previousAtSymbolIndex == -1) {
+      previousAtSymbolIndex = 0;
+    }
+
+    // Extraire la partie du texte à conserver avant le "@" précédent
+    String textToPreserveBefore =
+        currentText.substring(0, previousAtSymbolIndex);
+
+    // Trouver la position du "@" suivant (à partir de la position actuelle du curseur)
+    int nextAtSymbolIndex = currentText.indexOf('@', cursor.start);
+
+    // Si aucun "@" suivant n'est trouvé, la position est la fin du texte
+    if (nextAtSymbolIndex == -1) {
+      nextAtSymbolIndex = currentText.length;
+    }
+
+    // Extraire la partie du texte à conserver après le "@" suivant
+    String textToPreserveAfter = currentText.substring(nextAtSymbolIndex);
+
+    // Construire le nouveau texte en remplaçant le contenu entre les "@" par "@ + texte"
+    String newTextWithReplacement =
+        textToPreserveBefore + '@$newText' + textToPreserveAfter;
+
+    // Mettre à jour le texte dans le TextEditingController
+    _textEditingController.text = newTextWithReplacement;
+
+    // Mettre à jour la sélection du curseur après le nouvel ajout
+    _textEditingController.selection = TextSelection.collapsed(
+        offset: previousAtSymbolIndex + newText.length + 1);
+
+    update();
+  }
+
+  clearTextFromCurrentPosition() {
+    // Récupérer la position actuelle du curseur et le texte sélectionné
+    final TextSelection cursor = _textEditingController.selection;
+    String selectedText =
+        _textEditingController.text.substring(cursor.start, cursor.end);
+
+    // Trouver la position du "@" précédent
+    int previousAtSymbolIndex =
+        _textEditingController.text.lastIndexOf('@', cursor.start);
+
+    // Extraire la partie du texte à conserver
+    String textToPreserve =
+        _textEditingController.text.substring(0, previousAtSymbolIndex);
+
+    // Construire le nouveau texte en remplaçant la sélection par la partie à conserver
+    String newText = textToPreserve +
+        selectedText +
+        _textEditingController.text.substring(cursor.end);
+
+    // Mettre à jour le texte dans le TextEditingController
+    _textEditingController.text = newText;
+
+    // Mettre à jour la sélection du curseur
+    _textEditingController.selection =
+        TextSelection.collapsed(offset: previousAtSymbolIndex);
+
+    update();
+  }
+
+  void closeModalUserTag() {
+    Navigator.of(Get.overlayContext!).pop();
+  }
+
+  findUserByTag(text) async {
+    if (text.isNotEmpty && text.startsWith('@')) {
+      _isLoadingUsertag = 0;
+
+      await shortRepo.findUserBuyTag(text.split('@')[1]).then((response) async {
+        _usertagList.clear();
+
+        if (response.body['data'].length != 0) {
+          _usertagList.addAll((response.body['data'] as List)
+              .map((e) => UserTagModel.fromJson(e))
+              .toList());
+          print(_usertagList.length);
+          _isLoadingUsertag = 1;
+          update();
+        }
+      }).catchError((error) {
+        _isLoadingUsertag = 2;
+        update();
+        print(error);
+      });
+    }
+  }
+
+  FocusNode _focusNodeComment = FocusNode();
+  FocusNode get focusNodeComment => _focusNodeComment;
   var _refCom;
   get refCom => _refCom;
   setIdRef(ref) {
     _refCom = ref;
-    _textEditingController.selection;
+
+    _focusNodeComment.requestFocus();
+    print(_focusNodeComment.size);
     update();
   }
 
@@ -678,6 +968,10 @@ class ShortController extends GetxController {
   bool loadingC = false;
   getListCommentShort() async {
     if (!loadingC) {
+      _userTagSelect = '';
+      _usertagList.clear();
+      _textEditingController.clear();
+      _openTagList = false;
       _listCommentShort = [];
       _loadComment = 0;
       _idCurrentComment = 0;

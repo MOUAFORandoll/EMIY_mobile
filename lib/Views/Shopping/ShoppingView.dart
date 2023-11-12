@@ -13,6 +13,8 @@ import 'package:EMIY/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../components/Widget/EmptyShopComponent.dart';
+
 class ShoppingView extends StatelessWidget {
   ShoppingView({Key? key}) : super(key: key);
   ScrollController _scrollController = new ScrollController();
@@ -23,6 +25,7 @@ class ShoppingView extends StatelessWidget {
 
     return GetBuilder<CartController>(builder: (_controller) {
       return Scaffold(
+          backgroundColor: Colors.white,
           body: SafeArea(
               child: CustomScrollView(controller: _scrollController, slivers: [
             SliverAppBar(
@@ -94,19 +97,12 @@ class ShoppingView extends StatelessWidget {
             SliverList(
                 delegate: SliverChildBuilderDelegate(
               (context, index) => _controller.getItems.length == 0
-                  ? Container(
-                     margin: EdgeInsets.symmetric(
-                        vertical: kHeight/3,
-                    
-                      ),
-                      child: BigText(
-                        text: 'Vide',
-                        bolder: true,
-                      ),
-                    )
+                  ? EmptyShopComponent()
                   : Container(
                       decoration: BoxDecoration(
-                        color: ColorsApp.white,
+                        // color: ColorsApp.white,
+
+                        color: Colors.white,
                       ),
                       child: SingleChildScrollView(
                           child: ListView.builder(
@@ -122,69 +118,74 @@ class ShoppingView extends StatelessWidget {
               childCount: 1,
             ))
           ])),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: ColorsApp.greySearch,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            ),
-            padding: EdgeInsets.symmetric(
-              vertical: kMarginX,
-              horizontal: kMarginY,
-              // top: kMdHeight / 20,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            // width: Get.size.width * 0.1,
+          bottomNavigationBar: _controller.getItems.length == 0
+              ? null
+              : Container(
+                  decoration: BoxDecoration(
+                    color: ColorsApp.greySearch,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: kMarginX,
+                    horizontal: kMarginY,
+                    // top: kMdHeight / 20,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  // width: Get.size.width * 0.1,
 
-                            margin: EdgeInsets.only(
-                              bottom: 2,
-                            ),
-                            child: Text(
-                              'Nombre de produits : ${_controller.getItems.length}',
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: ColorsApp.black,
-                              ),
-                            )),
-                        Container(
-                            width: Get.size.width * 0.65,
-                            child: Text(
-                              'Montant du panier :  ${_controller.totalPrix} XAF',
-                              style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  color: ColorsApp.black,
-                                  fontSize: 11),
-                            )),
-                      ],
-                    ),
-                    Container(
-                        margin: EdgeInsets.only(bottom: kMarginY),
-                        child: AppButton(
-                          size: MainAxisSize.max,
-                          bgColor: ColorsApp.skyBlue,
-                          text: 'Buy',
-                          onTap: () {
-                            _controller.getItems.length != 0
-                                ? Get.toNamed(AppLinks.BUYSHOP)
-                                : functions.snackBar('Panier',
-                                    'Ajouter des produits au panier', false);
-                            ;
-                          },
-                        ))
-                  ],
-                )
-              ],
-            ),
-          ));
+                                  margin: EdgeInsets.only(
+                                    bottom: 2,
+                                  ),
+                                  child: Text(
+                                    'Nombre de produits : ${_controller.getItems.length}',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: ColorsApp.black,
+                                    ),
+                                  )),
+                              Container(
+                                  width: Get.size.width * 0.65,
+                                  child: Text(
+                                    'Montant du panier :  ${_controller.totalPrix} XAF',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: ColorsApp.black,
+                                        fontSize: 11),
+                                  )),
+                            ],
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(bottom: kMarginY),
+                              child: AppButton(
+                                size: MainAxisSize.max,
+                                bgColor: ColorsApp.skyBlue,
+                                text: 'Buy',
+                                onTap: () {
+                                  _controller.getItems.length != 0
+                                      ? Get.toNamed(AppLinks.BUYSHOP)
+                                      : functions.snackBar(
+                                          'Panier',
+                                          'Ajouter des produits au panier',
+                                          false);
+                                  ;
+                                },
+                              ))
+                        ],
+                      )
+                    ],
+                  ),
+                ));
     });
   }
 }

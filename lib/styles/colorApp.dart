@@ -7,8 +7,9 @@ abstract class ColorsApp {
   static const Color mint = Color(0xFF40F8FF);
   static const Color greenLight = Color(0xFFD5FFD0);
 
-  static const Color bg = Color.fromRGBO(243, 243, 243, 1);
-  static const Color bgColor = Color(0xFFE5E5E5);
+  static const Color bg0 =    Color.fromRGBO(243, 243, 243, 1);
+  static const Color bg =    Color.fromARGB(255, 255, 255, 255); //Color.fromRGBO(243, 243, 243, 1);
+  static const Color bgColor = Color.fromARGB(255, 255, 255, 255);
   static const Color grey5 = Color(0xFFCBD6D6);
 
   static const Color skyBlue = Color(0xFF459FD6);

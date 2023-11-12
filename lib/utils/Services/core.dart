@@ -51,6 +51,7 @@ Future<void> initApp() async {
   await Get.find<GeneralController>().generalSocket();
   await Get.find<GeneralController>().NotificationSocket();
   await Get.find<GeneralController>().getListNotifications();
+  Get.find<TransactionController>().getTransactions();
 
   await Get.find<ShortController>().disposePLayerAll();
 
@@ -58,6 +59,7 @@ Future<void> initApp() async {
 }
 
 Future<void> secondInit() async {
+  Get.find<TransactionController>().getTransactions();
   Get.find<CommandeController>().getListCommandes();
   Get.find<ProduitController>().getPopularProduit();
   Get.find<CategoryBoutiqueController>().getCategory();
@@ -83,6 +85,7 @@ Future<void> secondInit() async {
 // ...
 Future<void> initAllApp() async {
   await requestPermission();
+  Get.find<TransactionController>().getTransactions();
 
   Get.find<ManagerController>().chageN(true);
   await GetStorage.init();

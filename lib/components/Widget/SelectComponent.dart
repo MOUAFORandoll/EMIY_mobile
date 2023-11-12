@@ -76,7 +76,7 @@ class SelectComponent extends StatelessWidget {
                     ],
                   )),
               onTap: () {
-                _Acontroller.selectMode(mode.id);
+                _Acontroller.selectMode(mode);
               },
             ));
   }

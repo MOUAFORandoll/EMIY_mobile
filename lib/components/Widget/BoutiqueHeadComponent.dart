@@ -454,7 +454,7 @@ class InfoComponent extends StatelessWidget {
           child: icon,
         ),
         Container(
-            width: kWidth * .4,
+            width: kWidth * .38,
             margin: EdgeInsets.symmetric(horizontal: kMarginX),
             child: Text(
               text!,

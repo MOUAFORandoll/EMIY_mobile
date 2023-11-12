@@ -18,70 +18,95 @@ class TransactionComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: kMdHeight * .13,
-        width: kMdWidth,
-        // padding: EdgeInsets.all(kMarginX),
-        margin: EdgeInsets.symmetric(
-            horizontal: kMarginX / 2, vertical: kMarginY / 2),
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(vertical: kMarginY / 2),
         decoration: BoxDecoration(
             color: ColorsApp.grey, borderRadius: BorderRadius.circular(8)),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  alignment: Alignment.center,
-                  // margin: EdgeInsets.only(left: Get.width * .008),
-                  child: Icon(transaction.typeTransactionId == 1
-                      ? Icons.transit_enterexit
-                      : Icons.transfer_within_a_station)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      // width: kSmWidth * .6,
-                      margin: EdgeInsets.only(
-                          top: Get.height * .005, left: Get.width * .008),
-                      child: BigtitleText0(
-                        text: /* 'Transaction : ' +  */
-                            transaction.typeTransaction,
-                        bolder: true,
-                      )),
-                  Container(
-                      margin: EdgeInsets.only(
-                          top: Get.height * .005, left: Get.width * .008),
-                      child: SimpleText(
-                        text: 'Montant : XAF ' + transaction.montant.toString(),
-                      )),
-                  Container(
-                      margin: EdgeInsets.only(
-                          top: Get.height * .005, left: Get.width * .008),
-                      child: SimpleText(
-                        text: 'Fait le : ' + transaction.dateCreated.toString(),
-                      )),
-                  Container(
-                      margin: EdgeInsets.only(
-                          top: Get.height * .005, left: Get.width * .008),
-                      child: SimpleText(
-                        text: 'Etat : ' + transaction.status.toString(),
-                      )),
-                  // Container(
-                  //   width: kSmWidth * .6,
-                  //   margin: EdgeInsets.only(
-                  //       top: Get.height * .005, left: Get.width * .008),
-                  //   child: Text('XAF ' + price.toString(),
-                  //       overflow: TextOverflow.ellipsis,
-                  //       style: TextStyle(
-                  //           decoration: TextDecoration.lineThrough,
-                  //           decorationColor:  ColorsApp.black,
-                  //           decorationThickness: 2.85,
-                  //           color:  ColorsApp.black,
-                  //           fontSize: 12,
-                  //           fontWeight: FontWeight.w600)),
-                  // ),
-                ],
-              ),
-            ]),
+        child: Row(children: [
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    // width: kSmWidth * .6,
+
+                    child: SimpleText(
+                  text: /* 'Transaction : ' +  */
+                      transaction.typeTransaction,
+                  bolder: true,
+                )),
+                Container(
+                    child: Text(
+                  'Fait le : ' + transaction.dateCreated.toString(),
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: kDescription,
+                    fontFamily: 'Lato',
+                  ),
+                )),
+              ],
+            ),
+          ),
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    child: Row(
+                  children: [
+                    Container(
+                        child: Text(
+                      'XAF ',
+                      style: TextStyle(
+                        fontSize: kDescription,
+                        fontFamily: 'Lato',
+                      ),
+                    )),
+                    Container(
+                        child: Text(
+                      transaction.montant.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: kTitle,
+                          fontFamily: 'Lato',
+                          fontWeight: FontWeight.w800),
+                    )),
+                  ],
+                )),
+                Container(
+                    child: Row(
+                  children: [
+                    Container(
+                        child: Text(
+                      'Etat : ',
+                      style: TextStyle(
+                        fontSize: kDescription,
+                        fontFamily: 'Lato',
+                      ),
+                    )),
+                    Container(
+                        child: Text(
+                      transaction.status.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontFamily: 'Lato', fontWeight: FontWeight.w800),
+                    )),
+                    Container(
+                        margin: EdgeInsets.only(left: kMarginX),
+                        child: Icon(
+                          transaction.status == 'Valide'
+                              ? Icons.verified_rounded
+                              : Icons.close,
+                          color: transaction.status == 'Valide'
+                              ? ColorsApp.skyBlue
+                              : ColorsApp.red,
+                        )),
+                  ],
+                )),
+              ],
+            ),
+          ),
+        ]),
       ),
       onTap: () {},
     );

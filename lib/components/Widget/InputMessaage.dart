@@ -7,9 +7,10 @@ class InputMessaage extends StatelessWidget {
       this.typeT,
       this.controller,
       this.enabled,
+      this.focusNode,
       this.icon,
       this.hint});
-
+  final focusNode;
   final controller;
   bool? enabled = false;
   // final String? title;
@@ -24,7 +25,7 @@ class InputMessaage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: kWidth*.66,
+      width: kWidth * .66,
       height: 40,
       margin: EdgeInsets.symmetric(
         horizontal: 4,
@@ -37,11 +38,7 @@ class InputMessaage extends StatelessWidget {
       child: TextField(
         controller: controller,
         enabled: enabled,
-        onChanged: (val) {},
-        // maxLines: 10,
-
-        // maxLength: 10,
-
+        focusNode: focusNode,
         decoration: new InputDecoration(
           hintText: hint,
           hintStyle: TextStyle(
@@ -52,12 +49,12 @@ class InputMessaage extends StatelessWidget {
 
           counterText: "",
           focusedBorder: OutlineInputBorder(
-             borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(50),
               borderSide: BorderSide(
-            color: Colors.blue,
-          )),
+                color: Colors.blue,
+              )),
           border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(50),
 
             // borderSide: BorderSide.none,
           ),

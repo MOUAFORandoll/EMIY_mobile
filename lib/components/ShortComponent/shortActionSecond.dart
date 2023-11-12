@@ -67,7 +67,7 @@ class ShortActionSecond extends StatelessWidget {
                             backgroundColor: Colors.white,
                             radius: 50,
                             backgroundImage:
-                                AssetImage("assets/images/error.gif"));
+                                AssetImage("assets/logo/logoNew.png"));
                       },
                     )),
                 IconShortComponent(

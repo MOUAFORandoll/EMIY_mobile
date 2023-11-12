@@ -41,7 +41,14 @@ class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MySearchController>(builder: (searchCont) {
-      return DefaultTabController(
+      return WillPopScope(
+        onWillPop: () async {
+          Get.find<MySearchController>().resetAll();
+
+          Navigator.of(context).pop();
+          return true;
+        },
+        child: DefaultTabController(
           length: 4,
           child: Scaffold(
               appBar: AppBar(
@@ -58,6 +65,7 @@ class SearchView extends StatelessWidget {
                             color: Colors.blue,
                           ),
                           onTap: () {
+                            Get.find<MySearchController>().resetAll();
                             Navigator.of(context).pop();
                           }),
                       KSearchField(),
@@ -77,7 +85,10 @@ class SearchView extends StatelessWidget {
                       searchCont.search == 3
                   ? Container()
                   : searchCont.search == 1 && searchCont.search != 2
-                      ? ShimmerProduit()
+                      ? Container(
+                          // height: double.maxFinite,
+                          margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                          child: ShimmerProduit())
                       : NestedScrollView(
                           controller: _scrollController,
                           headerSliverBuilder:
@@ -89,6 +100,7 @@ class SearchView extends StatelessWidget {
                                     controller:
                                         DefaultTabController.of(context),
                                     onTap: (index) => searchCont.setType(index),
+                                    labelStyle: TextStyle(fontSize: 10),
                                     tabs: [
                                       Tab(text: 'Produits'),
                                       Tab(text: 'Boutiques'),
@@ -110,7 +122,9 @@ class SearchView extends StatelessWidget {
                               SearchShort(),
                             ],
                           ),
-                        )));
+                        )),
+        ),
+      );
     });
   }
 }
@@ -129,7 +143,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      color: Colors.black,
+      color: Colors.white,
       child: _tabBar,
     );
   }
