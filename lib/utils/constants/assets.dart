@@ -32,4 +32,9 @@ class Assets {
   static const share = 'assets/svg_icones/share.svg';
   static const location = 'assets/svg_icones/location.svg';
   static const nmreproduit = 'assets/svg_icones/nmreproduit.svg';
+  static const setting = 'assets/svg_icones/setting.svg';
+  static const produits = 'assets/svg_icones/produits.svg';
+  static const short = 'assets/svg_icones/short.svg';
+  static const commandes = 'assets/svg_icones/commandes.svg';
+  static const ventes = 'assets/svg_icones/ventes.svg';
 }

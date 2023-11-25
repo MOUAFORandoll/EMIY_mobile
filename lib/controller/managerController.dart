@@ -31,6 +31,9 @@ import '../utils/Services/routing.dart';
 import 'boutiqueController.dart';
 
 class ManagerController extends GetxController {
+  final ManageRepo manageRepo;
+  ManagerController({required this.manageRepo});
+
   // int _current = 0;
   // int get current => _current;
   // initCurrent() {
@@ -92,9 +95,6 @@ class ManagerController extends GetxController {
    */
   int _state = 0;
   int get state => _state;
-
-  final ManageRepo manageRepo;
-  ManagerController({required this.manageRepo});
 
   chageState(int i) {
     _state = i;
@@ -521,9 +521,34 @@ class ManagerController extends GetxController {
 
   TextEditingController _repass = TextEditingController();
   TextEditingController get repass => _repass;
+  bool verifDataReg() {
+    switch (_regStep) {
+      case 0:
+        return _formKeyReg1.currentState?.validate() ?? false;
+      case 1:
+        return _formKeyReg2.currentState?.validate() ?? false;
+      default:
+        return false;
+    }
+  }
+
+  int _regStep = 0;
+  get regStep => _regStep;
+
+  setRegStep(bool l) {
+    _regStep = l
+        ? (verifDataReg())
+            ? 1
+            : 0
+        : 0;
+    update();
+  }
 
   var _codeParrain = '';
   get codeParrain => _codeParrain;
+
+  TextEditingController _userTag = TextEditingController();
+  TextEditingController get userTag => _userTag;
   setCodeParrain(codeParrain0) {
     _codeParrain = codeParrain0;
     update();
@@ -532,8 +557,10 @@ class ManagerController extends GetxController {
 
   TextEditingController _email = TextEditingController();
   TextEditingController get email => _email;
-  final _formKeyReg = new GlobalKey<FormState>();
-  get formKeyReg => _formKeyReg;
+  final _formKeyReg1 = new GlobalKey<FormState>();
+  get formKeyReg1 => _formKeyReg1;
+  final _formKeyReg2 = new GlobalKey<FormState>();
+  get formKeyReg2 => _formKeyReg2;
   bool _isSignUp = false;
   bool get isSignUp => _isSignUp;
   signUp() async {
@@ -552,6 +579,7 @@ class ManagerController extends GetxController {
       "codeParrainage": codeParrain,
       "nom": name.text,
       "prenom": surname.text,
+      "user_tag": userTag.text,
       // "email": email.text,
     };
     print(data);
@@ -577,7 +605,7 @@ class ManagerController extends GetxController {
 
       // fn.snackBar('Mise a jour', response.body['message'], true);
       _isSignUp = true;
-      // Get.back(closeOverlays: true);
+      Get.back(closeOverlays: true);
       update();
     } catch (e) {
       fn.closeLoader();
@@ -652,7 +680,7 @@ class ManagerController extends GetxController {
     'Transactions',
     'Centre d\'iteret',
     'Preferences',
-    'Ma boutique',
+    'Mes boutiques',
   ];
   List _saveIndex = [];
   setContain(i) {
@@ -786,5 +814,4 @@ class ManagerController extends GetxController {
         return Container();
     }
   }
- 
 }

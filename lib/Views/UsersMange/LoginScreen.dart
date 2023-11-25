@@ -101,19 +101,14 @@ class LoginScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: kMarginY * 2,
-                        ),
-                        child: AppInputPassword(
-                          controller: _manager.passwordLog,
-                          label: 'labelpassword'.tr,
-                          obscureText: true,
-                          validator: (value) {
-                            //print(value);
-                            return Validators.required('Mot de passe', value!);
-                          },
-                        ),
+                      AppInputPassword(
+                        controller: _manager.passwordLog,
+                        label: 'labelpassword'.tr,
+                        obscureText: true,
+                        validator: (value) {
+                          //print(value);
+                          return Validators.required('Mot de passe', value!);
+                        },
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: kMarginY),

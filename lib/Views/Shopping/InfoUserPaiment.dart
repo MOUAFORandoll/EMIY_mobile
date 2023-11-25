@@ -55,37 +55,27 @@ class InfoUserPaiment extends StatelessWidget {
                         )
                       ],
                     )),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: kMarginY * 4,
+                AppInput(
+                  controller: _Bcontroller.nameController,
+                  icon: Icon(
+                    Icons.check_circle_sharp,
                   ),
-                  child: AppInput(
-                    controller: _Bcontroller.nameController,
-                    icon: Icon(
-                      Icons.check_circle_sharp,
-                    ),
-                    onChanged: (value) {
-                      _Bcontroller.refresh0();
-                    },
-                    label: 'name'.tr,
-                    validator: (value) {},
-                  ),
+                  onChanged: (value) {
+                    _Bcontroller.refresh0();
+                  },
+                  label: 'name'.tr,
+                  validator: (value) {},
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: kMarginY * 2,
+                AppInput(
+                  controller: _Bcontroller.phoneController,
+                  icon: Icon(
+                    Icons.check_circle_sharp,
                   ),
-                  child: AppInput(
-                    controller: _Bcontroller.phoneController,
-                    icon: Icon(
-                      Icons.check_circle_sharp,
-                    ),
-                    onChanged: (value) {
-                      _Bcontroller.refresh0();
-                    },
-                    label: 'labelphone'.tr,
-                    validator: (value) {},
-                  ),
+                  onChanged: (value) {
+                    _Bcontroller.refresh0();
+                  },
+                  label: 'labelphone'.tr,
+                  validator: (value) {},
                 ),
                 GetBuilder<BuyShopController>(
                     builder: (_BsCcontroller) => InkWell(
@@ -99,15 +89,29 @@ class InfoUserPaiment extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     color: ColorsApp.secondBlue),
-                                child: Text(
-                                  _BsCcontroller
-                                      .selected_livraison_point.libelle,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              )
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      _BsCcontroller
+                                          .selected_livraison_point.libelle,
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: ColorsApp.white,
+                                          fontFamily: 'lato',
+                                          fontWeight: FontWeight.w600),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Container(
+                                        child: SvgPicture.asset(
+                                      Assets.localisation,
+                                      width: 18,
+                                      height: 18,
+                                      color: ColorsApp.white,
+                                    )),
+                                  ],
+                                ))
                             : Container(
                                 padding: EdgeInsets.all(Get.height * .02),
                                 margin: EdgeInsets.only(
@@ -123,8 +127,10 @@ class InfoUserPaiment extends StatelessWidget {
                                     Text(
                                       'livrP'.tr,
                                       style: TextStyle(
-                                        fontSize: 12,
-                                      ),
+                                          fontSize: 12,
+                                          fontFamily: 'lato',
+                                          color: ColorsApp.white,
+                                          fontWeight: FontWeight.w600),
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Container(
@@ -132,7 +138,7 @@ class InfoUserPaiment extends StatelessWidget {
                                       Assets.localisation,
                                       width: 18,
                                       height: 18,
-                                      color: ColorsApp.orange,
+                                      color: ColorsApp.white,
                                     )),
                                   ],
                                 )),

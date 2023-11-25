@@ -20,15 +20,19 @@ class InfoComponent extends StatelessWidget {
               )
             : BoxDecoration(),
         alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             title,
-            Text(value,
-                style: TextStyle(
-                    fontSize: 15,
-                    color: ColorsApp.black,
-                    fontWeight: FontWeight.w600))
+            Container(
+              margin: EdgeInsets.only(top: 3),
+              child: Text(value,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: ColorsApp.black,
+                      fontWeight: FontWeight.w600)),
+            )
           ],
         ),
       ),

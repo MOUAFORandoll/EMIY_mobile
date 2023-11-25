@@ -54,7 +54,7 @@ class ProduitBoutiqueModel {
         prix: json["prix"],
         description: json["description"],
         status: json["status"],
-        date: json["date "] ?? '',
+        date: json["date"] ?? '',
         images:
             List<ImageU>.from(json["images"].map((x) => ImageU.fromJson(x))),
       );

@@ -58,6 +58,8 @@ class AppBarCommande extends StatelessWidget {
                           onTap: onTap))
                 ]))
         : KTextField(
-            controllerField: controllerField, onChange: onChange, onTap: onTap);
+            controllerField: controllerField,
+            onChange: onChange,
+            onClear: onTap);
   }
 }

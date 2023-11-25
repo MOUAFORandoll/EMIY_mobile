@@ -20,6 +20,8 @@ class BoutiqueUserModel {
     required this.dateCreated,
     required this.images,
     required this.localisation,
+    required this.nombre_produit,
+    required this.commandes,
   });
 
   String codeBoutique;
@@ -30,7 +32,8 @@ class BoutiqueUserModel {
   String dateCreated;
   List<Image> images;
   Localisation localisation;
-
+  int nombre_produit;
+  int commandes;
   factory BoutiqueUserModel.fromJson(Map<String, dynamic> json) =>
       BoutiqueUserModel(
         codeBoutique: json["codeBoutique"],
@@ -38,6 +41,8 @@ class BoutiqueUserModel {
         description: json["description"],
         titre: json["titre"],
         status: json["status"],
+        nombre_produit: json["nombre_produit"],
+        commandes: json["commandes"],
         dateCreated: json["dateCreated"],
         localisation: Localisation.fromJson(json["localisation"]),
         images: json["images"] == null
@@ -50,6 +55,8 @@ class BoutiqueUserModel {
         "user": user,
         "description": description,
         "titre": titre,
+        "commandes": commandes,
+        "nombre_produit": nombre_produit,
         "status": status,
         "dateCreated": dateCreated,
         "images": images == null

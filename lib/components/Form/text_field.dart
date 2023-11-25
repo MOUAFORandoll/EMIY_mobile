@@ -18,7 +18,7 @@ class KTextField extends StatelessWidget {
   final prefix;
   final String? type;
   Function? onChange;
-  var onTap;
+  var onClear;
   final double? dim;
   bool isCode;
 
@@ -30,7 +30,7 @@ class KTextField extends StatelessWidget {
       this.type,
       this.dim,
       this.isCode = false,
-      this.onTap,
+      this.onClear,
       this.onChange})
       : super(key: key);
 
@@ -57,7 +57,7 @@ class KTextField extends StatelessWidget {
           color: ColorsApp.greySecond,
         ),
 
-        height: kToolbarHeight / 1.7,
+        // height: kToolbarHeight / 1.7,
         // width: kMdWidth * 2,
         // padding: EdgeInsets.symmetric(horizontal: 10),
         child: TextField(
@@ -70,7 +70,7 @@ class KTextField extends StatelessWidget {
           // cursorHeight: kToolbarHeight / 2,
 
           // cursorColor: const Color(0xff28255A),
-          cursorHeight: 30.0,
+          // cursorHeight: 30.0,
           controller: controllerField,
           obscureText: type == KFieldType.password,
           textAlign: TextAlign.left,
@@ -102,7 +102,7 @@ class KTextField extends StatelessWidget {
                       Icons.close,
                       color: ColorsApp.red,
                     ),
-                    onTap: onTap)),
+                    onTap: onClear)),
             contentPadding: EdgeInsets.symmetric(vertical: 10)
                 .add(EdgeInsets.only(left: kMarginX)),
             hintStyle: TextStyle(color: Colors.grey, fontSize: 14),

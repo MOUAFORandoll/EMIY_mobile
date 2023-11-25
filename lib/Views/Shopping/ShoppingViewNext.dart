@@ -123,6 +123,7 @@ class ShoppingViewNext extends StatelessWidget {
                           Container(
                               margin: EdgeInsets.only(bottom: kMarginY),
                               child: AppButton(
+                               
                                 size: MainAxisSize.max,
                                 bgColor: ColorsApp.skyBlue,
                                 text: 'Buy',

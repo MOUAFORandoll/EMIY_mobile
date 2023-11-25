@@ -12,6 +12,8 @@ class PointLivraisonModel {
     required this.ville,
     required this.quartier,
     required this.image,
+    required this.longitude,
+    required this.latitude,
   });
 
   final int id;
@@ -19,10 +21,18 @@ class PointLivraisonModel {
   final String ville;
   final String quartier;
   final String image;
+  final longitude;
+  final latitude;
 
   factory PointLivraisonModel.fromJson(Map<String, dynamic> json) =>
       PointLivraisonModel(
         id: json["id"] == null ? null : json["id"],
+        latitude: json["latitude"] == null
+            ? null
+            : double.parse(json["latitude"].toString()),
+        longitude: json["longitude"] == null
+            ? null
+            : double.parse(json["longitude"].toString()),
         libelle: json["libelle"] == null ? null : json["libelle"],
         ville: json["ville"] == null ? null : json["ville"],
         quartier:
@@ -36,5 +46,7 @@ class PointLivraisonModel {
         "libelle": libelle == null ? null : libelle,
         "quartier": quartier == null ? null : quartier,
         "image": image == null ? null : image,
+        "latitude": latitude == null ? null : latitude,
+        "longitude": longitude == null ? null : longitude,
       };
 }

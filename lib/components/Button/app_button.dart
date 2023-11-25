@@ -10,7 +10,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onTap;
   final bool disabled;
   final MainAxisSize size;
-  final BoxBorder? border;
+  final BoxBorder? border; 
   AppButton({
     Key? key,
     required this.text,
@@ -18,7 +18,7 @@ class AppButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.onTap,
     this.leading,
-    this.border,
+    this.border, 
     this.disabled = false,
     this.size = MainAxisSize.min,
   }) : super(key: key);
@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
       onTap: disabled ? null : onTap,
       child: Container(
         constraints:
-            BoxConstraints(minHeight: kHeight / 17, minWidth: kWidth / 5),
+            BoxConstraints(minHeight: kHeight / 17, minWidth: kWidth * .2),
         padding: EdgeInsets.symmetric(horizontal: kMarginX),
         decoration: BoxDecoration(
             boxShadow: [

@@ -54,7 +54,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
     print(status.localVersion);
     print(status.storeVersion);
     print(status.appStoreLink);
-    newVersionPlus.showAlertIfNecessary(context: context);
+    newVersionPlus.showAlertIfNecessary(context:context);
     print('*---------***--------------------**');
   }
 

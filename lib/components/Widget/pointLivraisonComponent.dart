@@ -1,3 +1,4 @@
+import 'package:EMIY/components/exportcomponent.dart';
 import 'package:EMIY/controller/BuyShopController.dart';
 import 'package:EMIY/model/data/PointLivraisonModel.dart';
 import 'package:flutter/material.dart';
@@ -32,18 +33,34 @@ class PointLivraisonComponent extends StatelessWidget {
                   Text(
                     (point_livraison.libelle).toString(),
                     overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'lato',
+                        color: _controller.selected_livraison_point.id ==
+                                point_livraison.id
+                            ? ColorsApp.white
+                            : null,
+                        fontWeight: FontWeight.w600),
                   ),
                   Text(
                     point_livraison.ville.toString() +
                         ', ' +
                         point_livraison.quartier.toString(),
                     overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: kDescription,
+                      fontFamily: 'lato',
+                      color: _controller.selected_livraison_point.id ==
+                              point_livraison.id
+                          ? ColorsApp.white
+                          : null,
+                    ),
                   ),
                 ],
               )),
           onTap: () {
             _controller.selectPoint(point_livraison);
-            Get.back();
+            // Get.back();
           });
     });
   }

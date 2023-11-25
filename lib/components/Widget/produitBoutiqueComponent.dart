@@ -168,13 +168,28 @@ class ProduitBoutiqueComponent extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextButton(
-                                  child: Text('Annuler'),
+                                  child: Text(
+                                    'Annuler',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
                                   onPressed: () {
                                     Get.back();
                                   },
                                 ),
                                 TextButton(
-                                  child: Text('Enregistrer'),
+                                  child: Text(
+                                    'Enregistrer',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      fontFamily: 'Lato',
+                                      color: ColorsApp.skyBlue,
+                                    ),
+                                  ),
                                   onPressed: () async {
                                     var data = {
                                       'idProduit': produit.id,
@@ -185,7 +200,7 @@ class ProduitBoutiqueComponent extends StatelessWidget {
                                     };
                                     //print(data);
                                     await _controller.updateProduit(data);
-                                    Get.back(closeOverlays: true);
+                                    // Get.back(closeOverlays: true);
                                   },
                                 )
                               ]),
@@ -231,6 +246,7 @@ class ProduitBoutiqueComponent extends StatelessWidget {
                                 margin: EdgeInsets.only(
                                   top: kMarginY,
                                 ),
+                                height: kHeight * .06,
                                 padding: EdgeInsets.symmetric(
                                     vertical: kMarginY, horizontal: kMarginX),
                                 decoration: BoxDecoration(
@@ -258,8 +274,8 @@ class ProduitBoutiqueComponent extends StatelessWidget {
                                                   BorderRadius.circular(12),
                                               color: ColorsApp.greySecond),
                                           width: kMdWidth / 2,
-                                          height: 35,
-                                          alignment: Alignment.center,
+                                          // height: 35,
+                                          // alignment: Alignment.center,
                                           child: AppInputNew(
                                             controller: quantite,
                                             label: '',
@@ -287,7 +303,7 @@ class ProduitBoutiqueComponent extends StatelessWidget {
                                 ? Container(
                                     height: kSmHeight * 2,
                                     margin: EdgeInsets.symmetric(
-                                        vertical: kMarginY * .1),
+                                        vertical: kMarginY * .3),
                                     child: ListView.builder(
                                       itemCount: produit.images.length,
                                       scrollDirection: Axis.horizontal,

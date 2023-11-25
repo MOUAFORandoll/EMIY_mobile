@@ -17,12 +17,12 @@ class AppBarCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-            color: ColorsApp.grey, borderRadius: BorderRadius.circular(9)),
+            color: ColorsApp.greyTi, borderRadius: BorderRadius.circular(9)),
         padding: EdgeInsets.only(left: kMdWidth / 10, top: 2, bottom: 2),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Container(
-              width: Get.size.width * 0.4,
+              width: Get.size.width * 0.6,
               child: Text(
                 title,
                 style: TextStyle(

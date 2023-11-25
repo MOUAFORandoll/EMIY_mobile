@@ -24,6 +24,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../components/exportcomponent.dart';
+
 class HistroriqueCBUView extends StatelessWidget {
   HistroriqueCBUView({Key? key}) : super(key: key);
   ScrollController _scrollController = new ScrollController();
@@ -33,34 +35,60 @@ class HistroriqueCBUView extends StatelessWidget {
     TextEditingController controllerField = TextEditingController();
 
     return GetBuilder<BoutiqueController>(builder: (_controller) {
-      return SingleChildScrollView(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: kMarginX),
-            child: AppBarCommande(
-                title: 'Historique des ventes',
-                controllerField: _controller.controllerFieldSearch,
-                onTap: () {
-                  _controller.searchButtom();
-                },
-                search: _controller.searchCom,
-                onChange: _controller.searchCommande)),
-        _controller.loadFinishCommande == 0
-            ? AppLoading()
-            : _controller.HcommandeBoutiqueList.length == 0
-                ? Container(
-                    height: kHeight, child: AppEmpty(title: 'Aucune Vente'))
-                : SingleChildScrollView(
-                    child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: _controller.HcommandeBoutiqueList.length,
-                    itemBuilder: (_ctx, index) {
-                      return CommandeBoutiqueComponent(
-                          commande: _controller.HcommandeBoutiqueList[index]);
+      return Scaffold(
+          appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: AppBackButton(),
+              actions: [
+                Container(
+                    margin: EdgeInsets.only(top: Get.height * .020),
+                    padding: EdgeInsets.only(
+                        left: Get.width * .030, right: Get.width * .030),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: AppTitleRight(
+                                title: 'commandes'.tr,
+                                description: ''.tr,
+                                icon: null),
+                            margin: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * .005),
+                          ),
+                        ])),
+              ]),
+          body: SingleChildScrollView(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                child: AppBarCommande(
+                    title: 'Historique des ventes',
+                    controllerField: _controller.searchInBoutiqueCont,
+                    onTap: () {
+                      // _controller.searchButtom();
                     },
-                  ))
-      ]));
+                    search: _controller.searchCom,
+                    onChange: _controller.searchCommande)),
+            _controller.loadFinishCommande == 0
+                ? AppLoading()
+                : _controller.HcommandeBoutiqueList.length == 0
+                    ? Container(
+                        height: kHeight, child: AppEmpty(title: 'Aucune Vente'))
+                    : SingleChildScrollView(
+                        child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _controller.HcommandeBoutiqueList.length,
+                        itemBuilder: (_ctx, index) {
+                          return CommandeBoutiqueComponent(
+                              commande:
+                                  _controller.HcommandeBoutiqueList[index]);
+                        },
+                      ))
+          ])));
     });
   }
 }

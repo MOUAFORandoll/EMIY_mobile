@@ -25,6 +25,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../components/Widget/app_back_button.dart';
+import '../../components/Widget/app_title_right.dart';
+
 class CommandesBoutiqueUserView extends StatelessWidget {
   CommandesBoutiqueUserView({Key? key}) : super(key: key);
   ScrollController _scrollController = new ScrollController();
@@ -32,34 +35,57 @@ class CommandesBoutiqueUserView extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get.find<BoutiqueController>().getListCommandeForBoutique();
     return GetBuilder<BoutiqueController>(builder: (_controller) {
-      return SingleChildScrollView(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: kMarginX),
-            child: AppBarCommande(
-                title: 'Liste de vos commandes',
-                controllerField: _controller.controllerFieldSearch,
-                onTap: () {
-                  _controller.searchButtom();
-                },
-                search: _controller.searchCom,
-                onChange: _controller.searchCommande)),
-        _controller.isLoadedPC == 0
-            ? AppLoading()
-            : _controller.commandeBoutiqueList.length == 0
-                ? Container(
-                    height: kHeight, child: AppEmpty(title: 'Aucune Commande'))
-                : SingleChildScrollView(
-                    child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: _controller.commandeBoutiqueList.length,
-                    itemBuilder: (_ctx, index) {
-                      return CommandeBoutiqueComponent(
-                          commande: _controller.commandeBoutiqueList[index]);
-                    },
-                  ))
-      ]));
+      return Scaffold(
+          appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: AppBackButton(),
+              actions: [
+                Container(
+                    margin: EdgeInsets.only(top: Get.height * .020),
+                    padding: EdgeInsets.only(
+                        left: Get.width * .030, right: Get.width * .030),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: AppTitleRight(
+                                title: 'commandes'.tr,
+                                description: ''.tr,
+                                icon: null),
+                            margin: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * .005),
+                          ),
+                        ])),
+              ]),
+          body: SingleChildScrollView(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: kMarginX),
+                child: KTextField(
+                    controllerField: _controller.searchInBoutiqueCont,
+                    onChange: _controller.searchCommande,
+                    onClear: _controller.onClearAllController)),
+            _controller.isLoadedPC == 0
+                ? AppLoading()
+                : _controller.commandeBoutiqueList.length == 0
+                    ? Container(
+                        height: kHeight,
+                        child: AppEmpty(title: 'Aucune Commande'))
+                    : SingleChildScrollView(
+                        child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _controller.commandeBoutiqueList.length,
+                        itemBuilder: (_ctx, index) {
+                          return CommandeBoutiqueComponent(
+                              commande:
+                                  _controller.commandeBoutiqueList[index]);
+                        },
+                      ))
+          ])));
     });
   }
 }

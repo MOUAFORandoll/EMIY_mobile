@@ -126,102 +126,78 @@ class ShortAction extends StatelessWidget {
                                       '${short.nbre_commentaire} commentaires')),
                             ]),
                           ),
-                          _ShortController.loadComment == 0
-                              ? Container(
-                                  width: 22,
-                                  height: 22,
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: kHeight / 4.7),
-                                  child: CircularProgressIndicator(
-                                      color: ColorsApp.secondBlue))
-                              : GetBuilder<ShortController>(
-                                  builder: (_ShortController) =>
-                                      (_ShortController.openTagList)
-                                          ? _ShortController.isLoadingUsertag ==
-                                                  0
-                                              ? Container(
-                                                  width: 22,
-                                                  height: 22,
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: kHeight / 4.7),
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                          color: ColorsApp
-                                                              .secondBlue))
-                                              : Expanded(
-                                                  child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: ColorsApp.bg0,
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(15),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    15)),
-                                                  ),
-                                                  height: kHeight / 1.5,
-                                                  child: SingleChildScrollView(
-                                                    child: ListView.builder(
-                                                        itemCount:
-                                                            _ShortController
-                                                                .usertagList
-                                                                .length,
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            const BouncingScrollPhysics(),
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemBuilder: (_ctx,
-                                                                index) =>
-                                                            UserTagComponent(
-                                                                user: _ShortController
-                                                                        .usertagList[
-                                                                    index],
-                                                                onTap: () {
-                                                                  _ShortController.selectUserTag(_ShortController
+                          Expanded(
+                            child: _ShortController.loadComment == 0
+                                ? Container(
+                                    child: Center(
+                                        child: CircularProgressIndicator(
+                                            color: ColorsApp.secondBlue)))
+                                : GetBuilder<ShortController>(
+                                    builder: (_ShortController) => (_ShortController
+                                            .openTagList)
+                                        ? _ShortController.isLoadingUsertag == 0
+                                            ? Container(
+                                                child: Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                            color: ColorsApp
+                                                                .secondBlue)))
+                                            : Container(
+                                                decoration: BoxDecoration(
+                                                  color: ColorsApp.bg0,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  15),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  15)),
+                                                ),
+                                                height: kHeight / 1.5,
+                                                child: SingleChildScrollView(
+                                                  child: ListView.builder(
+                                                      itemCount:
+                                                          _ShortController
+                                                              .usertagList
+                                                              .length,
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          const BouncingScrollPhysics(),
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      itemBuilder: (_ctx,
+                                                              index) =>
+                                                          UserTagComponent(
+                                                              user: _ShortController
                                                                       .usertagList[
-                                                                          index]
-                                                                      .user_tag!);
-                                                                })),
-                                                  ),
-                                                ))
-                                          : Expanded(
-                                              // margin: EdgeInsets.only(
-                                              //   top: kMarginY * 6,
-                                              // ),
-                                              // decoration: BoxDecoration(
-                                              //     // color: ColorsApp.red,
-                                              //     borderRadius:
-                                              //         BorderRadius.only(
-                                              //             topLeft:
-                                              //                 Radius.circular(
-                                              //                     15),
-                                              //             topRight:
-                                              //                 Radius.circular(
-                                              //                     15))),
-                                              // height: kHeight / 1.5,
-                                              child: SingleChildScrollView(
-                                                child: ListView.builder(
-                                                    itemCount: _ShortController
-                                                        .listCommentShort
-                                                        .length,
-                                                    shrinkWrap: true,
-                                                    // controller: _ShortController.scrollController,
-                                                    physics:
-                                                        const BouncingScrollPhysics(),
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    itemBuilder: (_ctx,
-                                                            index) =>
-                                                        CommentComponent(
-                                                            comment:
-                                                                _ShortController
-                                                                        .listCommentShort[
-                                                                    index])),
-                                              ),
-                                            ),
-                                ),
+                                                                  index],
+                                                              onTap: () {
+                                                                _ShortController.selectUserTag(
+                                                                    _ShortController
+                                                                        .usertagList[
+                                                                            index]
+                                                                        .user_tag!);
+                                                              })),
+                                                ),
+                                              )
+                                        : SingleChildScrollView(
+                                            child: ListView.builder(
+                                                itemCount: _ShortController
+                                                    .listCommentShort.length,
+                                                shrinkWrap: true,
+                                                // controller: _ShortController.scrollController,
+                                                physics:
+                                                    const BouncingScrollPhysics(),
+                                                scrollDirection: Axis.vertical,
+                                                itemBuilder: (_ctx, index) =>
+                                                    CommentComponent(
+                                                        comment: _ShortController
+                                                                .listCommentShort[
+                                                            index])),
+                                          ),
+                                  ),
+                          ),
                           Padding(
                               padding: EdgeInsets.all(5.0),
                               child: Column(children: [

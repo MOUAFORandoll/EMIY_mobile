@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:EMIY/components/Widget/map_delivry_page.dart';
 import 'package:EMIY/controller/GeneralController.dart';
 import 'package:EMIY/controller/CommandeController.dart';
 import 'package:EMIY/controller/cartController.dart';
@@ -50,11 +51,24 @@ class BuyShopController extends GetxController {
   }
 
   PointLivraisonModel _selected_livraison_point = new PointLivraisonModel(
-      id: 0, libelle: '', ville: '', quartier: '', image: '');
+      id: 0,
+      libelle: '',
+      ville: '',
+      quartier: '',
+      image: '',
+      longitude: 0.0,
+      latitude: 0.0);
   PointLivraisonModel get selected_livraison_point => _selected_livraison_point;
   selectPoint(point) {
     _selected_livraison_point = point;
     update();
+    Get.toNamed(AppLinks.MAP_DELIVRY);
+  }
+
+  selectPoint0(point) {
+    _selected_livraison_point = point;
+    update();
+     
   }
 
   final TextEditingController _searchController = TextEditingController();

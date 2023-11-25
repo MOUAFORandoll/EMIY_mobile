@@ -344,7 +344,7 @@ class BoutiqueController extends GetxController {
     Get.toNamed(AppLinks.BOUTIQUE_USER);
 
     // getListShortBoutique();
-    setBoutiqueContent(0);
+    // setBoutiqueContent(0);
   }
 
   // BoutiqueController({required this.service});
@@ -488,26 +488,26 @@ class BoutiqueController extends GetxController {
     // update();
 
     _searchProB = false;
-    //print('getProduit---------');
 
-    try {
-      Response response =
-          await boutiqueRepo.getListProduitForBoutique(Boutique.codeBoutique);
+    await boutiqueRepo
+        .getListProduitForBoutique(Boutique.codeBoutique)
+        .then((response) {
       _produitBoutiqueList.clear();
-      if (response.body != null) {
-        if (response.body['data'].length != 0) {
-          _produitBoutiqueList.addAll((response.body['data'] as List)
-              .map((e) => ProduitBoutiqueModel.fromJson(e))
-              .toList());
-        }
 
-        _isLoadedPB = 1;
-        update();
-      }
+      _produitBoutiqueList.addAll((response.body['data'] as List)
+          .map((e) => ProduitBoutiqueModel.fromJson(e))
+          .toList());
       _produitBoutiqueListSave = _produitBoutiqueList;
-    } catch (e) {
-      //print(e);
-    }
+      print(_produitBoutiqueListSave.length);
+      _isLoadedPB = 1;
+      update();
+
+      _produitBoutiqueListSave = _produitBoutiqueList;
+    }).onError((e, h) {
+      print(e);
+      _isLoadedPB = 1;
+      update();
+    });
   }
 
   updateProduitImage(idProduitObject) async {
@@ -896,36 +896,26 @@ class BoutiqueController extends GetxController {
 
   bool _searchCom = false;
   bool get searchCom => _searchCom;
-  TextEditingController _controllerFieldSearch = TextEditingController();
-  get controllerFieldSearch => _controllerFieldSearch;
-
-  searchButtom() {
-    _searchCom = !_searchCom;
-    // searchCommande('');
-    if (!_searchCom) {
-      _commandeBoutiqueList = _commandeBoutiqueListSave;
-    }
-    update();
-  }
+  TextEditingController _searchInBoutiqueCont = TextEditingController();
+  get searchInBoutiqueCont => _searchInBoutiqueCont;
 
   searchCommande(text) {
     //print(text);
     _commandeBoutiqueList = [];
-    List<CommandeBoutiqueModel> cont = [];
-    _commandeBoutiqueListSave.forEach((item) {
-      if (item.numCommande.toUpperCase().contains(text.toUpperCase()) ||
-          item.titre.toUpperCase().contains(text.toUpperCase())) {
-        cont.add(item);
-      }
-    });
-    //print(cont.length);
-    if (cont.length != 0) {
-      _commandeBoutiqueList = cont;
-    } else {
-      _commandeBoutiqueList = _commandeBoutiqueListSave;
-    }
 
     update();
+
+    if (text.length == 0) {
+      _commandeBoutiqueList = _commandeBoutiqueListSave;
+      update();
+    } else {
+      _commandeBoutiqueList = _commandeBoutiqueListSave
+          .where((item) =>
+              (item.titre.toUpperCase().contains(text.toUpperCase()) ||
+                  item.numCommande.toUpperCase().contains(text.toUpperCase())))
+          .toList();
+      update();
+    }
   }
 
   bool _HsearchCom = false;
@@ -960,32 +950,27 @@ class BoutiqueController extends GetxController {
   bool _searchProB = false;
   bool get searchProB => _searchProB;
 
-  searchProBButtom() {
-    _searchProB = !_searchProB;
-    if (!_searchProB) {
-      _produitBoutiqueList = _produitBoutiqueListSave;
-    }
-    update();
-  }
-
   searchProduitB(text) {
-    //print(text);
-    _produitBoutiqueList.clear();
+    print(
+        "_produitBoutiqueListSave.length *-------${_produitBoutiqueListSave.length}");
+    // _produitBoutiqueList.clear();
     List<ProduitBoutiqueModel> cont = [];
-    _produitBoutiqueListSave.forEach((item) {
-      if (item.titre.toUpperCase().contains(text.toUpperCase()) ||
-          item.codeProduit.toUpperCase().contains(text.toUpperCase())) {
-        cont.add(item);
-      }
-    });
-    //print(cont.length);
-    if (cont.length != 0) {
-      _produitBoutiqueList = cont;
-    } else {
+    if (text.length == 0) {
+      print(
+          "ressssssssssssssssss.length *-------${_produitBoutiqueListSave.length}");
       _produitBoutiqueList = _produitBoutiqueListSave;
-    }
+      update();
+    } else {
+      print("okkkkkkkk.length *-------${_produitBoutiqueListSave.length}");
+      _produitBoutiqueList = _produitBoutiqueListSave
+          .where((item) =>
+              (item.titre.toUpperCase().contains(text.toUpperCase()) ||
+                  item.codeProduit.toUpperCase().contains(text.toUpperCase())))
+          .toList();
+      print(cont.length);
 
-    update();
+      update();
+    }
   }
 
   bool _addProduit = false;
@@ -997,6 +982,7 @@ class BoutiqueController extends GetxController {
     //print(!_addProduit);
   }
 
+  List<ShortModel> _listShortBoutiqueSave = [];
   List<ShortModel> _listShortBoutique = [];
   List<ShortModel> get listShortBoutique => _listShortBoutique;
   int _isLoadedShort = 0;
@@ -1004,32 +990,48 @@ class BoutiqueController extends GetxController {
   Future<void> getListShortBoutique() async {
     if (Boutique != null) {
       _isLoadedShort = 0;
-      try {
-        Response response =
-            await boutiqueRepo.getListShortBoutique(Boutique.codeBoutique);
+      print("getListShortBoutique");
 
+      await boutiqueRepo
+          .getListShortBoutique(Boutique.codeBoutique)
+          .then((response) {
         _listShortBoutique = [];
         _listShortBoutique.clear();
         update();
+        print("******${_listShortBoutique.length}********etListShortBoutique");
 
-        if (response.body != null) {
-          if (response.body['data'] != null) {
-            if (response.body['data'].length != 0) {
-              _listShortBoutique.addAll((response.body['data'] as List)
-                  .map((e) => ShortModel.fromJson(e))
-                  .toList());
-            }
-            _isLoadedShort = 1;
-            update();
-          }
-        }
-      } catch (e) {
-        //print(e);
-      }
+        _listShortBoutique.addAll((response.body['data'] as List)
+            .map((e) => ShortModel.fromJson(e))
+            .toList());
+        _listShortBoutiqueSave = _listShortBoutique;
+        _isLoadedShort = 1;
+        update();
+      }).onError((e, r) {
+        _isLoadedShort = 2;
+        update();
+      });
     }
   }
 
   VideoPlayerController? controller;
+
+  searchBoutiqueShort(text) {
+    // _ShortBoutiqueList.clear();
+    List<ShortModel> cont = [];
+    if (text.length == 0) {
+      _listShortBoutique = _listShortBoutiqueSave;
+      update();
+    } else {
+      _listShortBoutique = _listShortBoutiqueSave
+          .where((item) =>
+              (item.titre.toUpperCase().contains(text.toUpperCase()) ||
+                  item.codeShort.toUpperCase().contains(text.toUpperCase())))
+          .toList();
+      print(cont.length);
+
+      update();
+    }
+  }
 
   bool _initialise = false;
   bool get initialise => _initialise;
@@ -1296,36 +1298,42 @@ class BoutiqueController extends GetxController {
       ['produits'.tr, 'commandes'.tr, 'ventes'.tr, 'short'.tr, 'reglages'.tr];
   List _savePreviousBoutiqueItem = [];
   setBoutiqueContent(index) async {
+    print('--index--------------*');
+    print(index);
     _i = index;
-    update();
-    if (!_savePreviousBoutiqueItem.contains(i)) {
-      // if (i == 2) {
-      //   print('----------------*');
-      //   Get.find<BoutiqueController>().getListAbonnementForUser();
-      // }
-      // if (i == 4) {
-      //   print('-------------TransactionController---*');
-      //   Get.find<TransactionController>().getTransactions();
-      // }
-      // if (i == 7) {
-      //   print('----------------*');
-      //   Get.find<BoutiqueController>().getListBoutique();
-      // }
-      if (index == 0) {
-        await getListProduitForBoutique();
-      } else if (index == 1) {
-        await getListCommandeForBoutique();
-      } else if (index == 2) {
-        await getListHCommandeForBoutique();
-      } else if (index == 3) {
-        await getListShortBoutique();
-      } else if (index == 4) {
-        //print('*************${isLoaded}');
-        // await getListBoutique();
-      }
-    }
-    _savePreviousBoutiqueItem.add(i);
+    print('--contains------${_savePreviousBoutiqueItem.contains(i)}--------*');
 
+    update();
+    // if (!_savePreviousBoutiqueItem.contains(i)) {
+    // if (i == 2) {
+    //   print('----------------*');
+    //   Get.find<BoutiqueController>().getListAbonnementForUser();
+    // }
+    // if (i == 4) {
+    //   print('-------------TransactionController---*');
+    //   Get.find<TransactionController>().getTransactions();
+    // }
+    // if (i == 7) {
+    //   print('----------------*');
+    //   Get.find<BoutiqueController>().getListBoutique();
+    // }
+    if (index == 0) {
+      getListProduitForBoutique();
+    } else if (index == 1) {
+      getListCommandeForBoutique();
+    } else if (index == 2) {
+      getListHCommandeForBoutique();
+    } else if (index == 3) {
+      print('-----------000-----*');
+      getListShortBoutique();
+    } else if (index == 4) {
+      //print('*************${isLoaded}');
+      // await getListBoutique();
+    }
+    // }
+    print(index);
+    _savePreviousBoutiqueItem.add(i);
+    boutiqueGoToContent();
     // if (index == 0) {
     //   await getListProduitForBoutique();
     // } else if (index == 1) {
@@ -1338,6 +1346,31 @@ class BoutiqueController extends GetxController {
     //   //print('*************${isLoaded}');
     //   await getListBoutique();
     // }
+  }
+
+  onClearAllController() {
+    _searchInBoutiqueCont.clear();
+    searchCommande('');
+    searchBoutiqueShort('');
+    searchProduitB('');
+    update();
+  }
+
+  boutiqueGoToContent() {
+    switch (i) {
+      case 0:
+        return Get.toNamed(AppLinks.PRODUCT_FOR_BOUTIQUE);
+      case 1:
+        return Get.toNamed(AppLinks.COMMANDE_FOR_BOUTIQUE);
+      case 2:
+        return Get.toNamed(AppLinks.HISTORIQUE_FOR_BOUTIQUE);
+      case 3:
+        return Get.toNamed(AppLinks.SHORT_BOUTIQUE);
+      case 4:
+        return Get.toNamed(AppLinks.MANAGE_FOR_BOUTIQUE);
+      default:
+        return Get.toNamed(AppLinks.PRODUCT_FOR_BOUTIQUE);
+    }
   }
 
   getEltBoutique() {

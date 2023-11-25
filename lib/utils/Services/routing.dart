@@ -51,6 +51,7 @@ import 'package:EMIY/Views/ComplementView/AboutUsView.dart';
 // import 'package:EMIY/Views/Home/AcheterBillet.dart';
 import 'package:get/get.dart';
 
+import '../../components/Widget/map_delivry_page.dart';
 import '../../test.dart';
 import 'package:EMIY/Views/UsersMange/WalletView.dart';
 
@@ -267,6 +268,11 @@ class AppRoutes {
         name: AppLinks.MES_BOUTIQUES,
         page: () => MesBoutiquesView(),
         transition: transitionX),
+    GetPage(
+        name: AppLinks.MAP_DELIVRY,
+        page: () => MapDelevryPage(),
+        transition: transitionX),
+    
   ];
 }
 
@@ -318,6 +324,7 @@ class AppLinks {
   static const String NEGOCIATION_LIST = "/negociation/list";
   static const String FIEU_LIST = "/fieul/list";
   static const String NOTIFICATION = "/notifications";
+  static const String MAP_DELIVRY = "/map/delivry";
 }
 
 // <?php

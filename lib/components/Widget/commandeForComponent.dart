@@ -26,7 +26,7 @@ class CommandeBoutiqueComponent extends StatelessWidget {
         children: [
           InkWell(
             child: Container(
-                height: kMdHeight / 6,
+                height: kHeight * .2,
                 // width: kMdWidth,
                 margin: EdgeInsets.symmetric(
                     horizontal: kMarginX, vertical: kMarginY),
@@ -41,8 +41,8 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                         children: [
                       Container(
                           child: CachedNetworkImage(
-                        height: kMdHeight / 6,
-                        width: Get.width / 3,
+                        height: kHeight * .2,
+                        width: kWidth * .3,
                         fit: BoxFit.cover,
                         imageUrl: commande.photo.src,
                         imageBuilder: (context, imageProvider) {
@@ -83,23 +83,23 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                // width: kSmWidth * .6,
-
-                                child: Text(
-                                    'Numero Commande : ' + commande.numCommande,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: ColorsApp.greenLight,
-                                        fontSize: 12)),
+                                width: kWidth * .55,
+                                child:
+                                    Text('Commande : ' + commande.numCommande,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          color: ColorsApp.greenLight,
+                                        )),
                               ),
                               Container(
-                                // width: kSmWidth * .6,
-
-                                child: Text('Nom : ' + commande.titre,
+                                width: kWidth * .55,
+                                child: Text('Produit : ' + commande.titre,
+                                    maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: ColorsApp.greenLight,
-                                        fontSize: 12)),
+                                      color: ColorsApp.greenLight,
+                                    )),
                               ),
                               Container(
                                 child: Text(
@@ -108,8 +108,8 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                                         ' XAF',
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w600)),
+                                      color: ColorsApp.greenLight,
+                                    )),
                               ),
                               Container(
                                 child: Text(
@@ -117,28 +117,28 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                                         commande.quantite.toString(),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w600)),
+                                      color: ColorsApp.greenLight,
+                                    )),
                               ),
                               Container(
                                 child: Text('Code : ' + commande.codeCommande,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w600)),
+                                      color: ColorsApp.greenLight,
+                                    )),
                               ),
                               Container(
                                   child: Text('Date : ' + commande.date,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.w600))),
+                                        color: ColorsApp.greenLight,
+                                      ))),
                               Container(
                                 child: Text('Status : ' + commande.status,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w600)),
+                                      color: ColorsApp.greenLight,
+                                    )),
                               ),
                               // Container(
                               //   // width: kSmWidth * .6,
@@ -149,8 +149,8 @@ class CommandeBoutiqueComponent extends StatelessWidget {
                               //           decorationColor:  ColorsApp.black,
                               //           decorationThickness: 2.85,
                               //           color:  ColorsApp.black,
-                              //           fontSize: 12,
-                              //           fontWeight: FontWeight.w600)),
+                              //            ,
+                              //        )),
                               // )
                             ],
                           )),

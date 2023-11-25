@@ -18,7 +18,13 @@ class MesBoutiquesView extends StatelessWidget {
               SliverAppBar(
                 backgroundColor: ColorsApp.bg,
                 automaticallyImplyLeading: false,
-                title: Container(
+                title: Text(
+                  'Mes Boutiques',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontFamily: 'Lato', fontWeight: FontWeight.w600),
+                ),
+                leading: Container(
                     child: InkWell(
                   child: Container(
                     margin: EdgeInsets.zero,
@@ -34,32 +40,6 @@ class MesBoutiquesView extends StatelessWidget {
                     Get.back();
                   },
                 )),
-                flexibleSpace: FlexibleSpaceBar(
-                    background: Container(
-                        decoration: BoxDecoration(
-                          color: ColorsApp.bg,
-                        ),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(left: kWidth * .010),
-                                      child: TextBackSpace(
-                                        text: 'Mes Boutiques',
-                                        // bolder: true,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ]))),
-                expandedHeight: 100,
                 pinned: true,
               ),
               SliverList(

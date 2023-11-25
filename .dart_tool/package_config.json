@@ -446,6 +446,42 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "google_maps",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/google_maps-6.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_maps_flutter",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/google_maps_flutter-2.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "google_maps_flutter_android",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/google_maps_flutter_android-2.5.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "google_maps_flutter_ios",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/google_maps_flutter_ios-2.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "google_maps_flutter_platform_interface",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/google_maps_flutter_platform_interface-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "google_maps_flutter_web",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/google_maps_flutter_web-0.5.4+2",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
       "name": "graphs",
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/graphs-2.3.1",
       "packageUri": "lib/",
@@ -576,6 +612,12 @@
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
       "languageVersion": "2.19"
+    },
+    {
+      "name": "js_wrapping",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/js_wrapping-0.7.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "json_annotation",
@@ -820,6 +862,12 @@
     {
       "name": "rxdart",
       "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sanitize_html",
+      "rootUri": "file:///C:/Users/Premier/AppData/Local/Pub/Cache/hosted/pub.dev/sanitize_html-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1244,7 +1292,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-11-12T22:22:45.224670Z",
+  "generated": "2023-11-21T13:52:21.667401Z",
   "generator": "pub",
   "generatorVersion": "3.1.2"
 }

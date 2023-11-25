@@ -25,7 +25,7 @@ class UserModel {
   int id;
   String nom;
   String prenom;
-  String email;
+  var email;
   String phone;
   bool status;
   String dateCreated;

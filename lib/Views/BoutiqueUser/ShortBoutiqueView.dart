@@ -5,6 +5,7 @@ import 'package:EMIY/components/Widget/app_bar_custom.dart';
 import 'package:EMIY/components/Widget/app_input_new.dart';
 import 'package:EMIY/components/Widget/app_loading.dart';
 import 'package:EMIY/components/Widget/app_short_add.dart';
+import 'package:EMIY/components/Widget/shortComponent.dart';
 import 'package:EMIY/controller/boutiqueController.dart';
 import 'package:EMIY/model/data/ProduitBoutiqueModel.dart';
 import 'package:EMIY/styles/colorApp.dart';
@@ -14,6 +15,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../components/Form/text_field.dart';
+import '../../components/exportcomponent.dart';
 
 // ignore: must_be_immutable
 class ShortBoutiqueView extends StatelessWidget {
@@ -26,186 +30,232 @@ class ShortBoutiqueView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BoutiqueController>(builder: (_controller) {
-      return Container(
-          margin: EdgeInsets.symmetric(horizontal: kMarginX),
-          child: SingleChildScrollView(
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            AppBarCustom(
-              title: 'Vos shorts',
-              titleBtn: !_controller.addShoort ? 'Ajouter' : 'Retour',
-              onTap: () {
-                Get.bottomSheet(
-                  Container(
-                      margin: EdgeInsets.only(
-                        top: kMarginY * 8,
-                      ),
-                      decoration: BoxDecoration(
-                          color: ColorsApp.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15))),
-                      height: 800,
-                      padding: EdgeInsets.symmetric(horizontal: kMarginX),
-                      child: Column(children: [
-                        // _controller.listImgProduits.length != 0
-                        //     ? smallText(
-                        //         text: 'Listes images',
-                        //       )
-                        //     : Container(),
-                        Container(
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  child: Text('Annuler'),
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text('Ajouter'),
-                                  onPressed: () async {
-                                    await _controller.addShort();
-                                    // _controller.chageState(!_controller.addProduit);
-                                  },
-                                )
-                              ]),
-                        ),
-                        Expanded(
-                            child: SingleChildScrollView(
-                                child: Column(
-                          children: [
-                            Container(
+      return Scaffold(
+          appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: AppBackButton(),
+              actions: [
+                Container(
+                    margin: EdgeInsets.only(top: Get.height * .020),
+                    padding: EdgeInsets.only(
+                        left: Get.width * .030, right: Get.width * .030),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: AppTitleRight(
+                                title: 'Vos shorts'.tr,
+                                description: ''.tr,
+                                icon: null),
+                            margin: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * .005),
+                          ),
+                        ])),
+              ]),
+          body: Container(
+              margin: EdgeInsets.symmetric(horizontal: kMarginX),
+              child: SingleChildScrollView(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                    Container(
+                        margin: EdgeInsets.symmetric(vertical: kMarginY),
+                        child: KTextField(
+                            controllerField:
+                                _controller.searchInBoutiqueCont,
+                            onClear: _controller.onClearAllController,
+                            onChange: _controller.searchBoutiqueShort)),
+                    AppBarCustom(
+                      title: 'Liste de vos shorts',
+                      titleBtn: !_controller.addShoort ? 'Ajouter' : 'Retour',
+                      onTap: () {
+                        Get.bottomSheet(
+                          Container(
                               margin: EdgeInsets.only(
-                                top: kMarginY * 1.5,
+                                top: kMarginY * 8,
                               ),
-                              child: AppInputNew(
-                                controller: _controller.titreShort,
-                                label: 'lbtitleshort'.tr,
-                                icon: Icon(Icons.label),
-                                validator: (value) {
-                                  return Validators.isValidUsername(value!);
-                                },
-                              ),
-                            ),
-                            GetBuilder<BoutiqueController>(
-                              builder: (_Ncontroller) => _Ncontroller
-                                          .videoShort.length ==
-                                      0
-                                  ? Container(child: AppShortAdd())
-                                  : LayoutBuilder(
-                                      builder: (context, constraints) {
-                                        final videoPlayerWidth =
-                                            constraints.maxWidth;
-                                        final videoPlayerHeight =
-                                            videoPlayerWidth /
-                                                _Ncontroller
-                                                    .videoPlayerController
-                                                    .value
-                                                    .aspectRatio;
-
-                                        return GestureDetector(
-                                          onTap: _Ncontroller.playPauseVideo,
-                                          onDoubleTap: _Ncontroller.getVideo,
-                                          child: AspectRatio(
-                                            aspectRatio: 4 / 4,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: ColorsApp.greySecond,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                              ),
-                                              child: VideoPlayer(_Ncontroller
-                                                  .videoPlayerController),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                            ),
-                            GetBuilder<BoutiqueController>(
-                                builder: (_ccontroller) => Container(
-                                      child: Text(
-                                        '${_ccontroller.listProduitSelect.length} Produits selectionnees',
+                              decoration: BoxDecoration(
+                                  color: ColorsApp.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15))),
+                              height: 800,
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kMarginX),
+                              child: Column(children: [
+                                // _controller.listImgProduits.length != 0
+                                //     ? smallText(
+                                //         text: 'Listes images',
+                                //       )
+                                //     : Container(),
+                                Container(
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextButton(
+                                          child: Text('Annuler'),
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text('Ajouter'),
+                                          onPressed: () async {
+                                            await _controller.addShort();
+                                            // _controller.chageState(!_controller.addProduit);
+                                          },
+                                        )
+                                      ]),
+                                ),
+                                Expanded(
+                                    child: SingleChildScrollView(
+                                        child: Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: kMarginY * 1.5,
                                       ),
-                                    )),
-                            CustomBtn(
-                                color: ColorsApp.secondBlue,
-                                title: 'Selectionner Produit',
-                                onTap: () async {
-                                  selectProduit();
-                                }),
-                            Container(
-                              margin: EdgeInsets.only(
-                                top: kMarginY,
-                              ),
-                              decoration: new BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border:
-                                      Border.all(color: ColorsApp.greySecond)
-                                  // color: (color == null) ? ColorsApp.blue : color,
-                                  ),
-                              child: TextFormField(
-                                controller: _controller.descriptionShort,
-                                onChanged: (String value) {},
-                                validator: (value) {
-                                  return Validators.isValidUsername(value!);
-                                },
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  fontFamily: 'Lato',
-                                ),
-                                maxLines: 10,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: ColorsApp.skyBlue, width: 2),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: ColorsApp.greySearch),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorStyle: TextStyle(
-                                    fontSize: 8,
-                                    fontFamily: 'Lato',
-                                  ),
-                                  labelStyle: TextStyle(
-                                    color: ColorsApp.black,
-                                    fontFamily: 'Lato',
-                                    // fontWeight: FontWeight.w500,
-                                    fontSize: 12,
-                                  ),
-                                  labelText: 'lbdescprod'.tr,
-                                  fillColor: ColorsApp.skyBlue,
-                                  counter: Offstage(),
-                                  hintText: 'lbdescprod'.tr,
-                                  alignLabelWithHint: true,
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )))
-                      ])),
-                  isScrollControlled: true,
-                  // isDismissible: true,
-                );
+                                      child: AppInputNew(
+                                        controller: _controller.titreShort,
+                                        label: 'lbtitleshort'.tr,
+                                        icon: Icon(Icons.label),
+                                        validator: (value) {
+                                          return Validators.isValidUsername(
+                                              value!);
+                                        },
+                                      ),
+                                    ),
+                                    GetBuilder<BoutiqueController>(
+                                      builder: (_Ncontroller) => _Ncontroller
+                                                  .videoShort.length ==
+                                              0
+                                          ? Container(child: AppShortAdd())
+                                          : LayoutBuilder(
+                                              builder: (context, constraints) {
+                                                final videoPlayerWidth =
+                                                    constraints.maxWidth;
+                                                final videoPlayerHeight =
+                                                    videoPlayerWidth /
+                                                        _Ncontroller
+                                                            .videoPlayerController
+                                                            .value
+                                                            .aspectRatio;
 
-                // _controller.chageStateShort(!_controller.addShoort);
-              },
-            ),
-            _controller.isLoadedShort == 0
-                ? AppLoading()
-                : _controller.listShortBoutique.length == 0
-                    ? Center(child: Text('Aucun Produit'))
-                    : SingleChildScrollView(
-                        child: /* ListView.builder(
+                                                return GestureDetector(
+                                                  onTap: _Ncontroller
+                                                      .playPauseVideo,
+                                                  onDoubleTap:
+                                                      _Ncontroller.getVideo,
+                                                  child: AspectRatio(
+                                                    aspectRatio: 4 / 4,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: ColorsApp
+                                                            .greySecond,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20),
+                                                      ),
+                                                      child: VideoPlayer(
+                                                          _Ncontroller
+                                                              .videoPlayerController),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                    ),
+                                    GetBuilder<BoutiqueController>(
+                                        builder: (_ccontroller) => Container(
+                                              child: Text(
+                                                '${_ccontroller.listProduitSelect.length} Produits selectionnees',
+                                              ),
+                                            )),
+                                    CustomBtn(
+                                        color: ColorsApp.secondBlue,
+                                        title: 'Selectionner Produit',
+                                        onTap: () async {
+                                          selectProduit();
+                                        }),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: kMarginY,
+                                      ),
+                                      decoration: new BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: ColorsApp.greySecond)
+                                          // color: (color == null) ? ColorsApp.blue : color,
+                                          ),
+                                      child: TextFormField(
+                                        controller:
+                                            _controller.descriptionShort,
+                                        onChanged: (String value) {},
+                                        validator: (value) {
+                                          return Validators.isValidUsername(
+                                              value!);
+                                        },
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          fontFamily: 'Lato',
+                                        ),
+                                        maxLines: 10,
+                                        decoration: InputDecoration(
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: ColorsApp.skyBlue,
+                                                width: 2),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: ColorsApp.greySearch),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          errorStyle: TextStyle(
+                                            fontSize: 8,
+                                            fontFamily: 'Lato',
+                                          ),
+                                          labelStyle: TextStyle(
+                                            color: ColorsApp.black,
+                                            fontFamily: 'Lato',
+                                            // fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                          ),
+                                          labelText: 'lbdescprod'.tr,
+                                          fillColor: ColorsApp.skyBlue,
+                                          counter: Offstage(),
+                                          hintText: 'lbdescprod'.tr,
+                                          alignLabelWithHint: true,
+                                          hintStyle: TextStyle(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )))
+                              ])),
+                          isScrollControlled: true,
+                          // isDismissible: true,
+                        );
+
+                        // _controller.chageStateShort(!_controller.addShoort);
+                      },
+                    ),
+                    _controller.isLoadedShort == 0
+                        ? AppLoading()
+                        : _controller.listShortBoutique.length == 0
+                            ? Center(child: Text('Aucun Short'))
+                            : SingleChildScrollView(
+                                child: /* ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: _controller.listShortBoutique.length,
@@ -217,20 +267,27 @@ class ShortBoutiqueView extends StatelessWidget {
                     },
                   ) */
 
-                            Container(
-                        margin: EdgeInsets.only(top: kMarginY),
-                        child: GridView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 1.0,
-                                    mainAxisSpacing: 10.0),
-                            itemCount: 40,
-                            itemBuilder: (_ctx, index) => ShortComponent()),
-                      ))
-          ])));
+                                    Container(
+                                margin: EdgeInsets.only(top: kMarginY),
+                                child: GridView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10.0,
+                                      childAspectRatio: kMarginX / 13,
+                                      mainAxisSpacing: 8.0,
+                                    ),
+                                    itemCount:
+                                        _controller.listShortBoutique.length,
+                                    itemBuilder: (_ctx, index) =>
+                                        ShortComponentModel(
+                                          short: _controller
+                                              .listShortBoutique[index],
+                                        )),
+                              ))
+                  ]))));
     });
   }
 }

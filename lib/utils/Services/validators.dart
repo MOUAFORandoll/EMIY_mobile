@@ -37,8 +37,7 @@ class Validators {
   }
 
   static usPhoneValid(String input) {
-    final RegExp phone =
-        RegExp(r'^(\+0?1\s)?((\d{3})|(\(\d{3}\)))?(\s|-)\d{3}(\s|-)\d{4}$');
+    final RegExp phone = RegExp(r'^(?=.*[A-Za-z!])(?=.*\d)[A-Za-z\d]{8,}$');
 
     if (input.length == 9) {
       if (int.tryParse(input) != null) {
@@ -49,6 +48,12 @@ class Validators {
     } else {
       return 'invalidPhone'.tr;
     }
+  }
+
+  static usUserTagValid(String input) {
+    final RegExp userTag = RegExp(r'^[a-zA-Z0-9_]*$');
+
+    return userTag.hasMatch(input) && input.isNotEmpty ? null : 'invalid'.tr;
   }
 
   static usNumeriqValid(String input) {

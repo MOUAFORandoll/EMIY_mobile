@@ -22,7 +22,8 @@ xmlns:tools="http://schemas.android.com/tools"
     android:networkSecurityConfig="@xml/network_security_config"
  
     android:requestLegacyExternalStorage="true">
-    
+      <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBIUmra3XE_cnCkySOHphv5aUq3xfmXb0w"/>
     <activity
       android:screenOrientation="portrait"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar"

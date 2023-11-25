@@ -71,6 +71,7 @@ dependencies:
   flutter_blur: ^0.0.2
   new_version_plus: ^0.0.11
   flexible_text_editing_controller: ^1.0.0+2
+  google_maps_flutter: ^2.2.8
 
   # better_player: ^0.0.83
   # custom_floating_action_button: ^0.0.3
@@ -168,6 +169,11 @@ flutter:
     - assets/svg_icones/hand.svg
     - assets/svg_icones/location.svg
     - assets/svg_icones/nmreproduit.svg
+    - assets/svg_icones/setting.svg
+    - assets/svg_icones/produits.svg
+    - assets/svg_icones/short.svg
+    - assets/svg_icones/commandes.svg
+    - assets/svg_icones/ventes.svg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
