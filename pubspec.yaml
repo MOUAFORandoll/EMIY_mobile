@@ -68,7 +68,6 @@ dependencies:
   animated_text_kit: ^4.2.1
   objectbox: ^2.2.1
   objectbox_flutter_libs: any
-  flutter_blur: ^0.0.2
   new_version_plus: ^0.0.11
   flexible_text_editing_controller: ^1.0.0+2
   google_maps_flutter: ^2.2.8
